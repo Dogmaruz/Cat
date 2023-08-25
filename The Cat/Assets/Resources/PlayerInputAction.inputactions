@@ -1,0 +1,40 @@
+{
+    "name": "PlayerInputAction",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "84a14ef7-09bf-458e-ad52-08c7dec5460e",
+            "actions": [
+                {
+                    "name": "MouseAxisX",
+                    "type": "Value",
+                    "id": "e9bf72d5-3f35-4ffd-bab5-cd768cd39c26",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "443541ad-8774-436d-96eb-8b032cd48654",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "MouseAxisX",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard + Mouse",
+            "bindingGroup": "Keyboard + Mouse",
+            "devices": []
+        }
+    ]
+}
