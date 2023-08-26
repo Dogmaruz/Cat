@@ -47,6 +47,10 @@ public class MovementController : MonoBehaviour
 
     private SoundPlayer _soundPlayer;
 
+    private bool _isJump;
+
+    private Tile _currentTile;
+
     //private Rigidbody rigidBody;
 
     [Inject]
@@ -81,6 +85,10 @@ public class MovementController : MonoBehaviour
         _tween.Kill();
 
         _tweenMoveX.Kill();
+
+        _tweenMoveZ.Kill();
+
+        _sequence.Kill();
     }
 
     private void Update()
@@ -89,6 +97,11 @@ public class MovementController : MonoBehaviour
         MouseInput();
 
         UpdatePosition(_playerInputs.MouseAxisRight);
+
+        if (_isJump == false)
+        {
+            CheckKillZone();
+        }
 
         _playerInputs.MouseAxisRight = 0;
     }
@@ -101,14 +114,14 @@ public class MovementController : MonoBehaviour
 
         _tweenMoveX = m_cat.transform.DOMoveX(newPosition.x, 0.2f);
 
-        if (m_cat.transform.position.x >= 2)
+        if (m_cat.transform.position.x >= 1.5f)
         {
-            _tweenMoveX = m_cat.transform.DOMoveX(2, 0.01f);
+            _tweenMoveX = m_cat.transform.DOMoveX(1.5f, 0.01f);
         }
 
-        if (m_cat.transform.position.x <= -2)
+        if (m_cat.transform.position.x <= -1.5f)
         {
-            _tweenMoveX = m_cat.transform.DOMoveX(-2, 0.01f);
+            _tweenMoveX = m_cat.transform.DOMoveX(-1.5f, 0.01f);
         }
     }
 
@@ -147,8 +160,6 @@ public class MovementController : MonoBehaviour
 
         if (currentTile.TileType == TileType.Long)
         {
-            //_tweenMoveZ.Kill();
-
             _sequence.Kill();
 
             var distance = currentTile.transform.localScale.z - 1;
@@ -161,9 +172,9 @@ public class MovementController : MonoBehaviour
            .SetEase(Ease.Linear)
            .OnComplete(() =>
            {
-               currentTile.FadeTile();
-
                Jump(newPos, targetPos);
+
+               currentTile.FadeTile();
            });
         }
     }
@@ -171,6 +182,8 @@ public class MovementController : MonoBehaviour
 
     private void Jump(float currentTilePositionZ, Vector3 targetPos)
     {
+        _isJump = true;
+
         var result = targetPos.z - currentTilePositionZ - 1;
 
         var power = result;
@@ -182,24 +195,25 @@ public class MovementController : MonoBehaviour
             power = _maxPower;
         }
 
-
         var newPos = new Vector3(m_cat.transform.position.x, m_cat.transform.position.y, targetPos.z);
 
         _tween = m_cat.transform.DOJump(newPos, power, 1, result * _platformController.SecPerBeat)
-                          .SetEase(Ease.Linear)
-                          .OnComplete(OnComplete);
+                                .SetEase(Ease.Linear)
+                                .OnComplete(OnComplete);
     }
 
     private void OnComplete()
     {
-        CheckKillZone();
+        _tween.Kill();
+
+        _isJump = false;
     }
 
     private void CheckKillZone()
     {
         Vector3 origin = m_checkPosition.position;
 
-        Vector3 size = GetComponentInChildren<Transform>().localScale;
+        Vector3 size = GetComponentInChildren<Rigidbody>().GetComponent<Transform>().localScale;
 
         Vector3 direction = Vector3.down;
 
@@ -227,6 +241,8 @@ public class MovementController : MonoBehaviour
 
                     _tweenMoveZ.Kill();
 
+                    _sequence.Kill();
+
                     _tweenMoveX = m_cat.transform.DOMoveY(-5, 0.5f);
 
                     _backgroundSoundPlayer.Stop();
@@ -234,6 +250,21 @@ public class MovementController : MonoBehaviour
                     _soundPlayer.Play(Sound.Fall, 1f);
 
                     m_restartButton.SetActive(true);
+                }
+                else
+                {
+                    var tile = hitCollider.GetComponent<Tile>();
+
+                    if (_currentTile == tile) return;
+
+                    _currentTile = tile;
+
+                    Move(tile);
+
+                    if (tile.TileType == TileType.Static)
+                    {
+                        tile.FadeTile();
+                    }
                 }
             }
         }

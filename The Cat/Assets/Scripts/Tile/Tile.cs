@@ -17,10 +17,16 @@ public class Tile : MonoBehaviour
 
     private BoxCollider _collider;
 
+    private Vector3 _basePosition;
+    public Vector3 BasePosition => _basePosition;
 
-    private void Start()
+    public bool IsMoved = false;
+
+    private void Awake()
     {
         _collider = GetComponent<BoxCollider>();
+
+        _basePosition = transform.position;
     }
 
     private void OnDestroy()
@@ -28,20 +34,20 @@ public class Tile : MonoBehaviour
         _sequence.Kill();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        var cat = other.transform.root.GetComponent<MovementController>();
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    var cat = other.transform.root.GetComponent<MovementController>();
 
-        if (cat != null)
-        {
-            cat.Move(this);
+    //    if (cat != null)
+    //    {
+    //        cat.Move(this);
 
-            if (m_tileType == TileType.Static)
-            {
-                FadeTile();
-            }
-        }
-    }
+    //        if (m_tileType == TileType.Static)
+    //        {
+    //            FadeTile();
+    //        }
+    //    }
+    //}
 
     public void FadeTile()
     {
@@ -49,17 +55,22 @@ public class Tile : MonoBehaviour
 
         _sequence.Kill();
 
-        Material material = GetComponent<MeshRenderer>().material;
+        var meshRenders = GetComponentsInChildren<MeshRenderer>();
 
-        _sequence = DOTween.Sequence()
-        .Append(transform.DOPunchPosition(new Vector3(0f, 0.2f, 0f), 0.3f))
-        .Append(material.DOFade(0f, 0.5f))
-        .SetEase(Ease.InOutQuad)
-        .OnComplete(OnDissolveComplete);
+        foreach (var mesh in meshRenders)
+        {
+            _sequence = DOTween.Sequence()
+           .Append(transform.DOPunchPosition(new Vector3(0f, 0.2f, 0f), 0.3f))
+           .Append(mesh.material.DOFade(0f, 0.5f))
+           .SetEase(Ease.InOutQuad)
+           .OnComplete(OnDissolveComplete);
+        }
     }
 
     private void OnDissolveComplete()
     {
+        _sequence.Kill();
+
         //Destroy(gameObject);
     }
 }
