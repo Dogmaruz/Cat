@@ -1,11 +1,22 @@
 using DG.Tweening;
 using UnityEngine;
 
+public enum TileType
+{
+    Static,
+    Long,
+    Move,
+}
+
 public class Tile : MonoBehaviour
 {
+    [SerializeField] private TileType m_tileType;
+    public TileType TileType => m_tileType;
+
     private Sequence _sequence;
 
     private BoxCollider _collider;
+
 
     private void Start()
     {
@@ -27,16 +38,24 @@ public class Tile : MonoBehaviour
 
             _collider.enabled = false;
 
-            _sequence.Kill();
-
-            Material material = GetComponent<MeshRenderer>().material;
-
-            _sequence = DOTween.Sequence()
-            .Append(transform.DOPunchPosition(new Vector3(0f, 0.2f, 0f), 0.3f))
-            .Append(material.DOFade(0f, 0.5f))
-            .SetEase(Ease.InOutQuad)
-            .OnComplete(OnDissolveComplete); 
+            if (m_tileType == TileType.Static)
+            {
+                FadeTile();
+            }
         }
+    }
+
+    public void FadeTile()
+    {
+        _sequence.Kill();
+
+        Material material = GetComponent<MeshRenderer>().material;
+
+        _sequence = DOTween.Sequence()
+        .Append(transform.DOPunchPosition(new Vector3(0f, 0.2f, 0f), 0.3f))
+        .Append(material.DOFade(0f, 0.5f))
+        .SetEase(Ease.InOutQuad)
+        .OnComplete(OnDissolveComplete);
     }
 
     private void OnDissolveComplete()
