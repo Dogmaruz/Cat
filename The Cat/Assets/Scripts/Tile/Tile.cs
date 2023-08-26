@@ -36,8 +36,6 @@ public class Tile : MonoBehaviour
         {
             cat.Move(this);
 
-            _collider.enabled = false;
-
             if (m_tileType == TileType.Static)
             {
                 FadeTile();
@@ -47,6 +45,8 @@ public class Tile : MonoBehaviour
 
     public void FadeTile()
     {
+        _collider.enabled = false;
+
         _sequence.Kill();
 
         Material material = GetComponent<MeshRenderer>().material;

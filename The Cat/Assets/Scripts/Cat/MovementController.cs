@@ -1,7 +1,5 @@
 using DG.Tweening;
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 public struct PlayerInputs
@@ -27,6 +25,8 @@ public class MovementController : MonoBehaviour
     private Tween _tweenMoveX;
 
     private Tween _tweenMoveZ;
+
+    private Sequence _sequence;
 
     private bool _isTouch;
 
@@ -147,24 +147,24 @@ public class MovementController : MonoBehaviour
 
         if (currentTile.TileType == TileType.Long)
         {
-            _tweenMoveZ.Kill();
+            //_tweenMoveZ.Kill();
+
+            _sequence.Kill();
 
             var distance = currentTile.transform.localScale.z - 1;
 
             var newPos = m_cat.transform.position.z + distance;
 
-            _tweenMoveZ = m_cat.transform.DOMoveZ(newPos, (distance + 1f) * _platformController.SecPerBeat)
-                                         .SetEase(Ease.Linear)
-                                         //.OnUpdate(() =>
-                                         //{
-                                         //    CheckKillZone();
-                                         //})
-                                         .OnComplete(() =>
-                                         {
-                                             currentTile.FadeTile();
+            _sequence = DOTween.Sequence()
+           .Append(m_cat.transform.DOMoveZ(newPos, (distance + 1f) * _platformController.SecPerBeat))
+           .Join(m_cat.transform.DORotate(new Vector3(0, 360, 0), (distance + 1f) * _platformController.SecPerBeat, RotateMode.FastBeyond360))
+           .SetEase(Ease.Linear)
+           .OnComplete(() =>
+           {
+               currentTile.FadeTile();
 
-                                             Jump(newPos, targetPos);
-                                         });
+               Jump(newPos, targetPos);
+           });
         }
     }
 
@@ -199,11 +199,11 @@ public class MovementController : MonoBehaviour
     {
         Vector3 origin = m_checkPosition.position;
 
-        Vector3 size = GetComponentInChildren<BoxCollider>().size * 0.5f;
+        Vector3 size = GetComponentInChildren<Transform>().localScale;
 
         Vector3 direction = Vector3.down;
 
-        float maxDistance = 4f;
+        float maxDistance = 5f;
 
         RaycastHit hitInfo;
 
@@ -224,6 +224,8 @@ public class MovementController : MonoBehaviour
                     _tween.Kill();
 
                     _tweenMoveX.Kill();
+
+                    _tweenMoveZ.Kill();
 
                     _tweenMoveX = m_cat.transform.DOMoveY(-5, 0.5f);
 
