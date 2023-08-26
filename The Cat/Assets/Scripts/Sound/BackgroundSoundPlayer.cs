@@ -18,4 +18,12 @@ public class BackgroundSoundPlayer : MonoBehaviour
 
         m_AudioSource.Play();
     }
+
+    public void Stop()
+    {
+        if (m_AudioSource.isPlaying)
+        {
+            m_AudioSource?.Stop();
+        }
+    }
 }

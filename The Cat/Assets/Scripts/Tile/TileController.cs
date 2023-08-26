@@ -4,6 +4,8 @@ public class TileController : MonoBehaviour
 {
     [SerializeField] private float m_bpm;
 
+    [SerializeField] private BackgroundSceneClip m_backgroundSceneClip;
+
     private Tile[] _tiles;
 
     private int _tileCount = 0;
@@ -15,7 +17,9 @@ public class TileController : MonoBehaviour
     {
         _tiles = GetComponentsInChildren<Tile>();
 
-        _secPerBeat = 59.912f / m_bpm;
+        //_secPerBeat = 59.912f / m_bpm;
+
+        _secPerBeat = m_backgroundSceneClip.BackgroundClip.length / m_bpm;
     }
 
     public Tile NextTile()

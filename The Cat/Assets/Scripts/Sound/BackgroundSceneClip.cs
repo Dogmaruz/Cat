@@ -4,10 +4,12 @@ using Zenject;
 public class BackgroundSceneClip : MonoBehaviour
 {
     [SerializeField] private AudioClip m_backgroundClip;
+    public AudioClip BackgroundClip => m_backgroundClip;
 
     [SerializeField] private float m_volume = 1;
 
     private BackgroundSoundPlayer _backgroundSoundPlayer;
+
 
     [Inject]
     public void Construct(BackgroundSoundPlayer backgroundSoundPlayer)

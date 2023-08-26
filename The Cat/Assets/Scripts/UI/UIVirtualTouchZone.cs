@@ -25,7 +25,7 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
 
     private Vector2 _previousPositionDelta;
 
-    private Vector2 _resolution;
+    private Resolution _resolution;
 
     private Vector2 _positionDelta;
 
@@ -44,7 +44,7 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
 
     private void Awake()
     {
-        _resolution = new Vector2(1920, 1080);
+        _resolution = Screen.currentResolution;
     }
 
 
@@ -99,7 +99,7 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
     {
         TouchZoneOutputEvent?.Invoke(pointerPosition);
 
-        //_cat.SetMouseLookAxisRight(pointerPosition.x / (_resolution.x / 2) * MagnitudeMultiplier);
+        _cat.SetMouseAxisRight(pointerPosition.x / _resolution.width * MagnitudeMultiplier);
     }
 
     Vector2 GetDeltaBetweenPositions(Vector2 firstPosition, Vector2 secondPosition)

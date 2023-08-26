@@ -5,6 +5,18 @@ public class Tile : MonoBehaviour
 {
     private Sequence _sequence;
 
+    private BoxCollider _collider;
+
+    private void Start()
+    {
+        _collider = GetComponent<BoxCollider>();
+    }
+
+    private void OnDestroy()
+    {
+        _sequence.Kill();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         var cat = other.transform.root.GetComponent<MovementController>();
@@ -12,6 +24,8 @@ public class Tile : MonoBehaviour
         if (cat != null)
         {
             cat.Move(this);
+
+            _collider.enabled = false;
 
             _sequence.Kill();
 
