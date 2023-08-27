@@ -10,16 +10,10 @@ public class BackgroundSceneClip : MonoBehaviour
 
     private BackgroundSoundPlayer _backgroundSoundPlayer;
 
-
     [Inject]
     public void Construct(BackgroundSoundPlayer backgroundSoundPlayer)
     {
         _backgroundSoundPlayer = backgroundSoundPlayer;
-    }
-
-    private void Awake()
-    {
-
     }
 
     public void PlayBackground()

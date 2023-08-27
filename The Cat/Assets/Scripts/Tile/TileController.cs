@@ -15,13 +15,11 @@ public class TileController : MonoBehaviour
     private float _secPerBeat;
     public float SecPerBeat => _secPerBeat;
 
-    private float _offsetY = 4f;
+    private float maxDistance = 15f;
 
-    private float maxDistance = 15;
+    private Sequence _sequence;
 
-    private Tween _tween;
-
-    MovementController _cat;
+    private MovementController _cat;
 
     [Inject]
     public void Construct(MovementController cat)
@@ -31,6 +29,10 @@ public class TileController : MonoBehaviour
 
     void Start()
     {
+        DOTween.SetTweensCapacity(500, 150);
+
+        float bounds = 2f;
+
         _tiles = GetComponentsInChildren<Tile>();
 
         _secPerBeat = m_backgroundSceneClip.BackgroundClip.length / m_bpm;
@@ -43,25 +45,24 @@ public class TileController : MonoBehaviour
             {
                 tile.IsMoved = true;
 
-                var offsetX = Random.Range(-2f, 2f);
+                float offsetX = Random.Range(-bounds, bounds);
 
-                tile.transform.position = new Vector3(tile.transform.position.x + offsetX, tile.transform.position.y + _offsetY, tile.transform.position.z);
+                float offsetY = 4f;
+
+                var startPosition = new Vector3(tile.transform.position.x + offsetX, tile.transform.position.y + offsetY, tile.transform.position.z);
+
+                _sequence = DOTween.Sequence();
+
+                _sequence.Append(tile.transform.DOMove(startPosition, 0.01f));
 
                 var meshRenders = tile.GetComponentsInChildren<MeshRenderer>();
 
                 foreach (var mesh in meshRenders)
                 {
-                    _tween = mesh.material.DOFade(0f, 0.01f)
-                   .SetEase(Ease.InOutQuad)
-                   .OnComplete(KillTween);
+                    _sequence.Join(mesh.material.DOFade(0f, 0.01f).SetEase(Ease.InOutQuad));
                 }
             }
         }
-    }
-
-    private void KillTween()
-    {
-        _tween.Kill();
     }
 
     private void Update()
@@ -74,15 +75,15 @@ public class TileController : MonoBehaviour
             {
                 tile.IsMoved = false;
 
-                tile.transform.DOMove(tile.BasePosition, 1f);
+                _sequence = DOTween.Sequence();
+
+                _sequence.Append(tile.transform.DOMove(tile.BasePosition, 1f));
 
                 var meshRenders = tile.GetComponentsInChildren<MeshRenderer>();
 
                 foreach (var mesh in meshRenders)
                 {
-                    _tween = mesh.material.DOFade(1f, 0.3f)
-                   .SetEase(Ease.InOutQuad)
-                   .OnComplete(KillTween);
+                    _sequence.Join(mesh.material.DOFade(1f, 0.3f).SetEase(Ease.InOutQuad));
                 }
             }
         }
@@ -102,6 +103,6 @@ public class TileController : MonoBehaviour
 
     private void OnDestroy()
     {
-        _tween.Kill();
+        _sequence.Kill();
     }
 }

@@ -7,7 +7,14 @@ public class UIButton : MonoBehaviour
 
     [SerializeField] GameObject m_button;
 
-    MovementController _cat;
+    private MovementController _cat;
+
+    private void Awake()
+    {
+        Cursor.visible = true;
+
+        Cursor.lockState = CursorLockMode.None;
+    }
 
     [Inject]
     public void Construct(MovementController cat)
@@ -19,8 +26,12 @@ public class UIButton : MonoBehaviour
     {
         m_backgroundSceneClip.PlayBackground();
 
-        _cat.EnabledCollider();
+        _cat.ActivateMovement();
 
         m_button.SetActive(false);
+
+        Cursor.visible = false;
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

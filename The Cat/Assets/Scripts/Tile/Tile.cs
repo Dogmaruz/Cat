@@ -20,7 +20,8 @@ public class Tile : MonoBehaviour
     private Vector3 _basePosition;
     public Vector3 BasePosition => _basePosition;
 
-    public bool IsMoved = false;
+    [HideInInspector]
+    public bool IsMoved = false; //‘лаг указывающий на изменени€ позиции при старте.
 
     private void Awake()
     {
@@ -34,21 +35,6 @@ public class Tile : MonoBehaviour
         _sequence.Kill();
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    var cat = other.transform.root.GetComponent<MovementController>();
-
-    //    if (cat != null)
-    //    {
-    //        cat.Move(this);
-
-    //        if (m_tileType == TileType.Static)
-    //        {
-    //            FadeTile();
-    //        }
-    //    }
-    //}
-
     public void FadeTile()
     {
         _collider.enabled = false;
@@ -61,7 +47,7 @@ public class Tile : MonoBehaviour
         {
             _sequence = DOTween.Sequence()
            .Append(transform.DOPunchPosition(new Vector3(0f, 0.2f, 0f), 0.3f))
-           .Append(mesh.material.DOFade(0f, 0.5f))
+           .Append(mesh.material.DOFade(0f, 0.3f))
            .SetEase(Ease.InOutQuad)
            .OnComplete(OnDissolveComplete);
         }

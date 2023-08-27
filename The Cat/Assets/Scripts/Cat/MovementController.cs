@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
+using static UnityEngine.GraphicsBuffer;
 
 public struct PlayerInputs
 {
@@ -24,24 +25,19 @@ public class MovementController : MonoBehaviour
 
     private Tween _tweenMoveX;
 
-    private Tween _tweenMoveZ;
-
     private Sequence _sequence;
 
     private bool _isTouch;
 
     private BoxCollider _collider;
 
-    TileController _platformController;
+    private TileController _platformController;
 
-    protected PlayerInputs _playerInputs;
+    private PlayerInputs _playerInputs;
 
     private PlayerInputAction _playerInputAction;
-    public PlayerInputAction PlayerInputAction { get => _playerInputAction; set => _playerInputAction = value; }
 
-    private float _maxSpeedLookAxis = 50;
-
-    private float _maxPower = 3.2f;
+    private float _maxSpeedAxisRight = 50f;
 
     private BackgroundSoundPlayer _backgroundSoundPlayer;
 
@@ -50,6 +46,8 @@ public class MovementController : MonoBehaviour
     private bool _isJump;
 
     private Tile _currentTile;
+
+    private Vector3 _targetPos;
 
     //private Rigidbody rigidBody;
 
@@ -86,21 +84,18 @@ public class MovementController : MonoBehaviour
 
         _tweenMoveX.Kill();
 
-        _tweenMoveZ.Kill();
-
         _sequence.Kill();
     }
 
     private void Update()
     {
-        //Премещение персонажа с клавиатуры и мыши
         MouseInput();
 
         UpdatePosition(_playerInputs.MouseAxisRight);
 
         if (_isJump == false)
         {
-            CheckKillZone();
+            CheckCollisions();
         }
 
         _playerInputs.MouseAxisRight = 0;
@@ -108,24 +103,26 @@ public class MovementController : MonoBehaviour
 
     public void UpdatePosition(float mouseX)
     {
+        float bounds = 2f;
+
         Vector3 newPosition = m_cat.transform.position + new Vector3(mouseX * m_sensitivity, 0f, 0f);
 
         //rigidBody.velocity = new Vector3(mouseX - transform.position.x, rigidBody.velocity.y, 0);
 
         _tweenMoveX = m_cat.transform.DOMoveX(newPosition.x, 0.2f);
 
-        if (m_cat.transform.position.x >= 1.5f)
+        if (m_cat.transform.position.x >= bounds)
         {
-            _tweenMoveX = m_cat.transform.DOMoveX(1.5f, 0.01f);
+            _tweenMoveX = m_cat.transform.DOMoveX(bounds, 0.01f);
         }
 
-        if (m_cat.transform.position.x <= -1.5f)
+        if (m_cat.transform.position.x <= -bounds)
         {
-            _tweenMoveX = m_cat.transform.DOMoveX(-1.5f, 0.01f);
+            _tweenMoveX = m_cat.transform.DOMoveX(-bounds, 0.01f);
         }
     }
 
-    public void EnabledCollider()
+    public void ActivateMovement()
     {
         _collider.enabled = true;
 
@@ -136,43 +133,77 @@ public class MovementController : MonoBehaviour
     {
         var target = _platformController.NextTile();
 
-        Vector3 targetPos = new Vector3();
-
         if (target.TileType == TileType.Static)
         {
-            targetPos = target.transform.position;
+            _targetPos = target.transform.position;
         }
 
         if (target.TileType == TileType.Long)
         {
-            targetPos = target.GetComponent<LongPlaform>().JumpPosition.position;
+            _targetPos = target.GetComponent<LongPlaform>().JumpPosition.position;
         }
 
         if (target.TileType == TileType.Move)
         {
-            //Движение платформы вместе с игроком.
+            _targetPos = target.transform.position;
         }
 
         if (currentTile.TileType == TileType.Static)
         {
-            Jump(currentTile.transform.position.z, targetPos);
+            Jump(currentTile.transform.position.z);
         }
 
         if (currentTile.TileType == TileType.Long)
         {
             _sequence.Kill();
 
-            var distance = currentTile.transform.localScale.z - 1;
+            float offset = 1;
+
+            float angleY = 360;
+
+            var distance = currentTile.transform.localScale.z - offset;
 
             var newPos = m_cat.transform.position.z + distance;
 
             _sequence = DOTween.Sequence()
-           .Append(m_cat.transform.DOMoveZ(newPos, (distance + 1f) * _platformController.SecPerBeat))
-           .Join(m_cat.transform.DORotate(new Vector3(0, 360, 0), (distance + 1f) * _platformController.SecPerBeat, RotateMode.FastBeyond360))
+           .Append(m_cat.transform.DOMoveZ(newPos, (distance + offset) * _platformController.SecPerBeat))
+           .Join(m_cat.transform.DORotate(new Vector3(0, angleY, 0), (distance + offset) * _platformController.SecPerBeat, RotateMode.FastBeyond360))
            .SetEase(Ease.Linear)
            .OnComplete(() =>
            {
-               Jump(newPos, targetPos);
+               Jump(newPos);
+
+               currentTile.FadeTile();
+           });
+        }
+
+        if (currentTile.TileType == TileType.Move)
+        {
+            _sequence.Kill();
+
+            float offset = 1;
+
+            float angleY = 360;
+
+            MovePlatform movePlatform = currentTile.GetComponent<MovePlatform>();
+
+            var distance = Vector3.Distance(currentTile.transform.position, movePlatform.EndPosition.position);
+
+            var newPos = m_cat.transform.position.z + distance;
+
+            currentTile.transform.SetParent(m_checkPosition);
+
+            currentTile.transform.localPosition = new Vector3(0, currentTile.transform.localPosition.y, currentTile.transform.localPosition.z);
+
+            _sequence = DOTween.Sequence()
+           .Append(m_cat.transform.DOMoveZ(newPos, (distance + offset) * _platformController.SecPerBeat))
+           .Join(m_cat.transform.DORotate(new Vector3(0, angleY, 0), (distance + offset) * _platformController.SecPerBeat, RotateMode.FastBeyond360))
+           .SetEase(Ease.Linear)
+           .OnComplete(() =>
+           {
+               currentTile.transform.SetParent(movePlatform.Parent);
+
+               Jump(newPos);
 
                currentTile.FadeTile();
            });
@@ -180,24 +211,32 @@ public class MovementController : MonoBehaviour
     }
 
 
-    private void Jump(float currentTilePositionZ, Vector3 targetPos)
+    private void Jump(float currentTilePositionZ)
     {
+        float maxHight = 6f;
+
+        float _maxPower = 3.2f;
+
+        float offset = 1f;
+
+        int jumpCount = 1;
+
         _isJump = true;
 
-        var result = targetPos.z - currentTilePositionZ - 1;
+        var result = _targetPos.z - currentTilePositionZ - offset;
 
         var power = result;
 
         _tween.Kill();
 
-        if (result >= 6)
+        if (result >= maxHight)
         {
             power = _maxPower;
         }
 
-        var newPos = new Vector3(m_cat.transform.position.x, m_cat.transform.position.y, targetPos.z);
+        var newPos = new Vector3(m_cat.transform.position.x, m_cat.transform.position.y, _targetPos.z);
 
-        _tween = m_cat.transform.DOJump(newPos, power, 1, result * _platformController.SecPerBeat)
+        _tween = m_cat.transform.DOJump(newPos, power, jumpCount, result * _platformController.SecPerBeat)
                                 .SetEase(Ease.Linear)
                                 .OnComplete(OnComplete);
     }
@@ -209,19 +248,23 @@ public class MovementController : MonoBehaviour
         _isJump = false;
     }
 
-    private void CheckKillZone()
+    private void CheckCollisions()
     {
+        float maxDistance = 5f;
+
+        float halfIndex = 0.5f;
+
+        float fallYPosition = -5f;
+
         Vector3 origin = m_checkPosition.position;
 
-        Vector3 size = GetComponentInChildren<Rigidbody>().GetComponent<Transform>().localScale;
+        Vector3 size = GetComponentInChildren<Rigidbody>().GetComponent<Transform>().localScale * halfIndex;
 
         Vector3 direction = Vector3.down;
 
-        float maxDistance = 5f;
-
         RaycastHit hitInfo;
 
-        if (Physics.BoxCast(origin, size * 0.5f, direction, out hitInfo, transform.rotation, maxDistance, m_layerMask))
+        if (Physics.BoxCast(origin, size* halfIndex, direction, out hitInfo, transform.rotation, maxDistance, m_layerMask))
         {
             Collider hitCollider = hitInfo.collider;
 
@@ -231,6 +274,11 @@ public class MovementController : MonoBehaviour
 
                 if (killZone != null)
                 {
+                    if (_currentTile.TileType == TileType.Move)
+                    {
+                        _currentTile.transform.SetParent(_currentTile.GetComponent<MovePlatform>().Parent);
+                    }
+
                     enabled = false;
 
                     //Здесь реклама.
@@ -239,17 +287,19 @@ public class MovementController : MonoBehaviour
 
                     _tweenMoveX.Kill();
 
-                    _tweenMoveZ.Kill();
-
                     _sequence.Kill();
 
-                    _tweenMoveX = m_cat.transform.DOMoveY(-5, 0.5f);
+                    _tween = m_cat.transform.DOMoveY(fallYPosition, 0.5f);
 
                     _backgroundSoundPlayer.Stop();
 
                     _soundPlayer.Play(Sound.Fall, 1f);
 
                     m_restartButton.SetActive(true);
+
+                    Cursor.visible = true;
+
+                    Cursor.lockState = CursorLockMode.None;
                 }
                 else
                 {
@@ -276,7 +326,7 @@ public class MovementController : MonoBehaviour
         {
             float xValue = _playerInputAction.Player.MouseAxisX.ReadValue<Vector2>().x;
 
-            _playerInputs.MouseAxisRight = xValue >= 0 ? Mathf.Clamp(xValue, 0, _maxSpeedLookAxis) : Mathf.Clamp(xValue, -_maxSpeedLookAxis, 0);
+            _playerInputs.MouseAxisRight = xValue >= 0 ? Mathf.Clamp(xValue, 0, _maxSpeedAxisRight) : Mathf.Clamp(xValue, -_maxSpeedAxisRight, 0);
         }
     }
 
@@ -286,6 +336,6 @@ public class MovementController : MonoBehaviour
 
         float xValue = value;
 
-        _playerInputs.MouseAxisRight = xValue >= 0 ? Mathf.Clamp(xValue, 0, _maxSpeedLookAxis) : Mathf.Clamp(xValue, -_maxSpeedLookAxis, 0);
+        _playerInputs.MouseAxisRight = xValue >= 0 ? Mathf.Clamp(xValue, 0, _maxSpeedAxisRight) : Mathf.Clamp(xValue, -_maxSpeedAxisRight, 0);
     }
 }

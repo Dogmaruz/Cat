@@ -1,24 +1,15 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Events;
 using Zenject;
 
 public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
-    [System.Serializable]
-    public class Event : UnityEvent<Vector2> { }
-
     [Header("Rect References")]
-    public RectTransform ContainerRect;
+    [SerializeField] private RectTransform m_containerRect;
 
     [Header("Settings")]
-    public float MagnitudeMultiplier = 1f;
+    [SerializeField] private float m_magnitudeMultiplier = 50f;
 
-    public bool InvertXOutputValue;
-
-    public bool InvertYOutputValue;
-
-    //Stored Pointer Values
     private Vector2 _pointerDownPosition;
 
     private Vector2 _currentPointerPosition;
@@ -28,9 +19,6 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
     private Resolution _resolution;
 
     private Vector2 _positionDelta;
-
-    [Header("Output")]
-    public Event TouchZoneOutputEvent;
 
     private MovementController _cat;
 
@@ -47,17 +35,16 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
         _resolution = Screen.currentResolution;
     }
 
-
     public void OnPointerDown(PointerEventData eventData)
     {
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(ContainerRect, eventData.position, eventData.pressEventCamera, out _pointerDownPosition);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(m_containerRect, eventData.position, eventData.pressEventCamera, out _pointerDownPosition);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         _previousPositionDelta = _positionDelta;
 
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(ContainerRect, eventData.position, eventData.pressEventCamera, out _currentPointerPosition);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(m_containerRect, eventData.position, eventData.pressEventCamera, out _currentPointerPosition);
 
         _positionDelta = GetDeltaBetweenPositions(_pointerDownPosition, _currentPointerPosition);
 
@@ -97,9 +84,7 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
 
     void OutputPointerEventValue(Vector2 pointerPosition)
     {
-        TouchZoneOutputEvent?.Invoke(pointerPosition);
-
-        _cat.SetMouseAxisRight(pointerPosition.x / _resolution.width * MagnitudeMultiplier);
+        _cat.SetMouseAxisRight(pointerPosition.x / _resolution.width * m_magnitudeMultiplier);
     }
 
     Vector2 GetDeltaBetweenPositions(Vector2 firstPosition, Vector2 secondPosition)

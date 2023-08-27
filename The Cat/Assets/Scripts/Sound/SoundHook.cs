@@ -1,9 +1,9 @@
 using UnityEngine;
 using Zenject;
 
-    public class SoundHook : MonoBehaviour
-    {
-        public Sound m_sound;
+public class SoundHook : MonoBehaviour
+{
+    public Sound m_sound;
 
     private SoundPlayer _soundPlayer;
 
@@ -13,7 +13,7 @@ using Zenject;
         _soundPlayer = soundPlayer;
     }
     public void Play()
-        {
-            _soundPlayer.Play(m_sound, 1);
-        }
+    {
+        _soundPlayer.Play(m_sound, 1);
     }
+}

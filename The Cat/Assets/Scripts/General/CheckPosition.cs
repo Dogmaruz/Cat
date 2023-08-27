@@ -12,7 +12,7 @@ public class CheckPosition : MonoBehaviour
         _cat = cat;
     }
 
-    void LateUpdate()
+    void Update()
     {
         transform.position = new Vector3(_cat.Cat.transform.position.x, transform.position.y, _cat.Cat.transform.position.z);
     }

@@ -5,22 +5,41 @@ public class MoveTile : MonoBehaviour
 {
     [SerializeField] private float offset;
 
-    private Sequence _sequence;
+    private Vector3 startPoint;
+
+    private Vector3 endPoint;
+
+    public float duration = 2f;
+
+    private bool isMovingForward = true;
+
+    private Tween _tween;
 
     private void Start()
     {
-        var startPos = transform.position;
+        startPoint = transform.position;
 
-        _sequence = DOTween.Sequence()
-                .Append(transform.DOMoveX(startPos.x - offset, 3f))
-                .Append(transform.DOMoveX(startPos.x, 3f))
-                .SetEase(Ease.Linear)
-                .SetLink(gameObject)
-                .SetLoops(-1);
+        endPoint = new Vector3 (startPoint.x - offset, startPoint.y, startPoint.z);
+
+        MoveToNextWaypoint();
+    }
+
+    private void MoveToNextWaypoint()
+    {
+        Vector3 targetPosition = isMovingForward ? endPoint : startPoint;
+
+        _tween = transform.DOMove(targetPosition, duration).OnComplete(OnWaypointReached);
+    }
+
+    private void OnWaypointReached()
+    {
+        isMovingForward = !isMovingForward;
+
+        MoveToNextWaypoint();
     }
 
     private void OnDestroy()
     {
-        _sequence.Kill();
+        _tween.Kill();
     }
 }
