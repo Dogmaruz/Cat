@@ -1,7 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
-using static UnityEngine.GraphicsBuffer;
 
 public struct PlayerInputs
 {
@@ -91,6 +90,8 @@ public class MovementController : MonoBehaviour
     {
         MouseInput();
 
+        Debug.Log(_playerInputs.MouseAxisRight);
+
         UpdatePosition(_playerInputs.MouseAxisRight);
 
         if (_isJump == false)
@@ -98,11 +99,13 @@ public class MovementController : MonoBehaviour
             CheckCollisions();
         }
 
-        _playerInputs.MouseAxisRight = 0;
+        //_playerInputs.MouseAxisRight = 0;
     }
 
     public void UpdatePosition(float mouseX)
     {
+        Debug.Log(mouseX);
+
         float bounds = 2f;
 
         Vector3 newPosition = m_cat.transform.position + new Vector3(mouseX * m_sensitivity, 0f, 0f);
@@ -225,7 +228,7 @@ public class MovementController : MonoBehaviour
 
         var result = _targetPos.z - currentTilePositionZ - offset;
 
-        var power = result;
+        var power = result * 1.5f;
 
         _tween.Kill();
 
