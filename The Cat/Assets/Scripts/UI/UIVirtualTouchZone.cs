@@ -16,13 +16,15 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
 
     private Vector2 _previousPositionDelta;
 
+    private Vector2 _startPosition;
+
+    private bool _isMovingRight;
+
     private Resolution _resolution;
 
     private Vector2 _positionDelta;
 
     private MovementController _cat;
-
-    private float _directionIndex;
 
     [Inject]
     public void Construct(MovementController cat)
@@ -38,33 +40,29 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
     public void OnPointerDown(PointerEventData eventData)
     {
         RectTransformUtility.ScreenPointToLocalPointInRectangle(m_containerRect, eventData.position, eventData.pressEventCamera, out _pointerDownPosition);
+        _startPosition = _pointerDownPosition;
+        _isMovingRight = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        _previousPositionDelta = _positionDelta;
+        _previousPositionDelta = _currentPointerPosition;
 
         RectTransformUtility.ScreenPointToLocalPointInRectangle(m_containerRect, eventData.position, eventData.pressEventCamera, out _currentPointerPosition);
 
-        _positionDelta = GetDeltaBetweenPositions(_pointerDownPosition, _currentPointerPosition);
-
-        float oldDirectionIndex = _directionIndex;
-
-        if (Mathf.Abs(_previousPositionDelta.x) > Mathf.Abs(_positionDelta.x))
+        if (!_isMovingRight && _currentPointerPosition.x - _startPosition.x > 0)
         {
-            _directionIndex = -1;
+            _isMovingRight = true;
+            _startPosition = _currentPointerPosition;
         }
-        else
+        else if (_isMovingRight && _currentPointerPosition.x - _startPosition.x < 0)
         {
-            _directionIndex = 1;
+            _isMovingRight = false;
+            _startPosition = _currentPointerPosition;
         }
 
-        if (oldDirectionIndex != _directionIndex)
-        {
-            _pointerDownPosition = _currentPointerPosition;
-
-            _positionDelta *= _directionIndex;
-        }
+        _previousPositionDelta = _positionDelta;
+        _positionDelta = GetDeltaBetweenPositions(_startPosition, _currentPointerPosition);
 
         OutputPointerEventValue(new Vector2(_positionDelta.x, _positionDelta.y));
     }
@@ -72,12 +70,11 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
     public void OnPointerUp(PointerEventData eventData)
     {
         _pointerDownPosition = Vector2.zero;
-
-        _positionDelta = Vector2.zero;
-
-        _pointerDownPosition = Vector2.zero;
-
         _currentPointerPosition = Vector2.zero;
+        _previousPositionDelta = Vector2.zero;
+        _positionDelta = Vector2.zero;
+        _startPosition = Vector2.zero;
+        _isMovingRight = false;
 
         OutputPointerEventValue(Vector2.zero);
     }

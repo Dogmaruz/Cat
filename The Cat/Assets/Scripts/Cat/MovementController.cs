@@ -48,7 +48,7 @@ public class MovementController : MonoBehaviour
 
     private Vector3 _targetPos;
 
-    //private Rigidbody rigidBody;
+    private Rigidbody _rigidBody;
 
     [Inject]
     public void Construct(TileController platformController, BackgroundSoundPlayer backgroundSoundPlayer, SoundPlayer soundPlayer)
@@ -62,7 +62,7 @@ public class MovementController : MonoBehaviour
 
     private void Awake()
     {
-        //rigidBody = GetComponentInChildren<Rigidbody>();
+        _rigidBody = GetComponentInChildren<Rigidbody>();
 
         _collider = m_cat.GetComponent<BoxCollider>();
 
@@ -90,8 +90,6 @@ public class MovementController : MonoBehaviour
     {
         MouseInput();
 
-        Debug.Log(_playerInputs.MouseAxisRight);
-
         UpdatePosition(_playerInputs.MouseAxisRight);
 
         if (_isJump == false)
@@ -99,18 +97,14 @@ public class MovementController : MonoBehaviour
             CheckCollisions();
         }
 
-        //_playerInputs.MouseAxisRight = 0;
+        _playerInputs.MouseAxisRight = 0;
     }
 
     public void UpdatePosition(float mouseX)
     {
-        Debug.Log(mouseX);
-
         float bounds = 2f;
 
         Vector3 newPosition = m_cat.transform.position + new Vector3(mouseX * m_sensitivity, 0f, 0f);
-
-        //rigidBody.velocity = new Vector3(mouseX - transform.position.x, rigidBody.velocity.y, 0);
 
         _tweenMoveX = m_cat.transform.DOMoveX(newPosition.x, 0.2f);
 
@@ -340,5 +334,7 @@ public class MovementController : MonoBehaviour
         float xValue = value;
 
         _playerInputs.MouseAxisRight = xValue >= 0 ? Mathf.Clamp(xValue, 0, _maxSpeedAxisRight) : Mathf.Clamp(xValue, -_maxSpeedAxisRight, 0);
+
+        Debug.Log(_playerInputs.MouseAxisRight);
     }
 }
