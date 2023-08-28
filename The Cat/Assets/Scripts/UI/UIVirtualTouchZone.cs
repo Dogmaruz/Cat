@@ -81,7 +81,7 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
 
     void OutputPointerEventValue(Vector2 pointerPosition)
     {
-        _cat.SetMouseAxisRight(pointerPosition.x / _resolution.width * m_magnitudeMultiplier);
+        //_cat.SetMouseAxisRight(pointerPosition.x * m_magnitudeMultiplier);
     }
 
     Vector2 GetDeltaBetweenPositions(Vector2 firstPosition, Vector2 secondPosition)

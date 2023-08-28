@@ -31,7 +31,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""name"": ""MouseAxisX"",
                     ""type"": ""Value"",
                     ""id"": ""e9bf72d5-3f35-4ffd-bab5-cd768cd39c26"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -45,6 +45,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""MouseAxisX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f70cffe9-8266-4d4f-acbd-c85f94f10aa5"",
+                    ""path"": ""<Touchscreen>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""MouseAxisX"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

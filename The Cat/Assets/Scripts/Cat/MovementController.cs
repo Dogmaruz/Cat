@@ -1,5 +1,6 @@
-using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Zenject;
 
 public struct PlayerInputs
@@ -12,89 +13,98 @@ public class MovementController : MonoBehaviour
     [SerializeField] private Transform m_cat;
     public Transform Cat => m_cat;
 
-    [SerializeField] private Transform m_checkPosition;
-
     [SerializeField] private float m_sensitivity = 0.1f;
 
     [SerializeField] private LayerMask m_layerMask;
 
-    [SerializeField] private GameObject m_restartButton;
+    [SerializeField] private AnimationCurve m_moveCurve;
 
-    private Tween _tween;
+    [SerializeField] private AnimationCurve m_jumpCurve;
 
-    private Tween _tweenMoveX;
+    private LevelSecuenceController _levelSecuenceController;
 
-    private Sequence _sequence;
-
-    private bool _isTouch;
-
-    private BoxCollider _collider;
-
-    private TileController _platformController;
-
-    private PlayerInputs _playerInputs;
+    private TileController _tileController;
 
     private PlayerInputAction _playerInputAction;
 
-    private float _maxSpeedAxisRight = 50f;
+    private PlayerInputs _playerInputs;
 
-    private BackgroundSoundPlayer _backgroundSoundPlayer;
+    private BoxCollider _collider;
 
-    private SoundPlayer _soundPlayer;
+    private bool _isTouch;
 
     private bool _isJump;
+
+    private bool _isLongMove;
+
+    private bool _isLose;
 
     private Tile _currentTile;
 
     private Vector3 _targetPos;
 
-    private Rigidbody _rigidBody;
+    private float _totalTime;
+
+    private float _currentTime;
+
+    private Vector3 _lastPosition;
+
 
     [Inject]
-    public void Construct(TileController platformController, BackgroundSoundPlayer backgroundSoundPlayer, SoundPlayer soundPlayer)
+    public void Construct(TileController TileController, LevelSecuenceController levelSecuenceController)
     {
-        _platformController = platformController;
+        _tileController = TileController;
 
-        _backgroundSoundPlayer = backgroundSoundPlayer;
-
-        _soundPlayer = soundPlayer;
+        _levelSecuenceController = levelSecuenceController;
     }
 
     private void Awake()
     {
-        _rigidBody = GetComponentInChildren<Rigidbody>();
-
-        _collider = m_cat.GetComponent<BoxCollider>();
-
-        _collider.enabled = false;
-
         _playerInputs = new PlayerInputs();
 
         _playerInputAction = new PlayerInputAction();
 
+        _collider = m_cat.GetComponent<BoxCollider>();
+
         _playerInputAction.Player.Enable();
 
+        _collider.enabled = false;
+
         enabled = false;
-    }
 
-    private void OnDestroy()
-    {
-        _tween.Kill();
+        _lastPosition = m_cat.transform.localPosition;
 
-        _tweenMoveX.Kill();
-
-        _sequence.Kill();
+        _totalTime = m_jumpCurve.keys[m_jumpCurve.keys.Length - 1].time;
     }
 
     private void Update()
     {
-        MouseInput();
-
-        UpdatePosition(_playerInputs.MouseAxisRight);
-
-        if (_isJump == false)
+        if (_isLose)
         {
-            CheckCollisions();
+            _levelSecuenceController.Lose();
+
+            enabled = false;
+        }
+        else
+        {
+            MouseInput();
+
+            UpdatePosition(_playerInputs.MouseAxisRight);
+
+            if (_isJump == false && _isLongMove == false)
+            {
+                CheckCollisions();
+            }
+
+            if (_isJump == true)
+            {
+                Jump();
+            }
+
+            if (_isLongMove == true)
+            {
+                MoveToLongTile();
+            }
         }
 
         _playerInputs.MouseAxisRight = 0;
@@ -104,19 +114,9 @@ public class MovementController : MonoBehaviour
     {
         float bounds = 2f;
 
-        Vector3 newPosition = m_cat.transform.position + new Vector3(mouseX * m_sensitivity, 0f, 0f);
+        float newPositionX = Mathf.Clamp(m_cat.transform.localPosition.x + mouseX * m_sensitivity, -bounds, bounds);
 
-        _tweenMoveX = m_cat.transform.DOMoveX(newPosition.x, 0.2f);
-
-        if (m_cat.transform.position.x >= bounds)
-        {
-            _tweenMoveX = m_cat.transform.DOMoveX(bounds, 0.01f);
-        }
-
-        if (m_cat.transform.position.x <= -bounds)
-        {
-            _tweenMoveX = m_cat.transform.DOMoveX(-bounds, 0.01f);
-        }
+        m_cat.transform.localPosition = new Vector3(newPositionX, m_cat.transform.localPosition.y, m_cat.transform.localPosition.z);
     }
 
     public void ActivateMovement()
@@ -128,190 +128,169 @@ public class MovementController : MonoBehaviour
 
     public void Move(Tile currentTile)
     {
-        var target = _platformController.NextTile();
+        var target = _tileController.NextTile();
 
-        if (target.TileType == TileType.Static)
-        {
-            _targetPos = target.transform.position;
-        }
-
-        if (target.TileType == TileType.Long)
-        {
-            _targetPos = target.GetComponent<LongPlaform>().JumpPosition.position;
-        }
-
-        if (target.TileType == TileType.Move)
-        {
-            _targetPos = target.transform.position;
-        }
+        _targetPos = target.BasePosition;
 
         if (currentTile.TileType == TileType.Static)
         {
-            Jump(currentTile.transform.position.z);
+            _isJump = true;
         }
 
         if (currentTile.TileType == TileType.Long)
         {
-            _sequence.Kill();
-
-            float offset = 1;
-
-            float angleY = 360;
-
-            var distance = currentTile.transform.localScale.z - offset;
-
-            var newPos = m_cat.transform.position.z + distance;
-
-            _sequence = DOTween.Sequence()
-           .Append(m_cat.transform.DOMoveZ(newPos, (distance + offset) * _platformController.SecPerBeat))
-           .Join(m_cat.transform.DORotate(new Vector3(0, angleY, 0), (distance + offset) * _platformController.SecPerBeat, RotateMode.FastBeyond360))
-           .SetEase(Ease.Linear)
-           .OnComplete(() =>
-           {
-               Jump(newPos);
-
-               currentTile.FadeTile();
-           });
+            _isLongMove = true;
         }
 
-        if (currentTile.TileType == TileType.Move)
-        {
-            _sequence.Kill();
+        //if (currentTile.TileType == TileType.Move)
+        //{
+        //    _sequence.Kill();
 
-            float offset = 1;
+        //    float offset = 1;
 
-            float angleY = 360;
+        //    float angleY = 360;
 
-            MovePlatform movePlatform = currentTile.GetComponent<MovePlatform>();
+        //    MovePlatform movePlatform = currentTile.GetComponent<MovePlatform>();
 
-            var distance = Vector3.Distance(currentTile.transform.position, movePlatform.EndPosition.position);
+        //    var distance = Vector3.Distance(currentTile.transform.position, movePlatform.EndPosition.position);
 
-            var newPos = m_cat.transform.position.z + distance;
+        //    var newPos = m_cat.transform.position.z + distance;
 
-            currentTile.transform.SetParent(m_checkPosition);
+        //    currentTile.transform.SetParent(m_checkPosition);
 
-            currentTile.transform.localPosition = new Vector3(0, currentTile.transform.localPosition.y, currentTile.transform.localPosition.z);
+        //    currentTile.transform.localPosition = new Vector3(0, currentTile.transform.localPosition.y, currentTile.transform.localPosition.z);
 
-            _sequence = DOTween.Sequence()
-           .Append(m_cat.transform.DOMoveZ(newPos, (distance + offset) * _platformController.SecPerBeat))
-           .Join(m_cat.transform.DORotate(new Vector3(0, angleY, 0), (distance + offset) * _platformController.SecPerBeat, RotateMode.FastBeyond360))
-           .SetEase(Ease.Linear)
-           .OnComplete(() =>
-           {
-               currentTile.transform.SetParent(movePlatform.Parent);
+        //    _sequence = DOTween.Sequence()
+        //   .Append(m_cat.transform.DOMoveZ(newPos, (distance + offset) * _platformController.SecPerBeat))
+        //   .Join(m_cat.transform.DORotate(new Vector3(0, angleY, 0), (distance + offset) * _platformController.SecPerBeat, RotateMode.FastBeyond360))
+        //   .SetEase(Ease.Linear)
+        //   .OnComplete(() =>
+        //   {
+        //       currentTile.transform.SetParent(movePlatform.Parent);
 
-               Jump(newPos);
+        //       Jump(newPos);
 
-               currentTile.FadeTile();
-           });
-        }
+        //       currentTile.FadeTile();
+        //   });
+        //}
     }
 
-
-    private void Jump(float currentTilePositionZ)
+    private void MoveToLongTile()
     {
-        float maxHight = 6f;
-
-        float _maxPower = 3.2f;
-
-        float offset = 1f;
-
-        int jumpCount = 1;
-
-        _isJump = true;
-
-        var result = _targetPos.z - currentTilePositionZ - offset;
-
-        var power = result * 1.5f;
-
-        _tween.Kill();
-
-        if (result >= maxHight)
-        {
-            power = _maxPower;
-        }
-
-        var newPos = new Vector3(m_cat.transform.position.x, m_cat.transform.position.y, _targetPos.z);
-
-        _tween = m_cat.transform.DOJump(newPos, power, jumpCount, result * _platformController.SecPerBeat)
-                                .SetEase(Ease.Linear)
-                                .OnComplete(OnComplete);
-    }
-
-    private void OnComplete()
-    {
-        _tween.Kill();
+        //float angleY = 360;
 
         _isJump = false;
+
+        var position = _lastPosition;
+
+        var distance = _currentTile.transform.localScale.z - 1;
+
+        //var newPos = m_cat.transform.position.z + distance;
+
+        position.x = m_cat.transform.position.x;
+
+        position.y = m_cat.transform.position.y;
+
+        Debug.Log(position.y);
+
+        position.z = m_moveCurve.Evaluate(_currentTime) * distance;
+
+        m_cat.transform.localPosition = new Vector3(0, 0, _lastPosition.z) + position;
+
+        if (_currentTime >= _totalTime)
+        {
+            _currentTime = 0f;
+
+            _lastPosition = m_cat.transform.localPosition;
+
+            _isLongMove = false;
+
+            _isJump = true;
+
+            _currentTile.FadeTile();
+        }
+
+        _currentTime += 1 / _tileController.SecPerBeat / (distance - 1) * Time.deltaTime;
+
+
+        // _sequence = DOTween.Sequence()
+        //.Append(m_cat.transform.DOMoveZ(newPos, (distance + 1) * _tileController.SecPerBeat))
+        //.Join(m_cat.transform.DORotate(new Vector3(0, angleY, 0), (distance + 1) * _tileController.SecPerBeat, RotateMode.FastBeyond360))
+        //.SetEase(Ease.Linear)
+        //.OnComplete(() =>
+        //{
+        //    Jump(newPos);
+
+        //    currentTile.FadeTile();
+        //});
     }
+
+    private void Jump()
+    {
+        var position = _lastPosition;
+
+        var distance = _targetPos.z - _currentTile.transform.position.z;
+
+        position.x = m_cat.transform.position.x;
+
+        position.y = m_jumpCurve.Evaluate(_currentTime) * distance;
+
+        position.z = m_moveCurve.Evaluate(_currentTime) * distance;
+
+        m_cat.transform.localPosition = new Vector3(0, _lastPosition.y, _lastPosition.z) + position;
+
+
+        if (_currentTime >= _totalTime)
+        {
+            _isJump = false;
+
+            _currentTime = 0f;
+
+            _lastPosition = m_cat.transform.localPosition;
+
+            return;
+        }
+
+        _currentTime += 1 / _tileController.SecPerBeat / (distance - 1) * Time.deltaTime;
+    }
+
 
     private void CheckCollisions()
     {
-        float maxDistance = 5f;
+        float maxDistance = 4f;
 
-        float halfIndex = 0.5f;
-
-        float fallYPosition = -5f;
-
-        Vector3 origin = m_checkPosition.position;
-
-        Vector3 size = GetComponentInChildren<Rigidbody>().GetComponent<Transform>().localScale * halfIndex;
-
-        Vector3 direction = Vector3.down;
+        Vector3 origin = m_cat.transform.position + Vector3.up;
 
         RaycastHit hitInfo;
 
-        if (Physics.BoxCast(origin, size* halfIndex, direction, out hitInfo, transform.rotation, maxDistance, m_layerMask))
+        if (Physics.BoxCast(origin, new Vector3(0.15f, 0.15f, 0.15f), Vector3.down, out hitInfo, transform.rotation, maxDistance, m_layerMask))
         {
             Collider hitCollider = hitInfo.collider;
 
-            if (hitCollider != null)
+            var killZone = hitCollider.gameObject.GetComponent<KillZone>();
+
+            if (killZone != null)
             {
-                var killZone = hitCollider.gameObject.GetComponent<KillZone>();
-
-                if (killZone != null)
+                if (_currentTile.TileType == TileType.Move)
                 {
-                    if (_currentTile.TileType == TileType.Move)
-                    {
-                        _currentTile.transform.SetParent(_currentTile.GetComponent<MovePlatform>().Parent);
-                    }
-
-                    enabled = false;
-
-                    //Здесь реклама.
-
-                    _tween.Kill();
-
-                    _tweenMoveX.Kill();
-
-                    _sequence.Kill();
-
-                    _tween = m_cat.transform.DOMoveY(fallYPosition, 0.5f);
-
-                    _backgroundSoundPlayer.Stop();
-
-                    _soundPlayer.Play(Sound.Fall, 1f);
-
-                    m_restartButton.SetActive(true);
-
-                    Cursor.visible = true;
-
-                    Cursor.lockState = CursorLockMode.None;
+                    _currentTile.transform.SetParent(_currentTile.GetComponent<MoveTile>().Parent);
                 }
-                else
+
+                _isLose = true;
+            }
+            else
+            {
+                var tile = hitCollider.GetComponent<Tile>();
+
+                if (_currentTile == tile) return;
+
+                _currentTile = tile;
+
+                Move(tile);
+
+                if (tile.TileType == TileType.Static)
                 {
-                    var tile = hitCollider.GetComponent<Tile>();
-
-                    if (_currentTile == tile) return;
-
-                    _currentTile = tile;
-
-                    Move(tile);
-
-                    if (tile.TileType == TileType.Static)
-                    {
-                        tile.FadeTile();
-                    }
+                    tile.FadeTile();
                 }
             }
         }
@@ -323,18 +302,14 @@ public class MovementController : MonoBehaviour
         {
             float xValue = _playerInputAction.Player.MouseAxisX.ReadValue<Vector2>().x;
 
-            _playerInputs.MouseAxisRight = xValue >= 0 ? Mathf.Clamp(xValue, 0, _maxSpeedAxisRight) : Mathf.Clamp(xValue, -_maxSpeedAxisRight, 0);
+            _playerInputs.MouseAxisRight = xValue;
         }
     }
 
-    public void SetMouseAxisRight(float value)
+    public void SetMouseAxisRight(float xValue)
     {
         _isTouch = true;
 
-        float xValue = value;
-
-        _playerInputs.MouseAxisRight = xValue >= 0 ? Mathf.Clamp(xValue, 0, _maxSpeedAxisRight) : Mathf.Clamp(xValue, -_maxSpeedAxisRight, 0);
-
-        Debug.Log(_playerInputs.MouseAxisRight);
+        _playerInputs.MouseAxisRight = xValue;
     }
 }

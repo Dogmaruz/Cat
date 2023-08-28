@@ -14,6 +14,8 @@ public class UIButton : MonoBehaviour
         Cursor.visible = true;
 
         Cursor.lockState = CursorLockMode.None;
+
+
     }
 
     [Inject]

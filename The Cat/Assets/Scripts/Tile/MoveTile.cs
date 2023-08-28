@@ -1,21 +1,15 @@
-using DG.Tweening;
 using UnityEngine;
 
-public class MoveTile : MonoBehaviour
+public class MoveTile : Tile
 {
-    [SerializeField] private float offset;
+    [SerializeField] private Transform m_parent;
+    public Transform Parent => m_parent;
 
-    public float duration = 2f;
+    [SerializeField] private Transform m_endPosition;
+    public Transform EndPosition => m_endPosition;
 
-    private Tween _tween;
-
-    private void Start()
+    public override void SetBasePosition()
     {
-        _tween = transform.DOMoveX(offset, duration).SetLoops(-1, LoopType.Yoyo);
-    }
-
-    private void OnDestroy()
-    {
-        _tween.Kill();
+        _basePosition = transform.position;
     }
 }
