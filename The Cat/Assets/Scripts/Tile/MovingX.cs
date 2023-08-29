@@ -11,7 +11,9 @@ public class MovingX : MonoBehaviour
 
     private void Start()
     {
-        _tween = transform.DOMoveX(offset, duration).SetLoops(-1, LoopType.Yoyo);
+        _tween = transform.DOMoveX(offset, duration)
+                          .SetLoops(-1, LoopType.Yoyo)
+                          .SetEase(Ease.Linear);
     }
 
     private void OnDestroy()

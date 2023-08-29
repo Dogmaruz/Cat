@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class MoveTile : Tile
 {
-    [SerializeField] private Transform m_parent;
-    public Transform Parent => m_parent;
+    [SerializeField] private Transform m_parentTransform;
+    public Transform ParentTransform => m_parentTransform;
 
     [SerializeField] private Transform m_endPosition;
     public Transform EndPosition => m_endPosition;
 
-    public override void SetBasePosition()
+    public override void SetJumpPosition()
     {
-        _basePosition = transform.position;
+        JumpPosition = transform.position;
     }
 }

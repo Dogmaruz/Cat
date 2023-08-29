@@ -8,8 +8,10 @@ public struct PlayerInputs
 
 public class MovementController : MonoBehaviour
 {
-    [SerializeField] private Transform m_cat;
-    public Transform Cat => m_cat;
+    [SerializeField] private Transform m_parentPointTransform;
+
+    [SerializeField] private Transform m_playerTransform;
+    public Transform PlayerTransform => m_playerTransform;
 
     [SerializeField] private float m_sensitivity = 0.1f;
 
@@ -39,15 +41,12 @@ public class MovementController : MonoBehaviour
 
     private float _currentTime;
 
-    private bool _isTouch;
-
     private bool _isJump;
 
     private bool _isLongMove;
 
     private bool _isMove;
-
-    private bool _isLose;
+    public bool _isLose { get; set; }
 
 
     [Inject]
@@ -64,13 +63,13 @@ public class MovementController : MonoBehaviour
 
         _playerInputAction = new PlayerInputAction();
 
-        _collider = m_cat.GetComponent<BoxCollider>();
+        _collider = m_playerTransform.GetComponent<BoxCollider>();
 
         _playerInputAction.Player.Enable();
 
-        _collider.enabled = false;
+        //_collider.enabled = false;
 
-        _lastPosition = m_cat.transform.localPosition;
+        _lastPosition = m_playerTransform.transform.localPosition;
 
         _totalTime = m_jumpCurve.keys[m_jumpCurve.keys.Length - 1].time;
 
@@ -117,16 +116,16 @@ public class MovementController : MonoBehaviour
 
     public void UpdatePosition()
     {
-        float bounds = 2f;
+        float bounds = 2.5f;
 
-        float newPositionX = Mathf.Clamp(m_cat.transform.localPosition.x + _playerInputs.MouseAxisRight * m_sensitivity, -bounds, bounds);
+        float newPositionX = Mathf.Clamp(m_playerTransform.transform.localPosition.x + _playerInputs.MouseAxisRight * m_sensitivity, -bounds, bounds);
 
-        m_cat.transform.localPosition = new Vector3(newPositionX, m_cat.transform.localPosition.y, m_cat.transform.localPosition.z);
+        m_playerTransform.transform.localPosition = new Vector3(newPositionX, m_playerTransform.transform.localPosition.y, m_playerTransform.transform.localPosition.z);
     }
 
     public void ActivateMovement()
     {
-        _collider.enabled = true;
+        //_collider.enabled = true;
 
         enabled = true;
     }
@@ -135,7 +134,7 @@ public class MovementController : MonoBehaviour
     {
         var target = _tileController.NextTile();
 
-        _targetPos = target.BasePosition;
+        _targetPos = target.JumpPosition;
 
         if (currentTile.TileType == TileType.Static)
         {
@@ -158,13 +157,13 @@ public class MovementController : MonoBehaviour
     {
         var position = _lastPosition;
 
-        var distance =  (_currentTile as MoveTile).EndPosition.position.z - transform.TransformPoint(_lastPosition).z;
+        var distance = (_currentTile as MoveTile).EndPosition.position.z - transform.TransformPoint(_lastPosition).z;
 
-        _currentTile.transform.SetParent(m_cat.transform);
+        _currentTile.transform.SetParent(m_parentPointTransform.transform);
 
         _currentTile.transform.localPosition = new Vector3(0, _currentTile.transform.localPosition.y, _currentTile.transform.localPosition.z);
 
-        position.x = m_cat.transform.position.x;
+        position.x = m_playerTransform.transform.position.x;
 
         position.y = 0;
 
@@ -172,15 +171,15 @@ public class MovementController : MonoBehaviour
 
         float rotationAngle = 360f * (_currentTime / _totalTime);
 
-        m_cat.transform.localPosition = new Vector3(0, 0, _lastPosition.z) + position;
+        m_playerTransform.transform.localPosition = new Vector3(0, 0, _lastPosition.z) + position;
 
-        m_cat.transform.localRotation = Quaternion.Euler(0, rotationAngle, 0);
+        m_playerTransform.transform.localRotation = Quaternion.Euler(0, rotationAngle, 0);
 
         if (_currentTime >= _totalTime)
         {
             _currentTime = 0f;
 
-            _lastPosition = m_cat.transform.localPosition;
+            _lastPosition = m_playerTransform.transform.localPosition;
 
             _isMove = false;
 
@@ -188,7 +187,7 @@ public class MovementController : MonoBehaviour
 
             _currentTile.FadeTile();
 
-            _currentTile.transform.SetParent((_currentTile as MoveTile).Parent);
+            _currentTile.transform.SetParent((_currentTile as MoveTile).ParentTransform);
         }
 
         _currentTime += 1 / _tileController.SecPerBeat / (distance / 2) * Time.deltaTime;
@@ -200,7 +199,7 @@ public class MovementController : MonoBehaviour
 
         var distance = _currentTile.transform.localScale.z - 1;
 
-        position.x = m_cat.transform.position.x;
+        position.x = m_playerTransform.transform.position.x;
 
         position.y = 0;
 
@@ -208,15 +207,15 @@ public class MovementController : MonoBehaviour
 
         float rotationAngle = 360f * (_currentTime / _totalTime);
 
-        m_cat.transform.localPosition = new Vector3(0, 0, _lastPosition.z) + position;
+        m_playerTransform.transform.localPosition = new Vector3(0, 0, _lastPosition.z) + position;
 
-        m_cat.transform.localRotation = Quaternion.Euler(0, rotationAngle, 0);
+        m_playerTransform.transform.localRotation = Quaternion.Euler(0, rotationAngle, 0);
 
         if (_currentTime >= _totalTime)
         {
             _currentTime = 0f;
 
-            _lastPosition = m_cat.transform.localPosition;
+            _lastPosition = m_playerTransform.transform.localPosition;
 
             _isLongMove = false;
 
@@ -234,14 +233,13 @@ public class MovementController : MonoBehaviour
 
         var distance = _targetPos.z - transform.TransformPoint(_lastPosition).z;
 
-        position.x = m_cat.transform.position.x;
+        position.x = m_playerTransform.transform.position.x;
 
         position.y = m_jumpCurve.Evaluate(_currentTime) * distance;
 
         position.z = m_moveCurve.Evaluate(_currentTime) * distance;
 
-        m_cat.transform.localPosition = new Vector3(0, _lastPosition.y, _lastPosition.z) + position;
-
+        m_playerTransform.transform.localPosition = new Vector3(0, _lastPosition.y, _lastPosition.z) + position;
 
         if (_currentTime >= _totalTime)
         {
@@ -249,7 +247,7 @@ public class MovementController : MonoBehaviour
 
             _currentTime = 0f;
 
-            _lastPosition = m_cat.transform.localPosition;
+            _lastPosition = m_playerTransform.transform.localPosition;
 
             return;
         }
@@ -257,16 +255,15 @@ public class MovementController : MonoBehaviour
         _currentTime += 1 / _tileController.SecPerBeat / (distance - 1f) * Time.deltaTime;
     }
 
-
     private void CheckCollisions()
     {
         float maxDistance = 4f;
 
-        Vector3 origin = m_cat.transform.position + Vector3.up;
+        Vector3 origin = m_playerTransform.transform.position + Vector3.up;
 
         RaycastHit hitInfo;
 
-        if (Physics.BoxCast(origin, new Vector3(0.15f, 0.15f, 0.15f), Vector3.down, out hitInfo, transform.rotation, maxDistance, m_layerMask))
+        if (Physics.BoxCast(origin, new Vector3(0.3f, 0.3f, 0.3f), Vector3.down, out hitInfo, transform.rotation, maxDistance, m_layerMask))
         {
             Collider hitCollider = hitInfo.collider;
 
@@ -274,11 +271,6 @@ public class MovementController : MonoBehaviour
 
             if (killZone != null)
             {
-                if (_currentTile.TileType == TileType.Move)
-                {
-                    _currentTile.transform.SetParent(_currentTile.GetComponent<MoveTile>().Parent);
-                }
-
                 _isLose = true;
             }
             else
@@ -301,18 +293,13 @@ public class MovementController : MonoBehaviour
 
     private void MouseInput()
     {
-        if (!_isTouch)
-        {
-            float xValue = _playerInputAction.Player.MouseAxisX.ReadValue<Vector2>().x;
-
-            _playerInputs.MouseAxisRight = xValue;
-        }
-    }
-
-    public void SetMouseAxisRight(float xValue)
-    {
-        _isTouch = true;
+        float xValue = _playerInputAction.Player.MouseAxisX.ReadValue<Vector2>().x;
 
         _playerInputs.MouseAxisRight = xValue;
+    }
+
+    public void StopMovement()
+    {
+        enabled = false;
     }
 }

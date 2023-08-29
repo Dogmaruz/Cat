@@ -3,7 +3,7 @@ using Zenject;
 
 public class PlayerInstaller : MonoInstaller
 {
-    [SerializeField] private MovementController m_cat;
+    [SerializeField] private MovementController m_movementController;
 
     public override void InstallBindings()
     {
@@ -13,6 +13,6 @@ public class PlayerInstaller : MonoInstaller
     private void BindPlayer()
     {
         Container.
-            Bind<MovementController>().FromInstance(m_cat).AsSingle();
+            Bind<MovementController>().FromInstance(m_movementController).AsSingle();
     }
 }

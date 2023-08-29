@@ -14,14 +14,18 @@ public class TileController : MonoBehaviour
     private float _secPerBeat;
     public float SecPerBeat => _secPerBeat;
 
-    private float maxVisibleDistanceOfTiles = 15f;
+    private float _maxVisibleDistanceOfTiles = 15f;
 
-    private MovementController _cat;
+    private MovementController _movementController;
+
+    private LevelSecuenceController _levelSecuenceController;
 
     [Inject]
-    public void Construct(MovementController cat)
+    public void Construct(MovementController movementController, LevelSecuenceController levelSecuenceController)
     {
-        _cat = cat;
+        _movementController = movementController;
+
+        _levelSecuenceController = levelSecuenceController;
     }
 
     void Start()
@@ -44,9 +48,9 @@ public class TileController : MonoBehaviour
     {
         foreach (Tile tile in _tiles)
         {
-            var dist = Vector3.Distance(_cat.Cat.transform.position, tile.transform.position);
+            var dist = Vector3.Distance(_movementController.PlayerTransform.transform.position, tile.transform.position);
 
-            if (dist > maxVisibleDistanceOfTiles)
+            if (dist > _maxVisibleDistanceOfTiles)
             {
                 tile.Hide();
             }
@@ -55,15 +59,13 @@ public class TileController : MonoBehaviour
         enabled = true;
     }
 
-    
-
     private void TryShowHideTilesDependendingOnDistance()
     {
         foreach (Tile tile in _tiles)
         {
-            var dist = Vector3.Distance(_cat.Cat.transform.position, tile.transform.position);
+            var dist = Vector3.Distance(_movementController.PlayerTransform.transform.position, tile.transform.position);
 
-            if (dist < maxVisibleDistanceOfTiles && tile.IsMoved)
+            if (dist < _maxVisibleDistanceOfTiles && tile.IsMoved)
             {
                 tile.Show();
             }
@@ -76,6 +78,10 @@ public class TileController : MonoBehaviour
 
         if (_tileCount >= _tiles.Length)
         {
+            _movementController.StopMovement();
+
+            _levelSecuenceController.Lose();
+
             return _tiles[0];
         }
 

@@ -3,7 +3,7 @@ using Zenject;
 
 public class LevelInstaller : MonoInstaller
 {
-    [SerializeField] private LevelSecuenceController LevelSecuenceController;
+    [SerializeField] private LevelSecuenceController m_levelSecuenceController;
 
     public override void InstallBindings()
     {
@@ -13,6 +13,6 @@ public class LevelInstaller : MonoInstaller
     private void BindLevelController()
     {
         Container.
-            Bind<LevelSecuenceController>().FromInstance(LevelSecuenceController).AsSingle();
+            Bind<LevelSecuenceController>().FromInstance(m_levelSecuenceController).AsSingle();
     }
 }

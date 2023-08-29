@@ -1,7 +1,7 @@
 public class ShortTile : Tile
 {
-    public override void SetBasePosition()
+    public override void SetJumpPosition()
     {
-        _basePosition = transform.position;
+        JumpPosition = transform.position;
     }
 }

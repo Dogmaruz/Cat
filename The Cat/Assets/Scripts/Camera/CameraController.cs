@@ -9,23 +9,23 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] private float m_followSpeedZ = 10f;
 
-    private MovementController _cat;
+    private MovementController _movementController;
 
     private Vector3 _targetPosition;
 
     [Inject]
-    public void Construct(MovementController cat)
+    public void Construct(MovementController movementController)
     {
-        _cat = cat;
+        _movementController = movementController;
     }
 
     void Update()
     {
         Vector3 currentPosition = transform.position;
 
-        float targetX = _cat.Cat.transform.position.x;
+        float targetX = _movementController.PlayerTransform.transform.position.x;
 
-        float targetZ = _cat.Cat.transform.position.z + m_offsetZ;
+        float targetZ = _movementController.PlayerTransform.transform.position.z + m_offsetZ;
 
         _targetPosition.x = Mathf.Lerp(_targetPosition.x, targetX, m_followSpeedX * Time.deltaTime);
 

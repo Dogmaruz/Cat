@@ -14,18 +14,18 @@ public class LevelSecuenceController : MonoBehaviour
 
     private SoundPlayer _soundPlayer;
 
-    private MovementController _cat;
+    private MovementController _movementController;
 
     private SceneLoader _sceneLoader;
 
     [Inject]
-    public void Construct(BackgroundSoundPlayer backgroundSoundPlayer, SoundPlayer soundPlayer, MovementController cat)
+    public void Construct(BackgroundSoundPlayer backgroundSoundPlayer, SoundPlayer soundPlayer, MovementController movementController)
     {
         _backgroundSoundPlayer = backgroundSoundPlayer;
 
         _soundPlayer = soundPlayer;
 
-        _cat = cat;
+        _movementController = movementController;
     }
 
     private void Awake()
@@ -43,7 +43,7 @@ public class LevelSecuenceController : MonoBehaviour
     {
         m_backgroundSceneClip.PlayBackground();
 
-        _cat.ActivateMovement();
+        _movementController.ActivateMovement();
 
         m_startButton.SetActive(false);
 

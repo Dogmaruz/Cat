@@ -3,7 +3,7 @@ using Zenject;
 
 public class TileInstaller : MonoInstaller
 {
-    [SerializeField] private TileController m_platfornController;
+    [SerializeField] private TileController m_tileController;
 
     public override void InstallBindings()
     {
@@ -13,6 +13,6 @@ public class TileInstaller : MonoInstaller
     private void BindTileController()
     {
         Container.
-            Bind<TileController>().FromInstance(m_platfornController).AsSingle();
+            Bind<TileController>().FromInstance(m_tileController).AsSingle();
     }
 }

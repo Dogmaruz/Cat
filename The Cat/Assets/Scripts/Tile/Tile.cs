@@ -15,9 +15,9 @@ public abstract class Tile : MonoBehaviour
     public TileType TileType => m_tileType;
 
     protected BoxCollider _collider;
+    public Vector3 JumpPosition { get; protected set; }
 
-    protected Vector3 _basePosition;
-    public Vector3 BasePosition => _basePosition;
+    protected Vector3 _startPosition;
 
     protected MeshRenderer[] _meshes;
 
@@ -28,11 +28,13 @@ public abstract class Tile : MonoBehaviour
 
     protected void Awake()
     {
+        _startPosition = transform.position;
+
         _collider = GetComponent<BoxCollider>();
 
         _meshes = GetComponentsInChildren<MeshRenderer>();
 
-        SetBasePosition();
+        SetJumpPosition();
     }
 
     private void OnDestroy()
@@ -40,7 +42,7 @@ public abstract class Tile : MonoBehaviour
         _tween.Kill();
     }
 
-    public abstract void SetBasePosition();
+    public abstract void SetJumpPosition();
 
     public void FadeTile()
     {
@@ -58,14 +60,26 @@ public abstract class Tile : MonoBehaviour
 
         Vector3 hidePosition = SetTileHidePosition();
 
-        StartCoroutine(SmoothMove(hidePosition, 0f, 0.2f));
+        StartCoroutine(MoveToHidePosition(hidePosition, 0f));
     }
 
     public void Show()
     {
         IsMoved = false;
 
-        StartCoroutine(SmoothMove(BasePosition, 1f, 1f));
+        StartCoroutine(SmoothMove(_startPosition, 1f, 1f));
+    }
+
+    private IEnumerator MoveToHidePosition(Vector3 position, float alpha)
+    {
+        foreach (var mesh in _meshes)
+        {
+            mesh.material.color = new Color(mesh.material.color.r, mesh.material.color.g, mesh.material.color.b, alpha);
+
+            yield return null;
+        }
+
+        transform.position = position;
     }
 
     private IEnumerator SmoothMove(Vector3 position, float alpha, float duration)
@@ -83,6 +97,7 @@ public abstract class Tile : MonoBehaviour
             StartCoroutine(ChangeColorAlpha(duration, alpha));
 
             elapsedTime += Time.deltaTime;
+
             yield return null;
         }
 
@@ -105,6 +120,7 @@ public abstract class Tile : MonoBehaviour
             }
 
             elapsedTime += Time.deltaTime;
+
             yield return null;
         }
     }
@@ -114,6 +130,7 @@ public abstract class Tile : MonoBehaviour
         Vector2 newPos = new Vector2(Random.Range(-2, 2), 4f);
 
         var hidePosition = new Vector3(newPos.x, newPos.y, transform.position.z);
+
         return hidePosition;
     }
 }

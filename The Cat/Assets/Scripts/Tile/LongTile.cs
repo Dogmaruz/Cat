@@ -3,10 +3,9 @@ using UnityEngine;
 public class LongTile : Tile
 {
     [SerializeField] private Transform m_jumpPosition;
-    public Transform JumpPosition => m_jumpPosition;
 
-    public override void SetBasePosition()
+    public override void SetJumpPosition()
     {
-        _basePosition = m_jumpPosition.position;
+        JumpPosition = m_jumpPosition.position;
     }
 }
