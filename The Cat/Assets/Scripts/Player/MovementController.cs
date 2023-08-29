@@ -67,8 +67,6 @@ public class MovementController : MonoBehaviour
 
         _playerInputAction.Player.Enable();
 
-        //_collider.enabled = false;
-
         _lastPosition = m_playerTransform.transform.localPosition;
 
         _totalTime = m_jumpCurve.keys[m_jumpCurve.keys.Length - 1].time;
@@ -118,15 +116,13 @@ public class MovementController : MonoBehaviour
     {
         float bounds = 2.5f;
 
-        float newPositionX = Mathf.Clamp(m_playerTransform.transform.localPosition.x + _playerInputs.MouseAxisRight * m_sensitivity, -bounds, bounds);
+        float newPositionX = Mathf.Clamp(m_playerTransform.transform.localPosition.x + _playerInputs.MouseAxisRight * m_sensitivity * Time.deltaTime, -bounds, bounds);
 
         m_playerTransform.transform.localPosition = new Vector3(newPositionX, m_playerTransform.transform.localPosition.y, m_playerTransform.transform.localPosition.z);
     }
 
     public void ActivateMovement()
     {
-        //_collider.enabled = true;
-
         enabled = true;
     }
 
