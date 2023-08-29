@@ -1,4 +1,3 @@
-using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -29,18 +28,16 @@ public class TileController : MonoBehaviour
     {
         enabled = false;
 
-        DOTween.SetTweensCapacity(500, 150);
-
         _tiles = GetComponentsInChildren<Tile>();
 
         _secPerBeat = m_backgroundSceneClip.BackgroundClip.length / m_bpm;
 
-        //HidenTilesBasedOnDistance();
+        HidenTilesBasedOnDistance();
     }
 
     private void Update()
     {
-        //TryShowHideTilesDependendingOnDistance();
+        TryShowHideTilesDependendingOnDistance();
     }
 
     private void HidenTilesBasedOnDistance()

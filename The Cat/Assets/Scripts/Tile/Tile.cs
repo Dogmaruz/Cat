@@ -24,7 +24,7 @@ public abstract class Tile : MonoBehaviour
     private Tween _tween;
 
     [HideInInspector]
-    public bool IsMoved = false; //‘лаг указывающий на изменени€ позиции при старте.
+    public bool IsMoved = false;
 
     protected void Awake()
     {
@@ -54,11 +54,11 @@ public abstract class Tile : MonoBehaviour
 
     public void Hide()
     {
-       IsMoved = true;
+        IsMoved = true;
 
-        Vector3 startPosition = SetTileHidePosition();
+        Vector3 hidePosition = SetTileHidePosition();
 
-        StartCoroutine(SmoothMove(startPosition, 0f, 0.2f));
+        StartCoroutine(SmoothMove(hidePosition, 0f, 0.2f));
     }
 
     public void Show()
@@ -111,9 +111,9 @@ public abstract class Tile : MonoBehaviour
 
     private Vector3 SetTileHidePosition()
     {
-        Vector2 newPos = new Vector2 (Random.Range(-2, 2), 4f);
+        Vector2 newPos = new Vector2(Random.Range(-2, 2), 4f);
 
-        var startPosition = new Vector3(newPos.x, newPos.y, transform.position.z);
-        return startPosition;
+        var hidePosition = new Vector3(newPos.x, newPos.y, transform.position.z);
+        return hidePosition;
     }
 }
