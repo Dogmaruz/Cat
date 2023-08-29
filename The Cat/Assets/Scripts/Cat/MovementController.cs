@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -177,25 +178,21 @@ public class MovementController : MonoBehaviour
 
     private void MoveToLongTile()
     {
-        //float angleY = 360;
-
-        _isJump = false;
-
         var position = _lastPosition;
 
         var distance = _currentTile.transform.localScale.z - 1;
 
-        //var newPos = m_cat.transform.position.z + distance;
-
         position.x = m_cat.transform.position.x;
 
-        position.y = m_cat.transform.position.y;
-
-        Debug.Log(position.y);
+        position.y = 0;
 
         position.z = m_moveCurve.Evaluate(_currentTime) * distance;
 
+        float rotationAngle = 360f * (_currentTime / _totalTime);
+
         m_cat.transform.localPosition = new Vector3(0, 0, _lastPosition.z) + position;
+
+        m_cat.transform.localRotation = Quaternion.Euler(0, rotationAngle, 0);
 
         if (_currentTime >= _totalTime)
         {
@@ -210,26 +207,16 @@ public class MovementController : MonoBehaviour
             _currentTile.FadeTile();
         }
 
-        _currentTime += 1 / _tileController.SecPerBeat / (distance - 1) * Time.deltaTime;
-
-
-        // _sequence = DOTween.Sequence()
-        //.Append(m_cat.transform.DOMoveZ(newPos, (distance + 1) * _tileController.SecPerBeat))
-        //.Join(m_cat.transform.DORotate(new Vector3(0, angleY, 0), (distance + 1) * _tileController.SecPerBeat, RotateMode.FastBeyond360))
-        //.SetEase(Ease.Linear)
-        //.OnComplete(() =>
-        //{
-        //    Jump(newPos);
-
-        //    currentTile.FadeTile();
-        //});
+        _currentTime += 1 / _tileController.SecPerBeat / (distance) * Time.deltaTime;
     }
 
     private void Jump()
     {
         var position = _lastPosition;
 
-        var distance = _targetPos.z - _currentTile.transform.position.z;
+        var distance = _targetPos.z - transform.TransformPoint(_lastPosition).z;
+
+        Debug.Log(transform.TransformPoint(_lastPosition).z + " : " + _currentTile.transform.position.z);
 
         position.x = m_cat.transform.position.x;
 
@@ -251,7 +238,7 @@ public class MovementController : MonoBehaviour
             return;
         }
 
-        _currentTime += 1 / _tileController.SecPerBeat / (distance - 1) * Time.deltaTime;
+        _currentTime += 1 / _tileController.SecPerBeat / (distance - 1f) * Time.deltaTime;
     }
 
 

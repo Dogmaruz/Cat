@@ -35,12 +35,12 @@ public class TileController : MonoBehaviour
 
         _secPerBeat = m_backgroundSceneClip.BackgroundClip.length / m_bpm;
 
-        HidenTilesBasedOnDistance();
+        //HidenTilesBasedOnDistance();
     }
 
     private void Update()
     {
-        TryShowHideTilesDependendingOnDistance();
+        //TryShowHideTilesDependendingOnDistance();
     }
 
     private void HidenTilesBasedOnDistance()
