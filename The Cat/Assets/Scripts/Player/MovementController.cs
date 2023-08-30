@@ -74,7 +74,7 @@ public class MovementController : MonoBehaviour
         enabled = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_isLose)
         {
@@ -116,7 +116,7 @@ public class MovementController : MonoBehaviour
     {
         float bounds = 2.5f;
 
-        float newPositionX = Mathf.Clamp(m_playerTransform.transform.localPosition.x + _playerInputs.MouseAxisRight * m_sensitivity * Time.deltaTime, -bounds, bounds);
+        float newPositionX = Mathf.Clamp(m_playerTransform.transform.localPosition.x + _playerInputs.MouseAxisRight * m_sensitivity * Time.fixedDeltaTime, -bounds, bounds);
 
         m_playerTransform.transform.localPosition = new Vector3(newPositionX, m_playerTransform.transform.localPosition.y, m_playerTransform.transform.localPosition.z);
     }
@@ -186,7 +186,7 @@ public class MovementController : MonoBehaviour
             _currentTile.transform.SetParent((_currentTile as MoveTile).ParentTransform);
         }
 
-        _currentTime += 1 / _tileController.SecPerBeat / (distance / 2) * Time.deltaTime;
+        _currentTime += 1 / _tileController.SecPerBeat / (distance / 2) * Time.fixedDeltaTime;
     }
 
     private void MoveToLongTile()
@@ -220,7 +220,7 @@ public class MovementController : MonoBehaviour
             _currentTile.FadeTile();
         }
 
-        _currentTime += 1 / _tileController.SecPerBeat / (distance) * Time.deltaTime;
+        _currentTime += 1 / _tileController.SecPerBeat / (distance) * Time.fixedDeltaTime;
     }
 
     private void Jump()
@@ -248,7 +248,7 @@ public class MovementController : MonoBehaviour
             return;
         }
 
-        _currentTime += 1 / _tileController.SecPerBeat / (distance - 1f) * Time.deltaTime;
+        _currentTime += 1 / _tileController.SecPerBeat / (distance - 1f) * Time.fixedDeltaTime;
     }
 
     private void CheckCollisions()
