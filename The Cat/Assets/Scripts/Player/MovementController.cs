@@ -13,6 +13,8 @@ public class MovementController : MonoBehaviour
     [SerializeField] private Transform m_playerTransform;
     public Transform PlayerTransform => m_playerTransform;
 
+    [SerializeField] private float m_maxHightToJump = 3f;
+
     [SerializeField] private float m_sensitivity = 0.1f;
 
     [SerializeField] private LayerMask m_layerMask;
@@ -28,8 +30,6 @@ public class MovementController : MonoBehaviour
     private PlayerInputAction _playerInputAction;
 
     private PlayerInputs _playerInputs;
-
-    private BoxCollider _collider;
 
     private Tile _currentTile;
 
@@ -48,7 +48,6 @@ public class MovementController : MonoBehaviour
     private bool _isMove;
     public bool _isLose { get; set; }
 
-
     [Inject]
     public void Construct(TileController TileController, LevelSecuenceController levelSecuenceController)
     {
@@ -63,8 +62,6 @@ public class MovementController : MonoBehaviour
 
         _playerInputAction = new PlayerInputAction();
 
-        _collider = m_playerTransform.GetComponent<BoxCollider>();
-
         _playerInputAction.Player.Enable();
 
         _lastPosition = m_playerTransform.transform.localPosition;
@@ -74,7 +71,7 @@ public class MovementController : MonoBehaviour
         enabled = false;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_isLose)
         {
@@ -116,7 +113,7 @@ public class MovementController : MonoBehaviour
     {
         float bounds = 2.5f;
 
-        float newPositionX = Mathf.Clamp(m_playerTransform.transform.localPosition.x + _playerInputs.MouseAxisRight * m_sensitivity * Time.fixedDeltaTime, -bounds, bounds);
+        float newPositionX = Mathf.Clamp(m_playerTransform.transform.localPosition.x + _playerInputs.MouseAxisRight * m_sensitivity * Time.deltaTime, -bounds, bounds);
 
         m_playerTransform.transform.localPosition = new Vector3(newPositionX, m_playerTransform.transform.localPosition.y, m_playerTransform.transform.localPosition.z);
     }
@@ -163,15 +160,15 @@ public class MovementController : MonoBehaviour
 
         position.y = 0;
 
-        position.z = m_moveCurve.Evaluate(_currentTime) * distance;
+        position.z = m_moveCurve.Evaluate(_currentTime / (_tileController.Period * distance)) * distance;
 
-        float rotationAngle = 360f * (_currentTime / _totalTime);
+        float rotationAngle = 360f * (_currentTime / (_tileController.Period * distance));
 
         m_playerTransform.transform.localPosition = new Vector3(0, 0, _lastPosition.z) + position;
 
         m_playerTransform.transform.localRotation = Quaternion.Euler(0, rotationAngle, 0);
 
-        if (_currentTime >= _totalTime)
+        if (_currentTime / (_tileController.Period * distance) >= 1)
         {
             _currentTime = 0f;
 
@@ -186,28 +183,28 @@ public class MovementController : MonoBehaviour
             _currentTile.transform.SetParent((_currentTile as MoveTile).ParentTransform);
         }
 
-        _currentTime += 1 / _tileController.SecPerBeat / (distance / 2) * Time.fixedDeltaTime;
+        _currentTime += Time.deltaTime;
     }
 
     private void MoveToLongTile()
     {
         var position = _lastPosition;
 
-        var distance = _currentTile.transform.localScale.z - 1;
+        var distance = _currentTile.transform.localScale.z;
 
         position.x = m_playerTransform.transform.position.x;
 
         position.y = 0;
 
-        position.z = m_moveCurve.Evaluate(_currentTime) * distance;
+        position.z = m_moveCurve.Evaluate(_currentTime / (_tileController.Period * distance)) * distance;
 
-        float rotationAngle = 360f * (_currentTime / _totalTime);
+        float rotationAngle = 360f * (_currentTime / (_tileController.Period * distance));
 
         m_playerTransform.transform.localPosition = new Vector3(0, 0, _lastPosition.z) + position;
 
         m_playerTransform.transform.localRotation = Quaternion.Euler(0, rotationAngle, 0);
 
-        if (_currentTime >= _totalTime)
+        if (_currentTime / (_tileController.Period * distance) >= 1)
         {
             _currentTime = 0f;
 
@@ -220,7 +217,7 @@ public class MovementController : MonoBehaviour
             _currentTile.FadeTile();
         }
 
-        _currentTime += 1 / _tileController.SecPerBeat / (distance) * Time.fixedDeltaTime;
+        _currentTime += Time.deltaTime;
     }
 
     private void Jump()
@@ -231,13 +228,13 @@ public class MovementController : MonoBehaviour
 
         position.x = m_playerTransform.transform.position.x;
 
-        position.y = m_jumpCurve.Evaluate(_currentTime) * distance;
+        position.y = m_jumpCurve.Evaluate(_currentTime / (_tileController.Period * distance)) * Mathf.Clamp(distance, 0, m_maxHightToJump);
 
-        position.z = m_moveCurve.Evaluate(_currentTime) * distance;
+        position.z = m_moveCurve.Evaluate(_currentTime / (_tileController.Period * distance)) * distance;
 
         m_playerTransform.transform.localPosition = new Vector3(0, _lastPosition.y, _lastPosition.z) + position;
 
-        if (_currentTime >= _totalTime)
+        if (_currentTime / (_tileController.Period * distance) >= 1)
         {
             _isJump = false;
 
@@ -248,7 +245,7 @@ public class MovementController : MonoBehaviour
             return;
         }
 
-        _currentTime += 1 / _tileController.SecPerBeat / (distance - 1f) * Time.fixedDeltaTime;
+        _currentTime += Time.deltaTime;
     }
 
     private void CheckCollisions()

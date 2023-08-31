@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
         _movementController = movementController;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         Vector3 currentPosition = transform.position;
 
@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour
 
         float targetZ = _movementController.PlayerTransform.transform.position.z + m_offsetZ;
 
-        _targetPosition.x = Mathf.Lerp(_targetPosition.x, targetX, m_followSpeedX * Time.fixedDeltaTime);
+        _targetPosition.x = Mathf.Lerp(_targetPosition.x, targetX, m_followSpeedX * Time.deltaTime);
 
         _targetPosition.y = currentPosition.y;
 

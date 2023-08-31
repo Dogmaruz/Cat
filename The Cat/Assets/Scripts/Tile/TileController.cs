@@ -11,8 +11,8 @@ public class TileController : MonoBehaviour
 
     private int _tileCount = 0;
 
-    private float _secPerBeat;
-    public float SecPerBeat => _secPerBeat;
+    private float _period;
+    public float Period => _period;
 
     private float _maxVisibleDistanceOfTiles = 15f;
 
@@ -34,7 +34,7 @@ public class TileController : MonoBehaviour
 
         _tiles = GetComponentsInChildren<Tile>();
 
-        _secPerBeat = m_backgroundSceneClip.BackgroundClip.length / m_bpm;
+        _period = 60 / m_bpm * 0.5f;
 
         HidenTilesBasedOnDistance();
     }
