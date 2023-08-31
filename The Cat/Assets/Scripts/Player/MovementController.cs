@@ -37,8 +37,6 @@ public class MovementController : MonoBehaviour
 
     private Vector3 _lastPosition;
 
-    private float _totalTime;
-
     private float _currentTime;
 
     private bool _isJump;
@@ -65,8 +63,6 @@ public class MovementController : MonoBehaviour
         _playerInputAction.Player.Enable();
 
         _lastPosition = m_playerTransform.transform.localPosition;
-
-        _totalTime = m_jumpCurve.keys[m_jumpCurve.keys.Length - 1].time;
 
         enabled = false;
     }
@@ -190,7 +186,7 @@ public class MovementController : MonoBehaviour
     {
         var position = _lastPosition;
 
-        var distance = _currentTile.transform.localScale.z;
+        var distance = (_currentTile as LongTile).EndJumpPosition.transform.position.z - _currentTile.JumpPosition.z;
 
         position.x = m_playerTransform.transform.position.x;
 
@@ -240,7 +236,7 @@ public class MovementController : MonoBehaviour
 
             _currentTime = 0f;
 
-            _lastPosition = m_playerTransform.transform.localPosition;
+            _lastPosition = new Vector3(m_playerTransform.transform.localPosition.x, 0, m_playerTransform.transform.localPosition.z);
 
             return;
         }
@@ -256,7 +252,7 @@ public class MovementController : MonoBehaviour
 
         RaycastHit hitInfo;
 
-        if (Physics.BoxCast(origin, new Vector3(0.3f, 0.3f, 0.3f), Vector3.down, out hitInfo, transform.rotation, maxDistance, m_layerMask))
+        if (Physics.BoxCast(origin, new Vector3(0.35f, 0.35f, 0.35f), Vector3.down, out hitInfo, transform.rotation, maxDistance, m_layerMask))
         {
             Collider hitCollider = hitInfo.collider;
 
