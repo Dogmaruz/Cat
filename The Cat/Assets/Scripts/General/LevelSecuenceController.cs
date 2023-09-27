@@ -30,6 +30,8 @@ public class LevelSecuenceController : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 120;
+
         _sceneLoader = GetComponent<SceneLoader>();
 
         ChangeCursorVisible(true);
