@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MovingX : MonoBehaviour
 {
+
     [SerializeField] private float offset;
 
     public float duration = 2f;
@@ -20,4 +21,5 @@ public class MovingX : MonoBehaviour
     {
         _tween.Kill();
     }
+
 }
