@@ -4,7 +4,7 @@ public class ParentPointControl : MonoBehaviour
 {
     [SerializeField] private Transform _playerTransform;
 
-    void Update()
+    void LateUpdate()
     {
         transform.position = _playerTransform.position;
     }

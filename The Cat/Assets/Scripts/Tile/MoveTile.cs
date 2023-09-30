@@ -10,6 +10,6 @@ public class MoveTile : Tile
 
     public override void SetJumpPosition()
     {
-        JumpPosition = transform.position;
+        JumpPosition = transform.parent.position;
     }
 }

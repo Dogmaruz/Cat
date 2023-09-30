@@ -50,8 +50,13 @@ public abstract class Tile : MonoBehaviour
 
         StartCoroutine(ChangeColorAlpha(1, 0));
 
+        ShakeTile();
+    }
+
+    private void ShakeTile()
+    {
         _tween = transform.DOPunchPosition(new Vector3(0f, 0.2f, 0f), 0.3f)
-                 .SetEase(Ease.InOutQuad);
+                         .SetEase(Ease.InOutQuad);
     }
 
     public void Hide()

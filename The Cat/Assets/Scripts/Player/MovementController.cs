@@ -81,22 +81,22 @@ public class MovementController : MonoBehaviour
 
             UpdatePosition();
 
-            if (_isJump == false && _isMove == false)
+            if (!_isJump && !_isMove)
             {
                 CheckCollisions();
             }
 
-            if (_isJump == true)
+            if (_isJump)
             {
                 Jump();
             }
 
-            if (_isLongMove == true)
+            if (_isLongMove)
             {
                 MoveToLongTile();
             }
 
-            if (_isMove == true)
+            if (_isMove)
             {
                 MoveTile();
             }
@@ -112,11 +112,6 @@ public class MovementController : MonoBehaviour
         float newPositionX = Mathf.Clamp(m_playerTransform.transform.localPosition.x + _playerInputs.MouseAxisRight * m_sensitivity * Time.deltaTime, -bounds, bounds);
 
         m_playerTransform.transform.localPosition = new Vector3(newPositionX, m_playerTransform.transform.localPosition.y, m_playerTransform.transform.localPosition.z);
-    }
-
-    public void ActivateMovement()
-    {
-        enabled = true;
     }
 
     public void Move(Tile currentTile)
@@ -246,37 +241,26 @@ public class MovementController : MonoBehaviour
 
     private void CheckCollisions()
     {
-        float maxDistance = 4f;
+        Collider[] hitColliders = new Collider[1];
 
-        Vector3 origin = m_playerTransform.transform.position + Vector3.up;
-
-        RaycastHit hitInfo;
-
-        if (Physics.BoxCast(origin, new Vector3(0.35f, 0.35f, 0.35f), Vector3.down, out hitInfo, transform.rotation, maxDistance, m_layerMask))
+        if (Physics.OverlapBoxNonAlloc(m_playerTransform.transform.position, Vector3.one * 0.4f, hitColliders, transform.rotation, m_layerMask) == 1)
         {
-            Collider hitCollider = hitInfo.collider;
+            var tile = hitColliders[0].GetComponent<Tile>();
 
-            var killZone = hitCollider.gameObject.GetComponent<KillZone>();
+            if (_currentTile == tile) return;
 
-            if (killZone != null)
+            _currentTile = tile;
+
+            Move(tile);
+
+            if (tile.TileType == TileType.Static)
             {
-                _isLose = true;
+                tile.FadeTile();
             }
-            else
-            {
-                var tile = hitCollider.GetComponent<Tile>();
-
-                if (_currentTile == tile) return;
-
-                _currentTile = tile;
-
-                Move(tile);
-
-                if (tile.TileType == TileType.Static)
-                {
-                    tile.FadeTile();
-                }
-            }
+        }
+        else
+        {
+            _isLose = true;
         }
     }
 
@@ -285,6 +269,11 @@ public class MovementController : MonoBehaviour
         float xValue = _playerInputAction.Player.MouseAxisX.ReadValue<Vector2>().x;
 
         _playerInputs.MouseAxisRight = xValue;
+    }
+
+    public void ActivateMovement()
+    {
+        enabled = true;
     }
 
     public void StopMovement()

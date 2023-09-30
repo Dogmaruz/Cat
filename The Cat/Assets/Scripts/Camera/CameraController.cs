@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
         _movementController = movementController;
     }
 
-    void Update()
+    void LateUpdate()
     {
         Vector3 currentPosition = transform.position;
 
