@@ -15,13 +15,17 @@ public abstract class Tile : MonoBehaviour
     public TileType TileType => m_tileType;
 
     protected BoxCollider _collider;
+    public BoxCollider Collider => _collider;
     public Vector3 JumpPosition { get; protected set; }
+    public Vector3 FinishPosition { get; protected set; }
 
     protected Vector3 _startPosition;
 
     protected MeshRenderer[] _meshes;
 
     private Tween _tween;
+
+    public float Distance { get; set; }
 
     [HideInInspector]
     public bool IsMoved = false;
@@ -30,11 +34,15 @@ public abstract class Tile : MonoBehaviour
     {
         _startPosition = transform.position;
 
-        _collider = GetComponent<BoxCollider>();
+        _collider = GetComponentInChildren<BoxCollider>();
 
         _meshes = GetComponentsInChildren<MeshRenderer>();
 
         SetJumpPosition();
+
+        SetFinishPosition();
+
+        Distance = FinishPosition.z - JumpPosition.z;
     }
 
     private void OnDestroy()
@@ -43,6 +51,7 @@ public abstract class Tile : MonoBehaviour
     }
 
     public abstract void SetJumpPosition();
+    public abstract void SetFinishPosition();
 
     public void FadeTile()
     {

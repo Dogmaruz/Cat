@@ -15,11 +15,9 @@ public class MovementController : MonoBehaviour
 
     [SerializeField] private float m_maxHightToJump = 3f;
 
-    [SerializeField] private float m_sensitivity = 0.1f;
+    [SerializeField] private float m_sensitivity = 1f;
 
     [SerializeField] private LayerMask m_layerMask;
-
-    [SerializeField] private AnimationCurve m_moveCurve;
 
     [SerializeField] private AnimationCurve m_jumpCurve;
 
@@ -35,16 +33,22 @@ public class MovementController : MonoBehaviour
 
     private Vector3 _targetPos;
 
-    private Vector3 _lastPosition;
-
-    private float _currentTime;
-
     private bool _isJump;
 
     private bool _isLongMove;
 
     private bool _isMove;
     public bool _isLose { get; set; }
+
+    private float _speed;
+
+    private float _startTime;
+
+    private float _distance;
+
+    private float posY;
+
+    private float _startTimeY;
 
     [Inject]
     public void Construct(TileController TileController, LevelSecuenceController levelSecuenceController)
@@ -62,13 +66,23 @@ public class MovementController : MonoBehaviour
 
         _playerInputAction.Player.Enable();
 
-        _lastPosition = m_playerTransform.transform.localPosition;
-
         enabled = false;
+    }
+
+    private void Start()
+    {
+        _speed = 1f / _tileController.Period;
     }
 
     private void Update()
     {
+        if (_startTime == 0)
+        {
+            _startTime = Time.time;
+
+            _startTimeY = Time.time;
+        }
+
         if (_isLose)
         {
             _levelSecuenceController.Lose();
@@ -77,10 +91,6 @@ public class MovementController : MonoBehaviour
         }
         else
         {
-            MouseInput();
-
-            UpdatePosition();
-
             if (!_isJump && !_isMove)
             {
                 CheckCollisions();
@@ -100,25 +110,27 @@ public class MovementController : MonoBehaviour
             {
                 MoveTile();
             }
-        }
 
-        _playerInputs.MouseAxisRight = 0;
+            MouseInput();
+
+            UpdatePosition();
+        }
     }
 
     public void UpdatePosition()
     {
-        float bounds = 2.5f;
+        float bounds = 4.5f;
 
-        float newPositionX = Mathf.Clamp(m_playerTransform.transform.localPosition.x + _playerInputs.MouseAxisRight * m_sensitivity * Time.deltaTime, -bounds, bounds);
+        float posX = Mathf.Clamp(transform.position.x + _playerInputs.MouseAxisRight * m_sensitivity * Time.deltaTime, -bounds, bounds);
 
-        m_playerTransform.transform.localPosition = new Vector3(newPositionX, m_playerTransform.transform.localPosition.y, m_playerTransform.transform.localPosition.z);
+        float posZ = (Time.time - _startTime) * _speed;
+
+        transform.position = new Vector3(posX, posY, posZ);
     }
 
     public void Move(Tile currentTile)
     {
-        var target = _tileController.NextTile();
-
-        _targetPos = target.JumpPosition;
+        _targetPos = _tileController.NextTile().JumpPosition;
 
         if (currentTile.TileType == TileType.Static)
         {
@@ -139,113 +151,76 @@ public class MovementController : MonoBehaviour
 
     private void MoveTile()
     {
-        var position = _lastPosition;
+        _distance = _currentTile.Distance;
 
-        var distance = (_currentTile as MoveTile).EndPosition.position.z - transform.TransformPoint(_lastPosition).z;
+        var platforn = _currentTile.Collider;
 
-        _currentTile.transform.SetParent(m_parentPointTransform.transform);
-
-        _currentTile.transform.localPosition = new Vector3(0, _currentTile.transform.localPosition.y, _currentTile.transform.localPosition.z);
-
-        position.x = m_playerTransform.transform.position.x;
-
-        position.y = 0;
-
-        position.z = m_moveCurve.Evaluate(_currentTime / (_tileController.Period * distance)) * distance;
-
-        float rotationAngle = 360f * (_currentTime / (_tileController.Period * distance));
-
-        m_playerTransform.transform.localPosition = new Vector3(0, 0, _lastPosition.z) + position;
-
-        m_playerTransform.transform.localRotation = Quaternion.Euler(0, rotationAngle, 0);
-
-        if (_currentTime / (_tileController.Period * distance) >= 1)
+        if (platforn != null)
         {
-            _currentTime = 0f;
+            platforn.transform.SetParent(m_parentPointTransform.transform);
 
-            _lastPosition = m_playerTransform.transform.localPosition;
+            platforn.transform.localPosition = new Vector3(0, platforn.transform.localPosition.y, platforn.transform.localPosition.z);
+        }
 
+        PlayerRotation();
+
+        if (Mathf.FloorToInt((Time.time - _startTime) * _speed) == _currentTile.FinishPosition.z)
+        {
             _isMove = false;
 
             _isJump = true;
 
+            _startTimeY = Time.time;
+
             _currentTile.FadeTile();
 
-            _currentTile.transform.SetParent((_currentTile as MoveTile).ParentTransform);
+            m_parentPointTransform.GetComponentInChildren<BoxCollider>().transform.SetParent((_currentTile as MoveTile).ParentTransform);
         }
-
-        _currentTime += Time.deltaTime;
     }
 
     private void MoveToLongTile()
     {
-        var position = _lastPosition;
+        _distance = _currentTile.Distance;
 
-        var distance = (_currentTile as LongTile).EndJumpPosition.transform.position.z - _currentTile.JumpPosition.z;
+        PlayerRotation();
 
-        position.x = m_playerTransform.transform.position.x;
-
-        position.y = 0;
-
-        position.z = m_moveCurve.Evaluate(_currentTime / (_tileController.Period * distance)) * distance;
-
-        float rotationAngle = 360f * (_currentTime / (_tileController.Period * distance));
-
-        m_playerTransform.transform.localPosition = new Vector3(0, 0, _lastPosition.z) + position;
-
-        m_playerTransform.transform.localRotation = Quaternion.Euler(0, rotationAngle, 0);
-
-        if (_currentTime / (_tileController.Period * distance) >= 1)
+        if (Mathf.FloorToInt((Time.time - _startTime) * _speed) == _currentTile.FinishPosition.z)
         {
-            _currentTime = 0f;
-
-            _lastPosition = m_playerTransform.transform.localPosition;
+            _isJump = true;
 
             _isLongMove = false;
 
-            _isJump = true;
+            _startTimeY = Time.time;
 
             _currentTile.FadeTile();
-        }
 
-        _currentTime += Time.deltaTime;
+            posY = 0;
+        }
     }
 
     private void Jump()
     {
-        var position = _lastPosition;
+        _distance = _targetPos.z - _currentTile.FinishPosition.z;
 
-        var distance = _targetPos.z - transform.TransformPoint(_lastPosition).z;
+        posY = m_jumpCurve.Evaluate(((Time.time - _startTimeY) * _speed / _distance) % 1) * Mathf.Clamp(_distance, 0, m_maxHightToJump);
 
-        position.x = m_playerTransform.transform.position.x;
-
-        position.y = m_jumpCurve.Evaluate(_currentTime / (_tileController.Period * distance)) * Mathf.Clamp(distance, 0, m_maxHightToJump);
-
-        position.z = m_moveCurve.Evaluate(_currentTime / (_tileController.Period * distance)) * distance;
-
-        m_playerTransform.transform.localPosition = new Vector3(0, _lastPosition.y, _lastPosition.z) + position;
-
-        if (_currentTime / (_tileController.Period * distance) >= 1)
+        if (Mathf.FloorToInt((Time.time - _startTime) * _speed) == _targetPos.z)
         {
             _isJump = false;
 
-            _currentTime = 0f;
+            _startTimeY = Time.time;
 
-            _lastPosition = new Vector3(m_playerTransform.transform.localPosition.x, 0, m_playerTransform.transform.localPosition.z);
-
-            return;
+            posY = 0;
         }
-
-        _currentTime += Time.deltaTime;
     }
 
     private void CheckCollisions()
     {
-        Collider[] hitColliders = new Collider[1];
+        RaycastHit[] result = new RaycastHit[2];
 
-        if (Physics.OverlapBoxNonAlloc(m_playerTransform.transform.position, Vector3.one * 0.4f, hitColliders, transform.rotation, m_layerMask) == 1)
+        if (Physics.BoxCastNonAlloc(transform.position, Vector3.one * 0.3f, Vector3.down, result, Quaternion.identity, 1, m_layerMask) == 1)
         {
-            var tile = hitColliders[0].GetComponent<Tile>();
+            var tile = result[0].transform.parent.GetComponent<Tile>();
 
             if (_currentTile == tile) return;
 
@@ -271,13 +246,15 @@ public class MovementController : MonoBehaviour
         _playerInputs.MouseAxisRight = xValue;
     }
 
-    public void ActivateMovement()
+    private void PlayerRotation()
     {
-        enabled = true;
+        float rotationAngle = 360f * (((Time.time - _startTimeY) * _speed / _distance) % 1);
+
+        m_playerTransform.transform.localRotation = Quaternion.Euler(0, rotationAngle, 0);
     }
 
-    public void StopMovement()
+    public void SetMovementState(bool state)
     {
-        enabled = false;
+        enabled = state;
     }
 }

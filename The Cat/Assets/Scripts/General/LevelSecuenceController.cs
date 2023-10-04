@@ -30,7 +30,7 @@ public class LevelSecuenceController : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate = 120;
+        Application.targetFrameRate = 60;
 
         _sceneLoader = GetComponent<SceneLoader>();
 
@@ -45,7 +45,7 @@ public class LevelSecuenceController : MonoBehaviour
     {
         m_backgroundSceneClip.PlayBackground();
 
-        _movementController.ActivateMovement();
+        _movementController.SetMovementState(true);
 
         m_startButton.SetActive(false);
 

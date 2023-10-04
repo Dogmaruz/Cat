@@ -34,7 +34,7 @@ public class TileController : MonoBehaviour
 
         _tiles = GetComponentsInChildren<Tile>();
 
-        _period = 60 / m_bpm * 0.5f;
+        _period = 60f / m_bpm * 0.5f;
 
         HidenTilesBasedOnDistance();
     }
@@ -78,7 +78,7 @@ public class TileController : MonoBehaviour
 
         if (_tileCount >= _tiles.Length)
         {
-            _movementController.StopMovement();
+            _movementController.SetMovementState(false);
 
             _levelSecuenceController.Lose();
 
