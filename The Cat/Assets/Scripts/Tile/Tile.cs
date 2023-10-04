@@ -19,7 +19,8 @@ public abstract class Tile : MonoBehaviour
     public Vector3 JumpPosition { get; protected set; }
     public Vector3 FinishPosition { get; protected set; }
 
-    public Vector3 StartPosition;
+    protected Vector3 _startPosition;
+    public Vector3 StartPosition => _startPosition;
 
     protected MeshRenderer[] _meshes;
 
@@ -51,6 +52,11 @@ public abstract class Tile : MonoBehaviour
     public abstract void SetJumpPosition();
     public abstract void SetFinishPosition();
 
+    public void SetStartPosition(Vector3 position)
+    {
+        _startPosition = position;
+    }
+
     public void FadeTile()
     {
         _collider.enabled = false;
@@ -79,7 +85,7 @@ public abstract class Tile : MonoBehaviour
     {
         IsMoved = false;
 
-        StartCoroutine(SmoothMove(StartPosition, 1f, 1f));
+        StartCoroutine(SmoothMove(_startPosition, 1f, 1f));
     }
 
     private IEnumerator MoveToHidePosition(Vector3 position, float alpha)

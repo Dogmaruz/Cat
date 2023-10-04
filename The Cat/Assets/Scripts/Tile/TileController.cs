@@ -61,14 +61,16 @@ public class TileController : MonoBehaviour
 
                 float posX = Mathf.Clamp((int)_tiles[i - 1].StartPosition.x + rnd, -2, 2);
 
-                _tiles[i].StartPosition = new Vector3(posX, _tiles[i].transform.position.y, _tiles[i].transform.position.z);
+                Vector3 newStartPosition = new Vector3(posX, _tiles[i].transform.position.y, _tiles[i].transform.position.z);
+
+                _tiles[i].SetStartPosition(newStartPosition);
             }
         }
         else
         {
             foreach(var tile in _tiles)
             {
-                tile.StartPosition = tile.transform.position;
+                tile.SetStartPosition(tile.transform.position);
             }
         }
 
@@ -83,7 +85,9 @@ public class TileController : MonoBehaviour
 
                 float posX = Mathf.Clamp((int)_tiles[i - 1].StartPosition.x + rnd, -2, 2);
 
-                _tiles[i].StartPosition = new Vector3(posX, _tiles[i].transform.position.y, _tiles[i].transform.position.z);
+                Vector3 newStartPosition = new Vector3(posX, _tiles[i].transform.position.y, _tiles[i].transform.position.z);
+
+                _tiles[i].SetStartPosition(newStartPosition);
             }
         */
     }
