@@ -50,7 +50,7 @@ public class RhythmObjectGenerator : MonoBehaviour
                 else
                 {
                     // Смещаем позицию создания объектов на заданное расстояние
-                    spawnPosition = Vector3.right * perBeatsCount;
+                    spawnPosition = Vector3.forward * perBeatsCount;
                 }
 
                 // Создаем объект на текущей позиции

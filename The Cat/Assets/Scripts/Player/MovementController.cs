@@ -202,8 +202,6 @@ public class MovementController : MonoBehaviour
     {
         _distance = _targetPos.z - _currentTile.FinishPosition.z;
 
-        posY = m_jumpCurve.Evaluate(((Time.time - _startTimeY) * _speed / _distance) % 1) * Mathf.Clamp(_distance, 0, m_maxHightToJump);
-
         if (Mathf.FloorToInt((Time.time - _startTime) * _speed) == _targetPos.z)
         {
             _isJump = false;
@@ -211,6 +209,10 @@ public class MovementController : MonoBehaviour
             _startTimeY = Time.time;
 
             posY = 0;
+        }
+        else
+        {
+            posY = m_jumpCurve.Evaluate(((Time.time - _startTimeY) * _speed / _distance) % 1) * Mathf.Clamp(_distance, 0, m_maxHightToJump);
         }
     }
 
