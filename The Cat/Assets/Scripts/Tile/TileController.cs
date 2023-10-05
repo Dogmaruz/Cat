@@ -57,13 +57,25 @@ public class TileController : MonoBehaviour
         {
             for (int i = 4; i < _tiles.Length; i++)
             {
-                int rnd = Random.Range(-1, 2);
+                if(_tiles[i].TileType == TileType.Move)
+                {
+                    _tiles[i].SetStartPosition(_tiles[i].transform.position);
+                }
+                else
+                {
+                    float rnd = Random.Range(-1, 2);
 
-                float posX = Mathf.Clamp((int)_tiles[i - 1].StartPosition.x + rnd, -2, 2);
+                    if (i < _tiles.Length / 2)
+                    {
+                        rnd *= 0.5f;
+                    }
 
-                Vector3 newStartPosition = new Vector3(posX, _tiles[i].transform.position.y, _tiles[i].transform.position.z);
+                    float posX = Mathf.Clamp((int)_tiles[i - 1].StartPosition.x + rnd, -2, 2);
 
-                _tiles[i].SetStartPosition(newStartPosition);
+                    Vector3 newStartPosition = new Vector3(posX, _tiles[i].transform.position.y, _tiles[i].transform.position.z);
+
+                    _tiles[i].SetStartPosition(newStartPosition);
+                }
             }
         }
         else
