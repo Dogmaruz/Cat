@@ -48,7 +48,9 @@ public class MovementController : MonoBehaviour
 
     private float posY;
 
-    private float _startTimeY;
+    private float posZ;
+
+    private float _startTimeNewAction;
 
     [Inject]
     public void Construct(TileController TileController, LevelSecuenceController levelSecuenceController)
@@ -79,8 +81,6 @@ public class MovementController : MonoBehaviour
         if (_startTime == 0)
         {
             _startTime = Time.time;
-
-            _startTimeY = Time.time;
         }
 
         if (_isLose)
@@ -91,10 +91,9 @@ public class MovementController : MonoBehaviour
         }
         else
         {
-            if (!_isJump && !_isMove)
-            {
-                CheckCollisions();
-            }
+            MouseInput();
+
+            UpdatePosition();
 
             if (_isJump)
             {
@@ -111,38 +110,41 @@ public class MovementController : MonoBehaviour
                 MoveTile();
             }
 
-            MouseInput();
-
-            UpdatePosition();
+            if (!_isJump && !_isMove)
+            {
+                CheckCollisions();
+            }
         }
     }
 
     public void UpdatePosition()
     {
-        float bounds = 4.5f;
+        float bounds = 2.5f;
 
-        float posX = Mathf.Clamp(transform.position.x + _playerInputs.MouseAxisRight * m_sensitivity * Time.deltaTime, -bounds, bounds);
+        float posX = Mathf.Clamp(transform.position.x + _playerInputs.MouseAxisRight * m_sensitivity * Time.fixedDeltaTime, -bounds, bounds);
 
-        float posZ = (Time.time - _startTime) * _speed;
+        posZ = (Time.time - _startTime) * _speed;
 
         transform.position = new Vector3(posX, posY, posZ);
     }
 
-    public void Move(Tile currentTile)
+    public void Move()
     {
         _targetPos = _tileController.NextTile().JumpPosition;
 
-        if (currentTile.TileType == TileType.Static)
+        _startTimeNewAction = Time.time;
+
+        if (_currentTile.TileType == TileType.Static)
         {
             _isJump = true;
         }
 
-        if (currentTile.TileType == TileType.Long)
+        if (_currentTile.TileType == TileType.Long)
         {
             _isLongMove = true;
         }
 
-        if (currentTile.TileType == TileType.Move)
+        if (_currentTile.TileType == TileType.Move)
         {
 
             _isMove = true;
@@ -164,13 +166,13 @@ public class MovementController : MonoBehaviour
 
         PlayerRotation();
 
-        if (Mathf.FloorToInt((Time.time - _startTime) * _speed) == _currentTile.FinishPosition.z)
+        if (posZ >= _currentTile.FinishPosition.z)
         {
             _isMove = false;
 
             _isJump = true;
 
-            _startTimeY = Time.time;
+            _startTimeNewAction = Time.time;
 
             _currentTile.FadeTile();
 
@@ -184,13 +186,11 @@ public class MovementController : MonoBehaviour
 
         PlayerRotation();
 
-        if (Mathf.FloorToInt((Time.time - _startTime) * _speed) == _currentTile.FinishPosition.z)
+        if (posZ >= _currentTile.FinishPosition.z)
         {
             _isJump = true;
 
             _isLongMove = false;
-
-            _startTimeY = Time.time;
 
             _currentTile.FadeTile();
 
@@ -202,17 +202,15 @@ public class MovementController : MonoBehaviour
     {
         _distance = _targetPos.z - _currentTile.FinishPosition.z;
 
-        if (Mathf.FloorToInt((Time.time - _startTime) * _speed) == _targetPos.z)
+        if (posZ >= _targetPos.z)
         {
             _isJump = false;
-
-            _startTimeY = Time.time;
 
             posY = 0;
         }
         else
         {
-            posY = m_jumpCurve.Evaluate(((Time.time - _startTimeY) * _speed / _distance) % 1) * Mathf.Clamp(_distance, 0, m_maxHightToJump);
+            posY = m_jumpCurve.Evaluate(((Time.time - _startTimeNewAction) * _speed / _distance) % 1) * Mathf.Clamp(_distance, 0, m_maxHightToJump);
         }
     }
 
@@ -220,7 +218,7 @@ public class MovementController : MonoBehaviour
     {
         RaycastHit[] result = new RaycastHit[2];
 
-        if (Physics.BoxCastNonAlloc(transform.position, Vector3.one * 0.3f, Vector3.down, result, Quaternion.identity, 1, m_layerMask) == 1)
+        if (Physics.BoxCastNonAlloc(transform.position, Vector3.one * 0.3f, Vector3.down, result, Quaternion.identity, 2, m_layerMask) == 1)
         {
             var tile = result[0].transform.parent.GetComponent<Tile>();
 
@@ -228,7 +226,7 @@ public class MovementController : MonoBehaviour
 
             _currentTile = tile;
 
-            Move(tile);
+            Move();
 
             if (tile.TileType == TileType.Static)
             {
@@ -250,7 +248,7 @@ public class MovementController : MonoBehaviour
 
     private void PlayerRotation()
     {
-        float rotationAngle = 360f * (((Time.time - _startTimeY) * _speed / _distance) % 1);
+        float rotationAngle = 360f * (((Time.time - _startTimeNewAction) * _speed / _distance) % 1);
 
         m_playerTransform.transform.localRotation = Quaternion.Euler(0, rotationAngle, 0);
     }

@@ -3,22 +3,33 @@ using UnityEngine;
 public class RhythmObjectGenerator : MonoBehaviour
 {
     public GameObject objectPrefab; // Префаб объекта, который будет создаваться на ритмических событиях
+
     public AudioSource musicSource; // Ссылка на источник музыки
+
     public float rhythmThreshold = 0.5f; // Пороговое значение для определения ритмических событий
+
     public float spawnDistance = 1.0f; // Расстояние между созданными объектами
+
     public float beatsPerMinute = 120; // Темп музыки в BPM
 
     private float[] audioSamples;
+
     private int sampleRate;
+
     private float timePerBeat;
+
     private float nextSpawnTime;
+
     private Vector3 spawnPosition;
+
     private bool isFirstSpawn = true;
+
     public int perBeatsCount = 0;
 
     void Start()
     {
         sampleRate = AudioSettings.outputSampleRate;
+
         audioSamples = new float[musicSource.clip.samples * musicSource.clip.channels];
 
         // Получаем сэмплы аудио
@@ -67,7 +78,9 @@ public class RhythmObjectGenerator : MonoBehaviour
     float CalculateAverageAmplitude()
     {
         int currentSample = musicSource.timeSamples;
+
         int samplesInInterval = Mathf.RoundToInt(sampleRate * timePerBeat);
+
         float sumAmplitude = 0f;
 
         // Суммируем амплитуду в текущем интервале
