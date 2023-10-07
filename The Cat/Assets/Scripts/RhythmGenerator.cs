@@ -35,7 +35,7 @@ public class RhythmObjectGenerator : MonoBehaviour
         // Получаем сэмплы аудио
         musicSource.clip.GetData(audioSamples, 0);
 
-        timePerBeat = 60f / beatsPerMinute / 2f;
+        timePerBeat = 60f / beatsPerMinute;
 
         // Начинаем анализ сразу
         nextSpawnTime = Time.time + timePerBeat;

@@ -36,7 +36,7 @@ public class TileController : MonoBehaviour
 
         MoveTilesAlongAxisX();
 
-        _period = 60f / m_bpm * 0.5f;
+        _period = 60f / m_bpm;
     }
 
     void Start()
