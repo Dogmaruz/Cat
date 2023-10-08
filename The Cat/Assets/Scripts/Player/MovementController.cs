@@ -112,7 +112,7 @@ public class MovementController : MonoBehaviour
 
             if (!_isJump && !_isMove)
             {
-                CheckCollisions();
+                //CheckCollisions();
             }
         }
     }
@@ -121,7 +121,7 @@ public class MovementController : MonoBehaviour
     {
         float bounds = 2.5f;
 
-        float posX = Mathf.Clamp(transform.position.x + _playerInputs.MouseAxisRight * m_sensitivity * Time.fixedDeltaTime, -bounds, bounds);
+        float posX = Mathf.Clamp(transform.position.x + _playerInputs.MouseAxisRight * m_sensitivity * Time.deltaTime, -bounds, bounds);
 
         posZ = (Time.time - _startTime) * _speed;
 

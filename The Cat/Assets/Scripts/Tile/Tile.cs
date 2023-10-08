@@ -78,7 +78,7 @@ public abstract class Tile : MonoBehaviour
 
         Vector3 hidePosition = SetTileHidePosition();
 
-        StartCoroutine(MoveToHidePosition(hidePosition, 0f));
+        MoveToHidePosition(hidePosition, 0f);
     }
 
     public void Show()
@@ -88,13 +88,12 @@ public abstract class Tile : MonoBehaviour
         StartCoroutine(SmoothMove(_startPosition, 1f, 1f));
     }
 
-    private IEnumerator MoveToHidePosition(Vector3 position, float alpha)
+    private void MoveToHidePosition(Vector3 position, float alpha)
     {
         foreach (var mesh in _meshes)
         {
             mesh.material.color = new Color(mesh.material.color.r, mesh.material.color.g, mesh.material.color.b, alpha);
 
-            yield return null;
         }
 
         transform.position = position;

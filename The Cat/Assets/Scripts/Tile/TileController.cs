@@ -43,12 +43,12 @@ public class TileController : MonoBehaviour
     {
         enabled = false;
 
-        HidenTilesBasedOnDistance();
+        //HidenTilesBasedOnDistance();
     }
 
     private void Update()
     {
-        TryShowHideTilesDependendingOnDistance();
+        //TryShowHideTilesDependendingOnDistance();
     }
 
     private void MoveTilesAlongAxisX()
@@ -138,6 +138,8 @@ public class TileController : MonoBehaviour
 
         if (_tileCount >= _tiles.Length)
         {
+            //TODO: Заменить эту реализацию на окно результатов с переходом на новый уровень.
+
             _movementController.SetMovementState(false);
 
             _levelSecuenceController.Lose();
