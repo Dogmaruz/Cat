@@ -86,6 +86,8 @@ public abstract class Tile : MonoBehaviour
         IsMoved = false;
 
         StartCoroutine(SmoothMove(_startPosition, 1f, 1f));
+
+        StartCoroutine(ChangeColorAlpha(1, 1));
     }
 
     private void MoveToHidePosition(Vector3 position, float alpha)
@@ -110,8 +112,6 @@ public abstract class Tile : MonoBehaviour
             float t = Mathf.Clamp01(elapsedTime / moveDuration);
 
             transform.position = Vector3.Lerp(transform.position, position, t);
-
-            StartCoroutine(ChangeColorAlpha(duration, alpha));
 
             elapsedTime += Time.deltaTime;
 

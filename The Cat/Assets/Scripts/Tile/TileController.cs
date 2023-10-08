@@ -43,12 +43,12 @@ public class TileController : MonoBehaviour
     {
         enabled = false;
 
-        //HidenTilesBasedOnDistance();
+        HidenTilesBasedOnDistance();
     }
 
     private void Update()
     {
-        //TryShowHideTilesDependendingOnDistance();
+        TryShowHideTilesDependendingOnDistance();
     }
 
     private void MoveTilesAlongAxisX()
