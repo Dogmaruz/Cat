@@ -122,7 +122,7 @@ public class MovementController : MonoBehaviour
     {
         float bounds = 2.5f;
 
-        float posX = transform.position.x + _playerInputs.MouseAxisRight * m_sensitivity * Time.deltaTime;
+        float posX = transform.position.x + _playerInputs.MouseAxisRight * m_sensitivity;
 
         posX = Mathf.Clamp(posX, -bounds, bounds);
 
