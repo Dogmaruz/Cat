@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -30,7 +31,7 @@ public class LevelSecuenceController : MonoBehaviour
 
     private void Awake()
     {
-        //Application.targetFrameRate = 120;
+        Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
 
         _sceneLoader = GetComponent<SceneLoader>();
 
