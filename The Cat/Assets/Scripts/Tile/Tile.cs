@@ -15,26 +15,33 @@ public abstract class Tile : MonoBehaviour
     public TileType TileType => m_tileType;
 
     protected BoxCollider _collider;
+    public BoxCollider Collider => _collider;
     public Vector3 JumpPosition { get; protected set; }
+    public Vector3 FinishPosition { get; protected set; }
 
     protected Vector3 _startPosition;
+    public Vector3 StartPosition => _startPosition;
 
     protected MeshRenderer[] _meshes;
 
     private Tween _tween;
+
+    public float Distance { get; set; }
 
     [HideInInspector]
     public bool IsMoved = false;
 
     protected void Awake()
     {
-        _startPosition = transform.position;
-
-        _collider = GetComponent<BoxCollider>();
+        _collider = GetComponentInChildren<BoxCollider>();
 
         _meshes = GetComponentsInChildren<MeshRenderer>();
 
         SetJumpPosition();
+
+        SetFinishPosition();
+
+        Distance = FinishPosition.z - JumpPosition.z;
     }
 
     private void OnDestroy()
@@ -43,6 +50,12 @@ public abstract class Tile : MonoBehaviour
     }
 
     public abstract void SetJumpPosition();
+    public abstract void SetFinishPosition();
+
+    public void SetStartPosition(Vector3 position)
+    {
+        _startPosition = position;
+    }
 
     public void FadeTile()
     {
@@ -65,7 +78,7 @@ public abstract class Tile : MonoBehaviour
 
         Vector3 hidePosition = SetTileHidePosition();
 
-        StartCoroutine(MoveToHidePosition(hidePosition, 0f));
+        MoveToHidePosition(hidePosition, 0f);
     }
 
     public void Show()
@@ -73,15 +86,16 @@ public abstract class Tile : MonoBehaviour
         IsMoved = false;
 
         StartCoroutine(SmoothMove(_startPosition, 1f, 1f));
+
+        StartCoroutine(ChangeColorAlpha(1, 1));
     }
 
-    private IEnumerator MoveToHidePosition(Vector3 position, float alpha)
+    private void MoveToHidePosition(Vector3 position, float alpha)
     {
         foreach (var mesh in _meshes)
         {
             mesh.material.color = new Color(mesh.material.color.r, mesh.material.color.g, mesh.material.color.b, alpha);
 
-            yield return null;
         }
 
         transform.position = position;
@@ -98,8 +112,6 @@ public abstract class Tile : MonoBehaviour
             float t = Mathf.Clamp01(elapsedTime / moveDuration);
 
             transform.position = Vector3.Lerp(transform.position, position, t);
-
-            StartCoroutine(ChangeColorAlpha(duration, alpha));
 
             elapsedTime += Time.deltaTime;
 

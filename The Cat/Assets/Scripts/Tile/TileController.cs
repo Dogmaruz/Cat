@@ -7,6 +7,8 @@ public class TileController : MonoBehaviour
 
     [SerializeField] private BackgroundSceneClip m_backgroundSceneClip;
 
+    [SerializeField] private bool m_isRandomX; // переменная выставлена для удобства дебага. 
+
     private Tile[] _tiles;
 
     private int _tileCount = 0;
@@ -28,13 +30,18 @@ public class TileController : MonoBehaviour
         _levelSecuenceController = levelSecuenceController;
     }
 
+    private void Awake()
+    {
+        _tiles = GetComponentsInChildren<Tile>();
+
+        MoveTilesAlongAxisX();
+
+        _period = 60f / m_bpm;
+    }
+
     void Start()
     {
         enabled = false;
-
-        _tiles = GetComponentsInChildren<Tile>();
-
-        _period = 60 / m_bpm * 0.5f;
 
         HidenTilesBasedOnDistance();
     }
@@ -42,6 +49,59 @@ public class TileController : MonoBehaviour
     private void Update()
     {
         TryShowHideTilesDependendingOnDistance();
+    }
+
+    private void MoveTilesAlongAxisX()
+    {
+        if (m_isRandomX == true)
+        {
+            for (int i = 4; i < _tiles.Length; i++)
+            {
+                if(_tiles[i].TileType == TileType.Move)
+                {
+                    _tiles[i].SetStartPosition(_tiles[i].transform.position);
+                }
+                else
+                {
+                    float rnd = Random.Range(-1, 2);
+
+                    if (i < _tiles.Length / 2)
+                    {
+                        rnd *= 0.5f;
+                    }
+
+                    float posX = Mathf.Clamp((int)_tiles[i - 1].StartPosition.x + rnd, -2, 2);
+
+                    Vector3 newStartPosition = new Vector3(posX, _tiles[i].transform.position.y, _tiles[i].transform.position.z);
+
+                    _tiles[i].SetStartPosition(newStartPosition);
+                }
+            }
+        }
+        else
+        {
+            foreach(var tile in _tiles)
+            {
+                tile.SetStartPosition(tile.transform.position);
+            }
+        }
+
+        /*  TODO 
+         *  1. Убрать переменную m_isRandomX;
+         *  2. Удалить всё из метода выше;
+         *  3. Убрать комментарий.
+          
+            for (int i = 4; i < _tiles.Length; i++)
+            {
+                int rnd = Random.Range(-1, 2);
+
+                float posX = Mathf.Clamp((int)_tiles[i - 1].StartPosition.x + rnd, -2, 2);
+
+                Vector3 newStartPosition = new Vector3(posX, _tiles[i].transform.position.y, _tiles[i].transform.position.z);
+
+                _tiles[i].SetStartPosition(newStartPosition);
+            }
+        */
     }
 
     private void HidenTilesBasedOnDistance()
@@ -78,7 +138,9 @@ public class TileController : MonoBehaviour
 
         if (_tileCount >= _tiles.Length)
         {
-            _movementController.StopMovement();
+            //TODO: Заменить эту реализацию на окно результатов с переходом на новый уровень.
+
+            _movementController.SetMovementState(false);
 
             _levelSecuenceController.Lose();
 

@@ -6,10 +6,14 @@ public class MoveTile : Tile
     public Transform ParentTransform => m_parentTransform;
 
     [SerializeField] private Transform m_endPosition;
-    public Transform EndPosition => m_endPosition;
 
     public override void SetJumpPosition()
     {
-        JumpPosition = transform.parent.position;
+        JumpPosition = transform.position;
+    }
+
+    public override void SetFinishPosition()
+    {
+        FinishPosition = m_endPosition.position;
     }
 }
