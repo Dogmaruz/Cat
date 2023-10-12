@@ -16,10 +16,12 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.transform.root.GetComponent<MovementController>() == null) return;
+
         _soundPlayer.Play(Sound.Coin, 1f);
 
         _coinManager.AddCoins(1);
 
-        Destroy(gameObject);
+        GetComponentInChildren<MeshRenderer>().enabled = false;
     }
 }
