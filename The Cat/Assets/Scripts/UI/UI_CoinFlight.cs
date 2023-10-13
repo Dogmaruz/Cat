@@ -9,9 +9,9 @@ public class UI_CoinFlight : MonoBehaviour
     [SerializeField] private GameObject m_coinImagePrefab;
     [SerializeField] private Transform m_targetIcon;
 
-    [SerializeField] private Vector3 startScale;
+    [SerializeField] private Vector3 m_startScale;
 
-    [SerializeField] float m_duration;
+    [SerializeField] private float m_duration;
 
     [SerializeField] private GameObject[] m_randomMiddlePoints;
 
@@ -20,7 +20,6 @@ public class UI_CoinFlight : MonoBehaviour
     private TileController _tileController;
 
     private Vector2 _firstPos;
-    private Vector2 _middlePos;
     private Vector2 _lastPos;
     private Vector3[] _path;
 
@@ -68,14 +67,14 @@ public class UI_CoinFlight : MonoBehaviour
 
         int rnd = Random.Range(0, m_randomMiddlePoints.Length);
 
-        _middlePos = m_randomMiddlePoints[rnd].transform.position;
+        Vector2 middlePos = m_randomMiddlePoints[rnd].transform.position;
 
-        _path = new Vector3[] { _firstPos, _middlePos, _lastPos };
+        _path = new Vector3[] { _firstPos, middlePos, _lastPos };
 
         var currentImage = _coinsImages[_currentImageNumber];
 
         currentImage.transform.position = _firstPos;
-        currentImage.transform.localScale = startScale;
+        currentImage.transform.localScale = m_startScale;
 
         currentImage.transform.DOPath(_path, m_duration, PathType.CatmullRom);
         currentImage.transform.DOScale(_endScale, m_duration);
