@@ -22,6 +22,8 @@ public class MovementController : MonoBehaviour
 
     [SerializeField] private AnimationCurve m_jumpCurve;
 
+    [SerializeField] private float _step = 1f;
+
     private LevelSecuenceController _levelSecuenceController;
 
     private TileController _tileController;
@@ -74,7 +76,7 @@ public class MovementController : MonoBehaviour
 
     private void Start()
     {
-        _speed = 1f / _tileController.Period;
+        _speed = 1f / (_tileController.Period / _step);
     }
 
     private void Update()
@@ -194,6 +196,8 @@ public class MovementController : MonoBehaviour
             _isJump = true;
 
             _isLongMove = false;
+
+            _startTimeNewAction = Time.time;
 
             _currentTile.FadeTile();
 
