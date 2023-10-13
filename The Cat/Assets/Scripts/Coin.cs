@@ -5,16 +5,23 @@ public class Coin : MonoBehaviour
 {
     private SoundPlayer _soundPlayer;
 
+    private CoinManager _coinManager;
+
     [Inject]
-    public void Construct(SoundPlayer soundPlayer)
+    public void Construct(SoundPlayer soundPlayer, CoinManager coinManager)
     {
         _soundPlayer = soundPlayer;
+        _coinManager = coinManager;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.transform.root.GetComponent<MovementController>() == null) return;
+
         _soundPlayer.Play(Sound.Coin, 1f);
 
-        Destroy(gameObject);
+        _coinManager.AddCoins(1);
+
+        GetComponentInChildren<MeshRenderer>().enabled = false;
     }
 }

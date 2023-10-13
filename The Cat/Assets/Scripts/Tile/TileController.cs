@@ -5,7 +5,10 @@ public class TileController : MonoBehaviour
 {
     [SerializeField] private float m_bpm;
 
-    [SerializeField] private BackgroundSceneClip m_backgroundSceneClip;
+    [Range(0f, 1f)]
+    [SerializeField] private float m_coinSpawnChance;
+
+    [SerializeField] private Coin m_coinPrefab;
 
     [SerializeField] private bool m_isRandomX; // переменная выставлена для удобства дебага. 
 
@@ -18,13 +21,19 @@ public class TileController : MonoBehaviour
 
     private float _maxVisibleDistanceOfTiles = 15f;
 
+    private Vector3 _coinUpVector = new Vector3(0f, 0.5f, 0f);
+
+    private DiContainer _diContainer;
+
     private MovementController _movementController;
 
     private LevelSecuenceController _levelSecuenceController;
 
     [Inject]
-    public void Construct(MovementController movementController, LevelSecuenceController levelSecuenceController)
+    public void Construct(DiContainer diContainer, MovementController movementController, LevelSecuenceController levelSecuenceController)
     {
+        _diContainer = diContainer;
+
         _movementController = movementController;
 
         _levelSecuenceController = levelSecuenceController;
@@ -33,6 +42,8 @@ public class TileController : MonoBehaviour
     private void Awake()
     {
         _tiles = GetComponentsInChildren<Tile>();
+
+        TrySetCoinToTile();
 
         MoveTilesAlongAxisX();
 
@@ -49,6 +60,26 @@ public class TileController : MonoBehaviour
     private void Update()
     {
         TryShowHideTilesDependendingOnDistance();
+    }
+
+    private void TrySetCoinToTile()
+    {
+        foreach (Tile tile in _tiles)
+        {
+            float rnd = Random.Range(0f, 1f);
+
+            if (rnd > m_coinSpawnChance)
+            {
+                continue;
+            }
+            else
+            {
+                //var coin = Instantiate(m_coinPrefab, tile.transform);
+                var coin = _diContainer.InstantiatePrefab(m_coinPrefab, tile.transform);
+
+                coin.transform.localPosition += _coinUpVector;
+            }
+        }
     }
 
     private void MoveTilesAlongAxisX()
