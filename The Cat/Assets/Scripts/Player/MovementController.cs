@@ -23,6 +23,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private AnimationCurve m_jumpCurve;
 
     [SerializeField] private float _step = 1f;
+    public float Step => _step;
 
     private LevelSecuenceController _levelSecuenceController;
 

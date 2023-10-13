@@ -6,7 +6,7 @@ public class TileController : MonoBehaviour
     [SerializeField] private float m_bpm;
 
     [Range(0f, 1f)]
-    [SerializeField] private float m_coinSpawnChance;
+    [SerializeField] private float m_coinSpawnChance = 0.25f;
 
     [SerializeField] private Coin m_coinPrefab;
 
@@ -68,13 +68,12 @@ public class TileController : MonoBehaviour
         {
             float rnd = Random.Range(0f, 1f);
 
-            if (rnd > m_coinSpawnChance)
+            if (rnd > m_coinSpawnChance || tile.TileType != TileType.Static || tile == _tiles[0])
             {
                 continue;
             }
             else
             {
-                //var coin = Instantiate(m_coinPrefab, tile.transform);
                 var coin = _diContainer.InstantiatePrefab(m_coinPrefab, tile.transform);
 
                 coin.transform.localPosition += _coinUpVector;
