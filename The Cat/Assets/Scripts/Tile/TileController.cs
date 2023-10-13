@@ -43,9 +43,9 @@ public class TileController : MonoBehaviour
     {
         _tiles = GetComponentsInChildren<Tile>();
 
-        TrySetCoinToTile();
+        //TrySetCoinToTile();
 
-        MoveTilesAlongAxisX();
+        //MoveTilesAlongAxisX();
 
         _period = 60f / m_bpm;
     }
@@ -54,12 +54,12 @@ public class TileController : MonoBehaviour
     {
         enabled = false;
 
-        HidenTilesBasedOnDistance();
+        //HidenTilesBasedOnDistance();
     }
 
     private void Update()
     {
-        TryShowHideTilesDependendingOnDistance();
+        //TryShowHideTilesDependendingOnDistance();
     }
 
     private void TrySetCoinToTile()
@@ -101,7 +101,7 @@ public class TileController : MonoBehaviour
                         rnd *= 0.5f;
                     }
 
-                    float posX = Mathf.Clamp((int)_tiles[i - 1].StartPosition.x + rnd, -2, 2);
+                    float posX = Mathf.Clamp((int)_tiles[i - 1].StartPosition.x + rnd, -1.5f, 1.5f);
 
                     Vector3 newStartPosition = new Vector3(posX, _tiles[i].transform.position.y, _tiles[i].transform.position.z);
 

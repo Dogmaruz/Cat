@@ -122,7 +122,7 @@ public class MovementController : MonoBehaviour
 
     public void UpdatePosition()
     {
-        float bounds = 2.5f;
+        float bounds = 1.5f;
 
         float posX = transform.position.x + _playerInputs.MouseAxisRight * m_sensitivity;
 
