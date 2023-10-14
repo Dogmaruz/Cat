@@ -2,14 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class PlayerModelChanger : MonoBehaviour
+public class VisualModel : MonoBehaviour
 {
+    [SerializeField] private PlayerVisualModel m_visualModel;
     [SerializeField] private Image m_image;
 
     private UI_CharactersPanel _charactersPanel;
 
     private Button _button;
-    private Color _color;
 
     private SkinManager _skinManager;
 
@@ -26,12 +26,15 @@ public class PlayerModelChanger : MonoBehaviour
         _button = GetComponentInChildren<Button>();
         _button.onClick.AddListener(ChangeModel);
 
-        _color = m_image.color;
+        // TODO Add images;
+        //m_image.sprite = m_visualModel.Sprite;
+        //m_image.color = Color.white;
+        
     }
 
     private void ChangeModel()
     {
-        _skinManager.ChangePlayerColor(_color);
+        _skinManager.ChangePlayerVisualModel(m_visualModel);
         _charactersPanel.CloseCharactersPanel();
     }
 }

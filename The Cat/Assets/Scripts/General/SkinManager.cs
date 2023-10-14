@@ -1,11 +1,51 @@
+using System;
 using UnityEngine;
 
 public class SkinManager : MonoBehaviour
 {
-    [SerializeField] private Material m_material;
+    public Action<PlayerVisualModel> SkinChanged;
 
-    public void ChangePlayerColor(Color color)
+    [SerializeField] private PlayerVisualModel m_defaultVisualModels;
+
+    private string filename = "playerSkin.dat";
+
+    private PlayerVisualModel _currentVisualModel;
+    public PlayerVisualModel CurrentVisualModel => _currentVisualModel;
+
+    private void Awake()
     {
-        m_material.color = color;
+        LoadValue();
+    }
+
+    private void Start()
+    {
+        LoadValue();
+
+        if (_currentVisualModel == null)
+        {
+            _currentVisualModel = m_defaultVisualModels;
+        }
+
+        ChangePlayerVisualModel(_currentVisualModel);
+        
+    }
+
+    public void ChangePlayerVisualModel(PlayerVisualModel visualModel)
+    {
+        _currentVisualModel = visualModel;
+
+        Save();
+
+        SkinChanged?.Invoke(visualModel);
+    }
+
+    private void LoadValue()
+    {
+        Saver<PlayerVisualModel>.TryLoad(filename, ref _currentVisualModel);
+    }
+
+    private void Save()
+    {
+        Saver<PlayerVisualModel>.Save(filename, _currentVisualModel);
     }
 }
