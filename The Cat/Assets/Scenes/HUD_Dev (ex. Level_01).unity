@@ -5847,7 +5847,6 @@ GameObject:
   m_Component:
   - component: {fileID: 471712394}
   - component: {fileID: 471712396}
-  - component: {fileID: 471712398}
   - component: {fileID: 471712395}
   - component: {fileID: 471712397}
   m_Layer: 0
@@ -5966,27 +5965,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4080a0613b610478900d23b995303e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &471712398
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 471712393}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.35
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &473138014
 GameObject:
   m_ObjectHideFlags: 0
@@ -25844,6 +25822,7 @@ GameObject:
   - component: {fileID: 1843121562}
   - component: {fileID: 1843121565}
   - component: {fileID: 1843121564}
+  - component: {fileID: 1843121566}
   m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
@@ -25917,6 +25896,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1843121561}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!135 &1843121566
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843121561}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1848381651
 GameObject:
   m_ObjectHideFlags: 0
