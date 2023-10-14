@@ -10,15 +10,7 @@ public class UI_CharactersPanel : MonoBehaviour
     [SerializeField] private Button m_closePanelButton;
 
     [SerializeField] private GameObject m_mainMenuCanvas;
-
-    private MovementController _movementController; 
     
-    [Inject]
-    public void Construct(MovementController movementController)
-    {
-        _movementController = movementController;
-    }
-
     private void Awake()
     {
         m_openPanelButton.onClick.AddListener(OpenCharactersPanel);
@@ -41,10 +33,5 @@ public class UI_CharactersPanel : MonoBehaviour
     {
         m_mainMenuCanvas.SetActive(true);
         gameObject.SetActive(false);
-    }
-
-    public void ChangePlayerColor(Color color)
-    {
-        _movementController.GetComponentInChildren<MeshRenderer>().material.color = color;
     }
 }

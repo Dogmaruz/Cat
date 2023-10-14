@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class PlayerModelChanger : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class PlayerModelChanger : MonoBehaviour
     private Button _button;
     private Color _color;
 
+    private SkinManager _skinManager;
+
+    [Inject]
+    public void Construct(SkinManager skinManager)
+    {
+        _skinManager = skinManager;
+    }
 
     private void Start()
     {
@@ -23,7 +31,7 @@ public class PlayerModelChanger : MonoBehaviour
 
     private void ChangeModel()
     {
-        _charactersPanel.ChangePlayerColor(_color);
+        _skinManager.ChangePlayerColor(_color);
         _charactersPanel.CloseCharactersPanel();
     }
 }
