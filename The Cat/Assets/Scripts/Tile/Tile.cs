@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System.Collections;
 using UnityEngine;
 
 public enum TileType
@@ -9,7 +8,7 @@ public enum TileType
     Move,
 }
 
-public abstract class Tile : MonoBehaviour
+public abstract class Tile : Emerging
 {
     [SerializeField] protected TileType m_tileType;
     public TileType TileType => m_tileType;
@@ -19,23 +18,15 @@ public abstract class Tile : MonoBehaviour
     public Vector3 JumpPosition { get; protected set; }
     public Vector3 FinishPosition { get; protected set; }
 
-    protected Vector3 _startPosition;
-    public Vector3 StartPosition => _startPosition;
-
-    protected MeshRenderer[] _meshes;
-
     private Tween _tween;
 
     public float Distance { get; set; }
 
-    [HideInInspector]
-    public bool IsMoved = false;
-
-    protected void Awake()
+    protected override void Awake()
     {
-        _collider = GetComponentInChildren<BoxCollider>();
+        base.Awake();
 
-        _meshes = GetComponentsInChildren<MeshRenderer>();
+        _collider = GetComponentInChildren<BoxCollider>();
 
         SetJumpPosition();
 
@@ -44,18 +35,8 @@ public abstract class Tile : MonoBehaviour
         Distance = FinishPosition.z - JumpPosition.z;
     }
 
-    private void OnDestroy()
-    {
-        _tween.Kill();
-    }
-
     public abstract void SetJumpPosition();
     public abstract void SetFinishPosition();
-
-    public void SetStartPosition(Vector3 position)
-    {
-        _startPosition = position;
-    }
 
     public void FadeTile()
     {
@@ -72,82 +53,8 @@ public abstract class Tile : MonoBehaviour
                          .SetEase(Ease.InOutQuad);
     }
 
-    public void Hide()
+    private void OnDestroy()
     {
-        IsMoved = true;
-
-        Vector3 hidePosition = SetTileHidePosition();
-
-        MoveToHidePosition(hidePosition, 0f);
-    }
-
-    public void Show()
-    {
-        IsMoved = false;
-
-        StartCoroutine(SmoothMove(_startPosition, 1f, 1f));
-
-        StartCoroutine(ChangeColorAlpha(1, 1));
-    }
-
-    private void MoveToHidePosition(Vector3 position, float alpha)
-    {
-        foreach (var mesh in _meshes)
-        {
-            mesh.material.color = new Color(mesh.material.color.r, mesh.material.color.g, mesh.material.color.b, alpha);
-
-        }
-
-        transform.position = position;
-    }
-
-    private IEnumerator SmoothMove(Vector3 position, float alpha, float duration)
-    {
-        float elapsedTime = 0f;
-
-        float moveDuration = duration;
-
-        while (elapsedTime < moveDuration)
-        {
-            float t = Mathf.Clamp01(elapsedTime / moveDuration);
-
-            transform.position = Vector3.Lerp(transform.position, position, t);
-
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
-        }
-
-        transform.position = position;
-    }
-
-    private IEnumerator ChangeColorAlpha(float duration, float alpha)
-    {
-        float elapsedTime = 0f;
-
-        float moveDuration = duration;
-
-        while (elapsedTime < moveDuration)
-        {
-            float t = Mathf.Clamp01(elapsedTime / moveDuration);
-
-            foreach (var mesh in _meshes)
-            {
-                mesh.material.color = Color.Lerp(mesh.material.color, new Color(mesh.material.color.r, mesh.material.color.g, mesh.material.color.b, alpha), t);
-            }
-
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
-        }
-    }
-
-    private Vector3 SetTileHidePosition()
-    {
-        Vector2 newPos = new Vector2(Random.Range(-2, 2), 4f);
-
-        var hidePosition = new Vector3(newPos.x, newPos.y, transform.position.z);
-
-        return hidePosition;
+        _tween.Kill();
     }
 }
