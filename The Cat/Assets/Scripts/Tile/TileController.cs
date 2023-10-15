@@ -1,14 +1,23 @@
+using System;
 using UnityEngine;
 using Zenject;
 
 public class TileController : MonoBehaviour
 {
+    public Action LastTileReached;
+
     [SerializeField] private float m_bpm;
 
     [Range(0f, 1f)]
     [SerializeField] private float m_coinSpawnChance = 0.25f;
 
     [SerializeField] private Coin m_coinPrefab;
+
+    [SerializeField] private int m_multiplierBonusForCenterHit;
+    public int multiplierBonusForCenterHit => m_multiplierBonusForCenterHit;
+
+    [SerializeField] private Transform m_fieldEndPoint;
+    public float FieldDistance => m_fieldEndPoint.position.z;
 
     [SerializeField] private bool m_isRandomX; // переменна€ выставлена дл€ удобства дебага. 
 
@@ -27,21 +36,19 @@ public class TileController : MonoBehaviour
 
     private MovementController _movementController;
 
-    private LevelSecuenceController _levelSecuenceController;
-
     [Inject]
-    public void Construct(DiContainer diContainer, MovementController movementController, LevelSecuenceController levelSecuenceController)
+    public void Construct(DiContainer diContainer, MovementController movementController)
     {
         _diContainer = diContainer;
 
         _movementController = movementController;
-
-        _levelSecuenceController = levelSecuenceController;
     }
 
     private void Awake()
     {
         _tiles = GetComponentsInChildren<Tile>();
+
+        SetPointsToTiles(); // TODO заглушка
 
         TrySetCoinToTile();
 
@@ -62,11 +69,30 @@ public class TileController : MonoBehaviour
         TryShowHideTilesDependendingOnDistance();
     }
 
+    private void SetPointsToTiles() // TODO заглушка (очки назначаютс€ в префабах Tile)
+    {
+        foreach (var tile in _tiles)
+        {
+            switch (tile.TileType)
+            {
+                case TileType.Static:
+                    tile.SetPointsPerHit(5);
+                    break;
+                case TileType.Long:
+                    tile.SetPointsPerHit(20);
+                    break;
+                case TileType.Move:
+                    tile.SetPointsPerHit(10);
+                    break;
+            }
+        }
+    }
+
     private void TrySetCoinToTile()
     {
         foreach (Tile tile in _tiles)
         {
-            float rnd = Random.Range(0f, 1f);
+            float rnd = UnityEngine.Random.Range(0f, 1f);
 
             if (rnd > m_coinSpawnChance || tile.TileType != TileType.Static || tile == _tiles[0])
             {
@@ -87,13 +113,13 @@ public class TileController : MonoBehaviour
         {
             for (int i = 4; i < _tiles.Length; i++)
             {
-                if(_tiles[i].TileType == TileType.Move)
+                if (_tiles[i].TileType == TileType.Move)
                 {
                     _tiles[i].SetStartPosition(_tiles[i].transform.position);
                 }
                 else
                 {
-                    float rnd = Random.Range(-1, 2);
+                    float rnd = UnityEngine.Random.Range(-1, 2);
 
                     if (i < _tiles.Length / 2)
                     {
@@ -110,7 +136,7 @@ public class TileController : MonoBehaviour
         }
         else
         {
-            foreach(var tile in _tiles)
+            foreach (var tile in _tiles)
             {
                 tile.SetStartPosition(tile.transform.position);
             }
@@ -168,11 +194,7 @@ public class TileController : MonoBehaviour
 
         if (_tileCount >= _tiles.Length)
         {
-            //TODO: «аменить эту реализацию на окно результатов с переходом на новый уровень.
-
-            _movementController.SetMovementState(false);
-
-            _levelSecuenceController.Lose();
+            LastTileReached?.Invoke();
 
             return _tiles[0];
         }

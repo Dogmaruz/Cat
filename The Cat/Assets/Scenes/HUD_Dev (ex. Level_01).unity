@@ -621,6 +621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1001 &90048109
 PrefabInstance:
@@ -1165,6 +1166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &130431226
 GameObject:
@@ -1212,6 +1214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &133794933
 GameObject:
@@ -1715,9 +1718,10 @@ GameObject:
   m_Component:
   - component: {fileID: 166171292}
   - component: {fileID: 166171291}
+  - component: {fileID: 166171294}
   - component: {fileID: 166171293}
   m_Layer: 0
-  m_Name: LevelSecuenceController
+  m_Name: LevelController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1737,6 +1741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_startButton: {fileID: 102409796}
   m_restartButton: {fileID: 1018445732}
+  m_menuButton: {fileID: 4792372563523705979}
   m_backgroundSceneClip: {fileID: 1560673817}
 --- !u!4 &166171292
 Transform:
@@ -1746,8 +1751,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166171290}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.8093834, y: 4.8015666, z: 2.5598297}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1763,6 +1768,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee9ded375eccf1f43a0d75e76455dd6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &166171294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166171290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12fdef24daf1a074b81704fd7a885c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &166702587 stripped
@@ -1900,6 +1917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &186161782
 GameObject:
@@ -2219,6 +2237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &217872503
 GameObject:
@@ -2538,6 +2557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!4 &229851135 stripped
 Transform:
@@ -2591,38 +2611,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
---- !u!1 &232751628
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 232751629}
-  m_Layer: 0
-  m_Name: ------------------------------------
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &232751629
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232751628}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &239365898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2752,6 +2742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &245104954
 GameObject:
@@ -2965,6 +2956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &259030345
 GameObject:
@@ -3413,6 +3405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &301550098
 GameObject:
@@ -3543,6 +3536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &312518744
 GameObject:
@@ -3696,6 +3690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &329701558
 GameObject:
@@ -4091,6 +4086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &336074433
 GameObject:
@@ -4304,6 +4300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &348491573
 GameObject:
@@ -4351,6 +4348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &359719069
 GameObject:
@@ -4398,6 +4396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &361196175
 GameObject:
@@ -4551,6 +4550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &366686487
 GameObject:
@@ -4681,6 +4681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &371092801
 GameObject:
@@ -4834,6 +4835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &385229429
 GameObject:
@@ -5293,6 +5295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_levelSecuenceController: {fileID: 166171291}
+  m_levelScore: {fileID: 166171294}
 --- !u!1 &434403959
 GameObject:
   m_ObjectHideFlags: 0
@@ -6177,6 +6180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &523269566
 GameObject:
@@ -6224,6 +6228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &525586177
 GameObject:
@@ -6483,6 +6488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &536367271
 GameObject:
@@ -6696,6 +6702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &558530933
 GameObject:
@@ -6743,6 +6750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &559547149
 GameObject:
@@ -6790,6 +6798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &564457161
 GameObject:
@@ -7478,6 +7487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &613922692
 GameObject:
@@ -7820,6 +7830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &638516689
 GameObject:
@@ -8268,6 +8279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &660809220
 GameObject:
@@ -8315,6 +8327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &670406386
 GameObject:
@@ -8551,6 +8564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &690429140
 GameObject:
@@ -8847,6 +8861,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706896974}
   m_Mesh: {fileID: -5495902117074765545, guid: b9822cf2f862d764e88cf0630b0eddd6, type: 3}
+--- !u!1 &712813340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 712813341}
+  m_Layer: 0
+  m_Name: EndFieldPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &712813341
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712813340}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 340}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1322106289}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &713084573
 GameObject:
   m_ObjectHideFlags: 0
@@ -9165,6 +9210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &719505518
 GameObject:
@@ -9212,6 +9258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1001 &719895515
 PrefabInstance:
@@ -9327,6 +9374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &724946487
 GameObject:
@@ -9374,6 +9422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &726313141
 GameObject:
@@ -9400,7 +9449,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 726313141}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9540,7 +9589,7 @@ Transform:
   - {fileID: 871312174}
   - {fileID: 240733748}
   - {fileID: 335819950}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1322106289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &726313143
 MonoBehaviour:
@@ -9558,6 +9607,8 @@ MonoBehaviour:
   m_coinSpawnChance: 0.4
   m_coinPrefab: {fileID: 4355328946817618892, guid: 1be0c36b15541eb43865e318819cdce5,
     type: 3}
+  m_multiplierBonusForCenterHit: 0
+  m_fieldEndPoint: {fileID: 712813341}
   m_isRandomX: 0
 --- !u!1 &727030602
 GameObject:
@@ -9794,6 +9845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &755626566
 GameObject:
@@ -9947,6 +9999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &775505798
 GameObject:
@@ -10183,6 +10236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &788281506
 GameObject:
@@ -10230,6 +10284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1001 &793253237
 PrefabInstance:
@@ -10345,6 +10400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1001 &796369236
 PrefabInstance:
@@ -11417,6 +11473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &863752208
 GameObject:
@@ -11464,6 +11521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &871312173
 GameObject:
@@ -11511,6 +11569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &881729346
 GameObject:
@@ -11558,6 +11617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &890194229
 GameObject:
@@ -11605,6 +11665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &892329894
 GameObject:
@@ -11652,6 +11713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &893166832
 GameObject:
@@ -12373,6 +12435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &925107851
 GameObject:
@@ -12700,6 +12763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &938178513
 GameObject:
@@ -13262,6 +13326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &977048752
 GameObject:
@@ -13309,6 +13374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &978044429
 GameObject:
@@ -13439,6 +13505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &993278278
 GameObject:
@@ -13886,6 +13953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1059715843
 GameObject:
@@ -13933,6 +14001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1062841594
 GameObject:
@@ -13980,6 +14049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1063239040
 GameObject:
@@ -14133,6 +14203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1064734545
 GameObject:
@@ -14452,6 +14523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1078230720
 GameObject:
@@ -15157,6 +15229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1129960534
 GameObject:
@@ -15310,6 +15383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1135979177
 GameObject:
@@ -15780,7 +15854,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
+--- !u!4 &1155559542 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7692284716244462746, guid: ea241660598e6b744a649b3eb150f39b,
+    type: 3}
+  m_PrefabInstance: {fileID: 4858852236911848216}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1156195144
 GameObject:
   m_ObjectHideFlags: 0
@@ -15933,6 +16014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1158171840
 GameObject:
@@ -16842,6 +16924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1206044195
 GameObject:
@@ -16995,6 +17078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1220073033
 GameObject:
@@ -17148,6 +17232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1248104049
 GameObject:
@@ -17467,6 +17552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1283560707
 GameObject:
@@ -17514,6 +17600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!4 &1286639025 stripped
 Transform:
@@ -17650,6 +17737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1302666028
 GameObject:
@@ -17697,6 +17785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1302850541
 GameObject:
@@ -18021,6 +18110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1314823843
 GameObject:
@@ -18385,6 +18475,41 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a41fd8aff6bdf624bac11db05f947a7d, type: 3}
+--- !u!1 &1322106288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1322106289}
+  m_Layer: 0
+  m_Name: Field
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1322106289
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322106288}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 726313142}
+  - {fileID: 712813341}
+  - {fileID: 1155559542}
+  - {fileID: 2056125151}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1322310468
 GameObject:
   m_ObjectHideFlags: 0
@@ -18732,6 +18857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1341933965
 GameObject:
@@ -18968,6 +19094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1352327887
 GameObject:
@@ -19015,6 +19142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1355910516
 GameObject:
@@ -19062,6 +19190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1358110710
 GameObject:
@@ -19109,6 +19238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1360988293
 GameObject:
@@ -19534,6 +19664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1388676297
 GameObject:
@@ -19844,7 +19975,7 @@ Transform:
   m_GameObject: {fileID: 1415811538}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2435808, y: -4.1844945, z: 13.399581}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19898,6 +20029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1431499477
 GameObject:
@@ -19945,6 +20077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1439694232
 GameObject:
@@ -20459,6 +20592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1466983346
 GameObject:
@@ -20589,6 +20723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1478715272
 GameObject:
@@ -20802,6 +20937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1497121002
 GameObject:
@@ -21227,6 +21363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1523882330
 GameObject:
@@ -21274,6 +21411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1534059294
 GameObject:
@@ -21321,6 +21459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1536390394
 GameObject:
@@ -21663,6 +21802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1565792912
 GameObject:
@@ -21710,6 +21850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1572992152
 GameObject:
@@ -22029,6 +22170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1585186760
 GameObject:
@@ -22242,6 +22384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1617612908
 GameObject:
@@ -22590,6 +22733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1647186304
 GameObject:
@@ -22637,6 +22781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1658990000
 GameObject:
@@ -22684,6 +22829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1659707794
 GameObject:
@@ -23493,6 +23639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1701453547
 GameObject:
@@ -23646,6 +23793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1725533508
 GameObject:
@@ -24011,6 +24159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1736826572
 GameObject:
@@ -24058,6 +24207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1738088875
 GameObject:
@@ -24279,6 +24429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1761724236
 GameObject:
@@ -24432,6 +24583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1767901730
 GameObject:
@@ -24479,6 +24631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1769511050
 GameObject:
@@ -24609,6 +24762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1773976698
 GameObject:
@@ -24845,6 +24999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1784208906
 GameObject:
@@ -25081,6 +25236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1805232781
 GameObject:
@@ -25128,6 +25284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1810247357
 GameObject:
@@ -25613,6 +25770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1827552321
 GameObject:
@@ -25766,6 +25924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1835446010
 GameObject:
@@ -26334,6 +26493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1873449335
 GameObject:
@@ -26653,6 +26813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1898103306
 GameObject:
@@ -26700,6 +26861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1901081542
 GameObject:
@@ -26861,6 +27023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1923095404
 GameObject:
@@ -26939,6 +27102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1927953991
 GameObject:
@@ -26986,6 +27150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1938769835
 GameObject:
@@ -27245,6 +27410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &1947416415
 GameObject:
@@ -28460,6 +28626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &2053316840
 GameObject:
@@ -28507,6 +28674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &2053545570
 GameObject:
@@ -28803,6 +28971,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056025929}
   m_Mesh: {fileID: -5495902117074765545, guid: b9822cf2f862d764e88cf0630b0eddd6, type: 3}
+--- !u!4 &2056125151 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4873148343324324324, guid: 9c2cb887b1edce146a159deebd6c9f1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2058124992}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2057029162
 GameObject:
   m_ObjectHideFlags: 0
@@ -28918,6 +29092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &2057820219
 GameObject:
@@ -29008,7 +29183,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1322106289}
     m_Modifications:
     - target: {fileID: 4873148343324324324, guid: 9c2cb887b1edce146a159deebd6c9f1e,
         type: 3}
@@ -29033,17 +29208,17 @@ PrefabInstance:
     - target: {fileID: 4873148343324324324, guid: 9c2cb887b1edce146a159deebd6c9f1e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4873148343324324324, guid: 9c2cb887b1edce146a159deebd6c9f1e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4873148343324324324, guid: 9c2cb887b1edce146a159deebd6c9f1e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4873148343324324324, guid: 9c2cb887b1edce146a159deebd6c9f1e,
         type: 3}
@@ -29282,6 +29457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &2088965567
 GameObject:
@@ -29329,6 +29505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &2091069426
 GameObject:
@@ -30367,6 +30544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &2123666077
 GameObject:
@@ -30503,6 +30681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &2130720408
 GameObject:
@@ -30550,6 +30729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1001 &2134860371
 PrefabInstance:
@@ -30665,6 +30845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1 &2135982018
 GameObject:
@@ -30818,6 +30999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!4 &2141637757 stripped
 Transform:
@@ -30954,6 +31136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tileType: 0
+  m_pointsPerHit: 0
   IsMoved: 0
 --- !u!1001 &2147372747
 PrefabInstance:
@@ -31081,16 +31264,360 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2569118363381727305, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2569118363381727305, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2569118363381727305, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2569118363381727305, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2569118363381727305, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2569118363381727305, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293772216017961307, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293772216017961307, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293772216017961307, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293772216017961307, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293772216017961307, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293772216017961307, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036580441352063962, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036580441352063962, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036580441352063962, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036580441352063962, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036580441352063962, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036580441352063962, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926202608605405274, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926202608605405274, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926202608605405274, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926202608605405274, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926202608605405274, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926202608605405274, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182580922880860542, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182580922880860542, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182580922880860542, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182580922880860542, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182580922880860542, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182580922880860542, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280599878224353673, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280599878224353673, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280599878224353673, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280599878224353673, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280599878224353673, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280599878224353673, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5298099097979828737, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5298099097979828737, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5298099097979828737, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5298099097979828737, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5298099097979828737, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5298099097979828737, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105677085993838468, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105677085993838468, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105677085993838468, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105677085993838468, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105677085993838468, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105677085993838468, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8281221037178418490, guid: 7286536c21cd36240937c288f4fe2111,
         type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091393515261819988, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091393515261819988, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091393515261819988, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091393515261819988, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091393515261819988, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091393515261819988, guid: 7286536c21cd36240937c288f4fe2111,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7286536c21cd36240937c288f4fe2111, type: 3}
+--- !u!1 &4792372563523705979 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1727870884585189857, guid: 7286536c21cd36240937c288f4fe2111,
+    type: 3}
+  m_PrefabInstance: {fileID: 4792372563523705978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4858852236911848216
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1322106289}
+    m_Modifications:
+    - target: {fileID: 7692284716244462746, guid: ea241660598e6b744a649b3eb150f39b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692284716244462746, guid: ea241660598e6b744a649b3eb150f39b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692284716244462746, guid: ea241660598e6b744a649b3eb150f39b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 325
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692284716244462746, guid: ea241660598e6b744a649b3eb150f39b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692284716244462746, guid: ea241660598e6b744a649b3eb150f39b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692284716244462746, guid: ea241660598e6b744a649b3eb150f39b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692284716244462746, guid: ea241660598e6b744a649b3eb150f39b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692284716244462746, guid: ea241660598e6b744a649b3eb150f39b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692284716244462746, guid: ea241660598e6b744a649b3eb150f39b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7692284716244462746, guid: ea241660598e6b744a649b3eb150f39b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091129819227164583, guid: ea241660598e6b744a649b3eb150f39b,
+        type: 3}
+      propertyPath: m_Name
+      value: BonusCoins
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ea241660598e6b744a649b3eb150f39b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -31107,10 +31634,8 @@ SceneRoots:
   - {fileID: 1923095405}
   - {fileID: 471712394}
   - {fileID: 154552839}
-  - {fileID: 726313142}
+  - {fileID: 1322106289}
   - {fileID: 1015631880}
   - {fileID: 4792372563523705978}
-  - {fileID: 232751629}
-  - {fileID: 2058124992}
   - {fileID: 899212063}
   - {fileID: 1835446012}

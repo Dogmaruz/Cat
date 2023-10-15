@@ -14,6 +14,9 @@ public abstract class Tile : MonoBehaviour
     [SerializeField] protected TileType m_tileType;
     public TileType TileType => m_tileType;
 
+    [SerializeField] private int m_pointsPerHit;
+    public int PointsPerHit => m_pointsPerHit;
+
     protected BoxCollider _collider;
     public BoxCollider Collider => _collider;
     public Vector3 JumpPosition { get; protected set; }
@@ -55,6 +58,11 @@ public abstract class Tile : MonoBehaviour
     public void SetStartPosition(Vector3 position)
     {
         _startPosition = position;
+    }
+
+    public void SetPointsPerHit(int points)
+    {
+        m_pointsPerHit = Mathf.Clamp(points, 0, int.MaxValue);
     }
 
     public void FadeTile()
