@@ -19,7 +19,7 @@ public class TileController : MonoBehaviour
     [SerializeField] private Transform m_fieldEndPoint;
     public float FieldDistance => m_fieldEndPoint.position.z;
 
-    [SerializeField] private bool m_isRandomX; // ���������� ���������� ��� �������� ������. 
+    [SerializeField] private bool m_isRandomX; 
 
     private Tile[] _tiles;
 
@@ -52,7 +52,7 @@ public class TileController : MonoBehaviour
 
         _emergingObjects = GetComponentsInChildren<IEmerging>();
         
-        SetPointsToTiles(); // TODO ��������
+        SetPointsToTiles(); // TODO
 
         TrySetCoinToTile();
 
@@ -77,7 +77,7 @@ public class TileController : MonoBehaviour
         TryShowHideTilesDependendingOnDistance();
     }
 
-    private void SetPointsToTiles() // TODO �������� (���� ����������� � �������� Tile)
+    private void SetPointsToTiles() // TODO 
     {
         foreach (var tile in _tiles)
         {
@@ -151,9 +151,9 @@ public class TileController : MonoBehaviour
         }
 
         /*  TODO 
-         *  1. ������ ���������� m_isRandomX;
-         *  2. ������� �� �� ������ ����;
-         *  3. ������ �����������.
+         *  1. 
+         *  2. 
+         *  3. 
           
             for (int i = 4; i < _tiles.Length; i++)
             {

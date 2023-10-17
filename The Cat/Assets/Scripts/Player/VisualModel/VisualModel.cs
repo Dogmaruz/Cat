@@ -54,7 +54,10 @@ public class VisualModel : MonoBehaviour
 
     private void OnDestroy()
     {
-        _charactersPanel.PanelOpened -= UpdatePanel;
+        if (_charactersPanel)
+        {
+            _charactersPanel.PanelOpened -= UpdatePanel;
+        }
     }
 
     private void Click()
