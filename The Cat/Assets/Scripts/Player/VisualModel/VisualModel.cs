@@ -65,10 +65,15 @@ public class VisualModel : MonoBehaviour
         if (_canClick)
         {
             _skinManager.ChangePlayerVisualModel(m_visualModel);
+
+            UpdatePanel();
+
+            _charactersPanel.CloseCharactersPanel();
         }
         else if (_canBuy)
         {
             BuySkin();
+            UpdatePanel();
         }/*
         else if (Ad == null)
         {

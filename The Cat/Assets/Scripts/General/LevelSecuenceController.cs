@@ -5,13 +5,15 @@ using Zenject;
 
 public class LevelSecuenceController : MonoBehaviour
 {
-    [SerializeField] private GameObject m_startButton;
-
-    [SerializeField] private GameObject m_restartButton;
-
-    [SerializeField] private GameObject m_menuButton;
+    [SerializeField] private HUD m_HUD;
 
     [SerializeField] private BackgroundSceneClip m_backgroundSceneClip;
+
+    private GameObject m_startButton;
+
+    private GameObject m_restartButton;
+
+    private GameObject m_menuButton;
 
     private BackgroundSoundPlayer _backgroundSoundPlayer;
 
@@ -42,6 +44,10 @@ public class LevelSecuenceController : MonoBehaviour
         _sceneLoader = GetComponent<SceneLoader>();
 
         ChangeCursorVisible(true);
+
+        m_startButton = m_HUD.m_startButton;
+        m_restartButton = m_HUD.m_restartButton;
+        m_menuButton = m_HUD.m_menuButton;
 
         m_startButton.GetComponent<Button>().onClick.AddListener(StartGame);
 

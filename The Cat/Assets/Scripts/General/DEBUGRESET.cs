@@ -23,6 +23,7 @@ public class DEBUGRESET : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.M)) _coinManager.ResetValue();
+        if (Input.GetKeyUp(KeyCode.C)) _coinManager.AddCoins(99);
 
         if (Input.GetKeyUp(KeyCode.T))
         {

@@ -22,11 +22,6 @@ public class SkinManager : MonoBehaviour
     private PlayerVisualModel _currentVisualModel;
     public PlayerVisualModel CurrentVisualModel => _currentVisualModel;
 
-    private void Awake()
-    {
-        LoadData();
-    }
-
     private void Start()
     {
         LoadData();
@@ -37,7 +32,6 @@ public class SkinManager : MonoBehaviour
         }
 
         ChangePlayerVisualModel(_currentVisualModel);
-        
     }
 
     public void ChangePlayerVisualModel(PlayerVisualModel visualModel)
