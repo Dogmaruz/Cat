@@ -54,16 +54,16 @@ public class TileController : MonoBehaviour
     {
         enabled = false;
 
-        TrySetCoinToTile();
+        //TrySetCoinToTile();
 
-        MoveTilesAlongAxisX();
+        //MoveTilesAlongAxisX();
 
-        HidenTilesBasedOnDistance();
+        //HidenTilesBasedOnDistance();
     }
 
     private void Update()
     {
-        TryShowHideTilesDependendingOnDistance();
+        //TryShowHideTilesDependendingOnDistance();
     }
 
     private void TrySetCoinToTile()
