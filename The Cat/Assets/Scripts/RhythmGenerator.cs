@@ -50,7 +50,7 @@ public class RhythmObjectGenerator : MonoBehaviour
             float averageAmplitude = CalculateAverageAmplitude();
 
             // —равниваем с пороговым значением
-            if (averageAmplitude > rhythmThreshold)
+            if (averageAmplitude > rhythmThreshold || isFirstSpawn)
             {
                 // ≈сли это первое событие, задаем начальную позицию
                 if (isFirstSpawn)

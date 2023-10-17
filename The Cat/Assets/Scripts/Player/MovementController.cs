@@ -122,7 +122,7 @@ public class MovementController : MonoBehaviour
 
     public void UpdatePosition()
     {
-        float bounds = 2.5f;
+        float bounds = 1.5f;
 
         float posX = transform.position.x + _playerInputs.MouseAxisRight * m_sensitivity;
 
@@ -218,6 +218,11 @@ public class MovementController : MonoBehaviour
         else
         {
             posY = m_jumpCurve.Evaluate(((Time.time - _startTimeNewAction) * _speed / _distance) % 1) * Mathf.Clamp(_distance, 0, m_maxHightToJump);
+
+            if (posY == float.NaN)
+            {
+                posZ = 0;
+            }
         }
     }
 

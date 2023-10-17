@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class Coin : MonoBehaviour
+public class Coin : Emerging
 {
     private SoundPlayer _soundPlayer;
 
@@ -11,6 +11,7 @@ public class Coin : MonoBehaviour
     public void Construct(SoundPlayer soundPlayer, CoinManager coinManager)
     {
         _soundPlayer = soundPlayer;
+
         _coinManager = coinManager;
     }
 

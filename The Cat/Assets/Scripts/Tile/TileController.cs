@@ -14,6 +14,8 @@ public class TileController : MonoBehaviour
 
     private Tile[] _tiles;
 
+    private IEmerging[] _emergingObjects;
+
     private int _tileCount = 0;
 
     private float _period;
@@ -43,9 +45,7 @@ public class TileController : MonoBehaviour
     {
         _tiles = GetComponentsInChildren<Tile>();
 
-        TrySetCoinToTile();
-
-        MoveTilesAlongAxisX();
+        _emergingObjects = GetComponentsInChildren<IEmerging>();
 
         _period = 60f / m_bpm;
     }
@@ -53,6 +53,10 @@ public class TileController : MonoBehaviour
     void Start()
     {
         enabled = false;
+
+        TrySetCoinToTile();
+
+        MoveTilesAlongAxisX();
 
         HidenTilesBasedOnDistance();
     }
@@ -101,7 +105,7 @@ public class TileController : MonoBehaviour
                         rnd *= 0.5f;
                     }
 
-                    float posX = Mathf.Clamp((int)_tiles[i - 1].StartPosition.x + rnd, -2, 2);
+                    float posX = Mathf.Clamp((int)_tiles[i - 1].StartPosition.x + rnd, -1.5f, 1.5f);
 
                     Vector3 newStartPosition = new Vector3(posX, _tiles[i].transform.position.y, _tiles[i].transform.position.z);
 
@@ -137,13 +141,13 @@ public class TileController : MonoBehaviour
 
     private void HidenTilesBasedOnDistance()
     {
-        foreach (Tile tile in _tiles)
+        foreach (var e in _emergingObjects)
         {
-            var dist = Vector3.Distance(_movementController.PlayerTransform.transform.position, tile.transform.position);
+            var dist = Vector3.Distance(_movementController.PlayerTransform.transform.position, e.GetTransform().position);
 
             if (dist > _maxVisibleDistanceOfTiles)
             {
-                tile.Hide();
+                e.Hide();
             }
         }
 
@@ -152,13 +156,13 @@ public class TileController : MonoBehaviour
 
     private void TryShowHideTilesDependendingOnDistance()
     {
-        foreach (Tile tile in _tiles)
+        foreach (var e in _emergingObjects)
         {
-            var dist = Vector3.Distance(_movementController.PlayerTransform.transform.position, tile.transform.position);
+            var dist = Vector3.Distance(_movementController.PlayerTransform.transform.position, e.GetTransform().position);
 
-            if (dist < _maxVisibleDistanceOfTiles && tile.IsMoved)
+            if (dist < _maxVisibleDistanceOfTiles && e.IsMoved)
             {
-                tile.Show();
+                e.Show();
             }
         }
     }
