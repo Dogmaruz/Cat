@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_CharactersPanel : MonoBehaviour
 {
+    public Action PanelOpened;
+
     [SerializeField] private Button m_openPanelButton;
     [SerializeField] private Button m_closePanelButton;
 
@@ -23,12 +26,16 @@ public class UI_CharactersPanel : MonoBehaviour
     private void OpenCharactersPanel()
     {
         m_mainMenuCanvas.SetActive(false);
+
         gameObject.SetActive(true);
+
+        PanelOpened?.Invoke();
     }
 
     public void CloseCharactersPanel()
     {
         m_mainMenuCanvas.SetActive(true);
+
         gameObject.SetActive(false);
     }
 }

@@ -8,4 +8,6 @@ public class PlayerVisualModel : ScriptableObject
     public Mesh Mesh;
 
     public Material Material;
+
+    public int Cost;
 }
