@@ -1,16 +1,25 @@
+using System;
 using UnityEngine;
 using Zenject;
 
 public class TileController : MonoBehaviour
 {
+    public Action LastTileReached;
+
     [SerializeField] private float m_bpm;
 
     [Range(0f, 1f)]
-    [SerializeField] private float m_coinSpawnChance;
+    [SerializeField] private float m_coinSpawnChance = 0.25f;
 
     [SerializeField] private Coin m_coinPrefab;
 
-    [SerializeField] private bool m_isRandomX; // переменная выставлена для удобства дебага. 
+    [SerializeField] private int m_multiplierBonusForCenterHit;
+    public int multiplierBonusForCenterHit => m_multiplierBonusForCenterHit;
+
+    [SerializeField] private Transform m_fieldEndPoint;
+    public float FieldDistance => m_fieldEndPoint.position.z;
+
+    [SerializeField] private bool m_isRandomX; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. 
 
     private Tile[] _tiles;
 
@@ -29,16 +38,12 @@ public class TileController : MonoBehaviour
 
     private MovementController _movementController;
 
-    private LevelSecuenceController _levelSecuenceController;
-
     [Inject]
-    public void Construct(DiContainer diContainer, MovementController movementController, LevelSecuenceController levelSecuenceController)
+    public void Construct(DiContainer diContainer, MovementController movementController)
     {
         _diContainer = diContainer;
 
         _movementController = movementController;
-
-        _levelSecuenceController = levelSecuenceController;
     }
 
     private void Awake()
@@ -46,6 +51,12 @@ public class TileController : MonoBehaviour
         _tiles = GetComponentsInChildren<Tile>();
 
         _emergingObjects = GetComponentsInChildren<IEmerging>();
+        
+        SetPointsToTiles(); // TODO пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+        TrySetCoinToTile();
+
+        MoveTilesAlongAxisX();
 
         _period = 60f / m_bpm;
     }
@@ -66,19 +77,37 @@ public class TileController : MonoBehaviour
         TryShowHideTilesDependendingOnDistance();
     }
 
+    private void SetPointsToTiles() // TODO пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Tile)
+    {
+        foreach (var tile in _tiles)
+        {
+            switch (tile.TileType)
+            {
+                case TileType.Static:
+                    tile.SetPointsPerHit(5);
+                    break;
+                case TileType.Long:
+                    tile.SetPointsPerHit(20);
+                    break;
+                case TileType.Move:
+                    tile.SetPointsPerHit(10);
+                    break;
+            }
+        }
+    }
+
     private void TrySetCoinToTile()
     {
         foreach (Tile tile in _tiles)
         {
-            float rnd = Random.Range(0f, 1f);
+            float rnd = UnityEngine.Random.Range(0f, 1f);
 
-            if (rnd > m_coinSpawnChance)
+            if (rnd > m_coinSpawnChance || tile.TileType != TileType.Static || tile == _tiles[0])
             {
                 continue;
             }
             else
             {
-                //var coin = Instantiate(m_coinPrefab, tile.transform);
                 var coin = _diContainer.InstantiatePrefab(m_coinPrefab, tile.transform);
 
                 coin.transform.localPosition += _coinUpVector;
@@ -92,13 +121,13 @@ public class TileController : MonoBehaviour
         {
             for (int i = 4; i < _tiles.Length; i++)
             {
-                if(_tiles[i].TileType == TileType.Move)
+                if (_tiles[i].TileType == TileType.Move)
                 {
                     _tiles[i].SetStartPosition(_tiles[i].transform.position);
                 }
                 else
                 {
-                    float rnd = Random.Range(-1, 2);
+                    float rnd = UnityEngine.Random.Range(-1, 2);
 
                     if (i < _tiles.Length / 2)
                     {
@@ -115,16 +144,16 @@ public class TileController : MonoBehaviour
         }
         else
         {
-            foreach(var tile in _tiles)
+            foreach (var tile in _tiles)
             {
                 tile.SetStartPosition(tile.transform.position);
             }
         }
 
         /*  TODO 
-         *  1. Убрать переменную m_isRandomX;
-         *  2. Удалить всё из метода выше;
-         *  3. Убрать комментарий.
+         *  1. пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ m_isRandomX;
+         *  2. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ;
+         *  3. пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
           
             for (int i = 4; i < _tiles.Length; i++)
             {
@@ -173,11 +202,7 @@ public class TileController : MonoBehaviour
 
         if (_tileCount >= _tiles.Length)
         {
-            //TODO: Заменить эту реализацию на окно результатов с переходом на новый уровень.
-
-            _movementController.SetMovementState(false);
-
-            _levelSecuenceController.Lose();
+            LastTileReached?.Invoke();
 
             return _tiles[0];
         }

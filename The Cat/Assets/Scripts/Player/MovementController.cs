@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 public struct PlayerInputs
@@ -23,8 +22,11 @@ public class MovementController : MonoBehaviour
     [SerializeField] private AnimationCurve m_jumpCurve;
 
     [SerializeField] private float _step = 1f;
+    public float Step => _step;
 
     private LevelSecuenceController _levelSecuenceController;
+
+    private LevelScore _levelScore;
 
     private TileController _tileController;
 
@@ -41,6 +43,8 @@ public class MovementController : MonoBehaviour
     private bool _isLongMove;
 
     private bool _isMove;
+
+    private bool _isWin;
     public bool _isLose { get; set; }
 
     private float _speed;
@@ -56,11 +60,13 @@ public class MovementController : MonoBehaviour
     private float _startTimeNewAction;
 
     [Inject]
-    public void Construct(TileController TileController, LevelSecuenceController levelSecuenceController)
+    public void Construct(TileController TileController, LevelSecuenceController levelSecuenceController, LevelScore levelScore)
     {
         _tileController = TileController;
 
         _levelSecuenceController = levelSecuenceController;
+
+        _levelScore = levelScore;
     }
 
     private void Awake()
@@ -76,7 +82,14 @@ public class MovementController : MonoBehaviour
 
     private void Start()
     {
+        _tileController.LastTileReached += OnLastTileReached;
+
         _speed = 1f / (_tileController.Period / _step);
+    }
+
+    private void OnDestroy()
+    {
+        _tileController.LastTileReached -= OnLastTileReached;
     }
 
     private void Update()
@@ -113,14 +126,14 @@ public class MovementController : MonoBehaviour
                 MoveTile();
             }
 
-            if (!_isJump && !_isMove)
+            if (!_isJump && !_isMove && !_isWin)
             {
                 CheckCollisions();
             }
         }
     }
 
-    public void UpdatePosition()
+    private void UpdatePosition()
     {
         float bounds = 1.5f;
 
@@ -133,7 +146,7 @@ public class MovementController : MonoBehaviour
         transform.position = new Vector3(posX, posY, posZ);
     }
 
-    public void Move()
+    private void Move()
     {
         _targetPos = _tileController.NextTile().JumpPosition;
 
@@ -238,6 +251,9 @@ public class MovementController : MonoBehaviour
 
             _currentTile = tile;
 
+            _levelScore.AddScore(tile.PointsPerHit);
+            //_levelScore.AddScore(tile.PointsPerHit * _tileController.multiplierBonusForCenterHit); // TODO с использованием множителя бонусов
+
             Move();
 
             if (tile.TileType == TileType.Static)
@@ -249,6 +265,11 @@ public class MovementController : MonoBehaviour
         {
             _isLose = true;
         }
+    }
+
+    private void OnLastTileReached()
+    {
+        _isWin = true;
     }
 
     private void MouseInput()

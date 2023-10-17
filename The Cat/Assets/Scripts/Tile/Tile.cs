@@ -13,6 +13,9 @@ public abstract class Tile : Emerging
     [SerializeField] protected TileType m_tileType;
     public TileType TileType => m_tileType;
 
+    [SerializeField] private int m_pointsPerHit;
+    public int PointsPerHit => m_pointsPerHit;
+
     protected BoxCollider _collider;
     public BoxCollider Collider => _collider;
     public Vector3 JumpPosition { get; protected set; }
@@ -37,6 +40,11 @@ public abstract class Tile : Emerging
 
     public abstract void SetJumpPosition();
     public abstract void SetFinishPosition();
+
+    public void SetPointsPerHit(int points)
+    {
+        m_pointsPerHit = Mathf.Clamp(points, 0, int.MaxValue);
+    }
 
     public void FadeTile()
     {
