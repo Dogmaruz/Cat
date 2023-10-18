@@ -14,7 +14,7 @@ public class VisualModel : MonoBehaviour
     [SerializeField] private GameObject m_buy;
     [SerializeField] private GameObject m_ADOffer;
 
-    //[SerializeField] private ImpactEffect m_NotEnoughCoinsEffect;
+    //[SerializeField] private GameObject m_Adv; // TODO stub for Adv
 
     private Button _buyButton;
 
@@ -24,7 +24,8 @@ public class VisualModel : MonoBehaviour
 
     private CoinManager _coinManager;
 
-    private bool _canClick = false;
+    private bool _isCurrent = false;
+    private bool _canChoose = false;
     private bool _canBuy = false;
 
     [Inject]
@@ -62,7 +63,11 @@ public class VisualModel : MonoBehaviour
 
     private void Click()
     {
-        if (_canClick)
+        if (_isCurrent)
+        {
+            _charactersPanel.CloseCharactersPanel();
+        }
+        else if (_canChoose)
         {
             _skinManager.ChangePlayerVisualModel(m_visualModel);
 
@@ -75,13 +80,13 @@ public class VisualModel : MonoBehaviour
             BuySkin();
             UpdatePanel();
         }/*
-        else if (Ad == null)
+        else if (m_Adv == null)
         {
-            Instantiate(m_NotEnoughCoinsEffect);
+            Instantiate(_charactersPanel.NotEnoughCoinsEffect.gameObject);
         }*/
         else
         {
-            // TODO Watch AD;
+            // TODO Watch Adv;
         }
     }
 
@@ -93,12 +98,17 @@ public class VisualModel : MonoBehaviour
         {
             if (model.m_VisualModel == m_visualModel)
             {
-                if (model.isPurchased == true)
+                if (m_visualModel == _skinManager.CurrentVisualModel)
+                {
+                    SetAvailabilityToAllButtons(false);
+                    _isCurrent = true;
+                }
+                else if (model.isPurchased == true)
                 {
                     SetAvailabilityToAllButtons(false);
                     m_choose.SetActive(true);
 
-                    _canClick = true;
+                    _canChoose = true;
                     _canBuy = false;
                 }
                 else if (model.isPurchased == false && isCoinsEnough)
@@ -128,6 +138,7 @@ public class VisualModel : MonoBehaviour
                     model.isPurchased = true;
 
                     UpdatePanel();
+
                     _skinManager.SaveSkinsData();
                 }
             }

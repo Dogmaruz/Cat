@@ -10,7 +10,10 @@ public class UI_CharactersPanel : MonoBehaviour
     [SerializeField] private Button m_closePanelButton;
 
     [SerializeField] private GameObject m_mainMenuCanvas;
-    
+    /*
+    [SerializeField] private ImpactEffect m_NotEnoughCoinsEffect;
+    public ImpactEffect NotEnoughCoinsEffect => m_NotEnoughCoinsEffect;
+    */
     private void Awake()
     {
         m_openPanelButton.onClick.AddListener(OpenCharactersPanel);
