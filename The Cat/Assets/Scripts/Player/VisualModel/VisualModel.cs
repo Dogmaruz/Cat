@@ -5,7 +5,8 @@ using Zenject;
 
 public class VisualModel : MonoBehaviour
 {
-    [SerializeField] private PlayerVisualModel m_visualModel;
+    [SerializeField] private int m_index;
+    [SerializeField] private int m_skinCost;
 
     [SerializeField] private Image m_image;
     [SerializeField] private TMP_Text m_skinCostText;
@@ -48,7 +49,7 @@ public class VisualModel : MonoBehaviour
         //m_image.sprite = m_visualModel.Sprite;
         //m_image.color = Color.white;
 
-        m_skinCostText.text = m_visualModel.Cost.ToString();
+        m_skinCostText.text = m_skinCost.ToString();
 
         SetAvailabilityToAllButtons(false);
     }
@@ -69,7 +70,7 @@ public class VisualModel : MonoBehaviour
         }
         else if (_canChoose)
         {
-            _skinManager.ChangePlayerVisualModel(m_visualModel);
+            _skinManager.ChangePlayerVisualModel(m_index);
 
             UpdatePanel();
 
@@ -92,26 +93,27 @@ public class VisualModel : MonoBehaviour
 
     private void UpdatePanel()
     {
-        bool isCoinsEnough = _coinManager.CoinsCount >= m_visualModel.Cost;
+        bool isCoinsEnough = _coinManager.CoinsCount >= m_skinCost;
 
         foreach (var model in _skinManager.SkinsData)
         {
-            if (model.m_VisualModel == m_visualModel)
+            if (model.SkinIndex == m_index)
             {
-                if (m_visualModel == _skinManager.CurrentVisualModel)
+                if (m_index == _skinManager.CurrentSkinIndex)
                 {
                     SetAvailabilityToAllButtons(false);
                     _isCurrent = true;
                 }
-                else if (model.isPurchased == true)
+                else if (model.IsPurchased == true)
                 {
                     SetAvailabilityToAllButtons(false);
                     m_choose.SetActive(true);
 
                     _canChoose = true;
                     _canBuy = false;
+                    _isCurrent = false;
                 }
-                else if (model.isPurchased == false && isCoinsEnough)
+                else if (model.IsPurchased == false && isCoinsEnough)
                 {
                     SetAvailabilityToAllButtons(false);
                     m_buy.SetActive(true);
@@ -125,17 +127,20 @@ public class VisualModel : MonoBehaviour
                 }
             }
         }
+
+        //_buyButton.enabled = (!(m_index == _skinManager.CurrentSkinIndex));
+        //_buyButton.gameObject.SetActive(!(m_index == _skinManager.CurrentSkinIndex));
     }
 
     private void BuySkin()
     {
-        if (_coinManager.RemoveCoins(m_visualModel.Cost) == true)
+        if (_coinManager.RemoveCoins(m_skinCost) == true)
         {
             foreach (var model in _skinManager.SkinsData)
             {
-                if (model.m_VisualModel == m_visualModel)
+                if (model.SkinIndex == m_index)
                 {
-                    model.isPurchased = true;
+                    model.IsPurchased = true;
 
                     UpdatePanel();
 
