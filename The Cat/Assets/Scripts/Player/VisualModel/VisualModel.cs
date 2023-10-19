@@ -15,6 +15,11 @@ public class VisualModel : MonoBehaviour
     [SerializeField] private GameObject m_buy;
     [SerializeField] private GameObject m_ADOffer;
 
+    [SerializeField] private Sprite m_ifCurrentModelSprite;
+
+    private Sprite _defaultBtnSprite;
+    private Color _defaultBtnColor;
+
     //[SerializeField] private GameObject m_Adv; // TODO stub for Adv
 
     private Button _buyButton;
@@ -43,6 +48,8 @@ public class VisualModel : MonoBehaviour
         _charactersPanel.PanelOpened += UpdatePanel;
 
         _buyButton = GetComponentInChildren<Button>();
+        _defaultBtnSprite = _buyButton.GetComponent<Image>().sprite;
+        _defaultBtnColor = _buyButton.GetComponent<Image>().color;
         _buyButton.onClick.AddListener(Click);
 
         // TODO Add images;
@@ -66,7 +73,7 @@ public class VisualModel : MonoBehaviour
     {
         if (_isCurrent)
         {
-            _charactersPanel.CloseCharactersPanel();
+            _charactersPanel.ClosePanel();
         }
         else if (_canChoose)
         {
@@ -74,11 +81,12 @@ public class VisualModel : MonoBehaviour
 
             UpdatePanel();
 
-            _charactersPanel.CloseCharactersPanel();
+            _charactersPanel.ClosePanel();
         }
         else if (_canBuy)
         {
             BuySkin();
+
             UpdatePanel();
         }/*
         else if (m_Adv == null)
@@ -128,8 +136,10 @@ public class VisualModel : MonoBehaviour
             }
         }
 
-        //_buyButton.enabled = (!(m_index == _skinManager.CurrentSkinIndex));
-        //_buyButton.gameObject.SetActive(!(m_index == _skinManager.CurrentSkinIndex));
+        bool isCurrent = m_index == _skinManager.CurrentSkinIndex;
+        _buyButton.enabled = !isCurrent;
+        _buyButton.GetComponent<Image>().sprite = isCurrent ? m_ifCurrentModelSprite : _defaultBtnSprite;
+        _buyButton.GetComponent<Image>().color = isCurrent ? Color.white : _defaultBtnColor;
     }
 
     private void BuySkin()
