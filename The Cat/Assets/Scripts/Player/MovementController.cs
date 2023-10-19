@@ -231,11 +231,6 @@ public class MovementController : MonoBehaviour
         else
         {
             posY = m_jumpCurve.Evaluate(((Time.time - _startTimeNewAction) * _speed / _distance) % 1) * Mathf.Clamp(_distance, 0, m_maxHightToJump);
-
-            if (posY == float.NaN)
-            {
-                posZ = 0;
-            }
         }
     }
 

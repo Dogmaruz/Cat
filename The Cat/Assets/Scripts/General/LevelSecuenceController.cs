@@ -67,6 +67,8 @@ public class LevelSecuenceController : MonoBehaviour
     {
         m_backgroundSceneClip.PlayBackground();
 
+        VideoPlayerController.Instance.Play();
+
         _movementController.SetMovementState(true);
 
         m_startButton.SetActive(false);

@@ -52,6 +52,8 @@ public class RhythmObjectGenerator : MonoBehaviour
             // —равниваем с пороговым значением
             if (averageAmplitude > rhythmThreshold || isFirstSpawn)
             {
+                Debug.Log(averageAmplitude);
+
                 // ≈сли это первое событие, задаем начальную позицию
                 if (isFirstSpawn)
                 {
