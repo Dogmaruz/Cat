@@ -54,9 +54,9 @@ public class TileController : MonoBehaviour
         
         SetPointsToTiles(); // TODO
 
-        //TrySetCoinToTile();
+        TrySetCoinToTile();
 
-        //MoveTilesAlongAxisX();
+        MoveTilesAlongAxisX();
 
         _period = 60f / m_bpm;
     }
@@ -65,16 +65,16 @@ public class TileController : MonoBehaviour
     {
         enabled = false;
 
-        //TrySetCoinToTile();
+        TrySetCoinToTile();
 
-        //MoveTilesAlongAxisX();
+        MoveTilesAlongAxisX();
 
-        //HidenTilesBasedOnDistance();
+        HidenTilesBasedOnDistance();
     }
 
     private void Update()
     {
-        //TryShowHideTilesDependendingOnDistance();
+        TryShowHideTilesDependendingOnDistance();
     }
 
     private void SetPointsToTiles() // TODO 
