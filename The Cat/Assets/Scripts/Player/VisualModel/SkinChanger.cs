@@ -19,7 +19,7 @@ public class SkinChanger : MonoBehaviour
 
         _skinManager.SkinChanged += OnSkinChanged;
 
-        OnSkinChanged(_skinManager.CurrentVisualModel);
+        OnSkinChanged(_skinManager.CurrentSkinIndex);
     }
 
     private void OnDestroy()
@@ -27,9 +27,10 @@ public class SkinChanger : MonoBehaviour
         _skinManager.SkinChanged -= OnSkinChanged;
     }
 
-    private void OnSkinChanged(PlayerVisualModel visualModel)
+    private void OnSkinChanged(int index)
     {
-        _movementController.PlayerTransform.GetComponent<MeshFilter>().mesh = visualModel.Mesh;
-        _movementController.PlayerTransform.GetComponent<MeshRenderer>().material = visualModel.Material;
+        // TODO Add meshes to Resources
+        //_movementController.PlayerTransform.GetComponent<MeshFilter>().mesh = Resources.Load<Mesh>("PlayerSkins/Meshes/Skin_mesh_" + index);
+        _movementController.PlayerTransform.GetComponent<MeshRenderer>().material = Resources.Load<Material>("PlayerSkins/Materials/Skin_mat_" + index);
     }
 }

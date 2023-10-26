@@ -25,12 +25,12 @@ public class DEBUGRESET : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.M)) _coinManager.ResetValue();
         if (Input.GetKeyUp(KeyCode.C)) _coinManager.AddCoins(99);
 
+        if (Input.GetKeyUp(KeyCode.S)) _skinManager.ResetData();
+
         if (Input.GetKeyUp(KeyCode.T))
         {
             if (Time.timeScale > 0) Time.timeScale = 0;
             else if (Time.timeScale == 0) Time.timeScale = currentTimeScale;
         }
-
-        if (Input.GetKeyUp(KeyCode.S)) _skinManager.ResetData();
     }
 }

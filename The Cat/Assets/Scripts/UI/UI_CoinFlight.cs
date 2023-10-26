@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using DG.Tweening;
@@ -80,6 +78,7 @@ public class UI_CoinFlight : MonoBehaviour
         currentImage.transform.DOScale(_endScale, m_duration);
 
         _currentImageNumber++;
+
         if (_currentImageNumber == _coinsImages.Length)
         {
             _currentImageNumber = 0;

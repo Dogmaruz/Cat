@@ -7,6 +7,8 @@ public class BootstrapInstaller : MonoInstaller
 
     [SerializeField] private SkinManager m_skinManager;
 
+    [SerializeField] private DailyRewardManager m_dailyRewardManager;
+
     [SerializeField] private BackgroundSoundPlayer m_backgroundSoundPlayer;
 
     [SerializeField] private SoundPlayer m_soundPlayer;
@@ -21,6 +23,11 @@ public class BootstrapInstaller : MonoInstaller
         Container.
             Bind<SkinManager>()
             .FromComponentInNewPrefab(m_skinManager)
+            .AsSingle();
+
+        Container.
+            Bind<DailyRewardManager>()
+            .FromComponentInNewPrefab(m_dailyRewardManager)
             .AsSingle();
 
         Container.

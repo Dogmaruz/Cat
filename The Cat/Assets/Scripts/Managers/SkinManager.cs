@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SkinManager : MonoBehaviour
@@ -6,66 +7,98 @@ public class SkinManager : MonoBehaviour
     [Serializable]
     public class SkinAvailability
     {
-        public PlayerVisualModel m_VisualModel;
-        public bool isPurchased;
+        public int SkinIndex;
+        public bool IsPurchased;
+
+        public SkinAvailability(int index)
+        {
+            SkinIndex = index;
+        }
     }
 
-    public Action<PlayerVisualModel> SkinChanged;
+    public Action<int> SkinChanged;
 
-    [SerializeField] private PlayerVisualModel m_defaultVisualModels;
-    [SerializeField] private SkinAvailability[] m_SkinsData;
-    public SkinAvailability[] SkinsData => m_SkinsData;
+    private List<SkinAvailability> _skinsData;
+    public List<SkinAvailability> SkinsData => _skinsData;
 
     private string _currentSkinFilename = "playerCurrentSkin.dat";
     private string _allSkinsFilename = "allSkins.dat";
 
-    private PlayerVisualModel _currentVisualModel;
-    public PlayerVisualModel CurrentVisualModel => _currentVisualModel;
+    private int _currentSkinIndex = 0;
+    public int CurrentSkinIndex => _currentSkinIndex;
 
     private void Start()
     {
+        // DeleteData(); // TODO for debugging
+
         LoadData();
 
-        if (_currentVisualModel == null)
+        if (_skinsData == null)
         {
-            _currentVisualModel = m_defaultVisualModels;
+            SetDefaultData();
         }
 
-        ChangePlayerVisualModel(_currentVisualModel);
+        ChangePlayerVisualModel(_currentSkinIndex);
     }
 
-    public void ChangePlayerVisualModel(PlayerVisualModel visualModel)
+    public void ChangePlayerVisualModel(int index)
     {
-        _currentVisualModel = visualModel;
+        _currentSkinIndex = index;
 
-        SaveCurrentModel();
+        SaveCurrentSkinIndex();
 
-        SkinChanged?.Invoke(visualModel);
+        SkinChanged?.Invoke(_currentSkinIndex);
+    }
+
+    private void SetDefaultData()
+    {
+        _skinsData = new List<SkinAvailability>();
+
+        var resources = Resources.LoadAll("PlayerSkins/Materials");
+        int count = resources.Length;
+
+        for (int i = 0; i < count; i++) 
+        {
+            _skinsData.Add(new SkinAvailability(i));
+        }
+
+        ResetData();
     }
 
     private void LoadData()
     {
-        Saver<PlayerVisualModel>.TryLoad(_currentSkinFilename, ref _currentVisualModel);
-        Saver<SkinAvailability[]>.TryLoad(_allSkinsFilename, ref m_SkinsData);
+        Saver<int>.TryLoad(_currentSkinFilename, ref _currentSkinIndex);
+        Saver<List<SkinAvailability>>.TryLoad(_allSkinsFilename, ref _skinsData);
     }
 
-    private void SaveCurrentModel()
+    private void SaveCurrentSkinIndex()
     {
-        Saver<PlayerVisualModel>.Save(_currentSkinFilename, _currentVisualModel);
+        Saver<int>.Save(_currentSkinFilename, _currentSkinIndex);
     }
 
     public void SaveSkinsData()
     {
-        Saver<SkinAvailability[]>.Save(_allSkinsFilename, m_SkinsData);
+        Saver<List<SkinAvailability>>.Save(_allSkinsFilename, _skinsData);
     }
 
     public void ResetData()
     {
-        for (int i = 1; i < m_SkinsData.Length; i++)
+        foreach (var data in _skinsData)
         {
-            m_SkinsData[i].isPurchased = false;
+            data.IsPurchased = false;
+
+            if (data.SkinIndex == 0)
+            {
+                data.IsPurchased = true;
+            }
         }
 
         SaveSkinsData();
+    }
+
+    private void DeleteData()
+    {
+        FileHandler.Reset(_currentSkinFilename);
+        FileHandler.Reset(_allSkinsFilename);
     }
 }
