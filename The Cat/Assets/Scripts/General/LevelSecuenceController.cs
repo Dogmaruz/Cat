@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,6 +6,8 @@ using Zenject;
 
 public class LevelSecuenceController : MonoBehaviour
 {
+    public Action<bool> PlayModeChange;
+
     [SerializeField] private HUD m_HUD;
 
     [SerializeField] private BackgroundSceneClip m_backgroundSceneClip;
@@ -71,6 +74,8 @@ public class LevelSecuenceController : MonoBehaviour
 
         _movementController.SetMovementState(true);
 
+        PlayModeChange?.Invoke(true);
+
         m_startButton.SetActive(false);
 
         ChangeCursorVisible(false);
@@ -84,6 +89,8 @@ public class LevelSecuenceController : MonoBehaviour
 
         m_menuButton.SetActive(true);
 
+        PlayModeChange?.Invoke(false);
+
         ChangeCursorVisible(true);
     }
 
@@ -94,6 +101,8 @@ public class LevelSecuenceController : MonoBehaviour
         _soundPlayer.Play(Sound.Fall, 1f);
 
         m_restartButton.SetActive(true);
+
+        PlayModeChange?.Invoke(false);
 
         ChangeCursorVisible(true);
     }
