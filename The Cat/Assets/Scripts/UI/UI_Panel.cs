@@ -9,11 +9,16 @@ public class UI_Panel : MonoBehaviour
 
     [SerializeField] protected GameObject m_mainMenuCanvas;
 
+    protected SmthNewIcon _smthNew;
+
     protected virtual void Awake()
     {
         m_openPanelButton.onClick.AddListener(OpenPanel);
 
         m_closePanelButton.onClick.AddListener(ClosePanel);
+
+        _smthNew = m_openPanelButton.gameObject.GetComponentInChildren<SmthNewIcon>();
+        _smthNew.gameObject.SetActive(false);
     }
 
     protected virtual void Start()

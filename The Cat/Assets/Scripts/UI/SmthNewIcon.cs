@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UI_SmthNewObject : MonoBehaviour
+public class SmthNewIcon : MonoBehaviour
 {
     public void SetAvailability(bool state)
     {
