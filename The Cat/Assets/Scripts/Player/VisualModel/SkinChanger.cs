@@ -28,9 +28,9 @@ public class SkinChanger : MonoBehaviour
     }
 
     private void OnSkinChanged(int index)
-    { 
+    {
         // TODO Add meshes to Resources
-        //_movementController.PlayerTransform.GetComponent<MeshFilter>().mesh = Resources.Load<Mesh>("PlayerSkins/Meshes/Skin_mesh_" + index).GetComponent<MeshFilter>().mesh;
+        //_movementController.PlayerTransform.GetComponent<MeshFilter>().mesh = Resources.Load<Mesh>("PlayerSkins/Meshes/Skin_mesh_" + index);
         _movementController.PlayerTransform.GetComponent<MeshRenderer>().material = Resources.Load<Material>("PlayerSkins/Materials/Skin_mat_" + index);
     }
 }
