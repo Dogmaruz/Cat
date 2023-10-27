@@ -1,53 +1,103 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DailyRewardManager : MonoBehaviour
-{ 
+{
+    public Action RewardStateUpdated;
+    public Action<int> RewardClaimed;
 
+    [SerializeField] private int m_maxStreakCount = 5;
 
+    private int _currentStreak
+    {
+        get => PlayerPrefs.GetInt("currentStreak", 0);
+        set => PlayerPrefs.SetInt("currentStreak", value);
+    }
+    public int CurrentStreak => _currentStreak;
 
+    private DateTime? _lastClaimTime //он сказал, что в префс нельзя сохранять DateTime (но в JSON можно)
+    {
+        get
+        {
+            string data = PlayerPrefs.GetString("lastClaimedTime", null);
 
+            if (!string.IsNullOrEmpty(data))
+            {
+                return DateTime.Parse(data);
+            }
 
+            return null;
+        }
 
+        set
+        {
+            if (value != null)
+            {
+                PlayerPrefs.SetString("lastClaimedTime", value.ToString());
+            }
+            else
+            {
+                PlayerPrefs.DeleteKey("lastClaimedTime");
+            }
+        }
+    }
+    public DateTime LastClaimTimeValue => _lastClaimTime.Value;
 
-    /*
-    private bool _isYesterdayRewardReached;
-    private bool _isTodayRewardReached;
-    public bool IsRewardAvailable => !_isTodayRewardReached;
+    private bool _canClaimReward;
+    public bool CanClaimReward => _canClaimReward;
 
-    private DateTime _dateTime;
+    private float _claimCooldown = 24f;
+    public float ClaimCooldown => _claimCooldown;
 
-    private DailyReward[] _allRewards;
-
-    private HUD _hud;
+    private float _claimDeadline = 48f;
+    public float ClaimDeadline => _claimDeadline;
 
     private void Start()
     {
-        _hud = FindObjectOfType<HUD>();
-
-        _allRewards = _hud.GetComponentsInChildren<DailyReward>();
-
-        _dateTime = DateTime.Now;
-
-        int currentDay = _dateTime.Day;
-
-        if (_isTodayRewardReached == false ) 
-        {
-            
-        }
+        StartCoroutine(RewardStateUpdater());
     }
 
-    /*
-    private void ResetRewards()
+    private IEnumerator RewardStateUpdater()
     {
-        foreach (var reward in _allRewards)
+        while (true)
         {
-            reward.IsRewardAvailable = false;
+            UpdateRewardState();
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+    private void UpdateRewardState()
+    {
+        _canClaimReward = true;
+
+        if (_lastClaimTime.HasValue)
+        {
+            var timeSpan = DateTime.UtcNow - _lastClaimTime.Value;
+
+            if (timeSpan.TotalHours > _claimDeadline)
+            {
+                _lastClaimTime = null;
+                _currentStreak = 0;
+            }
+            else if (timeSpan.TotalHours < _claimCooldown)
+            {
+                _canClaimReward = false;
+            }
         }
 
-        _allRewards[0].IsRewardAvailable = true;
+        RewardStateUpdated?.Invoke();
     }
-    */
+
+    public void ClaimReward()
+    {
+        if (!_canClaimReward) return;
+
+        RewardClaimed?.Invoke(_currentStreak);
+
+        _lastClaimTime = DateTime.UtcNow;
+        _currentStreak = (_currentStreak + 1) % m_maxStreakCount;
+
+        RewardStateUpdated?.Invoke();
+    }
 }
