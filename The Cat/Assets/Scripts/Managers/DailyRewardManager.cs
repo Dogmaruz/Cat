@@ -7,51 +7,31 @@ public class DailyRewardManager : MonoBehaviour
     public Action RewardStateUpdated;
     public Action<int> RewardClaimed;
 
-    [SerializeField] private int m_maxStreakCount = 5;
+    [SerializeField] private int m_dailyRewardsCount = 5;
 
-    private int _currentStreak
-    {
-        get => PlayerPrefs.GetInt("currentStreak", 0);
-        set => PlayerPrefs.SetInt("currentStreak", value);
-    }
+    [SerializeField] private float _claimCooldownInHours = 24f;
+    public float ClaimCooldown => _claimCooldownInHours;
+
+    private string _dailyRewardDataFilename = "dailyReward.dat";
+    private string _currentStreakFilename = "currentStreak.dat";
+
+    private int _currentStreak = 0;
     public int CurrentStreak => _currentStreak;
 
-    private DateTime? _lastClaimTime //он сказал, что в префс нельзя сохранять DateTime (но в JSON можно)
-    {
-        get
-        {
-            string data = PlayerPrefs.GetString("lastClaimedTime", null);
-
-            if (!string.IsNullOrEmpty(data))
-            {
-                return DateTime.Parse(data);
-            }
-
-            return null;
-        }
-
-        set
-        {
-            if (value != null)
-            {
-                PlayerPrefs.SetString("lastClaimedTime", value.ToString());
-            }
-            else
-            {
-                PlayerPrefs.DeleteKey("lastClaimedTime");
-            }
-        }
-    }
-    public DateTime LastClaimTimeValue => _lastClaimTime.Value;
+    private DateTime _lastClaimTime = DateTime.MinValue;
+    public DateTime LastClaimTime => _lastClaimTime;
 
     private bool _canClaimReward;
     public bool CanClaimReward => _canClaimReward;
 
-    private float _claimCooldown = 24f;
-    public float ClaimCooldown => _claimCooldown;
+    
 
-    private float _claimDeadline = 48f;
-    public float ClaimDeadline => _claimDeadline;
+    private float _updatingVelocity = 1f;
+
+    private void Awake()
+    {
+        LoadAllData();
+    }
 
     private void Start()
     {
@@ -63,7 +43,7 @@ public class DailyRewardManager : MonoBehaviour
         while (true)
         {
             UpdateRewardState();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(_updatingVelocity);
         }
     }
 
@@ -71,20 +51,18 @@ public class DailyRewardManager : MonoBehaviour
     {
         _canClaimReward = true;
 
-        if (_lastClaimTime.HasValue)
+        if (_lastClaimTime != DateTime.MinValue)
         {
-            var timeSpan = DateTime.UtcNow - _lastClaimTime.Value;
+            var timeSpan = DateTime.UtcNow - _lastClaimTime;
 
-            if (timeSpan.TotalHours > _claimDeadline)
-            {
-                _lastClaimTime = null;
-                _currentStreak = 0;
-            }
-            else if (timeSpan.TotalHours < _claimCooldown)
+            if (timeSpan.TotalHours < _claimCooldownInHours)
             {
                 _canClaimReward = false;
             }
         }
+
+        _updatingVelocity = _canClaimReward ? 0.2f : 1f;
+
 
         RewardStateUpdated?.Invoke();
     }
@@ -96,8 +74,79 @@ public class DailyRewardManager : MonoBehaviour
         RewardClaimed?.Invoke(_currentStreak);
 
         _lastClaimTime = DateTime.UtcNow;
-        _currentStreak = (_currentStreak + 1) % m_maxStreakCount;
+        _currentStreak = (_currentStreak + 1) % m_dailyRewardsCount;
+
+        SaveAllData();
 
         RewardStateUpdated?.Invoke();
+
+        _canClaimReward = false;
     }
+
+    #region DataSaving
+    private void SaveLastClaimTimeData()
+    {
+        string data = _lastClaimTime.ToString();
+
+        Saver<string>.Save(_dailyRewardDataFilename, data);
+    }
+
+    private void LoadLastClaimTimeData()
+    {
+        string data = null;
+
+        Saver<string>.TryLoad(_dailyRewardDataFilename, ref data);
+
+        if (data == null)
+        {
+            _lastClaimTime = DateTime.MinValue;
+        }
+        else
+        {
+            _lastClaimTime = DateTime.Parse(data);
+        }
+    }
+
+    private void DeleteLastClaimTimeData()
+    {
+        FileHandler.Reset(_dailyRewardDataFilename);
+
+        _lastClaimTime = DateTime.MinValue;
+    }
+
+    private void SaveCurrentStreakData()
+    {
+        Saver<int>.Save(_currentStreakFilename, _currentStreak);
+    }
+
+    private void LoadCurrentStreakData()
+    {
+        Saver<int>.TryLoad(_currentStreakFilename, ref _currentStreak);
+    }
+
+    private void DeleteCurrentStreakData()
+    {
+        FileHandler.Reset(_currentStreakFilename);
+
+        _currentStreak = 0;
+    }
+
+    private void SaveAllData()
+    {
+        SaveLastClaimTimeData();
+        SaveCurrentStreakData();
+    }
+
+    private void LoadAllData()
+    {
+        LoadLastClaimTimeData();
+        LoadCurrentStreakData();
+    }
+
+    public void DeleteAllData()
+    {
+        DeleteLastClaimTimeData();
+        DeleteCurrentStreakData();
+    }
+    #endregion
 }

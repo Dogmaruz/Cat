@@ -58,13 +58,15 @@ public class UI_DailyRewardsPanel : UI_Panel
 
         m_claimButton.interactable = _dailyRewardManager.CanClaimReward;
 
+        _smthNew.gameObject.SetActive(_dailyRewardManager.CanClaimReward);
+
         if (_dailyRewardManager.CanClaimReward)
         {
             m_status.text = "Claim your reward!";
         }
         else
         {
-            var nextClaimTime = _dailyRewardManager.LastClaimTimeValue.AddHours(_dailyRewardManager.ClaimDeadline);
+            var nextClaimTime = _dailyRewardManager.LastClaimTime.AddHours(_dailyRewardManager.ClaimCooldown);
             var currentClaimCooldown = nextClaimTime - DateTime.UtcNow;
 
             string cd = $"{currentClaimCooldown.Hours:D2}:{currentClaimCooldown.Minutes:D2}:{currentClaimCooldown.Seconds:D2}";
