@@ -1,13 +1,11 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using TMPro;
 
 public class UI_DailyRewardsPanel : UI_Panel
 {
-    public Action PanelOpened;
-
     [SerializeField] private TMP_Text m_status;
     [SerializeField] private Button m_claimButton;
 
@@ -42,13 +40,6 @@ public class UI_DailyRewardsPanel : UI_Panel
         _dailyRewardManager.RewardStateUpdated -= UpdateRewardsUI;
     }
 
-    protected override void OpenPanel()
-    {
-        base.OpenPanel();
-
-        PanelOpened?.Invoke();
-    }
-
     private void UpdateRewardsUI()
     {
         foreach (var reward in rewards)
@@ -58,20 +49,22 @@ public class UI_DailyRewardsPanel : UI_Panel
 
         m_claimButton.interactable = _dailyRewardManager.CanClaimReward;
 
-        _smthNew.gameObject.SetActive(_dailyRewardManager.CanClaimReward);
+        foreach (var item in _smthNew)
+        {
+            item.SetAvailability(_dailyRewardManager.CanClaimReward);
+        }
 
         if (_dailyRewardManager.CanClaimReward)
         {
-            m_status.text = "Claim your reward!";
+            m_status.text = "Забери свою награду !";
         }
         else
         {
-            var nextClaimTime = _dailyRewardManager.LastClaimTime.AddHours(_dailyRewardManager.ClaimCooldown);
-            var currentClaimCooldown = nextClaimTime - DateTime.UtcNow;
+            var currentClaimCooldown = DateTime.MaxValue - DateTime.UtcNow;
 
             string cd = $"{currentClaimCooldown.Hours:D2}:{currentClaimCooldown.Minutes:D2}:{currentClaimCooldown.Seconds:D2}";
 
-            m_status.text = $"Come back in {cd} for your next reward";
+            m_status.text = $"Следующая награда   через {cd}";
         }
     }
 }

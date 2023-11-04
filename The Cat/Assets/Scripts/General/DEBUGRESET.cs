@@ -28,7 +28,7 @@ public class DEBUGRESET : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.C)) _coinManager.AddCoins(99);
 
         if (Input.GetKeyUp(KeyCode.S)) _skinManager.ResetData();
-        if (Input.GetKeyUp(KeyCode.D)) _dailyRewardManager.DeleteAllData();
+        if (Input.GetKeyUp(KeyCode.D)) _dailyRewardManager.DeleteData();
 
         if (Input.GetKeyUp(KeyCode.T))
         {

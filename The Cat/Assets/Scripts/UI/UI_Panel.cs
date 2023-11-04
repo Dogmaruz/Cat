@@ -1,24 +1,38 @@
-using DG.Tweening;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_Panel : MonoBehaviour
 {
-    [SerializeField] protected Button m_openPanelButton;
+    public Action PanelOpened;
+
+    [SerializeField] protected Button[] m_openPanelButton;
     [SerializeField] protected Button m_closePanelButton;
 
     [SerializeField] protected GameObject m_mainMenuCanvas;
 
-    protected SmthNewIcon _smthNew;
+    protected List<SmthNewIcon> _smthNew = new List<SmthNewIcon>();
 
     protected virtual void Awake()
     {
-        m_openPanelButton.onClick.AddListener(OpenPanel);
+        foreach (var button in m_openPanelButton)
+        {
+            button.onClick.AddListener(OpenPanel);
+        }
 
         m_closePanelButton.onClick.AddListener(ClosePanel);
 
-        _smthNew = m_openPanelButton.gameObject.GetComponentInChildren<SmthNewIcon>();
-        _smthNew.gameObject.SetActive(false);
+        foreach (var button in m_openPanelButton)
+        {
+            var item = button.gameObject.GetComponentInChildren<SmthNewIcon>();
+
+            if (item != null)
+            {
+                _smthNew.Add(item);
+                item.SetAvailability(false);
+            }
+        }
     }
 
     protected virtual void Start()
@@ -31,6 +45,8 @@ public class UI_Panel : MonoBehaviour
         m_mainMenuCanvas.SetActive(false);
 
         gameObject.SetActive(true);
+
+        PanelOpened?.Invoke();
     }
 
     public virtual void ClosePanel()

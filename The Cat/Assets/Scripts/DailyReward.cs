@@ -1,7 +1,7 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using TMPro;
 
 public class DailyReward : MonoBehaviour
 {
@@ -14,7 +14,6 @@ public class DailyReward : MonoBehaviour
     [SerializeField] private TMP_Text m_valueText;
 
     [SerializeField] public Image BackgroundImage;
-    
 
     private DailyRewardManager _dailyRewardManager;
     private CoinManager _coinManager;
@@ -41,7 +40,7 @@ public class DailyReward : MonoBehaviour
 
     public void ClaimReward(int currentStreak)
     {
-        if(currentStreak == m_dayIndex)
+        if (currentStreak == m_dayIndex)
         {
             _coinManager.AddCoins(m_value);
         }

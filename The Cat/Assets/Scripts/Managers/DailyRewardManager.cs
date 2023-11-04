@@ -12,25 +12,25 @@ public class DailyRewardManager : MonoBehaviour
     [SerializeField] private float _claimCooldownInHours = 24f;
     public float ClaimCooldown => _claimCooldownInHours;
 
-    private string _dailyRewardDataFilename = "dailyReward.dat";
+    private string _lastClaimTimeFilename = "lastClaimTime.dat";
+    private string _previousClaimTimeFilename = "previousClaimTime.dat";
     private string _currentStreakFilename = "currentStreak.dat";
 
     private int _currentStreak = 0;
     public int CurrentStreak => _currentStreak;
 
-    private DateTime _lastClaimTime = DateTime.MinValue;
-    public DateTime LastClaimTime => _lastClaimTime;
+    private DateTime _lastClaimTime = DateTime.UtcNow.AddDays(-1f);
+
+    private DateTime _previousClaimTime = DateTime.MinValue;
 
     private bool _canClaimReward;
     public bool CanClaimReward => _canClaimReward;
-
-    
 
     private float _updatingVelocity = 1f;
 
     private void Awake()
     {
-        LoadAllData();
+        LoadData();
     }
 
     private void Start()
@@ -51,14 +51,9 @@ public class DailyRewardManager : MonoBehaviour
     {
         _canClaimReward = true;
 
-        if (_lastClaimTime != DateTime.MinValue)
+        if (_lastClaimTime.Date == DateTime.UtcNow.Date)
         {
-            var timeSpan = DateTime.UtcNow - _lastClaimTime;
-
-            if (timeSpan.TotalHours < _claimCooldownInHours)
-            {
-                _canClaimReward = false;
-            }
+            _canClaimReward = false;
         }
 
         _updatingVelocity = _canClaimReward ? 0.2f : 1f;
@@ -73,10 +68,22 @@ public class DailyRewardManager : MonoBehaviour
 
         RewardClaimed?.Invoke(_currentStreak);
 
-        _lastClaimTime = DateTime.UtcNow;
-        _currentStreak = (_currentStreak + 1) % m_dailyRewardsCount;
+        _previousClaimTime = _lastClaimTime;
 
-        SaveAllData();
+        _lastClaimTime = DateTime.UtcNow;
+
+        var timeSpan = _lastClaimTime.Date - _previousClaimTime.Date;
+
+        if (timeSpan.Days != 1)
+        {
+            _currentStreak = 0;
+        }
+        else
+        {
+            _currentStreak = (_currentStreak + 1) % m_dailyRewardsCount;
+        }
+
+        SaveData();
 
         RewardStateUpdated?.Invoke();
 
@@ -84,69 +91,58 @@ public class DailyRewardManager : MonoBehaviour
     }
 
     #region DataSaving
-    private void SaveLastClaimTimeData()
+    private void SaveData()
     {
-        string data = _lastClaimTime.ToString();
+        string data;
 
-        Saver<string>.Save(_dailyRewardDataFilename, data);
+        data = _lastClaimTime.ToString();
+        Saver<string>.Save(_lastClaimTimeFilename, data);
+
+        data = _previousClaimTime.ToString();
+        Saver<string>.Save(_previousClaimTimeFilename, data);
+
+        Saver<int>.Save(_currentStreakFilename, _currentStreak);
     }
 
-    private void LoadLastClaimTimeData()
+    private void LoadData()
     {
-        string data = null;
+        string data; 
 
-        Saver<string>.TryLoad(_dailyRewardDataFilename, ref data);
-
-        if (data == null)
+        data = null;
+        Saver<string>.TryLoad(_lastClaimTimeFilename, ref data);
+        if (string.IsNullOrEmpty(data))
         {
-            _lastClaimTime = DateTime.MinValue;
+            _lastClaimTime = DateTime.UtcNow.AddDays(-1f);
         }
         else
         {
             _lastClaimTime = DateTime.Parse(data);
         }
-    }
 
-    private void DeleteLastClaimTimeData()
-    {
-        FileHandler.Reset(_dailyRewardDataFilename);
+        data = null;
+        Saver<string>.TryLoad(_previousClaimTimeFilename, ref data);
+        if (string.IsNullOrEmpty(data))
+        {
+            _previousClaimTime = DateTime.MinValue;
+        }
+        else
+        {
+            _previousClaimTime = DateTime.Parse(data);
+        }
 
-        _lastClaimTime = DateTime.MinValue;
-    }
-
-    private void SaveCurrentStreakData()
-    {
-        Saver<int>.Save(_currentStreakFilename, _currentStreak);
-    }
-
-    private void LoadCurrentStreakData()
-    {
         Saver<int>.TryLoad(_currentStreakFilename, ref _currentStreak);
     }
 
-    private void DeleteCurrentStreakData()
+    public void DeleteData()
     {
+        FileHandler.Reset(_lastClaimTimeFilename);
+        _lastClaimTime = DateTime.UtcNow.AddDays(-1f);
+
+        FileHandler.Reset(_previousClaimTimeFilename);
+        _lastClaimTime = DateTime.MinValue;
+
         FileHandler.Reset(_currentStreakFilename);
-
         _currentStreak = 0;
-    }
-
-    private void SaveAllData()
-    {
-        SaveLastClaimTimeData();
-        SaveCurrentStreakData();
-    }
-
-    private void LoadAllData()
-    {
-        LoadLastClaimTimeData();
-        LoadCurrentStreakData();
-    }
-
-    public void DeleteAllData()
-    {
-        DeleteLastClaimTimeData();
-        DeleteCurrentStreakData();
     }
     #endregion
 }
