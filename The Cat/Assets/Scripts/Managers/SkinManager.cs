@@ -29,8 +29,6 @@ public class SkinManager : MonoBehaviour
 
     private void Start()
     {
-        // DeleteData(); // TODO for debugging
-
         LoadData();
 
         if (_skinsData == null)
