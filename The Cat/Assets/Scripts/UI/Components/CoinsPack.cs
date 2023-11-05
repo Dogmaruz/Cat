@@ -57,24 +57,18 @@ public class CoinsPack : MonoBehaviour
         switch (m_type)
         {
             case PackType.Payment:
-                {
-                    break;
-                }
+                break;
 
             case PackType.Periodic:
+                if (_coinsShop.TryClaimReward() == true)
                 {
-                    if (_coinsShop.TryClaimReward() == true)
-                    {
-                        _coinManager.AddCoins(m_coinsValue);
-                    }
-
-                    break;
+                    _coinManager.AddCoins(m_coinsValue);
                 }
+                break;
 
             case PackType.Video:
-                {
-                    break;
-                }
+                break;
+
         }
     }
 

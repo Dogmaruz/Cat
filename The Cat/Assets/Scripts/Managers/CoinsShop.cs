@@ -21,7 +21,7 @@ public class CoinsShop : MonoBehaviour
 
     private void Awake()
     {
-        LoadLastClaimTimeData();
+        LoadData();
     }
 
     private void Start()
@@ -63,26 +63,26 @@ public class CoinsShop : MonoBehaviour
 
         _lastClaimTime = DateTime.UtcNow;
 
-        SaveLastClaimTimeData();
+        SaveData();
 
         return true;
     }
 
     #region DataSaving
-    private void SaveLastClaimTimeData()
+    private void SaveData()
     {
         string data = _lastClaimTime.ToString();
 
         Saver<string>.Save(_lastClaimTimeFilename, data);
     }
 
-    private void LoadLastClaimTimeData()
+    private void LoadData()
     {
         string data = null;
 
         Saver<string>.TryLoad(_lastClaimTimeFilename, ref data);
 
-        if (data == null)
+        if (string.IsNullOrEmpty(data))
         {
             _lastClaimTime = DateTime.MinValue;
         }
@@ -92,7 +92,7 @@ public class CoinsShop : MonoBehaviour
         }
     }
 
-    private void DeleteLastClaimTimeData()
+    public void DeleteData()
     {
         FileHandler.Reset(_lastClaimTimeFilename);
 
