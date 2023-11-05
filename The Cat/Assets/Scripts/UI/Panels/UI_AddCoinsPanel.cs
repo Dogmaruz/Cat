@@ -31,10 +31,12 @@ public class UI_AddCoinsPanel : UI_Panel
 
     private void UpdateUI()
     {
-        foreach(var item in _smthNew)
+        foreach (var item in _smthNew)
         {
             item.SetAvailability(_coinsShop.CanClaimReward);
         }
+
+        if (!isActiveAndEnabled) return;
 
         var nextClaimTime = _coinsShop.LastClaimTime.AddHours(_coinsShop.ClaimCooldown);
         var currentClaimCooldown = nextClaimTime - DateTime.UtcNow;

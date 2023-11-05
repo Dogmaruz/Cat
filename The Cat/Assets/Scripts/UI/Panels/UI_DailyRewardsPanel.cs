@@ -42,17 +42,19 @@ public class UI_DailyRewardsPanel : UI_Panel
 
     private void UpdateRewardsUI()
     {
+        foreach (var item in _smthNew)
+        {
+            item.SetAvailability(_dailyRewardManager.CanClaimReward);
+        }
+
+        if (!isActiveAndEnabled) return;
+
         foreach (var reward in rewards)
         {
             reward.BackgroundImage.color = reward.DayIndex == _dailyRewardManager.CurrentStreak ? m_currentColor : m_defaultColor;
         }
 
         m_claimButton.interactable = _dailyRewardManager.CanClaimReward;
-
-        foreach (var item in _smthNew)
-        {
-            item.SetAvailability(_dailyRewardManager.CanClaimReward);
-        }
 
         if (_dailyRewardManager.CanClaimReward)
         {
