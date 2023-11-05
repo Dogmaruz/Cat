@@ -1,4 +1,3 @@
-using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,10 +9,7 @@ public class UI_Score : MonoBehaviour
 
     [SerializeField] private Image m_filledImage;
 
-    [SerializeField] private Image[] m_stars;
-
-    [Range(0, 255)]
-    [SerializeField] private float m_unfilledStarAlpha;
+    private UI_ScoreStar[] _stars;
 
     private TileController _tileController;
 
@@ -39,10 +35,7 @@ public class UI_Score : MonoBehaviour
 
         _fieldDistance = _tileController.FieldDistance;
 
-        foreach (var star in m_stars)
-        {
-            star.color = new Color(1, 1, 1, m_unfilledStarAlpha / 255);
-        }
+        _stars = GetComponentsInChildren<UI_ScoreStar>();
     }
 
     private void OnDestroy()
@@ -56,11 +49,11 @@ public class UI_Score : MonoBehaviour
 
         m_filledImage.fillAmount = currentStep;
 
-        for (int i = 0; i < m_stars.Length; i++)
+        for (int i = 0; i < _stars.Length; i++)
         {
-            if (currentStep >= (float)(i + 1) / m_stars.Length)
+            if (currentStep >= (float)(i + 1) / _stars.Length)
             {
-                m_stars[i].DOColor(new Color(1, 1, 1, 1), 0.3f);
+                _stars[i].Activate();
             }
         }
     }
