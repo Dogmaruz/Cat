@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ImpactEffect : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float m_LifeTime;
 
-    // Update is called once per frame
-    void Update()
+    private float m_Timer;
+
+    private void Update()
     {
-        
+        if (m_Timer < m_LifeTime)
+        {
+            m_Timer += Time.deltaTime;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

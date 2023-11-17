@@ -149,23 +149,6 @@ public class TileController : MonoBehaviour
                 tile.SetStartPosition(tile.transform.position);
             }
         }
-
-        /*  TODO 
-         *  1. 
-         *  2. 
-         *  3. 
-          
-            for (int i = 4; i < _tiles.Length; i++)
-            {
-                int rnd = Random.Range(-1, 2);
-
-                float posX = Mathf.Clamp((int)_tiles[i - 1].StartPosition.x + rnd, -2, 2);
-
-                Vector3 newStartPosition = new Vector3(posX, _tiles[i].transform.position.y, _tiles[i].transform.position.z);
-
-                _tiles[i].SetStartPosition(newStartPosition);
-            }
-        */
     }
 
     private void HidenTilesBasedOnDistance()

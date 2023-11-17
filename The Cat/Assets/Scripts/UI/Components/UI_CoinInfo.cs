@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-public class UI_Coin : MonoBehaviour
+public class UI_CoinInfo : MonoBehaviour
 {
     [SerializeField] private TMP_Text m_coinCountText;
 

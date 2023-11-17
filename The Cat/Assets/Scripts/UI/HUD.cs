@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -11,9 +9,7 @@ public class HUD : MonoBehaviour
 
     [SerializeField] public GameObject m_menuButton;
 
-    [SerializeField] public GameObject m_OpenCharactersPanelBtn;
-
-    [SerializeField] public GameObject m_OpenDailyRewardsPanelBtn;
+    [SerializeField] private GameObject[] m_switchablePanelOpeningButtons;
 
     private LevelSecuenceController _levelSecuenceController;
 
@@ -39,7 +35,9 @@ public class HUD : MonoBehaviour
 
     private void ChangeButtonsAvailability(bool state)
     {
-        m_OpenCharactersPanelBtn.SetActive(!state);
-        m_OpenDailyRewardsPanelBtn.SetActive(!state);
+        foreach (var button in m_switchablePanelOpeningButtons)
+        {
+            button.SetActive(!state);
+        }
     }
 }

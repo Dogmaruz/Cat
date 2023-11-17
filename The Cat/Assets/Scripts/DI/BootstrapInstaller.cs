@@ -5,6 +5,8 @@ public class BootstrapInstaller : MonoInstaller
 {
     [SerializeField] private CoinManager m_coinManager;
 
+    [SerializeField] private CoinsShop m_coinsShop;
+
     [SerializeField] private SkinManager m_skinManager;
 
     [SerializeField] private DailyRewardManager m_dailyRewardManager;
@@ -18,6 +20,11 @@ public class BootstrapInstaller : MonoInstaller
         Container.
             Bind<CoinManager>()
             .FromComponentInNewPrefab(m_coinManager)
+            .AsSingle();
+
+        Container.
+            Bind<CoinsShop>()
+            .FromComponentInNewPrefab(m_coinsShop)
             .AsSingle();
 
         Container.

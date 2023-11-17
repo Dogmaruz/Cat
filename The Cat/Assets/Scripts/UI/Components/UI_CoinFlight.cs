@@ -1,6 +1,7 @@
 using UnityEngine;
 using Zenject;
 using DG.Tweening;
+using TMPro;
 
 public class UI_CoinFlight : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class UI_CoinFlight : MonoBehaviour
     [SerializeField] private float m_duration;
 
     [SerializeField] private GameObject[] m_randomMiddlePoints;
+
+    [SerializeField] private TMP_Text m_coinsText;
 
     private CoinManager _coinManager;
     private MovementController _movementController;
@@ -75,7 +78,7 @@ public class UI_CoinFlight : MonoBehaviour
         currentImage.transform.localScale = m_startScale;
 
         currentImage.transform.DOPath(_path, m_duration, PathType.CatmullRom);
-        currentImage.transform.DOScale(_endScale, m_duration);
+        currentImage.transform.DOScale(_endScale, m_duration).OnComplete(TextScaling);
 
         _currentImageNumber++;
 
@@ -83,5 +86,20 @@ public class UI_CoinFlight : MonoBehaviour
         {
             _currentImageNumber = 0;
         }
+    }
+
+    private void TextScaling()
+    {
+        /* 
+         * TODO Visual effect of text scaling
+         * 
+        Vector3 defaultScale = m_coinsText.transform.localScale;
+        
+        var sequence = DOTween.Sequence()
+           .Append(m_coinsText.transform.DOScale(defaultScale * 1.5f, 0.2f)).SetEase(Ease.OutBack)
+           .Append(m_coinsText.transform.DOScale(defaultScale, 0.2f)).SetEase(Ease.InBack);
+
+        sequence.Kill();
+        */
     }
 }

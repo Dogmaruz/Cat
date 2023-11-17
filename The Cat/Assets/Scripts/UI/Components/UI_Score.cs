@@ -9,6 +9,8 @@ public class UI_Score : MonoBehaviour
 
     [SerializeField] private Image m_filledImage;
 
+    private UI_ScoreStar[] _stars;
+
     private TileController _tileController;
 
     private LevelScore _levelScore;
@@ -33,6 +35,7 @@ public class UI_Score : MonoBehaviour
 
         _fieldDistance = _tileController.FieldDistance;
 
+        _stars = GetComponentsInChildren<UI_ScoreStar>();
     }
 
     private void OnDestroy()
@@ -42,7 +45,17 @@ public class UI_Score : MonoBehaviour
 
     private void Update()
     {
-        m_filledImage.fillAmount = _movementController.transform.position.z / _fieldDistance;
+        float currentStep = _movementController.transform.position.z / _fieldDistance;
+
+        m_filledImage.fillAmount = currentStep;
+
+        for (int i = 0; i < _stars.Length; i++)
+        {
+            if (currentStep >= (float)(i + 1) / _stars.Length)
+            {
+                _stars[i].Activate();
+            }
+        }
     }
 
     private void OnScoreChanged(int score)

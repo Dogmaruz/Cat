@@ -5,13 +5,15 @@ public class DEBUGRESET : MonoBehaviour
 {
     private CoinManager _coinManager;
     private SkinManager _skinManager;
+    private DailyRewardManager _dailyRewardManager;
     private float currentTimeScale;
 
     [Inject]
-    public void Construct(CoinManager coinManager, SkinManager skinManager)
+    public void Construct(CoinManager coinManager, SkinManager skinManager, DailyRewardManager dailyRewardManager)
     {
         _coinManager = coinManager;
         _skinManager = skinManager;
+        _dailyRewardManager = dailyRewardManager;
     }
 
     private void Start()
@@ -26,6 +28,7 @@ public class DEBUGRESET : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.C)) _coinManager.AddCoins(99);
 
         if (Input.GetKeyUp(KeyCode.S)) _skinManager.ResetData();
+        if (Input.GetKeyUp(KeyCode.D)) _dailyRewardManager.DeleteData();
 
         if (Input.GetKeyUp(KeyCode.T))
         {
