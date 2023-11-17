@@ -39,6 +39,8 @@ public class CoinsPack : MonoBehaviour
 
         _claimButton.onClick.AddListener(OnButtonClick);
 
+        m_coinsCountText.text = m_coinsValue.ToString();
+
         if (m_type == PackType.Video)
         {
             ModifyButton(false, "Смотреть видео"); // TODO change to true
