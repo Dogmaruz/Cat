@@ -3,15 +3,15 @@ using Zenject;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private float m_offsetZ = 0;
+    [SerializeField] private Vector3 m_offset;
 
-    [SerializeField] private float m_followSpeedX = 5f;
-
-    [SerializeField] private float m_followSpeedZ = 10f;
+    [SerializeField] private float m_followSpeed = 10f;
 
     private MovementController _movementController;
 
     private Vector3 _targetPosition;
+
+    private Vector3 _currentPosition;
 
     [Inject]
     public void Construct(MovementController movementController)
@@ -21,18 +21,12 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        Vector3 currentPosition = transform.position;
+        _currentPosition = transform.position;
 
-        float targetX = _movementController.PlayerTransform.transform.position.x;
+        _targetPosition = _movementController.PlayerTransform.transform.position + m_offset;
 
-        float targetZ = _movementController.PlayerTransform.transform.position.z + m_offsetZ;
+        _targetPosition.y = m_offset.y;
 
-        _targetPosition.x = Mathf.Lerp(_targetPosition.x, targetX, m_followSpeedX * Time.deltaTime);
-
-        _targetPosition.y = currentPosition.y;
-
-        _targetPosition.z = targetZ;
-
-        transform.position = Vector3.Lerp(currentPosition, _targetPosition, m_followSpeedZ);
+        transform.position = Vector3.Lerp(_currentPosition, _targetPosition, m_followSpeed * Time.deltaTime);
     }
 }

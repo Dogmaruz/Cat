@@ -59,6 +59,8 @@ public class MovementController : MonoBehaviour
 
     private float _startTimeNewAction;
 
+    private int _index = 1;
+
     [Inject]
     public void Construct(TileController TileController, LevelSecuenceController levelSecuenceController, LevelScore levelScore)
     {
@@ -126,10 +128,18 @@ public class MovementController : MonoBehaviour
                 MoveTile();
             }
 
-            if (!_isJump && !_isMove && !_isWin)
-            {
-                CheckCollisions();
-            }
+            //if (!_isJump && !_isMove && !_isWin)
+            //{
+            //    CheckCollisions();
+            //}
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!_isJump && !_isMove && !_isWin)
+        {
+            CheckCollisions();
         }
     }
 
@@ -160,12 +170,16 @@ public class MovementController : MonoBehaviour
         if (_currentTile.TileType == TileType.Long)
         {
             _isLongMove = true;
+
+            _index = -_index;
         }
 
         if (_currentTile.TileType == TileType.Move)
         {
 
             _isMove = true;
+
+            _index = -_index;
         }
     }
 
@@ -276,7 +290,7 @@ public class MovementController : MonoBehaviour
 
     private void PlayerRotation()
     {
-        float rotationAngle = 360f * (((Time.time - _startTimeNewAction) * _speed / _distance) % 1);
+        float rotationAngle = 360f * _index * (((Time.time - _startTimeNewAction) * _speed / _distance) % 1);
 
         m_playerTransform.transform.localRotation = Quaternion.Euler(0, rotationAngle, 0);
     }
