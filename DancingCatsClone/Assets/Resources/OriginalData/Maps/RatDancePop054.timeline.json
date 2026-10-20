@@ -1,0 +1,7019 @@
+{
+  "schemaVersion": 1,
+  "id": "RatDancePop054",
+  "catalog": {
+    "musicName": "Rat Dance",
+    "endOrder": 0,
+    "labelType": 1,
+    "group": 1,
+    "musicPath": "RatDancePop054",
+    "gold": 0,
+    "headSprite": "RatDancePop",
+    "scene": "DancingCats1",
+    "musicUnlockType": 3,
+    "difficultyType": 0,
+    "musicType": 0,
+    "builtin": true,
+    "disable": false,
+    "artName": "Cover Songs",
+    "speedAdd": [
+      0.0,
+      0.1,
+      0.2
+    ],
+    "baseSpeed": 7.0,
+    "id": 4,
+    "ad": 1
+  },
+  "mapAssetId": "-8438052360645896046",
+  "sourceMapBundle": "assets\\aa\\Android\\levels_builtin_assets_assets\\_resources\\level\\data\\ratdancepop054.asset_1c161979ecf6d9fb9223f232e50ffe14.bundle",
+  "sourceMapBundleSha256": "33ef3d9d72f77f621eec6b69a591699bd0bf336f16f2c593b5ccf3fa69ef8220",
+  "audio": {
+    "assetId": "CAB-c358bbc7023f82b9106e26733c856e6d:4134592696711976858",
+    "name": "RatDancePop054",
+    "category": "music",
+    "sourceContainer": "assets/aa/Android/music_builtin_assets_assets/_resources/level/music/ratdancepop054.asset_8d3ba82b9a0b3a64efccc444e3bcaad0.bundle",
+    "sourceContainerSha256": "a2a5557850ed44e9569180ea555d5c7c3aeab2beb9bd671549f63dec627018ee",
+    "pathId": 4134592696711976858,
+    "frequency": 44100,
+    "channels": 2,
+    "bitsPerSample": 16,
+    "declaredLengthSeconds": 38.00816345214844,
+    "compressionFormat": 1,
+    "resource": {
+      "m_Source": "archive:/CAB-c358bbc7023f82b9106e26733c856e6d/CAB-c358bbc7023f82b9106e26733c856e6d.resource",
+      "m_Offset": 0,
+      "m_Size": 880096
+    },
+    "rawFile": "audio-source/music/RatDancePop054__4134592696711976858.fsb",
+    "rawBytes": 880096,
+    "rawSha256": "10e1589e65c642dc4961818cff761eb5b5c05afd9bd1c0ad8fb897ceea7d3bde",
+    "files": [
+      {
+        "file": "audio/music/RatDancePop054__4134592696711976858.wav",
+        "sha256": "fa895e9df748fbfb257380fb59941ddb344e569a7cf019b66bc0b068e797f2fb",
+        "bytes": 6704684,
+        "frames": 1676160,
+        "frequency": 44100,
+        "channels": 2,
+        "lengthSeconds": 38.00816326530612
+      }
+    ]
+  },
+  "sampleRate": 44100,
+  "forwardSpeed": 7.0,
+  "delayTime": 0.44501134753227234,
+  "timing": {
+    "gameTime": "MapData.pos.z / forwardSpeed",
+    "audioTime": "gameTime - delayTime",
+    "eventGameTime": "mStartSample / mSampleRate + delayTime",
+    "warning": "Two equivalent relative timelines are preserved; original audio scheduling implementation is not inferred here."
+  },
+  "tempoSections": [
+    {
+      "sectionName": "New Section",
+      "startSample": 0,
+      "samplesPerBeat": 22050.0,
+      "beatsPerMeasure": 4,
+      "bStartNewMeasure": 1
+    }
+  ],
+  "elements": [
+    {
+      "id": 0,
+      "name": "Start",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.6499999761581421,
+        "y": -0.6499999761581421
+      },
+      "jumpDistance": 3.5,
+      "ext": "",
+      "sourceIndex": 0,
+      "kind": "Start",
+      "gameTime": 0.0,
+      "audioTime": -0.44501134753227234,
+      "audioSampleFromPosition": -19625.00042617321,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 3.5
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 3.8280954360961914,
+      "ext": "",
+      "sourceIndex": 1,
+      "kind": "Jump",
+      "gameTime": 0.5,
+      "audioTime": 0.05498865246772766,
+      "audioSampleFromPosition": 2424.99957382679,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 7.328095436096191
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 3.8280954360961914,
+      "ext": "",
+      "sourceIndex": 2,
+      "kind": "Jump",
+      "gameTime": 1.0468707765851701,
+      "audioTime": 0.6018594290528978,
+      "audioSampleFromPosition": 26542.000821232792,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 11.156190872192383
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 3.828253746032715,
+      "ext": "",
+      "sourceIndex": 3,
+      "kind": "Jump",
+      "gameTime": 1.5937415531703405,
+      "audioTime": 1.1487302056380682,
+      "audioSampleFromPosition": 50659.00206863881,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 14.984444618225098
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 3.864443778991699,
+      "ext": "",
+      "sourceIndex": 4,
+      "kind": "Jump",
+      "gameTime": 2.1406349454607283,
+      "audioTime": 1.695623597928456,
+      "audioSampleFromPosition": 74777.0006686449,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 18.848888397216797
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 5.760477066040039,
+      "ext": "",
+      "sourceIndex": 5,
+      "kind": "Jump",
+      "gameTime": 2.6926983424595425,
+      "audioTime": 2.24768699492727,
+      "audioSampleFromPosition": 99122.99647629261,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 24.609365463256836
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.8958721160888672,
+      "ext": "",
+      "sourceIndex": 6,
+      "kind": "Jump",
+      "gameTime": 3.5156236376081194,
+      "audioTime": 3.070612290075847,
+      "audioSampleFromPosition": 135414.00199234486,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 26.505237579345703
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.9322223663330078,
+      "ext": "",
+      "sourceIndex": 7,
+      "kind": "Jump",
+      "gameTime": 3.7864625113351003,
+      "audioTime": 3.341451163802828,
+      "audioSampleFromPosition": 147357.99632370472,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 28.43745994567871
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.9323806762695312,
+      "ext": "",
+      "sourceIndex": 8,
+      "kind": "Jump",
+      "gameTime": 4.062494277954102,
+      "audioTime": 3.6174829304218292,
+      "audioSampleFromPosition": 159530.99723160267,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 30.369840621948242
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.8957157135009766,
+      "ext": "",
+      "sourceIndex": 9,
+      "kind": "Jump",
+      "gameTime": 4.33854866027832,
+      "audioTime": 3.893537312746048,
+      "audioSampleFromPosition": 171704.99549210072,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 32.26555633544922
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.9323806762695312,
+      "ext": "",
+      "sourceIndex": 10,
+      "kind": "Jump",
+      "gameTime": 4.60936519077846,
+      "audioTime": 4.164353843246188,
+      "audioSampleFromPosition": 183648.00448715687,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 34.19793701171875
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 5.650951385498047,
+      "ext": "",
+      "sourceIndex": 11,
+      "kind": "Jump",
+      "gameTime": 4.885419573102679,
+      "audioTime": 4.4404082255704065,
+      "audioSampleFromPosition": 195822.00274765491,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 39.8488883972168
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.8958702087402344,
+      "ext": "",
+      "sourceIndex": 12,
+      "kind": "Jump",
+      "gameTime": 5.6926983424595425,
+      "audioTime": 5.24768699492727,
+      "audioSampleFromPosition": 231422.9964762926,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 41.74475860595703
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.9323806762695312,
+      "ext": "",
+      "sourceIndex": 13,
+      "kind": "Jump",
+      "gameTime": 5.963536943708148,
+      "audioTime": 5.518525596175875,
+      "audioSampleFromPosition": 243366.9787913561,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 43.67713928222656
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.9322242736816406,
+      "ext": "",
+      "sourceIndex": 14,
+      "kind": "Jump",
+      "gameTime": 6.239591326032366,
+      "audioTime": 5.794579978500094,
+      "audioSampleFromPosition": 255540.97705185413,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 45.6093635559082
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.8958778381347656,
+      "ext": "",
+      "sourceIndex": 15,
+      "kind": "Jump",
+      "gameTime": 6.515623365129743,
+      "audioTime": 6.070612017597471,
+      "audioSampleFromPosition": 267713.98997604847,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 47.50524139404297
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.932220458984375,
+      "ext": "",
+      "sourceIndex": 16,
+      "kind": "Jump",
+      "gameTime": 6.786463056291852,
+      "audioTime": 6.34145170875958,
+      "audioSampleFromPosition": 279658.0203562975,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 49.437461853027344
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 5.760475158691406,
+      "ext": "",
+      "sourceIndex": 17,
+      "kind": "Jump",
+      "gameTime": 7.062494550432477,
+      "audioTime": 6.617483202900205,
+      "audioSampleFromPosition": 291831.00924789906,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 55.19793701171875
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.8958740234375,
+      "ext": "",
+      "sourceIndex": 18,
+      "kind": "Jump",
+      "gameTime": 7.885419573102679,
+      "audioTime": 7.4404082255704065,
+      "audioSampleFromPosition": 328122.0027476549,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 57.09381103515625
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.932220458984375,
+      "ext": "",
+      "sourceIndex": 19,
+      "kind": "Jump",
+      "gameTime": 8.156258719308036,
+      "audioTime": 7.711247371775764,
+      "audioSampleFromPosition": 340066.0090953112,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 59.026031494140625
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.932220458984375,
+      "ext": "",
+      "sourceIndex": 20,
+      "kind": "Jump",
+      "gameTime": 8.432290213448661,
+      "audioTime": 7.987278865916389,
+      "audioSampleFromPosition": 352238.9979869128,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 60.958251953125
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.8958778381347656,
+      "ext": "",
+      "sourceIndex": 21,
+      "kind": "Jump",
+      "gameTime": 8.708321707589286,
+      "audioTime": 8.263310360057014,
+      "audioSampleFromPosition": 364411.98687851435,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 62.854129791259766
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.9323768615722656,
+      "ext": "",
+      "sourceIndex": 22,
+      "kind": "Jump",
+      "gameTime": 8.979161398751396,
+      "audioTime": 8.534150051219124,
+      "audioSampleFromPosition": 376356.0172587634,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 64.78650665283203
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 5.760322570800781,
+      "ext": "",
+      "sourceIndex": 23,
+      "kind": "Jump",
+      "gameTime": 9.255215236118861,
+      "audioTime": 8.810203888586589,
+      "audioSampleFromPosition": 388529.9914866686,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 70.54682922363281
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.9323806762695312,
+      "ext": "",
+      "sourceIndex": 24,
+      "kind": "Jump",
+      "gameTime": 10.078118460518974,
+      "audioTime": 9.633107112986702,
+      "audioSampleFromPosition": 424820.02368271357,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 72.47920989990234
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.8957138061523438,
+      "ext": "",
+      "sourceIndex": 25,
+      "kind": "Jump",
+      "gameTime": 10.354172842843193,
+      "audioTime": 9.90916149531092,
+      "audioSampleFromPosition": 436994.0219432116,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 74.37492370605469
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.932373046875,
+      "ext": "",
+      "sourceIndex": 26,
+      "kind": "Jump",
+      "gameTime": 10.624989100864955,
+      "audioTime": 10.179977753332683,
+      "audioSampleFromPosition": 448937.0189219713,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 76.30729675292969
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.932220458984375,
+      "ext": "",
+      "sourceIndex": 27,
+      "kind": "Jump",
+      "gameTime": 10.90104239327567,
+      "audioTime": 10.456031045743398,
+      "audioSampleFromPosition": 461110.9691172838,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 78.23951721191406
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.8958816528320312,
+      "ext": "",
+      "sourceIndex": 28,
+      "kind": "Jump",
+      "gameTime": 11.177073887416295,
+      "audioTime": 10.732062539884023,
+      "audioSampleFromPosition": 473283.9580088854,
+      "holdTicks": []
+    },
+    {
+      "id": 1,
+      "name": "Theme",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 80.1353988647461
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 5.760475158691406,
+      "ext": "",
+      "sourceIndex": 29,
+      "kind": "Theme",
+      "gameTime": 11.447914123535156,
+      "audioTime": 11.002902776002884,
+      "audioSampleFromPosition": 485228.0124217272,
+      "holdTicks": []
+    },
+    {
+      "id": 4,
+      "name": "Follow",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 85.8958740234375
+      },
+      "updateType": 2,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 9.624916076660156,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 30,
+      "kind": "Follow",
+      "gameTime": 12.270839146205358,
+      "audioTime": 11.825827798673085,
+      "audioSampleFromPosition": 521519.00592148304,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 87.82809448242188
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 31,
+      "kind": "FollowMids",
+      "gameTime": 12.546870640345983,
+      "audioTime": 12.10185929281371,
+      "audioSampleFromPosition": 533691.9948130846,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 89.76048278808594
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 32,
+      "kind": "FollowMids",
+      "gameTime": 12.822926112583705,
+      "audioTime": 12.377914765051433,
+      "audioSampleFromPosition": 545866.0411387682,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 91.65618896484375
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 33,
+      "kind": "FollowMids",
+      "gameTime": 13.093741280691964,
+      "audioTime": 12.648729933159691,
+      "audioSampleFromPosition": 557808.9900523424,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 93.58856964111328
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 34,
+      "kind": "FollowMids",
+      "gameTime": 13.369795663016182,
+      "audioTime": 12.92478431548391,
+      "audioSampleFromPosition": 569982.9883128405,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids (1)",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 95.55000305175781
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 35,
+      "kind": "FollowMids",
+      "gameTime": 13.650000435965401,
+      "audioTime": 13.204989088433129,
+      "audioSampleFromPosition": 582340.018799901,
+      "holdTicks": []
+    },
+    {
+      "id": 6,
+      "name": "FollowEnd",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 95.52079010009766
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 5.7604827880859375,
+      "ext": "",
+      "sourceIndex": 36,
+      "kind": "FollowEnd",
+      "gameTime": 13.645827157156807,
+      "audioTime": 13.200815809624535,
+      "audioSampleFromPosition": 582155.977204442,
+      "holdTicks": []
+    },
+    {
+      "id": 4,
+      "name": "Follow",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 101.2812728881836
+      },
+      "updateType": 2,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 9.588569641113281,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 37,
+      "kind": "Follow",
+      "gameTime": 14.468753269740514,
+      "audioTime": 14.023741922208242,
+      "audioSampleFromPosition": 618447.0187693834,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 103.17713928222656
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 38,
+      "kind": "FollowMids",
+      "gameTime": 14.739591326032366,
+      "audioTime": 14.294579978500094,
+      "audioSampleFromPosition": 630390.9770518541,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 105.10936737060547
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 39,
+      "kind": "FollowMids",
+      "gameTime": 15.015623910086495,
+      "audioTime": 14.570612562554222,
+      "audioSampleFromPosition": 642564.0140086412,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 107.00524139404297
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 40,
+      "kind": "FollowMids",
+      "gameTime": 15.286463056291852,
+      "audioTime": 14.84145170875958,
+      "audioSampleFromPosition": 654508.0203562975,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 108.93746185302734
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 41,
+      "kind": "FollowMids",
+      "gameTime": 15.562494550432477,
+      "audioTime": 15.117483202900205,
+      "audioSampleFromPosition": 666681.009247899,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids (2)",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 110.86000061035156
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 42,
+      "kind": "FollowMids",
+      "gameTime": 15.837142944335938,
+      "audioTime": 15.392131596803665,
+      "audioSampleFromPosition": 678793.0034190416,
+      "holdTicks": []
+    },
+    {
+      "id": 6,
+      "name": "FollowEnd",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 110.86984252929688
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 5.8696746826171875,
+      "ext": "",
+      "sourceIndex": 43,
+      "kind": "FollowEnd",
+      "gameTime": 15.838548932756696,
+      "audioTime": 15.393537585224424,
+      "audioSampleFromPosition": 678855.0075083971,
+      "holdTicks": []
+    },
+    {
+      "id": 4,
+      "name": "Follow",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 116.73951721191406
+      },
+      "updateType": 2,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 9.588577270507812,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 44,
+      "kind": "Follow",
+      "gameTime": 16.677073887416295,
+      "audioTime": 16.232062539884023,
+      "audioSampleFromPosition": 715833.9580088854,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 118.67190551757812
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 45,
+      "kind": "FollowMids",
+      "gameTime": 16.953129359654017,
+      "audioTime": 16.508118012121745,
+      "audioSampleFromPosition": 728008.004334569,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 120.56777954101562
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 46,
+      "kind": "FollowMids",
+      "gameTime": 17.223968505859375,
+      "audioTime": 16.778957158327103,
+      "audioSampleFromPosition": 739952.0106822252,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 122.5
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 47,
+      "kind": "FollowMids",
+      "gameTime": 17.5,
+      "audioTime": 17.054988652467728,
+      "audioSampleFromPosition": 752124.9995738268,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 124.43222045898438
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 48,
+      "kind": "FollowMids",
+      "gameTime": 17.776031494140625,
+      "audioTime": 17.331020146608353,
+      "audioSampleFromPosition": 764297.9884654284,
+      "holdTicks": []
+    },
+    {
+      "id": 5,
+      "name": "FollowMids (3)",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 126.30999755859375
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 49,
+      "kind": "FollowMids",
+      "gameTime": 18.044285365513392,
+      "audioTime": 17.59927401798112,
+      "audioSampleFromPosition": 776127.9841929674,
+      "holdTicks": []
+    },
+    {
+      "id": 6,
+      "name": "FollowEnd",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 126.32809448242188
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 5.7604827880859375,
+      "ext": "",
+      "sourceIndex": 50,
+      "kind": "FollowEnd",
+      "gameTime": 18.046870640345983,
+      "audioTime": 17.60185929281371,
+      "audioSampleFromPosition": 776241.9948130846,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 132.0885772705078
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.932220458984375,
+      "ext": "",
+      "sourceIndex": 51,
+      "kind": "Jump",
+      "gameTime": 18.869796752929688,
+      "audioTime": 18.424785405397415,
+      "audioSampleFromPosition": 812533.036378026,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 134.0207977294922
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.9323883056640625,
+      "ext": "",
+      "sourceIndex": 52,
+      "kind": "Jump",
+      "gameTime": 19.145828247070312,
+      "audioTime": 18.70081689953804,
+      "audioSampleFromPosition": 824706.0252696276,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 135.95318603515625
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.89569091796875,
+      "ext": "",
+      "sourceIndex": 53,
+      "kind": "Jump",
+      "gameTime": 19.421883719308035,
+      "audioTime": 18.976872371775762,
+      "audioSampleFromPosition": 836880.0715953112,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 137.848876953125
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.9323883056640625,
+      "ext": "",
+      "sourceIndex": 54,
+      "kind": "Jump",
+      "gameTime": 19.692696707589285,
+      "audioTime": 19.247685360057012,
+      "audioSampleFromPosition": 848822.9243785143,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 139.78126525878906
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.9322357177734375,
+      "ext": "",
+      "sourceIndex": 55,
+      "kind": "Jump",
+      "gameTime": 19.96875217982701,
+      "audioTime": 19.523740832294738,
+      "audioSampleFromPosition": 860996.970704198,
+      "holdTicks": []
+    },
+    {
+      "id": 1,
+      "name": "Theme",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 141.7135009765625
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 7.656341552734375,
+      "ext": "",
+      "sourceIndex": 56,
+      "kind": "Theme",
+      "gameTime": 20.244785853794642,
+      "audioTime": 19.79977450626237,
+      "audioSampleFromPosition": 873170.0557261705,
+      "holdTicks": []
+    },
+    {
+      "id": 1,
+      "name": "BigJump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 149.36984252929688
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 3.828094482421875,
+      "ext": "",
+      "sourceIndex": 57,
+      "kind": "BigJump",
+      "gameTime": 21.338548932756698,
+      "audioTime": 20.893537585224426,
+      "audioSampleFromPosition": 921405.0075083972,
+      "holdTicks": []
+    },
+    {
+      "id": 1,
+      "name": "BigJump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 153.19793701171875
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 4.01031494140625,
+      "ext": "",
+      "sourceIndex": 58,
+      "kind": "BigJump",
+      "gameTime": 21.885419573102677,
+      "audioTime": 21.440408225570405,
+      "audioSampleFromPosition": 945522.0027476548,
+      "holdTicks": []
+    },
+    {
+      "id": 2,
+      "name": "Hold",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 157.208251953125
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": -3.828247547149658
+      },
+      "jumpDistance": 3.791595458984375,
+      "ext": "157.2083,161.0365",
+      "sourceIndex": 59,
+      "kind": "Hold",
+      "gameTime": 22.458321707589285,
+      "audioTime": 22.013310360057012,
+      "audioSampleFromPosition": 970786.9868785143,
+      "holdTicks": [
+        {
+          "z": 157.2083,
+          "gameTime": 22.458328571428574,
+          "audioTime": 22.0133172238963
+        },
+        {
+          "z": 161.0365,
+          "gameTime": 23.005214285714285,
+          "audioTime": 22.560202938182012
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "BigJump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 164.82809448242188
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 3.791748046875,
+      "ext": "",
+      "sourceIndex": 60,
+      "kind": "BigJump",
+      "gameTime": 23.546870640345983,
+      "audioTime": 23.10185929281371,
+      "audioSampleFromPosition": 1018791.9948130846,
+      "holdTicks": []
+    },
+    {
+      "id": 1,
+      "name": "BigJump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 168.61984252929688
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 3.7550811767578125,
+      "ext": "",
+      "sourceIndex": 61,
+      "kind": "BigJump",
+      "gameTime": 24.088548932756698,
+      "audioTime": 23.643537585224426,
+      "audioSampleFromPosition": 1042680.0075083972,
+      "holdTicks": []
+    },
+    {
+      "id": 2,
+      "name": "Hold",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 172.3749237060547
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": -3.9739537239074707
+      },
+      "jumpDistance": 3.7552490234375,
+      "ext": "172.3749,176.3489",
+      "sourceIndex": 62,
+      "kind": "Hold",
+      "gameTime": 24.624989100864955,
+      "audioTime": 24.179977753332683,
+      "audioSampleFromPosition": 1066337.0189219713,
+      "holdTicks": [
+        {
+          "z": 172.3749,
+          "gameTime": 24.624985714285714,
+          "audioTime": 24.17997436675344
+        },
+        {
+          "z": 176.3489,
+          "gameTime": 25.1927,
+          "audioTime": 24.747688652467726
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 180.1041259765625
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.932373046875,
+      "ext": "",
+      "sourceIndex": 63,
+      "kind": "Jump",
+      "gameTime": 25.729160853794642,
+      "audioTime": 25.28414950626237,
+      "audioSampleFromPosition": 1115030.9932261705,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 182.0364990234375
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.895721435546875,
+      "ext": "",
+      "sourceIndex": 64,
+      "kind": "Jump",
+      "gameTime": 26.005214146205358,
+      "audioTime": 25.560202798673085,
+      "audioSampleFromPosition": 1127204.943421483,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 183.93222045898438
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.932373046875,
+      "ext": "",
+      "sourceIndex": 65,
+      "kind": "Jump",
+      "gameTime": 26.276031494140625,
+      "audioTime": 25.831020146608353,
+      "audioSampleFromPosition": 1139147.9884654284,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 185.86459350585938
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.932220458984375,
+      "ext": "",
+      "sourceIndex": 66,
+      "kind": "Jump",
+      "gameTime": 26.55208478655134,
+      "audioTime": 26.107073439019068,
+      "audioSampleFromPosition": 1151321.9386607409,
+      "holdTicks": []
+    },
+    {
+      "id": 1,
+      "name": "BigJump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 187.79681396484375
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 5.7239837646484375,
+      "ext": "",
+      "sourceIndex": 67,
+      "kind": "BigJump",
+      "gameTime": 26.828116280691965,
+      "audioTime": 26.383104933159693,
+      "audioSampleFromPosition": 1163494.9275523424,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 193.5207977294922
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.9323883056640625,
+      "ext": "",
+      "sourceIndex": 68,
+      "kind": "Jump",
+      "gameTime": 27.645828247070312,
+      "audioTime": 27.20081689953804,
+      "audioSampleFromPosition": 1199556.0252696276,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 195.45318603515625
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.89569091796875,
+      "ext": "",
+      "sourceIndex": 69,
+      "kind": "Jump",
+      "gameTime": 27.921883719308035,
+      "audioTime": 27.476872371775762,
+      "audioSampleFromPosition": 1211730.0715953112,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 197.348876953125
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.9323883056640625,
+      "ext": "",
+      "sourceIndex": 70,
+      "kind": "Jump",
+      "gameTime": 28.192696707589285,
+      "audioTime": 27.747685360057012,
+      "audioSampleFromPosition": 1223672.9243785143,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 199.28126525878906
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.9322357177734375,
+      "ext": "",
+      "sourceIndex": 71,
+      "kind": "Jump",
+      "gameTime": 28.46875217982701,
+      "audioTime": 28.023740832294738,
+      "audioSampleFromPosition": 1235846.970704198,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 201.2135009765625
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.8958587646484375,
+      "ext": "",
+      "sourceIndex": 72,
+      "kind": "Jump",
+      "gameTime": 28.744785853794642,
+      "audioTime": 28.29977450626237,
+      "audioSampleFromPosition": 1248020.0557261705,
+      "holdTicks": []
+    },
+    {
+      "id": 1,
+      "name": "Theme",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 203.10935974121094
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 7.76556396484375,
+      "ext": "",
+      "sourceIndex": 73,
+      "kind": "Theme",
+      "gameTime": 29.01562282017299,
+      "audioTime": 28.570611472640717,
+      "audioSampleFromPosition": 1259963.9659434557,
+      "holdTicks": []
+    },
+    {
+      "id": 1,
+      "name": "BigJump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 210.8749237060547
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 3.682373046875,
+      "ext": "",
+      "sourceIndex": 74,
+      "kind": "BigJump",
+      "gameTime": 30.124989100864955,
+      "audioTime": 29.679977753332683,
+      "audioSampleFromPosition": 1308887.0189219713,
+      "holdTicks": []
+    },
+    {
+      "id": 1,
+      "name": "BigJump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 214.5572967529297
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 3.8281097412109375,
+      "ext": "",
+      "sourceIndex": 75,
+      "kind": "BigJump",
+      "gameTime": 30.65104239327567,
+      "audioTime": 30.206031045743398,
+      "audioSampleFromPosition": 1332085.9691172838,
+      "holdTicks": []
+    },
+    {
+      "id": 2,
+      "name": "Hold",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 218.38540649414062
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": -3.901093006134033
+      },
+      "jumpDistance": 3.9009552001953125,
+      "ext": "218.3854,222.2865",
+      "sourceIndex": 76,
+      "kind": "Hold",
+      "gameTime": 31.19791521344866,
+      "audioTime": 30.752903865916387,
+      "audioSampleFromPosition": 1356203.0604869127,
+      "holdTicks": [
+        {
+          "z": 218.3854,
+          "gameTime": 31.197914285714287,
+          "audioTime": 30.752902938182014
+        },
+        {
+          "z": 222.2865,
+          "gameTime": 31.755214285714285,
+          "audioTime": 31.310202938182012
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "BigJump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 226.1874542236328
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 3.791748046875,
+      "ext": "",
+      "sourceIndex": 77,
+      "kind": "BigJump",
+      "gameTime": 32.31249346051897,
+      "audioTime": 31.8674821129867,
+      "audioSampleFromPosition": 1405355.9611827135,
+      "holdTicks": []
+    },
+    {
+      "id": 1,
+      "name": "BigJump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 229.9792022705078
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 3.8646087646484375,
+      "ext": "",
+      "sourceIndex": 78,
+      "kind": "BigJump",
+      "gameTime": 32.85417175292969,
+      "audioTime": 32.409160405397415,
+      "audioSampleFromPosition": 1429243.973878026,
+      "holdTicks": []
+    },
+    {
+      "id": 2,
+      "name": "Hold",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 233.84381103515625
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": -3.791595935821533
+      },
+      "jumpDistance": 3.864593505859375,
+      "ext": "233.8438,237.6354",
+      "sourceIndex": 79,
+      "kind": "Hold",
+      "gameTime": 33.406258719308035,
+      "audioTime": 32.96124737177576,
+      "audioSampleFromPosition": 1453591.0090953112,
+      "holdTicks": [
+        {
+          "z": 233.8438,
+          "gameTime": 33.40625714285714,
+          "audioTime": 32.96124579532487
+        },
+        {
+          "z": 237.6354,
+          "gameTime": 33.94791428571428,
+          "audioTime": 33.50290293818201
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 241.5
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.8958740234375,
+      "ext": "",
+      "sourceIndex": 80,
+      "kind": "Jump",
+      "gameTime": 34.5,
+      "audioTime": 34.05498865246773,
+      "audioSampleFromPosition": 1501824.9995738268,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.5,
+        "y": 0.0,
+        "z": 243.3958740234375
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.932220458984375,
+      "ext": "",
+      "sourceIndex": 81,
+      "kind": "Jump",
+      "gameTime": 34.770839146205354,
+      "audioTime": 34.32582779867308,
+      "audioSampleFromPosition": 1513769.0059214828,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 245.32809448242188
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.8958740234375,
+      "ext": "",
+      "sourceIndex": 82,
+      "kind": "Jump",
+      "gameTime": 35.04687064034598,
+      "audioTime": 34.60185929281371,
+      "audioSampleFromPosition": 1525941.9948130844,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 247.22396850585938
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.932220458984375,
+      "ext": "",
+      "sourceIndex": 83,
+      "kind": "Jump",
+      "gameTime": 35.31770978655134,
+      "audioTime": 34.87269843901907,
+      "audioSampleFromPosition": 1537886.0011607409,
+      "holdTicks": []
+    },
+    {
+      "id": 1,
+      "name": "BigJump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 249.15618896484375
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 5.7969970703125,
+      "ext": "",
+      "sourceIndex": 84,
+      "kind": "BigJump",
+      "gameTime": 35.593741280691965,
+      "audioTime": 35.14872993315969,
+      "audioSampleFromPosition": 1550058.9900523424,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 254.95318603515625
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.932220458984375,
+      "ext": "",
+      "sourceIndex": 85,
+      "kind": "Jump",
+      "gameTime": 36.421883719308035,
+      "audioTime": 35.97687237177576,
+      "audioSampleFromPosition": 1586580.0715953112,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 256.8854064941406
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.8958740234375,
+      "ext": "",
+      "sourceIndex": 86,
+      "kind": "Jump",
+      "gameTime": 36.69791521344866,
+      "audioTime": 36.25290386591639,
+      "audioSampleFromPosition": 1598753.0604869127,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": -0.5,
+        "y": 0.0,
+        "z": 258.7812805175781
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.932220458984375,
+      "ext": "",
+      "sourceIndex": 87,
+      "kind": "Jump",
+      "gameTime": 36.96875435965402,
+      "audioTime": 36.52374301212175,
+      "audioSampleFromPosition": 1610697.0668345692,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 260.7135009765625
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.932373046875,
+      "ext": "",
+      "sourceIndex": 88,
+      "kind": "Jump",
+      "gameTime": 37.244785853794646,
+      "audioTime": 36.799774506262374,
+      "audioSampleFromPosition": 1622870.0557261708,
+      "holdTicks": []
+    },
+    {
+      "id": 0,
+      "name": "Jump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 262.6458740234375
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 1.895721435546875,
+      "ext": "",
+      "sourceIndex": 89,
+      "kind": "Jump",
+      "gameTime": 37.520839146205354,
+      "audioTime": 37.07582779867308,
+      "audioSampleFromPosition": 1635044.0059214828,
+      "holdTicks": []
+    },
+    {
+      "id": 1,
+      "name": "FinishJump",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 264.5415954589844
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.7750000357627869,
+        "y": -0.7750000357627869
+      },
+      "jumpDistance": 5.0,
+      "ext": "",
+      "sourceIndex": 90,
+      "kind": "FinishJump",
+      "gameTime": 37.791656494140625,
+      "audioTime": 37.34664514660835,
+      "audioSampleFromPosition": 1646987.0509654284,
+      "holdTicks": []
+    },
+    {
+      "id": 7,
+      "name": "MidShotItem",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 91,
+      "kind": "MidShotItem",
+      "gameTime": 0.0,
+      "audioTime": -0.44501134753227234,
+      "audioSampleFromPosition": -19625.00042617321,
+      "holdTicks": []
+    },
+    {
+      "id": 7,
+      "name": "MidShotItem",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 50.0
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 92,
+      "kind": "MidShotItem",
+      "gameTime": 7.142857142857143,
+      "audioTime": 6.697845795324871,
+      "audioSampleFromPosition": 295374.9995738268,
+      "holdTicks": []
+    },
+    {
+      "id": 7,
+      "name": "MidShotItem",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 100.0
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 93,
+      "kind": "MidShotItem",
+      "gameTime": 14.285714285714286,
+      "audioTime": 13.840702938182014,
+      "audioSampleFromPosition": 610374.9995738268,
+      "holdTicks": []
+    },
+    {
+      "id": 7,
+      "name": "MidShotItem",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 150.0
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 94,
+      "kind": "MidShotItem",
+      "gameTime": 21.428571428571427,
+      "audioTime": 20.983560081039155,
+      "audioSampleFromPosition": 925374.9995738267,
+      "holdTicks": []
+    },
+    {
+      "id": 7,
+      "name": "MidShotItem",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 200.0
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 95,
+      "kind": "MidShotItem",
+      "gameTime": 28.571428571428573,
+      "audioTime": 28.1264172238963,
+      "audioSampleFromPosition": 1240374.9995738268,
+      "holdTicks": []
+    },
+    {
+      "id": 7,
+      "name": "MidShotItem",
+      "pos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 250.0
+      },
+      "updateType": 0,
+      "begin": 50.0,
+      "end": 5.0,
+      "mstartPos": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "mfendPos": 0.0,
+      "msLeft": 0,
+      "se": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "jumpDistance": 0.0,
+      "ext": "",
+      "sourceIndex": 96,
+      "kind": "MidShotItem",
+      "gameTime": 35.714285714285715,
+      "audioTime": 35.26927436675344,
+      "audioSampleFromPosition": 1555374.9995738268,
+      "holdTicks": []
+    }
+  ],
+  "segments": [
+    {
+      "sourceIndex": 0,
+      "kind": "Start",
+      "name": "Start",
+      "id": 0,
+      "x": 0.0,
+      "z": 0.0,
+      "endZ": 0.0,
+      "gameTime": 0.0,
+      "audioTime": -0.44501134753227234,
+      "endGameTime": 0.0,
+      "endAudioTime": -0.44501134753227234,
+      "duration": 0.0,
+      "elementIndices": [
+        0
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.6499999761581421,
+          "y": -0.6499999761581421
+        },
+        "jumpDistance": 3.5,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 1,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.0,
+      "z": 3.5,
+      "endZ": 3.5,
+      "gameTime": 0.5,
+      "audioTime": 0.05498865246772766,
+      "endGameTime": 0.5,
+      "endAudioTime": 0.05498865246772766,
+      "duration": 0.0,
+      "elementIndices": [
+        1
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 3.8280954360961914,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 2,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.0,
+      "z": 7.328095436096191,
+      "endZ": 7.328095436096191,
+      "gameTime": 1.0468707765851701,
+      "audioTime": 0.6018594290528978,
+      "endGameTime": 1.0468707765851701,
+      "endAudioTime": 0.6018594290528978,
+      "duration": 0.0,
+      "elementIndices": [
+        2
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 3.8280954360961914,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 3,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.0,
+      "z": 11.156190872192383,
+      "endZ": 11.156190872192383,
+      "gameTime": 1.5937415531703405,
+      "audioTime": 1.1487302056380682,
+      "endGameTime": 1.5937415531703405,
+      "endAudioTime": 1.1487302056380682,
+      "duration": 0.0,
+      "elementIndices": [
+        3
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 3.828253746032715,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 4,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.0,
+      "z": 14.984444618225098,
+      "endZ": 14.984444618225098,
+      "gameTime": 2.1406349454607283,
+      "audioTime": 1.695623597928456,
+      "endGameTime": 2.1406349454607283,
+      "endAudioTime": 1.695623597928456,
+      "duration": 0.0,
+      "elementIndices": [
+        4
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 3.864443778991699,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 5,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.0,
+      "z": 18.848888397216797,
+      "endZ": 18.848888397216797,
+      "gameTime": 2.6926983424595425,
+      "audioTime": 2.24768699492727,
+      "endGameTime": 2.6926983424595425,
+      "endAudioTime": 2.24768699492727,
+      "duration": 0.0,
+      "elementIndices": [
+        5
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 5.760477066040039,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 6,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 24.609365463256836,
+      "endZ": 24.609365463256836,
+      "gameTime": 3.5156236376081194,
+      "audioTime": 3.070612290075847,
+      "endGameTime": 3.5156236376081194,
+      "endAudioTime": 3.070612290075847,
+      "duration": 0.0,
+      "elementIndices": [
+        6
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.8958721160888672,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 7,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 26.505237579345703,
+      "endZ": 26.505237579345703,
+      "gameTime": 3.7864625113351003,
+      "audioTime": 3.341451163802828,
+      "endGameTime": 3.7864625113351003,
+      "endAudioTime": 3.341451163802828,
+      "duration": 0.0,
+      "elementIndices": [
+        7
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.9322223663330078,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 8,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 28.43745994567871,
+      "endZ": 28.43745994567871,
+      "gameTime": 4.062494277954102,
+      "audioTime": 3.6174829304218292,
+      "endGameTime": 4.062494277954102,
+      "endAudioTime": 3.6174829304218292,
+      "duration": 0.0,
+      "elementIndices": [
+        8
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.9323806762695312,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 9,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 30.369840621948242,
+      "endZ": 30.369840621948242,
+      "gameTime": 4.33854866027832,
+      "audioTime": 3.893537312746048,
+      "endGameTime": 4.33854866027832,
+      "endAudioTime": 3.893537312746048,
+      "duration": 0.0,
+      "elementIndices": [
+        9
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.8957157135009766,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 10,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 32.26555633544922,
+      "endZ": 32.26555633544922,
+      "gameTime": 4.60936519077846,
+      "audioTime": 4.164353843246188,
+      "endGameTime": 4.60936519077846,
+      "endAudioTime": 4.164353843246188,
+      "duration": 0.0,
+      "elementIndices": [
+        10
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.9323806762695312,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 11,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 34.19793701171875,
+      "endZ": 34.19793701171875,
+      "gameTime": 4.885419573102679,
+      "audioTime": 4.4404082255704065,
+      "endGameTime": 4.885419573102679,
+      "endAudioTime": 4.4404082255704065,
+      "duration": 0.0,
+      "elementIndices": [
+        11
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 5.650951385498047,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 12,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 39.8488883972168,
+      "endZ": 39.8488883972168,
+      "gameTime": 5.6926983424595425,
+      "audioTime": 5.24768699492727,
+      "endGameTime": 5.6926983424595425,
+      "endAudioTime": 5.24768699492727,
+      "duration": 0.0,
+      "elementIndices": [
+        12
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.8958702087402344,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 13,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 41.74475860595703,
+      "endZ": 41.74475860595703,
+      "gameTime": 5.963536943708148,
+      "audioTime": 5.518525596175875,
+      "endGameTime": 5.963536943708148,
+      "endAudioTime": 5.518525596175875,
+      "duration": 0.0,
+      "elementIndices": [
+        13
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.9323806762695312,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 14,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 43.67713928222656,
+      "endZ": 43.67713928222656,
+      "gameTime": 6.239591326032366,
+      "audioTime": 5.794579978500094,
+      "endGameTime": 6.239591326032366,
+      "endAudioTime": 5.794579978500094,
+      "duration": 0.0,
+      "elementIndices": [
+        14
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.9322242736816406,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 15,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 45.6093635559082,
+      "endZ": 45.6093635559082,
+      "gameTime": 6.515623365129743,
+      "audioTime": 6.070612017597471,
+      "endGameTime": 6.515623365129743,
+      "endAudioTime": 6.070612017597471,
+      "duration": 0.0,
+      "elementIndices": [
+        15
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.8958778381347656,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 16,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 47.50524139404297,
+      "endZ": 47.50524139404297,
+      "gameTime": 6.786463056291852,
+      "audioTime": 6.34145170875958,
+      "endGameTime": 6.786463056291852,
+      "endAudioTime": 6.34145170875958,
+      "duration": 0.0,
+      "elementIndices": [
+        16
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.932220458984375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 17,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 49.437461853027344,
+      "endZ": 49.437461853027344,
+      "gameTime": 7.062494550432477,
+      "audioTime": 6.617483202900205,
+      "endGameTime": 7.062494550432477,
+      "endAudioTime": 6.617483202900205,
+      "duration": 0.0,
+      "elementIndices": [
+        17
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 5.760475158691406,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 18,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 55.19793701171875,
+      "endZ": 55.19793701171875,
+      "gameTime": 7.885419573102679,
+      "audioTime": 7.4404082255704065,
+      "endGameTime": 7.885419573102679,
+      "endAudioTime": 7.4404082255704065,
+      "duration": 0.0,
+      "elementIndices": [
+        18
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.8958740234375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 19,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 57.09381103515625,
+      "endZ": 57.09381103515625,
+      "gameTime": 8.156258719308036,
+      "audioTime": 7.711247371775764,
+      "endGameTime": 8.156258719308036,
+      "endAudioTime": 7.711247371775764,
+      "duration": 0.0,
+      "elementIndices": [
+        19
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.932220458984375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 20,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 59.026031494140625,
+      "endZ": 59.026031494140625,
+      "gameTime": 8.432290213448661,
+      "audioTime": 7.987278865916389,
+      "endGameTime": 8.432290213448661,
+      "endAudioTime": 7.987278865916389,
+      "duration": 0.0,
+      "elementIndices": [
+        20
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.932220458984375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 21,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 60.958251953125,
+      "endZ": 60.958251953125,
+      "gameTime": 8.708321707589286,
+      "audioTime": 8.263310360057014,
+      "endGameTime": 8.708321707589286,
+      "endAudioTime": 8.263310360057014,
+      "duration": 0.0,
+      "elementIndices": [
+        21
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.8958778381347656,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 22,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 62.854129791259766,
+      "endZ": 62.854129791259766,
+      "gameTime": 8.979161398751396,
+      "audioTime": 8.534150051219124,
+      "endGameTime": 8.979161398751396,
+      "endAudioTime": 8.534150051219124,
+      "duration": 0.0,
+      "elementIndices": [
+        22
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.9323768615722656,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 23,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 64.78650665283203,
+      "endZ": 64.78650665283203,
+      "gameTime": 9.255215236118861,
+      "audioTime": 8.810203888586589,
+      "endGameTime": 9.255215236118861,
+      "endAudioTime": 8.810203888586589,
+      "duration": 0.0,
+      "elementIndices": [
+        23
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 5.760322570800781,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 24,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 70.54682922363281,
+      "endZ": 70.54682922363281,
+      "gameTime": 10.078118460518974,
+      "audioTime": 9.633107112986702,
+      "endGameTime": 10.078118460518974,
+      "endAudioTime": 9.633107112986702,
+      "duration": 0.0,
+      "elementIndices": [
+        24
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.9323806762695312,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 25,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 72.47920989990234,
+      "endZ": 72.47920989990234,
+      "gameTime": 10.354172842843193,
+      "audioTime": 9.90916149531092,
+      "endGameTime": 10.354172842843193,
+      "endAudioTime": 9.90916149531092,
+      "duration": 0.0,
+      "elementIndices": [
+        25
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.8957138061523438,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 26,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 74.37492370605469,
+      "endZ": 74.37492370605469,
+      "gameTime": 10.624989100864955,
+      "audioTime": 10.179977753332683,
+      "endGameTime": 10.624989100864955,
+      "endAudioTime": 10.179977753332683,
+      "duration": 0.0,
+      "elementIndices": [
+        26
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.932373046875,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 27,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 76.30729675292969,
+      "endZ": 76.30729675292969,
+      "gameTime": 10.90104239327567,
+      "audioTime": 10.456031045743398,
+      "endGameTime": 10.90104239327567,
+      "endAudioTime": 10.456031045743398,
+      "duration": 0.0,
+      "elementIndices": [
+        27
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.932220458984375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 28,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 78.23951721191406,
+      "endZ": 78.23951721191406,
+      "gameTime": 11.177073887416295,
+      "audioTime": 10.732062539884023,
+      "endGameTime": 11.177073887416295,
+      "endAudioTime": 10.732062539884023,
+      "duration": 0.0,
+      "elementIndices": [
+        28
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.8958816528320312,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 29,
+      "kind": "Theme",
+      "name": "Theme",
+      "id": 1,
+      "x": -0.5,
+      "z": 80.1353988647461,
+      "endZ": 80.1353988647461,
+      "gameTime": 11.447914123535156,
+      "audioTime": 11.002902776002884,
+      "endGameTime": 11.447914123535156,
+      "endAudioTime": 11.002902776002884,
+      "duration": 0.0,
+      "elementIndices": [
+        29
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 5.760475158691406,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 30,
+      "kind": "Follow",
+      "name": "Follow",
+      "id": 4,
+      "x": 0.5,
+      "z": 85.8958740234375,
+      "endZ": 95.52079010009766,
+      "gameTime": 12.270839146205358,
+      "audioTime": 11.825827798673085,
+      "endGameTime": 13.645827157156807,
+      "endAudioTime": 13.200815809624535,
+      "duration": 1.374988010951451,
+      "elementIndices": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36
+      ],
+      "holdTicks": [],
+      "path": [
+        {
+          "sourceIndex": 31,
+          "kind": "FollowMids",
+          "x": 0.5,
+          "z": 87.82809448242188,
+          "gameTime": 12.546870640345983,
+          "audioTime": 12.10185929281371,
+          "relativeTime": 0.276031494140625,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 32,
+          "kind": "FollowMids",
+          "x": 0.5,
+          "z": 89.76048278808594,
+          "gameTime": 12.822926112583705,
+          "audioTime": 12.377914765051433,
+          "relativeTime": 0.5520869663783482,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 33,
+          "kind": "FollowMids",
+          "x": 0.5,
+          "z": 91.65618896484375,
+          "gameTime": 13.093741280691964,
+          "audioTime": 12.648729933159691,
+          "relativeTime": 0.8229021344866071,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 34,
+          "kind": "FollowMids",
+          "x": 0.5,
+          "z": 93.58856964111328,
+          "gameTime": 13.369795663016182,
+          "audioTime": 12.92478431548391,
+          "relativeTime": 1.098956516810826,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 35,
+          "kind": "FollowMids",
+          "x": 0.5,
+          "z": 95.55000305175781,
+          "gameTime": 13.650000435965401,
+          "audioTime": 13.204989088433129,
+          "relativeTime": 1.3791612897600447,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 36,
+          "kind": "FollowEnd",
+          "x": 0.0,
+          "z": 95.52079010009766,
+          "gameTime": 13.645827157156807,
+          "audioTime": 13.200815809624535,
+          "relativeTime": 1.374988010951451,
+          "updateType": 0,
+          "msLeft": 0
+        }
+      ],
+      "motion": {
+        "updateType": 2,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 9.624916076660156,
+        "msLeft": 0,
+        "se": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "jumpDistance": 0.0,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 37,
+      "kind": "Follow",
+      "name": "Follow",
+      "id": 4,
+      "x": -0.5,
+      "z": 101.2812728881836,
+      "endZ": 110.86984252929688,
+      "gameTime": 14.468753269740514,
+      "audioTime": 14.023741922208242,
+      "endGameTime": 15.838548932756696,
+      "endAudioTime": 15.393537585224424,
+      "duration": 1.369795663016183,
+      "elementIndices": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "holdTicks": [],
+      "path": [
+        {
+          "sourceIndex": 38,
+          "kind": "FollowMids",
+          "x": -0.5,
+          "z": 103.17713928222656,
+          "gameTime": 14.739591326032366,
+          "audioTime": 14.294579978500094,
+          "relativeTime": 0.2708380562918527,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 39,
+          "kind": "FollowMids",
+          "x": -0.5,
+          "z": 105.10936737060547,
+          "gameTime": 15.015623910086495,
+          "audioTime": 14.570612562554222,
+          "relativeTime": 0.5468706403459821,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 40,
+          "kind": "FollowMids",
+          "x": -0.5,
+          "z": 107.00524139404297,
+          "gameTime": 15.286463056291852,
+          "audioTime": 14.84145170875958,
+          "relativeTime": 0.8177097865513393,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 41,
+          "kind": "FollowMids",
+          "x": -0.5,
+          "z": 108.93746185302734,
+          "gameTime": 15.562494550432477,
+          "audioTime": 15.117483202900205,
+          "relativeTime": 1.0937412806919642,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 42,
+          "kind": "FollowMids",
+          "x": -0.5,
+          "z": 110.86000061035156,
+          "gameTime": 15.837142944335938,
+          "audioTime": 15.392131596803665,
+          "relativeTime": 1.368389674595424,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 43,
+          "kind": "FollowEnd",
+          "x": 0.0,
+          "z": 110.86984252929688,
+          "gameTime": 15.838548932756696,
+          "audioTime": 15.393537585224424,
+          "relativeTime": 1.369795663016183,
+          "updateType": 0,
+          "msLeft": 0
+        }
+      ],
+      "motion": {
+        "updateType": 2,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 9.588569641113281,
+        "msLeft": 0,
+        "se": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "jumpDistance": 0.0,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 44,
+      "kind": "Follow",
+      "name": "Follow",
+      "id": 4,
+      "x": 0.5,
+      "z": 116.73951721191406,
+      "endZ": 126.32809448242188,
+      "gameTime": 16.677073887416295,
+      "audioTime": 16.232062539884023,
+      "endGameTime": 18.046870640345983,
+      "endAudioTime": 17.60185929281371,
+      "duration": 1.3697967529296875,
+      "elementIndices": [
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "holdTicks": [],
+      "path": [
+        {
+          "sourceIndex": 45,
+          "kind": "FollowMids",
+          "x": 0.5,
+          "z": 118.67190551757812,
+          "gameTime": 16.953129359654017,
+          "audioTime": 16.508118012121745,
+          "relativeTime": 0.2760554722377232,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 46,
+          "kind": "FollowMids",
+          "x": 0.5,
+          "z": 120.56777954101562,
+          "gameTime": 17.223968505859375,
+          "audioTime": 16.778957158327103,
+          "relativeTime": 0.5468946184430804,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 47,
+          "kind": "FollowMids",
+          "x": 0.5,
+          "z": 122.5,
+          "gameTime": 17.5,
+          "audioTime": 17.054988652467728,
+          "relativeTime": 0.8229261125837054,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 48,
+          "kind": "FollowMids",
+          "x": 0.5,
+          "z": 124.43222045898438,
+          "gameTime": 17.776031494140625,
+          "audioTime": 17.331020146608353,
+          "relativeTime": 1.0989576067243303,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 49,
+          "kind": "FollowMids",
+          "x": 0.5,
+          "z": 126.30999755859375,
+          "gameTime": 18.044285365513392,
+          "audioTime": 17.59927401798112,
+          "relativeTime": 1.3672114780970983,
+          "updateType": 0,
+          "msLeft": 0
+        },
+        {
+          "sourceIndex": 50,
+          "kind": "FollowEnd",
+          "x": 0.0,
+          "z": 126.32809448242188,
+          "gameTime": 18.046870640345983,
+          "audioTime": 17.60185929281371,
+          "relativeTime": 1.3697967529296875,
+          "updateType": 0,
+          "msLeft": 0
+        }
+      ],
+      "motion": {
+        "updateType": 2,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 9.588577270507812,
+        "msLeft": 0,
+        "se": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "jumpDistance": 0.0,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 51,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 132.0885772705078,
+      "endZ": 132.0885772705078,
+      "gameTime": 18.869796752929688,
+      "audioTime": 18.424785405397415,
+      "endGameTime": 18.869796752929688,
+      "endAudioTime": 18.424785405397415,
+      "duration": 0.0,
+      "elementIndices": [
+        51
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.932220458984375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 52,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 134.0207977294922,
+      "endZ": 134.0207977294922,
+      "gameTime": 19.145828247070312,
+      "audioTime": 18.70081689953804,
+      "endGameTime": 19.145828247070312,
+      "endAudioTime": 18.70081689953804,
+      "duration": 0.0,
+      "elementIndices": [
+        52
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.9323883056640625,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 53,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 135.95318603515625,
+      "endZ": 135.95318603515625,
+      "gameTime": 19.421883719308035,
+      "audioTime": 18.976872371775762,
+      "endGameTime": 19.421883719308035,
+      "endAudioTime": 18.976872371775762,
+      "duration": 0.0,
+      "elementIndices": [
+        53
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.89569091796875,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 54,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 137.848876953125,
+      "endZ": 137.848876953125,
+      "gameTime": 19.692696707589285,
+      "audioTime": 19.247685360057012,
+      "endGameTime": 19.692696707589285,
+      "endAudioTime": 19.247685360057012,
+      "duration": 0.0,
+      "elementIndices": [
+        54
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.9323883056640625,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 55,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 139.78126525878906,
+      "endZ": 139.78126525878906,
+      "gameTime": 19.96875217982701,
+      "audioTime": 19.523740832294738,
+      "endGameTime": 19.96875217982701,
+      "endAudioTime": 19.523740832294738,
+      "duration": 0.0,
+      "elementIndices": [
+        55
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.9322357177734375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 56,
+      "kind": "Theme",
+      "name": "Theme",
+      "id": 1,
+      "x": -0.5,
+      "z": 141.7135009765625,
+      "endZ": 141.7135009765625,
+      "gameTime": 20.244785853794642,
+      "audioTime": 19.79977450626237,
+      "endGameTime": 20.244785853794642,
+      "endAudioTime": 19.79977450626237,
+      "duration": 0.0,
+      "elementIndices": [
+        56
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 7.656341552734375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 57,
+      "kind": "BigJump",
+      "name": "BigJump",
+      "id": 1,
+      "x": 0.5,
+      "z": 149.36984252929688,
+      "endZ": 149.36984252929688,
+      "gameTime": 21.338548932756698,
+      "audioTime": 20.893537585224426,
+      "endGameTime": 21.338548932756698,
+      "endAudioTime": 20.893537585224426,
+      "duration": 0.0,
+      "elementIndices": [
+        57
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 3.828094482421875,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 58,
+      "kind": "BigJump",
+      "name": "BigJump",
+      "id": 1,
+      "x": -0.5,
+      "z": 153.19793701171875,
+      "endZ": 153.19793701171875,
+      "gameTime": 21.885419573102677,
+      "audioTime": 21.440408225570405,
+      "endGameTime": 21.885419573102677,
+      "endAudioTime": 21.440408225570405,
+      "duration": 0.0,
+      "elementIndices": [
+        58
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 4.01031494140625,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 59,
+      "kind": "Hold",
+      "name": "Hold",
+      "id": 2,
+      "x": 0.0,
+      "z": 157.208251953125,
+      "endZ": 161.03649950027466,
+      "gameTime": 22.458321707589285,
+      "audioTime": 22.013310360057012,
+      "endGameTime": 23.00521421432495,
+      "endAudioTime": 22.56020286679268,
+      "duration": 0.5468925067356655,
+      "elementIndices": [
+        59
+      ],
+      "holdTicks": [
+        {
+          "z": 157.2083,
+          "gameTime": 22.458328571428574,
+          "audioTime": 22.0133172238963
+        },
+        {
+          "z": 161.0365,
+          "gameTime": 23.005214285714285,
+          "audioTime": 22.560202938182012
+        }
+      ],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.0,
+          "y": -3.828247547149658
+        },
+        "jumpDistance": 3.791595458984375,
+        "ext": "157.2083,161.0365"
+      }
+    },
+    {
+      "sourceIndex": 60,
+      "kind": "BigJump",
+      "name": "BigJump",
+      "id": 1,
+      "x": 0.5,
+      "z": 164.82809448242188,
+      "endZ": 164.82809448242188,
+      "gameTime": 23.546870640345983,
+      "audioTime": 23.10185929281371,
+      "endGameTime": 23.546870640345983,
+      "endAudioTime": 23.10185929281371,
+      "duration": 0.0,
+      "elementIndices": [
+        60
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 3.791748046875,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 61,
+      "kind": "BigJump",
+      "name": "BigJump",
+      "id": 1,
+      "x": -0.5,
+      "z": 168.61984252929688,
+      "endZ": 168.61984252929688,
+      "gameTime": 24.088548932756698,
+      "audioTime": 23.643537585224426,
+      "endGameTime": 24.088548932756698,
+      "endAudioTime": 23.643537585224426,
+      "duration": 0.0,
+      "elementIndices": [
+        61
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 3.7550811767578125,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 62,
+      "kind": "Hold",
+      "name": "Hold",
+      "id": 2,
+      "x": 0.0,
+      "z": 172.3749237060547,
+      "endZ": 176.34887742996216,
+      "gameTime": 24.624989100864955,
+      "audioTime": 24.179977753332683,
+      "endGameTime": 25.192696775708878,
+      "endAudioTime": 24.747685428176606,
+      "duration": 0.5677076748439244,
+      "elementIndices": [
+        62
+      ],
+      "holdTicks": [
+        {
+          "z": 172.3749,
+          "gameTime": 24.624985714285714,
+          "audioTime": 24.17997436675344
+        },
+        {
+          "z": 176.3489,
+          "gameTime": 25.1927,
+          "audioTime": 24.747688652467726
+        }
+      ],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.0,
+          "y": -3.9739537239074707
+        },
+        "jumpDistance": 3.7552490234375,
+        "ext": "172.3749,176.3489"
+      }
+    },
+    {
+      "sourceIndex": 63,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 180.1041259765625,
+      "endZ": 180.1041259765625,
+      "gameTime": 25.729160853794642,
+      "audioTime": 25.28414950626237,
+      "endGameTime": 25.729160853794642,
+      "endAudioTime": 25.28414950626237,
+      "duration": 0.0,
+      "elementIndices": [
+        63
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.932373046875,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 64,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.0,
+      "z": 182.0364990234375,
+      "endZ": 182.0364990234375,
+      "gameTime": 26.005214146205358,
+      "audioTime": 25.560202798673085,
+      "endGameTime": 26.005214146205358,
+      "endAudioTime": 25.560202798673085,
+      "duration": 0.0,
+      "elementIndices": [
+        64
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.895721435546875,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 65,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 183.93222045898438,
+      "endZ": 183.93222045898438,
+      "gameTime": 26.276031494140625,
+      "audioTime": 25.831020146608353,
+      "endGameTime": 26.276031494140625,
+      "endAudioTime": 25.831020146608353,
+      "duration": 0.0,
+      "elementIndices": [
+        65
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.932373046875,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 66,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 185.86459350585938,
+      "endZ": 185.86459350585938,
+      "gameTime": 26.55208478655134,
+      "audioTime": 26.107073439019068,
+      "endGameTime": 26.55208478655134,
+      "endAudioTime": 26.107073439019068,
+      "duration": 0.0,
+      "elementIndices": [
+        66
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.932220458984375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 67,
+      "kind": "BigJump",
+      "name": "BigJump",
+      "id": 1,
+      "x": 0.5,
+      "z": 187.79681396484375,
+      "endZ": 187.79681396484375,
+      "gameTime": 26.828116280691965,
+      "audioTime": 26.383104933159693,
+      "endGameTime": 26.828116280691965,
+      "endAudioTime": 26.383104933159693,
+      "duration": 0.0,
+      "elementIndices": [
+        67
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 5.7239837646484375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 68,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.0,
+      "z": 193.5207977294922,
+      "endZ": 193.5207977294922,
+      "gameTime": 27.645828247070312,
+      "audioTime": 27.20081689953804,
+      "endGameTime": 27.645828247070312,
+      "endAudioTime": 27.20081689953804,
+      "duration": 0.0,
+      "elementIndices": [
+        68
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.9323883056640625,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 69,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.0,
+      "z": 195.45318603515625,
+      "endZ": 195.45318603515625,
+      "gameTime": 27.921883719308035,
+      "audioTime": 27.476872371775762,
+      "endGameTime": 27.921883719308035,
+      "endAudioTime": 27.476872371775762,
+      "duration": 0.0,
+      "elementIndices": [
+        69
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.89569091796875,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 70,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.0,
+      "z": 197.348876953125,
+      "endZ": 197.348876953125,
+      "gameTime": 28.192696707589285,
+      "audioTime": 27.747685360057012,
+      "endGameTime": 28.192696707589285,
+      "endAudioTime": 27.747685360057012,
+      "duration": 0.0,
+      "elementIndices": [
+        70
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.9323883056640625,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 71,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 199.28126525878906,
+      "endZ": 199.28126525878906,
+      "gameTime": 28.46875217982701,
+      "audioTime": 28.023740832294738,
+      "endGameTime": 28.46875217982701,
+      "endAudioTime": 28.023740832294738,
+      "duration": 0.0,
+      "elementIndices": [
+        71
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.9322357177734375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 72,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 201.2135009765625,
+      "endZ": 201.2135009765625,
+      "gameTime": 28.744785853794642,
+      "audioTime": 28.29977450626237,
+      "endGameTime": 28.744785853794642,
+      "endAudioTime": 28.29977450626237,
+      "duration": 0.0,
+      "elementIndices": [
+        72
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.8958587646484375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 73,
+      "kind": "Theme",
+      "name": "Theme",
+      "id": 1,
+      "x": -0.5,
+      "z": 203.10935974121094,
+      "endZ": 203.10935974121094,
+      "gameTime": 29.01562282017299,
+      "audioTime": 28.570611472640717,
+      "endGameTime": 29.01562282017299,
+      "endAudioTime": 28.570611472640717,
+      "duration": 0.0,
+      "elementIndices": [
+        73
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 7.76556396484375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 74,
+      "kind": "BigJump",
+      "name": "BigJump",
+      "id": 1,
+      "x": 0.5,
+      "z": 210.8749237060547,
+      "endZ": 210.8749237060547,
+      "gameTime": 30.124989100864955,
+      "audioTime": 29.679977753332683,
+      "endGameTime": 30.124989100864955,
+      "endAudioTime": 29.679977753332683,
+      "duration": 0.0,
+      "elementIndices": [
+        74
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 3.682373046875,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 75,
+      "kind": "BigJump",
+      "name": "BigJump",
+      "id": 1,
+      "x": -0.5,
+      "z": 214.5572967529297,
+      "endZ": 214.5572967529297,
+      "gameTime": 30.65104239327567,
+      "audioTime": 30.206031045743398,
+      "endGameTime": 30.65104239327567,
+      "endAudioTime": 30.206031045743398,
+      "duration": 0.0,
+      "elementIndices": [
+        75
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 3.8281097412109375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 76,
+      "kind": "Hold",
+      "name": "Hold",
+      "id": 2,
+      "x": 0.0,
+      "z": 218.38540649414062,
+      "endZ": 222.28649950027466,
+      "gameTime": 31.19791521344866,
+      "audioTime": 30.752903865916387,
+      "endGameTime": 31.75521421432495,
+      "endAudioTime": 31.31020286679268,
+      "duration": 0.5572990008762905,
+      "elementIndices": [
+        76
+      ],
+      "holdTicks": [
+        {
+          "z": 218.3854,
+          "gameTime": 31.197914285714287,
+          "audioTime": 30.752902938182014
+        },
+        {
+          "z": 222.2865,
+          "gameTime": 31.755214285714285,
+          "audioTime": 31.310202938182012
+        }
+      ],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.0,
+          "y": -3.901093006134033
+        },
+        "jumpDistance": 3.9009552001953125,
+        "ext": "218.3854,222.2865"
+      }
+    },
+    {
+      "sourceIndex": 77,
+      "kind": "BigJump",
+      "name": "BigJump",
+      "id": 1,
+      "x": 0.5,
+      "z": 226.1874542236328,
+      "endZ": 226.1874542236328,
+      "gameTime": 32.31249346051897,
+      "audioTime": 31.8674821129867,
+      "endGameTime": 32.31249346051897,
+      "endAudioTime": 31.8674821129867,
+      "duration": 0.0,
+      "elementIndices": [
+        77
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 3.791748046875,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 78,
+      "kind": "BigJump",
+      "name": "BigJump",
+      "id": 1,
+      "x": -0.5,
+      "z": 229.9792022705078,
+      "endZ": 229.9792022705078,
+      "gameTime": 32.85417175292969,
+      "audioTime": 32.409160405397415,
+      "endGameTime": 32.85417175292969,
+      "endAudioTime": 32.409160405397415,
+      "duration": 0.0,
+      "elementIndices": [
+        78
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 3.8646087646484375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 79,
+      "kind": "Hold",
+      "name": "Hold",
+      "id": 2,
+      "x": 0.0,
+      "z": 233.84381103515625,
+      "endZ": 237.63540697097778,
+      "gameTime": 33.406258719308035,
+      "audioTime": 32.96124737177576,
+      "endGameTime": 33.94791528156826,
+      "endAudioTime": 33.502903934035984,
+      "duration": 0.5416565622602191,
+      "elementIndices": [
+        79
+      ],
+      "holdTicks": [
+        {
+          "z": 233.8438,
+          "gameTime": 33.40625714285714,
+          "audioTime": 32.96124579532487
+        },
+        {
+          "z": 237.6354,
+          "gameTime": 33.94791428571428,
+          "audioTime": 33.50290293818201
+        }
+      ],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.0,
+          "y": -3.791595935821533
+        },
+        "jumpDistance": 3.864593505859375,
+        "ext": "233.8438,237.6354"
+      }
+    },
+    {
+      "sourceIndex": 80,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 241.5,
+      "endZ": 241.5,
+      "gameTime": 34.5,
+      "audioTime": 34.05498865246773,
+      "endGameTime": 34.5,
+      "endAudioTime": 34.05498865246773,
+      "duration": 0.0,
+      "elementIndices": [
+        80
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.8958740234375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 81,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.5,
+      "z": 243.3958740234375,
+      "endZ": 243.3958740234375,
+      "gameTime": 34.770839146205354,
+      "audioTime": 34.32582779867308,
+      "endGameTime": 34.770839146205354,
+      "endAudioTime": 34.32582779867308,
+      "duration": 0.0,
+      "elementIndices": [
+        81
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.932220458984375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 82,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.0,
+      "z": 245.32809448242188,
+      "endZ": 245.32809448242188,
+      "gameTime": 35.04687064034598,
+      "audioTime": 34.60185929281371,
+      "endGameTime": 35.04687064034598,
+      "endAudioTime": 34.60185929281371,
+      "duration": 0.0,
+      "elementIndices": [
+        82
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.8958740234375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 83,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.0,
+      "z": 247.22396850585938,
+      "endZ": 247.22396850585938,
+      "gameTime": 35.31770978655134,
+      "audioTime": 34.87269843901907,
+      "endGameTime": 35.31770978655134,
+      "endAudioTime": 34.87269843901907,
+      "duration": 0.0,
+      "elementIndices": [
+        83
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.932220458984375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 84,
+      "kind": "BigJump",
+      "name": "BigJump",
+      "id": 1,
+      "x": 0.0,
+      "z": 249.15618896484375,
+      "endZ": 249.15618896484375,
+      "gameTime": 35.593741280691965,
+      "audioTime": 35.14872993315969,
+      "endGameTime": 35.593741280691965,
+      "endAudioTime": 35.14872993315969,
+      "duration": 0.0,
+      "elementIndices": [
+        84
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 5.7969970703125,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 85,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 254.95318603515625,
+      "endZ": 254.95318603515625,
+      "gameTime": 36.421883719308035,
+      "audioTime": 35.97687237177576,
+      "endGameTime": 36.421883719308035,
+      "endAudioTime": 35.97687237177576,
+      "duration": 0.0,
+      "elementIndices": [
+        85
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.932220458984375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 86,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 256.8854064941406,
+      "endZ": 256.8854064941406,
+      "gameTime": 36.69791521344866,
+      "audioTime": 36.25290386591639,
+      "endGameTime": 36.69791521344866,
+      "endAudioTime": 36.25290386591639,
+      "duration": 0.0,
+      "elementIndices": [
+        86
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.8958740234375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 87,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": -0.5,
+      "z": 258.7812805175781,
+      "endZ": 258.7812805175781,
+      "gameTime": 36.96875435965402,
+      "audioTime": 36.52374301212175,
+      "endGameTime": 36.96875435965402,
+      "endAudioTime": 36.52374301212175,
+      "duration": 0.0,
+      "elementIndices": [
+        87
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.932220458984375,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 88,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.0,
+      "z": 260.7135009765625,
+      "endZ": 260.7135009765625,
+      "gameTime": 37.244785853794646,
+      "audioTime": 36.799774506262374,
+      "endGameTime": 37.244785853794646,
+      "endAudioTime": 36.799774506262374,
+      "duration": 0.0,
+      "elementIndices": [
+        88
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.932373046875,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 89,
+      "kind": "Jump",
+      "name": "Jump",
+      "id": 0,
+      "x": 0.0,
+      "z": 262.6458740234375,
+      "endZ": 262.6458740234375,
+      "gameTime": 37.520839146205354,
+      "audioTime": 37.07582779867308,
+      "endGameTime": 37.520839146205354,
+      "endAudioTime": 37.07582779867308,
+      "duration": 0.0,
+      "elementIndices": [
+        89
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 1.895721435546875,
+        "ext": ""
+      }
+    },
+    {
+      "sourceIndex": 90,
+      "kind": "FinishJump",
+      "name": "FinishJump",
+      "id": 1,
+      "x": 0.0,
+      "z": 264.5415954589844,
+      "endZ": 264.5415954589844,
+      "gameTime": 37.791656494140625,
+      "audioTime": 37.34664514660835,
+      "endGameTime": 37.791656494140625,
+      "endAudioTime": 37.34664514660835,
+      "duration": 0.0,
+      "elementIndices": [
+        90
+      ],
+      "holdTicks": [],
+      "path": [],
+      "motion": {
+        "updateType": 0,
+        "begin": 50.0,
+        "end": 5.0,
+        "mstartPos": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "mfendPos": 0.0,
+        "msLeft": 0,
+        "se": {
+          "x": 0.7750000357627869,
+          "y": -0.7750000357627869
+        },
+        "jumpDistance": 5.0,
+        "ext": ""
+      }
+    }
+  ],
+  "events": [
+    {
+      "mStartSample": 2425,
+      "mEndSample": 4262,
+      "index": 0,
+      "command": 23,
+      "audioTime": 0.054988662131519275,
+      "endAudioTime": 0.09664399092970521,
+      "gameTime": 0.5000000096637917,
+      "endGameTime": 0.5416553384619776
+    },
+    {
+      "mStartSample": 26542,
+      "mEndSample": 28609,
+      "index": 1,
+      "command": 23,
+      "audioTime": 0.601859410430839,
+      "endAudioTime": 0.6487301587301587,
+      "gameTime": 1.0468707579631114,
+      "endGameTime": 1.0937415062624312
+    },
+    {
+      "mStartSample": 50659,
+      "mEndSample": 52727,
+      "index": 2,
+      "command": 23,
+      "audioTime": 1.1487301587301588,
+      "endAudioTime": 1.1956235827664399,
+      "gameTime": 1.5937415062624312,
+      "endGameTime": 1.6406349302987122
+    },
+    {
+      "mStartSample": 74777,
+      "mEndSample": 76844,
+      "index": 3,
+      "command": 23,
+      "audioTime": 1.6956235827664399,
+      "endAudioTime": 1.7424943310657597,
+      "gameTime": 2.140634930298712,
+      "endGameTime": 2.187505678598032
+    },
+    {
+      "mStartSample": 99123,
+      "mEndSample": 101191,
+      "index": 4,
+      "command": 23,
+      "audioTime": 2.247687074829932,
+      "endAudioTime": 2.294580498866213,
+      "gameTime": 2.6926984223622044,
+      "endGameTime": 2.7395918463984854
+    },
+    {
+      "mStartSample": 135414,
+      "mEndSample": 137481,
+      "index": 5,
+      "command": 23,
+      "audioTime": 3.0706122448979594,
+      "endAudioTime": 3.117482993197279,
+      "gameTime": 3.5156235924302317,
+      "endGameTime": 3.5624943407295513
+    },
+    {
+      "mStartSample": 147358,
+      "mEndSample": 149425,
+      "index": 6,
+      "command": 23,
+      "audioTime": 3.341451247165533,
+      "endAudioTime": 3.3883219954648527,
+      "gameTime": 3.7864625946978054,
+      "endGameTime": 3.833333342997125
+    },
+    {
+      "mStartSample": 159531,
+      "mEndSample": 161598,
+      "index": 7,
+      "command": 23,
+      "audioTime": 3.617482993197279,
+      "endAudioTime": 3.6643537414965985,
+      "gameTime": 4.062494340729551,
+      "endGameTime": 4.109365089028871
+    },
+    {
+      "mStartSample": 171705,
+      "mEndSample": 173542,
+      "index": 8,
+      "command": 23,
+      "audioTime": 3.8935374149659863,
+      "endAudioTime": 3.9351927437641723,
+      "gameTime": 4.338548762498259,
+      "endGameTime": 4.380204091296445
+    },
+    {
+      "mStartSample": 183648,
+      "mEndSample": 185716,
+      "index": 9,
+      "command": 23,
+      "audioTime": 4.1643537414965985,
+      "endAudioTime": 4.21124716553288,
+      "gameTime": 4.609365089028871,
+      "endGameTime": 4.656258513065152
+    },
+    {
+      "mStartSample": 195822,
+      "mEndSample": 197889,
+      "index": 10,
+      "command": 23,
+      "audioTime": 4.440408163265306,
+      "endAudioTime": 4.487278911564625,
+      "gameTime": 4.885419510797578,
+      "endGameTime": 4.932290259096898
+    },
+    {
+      "mStartSample": 231423,
+      "mEndSample": 233261,
+      "index": 11,
+      "command": 23,
+      "audioTime": 5.247687074829932,
+      "endAudioTime": 5.289365079365079,
+      "gameTime": 5.692698422362204,
+      "endGameTime": 5.734376426897351
+    },
+    {
+      "mStartSample": 243367,
+      "mEndSample": 245434,
+      "index": 12,
+      "command": 23,
+      "audioTime": 5.518526077097506,
+      "endAudioTime": 5.565396825396825,
+      "gameTime": 5.963537424629778,
+      "endGameTime": 6.010408172929098
+    },
+    {
+      "mStartSample": 255541,
+      "mEndSample": 257608,
+      "index": 13,
+      "command": 23,
+      "audioTime": 5.794580498866213,
+      "endAudioTime": 5.841451247165533,
+      "gameTime": 6.239591846398485,
+      "endGameTime": 6.286462594697805
+    },
+    {
+      "mStartSample": 267714,
+      "mEndSample": 269552,
+      "index": 14,
+      "command": 23,
+      "audioTime": 6.070612244897959,
+      "endAudioTime": 6.112290249433107,
+      "gameTime": 6.515623592430232,
+      "endGameTime": 6.557301596965379
+    },
+    {
+      "mStartSample": 279658,
+      "mEndSample": 281725,
+      "index": 15,
+      "command": 23,
+      "audioTime": 6.341451247165533,
+      "endAudioTime": 6.388321995464852,
+      "gameTime": 6.786462594697805,
+      "endGameTime": 6.833333342997125
+    },
+    {
+      "mStartSample": 291831,
+      "mEndSample": 293898,
+      "index": 16,
+      "command": 23,
+      "audioTime": 6.617482993197279,
+      "endAudioTime": 6.6643537414965985,
+      "gameTime": 7.062494340729551,
+      "endGameTime": 7.109365089028871
+    },
+    {
+      "mStartSample": 328122,
+      "mEndSample": 330189,
+      "index": 17,
+      "command": 23,
+      "audioTime": 7.440408163265306,
+      "endAudioTime": 7.487278911564625,
+      "gameTime": 7.885419510797578,
+      "endGameTime": 7.932290259096898
+    },
+    {
+      "mStartSample": 340066,
+      "mEndSample": 342133,
+      "index": 18,
+      "command": 23,
+      "audioTime": 7.71124716553288,
+      "endAudioTime": 7.7581179138322,
+      "gameTime": 8.156258513065152,
+      "endGameTime": 8.203129261364472
+    },
+    {
+      "mStartSample": 352239,
+      "mEndSample": 354306,
+      "index": 19,
+      "command": 23,
+      "audioTime": 7.987278911564625,
+      "endAudioTime": 8.034149659863946,
+      "gameTime": 8.432290259096899,
+      "endGameTime": 8.479161007396218
+    },
+    {
+      "mStartSample": 364412,
+      "mEndSample": 366480,
+      "index": 20,
+      "command": 23,
+      "audioTime": 8.263310657596373,
+      "endAudioTime": 8.310204081632653,
+      "gameTime": 8.708322005128645,
+      "endGameTime": 8.755215429164926
+    },
+    {
+      "mStartSample": 376356,
+      "mEndSample": 378423,
+      "index": 21,
+      "command": 23,
+      "audioTime": 8.534149659863946,
+      "endAudioTime": 8.581020408163266,
+      "gameTime": 8.979161007396218,
+      "endGameTime": 9.026031755695538
+    },
+    {
+      "mStartSample": 388530,
+      "mEndSample": 390597,
+      "index": 22,
+      "command": 23,
+      "audioTime": 8.810204081632653,
+      "endAudioTime": 8.857074829931973,
+      "gameTime": 9.255215429164926,
+      "endGameTime": 9.302086177464245
+    },
+    {
+      "mStartSample": 424820,
+      "mEndSample": 426887,
+      "index": 23,
+      "command": 23,
+      "audioTime": 9.633106575963719,
+      "endAudioTime": 9.679977324263039,
+      "gameTime": 10.078117923495991,
+      "endGameTime": 10.124988671795311
+    },
+    {
+      "mStartSample": 436994,
+      "mEndSample": 439061,
+      "index": 24,
+      "command": 23,
+      "audioTime": 9.909160997732426,
+      "endAudioTime": 9.956031746031746,
+      "gameTime": 10.354172345264699,
+      "endGameTime": 10.401043093564018
+    },
+    {
+      "mStartSample": 448937,
+      "mEndSample": 451005,
+      "index": 25,
+      "command": 23,
+      "audioTime": 10.179977324263039,
+      "endAudioTime": 10.22687074829932,
+      "gameTime": 10.624988671795311,
+      "endGameTime": 10.671882095831592
+    },
+    {
+      "mStartSample": 461111,
+      "mEndSample": 463178,
+      "index": 26,
+      "command": 23,
+      "audioTime": 10.456031746031746,
+      "endAudioTime": 10.502902494331066,
+      "gameTime": 10.901043093564018,
+      "endGameTime": 10.947913841863338
+    },
+    {
+      "mStartSample": 473284,
+      "mEndSample": 475122,
+      "index": 27,
+      "command": 23,
+      "audioTime": 10.732063492063492,
+      "endAudioTime": 10.773741496598639,
+      "gameTime": 11.177074839595765,
+      "endGameTime": 11.218752844130911
+    },
+    {
+      "mStartSample": 485228,
+      "mEndSample": 488444,
+      "index": 28,
+      "command": 88,
+      "audioTime": 11.002902494331066,
+      "endAudioTime": 11.075827664399092,
+      "gameTime": 11.447913841863338,
+      "endGameTime": 11.520839011931365
+    },
+    {
+      "mStartSample": 521519,
+      "mEndSample": 523586,
+      "index": 29,
+      "command": 78,
+      "audioTime": 11.825827664399092,
+      "endAudioTime": 11.872698412698412,
+      "gameTime": 12.270839011931365,
+      "endGameTime": 12.317709760230684
+    },
+    {
+      "mStartSample": 533692,
+      "mEndSample": 535759,
+      "index": 30,
+      "command": 78,
+      "audioTime": 12.101859410430839,
+      "endAudioTime": 12.148730158730158,
+      "gameTime": 12.546870757963111,
+      "endGameTime": 12.59374150626243
+    },
+    {
+      "mStartSample": 545866,
+      "mEndSample": 547703,
+      "index": 31,
+      "command": 78,
+      "audioTime": 12.377913832199546,
+      "endAudioTime": 12.419569160997732,
+      "gameTime": 12.822925179731818,
+      "endGameTime": 12.864580508530004
+    },
+    {
+      "mStartSample": 557809,
+      "mEndSample": 559877,
+      "index": 32,
+      "command": 78,
+      "audioTime": 12.648730158730158,
+      "endAudioTime": 12.69562358276644,
+      "gameTime": 13.09374150626243,
+      "endGameTime": 13.140634930298713
+    },
+    {
+      "mStartSample": 569983,
+      "mEndSample": 572050,
+      "index": 33,
+      "command": 78,
+      "audioTime": 12.924784580498866,
+      "endAudioTime": 12.971655328798185,
+      "gameTime": 13.369795928031138,
+      "endGameTime": 13.416666676330458
+    },
+    {
+      "mStartSample": 582156,
+      "mEndSample": 583994,
+      "index": 34,
+      "command": 78,
+      "audioTime": 13.200816326530612,
+      "endAudioTime": 13.24249433106576,
+      "gameTime": 13.645827674062884,
+      "endGameTime": 13.687505678598033
+    },
+    {
+      "mStartSample": 618447,
+      "mEndSample": 620284,
+      "index": 35,
+      "command": 72,
+      "audioTime": 14.023741496598639,
+      "endAudioTime": 14.065396825396826,
+      "gameTime": 14.468752844130911,
+      "endGameTime": 14.510408172929099
+    },
+    {
+      "mStartSample": 630391,
+      "mEndSample": 632458,
+      "index": 36,
+      "command": 72,
+      "audioTime": 14.294580498866214,
+      "endAudioTime": 14.341451247165534,
+      "gameTime": 14.739591846398486,
+      "endGameTime": 14.786462594697806
+    },
+    {
+      "mStartSample": 642564,
+      "mEndSample": 644631,
+      "index": 37,
+      "command": 72,
+      "audioTime": 14.570612244897958,
+      "endAudioTime": 14.617482993197278,
+      "gameTime": 15.01562359243023,
+      "endGameTime": 15.06249434072955
+    },
+    {
+      "mStartSample": 654508,
+      "mEndSample": 656575,
+      "index": 38,
+      "command": 72,
+      "audioTime": 14.841451247165534,
+      "endAudioTime": 14.888321995464853,
+      "gameTime": 15.286462594697806,
+      "endGameTime": 15.333333342997125
+    },
+    {
+      "mStartSample": 666681,
+      "mEndSample": 668748,
+      "index": 39,
+      "command": 72,
+      "audioTime": 15.117482993197278,
+      "endAudioTime": 15.1643537414966,
+      "gameTime": 15.56249434072955,
+      "endGameTime": 15.609365089028872
+    },
+    {
+      "mStartSample": 678855,
+      "mEndSample": 680922,
+      "index": 40,
+      "command": 72,
+      "audioTime": 15.393537414965987,
+      "endAudioTime": 15.440408163265307,
+      "gameTime": 15.83854876249826,
+      "endGameTime": 15.885419510797579
+    },
+    {
+      "mStartSample": 715834,
+      "mEndSample": 717902,
+      "index": 41,
+      "command": 78,
+      "audioTime": 16.232063492063492,
+      "endAudioTime": 16.278956916099773,
+      "gameTime": 16.677074839595765,
+      "endGameTime": 16.723968263632045
+    },
+    {
+      "mStartSample": 728008,
+      "mEndSample": 730075,
+      "index": 42,
+      "command": 78,
+      "audioTime": 16.508117913832198,
+      "endAudioTime": 16.55498866213152,
+      "gameTime": 16.95312926136447,
+      "endGameTime": 17.000000009663793
+    },
+    {
+      "mStartSample": 739952,
+      "mEndSample": 742019,
+      "index": 43,
+      "command": 78,
+      "audioTime": 16.778956916099773,
+      "endAudioTime": 16.825827664399092,
+      "gameTime": 17.223968263632045,
+      "endGameTime": 17.270839011931365
+    },
+    {
+      "mStartSample": 752125,
+      "mEndSample": 754192,
+      "index": 44,
+      "command": 78,
+      "audioTime": 17.05498866213152,
+      "endAudioTime": 17.10185941043084,
+      "gameTime": 17.500000009663793,
+      "endGameTime": 17.546870757963113
+    },
+    {
+      "mStartSample": 764298,
+      "mEndSample": 766136,
+      "index": 45,
+      "command": 78,
+      "audioTime": 17.331020408163266,
+      "endAudioTime": 17.372698412698412,
+      "gameTime": 17.776031755695538,
+      "endGameTime": 17.817709760230684
+    },
+    {
+      "mStartSample": 776242,
+      "mEndSample": 778309,
+      "index": 46,
+      "command": 78,
+      "audioTime": 17.60185941043084,
+      "endAudioTime": 17.64873015873016,
+      "gameTime": 18.046870757963113,
+      "endGameTime": 18.093741506262432
+    },
+    {
+      "mStartSample": 812533,
+      "mEndSample": 814600,
+      "index": 47,
+      "command": 24,
+      "audioTime": 18.424784580498866,
+      "endAudioTime": 18.471655328798185,
+      "gameTime": 18.869795928031138,
+      "endGameTime": 18.916666676330458
+    },
+    {
+      "mStartSample": 824706,
+      "mEndSample": 826773,
+      "index": 48,
+      "command": 24,
+      "audioTime": 18.700816326530614,
+      "endAudioTime": 18.747687074829933,
+      "gameTime": 19.145827674062886,
+      "endGameTime": 19.192698422362206
+    },
+    {
+      "mStartSample": 836880,
+      "mEndSample": 838717,
+      "index": 49,
+      "command": 24,
+      "audioTime": 18.97687074829932,
+      "endAudioTime": 19.018526077097505,
+      "gameTime": 19.42188209583159,
+      "endGameTime": 19.463537424629777
+    },
+    {
+      "mStartSample": 848823,
+      "mEndSample": 850891,
+      "index": 50,
+      "command": 24,
+      "audioTime": 19.247687074829933,
+      "endAudioTime": 19.294580498866214,
+      "gameTime": 19.692698422362206,
+      "endGameTime": 19.739591846398486
+    },
+    {
+      "mStartSample": 860997,
+      "mEndSample": 863064,
+      "index": 51,
+      "command": 24,
+      "audioTime": 19.52374149659864,
+      "endAudioTime": 19.57061224489796,
+      "gameTime": 19.96875284413091,
+      "endGameTime": 20.01562359243023
+    },
+    {
+      "mStartSample": 873170,
+      "mEndSample": 876156,
+      "index": 52,
+      "command": 88,
+      "audioTime": 19.799773242630387,
+      "endAudioTime": 19.867482993197278,
+      "gameTime": 20.24478459016266,
+      "endGameTime": 20.31249434072955
+    },
+    {
+      "mStartSample": 921405,
+      "mEndSample": 923472,
+      "index": 53,
+      "command": 40,
+      "audioTime": 20.893537414965987,
+      "endAudioTime": 20.940408163265307,
+      "gameTime": 21.33854876249826,
+      "endGameTime": 21.38541951079758
+    },
+    {
+      "mStartSample": 945522,
+      "mEndSample": 947589,
+      "index": 54,
+      "command": 40,
+      "audioTime": 21.440408163265307,
+      "endAudioTime": 21.487278911564626,
+      "gameTime": 21.88541951079758,
+      "endGameTime": 21.9322902590969
+    },
+    {
+      "mStartSample": 970787,
+      "mEndSample": 972855,
+      "index": 55,
+      "command": 59,
+      "audioTime": 22.01331065759637,
+      "endAudioTime": 22.06020408163265,
+      "gameTime": 22.458322005128643,
+      "endGameTime": 22.505215429164924
+    },
+    {
+      "mStartSample": 994905,
+      "mEndSample": 996972,
+      "index": 56,
+      "command": 59,
+      "audioTime": 22.56020408163265,
+      "endAudioTime": 22.60707482993197,
+      "gameTime": 23.005215429164924,
+      "endGameTime": 23.052086177464243
+    },
+    {
+      "mStartSample": 1018792,
+      "mEndSample": 1020630,
+      "index": 57,
+      "command": 40,
+      "audioTime": 23.10185941043084,
+      "endAudioTime": 23.143537414965987,
+      "gameTime": 23.546870757963113,
+      "endGameTime": 23.58854876249826
+    },
+    {
+      "mStartSample": 1042680,
+      "mEndSample": 1044747,
+      "index": 58,
+      "command": 40,
+      "audioTime": 23.643537414965987,
+      "endAudioTime": 23.690408163265307,
+      "gameTime": 24.08854876249826,
+      "endGameTime": 24.13541951079758
+    },
+    {
+      "mStartSample": 1066337,
+      "mEndSample": 1068405,
+      "index": 59,
+      "command": 52,
+      "audioTime": 24.17997732426304,
+      "endAudioTime": 24.22687074829932,
+      "gameTime": 24.62498867179531,
+      "endGameTime": 24.67188209583159
+    },
+    {
+      "mStartSample": 1091373,
+      "mEndSample": 1093211,
+      "index": 60,
+      "command": 52,
+      "audioTime": 24.747687074829933,
+      "endAudioTime": 24.78936507936508,
+      "gameTime": 25.192698422362206,
+      "endGameTime": 25.234376426897352
+    },
+    {
+      "mStartSample": 1115031,
+      "mEndSample": 1117098,
+      "index": 61,
+      "command": 23,
+      "audioTime": 25.284149659863946,
+      "endAudioTime": 25.331020408163266,
+      "gameTime": 25.72916100739622,
+      "endGameTime": 25.776031755695538
+    },
+    {
+      "mStartSample": 1127205,
+      "mEndSample": 1129272,
+      "index": 62,
+      "command": 23,
+      "audioTime": 25.56020408163265,
+      "endAudioTime": 25.60707482993197,
+      "gameTime": 26.005215429164924,
+      "endGameTime": 26.052086177464243
+    },
+    {
+      "mStartSample": 1139148,
+      "mEndSample": 1141216,
+      "index": 63,
+      "command": 23,
+      "audioTime": 25.831020408163266,
+      "endAudioTime": 25.877913832199546,
+      "gameTime": 26.276031755695538,
+      "endGameTime": 26.32292517973182
+    },
+    {
+      "mStartSample": 1151322,
+      "mEndSample": 1153389,
+      "index": 64,
+      "command": 23,
+      "audioTime": 26.10707482993197,
+      "endAudioTime": 26.153945578231294,
+      "gameTime": 26.552086177464243,
+      "endGameTime": 26.598956925763567
+    },
+    {
+      "mStartSample": 1163495,
+      "mEndSample": 1165562,
+      "index": 65,
+      "command": 40,
+      "audioTime": 26.38310657596372,
+      "endAudioTime": 26.42997732426304,
+      "gameTime": 26.82811792349599,
+      "endGameTime": 26.87498867179531
+    },
+    {
+      "mStartSample": 1199556,
+      "mEndSample": 1201623,
+      "index": 66,
+      "command": 23,
+      "audioTime": 27.200816326530614,
+      "endAudioTime": 27.247687074829933,
+      "gameTime": 27.645827674062886,
+      "endGameTime": 27.692698422362206
+    },
+    {
+      "mStartSample": 1211730,
+      "mEndSample": 1213797,
+      "index": 67,
+      "command": 23,
+      "audioTime": 27.47687074829932,
+      "endAudioTime": 27.52374149659864,
+      "gameTime": 27.92188209583159,
+      "endGameTime": 27.96875284413091
+    },
+    {
+      "mStartSample": 1223673,
+      "mEndSample": 1225741,
+      "index": 68,
+      "command": 23,
+      "audioTime": 27.747687074829933,
+      "endAudioTime": 27.794580498866214,
+      "gameTime": 28.192698422362206,
+      "endGameTime": 28.239591846398486
+    },
+    {
+      "mStartSample": 1235847,
+      "mEndSample": 1237914,
+      "index": 69,
+      "command": 23,
+      "audioTime": 28.02374149659864,
+      "endAudioTime": 28.07061224489796,
+      "gameTime": 28.46875284413091,
+      "endGameTime": 28.51562359243023
+    },
+    {
+      "mStartSample": 1248020,
+      "mEndSample": 1250087,
+      "index": 70,
+      "command": 23,
+      "audioTime": 28.299773242630387,
+      "endAudioTime": 28.346643990929707,
+      "gameTime": 28.74478459016266,
+      "endGameTime": 28.79165533846198
+    },
+    {
+      "mStartSample": 1259964,
+      "mEndSample": 1263180,
+      "index": 71,
+      "command": 88,
+      "audioTime": 28.57061224489796,
+      "endAudioTime": 28.643537414965987,
+      "gameTime": 29.01562359243023,
+      "endGameTime": 29.08854876249826
+    },
+    {
+      "mStartSample": 1308887,
+      "mEndSample": 1310725,
+      "index": 72,
+      "command": 40,
+      "audioTime": 29.67997732426304,
+      "endAudioTime": 29.721655328798185,
+      "gameTime": 30.12498867179531,
+      "endGameTime": 30.166666676330458
+    },
+    {
+      "mStartSample": 1332086,
+      "mEndSample": 1334153,
+      "index": 73,
+      "command": 40,
+      "audioTime": 30.206031746031748,
+      "endAudioTime": 30.252902494331067,
+      "gameTime": 30.65104309356402,
+      "endGameTime": 30.69791384186334
+    },
+    {
+      "mStartSample": 1356203,
+      "mEndSample": 1358270,
+      "index": 74,
+      "command": 59,
+      "audioTime": 30.752902494331067,
+      "endAudioTime": 30.799773242630387,
+      "gameTime": 31.19791384186334,
+      "endGameTime": 31.24478459016266
+    },
+    {
+      "mStartSample": 1380780,
+      "mEndSample": 1382847,
+      "index": 75,
+      "command": 59,
+      "audioTime": 31.31020408163265,
+      "endAudioTime": 31.35707482993197,
+      "gameTime": 31.755215429164924,
+      "endGameTime": 31.802086177464243
+    },
+    {
+      "mStartSample": 1405356,
+      "mEndSample": 1407194,
+      "index": 76,
+      "command": 40,
+      "audioTime": 31.867482993197278,
+      "endAudioTime": 31.909160997732425,
+      "gameTime": 32.31249434072955,
+      "endGameTime": 32.3541723452647
+    },
+    {
+      "mStartSample": 1429244,
+      "mEndSample": 1431311,
+      "index": 77,
+      "command": 40,
+      "audioTime": 32.40916099773243,
+      "endAudioTime": 32.45603174603175,
+      "gameTime": 32.8541723452647,
+      "endGameTime": 32.90104309356402
+    },
+    {
+      "mStartSample": 1453591,
+      "mEndSample": 1455428,
+      "index": 78,
+      "command": 52,
+      "audioTime": 32.96124716553288,
+      "endAudioTime": 33.00290249433107,
+      "gameTime": 33.406258513065154,
+      "endGameTime": 33.44791384186334
+    },
+    {
+      "mStartSample": 1477478,
+      "mEndSample": 1479316,
+      "index": 79,
+      "command": 52,
+      "audioTime": 33.50290249433107,
+      "endAudioTime": 33.54458049886621,
+      "gameTime": 33.94791384186334,
+      "endGameTime": 33.98959184639848
+    },
+    {
+      "mStartSample": 1501825,
+      "mEndSample": 1503662,
+      "index": 80,
+      "command": 23,
+      "audioTime": 34.05498866213152,
+      "endAudioTime": 34.09664399092971,
+      "gameTime": 34.50000000966379,
+      "endGameTime": 34.54165533846198
+    },
+    {
+      "mStartSample": 1513769,
+      "mEndSample": 1515836,
+      "index": 81,
+      "command": 23,
+      "audioTime": 34.32582766439909,
+      "endAudioTime": 34.37269841269841,
+      "gameTime": 34.770839011931365,
+      "endGameTime": 34.817709760230684
+    },
+    {
+      "mStartSample": 1525942,
+      "mEndSample": 1528009,
+      "index": 82,
+      "command": 23,
+      "audioTime": 34.60185941043084,
+      "endAudioTime": 34.64873015873016,
+      "gameTime": 35.04687075796311,
+      "endGameTime": 35.09374150626243
+    },
+    {
+      "mStartSample": 1537886,
+      "mEndSample": 1539953,
+      "index": 83,
+      "command": 23,
+      "audioTime": 34.87269841269841,
+      "endAudioTime": 34.91956916099773,
+      "gameTime": 35.317709760230684,
+      "endGameTime": 35.364580508530004
+    },
+    {
+      "mStartSample": 1550059,
+      "mEndSample": 1552127,
+      "index": 84,
+      "command": 40,
+      "audioTime": 35.14873015873016,
+      "endAudioTime": 35.19562358276644,
+      "gameTime": 35.59374150626243,
+      "endGameTime": 35.64063493029871
+    },
+    {
+      "mStartSample": 1586580,
+      "mEndSample": 1588647,
+      "index": 85,
+      "command": 23,
+      "audioTime": 35.97687074829932,
+      "endAudioTime": 36.02374149659864,
+      "gameTime": 36.42188209583159,
+      "endGameTime": 36.46875284413091
+    },
+    {
+      "mStartSample": 1598753,
+      "mEndSample": 1600820,
+      "index": 86,
+      "command": 23,
+      "audioTime": 36.25290249433107,
+      "endAudioTime": 36.29977324263039,
+      "gameTime": 36.69791384186334,
+      "endGameTime": 36.74478459016266
+    },
+    {
+      "mStartSample": 1610697,
+      "mEndSample": 1612764,
+      "index": 87,
+      "command": 23,
+      "audioTime": 36.52374149659864,
+      "endAudioTime": 36.57061224489796,
+      "gameTime": 36.96875284413091,
+      "endGameTime": 37.01562359243023
+    },
+    {
+      "mStartSample": 1622870,
+      "mEndSample": 1624937,
+      "index": 88,
+      "command": 23,
+      "audioTime": 36.79977324263039,
+      "endAudioTime": 36.84664399092971,
+      "gameTime": 37.24478459016266,
+      "endGameTime": 37.29165533846198
+    },
+    {
+      "mStartSample": 1635044,
+      "mEndSample": 1636881,
+      "index": 89,
+      "command": 23,
+      "audioTime": 37.07582766439909,
+      "endAudioTime": 37.11748299319728,
+      "gameTime": 37.520839011931365,
+      "endGameTime": 37.56249434072955
+    },
+    {
+      "mStartSample": 1646987,
+      "mEndSample": 1650203,
+      "index": 90,
+      "command": 100,
+      "audioTime": 37.34664399092971,
+      "endAudioTime": 37.41956916099773,
+      "gameTime": 37.79165533846198,
+      "endGameTime": 37.864580508530004
+    }
+  ],
+  "normalizationNotes": [
+    "All original elements and fields are retained in source order.",
+    "FollowMids (n) names normalize to kind FollowMids, preserving the original name.",
+    "Follow paths preserve authored source order, including any point slightly beyond FollowEnd Z.",
+    "Hold endpoints use pos.z - se.y; comma-separated ext tick positions are preserved independently.",
+    "updateType/msLeft/mstartPos are retained, not replaced with an invented runtime motion formula."
+  ]
+}
