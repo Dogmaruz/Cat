@@ -13,6 +13,7 @@ using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.LowLevel;
+using UnityEngine.SceneManagement;
 
 namespace DancingCats.Clone.Editor
 {
@@ -45,9 +46,23 @@ namespace DancingCats.Clone.Editor
         private static int diceGold, dicePosition;
         private static bool bot;
         private static InputSettings previousInputSettings;
+        private static InputSettings qaInputSettings;
+        private static Mouse previousMouse;
+        private static readonly List<InputDevice> disabledPhysicalDevices = new List<InputDevice>();
+        [Serializable] private sealed class ReviewScene { public string path; public bool loaded, active; }
+        [Serializable] private sealed class ReviewSnapshot { public ReviewScene[] scenes; public string[] selection; public string activeSelection; }
         private static readonly List<string> errors = new List<string>();
         private static readonly string[] PanelNames = { "NewRoleShop_UIPanel", "DailyReward_UIPanel", "LoginReward_UIPanel", "ChallengeLevel_UIPanel", "PlayDice_UIPanel", "CatHouseBuilding_UIPanel", "Set_UIPanel" };
-        private static string Out => Environment.GetEnvironmentVariable("DANCING_CATS_QA_OUTPUT") ?? Path.GetFullPath("../work/clone-validation");
+        private static string Out
+        {
+            get
+            {
+                string session = SessionState.GetString(Key + ".output", "");
+                if (!string.IsNullOrWhiteSpace(session)) return session;
+                string environment = Environment.GetEnvironmentVariable("DANCING_CATS_QA_OUTPUT");
+                return !string.IsNullOrWhiteSpace(environment) ? environment : Path.GetFullPath("../work/clone-validation");
+            }
+        }
 
         static IntegratedPlayValidation()
         {
@@ -58,6 +73,29 @@ namespace DancingCats.Clone.Editor
         public static void RunInterfaceAndRecovery() => StartValidation(true, false);
         public static void RunChallenge() => StartValidation(false, false, true);
         public static void RunCustomSong() => StartValidation(false, false, false, true);
+        public static void RunCustomSongInOpenEditor() => StartValidation(false, false, false, true, true,
+            Path.GetFullPath(Path.Combine(Application.dataPath, "../Library/MusicalChartReview/playtest")));
+        public static void RunReviewSafetyChecks()
+        {
+            var preflight = typeof(IntegratedPlayValidation).GetMethod("ValidateEditorPreflight", BindingFlags.NonPublic | BindingFlags.Static);
+            Check(preflight != null, "open-Editor review has a preflight before any scene or save changes");
+            preflight.Invoke(null, new object[] { false, false, false, false, Array.Empty<string>(), Array.Empty<string>() });
+            foreach (var values in new[]
+            {
+                new object[] { true, false, false, false, Array.Empty<string>(), Array.Empty<string>() },
+                new object[] { false, true, false, false, Array.Empty<string>(), Array.Empty<string>() },
+                new object[] { false, false, true, false, Array.Empty<string>(), Array.Empty<string>() },
+                new object[] { false, false, false, true, Array.Empty<string>(), Array.Empty<string>() },
+                new object[] { false, false, false, false, new[] { "Assets/UnsavedUserScene.unity" }, Array.Empty<string>() },
+                new object[] { false, false, false, false, Array.Empty<string>(), new[] { "Untitled" } }
+            })
+            {
+                bool rejected = false;
+                try { preflight.Invoke(null, values); }
+                catch (TargetInvocationException error) when (error.InnerException is InvalidOperationException) { rejected = true; }
+                Check(rejected, "unsafe open-Editor review is refused before opening or saving a scene");
+            }
+        }
         public static void RunMenus()
         {
             ProgressionValidation.Run();
@@ -65,21 +103,64 @@ namespace DancingCats.Clone.Editor
             StartValidation(true, true);
         }
 
-        private static void StartValidation(bool followUp, bool onlyMenus, bool onlyChallenge = false, bool onlyCustomSong = false)
+        private static void ValidateEditorPreflight(bool changingPlayMode, bool compiling, bool updating, bool running, string[] dirtyScenes, string[] unsavedScenes)
         {
+            if (changingPlayMode) throw new InvalidOperationException("Stop Play Mode before starting an Editor review.");
+            if (compiling || updating) throw new InvalidOperationException("Wait for Editor compilation/imports before starting a review.");
+            if (running) throw new InvalidOperationException("An integrated review is already running.");
+            if (dirtyScenes.Length != 0) throw new InvalidOperationException("Review refused: open scenes have unsaved changes: " + string.Join(", ", dirtyScenes));
+            if (unsavedScenes.Length != 0) throw new InvalidOperationException("Review refused: an untitled scene cannot be restored without saving it first: " + string.Join(", ", unsavedScenes));
+        }
+
+        private static void CaptureEditorState()
+        {
+            var scenes = Enumerable.Range(0, SceneManager.sceneCount).Select(SceneManager.GetSceneAt).ToArray();
+            ValidateEditorPreflight(EditorApplication.isPlayingOrWillChangePlaymode, EditorApplication.isCompiling, EditorApplication.isUpdating,
+                SessionState.GetBool(Key, false), scenes.Where(scene => scene.isDirty).Select(scene => string.IsNullOrEmpty(scene.path) ? scene.name : scene.path).ToArray(),
+                scenes.Where(scene => string.IsNullOrEmpty(scene.path)).Select(scene => scene.name).ToArray());
+            var snapshot = new ReviewSnapshot
+            {
+                scenes = EditorSceneManager.GetSceneManagerSetup().Select(scene => new ReviewScene { path = scene.path, loaded = scene.isLoaded, active = scene.isActive }).ToArray(),
+                selection = Selection.objects.Select(value => GlobalObjectId.GetGlobalObjectIdSlow(value).ToString()).ToArray(),
+                activeSelection = Selection.activeObject != null ? GlobalObjectId.GetGlobalObjectIdSlow(Selection.activeObject).ToString() : ""
+            };
+            SessionState.SetString(Key + ".editor", JsonUtility.ToJson(snapshot));
+        }
+
+        private static void StartValidation(bool followUp, bool onlyMenus, bool onlyChallenge = false, bool onlyCustomSong = false, bool keepEditor = false, string output = null)
+        {
+            // Interactive entry points always preserve the user's Editor. Only batch children may exit.
+            keepEditor |= !Application.isBatchMode;
+            if (keepEditor) CaptureEditorState();
+            else if (SessionState.GetBool(Key, false)) throw new InvalidOperationException("An integrated review is already running.");
+            SessionState.SetBool(Key + ".keepEditor", keepEditor);
+            SessionState.SetBool(Key + ".finishing", false);
+            SessionState.SetBool(Key + ".gameViewCaptured", false);
+            SessionState.SetString(Key + ".gameViewCreatedSize", "");
+            SessionState.SetString(Key + ".output", output ?? "");
             SessionState.SetBool(Key + ".followUp", followUp);
             SessionState.SetBool(Key + ".menusOnly", onlyMenus);
             SessionState.SetBool(Key + ".challengeOnly", onlyChallenge);
             SessionState.SetBool(Key + ".customSongOnly", onlyCustomSong);
-            SetPortraitGameView();
+            SessionState.SetBool(Key + ".hadSave", PlayerPrefs.HasKey(OriginalProgression.SaveKey));
+            SessionState.SetBool(Key + ".hadGuide", PlayerPrefs.HasKey("DancingCatsClone.v1.howToPlaySeen"));
             SessionState.SetString(Key + ".save", PlayerPrefs.GetString(OriginalProgression.SaveKey, ""));
             SessionState.SetInt(Key + ".guide", PlayerPrefs.GetInt("DancingCatsClone.v1.howToPlaySeen", 0));
             PlayerPrefs.DeleteKey(OriginalProgression.SaveKey);
             PlayerPrefs.SetInt("DancingCatsClone.v1.howToPlaySeen", 0);
             PlayerPrefs.Save();
             SessionState.SetBool(Key, true);
-            EditorSceneManager.OpenScene(CloneSceneBuilder.ScenePath);
-            EditorApplication.isPlaying = true;
+            try
+            {
+                SetPortraitGameView();
+                EditorSceneManager.OpenScene(CloneSceneBuilder.ScenePath);
+                EditorApplication.isPlaying = true;
+            }
+            catch (Exception error)
+            {
+                Finish(false, "Unable to start integrated review: " + error);
+                throw;
+            }
         }
 
         private static void SetPortraitGameView()
@@ -88,30 +169,119 @@ namespace DancingCats.Clone.Editor
             var sizesType = assembly.GetType("UnityEditor.GameViewSizes", true);
             var singleton = typeof(ScriptableSingleton<>).MakeGenericType(sizesType);
             var sizes = singleton.GetProperty("instance", BindingFlags.Static | BindingFlags.Public).GetValue(null);
-            var groupType = assembly.GetType("UnityEditor.GameViewSizeGroupType", true);
-            var group = sizesType.GetMethod("GetGroup").Invoke(sizes, new[] { Enum.Parse(groupType, "Standalone") });
+            var groupKind = sizesType.GetProperty("currentGroupType", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).GetValue(sizes);
+            var group = sizesType.GetMethod("GetGroup").Invoke(sizes, new[] { groupKind });
             var sizeType = assembly.GetType("UnityEditor.GameViewSize", true);
             var resolutionType = assembly.GetType("UnityEditor.GameViewSizeType", true);
-            int index = (int)group.GetType().GetMethod("GetTotalCount").Invoke(group, null);
-            var size = Activator.CreateInstance(sizeType, new[] { Enum.Parse(resolutionType, "FixedResolution"), (object)540, 960, "Clone portrait QA" });
-            group.GetType().GetMethod("AddCustomSize").Invoke(group, new[] { size });
             var viewType = assembly.GetType("UnityEditor.GameView", true);
+            bool wasOpen = Resources.FindObjectsOfTypeAll(viewType).Length != 0;
             var view = EditorWindow.GetWindow(viewType);
-            viewType.GetProperty("selectedSizeIndex", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).SetValue(view, index);
+            var selected = viewType.GetProperty("selectedSizeIndex", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            SessionState.SetInt(Key + ".gameViewGroup", Convert.ToInt32(groupKind));
+            SessionState.SetInt(Key + ".gameViewSelected", (int)selected.GetValue(view));
+            SessionState.SetEntityId(Key + ".gameViewWindow", view.GetEntityId());
+            SessionState.SetBool(Key + ".gameViewWasOpen", wasOpen);
+            SessionState.SetBool(Key + ".gameViewCaptured", true);
+            int count = (int)group.GetType().GetMethod("GetTotalCount").Invoke(group, null);
+            int index = -1;
+            for (int i = 0; i < count; i++)
+            {
+                var candidate = group.GetType().GetMethod("GetGameViewSize").Invoke(group, new object[] { i });
+                if ((int)sizeType.GetProperty("width").GetValue(candidate) == 540 &&
+                    (int)sizeType.GetProperty("height").GetValue(candidate) == 960 &&
+                    sizeType.GetProperty("sizeType").GetValue(candidate).ToString() == "FixedResolution")
+                { index = i; break; }
+            }
+            if (index < 0)
+            {
+                string label = "Clone portrait QA " + Guid.NewGuid().ToString("N");
+                SessionState.SetString(Key + ".gameViewCreatedSize", label);
+                var size = Activator.CreateInstance(sizeType, new[] { Enum.Parse(resolutionType, "FixedResolution"), (object)540, 960, label });
+                group.GetType().GetMethod("AddCustomSize").Invoke(group, new[] { size });
+                index = count;
+            }
+            selected.SetValue(view, index);
             view.Show(); view.Focus(); view.Repaint();
             Debug.Log("INTEGRATED_PLAY portrait GameView selected index=" + index);
+        }
+
+        private static void RestoreGameViewState()
+        {
+            if (!SessionState.GetBool(Key + ".gameViewCaptured", false)) return;
+            var assembly = typeof(EditorWindow).Assembly;
+            var sizesType = assembly.GetType("UnityEditor.GameViewSizes", true);
+            var singleton = typeof(ScriptableSingleton<>).MakeGenericType(sizesType);
+            var sizes = singleton.GetProperty("instance", BindingFlags.Static | BindingFlags.Public).GetValue(null);
+            var groupType = assembly.GetType("UnityEditor.GameViewSizeGroupType", true);
+            int originalGroup = SessionState.GetInt(Key + ".gameViewGroup", 0);
+            var group = sizesType.GetMethod("GetGroup").Invoke(sizes, new[] { Enum.ToObject(groupType, originalGroup) });
+            var viewType = assembly.GetType("UnityEditor.GameView", true);
+            var view = EditorUtility.EntityIdToObject(SessionState.GetEntityId(Key + ".gameViewWindow", EntityId.None)) as EditorWindow;
+            int originalSelection = SessionState.GetInt(Key + ".gameViewSelected", 0);
+            if (view != null)
+            {
+                int currentGroup = Convert.ToInt32(sizesType.GetProperty("currentGroupType", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).GetValue(sizes));
+                if (currentGroup == originalGroup)
+                    viewType.GetProperty("selectedSizeIndex", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).SetValue(view, originalSelection);
+                else
+                {
+                    // The group follows the build target. Restore its saved selection without changing that target.
+                    var field = viewType.GetField("m_SelectedSizes", BindingFlags.Instance | BindingFlags.NonPublic);
+                    var indices = field?.GetValue(view) as int[];
+                    if (indices == null || originalGroup >= indices.Length) throw new InvalidOperationException("Unable to restore the prior GameView group selection.");
+                    indices[originalGroup] = originalSelection; field.SetValue(view, indices);
+                }
+            }
+            string created = SessionState.GetString(Key + ".gameViewCreatedSize", "");
+            if (created.Length != 0)
+            {
+                int count = (int)group.GetType().GetMethod("GetTotalCount").Invoke(group, null);
+                int builtins = (int)group.GetType().GetMethod("GetBuiltinCount").Invoke(group, null);
+                for (int i = builtins; i < count; i++)
+                {
+                    var size = group.GetType().GetMethod("GetGameViewSize").Invoke(group, new object[] { i });
+                    if ((string)size.GetType().GetProperty("baseText").GetValue(size) != created) continue;
+                    group.GetType().GetMethod("RemoveCustomSize").Invoke(group, new object[] { i });
+                    break;
+                }
+            }
+            if (view != null)
+            {
+                if (SessionState.GetBool(Key + ".gameViewWasOpen", true)) view.Repaint();
+                else view.Close(); // Only the GameView created by this review; never the Editor process.
+            }
+            SessionState.SetBool(Key + ".gameViewCaptured", false);
+            SessionState.SetString(Key + ".gameViewCreatedSize", "");
         }
 
         private static void Mode(PlayModeStateChange state)
         {
             if (!SessionState.GetBool(Key, false)) return;
+            if (state == PlayModeStateChange.ExitingPlayMode)
+            {
+                bot = false;
+                Application.logMessageReceived -= Log;
+                EditorApplication.update -= Tick;
+                CleanupPlayInput();
+            }
+            if (state == PlayModeStateChange.EnteredEditMode && SessionState.GetBool(Key + ".keepEditor", false))
+            {
+                if (!SessionState.GetBool(Key + ".finishing", false))
+                {
+                    SessionState.SetBool(Key + ".resultSuccess", false);
+                    SessionState.SetString(Key + ".resultDetails", "Play Mode was stopped before the integrated review completed.");
+                }
+                CompleteOpenEditorReview();
+                return;
+            }
             if (state == PlayModeStateChange.EnteredPlayMode)
             {
                 previousInputSettings = InputSystem.settings;
-                var settings = UnityEngine.Object.Instantiate(previousInputSettings);
-                settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
-                settings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
-                InputSystem.settings = settings;
+                qaInputSettings = UnityEngine.Object.Instantiate(previousInputSettings);
+                qaInputSettings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
+                qaInputSettings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
+                InputSystem.settings = qaInputSettings;
+                game = null; mouse = null; previousMouse = null; disabledPhysicalDevices.Clear();
                 step = substep = 0; bot = false; uiReady = -1; errors.Clear();
                 recoveryFollowUp = SessionState.GetBool(Key + ".followUp", false);
                 menusOnly = SessionState.GetBool(Key + ".menusOnly", false);
@@ -147,7 +317,7 @@ namespace DancingCats.Clone.Editor
 
         private static void Tick()
         {
-            if (!EditorApplication.isPlaying || EditorApplication.isCompiling || EditorApplication.isPaused) return;
+            if (!SessionState.GetBool(Key, false) || SessionState.GetBool(Key + ".finishing", false) || !EditorApplication.isPlaying || EditorApplication.isCompiling || EditorApplication.isPaused) return;
             try
             {
                 if (errors.Count > 0) throw new Exception("runtime errors: " + string.Join(" | ", errors.Take(4)));
@@ -158,8 +328,10 @@ namespace DancingCats.Clone.Editor
                 if (Time.time - uiReady < 1.7f) return; // Original GuideButton fades on scaled Animation time.
                 if (mouse == null)
                 {
+                    previousMouse = Mouse.current;
                     mouse = InputSystem.AddDevice<Mouse>("Clone QA pointer"); mouse.MakeCurrent();
-                    foreach (var physical in InputSystem.devices.Where(d => d.native && (d is Mouse || d is Keyboard)).ToArray()) InputSystem.DisableDevice(physical);
+                    foreach (var physical in InputSystem.devices.Where(d => d.native && d.enabled && (d is Mouse || d is Keyboard)).ToArray())
+                    { disabledPhysicalDevices.Add(physical); InputSystem.DisableDevice(physical); }
                 }
                 if (customSongOnly && step >= 60) { TickCustomSong(); return; }
                 switch (step)
@@ -553,8 +725,10 @@ namespace DancingCats.Clone.Editor
                     double platformAudioTime = finish.audioTime + 5 / game.Map.forwardSpeed;
                     Check(platformAudioTime >= customAudioLength - 1 && platformAudioTime <= customAudioLength + .05,
                         "custom end-platform landing covers the final second of the complete audio timeline");
-                    Check(game.Tiles.Any(t => t.element.id == 2 || t.element.id == 3) && game.Tiles.Any(t => t.element.id < 7 && t.element.updateType != 0),
-                        "actual custom track contains holds and moving tiles");
+                    Check(game.Tiles.Any(t => t.element.id == 2 || t.element.id == 3) &&
+                        game.Tiles.Any(t => t.element.id == 4 && t.element.updateType == 2 && t.element.mfendPos > 0) &&
+                        game.Tiles.Any(t => t.element.id == 5) && game.Tiles.Any(t => t.element.id == 6),
+                        "actual custom track contains holds and a native moving Follow route with markers and exit");
                     game.Endless = false;
                     customGold = game.Progression.Gold;
                     Check(game.Progression.State.settlements.Count == 0, "fresh custom validation has no previous settlement");
@@ -636,6 +810,8 @@ namespace DancingCats.Clone.Editor
                         "custom holds, every scored hold point and hold exits are crossed through actual contacts");
                     Check(game.Tiles.Where(t => t.element.id < 7 && t.element.updateType != 0).All(t => t.consumed),
                         "custom moving tiles are crossed through actual contacts");
+                    Check(game.Tiles.Where(t => t.element.id == 4 || t.element.id == 5 || t.element.id == 6).All(t => t.consumed),
+                        "every custom Follow entry, scored midpoint and outgoing exit is crossed through actual contacts");
                     NextCustom(68); break;
                 case 68:
                     if (!ResultAnimationReady()) return;
@@ -654,7 +830,7 @@ namespace DancingCats.Clone.Editor
                     Capture("25-custom-results.png");
                     Check(errors.Count == 0, "full custom song route is free of runtime errors");
                     Finish(true, "custom " + CustomSongId + ", audio=" + customAudioLength.ToString("F3") +
-                        "s, actual list selection and StartBtn, pause/resume, full real-time input playthrough, holds/moving tiles, final platform, saved three stars/best, one settlement" +
+                        "s, actual list selection and StartBtn, pause/resume, full real-time input playthrough, all hold points and Follow markers/exits, final platform, saved three stars/best, one settlement" +
                         ", captures gameplay=" + customGameplayCaptured + " hold=" + customHoldCaptured + " moving=" + customMovingCaptured); break;
             }
         }
@@ -673,9 +849,8 @@ namespace DancingCats.Clone.Editor
             { Capture("23-custom-gameplay.png"); customGameplayCaptured = true; }
             if (!customHoldCaptured && game.Support != null && (game.Support.element.id == 2 || game.Support.element.id == 3))
             { Capture("24-custom-hold.png"); customHoldCaptured = true; }
-            if (!customMovingCaptured && game.Tiles.Any(t => t.element.id < 7 && t.element.updateType != 0 && !t.consumed &&
-                t.initialZ - game.Actor.position.z > 0 && t.initialZ - game.Actor.position.z < 12))
-            { Capture("24-custom-moving.png"); customMovingCaptured = true; }
+            if (!customMovingCaptured && game.Support != null && game.Support.element.id == 4)
+            { Capture("24-custom-follow.png"); customMovingCaptured = true; }
         }
 
         private static void CheckCustomPlaying()
@@ -825,17 +1000,103 @@ namespace DancingCats.Clone.Editor
         }
         private static void Finish(bool success, string details)
         {
+            if (SessionState.GetBool(Key + ".finishing", false)) return;
+            SessionState.SetBool(Key + ".finishing", true);
+            SessionState.SetBool(Key + ".resultSuccess", success);
+            SessionState.SetString(Key + ".resultDetails", details);
+            bot = false;
             Application.logMessageReceived -= Log;
             EditorApplication.update -= Tick;
+            CleanupPlayInput();
+            if (SessionState.GetBool(Key + ".keepEditor", false) || !Application.isBatchMode)
+            {
+                if (EditorApplication.isPlayingOrWillChangePlaymode)
+                {
+                    EditorApplication.isPaused = false;
+                    EditorApplication.isPlaying = false;
+                }
+                else CompleteOpenEditorReview();
+                return;
+            }
+            RestoreSave();
+            RestoreGameViewState();
+            SessionState.SetBool(Key, false);
+            SessionState.SetBool(Key + ".keepEditor", false);
+            SessionState.SetBool(Key + ".finishing", false);
+            WriteResult(success, details);
+            EditorApplication.Exit(success ? 0 : 1);
+        }
+
+        private static void RestoreSave()
+        {
+            var saved = SessionState.GetString(Key + ".save", "");
+            if (SessionState.GetBool(Key + ".hadSave", false)) PlayerPrefs.SetString(OriginalProgression.SaveKey, saved);
+            else PlayerPrefs.DeleteKey(OriginalProgression.SaveKey);
+            if (SessionState.GetBool(Key + ".hadGuide", false)) PlayerPrefs.SetInt("DancingCatsClone.v1.howToPlaySeen", SessionState.GetInt(Key + ".guide", 0));
+            else PlayerPrefs.DeleteKey("DancingCatsClone.v1.howToPlaySeen");
+            PlayerPrefs.Save();
+        }
+
+        private static void CleanupPlayInput()
+        {
+            var loop = PlayerLoop.GetCurrentPlayerLoop();
+            if (loop.subSystemList != null && loop.subSystemList.Any(system => system.type == typeof(IntegratedPlayValidation)))
+            {
+                loop.subSystemList = loop.subSystemList.Where(system => system.type != typeof(IntegratedPlayValidation)).ToArray();
+                PlayerLoop.SetPlayerLoop(loop);
+            }
+            foreach (var device in disabledPhysicalDevices)
+                if (device != null && device.added && !device.enabled) InputSystem.EnableDevice(device);
+            disabledPhysicalDevices.Clear();
+            if (mouse != null && mouse.added) InputSystem.RemoveDevice(mouse);
+            mouse = null;
+            if (previousMouse != null && previousMouse.added) previousMouse.MakeCurrent();
+            previousMouse = null;
+            if (previousInputSettings != null) InputSystem.settings = previousInputSettings;
+            if (qaInputSettings != null && qaInputSettings != previousInputSettings) UnityEngine.Object.DestroyImmediate(qaInputSettings);
+            qaInputSettings = null; previousInputSettings = null;
+        }
+
+        private static void CompleteOpenEditorReview()
+        {
+            // Scene reopening is deferred until Unity has safely restored Edit Mode.
+            if (EditorApplication.isPlayingOrWillChangePlaymode) return;
+            bool success = SessionState.GetBool(Key + ".resultSuccess", false);
+            string details = SessionState.GetString(Key + ".resultDetails", "Review did not complete.");
+            try
+            {
+                RestoreSave();
+                var snapshot = JsonUtility.FromJson<ReviewSnapshot>(SessionState.GetString(Key + ".editor", ""));
+                if (snapshot == null || snapshot.scenes == null) throw new InvalidOperationException("Prior Editor scene snapshot is missing.");
+                var current = Enumerable.Range(0, SceneManager.sceneCount).Select(SceneManager.GetSceneAt).ToArray();
+                if (current.Any(scene => scene.isDirty)) throw new InvalidOperationException("Review stopped, but scene restoration was refused because the current Editor scene has unsaved changes. No scene was saved or discarded.");
+                var setup = snapshot.scenes.Select(scene => new SceneSetup { path = scene.path, isLoaded = scene.loaded, isActive = scene.active }).ToArray();
+                var actual = EditorSceneManager.GetSceneManagerSetup();
+                if (actual.Length != setup.Length || actual.Where((scene, i) => scene.path != setup[i].path || scene.isLoaded != setup[i].isLoaded || scene.isActive != setup[i].isActive).Any())
+                    EditorSceneManager.RestoreSceneManagerSetup(setup);
+                UnityEngine.Object Resolve(string value) => !string.IsNullOrEmpty(value) && GlobalObjectId.TryParse(value, out var id) ? GlobalObjectId.GlobalObjectIdentifierToObjectSlow(id) : null;
+                Selection.objects = (snapshot.selection ?? Array.Empty<string>()).Select(Resolve).Where(value => value != null).ToArray();
+                var active = Resolve(snapshot.activeSelection);
+                if (active != null) Selection.activeObject = active;
+                details += "; returned to Edit Mode, restored prior clean scenes, selection, input and saved progress";
+            }
+            catch (Exception error) { success = false; details += "; Editor restoration failed: " + error.Message; }
+            finally
+            {
+                try { RestoreGameViewState(); }
+                catch (Exception error) { success = false; details += "; GameView restoration failed: " + error.Message; }
+                SessionState.SetBool(Key, false);
+                SessionState.SetBool(Key + ".keepEditor", false);
+                SessionState.SetBool(Key + ".finishing", false);
+            }
+            WriteResult(success, details);
+        }
+
+        private static void WriteResult(bool success, string details)
+        {
             Directory.CreateDirectory(Out);
             File.WriteAllText(Path.Combine(Out, "integrated-result.txt"), (success ? "PASS " : "FAIL ") + details);
-            var saved = SessionState.GetString(Key + ".save", "");
-            if (saved.Length == 0) PlayerPrefs.DeleteKey(OriginalProgression.SaveKey); else PlayerPrefs.SetString(OriginalProgression.SaveKey, saved);
-            PlayerPrefs.SetInt("DancingCatsClone.v1.howToPlaySeen", SessionState.GetInt(Key + ".guide", 0)); PlayerPrefs.Save();
-            SessionState.SetBool(Key, false);
-            if (previousInputSettings != null) InputSystem.settings = previousInputSettings;
             Debug.Log("INTEGRATED_PLAY " + (success ? "PASS " : "FAIL ") + details);
-            EditorApplication.Exit(success ? 0 : 1);
         }
     }
 }

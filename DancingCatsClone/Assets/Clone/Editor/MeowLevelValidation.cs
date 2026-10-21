@@ -11,11 +11,12 @@ namespace DancingCats.Clone.Editor
         public static void RunChecks()
         {
             var failures = new List<string>();
-            foreach (var name in new[] { "AudioChartGeneratorValidation", "CustomContentValidation" })
+            foreach (var name in new[] { "AudioChartGeneratorValidation", "MusicalChartCompilerValidation", "CustomContentValidation", "IntegratedPlayValidation" })
             {
                 try
                 {
                     if (name == "CustomContentValidation") Invoke(name, "RunChecks", true);
+                    else if (name == "IntegratedPlayValidation") Invoke(name, "RunReviewSafetyChecks");
                     else Invoke(name, "RunChecks");
                 }
                 catch (Exception error)
@@ -26,7 +27,7 @@ namespace DancingCats.Clone.Editor
                 }
             }
             if (failures.Count != 0) throw new InvalidOperationException(string.Join("\n", failures));
-            Debug.Log("MEOW_LEVEL PASS: generator and custom catalog checks");
+            Debug.Log("MEOW_LEVEL PASS: audio generator, musical compiler, native custom geometry and open-Editor review safety checks");
         }
 
         public static void GenerateAndVerify()

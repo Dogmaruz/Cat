@@ -9,12 +9,12 @@ using UnityEngine;
 
 namespace DancingCats.Clone.Editor
 {
-    /// <summary>Offline energy/onset based authoring tool. It does not identify vocals or musical pitch.</summary>
+    /// <summary>Offline score compiler with a conservative mixed-audio onset fallback. It does not isolate vocals.</summary>
     public static class AudioChartGenerator
     {
         public const string AlwaysRememberId = "AlwaysRememberMeowCat";
-        private const string Version = "pcm-onset-chart-v1";
-        private const double MinGap = .32, MaxGap = 1.0;
+        private const string Version = "pcm-accent-chart-v2";
+        private const double MinGap = .18, MaxGap = 1.95;
 
         [Serializable]
         public sealed class Options
@@ -30,12 +30,6 @@ namespace DancingCats.Clone.Editor
             public double[] energy, novelty;
             public List<double> accents;
         }
-        private sealed class Note
-        {
-            public double time, end;
-            public float lane;
-        }
-
         [MenuItem("Dancing Cats/Generate Always Remember Meow Chart")]
         public static void GenerateAlwaysRemember()
         {
@@ -59,23 +53,36 @@ namespace DancingCats.Clone.Editor
         public static MapTimeline Generate(AudioClip clip, string id, Options options = null)
         {
             if (clip == null) throw new ArgumentNullException("clip");
-            if (clip.loadState != AudioDataLoadState.Loaded) clip.LoadAudioData();
-            if (clip.loadState != AudioDataLoadState.Loaded)
-                throw new InvalidDataException("Audio PCM is unavailable. Use Decompress On Load and disable Load In Background on the music importer.");
-            var pcm = new float[checked(clip.samples * clip.channels)];
-            if (!clip.GetData(pcm, 0)) throw new InvalidDataException("AudioClip.GetData failed; import the song with Decompress On Load.");
-            var map = GenerateFromSamples(pcm, clip.frequency, clip.channels, id, options);
+            options = options ?? new Options();
+            ValidateOptions(id, options);
             string assetPath = AssetDatabase.GetAssetPath(clip);
             string source = ProjectFile(assetPath);
+            string hash = "";
+            if (File.Exists(source))
+                using (var stream = File.OpenRead(source)) using (var sha = SHA256.Create()) hash = Hex(sha.ComputeHash(stream));
+            string scorePath = ProjectFile("Assets/Clone/Editor/MusicalScores/" + id + ".score.json");
+            MapTimeline map;
+            if (File.Exists(scorePath))
+            {
+                var score = JsonUtility.FromJson<MusicalScore>(File.ReadAllText(scorePath));
+                ValidateScoreSource(score, id, hash);
+                map = MusicalChartCompiler.Compile(score, options, clip.frequency, (double)clip.samples / clip.frequency);
+            }
+            else
+            {
+                if (clip.loadState != AudioDataLoadState.Loaded) clip.LoadAudioData();
+                if (clip.loadState != AudioDataLoadState.Loaded)
+                    throw new InvalidDataException("Audio PCM is unavailable. Use Decompress On Load and disable Load In Background on the music importer.");
+                var pcm = new float[checked(clip.samples * clip.channels)];
+                if (!clip.GetData(pcm, 0)) throw new InvalidDataException("AudioClip.GetData failed; import the song with Decompress On Load.");
+                map = GenerateFromSamples(pcm, clip.frequency, clip.channels, id, options);
+            }
+            map.audio.channels = clip.channels;
             if (File.Exists(source))
             {
-                string hash;
-                using (var stream = File.OpenRead(source)) using (var sha = SHA256.Create()) hash = Hex(sha.ComputeHash(stream));
-                map.audio.rawFile = assetPath;
-                map.audio.rawSha256 = hash;
+                map.audio.rawFile = assetPath; map.audio.rawSha256 = hash;
                 map.audio.rawBytes = new FileInfo(source).Length;
-                map.audio.sourceContainer = assetPath;
-                map.audio.sourceContainerSha256 = hash;
+                map.audio.sourceContainer = assetPath; map.audio.sourceContainerSha256 = hash;
                 map.normalizationNotes = map.normalizationNotes.Concat(new[] { "Imported source SHA-256: " + hash }).ToArray();
             }
             map.audio.name = clip.name;
@@ -86,117 +93,52 @@ namespace DancingCats.Clone.Editor
         public static MapTimeline GenerateFromSamples(float[] interleaved, int sampleRate, int channels, string id, Options options = null)
         {
             options = options ?? new Options();
-            if (string.IsNullOrWhiteSpace(id) || id.Any(c => !char.IsLetterOrDigit(c) && c != '_' && c != '-')) throw new ArgumentException("Use an alphanumeric chart id.", "id");
+            ValidateOptions(id, options);
             if (interleaved == null || sampleRate < 1000 || channels < 1 || interleaved.Length % channels != 0) throw new ArgumentException("Invalid interleaved PCM, channels or sample rate.");
-            if (float.IsNaN(options.forwardSpeed) || float.IsInfinity(options.forwardSpeed) || float.IsNaN(options.delayTime) || float.IsInfinity(options.delayTime) || options.forwardSpeed <= 0 || options.delayTime < MinGap || options.delayTime > MaxGap) throw new ArgumentException("Positive speed and a .32 to 1 second preroll are required.");
             double duration = (double)(interleaved.Length / channels) / sampleRate;
             if (duration < 5) throw new InvalidDataException("A playable song must contain at least five seconds of decoded PCM.");
             var analysis = Analyze(interleaved, sampleRate, channels);
             double finishTime = Round(duration - Math.Max(1.1, 5 / options.forwardSpeed + .25));
-            var times = new List<double> { 0 };
+            // A mixed recording's energy bed is not evidence for a held melody. Fallback emits measured accents only.
+            var cues = new List<MusicalCue> { new MusicalCue { kind = "Jump", time = 0, endTime = 0, reason = "Initial support" } };
             foreach (double accent in analysis.accents)
             {
-                if (accent < MinGap || accent > finishTime - MinGap || accent - times[times.Count - 1] < MinGap) continue;
-                FillGap(times, accent, analysis.period);
-                times.Add(Round(accent));
+                if (accent < MinGap || accent > finishTime - MinGap) continue;
+                cues.Add(new MusicalCue { kind = "Jump", time = accent, endTime = accent, lane = 0, reason = "Measured mixed-audio onset; melodic role unverified" });
             }
-            times.RemoveAll(t => t > finishTime - MinGap);
-            FillGap(times, finishTime, analysis.period);
-            times.Add(finishTime);
-            var notes = new List<Note>();
-            double nextHold = Math.Max(8, analysis.period * 8);
-            // The repeating phrase lanes are deterministic; accents and hold lengths come from PCM.
-            float[] phraseLanes = { 0, .5f, 0, -.5f, -.5f, 0, .5f, 0 };
-            for (int i = 0; i < times.Count; i++)
-            {
-                double time = times[i], end = time;
-                if (options.includeHolds && time >= nextHold && i + 3 < times.Count)
-                {
-                    int endIndex = i + 2;
-                    double proposedEnd = times[endIndex];
-                    if (proposedEnd - time >= .6 && proposedEnd - time <= 2.1 && Sustained(analysis, time, proposedEnd))
-                    {
-                        end = proposedEnd;
-                        i = endIndex;
-                        nextHold = end + analysis.period * 8;
-                    }
-                }
-                int phraseBeat = (int)Math.Floor(Math.Max(0, time - analysis.phase) / analysis.period + .1);
-                notes.Add(new Note { time = time, end = end, lane = phraseLanes[phraseBeat % phraseLanes.Length] });
-            }
-            notes[0].lane = 0;
-            notes[notes.Count - 1].lane = 0;
-            string pcmDigest = PcmHash(interleaved);
-            var metadata = new OriginalSongMetadata
-            {
-                id = options.catalogId, musicName = options.title, artName = options.artist, musicPath = id,
-                scene = "level1", builtin = true, disable = false, musicUnlockType = 0, baseSpeed = options.forwardSpeed,
-                difficultyType = 1, speedAdd = Array.Empty<float>()
-            };
-            var map = new MapTimeline
-            {
-                schemaVersion = 1, id = id, sampleRate = sampleRate, mapAssetId = "custom:" + id,
-                sourceMapBundle = Version, sourceMapBundleSha256 = pcmDigest, sourceMapUrl = "",
-                forwardSpeed = options.forwardSpeed, delayTime = options.delayTime, catalog = metadata,
-                audio = new OriginalAudioMetadata
-                {
-                    assetId = "custom:" + id, name = id, category = "Music", rawSha256 = pcmDigest,
-                    rawBytes = (long)interleaved.Length * sizeof(float), frequency = sampleRate, channels = channels,
-                    bitsPerSample = 32, declaredLengthSeconds = duration, files = Array.Empty<OriginalAudioFile>()
-                },
-                timing = new TimingDescription
-                {
-                    gameTime = "audioTime + delayTime", audioTime = "gameTime - delayTime", eventGameTime = "sample / sampleRate + delayTime",
-                    warning = "Energy/onset heuristic with beat scaffolding; manual playability and listening QA remain required."
-                },
-                tempoSections = new[] { new TempoSection { sectionName = "Measured stable beat", startSample = (int)Math.Round(analysis.phase * sampleRate), samplesPerBeat = analysis.period * sampleRate, beatsPerMeasure = 4, bStartNewMeasure = 1 } },
-                normalizationNotes = new[]
-                {
-                    "Generator: " + Version + "; decoded PCM float32 SHA-256: " + pcmDigest,
-                    "20ms channel-energy windows / 10ms hop; positive RMS flux; normalized autocorrelation 55-180 BPM; measured onset phase.",
-                    "Detected BPM: " + (60 / analysis.period).ToString("F4", CultureInfo.InvariantCulture) + "; phase seconds: " + analysis.phase.ToString("F6", CultureInfo.InvariantCulture) + "; accented peaks: " + analysis.accents.Count,
-                    "Landings prioritize actual accents; beat scaffolding bounds .32-1.0 second arcs. Sustained RMS floor selects holds; this does not detect vocal pitch or words.",
-                    "Native holds use negative se.y length and ext checkpoint Zs; outgoing distance begins at hold exit. Sparse moving jumps use native cycle phase zero at landing.",
-                    "FinishJump launches five units to the original end platform while decoded audio is still playing."
-                }
-            };
-            var elements = new List<MapElement>();
-            var segments = new List<MapSegment>();
-            elements.Add(Element(map, 0, "Start", -map.delayTime, -map.delayTime, 0, 0));
-            segments.Add(Segment(elements[0], -map.delayTime, map));
-            double nextMoving = 18;
-            for (int i = 0; i < notes.Count; i++)
-            {
-                var note = notes[i];
-                bool finish = i == notes.Count - 1, hold = note.end > note.time;
-                string kind = finish ? "FinishJump" : hold ? "Hold" : "Jump";
-                var element = Element(map, finish ? 1 : hold ? 2 : 0, kind, note.time, note.end, note.lane, elements.Count);
-                if (options.includeMovingJumps && !finish && !hold && i > 0 && i + 1 < notes.Count && note.time >= nextMoving &&
-                    note.time - notes[i - 1].end >= .6 && notes[i + 1].time - note.time >= .6 &&
-                    Math.Abs(notes[i - 1].lane) <= .5f && Math.Abs(notes[i + 1].lane) <= .5f)
-                {
-                    element.updateType = 3;
-                    element.pos.x = 0; // Native MoveCycleX(initialX, 0, direction) == 0.
-                    element.msLeft = ((int)(note.time / 24)) % 2;
-                    nextMoving = note.time + 24;
-                }
-                elements.Add(element);
-                segments.Add(Segment(element, note.end, map));
-            }
-            for (int i = 0; i < elements.Count; i++)
-            {
-                elements[i].jumpDistance = i + 1 < elements.Count ? elements[i + 1].pos.z - segments[i].endZ : 5;
-                segments[i].motion.jumpDistance = elements[i].jumpDistance;
-            }
-            var events = new List<KoreographyEvent>();
-            foreach (var element in elements.Skip(1))
-            {
-                AddEvent(events, element.audioTime, element.kind == "FinishJump" ? 100 : 0, map);
-                foreach (var tick in element.holdTicks.Skip(1)) AddEvent(events, tick.audioTime, 0, map);
-            }
-            map.elements = elements.ToArray(); map.segments = segments.ToArray(); map.events = events.OrderBy(e => e.mStartSample).ToArray();
-            for (int i = 0; i < map.events.Length; i++) map.events[i].index = i;
+            var beats = new List<double>();
+            for (double beat = analysis.phase; beat < duration; beat += analysis.period) beats.Add(Round(beat));
+            var map = MusicalChartCompiler.Compile(new MusicalScore { id = id, audioDuration = duration, sampleRate = sampleRate, bpm = 60 / analysis.period, beats = beats.ToArray(), cues = cues.ToArray() }, options, sampleRate, duration);
+            string digest = PcmHash(interleaved);
+            map.sourceMapBundle = Version; map.sourceMapBundleSha256 = digest;
+            map.audio.rawSha256 = digest; map.audio.channels = channels; map.audio.bitsPerSample = 32; map.audio.rawBytes = (long)interleaved.Length * sizeof(float);
+            map.timing.warning = "Mixed-audio onset fallback; melodic roles and sustained pitches need authored score annotations. Long rests are preserved and may require a manually authored support before saving.";
+            map.normalizationNotes = new[] { "Generator: " + Version + "; decoded PCM float32 SHA-256: " + digest, "20ms channel-energy windows / 10ms hop; RMS novelty; strength-ranked non-maximum suppression; measured autocorrelation pulse.", "Detected BPM: " + (60 / analysis.period).ToString("F4", CultureInfo.InvariantCulture) + "; phase seconds: " + analysis.phase.ToString("F6", CultureInfo.InvariantCulture), "No arbitrary gap filler, energy-only holds, singer-isolation claim or periodic moving jumps. A musical score takes priority when its source hash matches." };
             return map;
+        }
+
+        public static void ValidateOptions(string id, Options options)
+        {
+            if (string.IsNullOrWhiteSpace(id) || id.Any(c => !char.IsLetterOrDigit(c) && c != '_' && c != '-')) throw new ArgumentException("Use an alphanumeric chart id.", "id");
+            if (options == null || float.IsNaN(options.forwardSpeed) || float.IsInfinity(options.forwardSpeed) || float.IsNaN(options.delayTime) || float.IsInfinity(options.delayTime) || options.forwardSpeed <= 0 || options.delayTime < MinGap || options.delayTime > MaxGap)
+                throw new ArgumentException("Positive finite speed and a .18 to 1.95 second preroll are required.");
+        }
+        public static void ValidateScoreSource(MusicalScore score, string id, string actualHash)
+        {
+            if (score == null || !string.Equals(score.id, id, StringComparison.Ordinal) || string.IsNullOrEmpty(actualHash) || !string.Equals(score.sourceSha256, actualHash, StringComparison.OrdinalIgnoreCase))
+                throw new InvalidDataException("Musical score identity or SHA-256 does not match the imported source audio. Re-analyze that source before generation.");
+        }
+        /// <summary>Choose strong onsets before weaker neighbours, then restore chronological order.</summary>
+        public static double[] SelectAccentTimes(double[] times, double[] strengths, double minimumGap)
+        {
+            if (times == null || strengths == null || times.Length != strengths.Length || minimumGap <= 0) throw new ArgumentException("Accent times and strengths must have equal lengths and a positive gap.");
+            var selected = new List<int>();
+            foreach (int i in Enumerable.Range(0, times.Length).OrderByDescending(i => strengths[i]).ThenBy(i => times[i]))
+            {
+                if (double.IsNaN(times[i]) || double.IsInfinity(times[i]) || double.IsNaN(strengths[i]) || double.IsInfinity(strengths[i])) throw new ArgumentException("Accent values must be finite.");
+                if (selected.All(j => Math.Abs(times[j] - times[i]) >= minimumGap - .000001)) selected.Add(i);
+            }
+            return selected.Select(i => times[i]).OrderBy(t => t).ToArray();
         }
 
         private static Analysis Analyze(float[] pcm, int rate, int channels)
@@ -228,7 +170,7 @@ namespace DancingCats.Clone.Editor
                 novelty[n] = Math.Max(0, energy[n] - (n > 0 ? energy[n - 1] : 0));
             }
             double maxNovelty = novelty.Max();
-            var peaks = new List<double>();
+            var peaks = new List<double>(); var strengths = new List<double>();
             for (int n = 1; n + 1 < count; n++)
             {
                 double mean = 0; int left = Math.Max(0, n - 40), right = Math.Min(count - 1, n + 40);
@@ -237,9 +179,10 @@ namespace DancingCats.Clone.Editor
                 if (novelty[n] >= novelty[n - 1] && novelty[n] > novelty[n + 1] && novelty[n] > Math.Max(maxNovelty * .065, mean * 1.4))
                 {
                     double time = (double)(n * hop + window / 2) / rate;
-                    if (peaks.Count == 0 || time - peaks[peaks.Count - 1] >= .12) peaks.Add(Round(time));
+                    peaks.Add(Round(time)); strengths.Add(novelty[n]);
                 }
             }
+            peaks = SelectAccentTimes(peaks.ToArray(), strengths.ToArray(), MinGap).ToList();
             if (peaks.Count < 4 || maxNovelty < rms * .005) throw new InvalidDataException("Audio has insufficient rhythmic accents; author the chart manually or use a recording with a clear beat.");
             double hopSeconds = (double)hop / rate, bestScore = double.MinValue; int bestLag = 0;
             int minLag = (int)Math.Ceiling(60 / 180.0 / hopSeconds), maxLag = Math.Min(count / 3, (int)Math.Floor(60 / 55.0 / hopSeconds));
@@ -274,64 +217,6 @@ namespace DancingCats.Clone.Editor
             return new Analysis { hop = hopSeconds, energy = energy, novelty = novelty, period = period, phase = phase, rms = rms, accents = peaks };
         }
 
-        private static bool Sustained(Analysis analysis, double start, double end)
-        {
-            int first = Math.Max(0, (int)Math.Ceiling((start + .1) / analysis.hop));
-            int last = Math.Min(analysis.energy.Length - 1, (int)((end - .1) / analysis.hop));
-            if (last <= first) return false;
-            int active = 0; double novelty = 0;
-            for (int i = first; i <= last; i++) { if (analysis.energy[i] >= analysis.rms * .23) active++; novelty += analysis.novelty[i]; }
-            return (double)active / (last - first + 1) >= .92 && novelty / (last - first + 1) < analysis.rms * .055;
-        }
-        private static void FillGap(List<double> times, double target, double period)
-        {
-            while (target - times[times.Count - 1] > MaxGap)
-            {
-                double last = times[times.Count - 1], step = Math.Min(.8, Math.Max(MinGap, period));
-                if (target - last - step < MinGap) step = (target - last) / 2;
-                times.Add(Round(last + step));
-            }
-        }
-        private static MapElement Element(MapTimeline map, int id, string kind, double audio, double endAudio, float lane, int index)
-        {
-            double game = audio + map.delayTime;
-            var ticks = new List<HoldTick>();
-            if (endAudio > audio)
-            {
-                int count = Math.Max(1, (int)Math.Ceiling((endAudio - audio) / .5));
-                for (int i = 0; i <= count; i++)
-                {
-                    double tickAudio = audio + (endAudio - audio) * i / count;
-                    ticks.Add(new HoldTick { audioTime = tickAudio, gameTime = tickAudio + map.delayTime, z = (float)((tickAudio + map.delayTime) * map.forwardSpeed) });
-                }
-            }
-            return new MapElement
-            {
-                id = id, name = kind, kind = kind, sourceIndex = index,
-                gameTime = game, audioTime = audio, audioSampleFromPosition = audio * map.sampleRate,
-                pos = new Vector3(lane, 0, (float)(game * map.forwardSpeed)), begin = 50, end = 5,
-                se = endAudio > audio ? new Vector2(0, -(float)((endAudio - audio) * map.forwardSpeed)) : new Vector2(.775f, -.775f),
-                ext = string.Join(",", ticks.Select(t => t.z.ToString("R", CultureInfo.InvariantCulture)).ToArray()), holdTicks = ticks.ToArray()
-            };
-        }
-        private static MapSegment Segment(MapElement element, double endAudio, MapTimeline map)
-        {
-            double endGame = endAudio + map.delayTime;
-            return new MapSegment
-            {
-                sourceIndex = element.sourceIndex, id = element.id, kind = element.kind, name = element.name,
-                x = element.pos.x, z = element.pos.z, endZ = (float)(endGame * map.forwardSpeed),
-                gameTime = element.gameTime, audioTime = element.audioTime, endGameTime = endGame, endAudioTime = endAudio,
-                duration = endAudio - element.audioTime, holdTicks = element.holdTicks, elementIndices = new[] { element.sourceIndex }, path = Array.Empty<ChartPoint>(),
-                motion = new MotionParameters { updateType = element.updateType, msLeft = element.msLeft, begin = element.begin, end = element.end, se = element.se, ext = element.ext }
-            };
-        }
-        private static void AddEvent(List<KoreographyEvent> events, double audio, int command, MapTimeline map)
-        {
-            int sample = (int)Math.Round(audio * map.sampleRate);
-            events.Add(new KoreographyEvent { index = events.Count, command = command, mStartSample = sample, mEndSample = sample, audioTime = (double)sample / map.sampleRate,
-                endAudioTime = (double)sample / map.sampleRate, gameTime = (double)sample / map.sampleRate + map.delayTime, endGameTime = (double)sample / map.sampleRate + map.delayTime });
-        }
         private static double Round(double value) { return Math.Round(value, 6, MidpointRounding.AwayFromZero); }
         private static string Hex(byte[] bytes) { return BitConverter.ToString(bytes).Replace("-", "").ToLowerInvariant(); }
         private static string PcmHash(float[] pcm)
@@ -394,14 +279,14 @@ namespace DancingCats.Clone.Editor
                 audioResource = audioResource, previewAudioResource = audioResource, timelineResource = "CustomData/Maps/" + map.id + ".timeline",
                 timeline = mapPath, audioFile = assetPath, audioAssetId = map.audio.assetId, sampleRate = map.sampleRate, audioLengthSeconds = map.audio.declaredLengthSeconds,
                 forwardSpeed = map.forwardSpeed, delayTime = map.delayTime, elementCount = map.elements.Length, segmentCount = map.segments.Length, eventCount = map.events.Length,
-                holdTickCount = map.elements.Sum(e => e.holdTicks.Length), followPathPointCount = 0, finish = map.segments.Where(s => s.kind == "FinishJump").ToArray()
+                holdTickCount = map.elements.Sum(e => e.holdTicks.Length), followPathPointCount = map.segments.Sum(s => s.path.Length), finish = map.segments.Where(s => s.kind == "FinishJump").ToArray()
             });
             Directory.CreateDirectory(Path.GetDirectoryName(ProjectFile(mapPath)));
             File.WriteAllText(ProjectFile(mapPath), JsonUtility.ToJson(map, true) + "\n");
             File.WriteAllText(ProjectFile(catalogPath), "[\n" + string.Join(",\n", songs.OrderBy(s => s.catalogId).Select(s => JsonUtility.ToJson(s, true)).ToArray()) + "\n]\n");
             AssetDatabase.ImportAsset(mapPath, ImportAssetOptions.ForceSynchronousImport);
             AssetDatabase.ImportAsset(catalogPath, ImportAssetOptions.ForceSynchronousImport);
-            Debug.Log("AUDIO_CHART_GENERATED " + map.id + ": " + map.audio.declaredLengthSeconds.ToString("F3", CultureInfo.InvariantCulture) + " seconds, " + map.elements.Length + " elements, " + map.elements.Count(e => e.kind == "Hold") + " holds, " + map.elements.Count(e => e.updateType == 3) + " moving jumps; source SHA-256 " + map.audio.rawSha256);
+            Debug.Log("AUDIO_CHART_GENERATED " + map.id + ": " + map.audio.declaredLengthSeconds.ToString("F3", CultureInfo.InvariantCulture) + " seconds, " + map.elements.Length + " elements, " + map.elements.Count(e => e.kind == "Hold") + " holds, " + map.elements.Count(e => e.updateType == 3) + " moving jumps, " + map.segments.Count(s => s.kind == "Follow") + " glides; source SHA-256 " + map.audio.rawSha256);
         }
     }
 }

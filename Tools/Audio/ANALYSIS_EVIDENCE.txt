@@ -1,0 +1,67 @@
+ONNX-only vocal-stem analysis: reproducible research tools
+
+No Torch/TensorFlow is used or required for the execution path tested here.
+No repo, game assets, Unity, or builds are modified by these scripts.
+
+Tested dependencies:
+Python3.12.14; numpy2.3.5; scipy1.16.2; librosa0.11.0;
+soundfile0.13.1; onnxruntime1.23.1; basic-pitch0.4.0;
+matplotlib3.10.7; pretty_midi0.2.11.
+Install BasicPitch with --no-deps after installing its runtime dependencies,
+so pip does not fetch TensorFlow. The existing venv executed all steps below.
+basic_pitch defaults to ONNX when Model(path/to/nmp.onnx) is supplied explicitly.
+
+Model: https://github.com/TRvlvr/model_repo/releases/download/all_public_uvr_models/UVR-MDX-NET-Voc_FT.onnx
+Metadata: https://raw.githubusercontent.com/TRvlvr/application_data/main/mdx_model_data/model_data.json
+Exact tested model SHA256:534b2070fcc7df514b13ef660dc8cbb328679c2374d04354a5c42bb14ecce111
+UVR tail hash:77d07b2667ddf05b9e3175941b4454a0 (MD5 last10000*1024 bytes).
+Metadata FFT7680,dim_f3072,dim_t256,compensate1.021,stemVocals.
+No input peak normalization, no denoise model or extra models.
+
+Commands (replace paths; explicit source-score carries original MP3 hash,
+measured beats and coarse phrase metadata into the compatible JSON contract):
+
+python separate_onnx.py --audio full.wav --model UVR-MDX-NET-Voc_FT.onnx --model-data uvr_model_data.json --out stems
+python analyze_stem.py --audio stems/vocals_mdx.wav --out stems/stem_analysis --source-score score_candidates.json
+python support_onsets.py --audio full.wav --residual stems/instrumental_residual.wav --out stems/support_onsets.json
+
+An explicit --reuse-features is available for repeated editorial derivation
+from unchanged stem audio only. It reuses stem_analysis/stem_features.npz;
+the normal command recalculates pYIN rather than trusting a stale cache.
+
+Exports:
+lead_notes.json: dominant predicted-vocal intervals with strength,confidence,
+pyinAgreement,pitchSpreadSemitones,onsetStrength,samePitchReattack.
+attack_candidates.json: subset with nearby measured stem spectral attack.
+sustain_candidates.json: conservative no-strong-internal-reattack subset.
+summary.json: activity/gaps,counts,dependencies and thresholds.
+score_stem_candidates.json: compatible MusicalScore shape; cues remain
+editorial candidates rather than a complete safe playable route.
+support_onsets.json: real measured mix and residual spectral changes,
+not a periodic grid or an instruction to score every sound.
+stem_piano_roll_first30.png/full.png and raw NPZ/MIDI retain evidence.
+
+Primary implementation contracts (metadata and standard STFT behavior):
+https://github.com/Anjok07/ultimatevocalremovergui/blob/master/UVR.py#L708-L727
+https://github.com/Anjok07/ultimatevocalremovergui/blob/master/separate.py#L528-L629
+https://github.com/Anjok07/ultimatevocalremovergui/blob/master/lib_v5/tfc_tdf_v3.py#L4-L45
+
+Measured result:157.152653s,29chunks,60.8sCPU separation.
+Full-bin STFT identity maxerror8.94e-8 verified before inference;
+output frames6930432,44.1kHzstereo,finite and aligned with input.
+BasicPitch522polyphonic stem notes versus1455full-mix notes.
+307dominant intervals;292candidate attacks;14strict sustain candidates.
+pYIN voiced83.59%of frames on the stem. The previous mixture's2610
+accepted frames had extra confidence/RMS gating, so their19.28%fraction
+is not directly comparable to this raw voicing fraction.
+
+Interpretation limits:
+Learned vocal separation is not ground truth, especially synthetic meows.
+No human listening channel was available. The stem suppresses the intro
+almost entirely until14.6866s; accompaniment there is still musically real.
+Activity threshold=maxStemRMS-30dB, not semantic vocal detection.
+Same-pitch weak model boundaries are merged; matched real reattacks remain.
+Strict sustain gating can miss an obvious stable pitch if residual flux
+contains an attack, e.g.15.1136-16.07s. An editor may choose Hold after
+examining the independent pitch/onset evidence. Confidence is heuristic.
+No count quota or periodic supports are inserted by these scripts.

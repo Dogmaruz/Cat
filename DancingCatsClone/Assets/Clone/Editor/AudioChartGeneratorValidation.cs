@@ -13,6 +13,7 @@ namespace DancingCats.Clone.Editor
         public static void RunChecks()
         {
             RunSafetyChecks();
+            RunMusicalFallbackChecks();
             var type = typeof(AudioChartGeneratorValidation).Assembly.GetType("DancingCats.Clone.Editor.AudioChartGenerator");
             Require(type != null, "PCM audio chart generator is missing");
             var method = type.GetMethod("GenerateFromSamples", BindingFlags.Public | BindingFlags.Static);
@@ -33,9 +34,21 @@ namespace DancingCats.Clone.Editor
                 "ordinary landings follow measured off-grid pulse phase");
             ValidateMap(map);
             var sustained = Generate(method, PulseTrack(rate, true), rate);
-            Require(sustained.segments.Any(s => s.kind == "Hold" && s.duration >= .6), "sustained PCM creates a native hold section");
+            Require(!sustained.segments.Any(s => s.kind == "Hold"), "a mixed-audio RMS bed alone must not invent a melodic hold");
             ValidateMap(sustained);
-            Debug.Log("AUDIO_CHART_GENERATOR PASS: silence rejected; 80 BPM and measured phase; deterministic PCM output; safe gaps; native holds and exit distances; finish before audio end");
+            Debug.Log("AUDIO_CHART_GENERATOR PASS: silence rejected; 80 BPM and measured phase; deterministic PCM output; preserved rests; no RMS-only holds; exit distances; finish before audio end");
+        }
+
+        public static void RunMusicalFallbackChecks()
+        {
+            var select = typeof(AudioChartGenerator).GetMethod("SelectAccentTimes", BindingFlags.Public | BindingFlags.Static);
+            Require(select != null, "strength-ranked accent selection is missing");
+            var selected = (double[])select.Invoke(null, new object[] { new[] { .4, .5, 1.2, 2.0 }, new[] { .1, 1.0, .8, .7 }, .18 });
+            Require(selected.SequenceEqual(new[] { .5, 1.2, 2.0 }), "strong late accent replaces weak early accent inside the minimum gap");
+            var samples = PulseTrack(8000, false);
+            Array.Clear(samples, 6 * 8000, 3 * 8000);
+            var map = AudioChartGenerator.GenerateFromSamples(samples, 8000, 1, "SparsePulse");
+            Require(!map.events.Any(e => e.audioTime > 6.15 && e.audioTime < 8.95), "PCM silence receives no arbitrary .8-second scored filler");
         }
 
         public static void RunSafetyChecks()
@@ -87,26 +100,36 @@ namespace DancingCats.Clone.Editor
             Require(map.elements[0].kind == "Start" && map.elements[0].gameTime == 0, "Start remains at game time zero");
             Require(Math.Abs(map.elements[0].audioTime + map.delayTime) < .00001, "Start uses negative audio preroll");
             Require(map.events.All(e => e.mStartSample >= 0 && e.mEndSample >= e.mStartSample && e.mEndSample < map.audio.declaredLengthSeconds * map.sampleRate), "events are inside decoded PCM");
-            for (int i = 0; i < map.elements.Length; i++)
+            foreach (var element in map.elements)
             {
-                var element = map.elements[i];
-                Require(!float.IsNaN(element.pos.z) && !float.IsInfinity(element.pos.z), "finite geometry");
+                Require(!float.IsNaN(element.pos.z) && !float.IsInfinity(element.pos.z) && !float.IsNaN(element.pos.x) && !float.IsInfinity(element.pos.x), "finite geometry");
                 Require(Math.Abs(element.gameTime - element.audioTime - map.delayTime) < .00001, "audio/game timing relation");
                 Require(Math.Abs(element.pos.z - element.gameTime * map.forwardSpeed) < .0003, "position follows native forward speed");
-                Require(element.jumpDistance > 0, "every arc has a positive distance");
-                if (i + 1 >= map.elements.Length) continue;
-                var segment = map.segments.Single(s => s.sourceIndex == element.sourceIndex);
-                var next = map.elements[i + 1];
-                double gap = next.gameTime - segment.endGameTime;
-                Require(gap >= .319 && gap <= 1.001, "takeoff-to-landing interval is safe: " + gap);
-                Require(Math.Abs(element.jumpDistance - (next.pos.z - segment.endZ)) < .0003, "hold exit, rather than hold start, determines outgoing arc");
-                Require(Math.Abs(next.pos.x - element.pos.x) <= 1.001, "lane changes stay reachable");
-                if (element.kind == "Hold")
+                Require(element.id == 4 || element.id == 5 ? element.jumpDistance == 0 : element.jumpDistance > 0, "Follow entry and markers do not launch arcs; actual exits have positive arcs");
+            }
+            foreach (var segment in map.segments)
+            {
+                var element = map.elements[segment.sourceIndex];
+                var exit = map.elements[segment.elementIndices.Last()];
+                if (segment.kind == "Follow")
+                {
+                    Require(element.id == 4 && element.updateType == 2 && exit.id == 6 && exit.updateType == 0, "native Follow entry and exit contract");
+                    Require(segment.path.Length == segment.elementIndices.Length && segment.path.Length >= 2, "Follow stores its native path");
+                    Require(Math.Abs(element.mfendPos - (segment.endZ - element.pos.z)) < .0003, "Follow native travel ends at terminal Z");
+                    Require(segment.elementIndices.Skip(1).Take(segment.elementIndices.Length - 2).All(i => map.elements[i].id == 5 && map.elements[i].updateType == 0), "Follow mids remain stationary native markers");
+                }
+                if (segment.kind == "Hold")
                 {
                     Require(element.se.y < 0 && element.holdTicks.Length >= 2, "hold native mesh length and checkpoints exist");
                     Require(element.holdTicks.Select(t => t.z).Distinct().Count() == element.holdTicks.Length, "hold checkpoints do not double-score");
-                    Require(Math.Abs(element.holdTicks.Last().z - segment.endZ) < .0003, "hold checkpoint end matches native exit");
+                    Require(Math.Abs(element.holdTicks.First().z - element.pos.z) < .0003 && Math.Abs(element.holdTicks.Last().z - segment.endZ) < .0003, "hold checkpoints include native entry and exit");
                 }
+                if (exit.sourceIndex + 1 >= map.elements.Length) continue;
+                var next = map.elements[exit.sourceIndex + 1];
+                double gap = next.gameTime - segment.endGameTime;
+                Require(gap >= .077 && gap <= 1.964, "takeoff-to-landing interval exceeds measured native arc range; annotate sustained support rather than scoring filler: " + gap);
+                Require(Math.Abs(exit.jumpDistance - (next.pos.z - segment.endZ)) < .0003, "sustained support exit determines outgoing arc");
+                Require(Math.Abs(next.pos.x - exit.pos.x) <= 1.001, "lane changes stay reachable");
             }
             var finish = map.elements.Last();
             Require(finish.kind == "FinishJump" && Math.Abs(finish.jumpDistance - 5) < .00001, "real finish jumps five units to the original end platform");
