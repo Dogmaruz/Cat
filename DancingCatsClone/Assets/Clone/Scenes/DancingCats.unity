@@ -129,8 +129,8 @@ GameObject:
   m_Component:
   - component: {fileID: 328620665}
   - component: {fileID: 328620664}
-  - component: {fileID: 328620667}
   - component: {fileID: 328620666}
+  - component: {fileID: 328620667}
   m_Layer: 0
   m_Name: Dancing Cats offline reconstruction
   m_TagString: Untagged
@@ -177,14 +177,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3ec026b3cd944d48aafa5a51cdb9c6a, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGame.Composition.GameLifetimeScope
   parentReference:
-    TypeName:
+    TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
   controller: {fileID: 328620664}
   presenter: {fileID: 328620667}
+  radioArt: {fileID: 11400000, guid: d0104642bba30d94ab86e607b2a5825c, type: 2}
+  courierCatalog: {fileID: 11400000, guid: 198f7769a81d98541b0db6efbbc1f624, type: 2}
   eventSystem: {fileID: 1706459760}
   volumes:
   - {fileID: 442091012}
@@ -197,9 +199,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 328620663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c988de82738e134495eb7808b6b7af5, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::DancingCats.Clone.OriginalUIPresenter
+  m_Script: {fileID: 11500000, guid: ecb0599d9fc10ab469736c27ee98cc03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RadioArchipelago.UI.RadioMenuPresenter
 --- !u!1 &442091011
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,7 +278,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1

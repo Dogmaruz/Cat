@@ -7,11 +7,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
 using RhythmGame.Services;
 using VContainer;
+using RadioArchipelago;
 
 namespace DancingCats.Clone
 {
     /// <summary>Behavior adapter for the recovered original UI prefabs. Art, fonts and item layouts stay authored.</summary>
-    public sealed class OriginalUIPresenter : MonoBehaviour
+    public sealed class OriginalUIPresenter : MonoBehaviour, IGamePresentation
     {
         private OriginalPlayController game;
         private OriginalAssets assets;

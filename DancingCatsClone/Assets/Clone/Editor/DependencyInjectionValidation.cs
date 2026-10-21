@@ -11,6 +11,8 @@ using UnityEngine.InputSystem.UI;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using VContainer;
+using RadioArchipelago;
+using RadioArchipelago.UI;
 
 namespace DancingCats.Clone.Editor
 {
@@ -57,7 +59,9 @@ namespace DancingCats.Clone.Editor
         public static void ConfigureScene(OriginalPlayController controller)
         {
             var scene = controller.gameObject.scene;
-            var presenter = controller.GetComponent<OriginalUIPresenter>() ?? controller.gameObject.AddComponent<OriginalUIPresenter>();
+            var legacy = controller.GetComponent<OriginalUIPresenter>();
+            if (legacy != null) UnityEngine.Object.DestroyImmediate(legacy);
+            var presenter = controller.GetComponent<RadioMenuPresenter>() ?? controller.gameObject.AddComponent<RadioMenuPresenter>();
             var systems = scene.GetRootGameObjects().SelectMany(root => root.GetComponentsInChildren<EventSystem>(true)).ToArray();
             Require(systems.Length <= 1, "Scene has multiple input event systems");
             EventSystem events;
@@ -72,7 +76,10 @@ namespace DancingCats.Clone.Editor
                 UnityEngine.Object.DestroyImmediate(generatedModule);
             var scope = controller.GetComponent<GameLifetimeScope>() ?? controller.gameObject.AddComponent<GameLifetimeScope>();
             var volumes = scene.GetRootGameObjects().SelectMany(root => root.GetComponentsInChildren<Volume>(true)).ToArray();
-            scope.SetBindings(controller, presenter, events, volumes);
+            var art = AssetDatabase.LoadAssetAtPath<RadioArtAssets>("Assets/RadioArchipelago/Content/RadioArtAssets.asset");
+            var couriers = AssetDatabase.LoadAssetAtPath<CourierCatalog>("Assets/RadioArchipelago/Content/CourierCatalog.asset");
+            Require(art != null && couriers != null, "Create Radio Archipelago art and courier assets before composing the scene");
+            scope.SetBindings(controller, presenter, events, volumes, art, couriers);
             EditorUtility.SetDirty(scope);
         }
 

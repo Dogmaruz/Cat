@@ -9,6 +9,7 @@ using UnityEngine.Rendering.Universal;
 using RhythmGame.Services;
 using RhythmGame.Sessions;
 using VContainer;
+using RadioArchipelago;
 
 namespace DancingCats.Clone
 {
@@ -52,7 +53,7 @@ namespace DancingCats.Clone
         public bool CanRevive => Phase == ClonePhase.Dead && !_revived && ReviveSeconds > 0;
         public float ReviveSeconds => Mathf.Max(0, 5 - (Time.unscaledTime - _deathTime));
         public AudioSource Music => _music;
-        public OriginalUIPresenter Presenter { get; private set; }
+        public IGamePresentation Presenter { get; private set; }
         public IReadOnlyList<OriginalTile> Tiles => _tiles;
         public float PlaybackRate => _rate;
         public bool Descending => _jumping && JumpPercent > .5f;
@@ -60,7 +61,7 @@ namespace DancingCats.Clone
         private readonly List<OriginalTile> _tiles = new List<OriginalTile>();
         private readonly List<Collider> _coins = new List<Collider>();
         private OriginalScore _score => _runSessions.Current.Score;
-        private OriginalRoleMotion _motion;
+        private CourierMotion _motion;
         private Transform _track, _railway, _endPlatform;
         private AudioSource _music, _effects;
         private Camera _camera;
@@ -76,13 +77,13 @@ namespace DancingCats.Clone
         private OriginalThemeVisuals _themeVisuals;
         private Collider _finishCollider;
         private string _runId;
-        private string _boundRole, _boundTrail;
+        private string _boundRole;
         private SongRecord _nextSong;
         private bool _nextSongEvaluated;
         private ISongCatalog _catalog;
         private IGameResources _resources;
         private IAudioClock _audioClock;
-        private RoleMotionCatalog _roleCatalog;
+        private CourierSelection _couriers;
         private ThemeCatalog _themeCatalog;
         private SceneRenderSettings _renderSettings;
         private bool _initialized;
@@ -95,15 +96,16 @@ namespace DancingCats.Clone
 
         [Inject]
         public void Construct(OriginalAssets assets, ISongCatalog catalog, OriginalProgression progression,
-            IGameResources resources, IAudioClock audioClock, RoleMotionCatalog roleCatalog,
-            ThemeCatalog themeCatalog, SceneRenderSettings renderSettings, RunSessionFactory runSessions)
+            IGameResources resources, IAudioClock audioClock,
+            ThemeCatalog themeCatalog, SceneRenderSettings renderSettings, RunSessionFactory runSessions,
+            CourierSelection couriers)
         {
             Assets = assets ?? throw new ArgumentNullException(nameof(assets));
             _catalog = catalog ?? throw new ArgumentNullException(nameof(catalog));
             Progression = progression ?? throw new ArgumentNullException(nameof(progression));
             _resources = resources ?? throw new ArgumentNullException(nameof(resources));
             _audioClock = audioClock ?? throw new ArgumentNullException(nameof(audioClock));
-            _roleCatalog = roleCatalog ?? throw new ArgumentNullException(nameof(roleCatalog));
+            _couriers = couriers ?? throw new ArgumentNullException(nameof(couriers));
             _themeCatalog = themeCatalog ?? throw new ArgumentNullException(nameof(themeCatalog));
             _renderSettings = renderSettings ?? throw new ArgumentNullException(nameof(renderSettings));
             _runSessions = runSessions ?? throw new ArgumentNullException(nameof(runSessions));
@@ -119,25 +121,25 @@ namespace DancingCats.Clone
             Screen.orientation = ScreenOrientation.Portrait;
             Songs = _catalog.Songs;
             Progression.Changed += NotifyChanged;
+            _couriers.Changed += RefreshRole;
             _music = gameObject.AddComponent<AudioSource>(); _music.playOnAwake = false;
             _effects = gameObject.AddComponent<AudioSource>(); _effects.playOnAwake = false;
             _track = new GameObject("Original authored map").transform;
             _track.SetParent(transform, false);
-            Actor = new GameObject("Original Cat Actor").transform;
+            Actor = new GameObject("Radio courier actor").transform;
             Actor.SetParent(transform, false);
             var body = Actor.gameObject.AddComponent<Rigidbody>();
             body.useGravity = false; body.isKinematic = true;
             var sphere = Actor.gameObject.AddComponent<SphereCollider>();
             sphere.radius = .25f; sphere.isTrigger = true;
             Actor.gameObject.AddComponent<OriginalActorTrigger>().owner = this;
-            _motion = Actor.gameObject.AddComponent<OriginalRoleMotion>();
             RefreshRole();
             var selected = Songs.FirstOrDefault(s => s.id == Progression.State.selectedSong) ?? Songs[0];
             Prepare(selected, ClonePhase.Menu, true);
-            Debug.Log("DANCING_CATS_READY songs=" + Songs.Length + " cats=" + Assets.RoleNames.Length + " sprites=" + Assets.sprites.Length + " song=" + Selected.id + " elements=" + Map.elements.Length);
+            Debug.Log("RADIO_ARCHIPELAGO_READY songs=" + Songs.Length + " courier=" + _couriers.SelectedId + " song=" + Selected.id + " elements=" + Map.elements.Length);
         }
 
-        public void AttachPresenter(OriginalUIPresenter presenter)
+        public void AttachPresenter(IGamePresentation presenter)
         {
             if (Presenter != null) throw new InvalidOperationException("A presenter is already attached.");
             Presenter = presenter ?? throw new ArgumentNullException(nameof(presenter));
@@ -234,25 +236,19 @@ namespace DancingCats.Clone
 
         public void RefreshRole()
         {
-            if (Actor == null || Progression == null) return;
+            if (Actor == null || _couriers == null) return;
             foreach (Transform child in Actor) { child.gameObject.SetActive(false); Destroy(child.gameObject); }
-            string id = Progression.SelectedRole;
-            string name = Progression.Role(id)?.prefabName;
-            if (name == null) throw new InvalidOperationException("Recovered original cat is unavailable: " + id);
-            var instance = Instantiate(Assets.Prefab(name), Actor, false);
-            instance.name = name; instance.transform.localPosition = Vector3.zero;
+            var definition = _couriers.SelectedDefinition;
+            if (definition.prefab == null) throw new InvalidOperationException("The selected courier has no model: " + definition.id);
+            var instance = Instantiate(definition.prefab, Actor, false);
+            instance.name = definition.id;
+            instance.transform.localPosition = new Vector3(0, -.25f, 0);
             instance.transform.localRotation = Quaternion.identity;
-            foreach (var collider in instance.GetComponentsInChildren<Collider>(true)) { collider.enabled = false; Destroy(collider); }
-            foreach (var body in instance.GetComponentsInChildren<Rigidbody>(true)) { body.isKinematic = true; Destroy(body); }
-            _motion.Bind(instance, name, _roleCatalog);
-            string trailName = Progression.Trail(Progression.SelectedTrail)?.prefabName;
-            var trailEntry = Assets.prefabs.FirstOrDefault(p => p.name == trailName);
-            if (trailEntry?.asset != null)
-            {
-                var trail = Instantiate(trailEntry.asset, Actor, false);
-                trail.name = "Original selected trail";
-            }
-            _boundRole = Progression.SelectedRole; _boundTrail = Progression.SelectedTrail;
+            instance.transform.localScale = Vector3.one * .47f;
+            _motion = instance.GetComponent<CourierMotion>();
+            if (_motion == null) throw new InvalidOperationException("The courier has no presentation rig: " + definition.id);
+            _motion.ResetMotion();
+            _boundRole = definition.id;
             NotifyChanged();
         }
 
@@ -395,6 +391,7 @@ namespace DancingCats.Clone
                 double targetTime = _clockOffset + Math.Max(0, _audioClock.DspTime - _dspStart) * _rate;
                 var previousPosition = Actor.position;
                 float targetX = Mathf.Clamp(previousPosition.x + (_destinationX - previousPosition.x) * .25f, -1.5f, 1.5f);
+                _motion.SetFacing(Mathf.Clamp((targetX - previousPosition.x) * 160, -25, 25));
                 int steps = Mathf.Clamp(Mathf.CeilToInt(Mathf.Abs((float)targetTime * Map.forwardSpeed - previousPosition.z) / .12f), 1, 1024);
                 // Preserve the native once-per-frame lateral damping while sampling the real arc
                 // densely enough that authored thin checkpoint/finish colliders survive a render hitch.
@@ -661,7 +658,7 @@ namespace DancingCats.Clone
         {
             if (Progression != null)
             {
-                if (Actor != null && (_boundRole != Progression.SelectedRole || _boundTrail != Progression.SelectedTrail)) RefreshRole();
+                if (Actor != null && _boundRole != _couriers.SelectedId) RefreshRole();
                 var settings = Progression.State.settings;
                 if (_music != null) _music.volume = settings.sound ? _volume : 0;
                 if (_effects != null) _effects.volume = settings.sound ? _volume : 0;
@@ -673,6 +670,7 @@ namespace DancingCats.Clone
         private void OnDestroy()
         {
             if (Progression != null) Progression.Changed -= NotifyChanged;
+            if (_couriers != null) _couriers.Changed -= RefreshRole;
             if (_music != null) _music.Stop();
             if (_effects != null) _effects.Stop();
         }
