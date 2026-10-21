@@ -14,6 +14,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.LowLevel;
 using UnityEngine.SceneManagement;
+using RhythmGame.Services;
 
 namespace DancingCats.Clone.Editor
 {
@@ -75,6 +76,8 @@ namespace DancingCats.Clone.Editor
         public static void RunCustomSong() => StartValidation(false, false, false, true);
         public static void RunCustomSongInOpenEditor() => StartValidation(false, false, false, true, true,
             Path.GetFullPath(Path.Combine(Application.dataPath, "../Library/MusicalChartReview/playtest")));
+        public static void RunDependencyInjectionMenusInOpenEditor() => StartValidation(true, true, false, false, true,
+            Path.GetFullPath(Path.Combine(Application.dataPath, "../Library/DependencyInjectionValidation/menus")));
         public static void RunReviewSafetyChecks()
         {
             var preflight = typeof(IntegratedPlayValidation).GetMethod("ValidateEditorPreflight", BindingFlags.NonPublic | BindingFlags.Static);
@@ -816,14 +819,16 @@ namespace DancingCats.Clone.Editor
                 case 68:
                     if (!ResultAnimationReady()) return;
                     var quote = game.SettlementQuote;
-                    var persisted = OriginalProgression.FromJson(game.Progression.Config, PlayerPrefs.GetString(OriginalProgression.SaveKey, ""));
+                    var persisted = OriginalProgression.FromJson(game.Progression.Config, PlayerPrefs.GetString(OriginalProgression.SaveKey, ""),
+                        new ResourceSongCatalog(new UnityGameResources()), new PlayerPrefsProfileStore());
                     var progress = persisted.SongProgress(CustomSongId);
                     Check(game.Score > 0 && game.RunStars == 3 && progress != null && progress.normalStars == 3 && progress.normalScore == game.Score &&
                         progress.starts == 1 && progress.completions == 1, "custom three-star result and best score survive save deserialization exactly once");
                     Check(quote != null && quote.eligible && quote.claimed && game.Progression.State.settlements.Count == 1 &&
                         game.Progression.Gold == customGold + quote.totalGold, "native custom settlement pays exactly one full-tier reward");
                     game.PaySettlement(); game.PaySettlement();
-                    persisted = OriginalProgression.FromJson(game.Progression.Config, PlayerPrefs.GetString(OriginalProgression.SaveKey, ""));
+                    persisted = OriginalProgression.FromJson(game.Progression.Config, PlayerPrefs.GetString(OriginalProgression.SaveKey, ""),
+                        new ResourceSongCatalog(new UnityGameResources()), new PlayerPrefsProfileStore());
                     Check(game.Progression.Gold == customGold + quote.totalGold && persisted.Gold == game.Progression.Gold &&
                         persisted.State.settlements.Count == 1 && persisted.State.settlements[0].claimed && persisted.SongProgress(CustomSongId).completions == 1,
                         "repeated settlement requests preserve the saved wallet and single completion");

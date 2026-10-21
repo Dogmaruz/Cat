@@ -3,11 +3,58 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
+using RhythmGame.Services;
 
 namespace DancingCats.Clone
 {
-    /// <summary>Original LanguageController text IDs recovered from serialized prefab pointers.</summary>
+    /// <summary>Localized label state owned by its containing UI scope.</summary>
     public sealed class OriginalUILocalization : MonoBehaviour
+    {
+        [SerializeField] private int textId, language;
+        [SerializeField] private string sourceValue;
+        [SerializeField] private bool dynamicValue;
+        private Text target;
+        private UiLocalization localization;
+
+        internal void Bind(UiLocalization service, Text text, int id, int selectedLanguage)
+        {
+            localization = service;
+            target = text;
+            textId = id;
+            language = Mathf.Clamp(selectedLanguage, 0, 12);
+            sourceValue = text.text;
+            dynamicValue = false;
+            Refresh();
+        }
+
+        internal void Apply(UiLocalization service, int selectedLanguage)
+        {
+            localization = service;
+            language = Mathf.Clamp(selectedLanguage, 0, 12);
+            Refresh();
+        }
+
+        internal void SetValue(UiLocalization service, string value)
+        {
+            localization = service;
+            if (target == null) target = GetComponent<Text>();
+            if (target == null) return;
+            dynamicValue = !string.Equals(value, sourceValue, StringComparison.Ordinal) &&
+                !localization.IsEnglishSource(textId, value);
+            if (dynamicValue) target.text = value;
+            else Refresh();
+        }
+
+        private void Refresh()
+        {
+            if (dynamicValue || localization == null) return;
+            if (target == null) target = GetComponent<Text>();
+            if (target != null && localization.TryTranslate(textId, language, out var value)) target.text = value;
+        }
+    }
+
+    /// <summary>Scope-owned language catalog and prefab bindings with an explicit resource dependency.</summary>
+    public sealed class UiLocalization
     {
         [Serializable] private sealed class Catalog { public Row[] items; }
         [Serializable] private sealed class Row
@@ -28,14 +75,16 @@ namespace DancingCats.Clone
             }
         }
         private sealed class Binding { public string path; public int id; }
-        private static Dictionary<int, Row> catalog;
-        private static Dictionary<string, List<Binding>> bindings;
-        [SerializeField] private int textId, language;
-        [SerializeField] private string sourceValue;
-        [SerializeField] private bool dynamicValue;
-        private Text target;
+        private readonly IGameResources resources;
+        private Dictionary<int, Row> catalog;
+        private Dictionary<string, List<Binding>> bindings;
 
-        public static void Bind(GameObject root, string prefabName, int language)
+        public UiLocalization(IGameResources resources)
+        {
+            this.resources = resources ?? throw new ArgumentNullException(nameof(resources));
+        }
+
+        public void Bind(GameObject root, string prefabName, int language)
         {
             Load();
             if (!bindings.TryGetValue(prefabName, out var entries)) return;
@@ -45,45 +94,50 @@ namespace DancingCats.Clone
                 var text = node != null ? node.GetComponent<Text>() : null;
                 if (text == null) throw new InvalidOperationException("Original localized Text is missing: " + prefabName + "/" + entry.path);
                 var label = text.GetComponent<OriginalUILocalization>() ?? text.gameObject.AddComponent<OriginalUILocalization>();
-                label.target = text; label.textId = entry.id; label.language = Mathf.Clamp(language, 0, 12);
-                label.sourceValue = text.text; label.dynamicValue = false; label.Refresh();
+                label.Bind(this, text, entry.id, language);
             }
         }
 
-        public static void Apply(GameObject root, int language)
+        public void Apply(GameObject root, int language)
         {
             foreach (var label in root.GetComponentsInChildren<OriginalUILocalization>(true))
             {
-                label.language = Mathf.Clamp(language, 0, 12); label.Refresh();
+                label.Apply(this, language);
             }
         }
 
-        public static void SetText(Text text, string value)
+        public void SetText(Text text, string value)
         {
             value = value ?? string.Empty;
             var label = text.GetComponent<OriginalUILocalization>();
             if (label == null) { text.text = value; return; }
-            Load();
-            bool known = catalog.TryGetValue(label.textId, out var row);
-            label.dynamicValue = !string.Equals(value, label.sourceValue, StringComparison.Ordinal) &&
-                (!known || !string.Equals(value.Trim(), row.English?.Trim(), StringComparison.OrdinalIgnoreCase));
-            if (label.dynamicValue) text.text = value; else label.Refresh();
+            label.SetValue(this, value);
         }
 
-        private void Refresh()
+        internal bool IsEnglishSource(int textId, string value)
         {
-            if (dynamicValue) return;
             Load();
-            if (target == null) target = GetComponent<Text>();
-            if (target == null || !catalog.TryGetValue(textId, out var row)) return;
-            string value = row.InLanguage(language);
-            target.text = string.IsNullOrEmpty(value) ? row.English : value;
+            return catalog.TryGetValue(textId, out var row) &&
+                string.Equals(value.Trim(), row.English?.Trim(), StringComparison.OrdinalIgnoreCase);
         }
 
-        private static void Load()
+        internal bool TryTranslate(int textId, int language, out string value)
+        {
+            Load();
+            if (catalog.TryGetValue(textId, out var row))
+            {
+                value = row.InLanguage(language);
+                if (string.IsNullOrEmpty(value)) value = row.English;
+                return true;
+            }
+            value = null;
+            return false;
+        }
+
+        private void Load()
         {
             if (catalog != null) return;
-            var resource = Resources.Load<TextAsset>("json/language_table");
+            var resource = resources.Load<TextAsset>("json/language_table");
             if (resource == null) throw new InvalidOperationException("Original language table is missing.");
             // JsonUtility needs an array; remove only the numeric keys of the native root dictionary.
             string json = Regex.Replace(resource.text.Trim(), @"(?<=[{,])\s*""\d+""\s*:\s*(?=\{)", string.Empty);

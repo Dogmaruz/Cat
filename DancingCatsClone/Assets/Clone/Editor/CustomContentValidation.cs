@@ -42,7 +42,8 @@ namespace DancingCats.Clone.Editor
 
         private static SongRecord[] Originals()
         {
-            var method = typeof(RecoveredCatalog).GetMethod("LoadOriginal", BindingFlags.Public | BindingFlags.Static);
+            var method = typeof(RecoveredCatalog).GetMethod("LoadOriginal", BindingFlags.Public | BindingFlags.Static,
+                null, Type.EmptyTypes, null);
             Require(method != null, "RecoveredCatalog.LoadOriginal is not implemented yet");
             return (SongRecord[])method.Invoke(null, null);
         }

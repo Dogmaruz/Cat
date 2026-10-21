@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using RhythmGame.Services;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,6 +14,17 @@ namespace DancingCats.Clone.Editor
         [Serializable] private sealed class PrefabBinding { public string prefab; public RendererBinding[] bindings; }
         [Serializable] private sealed class RendererBinding { public string rendererPath; public int[] materials; }
 
+        private sealed class CountingResources : IGameResources
+        {
+            private readonly IGameResources resources = new UnityGameResources();
+            public int LoadCount { get; private set; }
+            public T Load<T>(string path) where T : UnityEngine.Object
+            {
+                LoadCount++;
+                return resources.Load<T>(path);
+            }
+        }
+
         public static void Run()
         {
             var type = typeof(RecoveredCatalog).Assembly.GetType("DancingCats.Clone.OriginalThemeVisuals");
@@ -20,6 +32,14 @@ namespace DancingCats.Clone.Editor
             var data = Resources.Load<TextAsset>("OriginalData/theme-visual-bindings");
             Require(data != null, "original theme binding manifest exists");
             var manifest = JsonUtility.FromJson<Manifest>(data.text);
+            var resources = new CountingResources();
+            var catalog = new ThemeCatalog(resources);
+            Require(catalog.MaterialCount == manifest.materials.Length && catalog.MaterialCount == manifest.materials.Length,
+                "injected theme catalog preserves material ordering and reuses its manifest");
+            Require(resources.LoadCount == 1, "theme manifest is loaded once per application scope");
+            var otherResources = new CountingResources();
+            Require(new ThemeCatalog(otherResources).MaterialCount == manifest.materials.Length && otherResources.LoadCount == 1,
+                "a separate application scope owns its own theme manifest");
             var library = AssetDatabase.LoadAssetAtPath<OriginalAssets>("Assets/Resources/OriginalAssets.asset");
             Require(library != null && library.themeMaterials.Length == manifest.materials.Length,
                 "builder preserves every original palette material in the runtime library");
@@ -58,7 +78,7 @@ namespace DancingCats.Clone.Editor
                         tiles.Add(tile);
                     }
                     var component = owner.AddComponent(type);
-                    Invoke(type, component, "Bind", environment, tiles, library.themeMaterials, number);
+                    Invoke(type, component, "Bind", environment, tiles, library.themeMaterials, number, catalog);
                     Require((int)type.GetProperty("Index").GetValue(component) == 0, "original palette starts at0");
                     Invoke(type, component, "Advance", 6f);
                     Require((int)type.GetProperty("Index").GetValue(component) == 1, "Theme tile advances the original palette");
@@ -79,7 +99,8 @@ namespace DancingCats.Clone.Editor
                     UnityEngine.Object.DestroyImmediate(owner);
                 }
             }
-            Debug.Log("ORIGINAL_THEME_VISUALS PASS: seven environments,114 materials,223 exact renderer bindings and native palette cycling");
+            Require(resources.LoadCount == 1, "all environment bindings reuse their injected theme manifest");
+            Debug.Log("ORIGINAL_THEME_VISUALS PASS: seven environments,114 materials,223 exact renderer bindings, native palette cycling and scoped manifest caching");
         }
 
         private static object Invoke(Type type, Component component, string name, params object[] values)

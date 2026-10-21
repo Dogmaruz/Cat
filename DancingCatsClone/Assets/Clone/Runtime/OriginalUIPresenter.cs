@@ -5,6 +5,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
+using RhythmGame.Services;
+using VContainer;
 
 namespace DancingCats.Clone
 {
@@ -12,6 +14,14 @@ namespace DancingCats.Clone
     public sealed class OriginalUIPresenter : MonoBehaviour
     {
         private OriginalPlayController game;
+        private OriginalAssets assets;
+        private OriginalProgression progress;
+        private ISongCatalog catalog;
+        private IGameResources resources;
+        private IPlayerPreferences preferences;
+        private UiLocalization localization;
+        private RoleMotionCatalog roleCatalog;
+        private ICalendar calendar;
         private readonly Dictionary<string, GameObject> panels = new Dictionary<string, GameObject>(StringComparer.Ordinal);
         private readonly List<SongRow> songRows = new List<SongRow>();
         private readonly List<SongRow> recommendedRows = new List<SongRow>();
@@ -37,17 +47,35 @@ namespace DancingCats.Clone
         public Canvas UICanvas => canvas;
         public bool IsBlockingInput => !string.IsNullOrEmpty(popup) || menu != null && Active(menu, "GuideInternalStart_UIPanel");
 
-        public void Bind(OriginalPlayController controller)
+        [Inject]
+        public void Construct(OriginalPlayController controller, OriginalAssets assetLibrary,
+            OriginalProgression progression, ISongCatalog songCatalog, IGameResources resourceProvider,
+            IPlayerPreferences playerPreferences, UiLocalization uiLocalization, RoleMotionCatalog motionCatalog,
+            EventSystem eventSystem, ICalendar calendar)
         {
-            if (game == controller && built) return;
-            if (built) throw new InvalidOperationException("Original UI is already bound.");
-            game = controller;
+            game = controller ?? throw new ArgumentNullException(nameof(controller));
+            assets = assetLibrary ?? throw new ArgumentNullException(nameof(assetLibrary));
+            progress = progression ?? throw new ArgumentNullException(nameof(progression));
+            catalog = songCatalog ?? throw new ArgumentNullException(nameof(songCatalog));
+            resources = resourceProvider ?? throw new ArgumentNullException(nameof(resourceProvider));
+            preferences = playerPreferences ?? throw new ArgumentNullException(nameof(playerPreferences));
+            localization = uiLocalization ?? throw new ArgumentNullException(nameof(uiLocalization));
+            roleCatalog = motionCatalog ?? throw new ArgumentNullException(nameof(motionCatalog));
+            this.calendar = calendar ?? throw new ArgumentNullException(nameof(calendar));
+            if (eventSystem == null) throw new ArgumentNullException(nameof(eventSystem));
+        }
+
+        public void Initialize()
+        {
+            if (built) throw new InvalidOperationException("The UI has already started.");
+            if (game == null) throw new InvalidOperationException("The UI must be composed before startup.");
             TryBuild();
+            if (!built) throw new InvalidOperationException("Initialize the game before the UI.");
         }
 
         private void Update()
         {
-            if (!built) { TryBuild(); return; }
+            if (!built) return;
             if (lastPhase != game.Phase) Refresh();
             if (game.Phase == ClonePhase.Playing)
             {
@@ -68,7 +96,7 @@ namespace DancingCats.Clone
             }
         }
 
-        private OriginalProgression Progress => game.Progression;
+        private OriginalProgression Progress => progress;
 
         private void UpdateHudMilestones()
         {
@@ -115,12 +143,12 @@ namespace DancingCats.Clone
             }
         }
 
-        private Sprite SongIcon(SongRecord song) => song != null ? Resources.Load<Sprite>("OriginalIcons/" + song.catalogId) : null;
-        private Sprite SongIcon(string id) => SongIcon(game.Songs.FirstOrDefault(song => song.id == id));
+        private Sprite SongIcon(SongRecord song) => catalog.LoadIcon(song);
+        private Sprite SongIcon(string id) => SongIcon(catalog.Songs.FirstOrDefault(song => song.id == id));
 
         private void TryBuild()
         {
-            if (built || game == null || game.Assets == null || game.Songs == null || game.Songs.Length == 0 || game.Progression == null) return;
+            if (built || game == null || assets == null || catalog.Songs == null || catalog.Songs.Length == 0 || progress == null) return;
             var root = new GameObject("OriginalUI", typeof(RectTransform), typeof(Canvas),
                 typeof(UnityEngine.UI.CanvasScaler), typeof(UnityEngine.UI.GraphicRaycaster));
             root.transform.SetParent(transform, false);
@@ -131,12 +159,6 @@ namespace DancingCats.Clone
             scaler.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scaler.referenceResolution = new Vector2(1080, 1920);
             scaler.matchWidthOrHeight = 0;
-            if (FindAnyObjectByType<EventSystem>() == null)
-            {
-                var events = new GameObject("OriginalEventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
-                events.GetComponent<InputSystemUIInputModule>().AssignDefaultActions();
-                events.transform.SetParent(transform, false);
-            }
             menu = Panel("InternalStart_UIPanel");
             hud = Panel("Internal_UIPanel");
             death = Panel("Death_UIPanel");
@@ -158,11 +180,11 @@ namespace DancingCats.Clone
         private GameObject Panel(string name)
         {
             if (panels.TryGetValue(name, out var existing)) return existing;
-            var source = name == "MusicSettings" ? Resources.Load<GameObject>("ui/MusicSettings") : game.Assets.Prefab(name);
+            var source = name == "MusicSettings" ? resources.Load<GameObject>("ui/MusicSettings") : assets.Prefab(name);
             if (source == null) throw new InvalidOperationException("Original UI prefab is missing: " + name);
             var panel = Instantiate(source, canvas.transform, false);
             panel.name = name;
-            OriginalUILocalization.Bind(panel, name, Progress.State.settings.language);
+            localization.Bind(panel, name, Progress.State.settings.language);
             if (panel.transform is RectTransform rect)
             {
                 rect.anchorMin = Vector2.zero; rect.anchorMax = Vector2.one;
@@ -199,11 +221,11 @@ namespace DancingCats.Clone
             Action dismiss = () =>
             {
                 Set(menu, "GuideInternalStart_UIPanel", false);
-                PlayerPrefs.SetInt("DancingCatsClone.v1.howToPlaySeen", 1); PlayerPrefs.Save();
+                preferences.SetInt("DancingCatsClone.v1.howToPlaySeen", 1);
             };
             Button(menu, "GuideInternalStart_UIPanel/Image/GuideButton", dismiss);
             Button(menu, "GuideInternalStart_UIPanel/GuideCloseButton", dismiss);
-            Set(menu, "GuideInternalStart_UIPanel", PlayerPrefs.GetInt("DancingCatsClone.v1.howToPlaySeen", 0) == 0);
+            Set(menu, "GuideInternalStart_UIPanel", preferences.GetInt("DancingCatsClone.v1.howToPlaySeen", 0) == 0);
             Set(menu, "L/ActivitesButton/Tips", false);
             Set(menu, "L/BuildingButton/Lock", false);
             Set(menu, "R/PlayVideoButton/Tap", false);
@@ -257,7 +279,7 @@ namespace DancingCats.Clone
             if (game.Phase != ClonePhase.Menu && game.Phase != ClonePhase.Ready) return;
             if (game.Selected == null)
             {
-                var song = game.Songs.FirstOrDefault(s => s.id == Progress.State.selectedSong) ?? game.Songs[0];
+                var song = catalog.Songs.FirstOrDefault(s => s.id == Progress.State.selectedSong) ?? catalog.Songs[0];
                 game.SelectSong(song.catalogId);
             }
             game.BeginRun();
@@ -303,7 +325,7 @@ namespace DancingCats.Clone
                     if (Progress.DailyCardClaimed(index)) PresentDailyCard(cards.GetChild(index).gameObject, 1f);
             }
             if (name == "NewRoleShop_UIPanel" && roleRows.Count == 0) BuildRoles(panel);
-            if (name == "PlayDice_UIPanel") Progress.StartDiceEvent(DateTime.Today);
+            if (name == "PlayDice_UIPanel") Progress.StartDiceEvent(calendar.Today);
             if (name == "MusicSettings")
             {
                 PauseMenuMusic();
@@ -335,11 +357,11 @@ namespace DancingCats.Clone
             var content = template.parent as RectTransform;
             template.gameObject.SetActive(false);
             SetupScroll(scroll, content);
-            foreach (var song in game.Songs.OrderBy(s => s.id == "AlwaysRememberMeowCat" ? 0 : 1).ThenBy(s => s.catalog.endOrder).ThenBy(s => s.catalogId))
+            foreach (var song in catalog.Songs.OrderBy(s => s.id == "AlwaysRememberMeowCat" ? 0 : 1).ThenBy(s => s.catalog.endOrder).ThenBy(s => s.catalogId))
             {
-                var item = Instantiate(game.Assets.Prefab("MusicLevelItem"), content, false);
+                var item = Instantiate(assets.Prefab("MusicLevelItem"), content, false);
                 item.name = "MusicLevelItem_" + song.id;
-                OriginalUILocalization.Bind(item, "MusicLevelItem", Progress.State.settings.language);
+                localization.Bind(item, "MusicLevelItem", Progress.State.settings.language);
                 item.SetActive(true);
                 CleanGraphics(item);
                 var row = new SongRow { Song = song, Root = item }; songRows.Add(row);
@@ -371,7 +393,7 @@ namespace DancingCats.Clone
             PauseMenuMusic();
             if (previewAudio == null) { previewAudio = gameObject.AddComponent<AudioSource>(); previewAudio.playOnAwake = false; }
             previewAudio.Stop();
-            previewAudio.clip = Resources.Load<AudioClip>(string.IsNullOrEmpty(song.previewAudioResource) ? song.audioResource : song.previewAudioResource);
+            previewAudio.clip = catalog.LoadAudio(song, true);
             previewAudio.volume = Progress.State.settings.sound ? .6f : 0;
             if (previewAudio.clip != null) previewAudio.Play();
         }
@@ -429,7 +451,7 @@ namespace DancingCats.Clone
             {
                 var item = Instantiate(template.gameObject, content, false);
                 item.name = "Recommendation_" + index + "_" + song.id;
-                OriginalUILocalization.Bind(item, "MusicLevelItem", Progress.State.settings.language);
+                localization.Bind(item, "MusicLevelItem", Progress.State.settings.language);
                 item.SetActive(true); CleanGraphics(item);
                 Place(item.transform as RectTransform, index, 1, 225, 1080);
                 var rect = item.transform as RectTransform;
@@ -476,7 +498,7 @@ namespace DancingCats.Clone
         {
             // Native GetNextTenSongIds: active catalog by ID, locked event music
             // 10032..10041 first, then locked songs, then never-started songs.
-            var candidates = game.Songs.Where(song => !song.catalog.disable &&
+            var candidates = catalog.Songs.Where(song => !song.catalog.disable &&
                 (song.catalogId < 901 || song.catalogId >= 10000 || Progress.IsSongUnlocked(song.id))).OrderBy(song => song.catalogId).ToArray();
             var rows = new List<SongRecord>();
             var added = new HashSet<string>(StringComparer.Ordinal);
@@ -612,14 +634,14 @@ namespace DancingCats.Clone
         {
             if (string.IsNullOrEmpty(id)) return null;
             var definition = trail ? Progress.Trail(id) : Progress.Role(id);
-            if (definition != null && !string.IsNullOrEmpty(definition.headName)) return game.Assets.Sprite(definition.headName);
+            if (definition != null && !string.IsNullOrEmpty(definition.headName)) return assets.Sprite(definition.headName);
             if (trail)
             {
-                int number; if (!int.TryParse(id, out number) || number <= 1) return game.Assets.Sprite("NoTrail");
-                return game.Assets.Sprite("Icon" + (number - 1).ToString("D2"));
+                int number; if (!int.TryParse(id, out number) || number <= 1) return assets.Sprite("NoTrail");
+                return assets.Sprite("Icon" + (number - 1).ToString("D2"));
             }
-            string name = game.Assets.RoleNames.FirstOrDefault(n => n.StartsWith("Role" + id + "_", StringComparison.Ordinal));
-            return game.Assets.Sprite(name ?? "Role" + id + "_main");
+            string name = assets.RoleNames.FirstOrDefault(n => n.StartsWith("Role" + id + "_", StringComparison.Ordinal));
+            return assets.Sprite(name ?? "Role" + id + "_main");
         }
 
         private void RefreshRole(RoleRow row)
@@ -710,7 +732,7 @@ namespace DancingCats.Clone
         private void ClaimCard(GameObject card, int index)
         {
             if (!dailyChoosing || dailyPicked.Contains(index)) return;
-            var receipt = Progress.FlipDailyCard(DateTime.Today, index, Environment.TickCount, true);
+            var receipt = Progress.FlipDailyCard(calendar.Today, index, Environment.TickCount, true);
             if (!receipt.success) return;
             dailyPicked.Add(index);
             dailyChoosing = false;
@@ -720,7 +742,7 @@ namespace DancingCats.Clone
             Set(card, "Animation/Win/Role", role); Set(card, "Animation/Win/Music", music);
             Set(card, "Animation/Win/Icon", !role && !music);
             var rewardArt = Progress.Config.dailyRewards.FirstOrDefault(r => r.goldNumber == receipt.gold && !string.IsNullOrEmpty(r.headName));
-            if (rewardArt != null) Sprite(card, "Animation/Win/Icon", game.Assets.Sprite(rewardArt.headName));
+            if (rewardArt != null) Sprite(card, "Animation/Win/Icon", assets.Sprite(rewardArt.headName));
             Sprite(card, "Animation/Win/Role", role ? RoleHead(receipt.role, false) : null);
             Sprite(card, "Animation/Win/Music/Head", music ? SongIcon(receipt.music) : null);
             PresentDailyCard(card, 0f);
@@ -740,8 +762,8 @@ namespace DancingCats.Clone
 
         private void WireLogin(GameObject panel)
         {
-            Button(panel, "RewardButton", () => Progress.ClaimLogin(DateTime.Today));
-            Button(panel, "DoubleRewardButton", () => Progress.ClaimLogin(DateTime.Today, true));
+            Button(panel, "RewardButton", () => Progress.ClaimLogin(calendar.Today));
+            Button(panel, "DoubleRewardButton", () => Progress.ClaimLogin(calendar.Today, true));
             Button(panel, "CloseButton", ClosePopup);
             Text(panel, "Title/Text (3)", "7-Day Reward");
             Set(panel, "DoubleRewardButton/Tips", false);
@@ -749,7 +771,7 @@ namespace DancingCats.Clone
 
         private void RefreshLogin(GameObject panel)
         {
-            bool can = Progress.CanClaimLogin(DateTime.Today);
+            bool can = Progress.CanClaimLogin(calendar.Today);
             Set(panel, "RewardButton", can);
             Set(panel, "DoubleRewardButton", can && Progress.NextLoginReward.landRweardType == 1);
             Set(panel, "CloseButton", !can);
@@ -784,7 +806,7 @@ namespace DancingCats.Clone
                 Text(item.gameObject, "Gold/Image/Text", "Day" + (i + 1));
                 Text(item.gameObject, "Role/Image/Text", "Day" + (i + 1));
                 if (role && !special) Sprite(item.gameObject, "Role/Head", RoleHead(reward.roleIdName, false));
-                else if (!string.IsNullOrEmpty(reward.headName)) Sprite(item.gameObject, "Gold/Head/Head", game.Assets.Sprite(reward.headName));
+                else if (!string.IsNullOrEmpty(reward.headName)) Sprite(item.gameObject, "Gold/Head/Head", assets.Sprite(reward.headName));
                 Set(item.gameObject, "Complete", i < claimedInWeek);
                 if (directImages.Length > 0) directImages[directImages.Length - 1].gameObject.SetActive(i < claimedInWeek);
                 Set(item.gameObject, "Select", can && i == Progress.LoginDayNumber - 1);
@@ -796,8 +818,8 @@ namespace DancingCats.Clone
             Button(panel, "BG/Start/CloseButton", ClosePopup);
             Action play = () =>
             {
-                string id = Progress.ChallengeSong(DateTime.Today);
-                var song = game.Songs.FirstOrDefault(s => s.id == id);
+                string id = Progress.ChallengeSong(calendar.Today);
+                var song = catalog.Songs.FirstOrDefault(s => s.id == id);
                 if (song == null) return;
                 if (!Progress.IsSongUnlocked(id)) Progress.RewardSongUnlock(song);
                 if (!Progress.IsSongUnlocked(id)) return;
@@ -820,7 +842,7 @@ namespace DancingCats.Clone
         private void ClaimChallenge()
         {
             for (int tier = 0; tier < 3; tier++)
-                if (Progress.CanClaimChallenge(DateTime.Today, tier)) Progress.ClaimChallenge(DateTime.Today, tier);
+                if (Progress.CanClaimChallenge(calendar.Today, tier)) Progress.ClaimChallenge(calendar.Today, tier);
             Refresh();
         }
 
@@ -849,7 +871,7 @@ namespace DancingCats.Clone
         private void BuildDiceBoard(GameObject panel)
         {
             var track = panel.GetComponent<OriginalDicePresentation>() ?? panel.AddComponent<OriginalDicePresentation>();
-            track.Bind(Progress, id => RoleHead(id, false));
+            track.Bind(Progress, id => RoleHead(id, false), localization);
         }
 
         private void RollDice(bool offline)
@@ -857,9 +879,9 @@ namespace DancingCats.Clone
             var panel = panels["PlayDice_UIPanel"];
             var track = panel.GetComponent<OriginalDicePresentation>();
             if (track != null && track.IsRolling || Active(panel, "RoleUI") || Active(panel, "Coins")) return;
-            int face = Progress.NextDiceFace(DateTime.Today, Environment.TickCount, offline);
+            int face = Progress.NextDiceFace(calendar.Today, Environment.TickCount, offline);
             track?.BeginRoll(face);
-            var receipt = Progress.RollDice(DateTime.Today, face, offline);
+            var receipt = Progress.RollDice(calendar.Today, face, offline);
             if (!receipt.success) { track?.CancelRoll(); return; }
             Action showReward = () =>
             {
@@ -948,7 +970,7 @@ namespace DancingCats.Clone
                 Text(panel, path + "/AdButton/Text", "OFFLINE " + Math.Abs(price));
                 Text(panel, path + "/FreeButton/Text", state != null && state.selected == index ? "SELECTED" : "SELECT");
                 if (furniture.icon != null && index < furniture.icon.Length)
-                    Sprite(panel, path + "/Head", game.Assets.Sprite(furniture.icon[index]));
+                    Sprite(panel, path + "/Head", assets.Sprite(furniture.icon[index]));
             }
         }
 
@@ -1078,7 +1100,7 @@ namespace DancingCats.Clone
                 Set(menu, "L/UIToggleRoot_Pattern/Normal/Background/Checkmark", !game.Endless);
                 Set(menu, "L/UIToggleRoot_Pattern/Endless/Background/Checkmark", game.Endless);
                 Text(menu, "Text", "Lv." + (1 + Progress.TotalStars / 3));
-                var challengeSong = game.Songs.FirstOrDefault(s => s.id == Progress.ChallengeSong(DateTime.Today));
+                var challengeSong = catalog.Songs.FirstOrDefault(s => s.id == Progress.ChallengeSong(calendar.Today));
                 if (challengeSong != null)
                 {
                     Sprite(menu, "L/ActivitesButton/AD_Level/Animation/BG/Mask/Image", SongIcon(challengeSong));
@@ -1097,7 +1119,7 @@ namespace DancingCats.Clone
                 if (popup == "ChallengeLevel_UIPanel") RefreshChallenge(panels[popup]);
                 if (popup == "PlayDice_UIPanel") RefreshDice(panels[popup]);
                 if (popup == "CatHouseBuilding_UIPanel") RefreshHouse(panels[popup]);
-                OriginalUILocalization.Apply(canvas.gameObject, Progress.State.settings.language);
+                localization.Apply(canvas.gameObject, Progress.State.settings.language);
             }
             finally { refreshing = false; }
         }
@@ -1167,7 +1189,7 @@ namespace DancingCats.Clone
 
         private void RefreshDaily(GameObject panel)
         {
-            int remaining = Progress.WheelClaimsRemaining(DateTime.Today);
+            int remaining = Progress.WheelClaimsRemaining(calendar.Today);
             dailyPicked.Clear();
             for (int index = 0; index < 9; index++)
                 if (Progress.DailyCardClaimed(index)) dailyPicked.Add(index);
@@ -1186,10 +1208,10 @@ namespace DancingCats.Clone
 
         private void RefreshChallenge(GameObject panel)
         {
-            string id = Progress.ChallengeSong(DateTime.Today);
-            var song = game.Songs.FirstOrDefault(s => s.id == id);
+            string id = Progress.ChallengeSong(calendar.Today);
+            var song = catalog.Songs.FirstOrDefault(s => s.id == id);
             Text(panel, "BG/MusicNameText", song != null ? song.title : "");
-            bool claim = Enumerable.Range(0, 3).Any(i => Progress.CanClaimChallenge(DateTime.Today, i));
+            bool claim = Enumerable.Range(0, 3).Any(i => Progress.CanClaimChallenge(calendar.Today, i));
             bool result = game.Phase == ClonePhase.Results && game.ChallengeRun;
             bool rewards = result || claim;
             Set(panel, "BG/Title/Title", !result); Set(panel, "BG/Title/TitleOver", result);
@@ -1199,7 +1221,7 @@ namespace DancingCats.Clone
             Set(panel, "BG/Win/OverCloseButton", !claim);
             Set(panel, "BG/Start/AdButton", false); Set(panel, "BG/Start/Start", true);
             int marks = Progress.State.challengeStars;
-            int pendingGold = Enumerable.Range(0, 3).Where(i => Progress.CanClaimChallenge(DateTime.Today, i)).Sum(i => Progress.Config.challengeRewards[i].goldNumber);
+            int pendingGold = Enumerable.Range(0, 3).Where(i => Progress.CanClaimChallenge(calendar.Today, i)).Sum(i => Progress.Config.challengeRewards[i].goldNumber);
             Set(panel, "BG/GoldShowBG", rewards && pendingGold > 0);
             Text(panel, "BG/GoldShowBG/Text", pendingGold.ToString());
             var progress = Component<UnityEngine.UI.Image>(panel, "BG/Progress/ProgressBG/ProgressImage");
@@ -1219,8 +1241,8 @@ namespace DancingCats.Clone
 
         private void RefreshDice(GameObject panel)
         {
-            bool free = Progress.DiceRollsRemaining(DateTime.Today) > 0;
-            bool extra = Progress.DiceRewardActionsRemaining(DateTime.Today) > 0;
+            bool free = Progress.DiceRollsRemaining(calendar.Today) > 0;
+            bool extra = Progress.DiceRewardActionsRemaining(calendar.Today) > 0;
             Set(panel, "Button_Bg/FreeButton", free); Set(panel, "Button_Bg/AdButton", !free && extra);
             Set(panel, "Button_Bg/Text", !free && !extra);
             var track = panel.GetComponent<OriginalDicePresentation>();
@@ -1245,7 +1267,7 @@ namespace DancingCats.Clone
                     Set(panel, part + "/Build", !placed && unlocked);
                     Set(panel, part + "/SelectedImage", furniture != null && furniture.id == row.id && Active(panel, "Down"));
                     if (state != null && row.icon != null && state.selected >= 0 && state.selected < row.icon.Length)
-                        Sprite(panel, part + "/Head", game.Assets.Sprite(row.icon[state.selected]));
+                        Sprite(panel, part + "/Head", assets.Sprite(row.icon[state.selected]));
                 }
                 for (int index = 0; index < 3; index++)
                 {
@@ -1271,9 +1293,9 @@ namespace DancingCats.Clone
         private static T Component<T>(GameObject root, string path) where T : Component => Find(root, path)?.GetComponent<T>();
         private static bool Active(GameObject root, string path) { var node = Find(root, path); return node != null && node.gameObject.activeSelf; }
         private static void Set(GameObject root, string path, bool active) { var node = Find(root, path); if (node != null) node.gameObject.SetActive(active); }
-        private static void Text(GameObject root, string path, string value)
+        private void Text(GameObject root, string path, string value)
         {
-            var text = Component<UnityEngine.UI.Text>(root, path); if (text != null) OriginalUILocalization.SetText(text, value);
+            var text = Component<UnityEngine.UI.Text>(root, path); if (text != null) localization.SetText(text, value);
         }
         private static void Sprite(GameObject root, string path, Sprite sprite)
         {
@@ -1287,8 +1309,8 @@ namespace DancingCats.Clone
             var parent = Find(root, parentPath);
             if (raw == null || camera == null || parent == null) throw new InvalidOperationException("Original 3D preview hierarchy is missing.");
             var preview = raw.GetComponent<OriginalRolePreview>() ?? raw.gameObject.AddComponent<OriginalRolePreview>();
-            preview.Bind(game.Assets, Progress.Role(trail ? Progress.SelectedRole : id),
-                trail ? Progress.Trail(id) : null, camera, parent);
+            preview.Bind(assets, Progress.Role(trail ? Progress.SelectedRole : id),
+                trail ? Progress.Trail(id) : null, camera, parent, roleCatalog);
         }
         private static void Interactable(GameObject root, string path, bool value)
         {
@@ -1356,7 +1378,7 @@ namespace DancingCats.Clone
         private void OnDestroy()
         {
             if (game != null) game.Changed -= Refresh;
-            if (game != null && game.Progression != null) game.Progression.Changed -= Refresh;
+            if (progress != null) progress.Changed -= Refresh;
             if (canvas != null) Destroy(canvas.gameObject);
         }
     }

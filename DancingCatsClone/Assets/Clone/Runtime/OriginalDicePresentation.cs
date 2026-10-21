@@ -16,9 +16,10 @@ namespace DancingCats.Clone
         private int visiblePosition;
         public bool IsRolling { get; private set; }
 
-        public void Bind(OriginalProgression service, Func<string, Sprite> roleHead)
+        public void Bind(OriginalProgression service, Func<string, Sprite> roleHead, UiLocalization localization)
         {
-            progress = service;
+            progress = service ?? throw new ArgumentNullException(nameof(service));
+            if (localization == null) throw new ArgumentNullException(nameof(localization));
             var parent = Require("UIListView_Monopoly/Content/Parent");
             var normal = parent.Find("MonopolyItem");
             var maximum = parent.Find("MaxMonopolyItem");
@@ -41,7 +42,7 @@ namespace DancingCats.Clone
                 bool role = reward.landRweardType == 2 || reward.landRweardType == 5;
                 Set(item, "GoldHead", gold); Set(item, "RoleHead", role); Set(item, "New", reward.landRweardType == 4);
                 var text = item.Find("GoldHead/GoldText")?.GetComponent<Text>();
-                if (text != null) OriginalUILocalization.SetText(text, "X" + reward.goldNumber);
+                if (text != null) localization.SetText(text, "X" + reward.goldNumber);
                 var head = item.Find("RoleHead")?.GetComponent<Image>();
                 if (head != null && role) { head.sprite = roleHead(reward.RoleName); head.preserveAspect = true; }
             }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using RhythmGame.Services;
 using UnityEngine;
 
 namespace DancingCats.Clone
@@ -7,45 +8,28 @@ namespace DancingCats.Clone
     /// <summary>Rebinds original ThemeController and ThemeChangeMaterial pointers removed on import.</summary>
     public sealed class OriginalThemeVisuals : MonoBehaviour
     {
-        [Serializable] private sealed class Manifest
-        {
-            public string[] materials;
-            public EnvironmentBinding[] environments;
-            public PrefabBinding[] prefabs;
-        }
-        [Serializable] private sealed class EnvironmentBinding
-        {
-            public int environmentIndex;
-            public string[] allThemes, allThemesTarget, allSpeedLine, allPerfect, goEndTheme, allQuad;
-            public Color[] themeColor;
-        }
-        [Serializable] private sealed class PrefabBinding { public string prefab; public RendererBinding[] bindings; }
-        [Serializable] private sealed class RendererBinding { public string rendererPath; public int[] materials; }
         private sealed class TileBinding
         {
             internal OriginalTile tile, eligibilityTile;
             internal Renderer[] renderers;
-            internal RendererBinding[] bindings;
+            internal ThemeCatalog.RendererBinding[] bindings;
         }
 
         private readonly List<TileBinding> _tiles = new List<TileBinding>();
         private Material[] _materials;
-        private EnvironmentBinding _binding;
+        private ThemeCatalog.EnvironmentBinding _binding;
         private GameObject[] _themes, _targets, _perfect, _endThemes;
         private Animator[] _quads;
         public int Index { get; private set; }
         public Color CurrentColor => _binding.themeColor[Index];
 
         public void Bind(GameObject environment, IEnumerable<OriginalTile> allTiles,
-            Material[] materialLibrary, int environmentIndex)
+            Material[] materialLibrary, int environmentIndex, ThemeCatalog catalog)
         {
             if (environment == null) throw new ArgumentNullException(nameof(environment));
-            var asset = Resources.Load<TextAsset>("OriginalData/theme-visual-bindings");
-            if (asset == null) throw new InvalidOperationException("Original theme pointer manifest is missing.");
-            var manifest = JsonUtility.FromJson<Manifest>(asset.text);
-            _binding = Array.Find(manifest.environments, item => item.environmentIndex == environmentIndex);
-            if (_binding == null) throw new ArgumentOutOfRangeException(nameof(environmentIndex));
-            if (materialLibrary == null || materialLibrary.Length != manifest.materials.Length)
+            if (catalog == null) throw new ArgumentNullException(nameof(catalog));
+            _binding = catalog.GetEnvironment(environmentIndex);
+            if (materialLibrary == null || materialLibrary.Length != catalog.MaterialCount)
                 throw new ArgumentException("Original palette material library does not match the pointer manifest.", nameof(materialLibrary));
             _materials = materialLibrary;
             _themes = ResolveObjects(environment.transform, _binding.allThemes);
@@ -69,7 +53,7 @@ namespace DancingCats.Clone
                 // MidShot decorations use scene-specific source lists and runtime names retain
                 // the chosen original prefab name, including variants without palette bindings.
                 string sourceName = tile.element.id == 7 ? tile.gameObject.name : stem + suffix;
-                var source = Array.Find(manifest.prefabs, entry => entry.prefab == sourceName);
+                var source = catalog.FindPrefab(sourceName);
                 if (source == null) continue; // FollowMid/FollowEnd have no original material-change component.
                 var item = new TileBinding { tile = tile, eligibilityTile = tile, bindings = source.bindings,
                     renderers = new Renderer[source.bindings.Length] };

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using RhythmGame.Services;
 using UnityEngine;
 
 namespace DancingCats.Clone
@@ -8,28 +9,6 @@ namespace DancingCats.Clone
     /// <summary>Original Animator states and the shipped UnityChan spring equations, using recovered bindings.</summary>
     public sealed class OriginalRoleMotion : MonoBehaviour
     {
-        [Serializable] private sealed class Manifest { public RoleBinding[] roles; }
-        [Serializable] private sealed class RoleBinding
-        {
-            public string prefab;
-            public ManagerBinding[] managers;
-            public BoneBinding[] bones;
-            public ColliderBinding[] colliders;
-        }
-        [Serializable] private sealed class ManagerBinding
-        {
-            public string path;
-            public float dynamicRatio;
-            public string[] bonePathsInUpdateOrder;
-        }
-        [Serializable] private sealed class BoneBinding
-        {
-            public string path, childPath;
-            public Vector3 boneAxis, springForce;
-            public float radius, stiffnessForce, dragForce, threshold;
-            public string[] colliderPaths;
-        }
-        [Serializable] private sealed class ColliderBinding { public string path; public float radius; }
         private sealed class Sphere
         {
             public Transform Transform;
@@ -44,7 +23,6 @@ namespace DancingCats.Clone
             public Sphere[] Colliders;
         }
 
-        private static Manifest cachedManifest;
         private static readonly int IdleHash = Animator.StringToHash("Idle");
         private static readonly int JumpHash = Animator.StringToHash("Jump");
         private static readonly int HoldHash = Animator.StringToHash("Hold");
@@ -60,10 +38,11 @@ namespace DancingCats.Clone
         public int SpringBoneCount => springs.Length;
         public Animator Animator => animator;
 
-        public void Bind(GameObject instance, string sourcePrefabName)
+        public void Bind(GameObject instance, string sourcePrefabName, RoleMotionCatalog catalog)
         {
             if (instance == null) throw new ArgumentNullException(nameof(instance));
-            var binding = FindBinding(sourcePrefabName);
+            if (catalog == null) throw new ArgumentNullException(nameof(catalog));
+            var binding = catalog.GetBinding(sourcePrefabName);
             model = instance.transform.Find("Model");
             if (model == null) throw new InvalidDataException("Original role is missing its Model transform: " + sourcePrefabName);
             animator = FindAnimator(instance);
@@ -71,12 +50,12 @@ namespace DancingCats.Clone
             animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
 
             var colliderLookup = new Dictionary<string, Sphere>(StringComparer.Ordinal);
-            foreach (var collider in binding.colliders ?? Array.Empty<ColliderBinding>())
+            foreach (var collider in binding.colliders ?? Array.Empty<RoleMotionCatalog.ColliderBinding>())
                 colliderLookup.Add(collider.path, new Sphere { Transform = RequireTransform(instance.transform, collider.path), Radius = collider.radius });
-            var boneLookup = new Dictionary<string, BoneBinding>(StringComparer.Ordinal);
-            foreach (var bone in binding.bones ?? Array.Empty<BoneBinding>()) boneLookup.Add(bone.path, bone);
+            var boneLookup = new Dictionary<string, RoleMotionCatalog.BoneBinding>(StringComparer.Ordinal);
+            foreach (var bone in binding.bones ?? Array.Empty<RoleMotionCatalog.BoneBinding>()) boneLookup.Add(bone.path, bone);
             var ordered = new List<Spring>();
-            foreach (var manager in binding.managers ?? Array.Empty<ManagerBinding>())
+            foreach (var manager in binding.managers ?? Array.Empty<RoleMotionCatalog.ManagerBinding>())
             {
                 foreach (string path in manager.bonePathsInUpdateOrder)
                 {
@@ -200,21 +179,6 @@ namespace DancingCats.Clone
         {
             var direction = tip - origin;
             return origin + (direction.sqrMagnitude > 1e-12f ? direction.normalized : fallback.normalized) * length;
-        }
-
-        private static RoleBinding FindBinding(string sourcePrefabName)
-        {
-            if (cachedManifest == null)
-            {
-                var text = Resources.Load<TextAsset>("OriginalData/role-spring-bindings");
-                if (text == null) throw new FileNotFoundException("Original spring binding manifest is missing.");
-                cachedManifest = JsonUtility.FromJson<Manifest>(text.text);
-            }
-            string name = Path.GetFileName(sourcePrefabName ?? string.Empty).Replace("(Clone)", string.Empty).Trim();
-            if (!name.EndsWith(".prefab", StringComparison.Ordinal)) name += ".prefab";
-            foreach (var role in cachedManifest.roles)
-                if (string.Equals(role.prefab, name, StringComparison.Ordinal)) return role;
-            throw new InvalidDataException("Original role has no spring binding record: " + sourcePrefabName);
         }
 
         private static Transform RequireTransform(Transform root, string path)

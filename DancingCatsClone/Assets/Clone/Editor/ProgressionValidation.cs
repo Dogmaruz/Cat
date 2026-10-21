@@ -1,9 +1,9 @@
-﻿// Work-only test draft. Copy into Assets only after the root task permits writes.
 using System;
 using System.Collections;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using RhythmGame.Services;
 
 namespace DancingCats.Clone.Editor
 {
@@ -11,6 +11,7 @@ namespace DancingCats.Clone.Editor
     {
         public static void Run()
         {
+            CheckInjectedProfileIsolation();
             var configType = Find("OriginalProgressionConfig");
             var config = configType.GetMethod("Load").Invoke(null,null);
             var roles = Rows(config,"roles");
@@ -37,7 +38,8 @@ namespace DancingCats.Clone.Editor
             stateType.GetField("gold").SetValue(state,10000);
             stateType.GetField("diamonds").SetValue(state,123);
             var progressionType=Find("OriginalProgression");
-            var progression=Activator.CreateInstance(progressionType,new[]{config,state});
+            var progression=new OriginalProgression((OriginalProgressionConfig)config,(OriginalProgressionState)state,
+                new FixtureCatalog(RecoveredCatalog.Load()),new MemoryProfileStore());
             var buy=progressionType.GetMethod("TryBuyRole");
             Check((bool)buy.Invoke(progression,new object[]{"4"}),"coin-priced cat can be purchased");
             Check(N(state,"gold")==7000 && N(state,"diamonds")==123,"purchase debits only its actual currency");
@@ -55,7 +57,70 @@ namespace DancingCats.Clone.Editor
         }
 
         private static OriginalProgression Fresh(int gold=0)
-        { return new OriginalProgression(OriginalProgressionConfig.Load(),new OriginalProgressionState { gold=gold }); }
+        { return new OriginalProgression(OriginalProgressionConfig.Load(),new OriginalProgressionState { gold=gold },
+            new FixtureCatalog(RecoveredCatalog.Load()),new MemoryProfileStore()); }
+
+        private static OriginalProgression Restore(OriginalProgression service)
+        {
+            var session=string.IsNullOrEmpty(service.State.dailySession) ? new ApplicationSession() : new ApplicationSession(service.State.dailySession);
+            return OriginalProgression.FromJson(service.Config,service.ToJson(),new FixtureCatalog(RecoveredCatalog.Load()),new MemoryProfileStore(),session:session);
+        }
+
+        private static void CheckInjectedProfileIsolation()
+        {
+            var config=OriginalProgressionConfig.Load();
+            var records=RecoveredCatalog.Load();
+            var catalog=new FixtureCatalog(records.Take(2).ToArray());
+            var firstStore=new MemoryProfileStore();
+            var secondStore=new MemoryProfileStore();
+            var session=new ApplicationSession("profile-fixture-session");
+            var calendar=new FixtureCalendar(new DateTime(2026,10,20,12,0,0));
+            var first=new ProfileServiceFactory(config,catalog,firstStore,session,calendar).Create();
+            var second=new ProfileServiceFactory(config,catalog,secondStore,new ApplicationSession("other-fixture-session"),calendar).Create();
+            Check(first.State.diceStartedDay=="2026-10-20","profile startup uses the injected calendar");
+            first.RecordSongStart(records[0].id);
+            first.RecordSongStart(records[2].id);
+            Check(first.SongProgress(records[0].id)?.starts==1 && first.SongProgress(records[2].id)==null,
+                "progression accepts only songs from its injected catalog");
+            Check(second.SongProgress(records[0].id)==null,"separate injected profile stores do not share progress");
+            var firstClaim=first.FlipDailyCard(calendar.Today,4,19);
+            Check(firstClaim.success && firstClaim.role=="9","injected profile retains the first card reward");
+            var reopened=new ProfileServiceFactory(config,catalog,firstStore,session,calendar).Create();
+            Check(reopened.SongProgress(records[0].id)?.starts==1 && reopened.DailyCardClaimed(4) &&
+                !reopened.FlipDailyCard(calendar.Today,4,19,true).success,
+                "same application session and store preserve progress and duplicate claim guards");
+            var nextSession=new ProfileServiceFactory(config,catalog,firstStore,new ApplicationSession("next-fixture-session"),calendar).Create();
+            Check(!nextSession.DailyCardClaimed(4) && nextSession.State.firstDailyRewardClaimed && nextSession.IsRoleUnlocked("9"),
+                "new application session resets the card page while preserving earned rewards");
+            var restored=OriginalProgression.FromJson(config,firstStore.Read(),catalog,new MemoryProfileStore(),session:session);
+            Check(restored.SongProgress(records[0].id)?.starts==1 && restored.IsRoleUnlocked("9"),
+                "injected store keeps the existing JSON save contract");
+            Check(secondStore.Read()!=firstStore.Read() && second.Gold==0 && !second.IsRoleUnlocked("9"),
+                "writes and earned rewards remain isolated between stores");
+        }
+
+        private sealed class MemoryProfileStore : IProfileStore
+        {
+            private string json="";
+            public string Read() => json;
+            public void Write(string value) { json=value; }
+        }
+
+        private sealed class FixtureCalendar : ICalendar
+        {
+            public FixtureCalendar(DateTime now) { Now=now; }
+            public DateTime Today => Now.Date;
+            public DateTime Now { get; }
+        }
+
+        private sealed class FixtureCatalog : ISongCatalog
+        {
+            public FixtureCatalog(SongRecord[] songs) { Songs=songs; }
+            public SongRecord[] Songs { get; }
+            public MapTimeline LoadMap(string id) => throw new NotSupportedException();
+            public AudioClip LoadAudio(SongRecord song,bool preview=false) => throw new NotSupportedException();
+            public Sprite LoadIcon(SongRecord song) => throw new NotSupportedException();
+        }
 
         private static void CheckClaimsAndPersistence()
         {
@@ -64,7 +129,7 @@ namespace DancingCats.Clone.Editor
             var first=service.ClaimLogin(date);
             Check(first.success && first.gold==100 && service.Gold==100 && service.Diamonds==0,"native login enum1 credits Gold, not Diamond");
             Check(!service.ClaimLogin(date).success && service.Gold==100,"login claim is atomic and once per local date");
-            service=OriginalProgression.FromJson(service.Config,service.ToJson());
+            service=Restore(service);
             Check(!service.ClaimLogin(date).success,"same-day login ledger survives JSON restart");
             var role=service.ClaimLogin(date.AddDays(1));
             Check(role.success && role.role=="12" && service.IsRoleUnlocked("12") && service.SelectedRole=="12","day2 grants and selects original cat12");
@@ -77,7 +142,7 @@ namespace DancingCats.Clone.Editor
             for(int i=0;i<9;i++)if(i!=4)Check(cards.FlipDailyCard(date,i,i,true).success,"remaining original cards can use explicit offline reward actions");
             Check(cards.WheelClaimsRemaining(date)==0 && !cards.SpinWheel(date,10,true).success,"nine-card reward page has a finite claim ledger");
             service.SetSettings(false,false,true,6,.037f);
-            var restored=OriginalProgression.FromJson(service.Config,service.ToJson());
+            var restored=Restore(service);
             Check(!restored.State.settings.sound && !restored.State.settings.vibration && restored.State.settings.language==6 && Mathf.Abs(restored.State.settings.calibrationOffsetSeconds-.037f)<.000001f,"settings persist independently of original PlayerPrefs");
             Check(OriginalProgression.SaveKey.StartsWith("DancingCatsClone.v1.",StringComparison.Ordinal),"new progression uses an isolated save namespace");
             restored.SetRhythmLineHeight(.99f);restored.AdjustCalibration(1);restored.AdjustCalibration(1);
@@ -92,7 +157,7 @@ namespace DancingCats.Clone.Editor
             Check(!service.RewardRoleUnlock("20") && service.RoleUnlockProgress("20")==5 && service.Gold==0,"repeated unlock cannot farm wallet or counter");
             Check(!service.RewardRoleUnlock("12"),"login-only cats cannot use advertising progress");
             Check(!service.RewardTrailUnlock("10") && !service.RewardTrailUnlock("10") && service.RewardTrailUnlock("10"),"original trail10 uses its actual three-action requirement");
-            var restored=OriginalProgression.FromJson(service.Config,service.ToJson());
+            var restored=Restore(service);
             Check(restored.IsTrailUnlocked("10") && restored.SelectTrail("10") && !restored.SelectTrail("9"),"trail unlock and selection survive restart without selecting locked trails");
         }
 
@@ -107,7 +172,7 @@ namespace DancingCats.Clone.Editor
             var next=service.RollDice(date,1,true);
             Check(next.success && next.position==6 && service.IsRoleUnlocked("22"),"crossing arrayindex5 grants original cat22");
             Check(!service.RollDice(date,1,true).success,"one reward-action roll per date in first seven days");
-            var restored=OriginalProgression.FromJson(service.Config,service.ToJson());
+            var restored=Restore(service);
             Check(restored.DiceRollsRemaining(date)==0 && restored.DiceRewardActionsRemaining(date)==0,"both dice entitlements persist across restarts");
             Check(restored.RollDice(date.AddDays(1),6).gold==600,"dice credits gold from all intermediate prize spaces");
             Check(restored.RollDice(date.AddDays(1),3,true).extraRolls==1 && restored.DiceRollsRemaining(date.AddDays(1))==1,"native Free cell restores one free entitlement");
@@ -132,7 +197,7 @@ namespace DancingCats.Clone.Editor
             Check(service.TryBuyHouseVariant(1,0) && service.TryBuyHouseVariant(1,1) && service.Gold==1100,"house uses original row1 free variant and400Gold price");
             Check(service.TryBuyHouseVariant(1,1) && service.Gold==1100,"owned furniture selection never charges again");
             Check(!service.TryBuyHouseVariant(1,2) && service.TryBuyHouseVariant(1,2,true),"house sentinel-1 requires an explicit offline reward action");
-            var restored=OriginalProgression.FromJson(service.Config,service.ToJson());
+            var restored=Restore(service);
             Check(restored.HouseProgress(1).selected==2 && restored.HouseProgress(1).owned.Count==3,"all purchased original furniture variants persist");
             Check(service.TryUnlockCatSlot(1,0) && service.TryUnlockCatSlot(1,1),"first floor's original two free cat slots");
             Check(service.AssignCatToSlot(1,0,"1") && !service.AssignCatToSlot(1,1,"1"),"one original cat cannot occupy two slots accidentally");
@@ -150,7 +215,7 @@ namespace DancingCats.Clone.Editor
             service.RecordSongResult(song,9,1234,true,false,date);
             service.RecordSongResult(song,2,90,true,false,date);
             service.RecordSongResult(song,3,120,false,true,date);
-            var restored=OriginalProgression.FromJson(service.Config,service.ToJson());
+            var restored=Restore(service);
             Check(restored.SongProgress(song).endlessStars==9 && restored.SongProgress(song).normalStars==3 && restored.TotalStars==3,"native nine endless marks persist independently of normal stars and count once for house");
             Check(restored.Gold==0,"recording a score does not credit a settlement without its run ledger");
             var quote=restored.PrepareSettlement("run-one",3,13,77,"2");
@@ -159,7 +224,7 @@ namespace DancingCats.Clone.Editor
             Check(again.totalGold==quote.totalGold && again.baseGold==quote.baseGold && again.roleId=="2" && again.collectedCoins==13,"same run cannot reroll or replace the snapshotted coin bonus");
             var paid=restored.AutoRewardSettlement("run-one");
             Check(paid.success && paid.gold==quote.totalGold && restored.Gold==quote.totalGold,"native full tier automatically credits its exact quote");
-            restored=OriginalProgression.FromJson(restored.Config,restored.ToJson());
+            restored=Restore(restored);
             Check(!restored.AutoRewardSettlement("run-one").success && restored.Gold==quote.totalGold,"duplicate callback after JSON restart cannot pay the same run twice");
             var partial=restored.PrepareSettlement("run-partial",2,200,77,"2");
             Check(!partial.eligible && !restored.AutoRewardSettlement("run-partial").success,"native one or two marks do not invoke the three-mark automatic gold reward");
@@ -178,7 +243,7 @@ namespace DancingCats.Clone.Editor
             Check(service.GetNextPlaySong()==free[0].id,"native Next first chooses the earliest unlocked unstarted song");
             service.RecordSongStart(free[0].id);
             Check(service.SongProgress(free[0].id).starts==1 && service.SongProgress(free[0].id).completions==0,"abandoned run counts as a start independently of completions");
-            service=OriginalProgression.FromJson(service.Config,service.ToJson());
+            service=Restore(service);
             Check(service.SongProgress(free[0].id).starts==1 && service.GetNextPlaySong()==free[1].id,"starts survive restart and Next advances to the next unlocked unstarted song");
             foreach(var song in free.Skip(1))service.RecordSongStart(song.id);
             var locked=catalog.First(s=>!service.IsSongUnlocked(s.id));
@@ -207,7 +272,7 @@ namespace DancingCats.Clone.Editor
             Check(service.ClaimChallenge(date,0).gold==500 && !service.ClaimChallenge(date,0).success,"native first checkpoint pays500 once");
             RecordChallenge(service,song,5,220,false,date);
             RecordChallenge(service,song,4,200,false,date);
-            service=OriginalProgression.FromJson(service.Config,service.ToJson());
+            service=Restore(service);
             Check(service.State.challengeStars==5 && !service.CanClaimChallenge(date,1),"native challenge stores a maximum rather than adding attempts and retains it after restart");
             RecordChallenge(service,song,6,260,false,date);
             Check(service.CanClaimChallenge(date,1) && !service.CanClaimChallenge(date,2) && service.ClaimChallenge(date,1).gold==1000,"six marks unlock the native1000Gold second checkpoint");
@@ -215,7 +280,7 @@ namespace DancingCats.Clone.Editor
             Check(!service.CanClaimChallenge(date,2),"eight marks remain below the final native checkpoint");
             RecordChallenge(service,song,9,400,false,date);
             Check(service.CanClaimChallenge(date,2) && service.ClaimChallenge(date,2).gold==1500 && service.Gold==3000,"nine marks unlock the native1500Gold final checkpoint and total3000");
-            service=OriginalProgression.FromJson(service.Config,service.ToJson());
+            service=Restore(service);
             Check(service.State.challengeStars==9 && !Enumerable.Range(0,3).Any(tier=>service.CanClaimChallenge(date,tier)),"native nine-mark maximum and all three claim guards survive restart");
             Check(!service.CanClaimChallenge(date.AddDays(1),0) && service.State.challengeStars==0 && service.State.claimedChallengeTiers.Count==0,"native next-local-date reset clears challenge marks and checkpoint claims");
         }

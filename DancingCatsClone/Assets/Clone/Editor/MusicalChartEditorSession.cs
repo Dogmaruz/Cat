@@ -8,7 +8,8 @@ using UnityEngine.SceneManagement;
 namespace DancingCats.Clone.Editor
 {
     // A local, allowlisted authoring job queue for an already open Editor.
-    // No package, network endpoint, arbitrary code evaluation or player build commands.
+    // No network endpoint, arbitrary code evaluation or player build commands.
+    // Package setup is restricted to the explicit, pinned DI installation action.
     [InitializeOnLoad]
     public static class MusicalChartEditorSession
     {
@@ -62,6 +63,22 @@ namespace DancingCats.Clone.Editor
                     case "playtest":
                         RequireEditMode();
                         Invoke("IntegratedPlayValidation", "RunCustomSongInOpenEditor");
+                        break;
+                    case "install-di":
+                        RequireEditMode();
+                        Invoke("DependencyInjectionPackageSetup", "Install");
+                        break;
+                    case "di-migrate":
+                        RequireEditMode();
+                        Invoke("DependencyInjectionValidation", "MigrateScene");
+                        break;
+                    case "di-checks":
+                        RequireEditMode();
+                        Invoke("DependencyInjectionValidation", "RunChecks");
+                        break;
+                    case "di-menus":
+                        RequireEditMode();
+                        Invoke("IntegratedPlayValidation", "RunDependencyInjectionMenusInOpenEditor");
                         break;
                     default: throw new ArgumentException("Unknown musical authoring job: " + action);
                 }

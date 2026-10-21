@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using RhythmGame.Services;
 
 namespace DancingCats.Clone
 {
@@ -147,14 +148,20 @@ namespace DancingCats.Clone
         [Serializable] private sealed class JsonArray<T> { public T[] items; }
 
         public static SongRecord[] Load()
+            => LoadFrom(new UnityGameResources());
+
+        public static SongRecord[] LoadFrom(IGameResources resources)
         {
-            var optional = Resources.Load<TextAsset>("CustomData/songs");
-            return MergeCatalog(LoadOriginal(), optional == null ? null : FromJsonArray<SongRecord>(optional.text));
+            var optional = resources.Load<TextAsset>("CustomData/songs");
+            return MergeCatalog(LoadOriginalFrom(resources), optional == null ? null : FromJsonArray<SongRecord>(optional.text));
         }
 
         public static SongRecord[] LoadOriginal()
+            => LoadOriginalFrom(new UnityGameResources());
+
+        public static SongRecord[] LoadOriginalFrom(IGameResources resources)
         {
-            var json = RequireText("OriginalData/songs").text;
+            var json = RequireText("OriginalData/songs", resources).text;
             var songs = FromJsonArray<SongRecord>(json);
             if (songs == null || songs.Length == 0) throw new InvalidDataException("Original song catalog is empty.");
             return MergeCatalog(songs, null);
@@ -182,12 +189,15 @@ namespace DancingCats.Clone
         }
 
         public static MapTimeline LoadMap(string id)
+            => LoadMapFrom(id, new UnityGameResources());
+
+        public static MapTimeline LoadMapFrom(string id, IGameResources resources)
         {
             if (!ValidIdentifier(id))
                 throw new ArgumentException("Invalid recovered map identifier.", "id");
             var originalPath = "OriginalData/Maps/" + id + ".timeline";
             var customPath = "CustomData/Maps/" + id + ".timeline";
-            var asset = Resources.Load<TextAsset>(originalPath) ?? Resources.Load<TextAsset>(customPath);
+            var asset = resources.Load<TextAsset>(originalPath) ?? resources.Load<TextAsset>(customPath);
             if (asset == null) throw new FileNotFoundException("Map resource is missing: " + originalPath + " or " + customPath);
             var map = JsonUtility.FromJson<MapTimeline>(asset.text);
             if (map == null || map.id != id || map.schemaVersion != 1 || map.elements == null || map.segments == null || map.events == null)
@@ -207,9 +217,9 @@ namespace DancingCats.Clone
             return JsonUtility.FromJson<JsonArray<T>>("{\"items\":" + json + "}").items;
         }
 
-        private static TextAsset RequireText(string resource)
+        private static TextAsset RequireText(string resource, IGameResources resources)
         {
-            var asset = Resources.Load<TextAsset>(resource);
+            var asset = resources.Load<TextAsset>(resource);
             if (asset == null) throw new FileNotFoundException("Original data resource is missing: " + resource);
             return asset;
         }

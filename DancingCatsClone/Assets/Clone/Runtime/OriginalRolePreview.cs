@@ -1,4 +1,5 @@
 using System;
+using RhythmGame.Services;
 using UnityEngine;
 
 namespace DancingCats.Clone
@@ -13,13 +14,15 @@ namespace DancingCats.Clone
         private GameObject actor;
         private GameObject model;
         private OriginalRoleMotion motion;
+        private RoleMotionCatalog motionCatalog;
         private bool needsFrame;
         public string PrefabName { get; private set; }
         public Camera PreviewCamera => previewCamera;
 
         public void Bind(OriginalAssets assets, OriginalRoleDefinition role, OriginalRoleDefinition trail,
-            Camera nativeCamera, Transform nativeParent)
+            Camera nativeCamera, Transform nativeParent, RoleMotionCatalog catalog)
         {
+            motionCatalog = catalog ?? throw new ArgumentNullException(nameof(catalog));
             if (assets == null || role == null || string.IsNullOrEmpty(role.prefabName) || nativeCamera == null || nativeParent == null)
                 throw new InvalidOperationException("The original role preview needs its real prefab, camera and parent.");
             image = GetComponent<UnityEngine.UI.RawImage>();
@@ -89,7 +92,7 @@ namespace DancingCats.Clone
             actor.transform.position -= previewCamera.transform.right * Vector3.Dot(center, previewCamera.transform.right)
                 + previewCamera.transform.up * Vector3.Dot(center, previewCamera.transform.up);
             // Spring lengths are world distances, so bind again after the independent preview scales.
-            motion.Bind(model, PrefabName); motion.PlayIdle();
+            motion.Bind(model, PrefabName, motionCatalog); motion.PlayIdle();
             needsFrame = false;
         }
 

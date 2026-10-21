@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using RhythmGame.Services;
 
 namespace DancingCats.Clone
 {
@@ -85,8 +86,11 @@ namespace DancingCats.Clone
         public OriginalAppointedScene[] appointedScenes;
 
         public static OriginalProgressionConfig Load()
+            => LoadFrom(new UnityGameResources());
+
+        public static OriginalProgressionConfig LoadFrom(IGameResources resources)
         {
-            var asset = Resources.Load<TextAsset>("OriginalData/progression.catalog");
+            var asset = resources.Load<TextAsset>("OriginalData/progression.catalog");
             if (asset == null) throw new FileNotFoundException("Original progression configuration is missing.");
             var result = JsonUtility.FromJson<OriginalProgressionConfig>(asset.text);
             if (result == null || result.schemaVersion != 1 || result.roles == null || result.trails == null || result.houseRows == null)
@@ -161,7 +165,7 @@ namespace DancingCats.Clone
     public sealed class OriginalProgression
     {
         public const string SaveKey = "DancingCatsClone.v1.progression";
-        private static readonly string DailySession = Guid.NewGuid().ToString("N");
+        private string dailySession;
         public OriginalProgressionConfig Config { get; private set; }
         public OriginalProgressionState State { get; private set; }
         public int Gold { get { return State.gold; } }
@@ -169,30 +173,28 @@ namespace DancingCats.Clone
         public string SelectedRole { get { return State.selectedRole; } }
         public string SelectedTrail { get { return State.selectedTrail; } }
         public event Action Changed;
-        private bool autoSave;
-        private SongRecord[] songs;
-        private SongRecord[] SongCatalog { get { return songs ?? (songs = RecoveredCatalog.Load()); } }
+        private readonly bool autoSave;
+        private readonly ISongCatalog songCatalog;
+        private readonly IProfileStore profileStore;
+        private SongRecord[] SongCatalog => songCatalog.Songs;
 
-        public OriginalProgression(OriginalProgressionConfig config, OriginalProgressionState state)
+        public OriginalProgression(OriginalProgressionConfig config, OriginalProgressionState state,
+            ISongCatalog catalog, IProfileStore store, bool autoSave = false, ApplicationSession session = null)
         {
             if (config == null) throw new ArgumentNullException("config");
+            songCatalog = catalog ?? throw new ArgumentNullException(nameof(catalog));
+            profileStore = store ?? throw new ArgumentNullException(nameof(store));
+            if (catalog.Songs == null || catalog.Songs.Length == 0)
+                throw new ArgumentException("Progression requires a nonempty song catalog.", nameof(catalog));
+            dailySession = (session ?? new ApplicationSession()).Id;
+            this.autoSave = autoSave;
             Config = config;
             State = state ?? new OriginalProgressionState();
             Normalize();
         }
 
-        public static OriginalProgression LoadSaved()
-        {
-            var config = OriginalProgressionConfig.Load();
-            var value = PlayerPrefs.GetString(SaveKey, "");
-            var service = FromJson(config, value);
-            service.autoSave = true;
-            service.BeginDailySession(DailySession);
-            service.StartDiceEvent(DateTime.Today);
-            return service;
-        }
-
-        public static OriginalProgression FromJson(OriginalProgressionConfig config, string json)
+        public static OriginalProgression FromJson(OriginalProgressionConfig config, string json,
+            ISongCatalog catalog, IProfileStore store, bool autoSave = false, ApplicationSession session = null)
         {
             OriginalProgressionState state = null;
             if (!string.IsNullOrWhiteSpace(json))
@@ -200,11 +202,11 @@ namespace DancingCats.Clone
                 try { state = JsonUtility.FromJson<OriginalProgressionState>(json); }
                 catch (ArgumentException) { }
             }
-            return new OriginalProgression(config, state);
+            return new OriginalProgression(config, state, catalog, store, autoSave, session);
         }
 
         public string ToJson() { return JsonUtility.ToJson(State); }
-        public void Save() { PlayerPrefs.SetString(SaveKey, ToJson()); PlayerPrefs.Save(); }
+        public void Save() { profileStore.Write(ToJson()); }
         private void Commit() { if (autoSave) Save(); if (Changed != null) Changed(); }
 
         private void Normalize()
@@ -362,6 +364,7 @@ namespace DancingCats.Clone
         public void BeginDailySession(string sessionId)
         {
             if (string.IsNullOrEmpty(sessionId)) throw new ArgumentException("A session identifier is required.", "sessionId");
+            dailySession = sessionId;
             if (State.dailySession == sessionId) return;
             // Native DailyRewardUIPanel keeps its nine-card page in panel-instance fields, while
             // FirstDailyReward is saved. Persisting the current session ledger also prevents duplicate callbacks.
@@ -369,7 +372,7 @@ namespace DancingCats.Clone
             State.dailyDeck.Clear(); State.dailyCards.Clear();
             Commit();
         }
-        private void DailyDate(DateTime now) { BeginDailySession(DailySession); }
+        private void DailyDate(DateTime now) { BeginDailySession(dailySession); }
         public int WheelClaimsRemaining(DateTime now)
         { DailyDate(now); return Math.Max(0, 9 - State.dailyFreeClaims - State.dailyRewardClaims); }
         public OriginalRewardReceipt SpinWheel(DateTime now, int ticket, bool offlineReward = false)

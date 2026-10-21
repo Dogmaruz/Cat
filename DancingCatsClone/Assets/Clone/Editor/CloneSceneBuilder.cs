@@ -70,6 +70,7 @@ namespace DancingCats.Clone.Editor
             EditorUtility.SetDirty(library);
             var controller = new GameObject("Dancing Cats offline reconstruction").AddComponent<OriginalPlayController>();
             controller.Assets = library;
+            DependencyInjectionValidation.ConfigureScene(controller);
             EditorSceneManager.SaveScene(scene, ScenePath);
             EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
             PlayerSettings.companyName = "Dogmaruz";

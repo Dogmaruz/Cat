@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using RhythmGame.Services;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,6 +14,17 @@ namespace DancingCats.Clone.Editor
         [Serializable] private sealed class Role { public string prefab, assetPath; public Bone[] bones; }
         [Serializable] private sealed class Bone { public string path, childPath; }
 
+        private sealed class CountingResources : IGameResources
+        {
+            private readonly IGameResources resources = new UnityGameResources();
+            public int LoadCount { get; private set; }
+            public T Load<T>(string path) where T : UnityEngine.Object
+            {
+                LoadCount++;
+                return resources.Load<T>(path);
+            }
+        }
+
         public static void Run()
         {
             var type = typeof(RecoveredCatalog).Assembly.GetType("DancingCats.Clone.OriginalRoleMotion");
@@ -21,6 +33,8 @@ namespace DancingCats.Clone.Editor
             Require(json != null, "original spring binding manifest is available");
             var manifest = JsonUtility.FromJson<Manifest>(json.text);
             Require(manifest.roles.Length == 63, "all 63 original role prefabs are represented");
+            var resources = new CountingResources();
+            var catalog = new RoleMotionCatalog(resources);
             int animated = 0, springs = 0;
             foreach (var role in manifest.roles)
             {
@@ -32,7 +46,15 @@ namespace DancingCats.Clone.Editor
                     var instance = UnityEngine.Object.Instantiate(prefab, owner.transform);
                     var motion = owner.AddComponent(type);
                     type.GetProperty("ManualSimulation").SetValue(motion, true);
-                    Invoke(type, motion, "Bind", instance, role.prefab);
+                    Invoke(type, motion, "Bind", instance, role.prefab, catalog);
+                    if (animated == 0)
+                    {
+                        var otherResources = new CountingResources();
+                        Invoke(type, motion, "Bind", instance, role.prefab, new RoleMotionCatalog(otherResources));
+                        Require(otherResources.LoadCount == 1, "a new application scope loads its own rig manifest");
+                        Invoke(type, motion, "Bind", instance, role.prefab, catalog);
+                        Require(resources.LoadCount == 1, "repeated bindings reuse only their injected rig catalog");
+                    }
                     Require((int)type.GetProperty("SpringBoneCount").GetValue(motion) == role.bones.Length,
                         role.prefab + " binds exactly its authored tail bones");
                     var animator = instance.GetComponentInChildren<Animator>(true);
@@ -92,7 +114,8 @@ namespace DancingCats.Clone.Editor
                 }
                 finally { UnityEngine.Object.DestroyImmediate(owner); }
             }
-            Debug.Log("ORIGINAL_ROLE_MOTION PASS: " + animated + " imported rigs, " + springs + " exact spring bones, native states and preserved lengths");
+            Require(resources.LoadCount == 1, "all rigs share one parse within their application scope");
+            Debug.Log("ORIGINAL_ROLE_MOTION PASS: " + animated + " imported rigs, " + springs + " exact spring bones, native states, preserved lengths and scoped manifest caching");
         }
 
         private static void Invoke(Type type, Component component, string name, params object[] arguments)

@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using RhythmGame.Services;
+using RhythmGame.Sessions;
+using VContainer;
 
 namespace DancingCats.Clone
 {
@@ -56,7 +59,7 @@ namespace DancingCats.Clone
         public float JumpPercent => _jumpDistance > .0001f ? (Actor.position.z - _jumpBegin.z) / _jumpDistance : 0;
         private readonly List<OriginalTile> _tiles = new List<OriginalTile>();
         private readonly List<Collider> _coins = new List<Collider>();
-        private OriginalScore _score = new OriginalScore();
+        private OriginalScore _score => _runSessions.Current.Score;
         private OriginalRoleMotion _motion;
         private Transform _track, _railway, _endPlatform;
         private AudioSource _music, _effects;
@@ -76,26 +79,52 @@ namespace DancingCats.Clone
         private string _boundRole, _boundTrail;
         private SongRecord _nextSong;
         private bool _nextSongEvaluated;
+        private ISongCatalog _catalog;
+        private IGameResources _resources;
+        private IAudioClock _audioClock;
+        private RoleMotionCatalog _roleCatalog;
+        private ThemeCatalog _themeCatalog;
+        private SceneRenderSettings _renderSettings;
+        private bool _initialized;
+        private RunSessionFactory _runSessions;
         private static readonly string[][] MidShotSources = {
             Array.Empty<string>(), new[] { "MidShotItem" }, new[] { "MidShotItem01" }, new[] { "MidShotItem01_0" },
             new[] { "MidShotItem01_1", "MidShotItem02" }, new[] { "MidShotItem01_2", "MidShotItem02_0" },
             new[] { "MidShotItem1", "MidShotItem2", "MidShotItem3" }, new[] { "MidShotItem01_3", "MidShotItem02_1" }
         };
 
-        private void Start()
+        [Inject]
+        public void Construct(OriginalAssets assets, ISongCatalog catalog, OriginalProgression progression,
+            IGameResources resources, IAudioClock audioClock, RoleMotionCatalog roleCatalog,
+            ThemeCatalog themeCatalog, SceneRenderSettings renderSettings, RunSessionFactory runSessions)
         {
+            Assets = assets ?? throw new ArgumentNullException(nameof(assets));
+            _catalog = catalog ?? throw new ArgumentNullException(nameof(catalog));
+            Progression = progression ?? throw new ArgumentNullException(nameof(progression));
+            _resources = resources ?? throw new ArgumentNullException(nameof(resources));
+            _audioClock = audioClock ?? throw new ArgumentNullException(nameof(audioClock));
+            _roleCatalog = roleCatalog ?? throw new ArgumentNullException(nameof(roleCatalog));
+            _themeCatalog = themeCatalog ?? throw new ArgumentNullException(nameof(themeCatalog));
+            _renderSettings = renderSettings ?? throw new ArgumentNullException(nameof(renderSettings));
+            _runSessions = runSessions ?? throw new ArgumentNullException(nameof(runSessions));
+        }
+
+        public void Initialize()
+        {
+            if (_initialized) throw new InvalidOperationException("The game has already started.");
+            if (_catalog == null) throw new InvalidOperationException("The game must be composed before startup.");
+            _initialized = true;
             Application.runInBackground = true;
             Application.targetFrameRate = 60;
             Screen.orientation = ScreenOrientation.Portrait;
-            Assets = Assets != null ? Assets : Resources.Load<OriginalAssets>("OriginalAssets");
-            if (Assets == null) throw new InvalidOperationException("Build the original asset library before opening the clone scene.");
-            Songs = RecoveredCatalog.Load();
-            Progression = OriginalProgression.LoadSaved();
+            Songs = _catalog.Songs;
             Progression.Changed += NotifyChanged;
             _music = gameObject.AddComponent<AudioSource>(); _music.playOnAwake = false;
             _effects = gameObject.AddComponent<AudioSource>(); _effects.playOnAwake = false;
             _track = new GameObject("Original authored map").transform;
+            _track.SetParent(transform, false);
             Actor = new GameObject("Original Cat Actor").transform;
+            Actor.SetParent(transform, false);
             var body = Actor.gameObject.AddComponent<Rigidbody>();
             body.useGravity = false; body.isKinematic = true;
             var sphere = Actor.gameObject.AddComponent<SphereCollider>();
@@ -105,9 +134,13 @@ namespace DancingCats.Clone
             RefreshRole();
             var selected = Songs.FirstOrDefault(s => s.id == Progression.State.selectedSong) ?? Songs[0];
             Prepare(selected, ClonePhase.Menu, true);
-            Presenter = gameObject.AddComponent<OriginalUIPresenter>();
-            Presenter.Bind(this);
             Debug.Log("DANCING_CATS_READY songs=" + Songs.Length + " cats=" + Assets.RoleNames.Length + " sprites=" + Assets.sprites.Length + " song=" + Selected.id + " elements=" + Map.elements.Length);
+        }
+
+        public void AttachPresenter(OriginalUIPresenter presenter)
+        {
+            if (Presenter != null) throw new InvalidOperationException("A presenter is already attached.");
+            Presenter = presenter ?? throw new ArgumentNullException(nameof(presenter));
         }
 
         public bool SelectSong(int catalogId)
@@ -128,8 +161,8 @@ namespace DancingCats.Clone
             int retainedPalette = _themeVisuals != null ? _themeVisuals.Index : 0;
             Vector3 retainedCamera = _camera != null ? _camera.transform.position : Vector3.zero;
             _music.Stop();
-            Selected = song; Map = RecoveredCatalog.LoadMap(song.id);
-            if (resetScore) { _score.Reset(); _lap = 0; _settled = _revived = false; _runId = Guid.NewGuid().ToString("N"); CollectedCoins = 0; _nextSong = null; _nextSongEvaluated = false; }
+            Selected = song; Map = _catalog.LoadMap(song.id);
+            if (resetScore) { _runId = _runSessions.Begin().Id; _lap = 0; _settled = _revived = false; CollectedCoins = 0; _nextSong = null; _nextSongEvaluated = false; }
             _rate = 1 + (song.catalog?.speedAdd != null && song.catalog.speedAdd.Length > 0 ? song.catalog.speedAdd[Mathf.Min(_lap, song.catalog.speedAdd.Length - 1)] : 0);
             _localFinishZ = Map.elements.First(e => e.kind == "FinishJump").pos.z;
             float delayLength = Mathf.Min(0, UserDelay) * Map.forwardSpeed;
@@ -183,6 +216,7 @@ namespace DancingCats.Clone
             var environment = Assets.prefabs.FirstOrDefault(p => p.name == "Environment" + _theme);
             if (environment == null) throw new InvalidOperationException("Original environment unavailable: " + _theme);
             _railway = Instantiate(environment.asset).transform;
+            _railway.SetParent(transform, true);
             _railway.name = "Original railway " + _theme;
             var cameras = _railway.GetComponentsInChildren<Camera>(true);
             _camera = cameras.FirstOrDefault(c => c.gameObject.activeInHierarchy) ?? cameras.FirstOrDefault();
@@ -192,6 +226,7 @@ namespace DancingCats.Clone
             if (platform != null)
             {
                 _endPlatform = Instantiate(platform.asset).transform;
+                _endPlatform.SetParent(transform, true);
                 _endPlatform.name = "Original end platform";
                 _endPlatform.gameObject.SetActive(true);
             }
@@ -209,7 +244,7 @@ namespace DancingCats.Clone
             instance.transform.localRotation = Quaternion.identity;
             foreach (var collider in instance.GetComponentsInChildren<Collider>(true)) { collider.enabled = false; Destroy(collider); }
             foreach (var body in instance.GetComponentsInChildren<Rigidbody>(true)) { body.isKinematic = true; Destroy(body); }
-            _motion.Bind(instance, name);
+            _motion.Bind(instance, name, _roleCatalog);
             string trailName = Progression.Trail(Progression.SelectedTrail)?.prefabName;
             var trailEntry = Assets.prefabs.FirstOrDefault(p => p.name == trailName);
             if (trailEntry?.asset != null)
@@ -295,7 +330,7 @@ namespace DancingCats.Clone
                 }
             }
             if (_themeVisuals == null) _themeVisuals = gameObject.AddComponent<OriginalThemeVisuals>();
-            _themeVisuals.Bind(_railway.gameObject, _tiles, Assets.themeMaterials, _theme);
+            _themeVisuals.Bind(_railway.gameObject, _tiles, Assets.themeMaterials, _theme, _themeCatalog);
         }
 
         public void BeginRun()
@@ -313,17 +348,17 @@ namespace DancingCats.Clone
 
         private void Schedule(double gameTime)
         {
-            _music.Stop(); _music.clip = Selected.LoadAudio(); _music.loop = false;
+            _music.Stop(); _music.clip = _catalog.LoadAudio(Selected); _music.loop = false;
             _music.pitch = _rate; _music.volume = Progression.State.settings.sound ? _volume : 0;
             double audioTime = gameTime - _lapOffset / Map.forwardSpeed - Mathf.Min(UserDelay, 0) - EffectiveDelay;
-            _clockOffset = gameTime; _dspStart = AudioSettings.dspTime;
+            _clockOffset = gameTime; _dspStart = _audioClock.DspTime;
             _music.timeSamples = Mathf.Clamp((int)Math.Round(Math.Max(0, audioTime) * _music.clip.frequency), 0, _music.clip.samples - 1);
             if (audioTime < _music.clip.length) _music.PlayScheduled(_dspStart + Math.Max(0, -audioTime) / _rate);
         }
 
         private void PlayPreview()
         {
-            _music.clip = Resources.Load<AudioClip>(Selected.previewAudioResource);
+            _music.clip = _catalog.LoadAudio(Selected, true);
             _music.pitch = 1; _music.loop = true; _music.volume = Progression.State.settings.sound ? _volume : 0;
             if (_music.clip != null) _music.Play();
         }
@@ -357,7 +392,7 @@ namespace DancingCats.Clone
                 }
                 ReadPointer();
                 double previousTime = GameTime;
-                double targetTime = _clockOffset + Math.Max(0, AudioSettings.dspTime - _dspStart) * _rate;
+                double targetTime = _clockOffset + Math.Max(0, _audioClock.DspTime - _dspStart) * _rate;
                 var previousPosition = Actor.position;
                 float targetX = Mathf.Clamp(previousPosition.x + (_destinationX - previousPosition.x) * .25f, -1.5f, 1.5f);
                 int steps = Mathf.Clamp(Mathf.CeilToInt(Mathf.Abs((float)targetTime * Map.forwardSpeed - previousPosition.z) / .12f), 1, 1024);
@@ -596,7 +631,7 @@ namespace DancingCats.Clone
         public void PaySettlement() { if (!string.IsNullOrEmpty(_runId)) Progression?.AutoRewardSettlement(_runId); }
         private void PlayEffect(string resource)
         {
-            var clip = Resources.Load<AudioClip>("OriginalAudio/Sfx/" + resource);
+            var clip = _resources.Load<AudioClip>("OriginalAudio/Sfx/" + resource);
             if (clip != null && Progression.State.settings.sound) _effects.PlayOneShot(clip);
         }
 
@@ -630,11 +665,16 @@ namespace DancingCats.Clone
                 var settings = Progression.State.settings;
                 if (_music != null) _music.volume = settings.sound ? _volume : 0;
                 if (_effects != null) _effects.volume = settings.sound ? _volume : 0;
-                if (_camera != null && _camera.TryGetComponent<UniversalAdditionalCameraData>(out var data)) data.renderPostProcessing = settings.postProcessing;
-                foreach (var volume in FindObjectsByType<Volume>(FindObjectsSortMode.None)) volume.enabled = settings.postProcessing;
+                _renderSettings.Apply(_camera, settings.postProcessing);
             }
             Changed?.Invoke();
         }
         private void OnApplicationPause(bool paused) { if (paused) Pause(); }
+        private void OnDestroy()
+        {
+            if (Progression != null) Progression.Changed -= NotifyChanged;
+            if (_music != null) _music.Stop();
+            if (_effects != null) _effects.Stop();
+        }
     }
 }
