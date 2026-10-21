@@ -43,6 +43,32 @@ namespace DancingCats.Clone.Editor
             RadioEditorValidation.RunPlaytest();
         }
 
+        public static void MenuPreviewChecks()
+        {
+            RequireSavedEditor();
+            RadioEditorValidation.RunMenuPreviewReview();
+        }
+
+        public static void MenuBakeProbe()
+        {
+            RequireSavedEditor();
+            CourierMenuPreviewChecks.ProbeBakeSpaces();
+        }
+
+        public static void LightingAssets()
+        {
+            RequireSavedEditor();
+            var catalog = AssetDatabase.LoadAssetAtPath<RadioArchipelago.CourierCatalog>("Assets/RadioArchipelago/Content/CourierCatalog.asset");
+            CourierLightingAssetBuilder.Ensure(catalog);
+            Debug.Log("RADIO_COURIER_LIGHTING_ASSETS PASS: shared studio profile and static HDR reflections are assigned");
+        }
+
+        public static void RefreshLightingReflections()
+        {
+            RequireSavedEditor();
+            CourierLightingAssetBuilder.RebuildReflections();
+        }
+
         public static void MotionChecks()
         {
             RequireSavedEditor();
@@ -91,6 +117,14 @@ namespace DancingCats.Clone.Editor
         {
             RequireSavedEditor();
             EditorSceneManager.OpenScene(CloneSceneBuilder.ScenePath);
+        }
+
+        public static void ShowMainMenu()
+        {
+            RequireSavedEditor();
+            if (SceneManager.GetActiveScene().path != CloneSceneBuilder.ScenePath)
+                EditorSceneManager.OpenScene(CloneSceneBuilder.ScenePath);
+            EditorApplication.isPlaying = true;
         }
 
         private static void RequireSavedEditor()

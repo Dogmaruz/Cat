@@ -11,6 +11,7 @@ namespace RadioArchipelago
         public int SelectedIndex { get; private set; }
         public string SelectedId => SelectedDefinition.id;
         public CourierDefinition SelectedDefinition => catalog.entries[SelectedIndex];
+        public CourierLightingProfile Lighting => catalog.lighting;
         public event Action Changed;
 
         public CourierSelection(CourierCatalog catalog, IPlayerPreferences preferences)

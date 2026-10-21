@@ -249,6 +249,9 @@ namespace DancingCats.Clone
             _motion = instance.GetComponent<CourierMotion>();
             if (_motion == null) throw new InvalidOperationException("The courier has no presentation rig: " + definition.id);
             _motion.ResetMotion();
+            var lighting = new GameObject("Courier lighting"); lighting.transform.SetParent(Actor, false);
+            var front = _camera != null ? _camera.transform.position - Actor.position : Vector3.back;
+            lighting.AddComponent<CourierLightingRig>().Initialize(_couriers.Lighting, instance, front, ~0);
             _boundRole = definition.id;
             NotifyChanged();
         }

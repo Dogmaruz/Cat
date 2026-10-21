@@ -42,6 +42,7 @@ namespace RadioArchipelago.Editor
             if (catalog == null) { catalog = ScriptableObject.CreateInstance<CourierCatalog>(); AssetDatabase.CreateAsset(catalog, path); }
             catalog.entries = entries;
             EditorUtility.SetDirty(catalog);
+            CourierLightingAssetBuilder.Ensure(catalog);
             AssetDatabase.SaveAssets();
             Validate();
             Debug.Log("RADIO_COURIERS_BUILT count=3 catalog=" + path);

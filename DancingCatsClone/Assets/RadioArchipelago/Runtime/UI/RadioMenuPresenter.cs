@@ -166,13 +166,12 @@ namespace RadioArchipelago.UI
             Label("BrandName", header, "Радиоархипелаг", 25, Ink, new Vector2(.13f,0),new Vector2(.88f,1),TextAlignmentOptions.MidlineLeft, FontStyles.Bold);
             IconButton("SettingsButton", header, new Vector2(.91f,.12f),new Vector2(1,.88f), RadioGlyph.Symbol.Settings, art.settingsIcon, () => Navigate("Settings"), false);
 
-            var previewRect = Rect("CourierHero", home.transform, new Vector2(.03f,.61f), new Vector2(.79f,.94f));
+            var previewRect = Rect("CourierHero", home.transform, Vector2.zero, Vector2.one);
+            var shadow = Panel("CourierContactShadow", previewRect, Vector2.zero, Vector2.zero, new Color(.06f,.30f,.32f,.22f), true);
             var previewImage = Rect("Preview",previewRect,Vector2.zero,Vector2.one);
-            var fit = previewImage.gameObject.AddComponent<AspectRatioFitter>();
-            fit.aspectMode=AspectRatioFitter.AspectMode.FitInParent; fit.aspectRatio=1;
             var hero = previewImage.gameObject.AddComponent<UnityEngine.UI.RawImage>();
             hero.raycastTarget = false;
-            previewImage.gameObject.AddComponent<CourierMenuPreview>().Initialize(courierSelection);
+            previewImage.gameObject.AddComponent<CourierMenuPreview>().Initialize(courierSelection, (RectTransform)backdrop.transform, shadow.rectTransform);
             Label("Tagline",home.transform,"Поймай\nсвой ритм", 27,Ink,new Vector2(.055f,.625f),new Vector2(.50f,.715f),TextAlignmentOptions.MidlineLeft,FontStyles.Italic);
             var underline = Panel("TaglineUnderline",home.transform,new Vector2(.055f,.620f),new Vector2(.31f,.624f),Mint);
             underline.transform.localRotation = Quaternion.Euler(0,0,8);

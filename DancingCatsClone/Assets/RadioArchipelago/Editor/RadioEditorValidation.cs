@@ -37,6 +37,8 @@ namespace RadioArchipelago.Editor
         private static float dragOrigin, songLength;
         private static double deadline, readyAt, pauseClock, pauseDsp, startDsp, lastClock, lastDsp;
         private static bool bot, capturedHold, capturedGlide;
+        private static readonly Vector2Int[] MenuSizes = { new Vector2Int(540, 960), new Vector2Int(390, 844), new Vector2Int(1080, 1920) };
+        private static int menuSize, menuCourier;
         private static LocalPose[] pausedCourierPose;
         private static BlendPose[] pausedCourierBlends;
 
@@ -74,6 +76,7 @@ namespace RadioArchipelago.Editor
                 Check(!EditorApplication.isCompiling && !EditorApplication.isUpdating, "Editor imports and compilation have finished");
                 Check(TMPro.TMP_Settings.LoadDefaultSettings() != null, "official TextMeshPro essential resources are imported");
                 var catalog = LoadCatalog();
+                Check(catalog.lighting != null && catalog.lighting.reflections != null, "couriers share their studio lighting profile and static HDR reflections");
                 Check(catalog.entries != null && catalog.entries.Length == 3, "three original courier definitions are present");
                 Check(catalog.entries.Select(entry => entry.id).Distinct(StringComparer.Ordinal).Count() == 3, "courier identifiers are unique");
                 foreach (var entry in catalog.entries)
@@ -112,7 +115,12 @@ namespace RadioArchipelago.Editor
         }
 
         [MenuItem("Radio Archipelago/Review/Play menu and full song")]
-        public static void RunPlaytest()
+        public static void RunPlaytest() => StartReview(false);
+
+        [MenuItem("Radio Archipelago/Review/Check live menu preview framing")]
+        public static void RunMenuPreviewReview() => StartReview(true);
+
+        private static void StartReview(bool menuOnly)
         {
             if (SessionState.GetBool(Key, false)) throw new InvalidOperationException("A Radio Archipelago review is already running.");
             if (EditorApplication.isPlayingOrWillChangePlaymode || EditorApplication.isCompiling || EditorApplication.isUpdating)
@@ -131,6 +139,7 @@ namespace RadioArchipelago.Editor
             };
             SessionState.SetString(Key + ".snapshot", JsonUtility.ToJson(snapshot));
             SessionState.SetBool(Key, true);
+            SessionState.SetBool(Key + ".menuOnly", menuOnly);
             SessionState.SetBool(Key + ".finishing", false);
             SessionState.SetBool(Key + ".viewCaptured", false);
             SessionState.SetString(Key + ".viewSizes", "");
@@ -198,6 +207,7 @@ namespace RadioArchipelago.Editor
                 if (readyAt < 0) readyAt = EditorApplication.timeSinceStartup;
                 if (EditorApplication.timeSinceStartup - readyAt < 1.5) return;
                 frames++;
+                if (SessionState.GetBool(Key + ".menuOnly", false)) { TickMenuPreview(); return; }
                 switch (step)
                 {
                     case 0:
@@ -381,6 +391,35 @@ namespace RadioArchipelago.Editor
             catch (Exception error) { Finish(false, error.ToString()); }
         }
 
+        private static void TickMenuPreview()
+        {
+            if (step == 0)
+            {
+                couriers = LoadCatalog(); menuSize = menuCourier = 0;
+                InvokeButton("CourierButton_0"); Next(1); return;
+            }
+            var size = MenuSizes[menuSize];
+            if (frames < 20 || Screen.width != size.x || Screen.height != size.y) return;
+            string context = couriers.entries[menuCourier].id + "-" + size.x + "x" + size.y;
+            string result = CourierMenuPreviewChecks.CheckCurrent(game.Presenter.UICanvas, context);
+            if (frames < 45) return;
+            Capture("menu-" + context + ".png", size.x, size.y);
+            Notes.Add(result);
+            Notes.Add(CourierLightingChecks.CheckMenu(game.Presenter.UICanvas));
+            if (++menuCourier < couriers.entries.Length)
+            {
+                InvokeButton("CourierButton_" + menuCourier); Next(1); return;
+            }
+            menuCourier = 0;
+            if (++menuSize < MenuSizes.Length)
+            {
+                SelectGameViewSize(MenuSizes[menuSize].x, MenuSizes[menuSize].y);
+                InvokeButton("CourierButton_0"); Next(1); return;
+            }
+            Check(Errors.Count == 0, "menu preview switching and resizing produced no runtime errors");
+            Finish(true, "All three live menu courier previews fit their camera after layout and during animation at 540x960, 390x844 and 1080x1920. No player build was created.");
+        }
+
         private static void CheckActor(int index)
         {
             var definition = couriers.entries[index];
@@ -391,6 +430,7 @@ namespace RadioArchipelago.Editor
             var expectedMeshes = new HashSet<Mesh>(CourierMeshes(definition.prefab, true));
             var activeMeshes = CourierMeshes(motion.gameObject, false).ToArray();
             Check(activeMeshes.Length > 0 && activeMeshes.All(expectedMeshes.Contains), "the installed courier uses the selected definition's actual 3D meshes");
+            Notes.Add(CourierLightingChecks.CheckActor(game.Actor));
         }
 
         private static IEnumerable<Mesh> CourierMeshes(GameObject root, bool includeInactive) =>
@@ -600,7 +640,7 @@ namespace RadioArchipelago.Editor
                 SessionState.SetBool(Key, false); SessionState.SetBool(Key + ".finishing", false);
                 Notes.Clear(); Notes.AddRange(SessionState.GetString(Key + ".notes", "").Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries));
             }
-            WriteResult("result.txt", success, details);
+            WriteResult(SessionState.GetBool(Key + ".menuOnly", false) ? "menu-result.txt" : "result.txt", success, details);
         }
 
         private static void RestoreGameView()

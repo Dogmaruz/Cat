@@ -6,6 +6,7 @@ namespace RadioArchipelago
     [CreateAssetMenu(menuName = "Radio Archipelago/Courier catalog")]
     public sealed class CourierCatalog : ScriptableObject
     {
+        public CourierLightingProfile lighting;
         public CourierDefinition[] entries = Array.Empty<CourierDefinition>();
 
         public CourierDefinition Find(string id)

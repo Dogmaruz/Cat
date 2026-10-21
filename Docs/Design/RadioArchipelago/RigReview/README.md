@@ -74,3 +74,29 @@ The later supplied Tripo part exports were inspected separately; their open
 shoulder boundaries agree with the selected bone roots and do not justify
 replacing the connected rigs or original 4K atlases. See
 [`TRIPO_PARTS.md`](TRIPO_PARTS.md) for the comparison and source hashes.
+
+## Main menu framing and landing pad
+
+The follow-up fixes double-applied skin scale, root-bone culling bounds and
+UI ancestor scaling. All three couriers now share a feet-to-head display size
+and stand on the first turquoise platform. The live review passed nine cases
+across 540×960, 390×844 and 1080×1920, checking every baked vertex, body height
+and the platform anchor. See [MENU_PREVIEW.md](../MENU_PREVIEW.md),
+[numeric proof](Menu/skin-space-proof.txt) and [live results](Menu/after-framing.txt).
+
+Actual GameView frames:
+[Tiko](Menu/menu-signal-540x960.png), [Lumen](Menu/menu-sail-540x960.png),
+[Nori](Menu/menu-orbit-540x960.png).
+
+## Courier lighting in the actual menu and game
+
+The shared studio profile adds a warm key, sky fill and soft rim, plus a static
+HDR reflection map for the supplied URP Lit materials. No realtime probe capture
+or shadow maps are added. The direct lights address the registered `Courier Studio`
+rendering layer. The nine live menu cases check lighting as well as framing.
+
+- [Before lighting](Menu/before-lighting-nori.png) and [after](Menu/menu-orbit-540x960.png).
+- Actual gameplay: [jump](Menu/gameplay-lit.png), [sustain](Menu/sustain-lit.png), [glide](Menu/glide-lit.png).
+- [Layer registration proof](Menu/lighting-layer-proof.txt): the previous defined
+  mask `0x1` stripped bit 7; registered mask `0x81` preserves the light mask `0x80`.
+- [Lighting setup and authoring](../COURIER_LIGHTING.md).

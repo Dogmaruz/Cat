@@ -74,8 +74,8 @@ namespace RadioArchipelago.Editor
             foreach (var entry in entries)
             {
                 if (entry.source == null) continue;
-                // false keeps vertices in renderer-local space; the proxy shares that exact transform.
-                entry.source.BakeMesh(entry.mesh, false);
+                // The proxy shares the source Transform, so bake renderer-local vertices.
+                entry.source.BakeMesh(entry.mesh, true);
                 entry.mesh.RecalculateBounds();
                 entry.mesh.UploadMeshData(false);
                 entry.node.layer = entry.source.gameObject.layer;

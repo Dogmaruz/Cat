@@ -35,7 +35,9 @@ namespace RadioArchipelago.Editor
             var catalog = AssetDatabase.LoadAssetAtPath<CourierCatalog>(catalogPath);
             if (catalog == null) throw new FileNotFoundException("The existing courier catalog is missing.", catalogPath);
             // Keep the catalog GUID, gameplay IDs and saved selection indices stable.
-            catalog.entries = entries; EditorUtility.SetDirty(catalog); AssetDatabase.SaveAssets();
+            catalog.entries = entries; EditorUtility.SetDirty(catalog);
+            CourierLightingAssetBuilder.Ensure(catalog);
+            AssetDatabase.SaveAssets();
             CourierAssetBuilder.Validate();
             Debug.Log("RADIO_IMPORTED_ASSETS PASS: supplied Blender models, explicit skinned controls, original UV/textures and stable catalog IDs");
         }
@@ -183,9 +185,12 @@ namespace RadioArchipelago.Editor
             {
                 for (int i = 0; i < skins.Length; i++)
                 {
-                    skins[i].BakeMesh(sample, false); sample.GetVertices(vertices);
-                    foreach (var point in vertices)
+                    skins[i].BakeMesh(sample, true); sample.GetVertices(vertices);
+                    var frame = skins[i].rootBone != null ? skins[i].rootBone : skins[i].transform;
+                    foreach (var vertex in vertices)
                     {
+                        // Skinned culling bounds follow rootBone, which can have different FBX axes.
+                        var point = frame.InverseTransformPoint(skins[i].transform.TransformPoint(vertex));
                         if (!found[i]) { bounds[i] = new Bounds(point, Vector3.zero); found[i] = true; }
                         else bounds[i].Encapsulate(point);
                     }

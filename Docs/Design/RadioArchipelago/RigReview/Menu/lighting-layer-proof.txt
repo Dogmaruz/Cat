@@ -1,0 +1,3 @@
+RADIO_COURIER_LIGHTING_LAYER: defined mask 0x1 -> 0x81
+URP ForwardLights -> RenderingLayerUtils.ToValidRenderingLayers -> component mask AND defined rendering layers.
+Before registration: 0x80 & 0x1 = 0. After registration: 0x80 & 0x81 = 0x80.

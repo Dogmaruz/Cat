@@ -189,10 +189,10 @@ namespace RadioArchipelago.Editor
                 var mesh = new Mesh();
                 try
                 {
-                    skin.BakeMesh(mesh); var vertices = mesh.vertices;
-                    var culling = skin.localBounds; culling.Expand(.002f);
+                    skin.BakeMesh(mesh, true); var vertices = mesh.vertices;
+                    var culling = skin.bounds; culling.Expand(.002f);
                     foreach (var point in vertices)
-                        Require(culling.Contains(point), skin.name + ": animated geometry leaves its authored culling bounds.");
+                        Require(culling.Contains(skin.transform.TransformPoint(point)), skin.name + ": actual world geometry leaves its renderer culling bounds.");
                     result.Add(vertices);
                 }
                 finally { UnityEngine.Object.DestroyImmediate(mesh); }
@@ -241,7 +241,7 @@ namespace RadioArchipelago.Editor
             {
                 foreach (var sample in samples)
                 {
-                    sample.skin.BakeMesh(mesh, false); var vertices = mesh.vertices;
+                    sample.skin.BakeMesh(mesh, true); var vertices = mesh.vertices;
                     foreach (int index in sample.vertices)
                     {
                         sum += visualFrame.InverseTransformPoint(sample.skin.transform.TransformPoint(vertices[index]));
@@ -270,8 +270,8 @@ namespace RadioArchipelago.Editor
             float prior = skin.GetBlendShapeWeight(index); var mesh = new Mesh();
             try
             {
-                skin.SetBlendShapeWeight(index, 0); skin.BakeMesh(mesh, false); var open = mesh.vertices;
-                skin.SetBlendShapeWeight(index, 100); skin.BakeMesh(mesh, false); var closed = mesh.vertices;
+                skin.SetBlendShapeWeight(index, 0); skin.BakeMesh(mesh, true); var open = mesh.vertices;
+                skin.SetBlendShapeWeight(index, 100); skin.BakeMesh(mesh, true); var closed = mesh.vertices;
                 Require(open.Length == closed.Length && open.Length > 0, id + ": Head blink must preserve supplied mesh topology.");
                 int changed = 0; float maxDistance = 0;
                 for (int i = 0; i < open.Length; i++)
