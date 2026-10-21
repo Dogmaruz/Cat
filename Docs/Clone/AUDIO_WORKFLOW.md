@@ -2,6 +2,7 @@
 
 User preferences recorded on 2026-10-21:
 
+- Work only in Unity Editor for now. Do not start Windows, Android or other player builds unless the user explicitly requests them again. The first custom-song builds had already completed when this instruction arrived.
 - Generate a full track directly in Runway. Do not spend a separate generation on a short demo.
 - Let the user listen before integrating a new musical direction into the game.
 - After every generation report the charge and the returned remaining credit balance. Do not infer the subscription tier from the balance.
