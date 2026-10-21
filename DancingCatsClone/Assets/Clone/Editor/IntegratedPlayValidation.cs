@@ -118,6 +118,11 @@ namespace DancingCats.Clone.Editor
 
         private static void Log(string message, string trace, LogType type)
         {
+            if (type == LogType.Warning && message.Contains("Can not play a disabled audio source"))
+            {
+                errors.Add(message + "\n" + trace);
+                return;
+            }
             if (type != LogType.Exception && type != LogType.Error && type != LogType.Assert) return;
             if (trace.Contains("UnityEditor.Search.SearchDatabase"))
             {
@@ -148,6 +153,10 @@ namespace DancingCats.Clone.Editor
                     case 0:
                         Check(game.Songs.Length == 58 && game.Assets.RoleNames.Length == 63, "all original songs and cats bound");
                         Check(game.Phase == ClonePhase.Menu, "fresh startup opens original menu");
+                        var clickAudio = UnityEngine.Object.FindObjectsByType<AudioSource>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+                            .FirstOrDefault(source => source.name == "ButtonClickAudio");
+                        Check(clickAudio != null && clickAudio.isActiveAndEnabled && clickAudio.clip != null,
+                            "original UI click sound remains active with its original clip");
                         Capture("01-original-how-to-play.png");
                         Next(11, 10); break;
                     case 11:

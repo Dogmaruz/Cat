@@ -145,6 +145,8 @@ namespace DancingCats.Clone
             tokens = Panel("Tokens_UIPanel");
             var audio = Panel("Audio_UIPanel");
             clickAudio = Component<AudioSource>(audio, "ButtonClickAudio");
+            // This original audio-only root is permanent; it is not a modal panel.
+            audio.SetActive(true);
             WireMenu(); WireGame();
             Button(tokens, "Coins/Image/Animation/Button/Button", () => OpenPanel("DailyReward_UIPanel"));
             game.Changed += Refresh;

@@ -42,6 +42,14 @@ namespace DancingCats.Clone.Editor
 
         private static void Build(string scene, string path, BuildTarget target)
         {
+            // URP gathers shader features from the Editor's active target, not only
+            // BuildPlayerOptions.target. A cross-target batch build can otherwise
+            // report success after stripping every mobile post-processing variant.
+            if (EditorUserBuildSettings.activeBuildTarget != target)
+            {
+                string argument = target == BuildTarget.Android ? "Android" : "Win64";
+                throw new InvalidOperationException("Launch Unity with -buildTarget " + argument + " before invoking this build method.");
+            }
             var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
             {
                 scenes = new[] { scene }, locationPathName = path, target = target, options = BuildOptions.None
