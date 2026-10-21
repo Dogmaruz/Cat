@@ -335,7 +335,7 @@ namespace DancingCats.Clone
             var content = template.parent as RectTransform;
             template.gameObject.SetActive(false);
             SetupScroll(scroll, content);
-            foreach (var song in game.Songs.OrderBy(s => s.catalog.endOrder).ThenBy(s => s.catalogId))
+            foreach (var song in game.Songs.OrderBy(s => s.id == "AlwaysRememberMeowCat" ? 0 : 1).ThenBy(s => s.catalog.endOrder).ThenBy(s => s.catalogId))
             {
                 var item = Instantiate(game.Assets.Prefab("MusicLevelItem"), content, false);
                 item.name = "MusicLevelItem_" + song.id;
@@ -1127,7 +1127,12 @@ namespace DancingCats.Clone
                     game.PaySettlement();
                     Set(results, "Particle", true);
                     var applause = Component<AudioSource>(results, "Particle");
-                    if (applause != null && Progress.State.settings.sound) applause.Play();
+                    if (applause != null && Progress.State.settings.sound)
+                    {
+                        // The recovered Particle source is disabled until its reward cue.
+                        applause.enabled = true;
+                        applause.Play();
+                    }
                 }
                 string path = "MoveContens/TheStar/" + groups[tier] + "/" + groups[tier] + "_" + number + "/Animation";
                 Set(results, path, true);

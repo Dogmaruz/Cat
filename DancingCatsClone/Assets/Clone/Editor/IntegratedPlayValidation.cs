@@ -32,6 +32,13 @@ namespace DancingCats.Clone.Editor
         private static bool recoveryFollowUp;
         private static bool menusOnly;
         private static bool challengeOnly;
+        private static bool customSongOnly;
+        private const string CustomSongId = "AlwaysRememberMeowCat";
+        private const int CustomSongCatalogId = 20001;
+        private static double customDeadline, customStartDsp, customLastDsp, customLastClock, customResumeDsp, customResumeClock;
+        private static float customAudioLength;
+        private static int customGold, customPausedSamples;
+        private static bool customGameplayCaptured, customHoldCaptured, customMovingCaptured;
         private static OriginalTile edgeHold, edgeExit, edgeFinish, edgePrevious;
         private static int edgePointCount, edgeScore;
         private static float edgeMissX;
@@ -50,6 +57,7 @@ namespace DancingCats.Clone.Editor
         public static void Run() => StartValidation(false, false);
         public static void RunInterfaceAndRecovery() => StartValidation(true, false);
         public static void RunChallenge() => StartValidation(false, false, true);
+        public static void RunCustomSong() => StartValidation(false, false, false, true);
         public static void RunMenus()
         {
             ProgressionValidation.Run();
@@ -57,11 +65,12 @@ namespace DancingCats.Clone.Editor
             StartValidation(true, true);
         }
 
-        private static void StartValidation(bool followUp, bool onlyMenus, bool onlyChallenge = false)
+        private static void StartValidation(bool followUp, bool onlyMenus, bool onlyChallenge = false, bool onlyCustomSong = false)
         {
             SessionState.SetBool(Key + ".followUp", followUp);
             SessionState.SetBool(Key + ".menusOnly", onlyMenus);
             SessionState.SetBool(Key + ".challengeOnly", onlyChallenge);
+            SessionState.SetBool(Key + ".customSongOnly", onlyCustomSong);
             SetPortraitGameView();
             SessionState.SetString(Key + ".save", PlayerPrefs.GetString(OriginalProgression.SaveKey, ""));
             SessionState.SetInt(Key + ".guide", PlayerPrefs.GetInt("DancingCatsClone.v1.howToPlaySeen", 0));
@@ -107,11 +116,15 @@ namespace DancingCats.Clone.Editor
                 recoveryFollowUp = SessionState.GetBool(Key + ".followUp", false);
                 menusOnly = SessionState.GetBool(Key + ".menusOnly", false);
                 challengeOnly = SessionState.GetBool(Key + ".challengeOnly", false);
+                customSongOnly = SessionState.GetBool(Key + ".customSongOnly", false);
+                customDeadline = 0;
+                customGameplayCaptured = customHoldCaptured = customMovingCaptured = false;
                 deadline = EditorApplication.timeSinceStartup + 30;
                 Application.logMessageReceived += Log;
                 EditorApplication.update -= Tick;
                 var loop = PlayerLoop.GetCurrentPlayerLoop();
-                loop.subSystemList = loop.subSystemList.Concat(new[] { new PlayerLoopSystem { type = typeof(IntegratedPlayValidation), updateDelegate = Tick } }).ToArray();
+                loop.subSystemList = loop.subSystemList.Where(system => system.type != typeof(IntegratedPlayValidation))
+                    .Concat(new[] { new PlayerLoopSystem { type = typeof(IntegratedPlayValidation), updateDelegate = Tick } }).ToArray();
                 PlayerLoop.SetPlayerLoop(loop);
             }
         }
@@ -148,10 +161,12 @@ namespace DancingCats.Clone.Editor
                     mouse = InputSystem.AddDevice<Mouse>("Clone QA pointer"); mouse.MakeCurrent();
                     foreach (var physical in InputSystem.devices.Where(d => d.native && (d is Mouse || d is Keyboard)).ToArray()) InputSystem.DisableDevice(physical);
                 }
+                if (customSongOnly && step >= 60) { TickCustomSong(); return; }
                 switch (step)
                 {
                     case 0:
-                        Check(game.Songs.Length == 58 && game.Assets.RoleNames.Length == 63, "all original songs and cats bound");
+                        Check(RecoveredCatalog.LoadOriginal().Length == 58 && game.Songs.Length >= 58 && game.Assets.RoleNames.Length == 63,
+                            "all 58 original songs and 63 cats remain bound alongside optional custom songs");
                         Check(game.Phase == ClonePhase.Menu, "fresh startup opens original menu");
                         var clickAudio = UnityEngine.Object.FindObjectsByType<AudioSource>(FindObjectsInactive.Include, FindObjectsSortMode.None)
                             .FirstOrDefault(source => source.name == "ButtonClickAudio");
@@ -180,6 +195,13 @@ namespace DancingCats.Clone.Editor
                     case 12:
                         if (substep++ < 3) return;
                         Capture("02-original-main-menu.png");
+                        if (customSongOnly)
+                        {
+                            var custom = game.Songs.Single(s => s.id == CustomSongId);
+                            Check(custom.catalogId == CustomSongCatalogId && game.Progression.IsSongUnlocked(CustomSongId),
+                                "custom song 20001 is available unlocked on a fresh save");
+                            BeginClick(FindButton("L/MusicButton")); panelOpened = Time.unscaledTime; Next(60, 15); break;
+                        }
                         BeginClick(FindButton("L/MusicButton")); Next(2, 10); break;
                     case 2:
                         if (Time.frameCount <= pressedFrame + 3) return;
@@ -492,6 +514,173 @@ namespace DancingCats.Clone.Editor
                 }
             }
             catch (Exception exception) { Finish(false, exception.ToString()); }
+        }
+
+        private static void TickCustomSong()
+        {
+            if (game.Phase == ClonePhase.Dead)
+                throw new Exception("custom song died at chart time " + game.GameTime + ", actor " + game.Actor.position);
+            switch (step)
+            {
+                case 60:
+                    if (Time.frameCount <= pressedFrame + 3) return;
+                    Release();
+                    var list = GameObject.Find("MusicList_UIPanel");
+                    if (list == null || !list.activeInHierarchy || Time.unscaledTime - panelOpened < 1.7f) return;
+                    var play = FindButton("MusicLevelItem_" + CustomSongId + "/Unlock/Play");
+                    Check(play != null && play.gameObject.activeInHierarchy && play.interactable, "custom song has an unlocked playable native list row");
+                    var row = play.transform.parent.parent;
+                    var rows = row.parent.Cast<Transform>().Where(t => t.gameObject.activeInHierarchy && t.name.StartsWith("MusicLevelItem_", StringComparison.Ordinal)).ToArray();
+                    Check(Array.IndexOf(rows, row) >= 0 && Array.IndexOf(rows, row) < 3, "custom song appears in the first three native list rows");
+                    var scroll = play.GetComponentInParent<ScrollRect>();
+                    var viewport = scroll.viewport != null ? scroll.viewport : (RectTransform)scroll.transform;
+                    var rect = (RectTransform)play.transform;
+                    Check(RectTransformUtility.RectangleContainsScreenPoint(viewport, RectTransformUtility.WorldToScreenPoint(null, rect.TransformPoint(rect.rect.center))),
+                        "custom song is visible immediately without scrolling");
+                    Capture("20-custom-song-list.png");
+                    BeginClick(play); panelOpened = Time.unscaledTime; NextCustom(61); break;
+                case 61:
+                    if (Time.frameCount <= pressedFrame + 3) return;
+                    Release();
+                    if (game.Presenter.IsBlockingInput || Time.unscaledTime - panelOpened < .5f) return;
+                    Check(game.Selected.id == CustomSongId && game.Selected.catalogId == CustomSongCatalogId && game.Phase == ClonePhase.Menu,
+                        "native custom row selects the custom song and returns to its menu");
+                    var clip = game.Selected.LoadAudio();
+                    Check(clip != null && clip.length > 150 && Math.Abs(clip.length - game.Selected.audioLengthSeconds) < .1,
+                        "custom song binds the complete decoded recording and matching catalog duration");
+                    customAudioLength = clip.length;
+                    var finish = game.Map.elements.First(e => e.kind == "FinishJump");
+                    double platformAudioTime = finish.audioTime + 5 / game.Map.forwardSpeed;
+                    Check(platformAudioTime >= customAudioLength - 1 && platformAudioTime <= customAudioLength + .05,
+                        "custom end-platform landing covers the final second of the complete audio timeline");
+                    Check(game.Tiles.Any(t => t.element.id == 2 || t.element.id == 3) && game.Tiles.Any(t => t.element.id < 7 && t.element.updateType != 0),
+                        "actual custom track contains holds and moving tiles");
+                    game.Endless = false;
+                    customGold = game.Progression.Gold;
+                    Check(game.Progression.State.settlements.Count == 0, "fresh custom validation has no previous settlement");
+                    Capture("21-custom-menu.png");
+                    BeginStartPress(); NextCustom(62); break;
+                case 62:
+                    if (Time.frameCount <= pressedFrame + 3) return;
+                    Check(game.Phase == ClonePhase.Playing && mouse.leftButton.isPressed, "custom run starts through the actual StartBtn pointer DOWN");
+                    customStartDsp = AudioSettings.dspTime;
+                    customDeadline = EditorApplication.timeSinceStartup + customAudioLength + 60;
+                    beginX = game.Actor.position.x; Hold(beginX); bot = true;
+                    NextCustom(63); break;
+                case 63:
+                    ObserveCustomPlayback();
+                    if (game.GameTime < game.Map.delayTime + 4) return;
+                    Check(game.Score > 0 && game.Music.isPlaying, "custom audio plays while real input scores actual collider landings");
+                    bot = false; Release(); pressedFrame = Time.frameCount; NextCustom(70); break;
+                case 70:
+                    // The UI module must observe a released frame between gameplay drag
+                    // and the new pause-button press. Bot stays disabled until resume.
+                    if (Time.frameCount <= pressedFrame + 1) return;
+                    BeginClick(FindButton("Internal_UIPanel/StopButton")); NextCustom(64); break;
+                case 64:
+                    if (Time.frameCount <= pressedFrame + 3) return;
+                    Release();
+                    if (game.Phase != ClonePhase.Paused) return;
+                    bot = false;
+                    pauseClock = game.GameTime; pauseDsp = AudioSettings.dspTime; lastScore = game.Score;
+                    customPausedSamples = game.Music.timeSamples;
+                    NextCustom(65); break;
+                case 65:
+                    if (AudioSettings.dspTime - pauseDsp < .8) return;
+                    Check(game.Phase == ClonePhase.Paused && Math.Abs(game.GameTime - pauseClock) < .0001 && game.Score == lastScore &&
+                        !game.Music.isPlaying && game.Music.timeSamples == customPausedSamples,
+                        "native pause freezes chart, score and audio position while the system DSP clock advances");
+                    Capture("22-custom-pause.png");
+                    BeginClick(FindButton("Stop_UIPanel/StopWindow/Resume")); NextCustom(66); break;
+                case 66:
+                    if (Time.frameCount <= pressedFrame + 3) return;
+                    Release();
+                    if (game.Phase != ClonePhase.Playing) return;
+                    Check(game.GameTime >= pauseClock && game.GameTime - pauseClock < .3, "resume continues from the paused chart position without a time skip");
+                    customResumeClock = customLastClock = game.GameTime;
+                    customResumeDsp = customLastDsp = AudioSettings.dspTime;
+                    // Let runtime ReadPointer observe one released frame after the UI click,
+                    // then establish a new drag origin at the actor's current lane.
+                    pressedFrame = Time.frameCount; NextCustom(69); break;
+                case 69:
+                    if (Time.frameCount <= pressedFrame + 1) return;
+                    beginX = game.Actor.position.x; Hold(beginX); bot = true;
+                    NextCustom(67); break;
+                case 67:
+                    if (game.Phase == ClonePhase.Playing)
+                    {
+                        ObserveCustomPlayback();
+                        double dsp = AudioSettings.dspTime;
+                        if (!game.WinSequence && Math.Abs((game.GameTime - customLastClock) - (dsp - customLastDsp) * game.PlaybackRate) > .1)
+                            throw new Exception("custom chart clock is discontinuous with DSP playback");
+                        customLastClock = game.GameTime; customLastDsp = dsp;
+                        if (substep == 0 && dsp - customResumeDsp > 1)
+                        {
+                            Check(Math.Abs((game.GameTime - customResumeClock) - (dsp - customResumeDsp) * game.PlaybackRate) < .1 &&
+                                Math.Abs(game.Music.time - (game.GameTime - game.Map.delayTime)) < .15,
+                                "resumed custom music and chart remain aligned with the DSP clock");
+                            substep = 1;
+                        }
+                        return;
+                    }
+                    Release(); bot = false;
+                    Check(game.Phase == ClonePhase.Results && game.WinSequence, "custom song reaches results through the real win sequence without death or revival");
+                    Check(game.Tiles.Any(t => t.element.id == 10 && t.consumed) &&
+                        game.Actor.position.z >= game.Map.elements.First(e => e.kind == "FinishJump").pos.z + 33,
+                        "custom actor lands on the actual end platform and reaches its final collider");
+                    Check(game.GameTime - game.Map.delayTime >= customAudioLength - .25 &&
+                        AudioSettings.dspTime - customStartDsp >= (customAudioLength - .25) / game.PlaybackRate,
+                        "full custom recording completes in real playback time without teleporting or seeking");
+                    Check(game.Tiles.Where(t => t.element.id == 2 || t.element.id == 3 || t.element.id == 8).All(t => t.consumed) &&
+                        game.Tiles.Any(t => t.element.id == 9) && game.Tiles.Where(t => t.element.id == 9).All(t => t.consumed),
+                        "custom holds, every scored hold point and hold exits are crossed through actual contacts");
+                    Check(game.Tiles.Where(t => t.element.id < 7 && t.element.updateType != 0).All(t => t.consumed),
+                        "custom moving tiles are crossed through actual contacts");
+                    NextCustom(68); break;
+                case 68:
+                    if (!ResultAnimationReady()) return;
+                    var quote = game.SettlementQuote;
+                    var persisted = OriginalProgression.FromJson(game.Progression.Config, PlayerPrefs.GetString(OriginalProgression.SaveKey, ""));
+                    var progress = persisted.SongProgress(CustomSongId);
+                    Check(game.Score > 0 && game.RunStars == 3 && progress != null && progress.normalStars == 3 && progress.normalScore == game.Score &&
+                        progress.starts == 1 && progress.completions == 1, "custom three-star result and best score survive save deserialization exactly once");
+                    Check(quote != null && quote.eligible && quote.claimed && game.Progression.State.settlements.Count == 1 &&
+                        game.Progression.Gold == customGold + quote.totalGold, "native custom settlement pays exactly one full-tier reward");
+                    game.PaySettlement(); game.PaySettlement();
+                    persisted = OriginalProgression.FromJson(game.Progression.Config, PlayerPrefs.GetString(OriginalProgression.SaveKey, ""));
+                    Check(game.Progression.Gold == customGold + quote.totalGold && persisted.Gold == game.Progression.Gold &&
+                        persisted.State.settlements.Count == 1 && persisted.State.settlements[0].claimed && persisted.SongProgress(CustomSongId).completions == 1,
+                        "repeated settlement requests preserve the saved wallet and single completion");
+                    Capture("25-custom-results.png");
+                    Check(errors.Count == 0, "full custom song route is free of runtime errors");
+                    Finish(true, "custom " + CustomSongId + ", audio=" + customAudioLength.ToString("F3") +
+                        "s, actual list selection and StartBtn, pause/resume, full real-time input playthrough, holds/moving tiles, final platform, saved three stars/best, one settlement" +
+                        ", captures gameplay=" + customGameplayCaptured + " hold=" + customHoldCaptured + " moving=" + customMovingCaptured); break;
+            }
+        }
+
+        private static void NextCustom(int number)
+        {
+            Next(number, 15);
+            if (customDeadline > 0) deadline = customDeadline;
+        }
+
+        private static void ObserveCustomPlayback()
+        {
+            CheckCustomPlaying();
+            Bot();
+            if (!customGameplayCaptured && game.GameTime >= game.Map.delayTime + 2)
+            { Capture("23-custom-gameplay.png"); customGameplayCaptured = true; }
+            if (!customHoldCaptured && game.Support != null && (game.Support.element.id == 2 || game.Support.element.id == 3))
+            { Capture("24-custom-hold.png"); customHoldCaptured = true; }
+            if (!customMovingCaptured && game.Tiles.Any(t => t.element.id < 7 && t.element.updateType != 0 && !t.consumed &&
+                t.initialZ - game.Actor.position.z > 0 && t.initialZ - game.Actor.position.z < 12))
+            { Capture("24-custom-moving.png"); customMovingCaptured = true; }
+        }
+
+        private static void CheckCustomPlaying()
+        {
+            if (game.Phase != ClonePhase.Playing) throw new Exception("custom playback unexpectedly entered " + game.Phase + " at " + game.GameTime);
         }
 
         private static void Bot()

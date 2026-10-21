@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -147,20 +148,56 @@ namespace DancingCats.Clone
 
         public static SongRecord[] Load()
         {
+            var optional = Resources.Load<TextAsset>("CustomData/songs");
+            return MergeCatalog(LoadOriginal(), optional == null ? null : FromJsonArray<SongRecord>(optional.text));
+        }
+
+        public static SongRecord[] LoadOriginal()
+        {
             var json = RequireText("OriginalData/songs").text;
             var songs = FromJsonArray<SongRecord>(json);
             if (songs == null || songs.Length == 0) throw new InvalidDataException("Original song catalog is empty.");
-            return songs;
+            return MergeCatalog(songs, null);
+        }
+
+        internal static SongRecord[] MergeCatalog(SongRecord[] originals, SongRecord[] custom)
+        {
+            if (originals == null || originals.Length == 0) throw new InvalidDataException("Original song catalog is empty.");
+            var result = new List<SongRecord>(originals.Length + (custom?.Length ?? 0));
+            var ids = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var catalogIds = new HashSet<int>();
+            foreach (var source in new[] { originals, custom ?? Array.Empty<SongRecord>() })
+            foreach (var song in source)
+            {
+                if (song == null) throw new InvalidDataException("Song catalog contains a null record.");
+                if (!ValidIdentifier(song.id)) throw new InvalidDataException("Invalid song identifier: " + song.id);
+                if (!ids.Add(song.id)) throw new InvalidDataException("Duplicate song identifier: " + song.id);
+                if (song.catalogId <= 0) throw new InvalidDataException("Invalid catalog identifier for " + song.id + ": " + song.catalogId);
+                if (!catalogIds.Add(song.catalogId)) throw new InvalidDataException("Duplicate song catalog identifier: " + song.catalogId + " (" + song.id + ").");
+                if (song.catalog == null || song.catalog.id != song.catalogId)
+                    throw new InvalidDataException("Song metadata catalog identifier does not match " + song.id + ".");
+                result.Add(song);
+            }
+            return result.ToArray();
         }
 
         public static MapTimeline LoadMap(string id)
         {
-            if (string.IsNullOrWhiteSpace(id) || Array.Exists(id.ToCharArray(), c => !char.IsLetterOrDigit(c) && c != '_' && c != '-'))
+            if (!ValidIdentifier(id))
                 throw new ArgumentException("Invalid recovered map identifier.", "id");
-            var map = JsonUtility.FromJson<MapTimeline>(RequireText("OriginalData/Maps/" + id + ".timeline").text);
+            var originalPath = "OriginalData/Maps/" + id + ".timeline";
+            var customPath = "CustomData/Maps/" + id + ".timeline";
+            var asset = Resources.Load<TextAsset>(originalPath) ?? Resources.Load<TextAsset>(customPath);
+            if (asset == null) throw new FileNotFoundException("Map resource is missing: " + originalPath + " or " + customPath);
+            var map = JsonUtility.FromJson<MapTimeline>(asset.text);
             if (map == null || map.id != id || map.schemaVersion != 1 || map.elements == null || map.segments == null || map.events == null)
                 throw new InvalidDataException("Invalid recovered map: " + id);
             return map;
+        }
+
+        private static bool ValidIdentifier(string id)
+        {
+            return !string.IsNullOrWhiteSpace(id) && !Array.Exists(id.ToCharArray(), c => !char.IsLetterOrDigit(c) && c != '_' && c != '-');
         }
 
         public static T[] FromJsonArray<T>(string json)

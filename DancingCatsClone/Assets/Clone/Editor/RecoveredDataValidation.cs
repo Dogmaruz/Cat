@@ -36,7 +36,7 @@ namespace DancingCats.Clone.Editor
             }
         }
 
-        private static Array Songs() { return (Array)Catalog.GetMethod("Load").Invoke(null, null); }
+        private static Array Songs() { return (Array)Catalog.GetMethod("LoadOriginal").Invoke(null, null); }
         private static object Map(string id) { return Catalog.GetMethod("LoadMap").Invoke(null, new object[] { id }); }
         private static object Field(object value, string name)
         {
