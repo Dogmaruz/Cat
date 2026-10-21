@@ -1,0 +1,305 @@
+{
+  "character": "Lumen",
+  "coordinate_system": "Blender Z up, facing -Y, feet at root origin; FBX export forward -Z/up Y",
+  "height": 2.600000126671109,
+  "source_foot_offset": [
+    0.06811685860157013,
+    -0.19604754447937012,
+    0.0
+  ],
+  "triangles": 18764,
+  "meshes": [
+    {
+      "name": "Lumen_Character",
+      "role": "Character",
+      "vertices": 9370,
+      "triangles": 18764
+    }
+  ],
+  "bones": [
+    {
+      "name": "root",
+      "parent": null,
+      "head": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        0.25
+      ]
+    },
+    {
+      "name": "body",
+      "parent": "root",
+      "head": [
+        0.0,
+        0.0,
+        0.4300000071525574
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        1.100000023841858
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "body",
+      "head": [
+        0.0,
+        -0.11999999731779099,
+        1.090000033378601
+      ],
+      "tail": [
+        0.0,
+        -0.11999999731779099,
+        1.75
+      ]
+    },
+    {
+      "name": "arm.R",
+      "parent": "body",
+      "head": [
+        -0.3100000023841858,
+        0.1599999964237213,
+        0.8799999952316284
+      ],
+      "tail": [
+        -0.527999997138977,
+        0.23600000143051147,
+        0.5400000214576721
+      ]
+    },
+    {
+      "name": "arm.L",
+      "parent": "body",
+      "head": [
+        0.3399999737739563,
+        0.15000000596046448,
+        0.8700000047683716
+      ],
+      "tail": [
+        0.5120000243186951,
+        0.23600000143051147,
+        0.5400000214576721
+      ]
+    },
+    {
+      "name": "foot.L",
+      "parent": "body",
+      "head": [
+        0.27000001072883606,
+        0.0,
+        0.20000000298023224
+      ],
+      "tail": [
+        0.27000001072883606,
+        -0.12999999523162842,
+        0.04500000178813934
+      ]
+    },
+    {
+      "name": "foot.R",
+      "parent": "body",
+      "head": [
+        -0.27000001072883606,
+        0.0,
+        0.20000000298023224
+      ],
+      "tail": [
+        -0.27000001072883606,
+        -0.12999999523162842,
+        0.04500000178813934
+      ]
+    },
+    {
+      "name": "antenna.01",
+      "parent": "body",
+      "head": [
+        -0.26811686158180237,
+        0.35604754090309143,
+        1.3700000047683716
+      ],
+      "tail": [
+        -0.6831168532371521,
+        0.7160475254058838,
+        1.4500000476837158
+      ]
+    },
+    {
+      "name": "antenna.02",
+      "parent": "antenna.01",
+      "head": [
+        -0.6831168532371521,
+        0.7160475254058838,
+        1.4500000476837158
+      ],
+      "tail": [
+        -0.5581168532371521,
+        0.5960475206375122,
+        1.940000057220459
+      ]
+    },
+    {
+      "name": "antenna.03",
+      "parent": "antenna.02",
+      "head": [
+        -0.5581168532371521,
+        0.5960475206375122,
+        1.940000057220459
+      ],
+      "tail": [
+        -0.26811686158180237,
+        0.30604755878448486,
+        2.309999942779541
+      ]
+    },
+    {
+      "name": "antenna.04",
+      "parent": "antenna.03",
+      "head": [
+        -0.26811686158180237,
+        0.30604755878448486,
+        2.309999942779541
+      ],
+      "tail": [
+        0.14188313484191895,
+        -0.05395245552062988,
+        2.5299999713897705
+      ]
+    }
+  ],
+  "blink_meshes": [
+    "Lumen_Character"
+  ],
+  "blink_shape": "Blink",
+  "has_crest": false,
+  "has_scarf": false,
+  "exporter": "export_prepared_rigs.py",
+  "blender_version": "5.2.1 LTS",
+  "source_review_sha256": "06200f75bb959b586b219e893224e0f4395844122c411c9a5ac22c34f6f7aa0b",
+  "source_review_manifest_sha256": "a3cee4332565cf6e99ab85c450a65c88a4ed0da33ce91f259a9ebc688e18102f",
+  "model": "Model.fbx",
+  "authoring_project": "Lumen_Rigged.blend",
+  "fbx_coordinates": "forward -Z, up Y; Blender source faces -Y, Unity import faces +Z",
+  "bounds_blender": {
+    "min": [
+      -0.744408369064331,
+      -0.38280993700027466,
+      1.6380038658780904e-08
+    ],
+    "max": [
+      0.6081746220588684,
+      0.7749050855636597,
+      2.6000001430511475
+    ]
+  },
+  "mesh_uv_geometry_sha256": {
+    "Lumen_Character": "67e2c882782472bcbe0f83bb896e77070cf39b44d9892a958155b79d8368d342"
+  },
+  "skinned_mesh_count": 1,
+  "bone_count": 11,
+  "texture_packing": {
+    "size": [
+      4096,
+      4096
+    ],
+    "channels": {
+      "R": "metallic",
+      "G": "0",
+      "B": "0",
+      "A": "1 - roughness"
+    },
+    "color_space": "linear",
+    "maximum_roundtrip_error": 1.1920928955078125e-07
+  },
+  "texture_sources": {
+    "BaseColor.png": {
+      "source_filename": "Lumen_basecolor.PNG",
+      "sha256": "74b39b321011a88ef8a017d7d6aa77efae677a64f08c5c1349de71792ca83608"
+    },
+    "Normal.png": {
+      "source_filename": "Lumen_normal.PNG",
+      "sha256": "d086a1fa99e198604704f18b3c433e440434d4317810f96d89dbea4e9ba7461f"
+    }
+  },
+  "fbx_options": {
+    "use_selection": true,
+    "object_types": [
+      "ARMATURE",
+      "MESH"
+    ],
+    "global_scale": 1.0,
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_ALL",
+    "use_space_transform": true,
+    "bake_space_transform": false,
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "use_mesh_modifiers": false,
+    "use_tspace": true,
+    "mesh_smooth_type": "OFF",
+    "use_custom_props": true,
+    "add_leaf_bones": false,
+    "primary_bone_axis": "Y",
+    "secondary_bone_axis": "X",
+    "use_armature_deform_only": false,
+    "armature_nodetype": "NULL",
+    "bake_anim": false,
+    "path_mode": "STRIP",
+    "embed_textures": false
+  },
+  "files": {
+    "Model.fbx": {
+      "bytes": 1576556,
+      "sha256": "9041322c1b50ff15359ccfb0c4874e557e235a7e5b9c729eb5a22db35035f307"
+    },
+    "Lumen_Rigged.blend": {
+      "bytes": 1014756,
+      "sha256": "2dec3283f7161458705fc71afe33407b66269faef2b4717835a42803ced91b43"
+    },
+    "BaseColor.png": {
+      "bytes": 21533874,
+      "sha256": "74b39b321011a88ef8a017d7d6aa77efae677a64f08c5c1349de71792ca83608"
+    },
+    "Normal.png": {
+      "bytes": 5557925,
+      "sha256": "d086a1fa99e198604704f18b3c433e440434d4317810f96d89dbea4e9ba7461f"
+    },
+    "MetallicSmoothness.png": {
+      "bytes": 11274974,
+      "sha256": "9035db56b44c1fdf0115d2441bdede3715d120df21662fc7f3fef4fd1064ec69"
+    }
+  },
+  "verification": {
+    "portable_blend_reopened": true,
+    "fbx_reimported": true,
+    "mesh_names_match": true,
+    "bone_names_match": true,
+    "normalized_skin_weights": true,
+    "maximum_weight_error": 0.0,
+    "maximum_vertex_error": 4.172325134277344e-07,
+    "maximum_uv_error": 0.0,
+    "maximum_normal_error": 0.00034822430461645126,
+    "maximum_blink_error": 4.172325134277344e-07,
+    "maximum_normal_angle_degrees": 0.021033565934386468,
+    "maximum_bone_rest_matrix_error": 1.6689300537109375e-06,
+    "image_sizes": {
+      "BaseColor.png": [
+        4096,
+        4096
+      ],
+      "MetallicSmoothness.png": [
+        4096,
+        4096
+      ],
+      "Normal.png": [
+        4096,
+        4096
+      ]
+    }
+  }
+}

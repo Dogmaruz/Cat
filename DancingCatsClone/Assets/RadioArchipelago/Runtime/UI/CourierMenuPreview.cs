@@ -83,11 +83,9 @@ namespace RadioArchipelago.UI
             foreach (var body in actor.GetComponentsInChildren<Rigidbody>(true)) { body.isKinematic=true; body.detectCollisions=false; }
             var renderers = actor.GetComponentsInChildren<Renderer>(true);
             if (renderers.Length == 0) return;
-            Bounds bounds = renderers[0].bounds;
-            for (int i=1;i<renderers.Length;i++) bounds.Encapsulate(renderers[i].bounds);
+            Bounds bounds = CourierVisualBounds.Measure(renderers);
             actor.transform.localScale *= 3.05f / Mathf.Max(.01f,bounds.size.y);
-            bounds = renderers[0].bounds;
-            for (int i=1;i<renderers.Length;i++) bounds.Encapsulate(renderers[i].bounds);
+            bounds = CourierVisualBounds.Measure(renderers);
             actor.transform.position += rig.transform.position - bounds.center;
             restPosition = actor.transform.localPosition;
             restRotation = actor.transform.localRotation;

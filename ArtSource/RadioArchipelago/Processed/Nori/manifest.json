@@ -1,0 +1,375 @@
+{
+  "character": "Nori",
+  "coordinate_system": "Blender Z up, facing -Y, feet at root origin; FBX export forward -Z/up Y",
+  "height": 2.600000126030377,
+  "source_foot_offset": [
+    0.2002236545085907,
+    -0.3341296315193176,
+    0.0
+  ],
+  "triangles": 14508,
+  "meshes": [
+    {
+      "name": "Nori_Character",
+      "role": "Character",
+      "vertices": 7244,
+      "triangles": 14508
+    }
+  ],
+  "bones": [
+    {
+      "name": "root",
+      "parent": null,
+      "head": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        0.25
+      ]
+    },
+    {
+      "name": "body",
+      "parent": "root",
+      "head": [
+        0.0,
+        0.0,
+        0.4300000071525574
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        1.100000023841858
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "body",
+      "head": [
+        0.0,
+        -0.11999999731779099,
+        1.090000033378601
+      ],
+      "tail": [
+        0.0,
+        -0.11999999731779099,
+        1.75
+      ]
+    },
+    {
+      "name": "arm.R",
+      "parent": "body",
+      "head": [
+        -0.6599999666213989,
+        0.2800000011920929,
+        0.8799999952316284
+      ],
+      "tail": [
+        -0.8700000047683716,
+        0.3540000021457672,
+        0.49000000953674316
+      ]
+    },
+    {
+      "name": "arm.L",
+      "parent": "body",
+      "head": [
+        0.6899999380111694,
+        0.28999999165534973,
+        0.8899999856948853
+      ],
+      "tail": [
+        0.8399999141693115,
+        0.3540000021457672,
+        0.49000000953674316
+      ]
+    },
+    {
+      "name": "foot.L",
+      "parent": "body",
+      "head": [
+        0.27000001072883606,
+        0.0,
+        0.20000000298023224
+      ],
+      "tail": [
+        0.27000001072883606,
+        -0.12999999523162842,
+        0.04500000178813934
+      ]
+    },
+    {
+      "name": "foot.R",
+      "parent": "body",
+      "head": [
+        -0.27000001072883606,
+        0.0,
+        0.20000000298023224
+      ],
+      "tail": [
+        -0.27000001072883606,
+        -0.12999999523162842,
+        0.04500000178813934
+      ]
+    },
+    {
+      "name": "antenna.01",
+      "parent": "body",
+      "head": [
+        -0.8202236890792847,
+        0.714129626750946,
+        1.7400000095367432
+      ],
+      "tail": [
+        -0.8502236604690552,
+        0.7341296672821045,
+        1.9800000190734863
+      ]
+    },
+    {
+      "name": "antenna.02",
+      "parent": "antenna.01",
+      "head": [
+        -0.8502236604690552,
+        0.7341296672821045,
+        1.9800000190734863
+      ],
+      "tail": [
+        -0.5902236700057983,
+        0.4741296172142029,
+        2.299999952316284
+      ]
+    },
+    {
+      "name": "antenna.03",
+      "parent": "antenna.02",
+      "head": [
+        -0.5902236700057983,
+        0.4741296172142029,
+        2.299999952316284
+      ],
+      "tail": [
+        -0.16022366285324097,
+        0.044129639863967896,
+        2.4800000190734863
+      ]
+    },
+    {
+      "name": "antenna.04",
+      "parent": "antenna.03",
+      "head": [
+        -0.16022366285324097,
+        0.044129639863967896,
+        2.4800000190734863
+      ],
+      "tail": [
+        0.20977634191513062,
+        -0.3358703851699829,
+        2.4200000762939453
+      ]
+    },
+    {
+      "name": "antenna.05",
+      "parent": "antenna.04",
+      "head": [
+        0.20977634191513062,
+        -0.3358703851699829,
+        2.4200000762939453
+      ],
+      "tail": [
+        0.514776349067688,
+        -0.5958703756332397,
+        2.197000026702881
+      ]
+    },
+    {
+      "name": "scarf.L.01",
+      "parent": "body",
+      "head": [
+        -0.800223708152771,
+        0.8141295909881592,
+        0.8899999856948853
+      ],
+      "tail": [
+        -1.050223708152771,
+        1.0841295719146729,
+        0.9800000190734863
+      ]
+    },
+    {
+      "name": "scarf.L.02",
+      "parent": "scarf.L.01",
+      "head": [
+        -1.050223708152771,
+        1.0841295719146729,
+        0.9800000190734863
+      ],
+      "tail": [
+        -1.4202237129211426,
+        1.4741296768188477,
+        0.9399999976158142
+      ]
+    },
+    {
+      "name": "scarf.R.01",
+      "parent": "body",
+      "head": [
+        -0.800223708152771,
+        0.8141295909881592,
+        0.8500000238418579
+      ],
+      "tail": [
+        -1.050223708152771,
+        1.0441296100616455,
+        0.7200000286102295
+      ]
+    },
+    {
+      "name": "scarf.R.02",
+      "parent": "scarf.R.01",
+      "head": [
+        -1.050223708152771,
+        1.0441296100616455,
+        0.7200000286102295
+      ],
+      "tail": [
+        -1.300223708152771,
+        1.2941296100616455,
+        0.5600000023841858
+      ]
+    }
+  ],
+  "blink_meshes": [
+    "Nori_Character"
+  ],
+  "blink_shape": "Blink",
+  "has_crest": false,
+  "has_scarf": true,
+  "exporter": "export_prepared_rigs.py",
+  "blender_version": "5.2.1 LTS",
+  "source_review_sha256": "ed28016405d5e83f764fea7edd488ff3ffc64ca61913a50d80828c63a10829a9",
+  "source_review_manifest_sha256": "302ea12f54e932043745d629fba36387624970aa1df8a4d5b7d0713d80630f4f",
+  "model": "Model.fbx",
+  "authoring_project": "Nori_Rigged.blend",
+  "fbx_coordinates": "forward -Z, up Y; Blender source faces -Y, Unity import faces +Z",
+  "bounds_blender": {
+    "min": [
+      -1.4274113178253174,
+      -0.8164352178573608,
+      1.7020770570752575e-08
+    ],
+    "max": [
+      1.0269639492034912,
+      1.484694480895996,
+      2.6000001430511475
+    ]
+  },
+  "mesh_uv_geometry_sha256": {
+    "Nori_Character": "365c8afe145bece25f354aba03fae91aea449377273182cb21c8bff2f577948b"
+  },
+  "skinned_mesh_count": 1,
+  "bone_count": 16,
+  "texture_packing": {
+    "size": [
+      4096,
+      4096
+    ],
+    "channels": {
+      "R": "metallic",
+      "G": "0",
+      "B": "0",
+      "A": "1 - roughness"
+    },
+    "color_space": "linear",
+    "maximum_roundtrip_error": 1.1920928955078125e-07
+  },
+  "texture_sources": {
+    "BaseColor.png": {
+      "source_filename": "Nori_basecolor.PNG",
+      "sha256": "491d3ba2578ad6920f166e4d65e821feacf39e08606a2c37106cf2359cba4983"
+    },
+    "Normal.png": {
+      "source_filename": "Nori_normal.PNG",
+      "sha256": "4b9942c9bf9fb7ac98776ff6b682135a183982f5696b759d985ed9c64c7fbb4d"
+    }
+  },
+  "fbx_options": {
+    "use_selection": true,
+    "object_types": [
+      "ARMATURE",
+      "MESH"
+    ],
+    "global_scale": 1.0,
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_ALL",
+    "use_space_transform": true,
+    "bake_space_transform": false,
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "use_mesh_modifiers": false,
+    "use_tspace": true,
+    "mesh_smooth_type": "OFF",
+    "use_custom_props": true,
+    "add_leaf_bones": false,
+    "primary_bone_axis": "Y",
+    "secondary_bone_axis": "X",
+    "use_armature_deform_only": false,
+    "armature_nodetype": "NULL",
+    "bake_anim": false,
+    "path_mode": "STRIP",
+    "embed_textures": false
+  },
+  "files": {
+    "Model.fbx": {
+      "bytes": 1196140,
+      "sha256": "e93fbb60f25e7fcf0a783dafa42277f504bd227ff55d3c2f5cebd94f8f180afb"
+    },
+    "Nori_Rigged.blend": {
+      "bytes": 804976,
+      "sha256": "efdcb8790e4b666e8a0840528ef6e1f6667e4ba88eff22130dfdaa7c2238056f"
+    },
+    "BaseColor.png": {
+      "bytes": 25226179,
+      "sha256": "491d3ba2578ad6920f166e4d65e821feacf39e08606a2c37106cf2359cba4983"
+    },
+    "Normal.png": {
+      "bytes": 5826473,
+      "sha256": "4b9942c9bf9fb7ac98776ff6b682135a183982f5696b759d985ed9c64c7fbb4d"
+    },
+    "MetallicSmoothness.png": {
+      "bytes": 10050964,
+      "sha256": "03f846c0fa3be237186104cf7bb5a68f2974bdfbd64472aa5e28fb4ad70b68a0"
+    }
+  },
+  "verification": {
+    "portable_blend_reopened": true,
+    "fbx_reimported": true,
+    "mesh_names_match": true,
+    "bone_names_match": true,
+    "normalized_skin_weights": true,
+    "maximum_weight_error": 0.0,
+    "maximum_vertex_error": 5.819892976433039e-07,
+    "maximum_uv_error": 0.0,
+    "maximum_normal_error": 0.00032585859298706055,
+    "maximum_blink_error": 5.819892976433039e-07,
+    "maximum_normal_angle_degrees": 0.019733924213235665,
+    "maximum_bone_rest_matrix_error": 2.7120113372802734e-06,
+    "image_sizes": {
+      "BaseColor.png": [
+        4096,
+        4096
+      ],
+      "MetallicSmoothness.png": [
+        4096,
+        4096
+      ],
+      "Normal.png": [
+        4096,
+        4096
+      ]
+    }
+  }
+}

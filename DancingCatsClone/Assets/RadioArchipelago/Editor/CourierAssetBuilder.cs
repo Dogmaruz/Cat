@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -22,6 +23,11 @@ namespace RadioArchipelago.Editor
         [MenuItem("Radio Archipelago/Build courier assets")]
         public static void Run()
         {
+            if (ImportedCourierAssetBuilder.HasPreparedModels)
+            {
+                ImportedCourierAssetBuilder.Run();
+                return;
+            }
             EnsureFolder(Root); EnsureFolder(MeshFolder); EnsureFolder(MaterialFolder);
             EnsureFolder(PrefabFolder); EnsureFolder(IconFolder);
             var palette = new Palette();
@@ -60,25 +66,26 @@ namespace RadioArchipelago.Editor
                     || entry.prefab.GetComponentsInChildren<Rigidbody>(true).Length != 0)
                     throw new InvalidDataException("Presentation prefabs must not own gameplay physics: " + entry.id);
                 int triangles = 0;
-                var renderers = entry.prefab.GetComponentsInChildren<MeshRenderer>(true);
+                var renderers = entry.prefab.GetComponentsInChildren<Renderer>(true);
                 if (renderers.Length == 0) throw new InvalidDataException("Courier has no actual 3D geometry: " + entry.id);
-                var bounds = renderers[0].bounds;
+                var bounds = CourierVisualBounds.Measure(renderers);
                 foreach (var renderer in renderers)
                 {
-                    bounds.Encapsulate(renderer.bounds);
                     foreach (var material in renderer.sharedMaterials)
                         if (material == null || !AssetDatabase.GetAssetPath(material).StartsWith(Root, StringComparison.Ordinal))
                             throw new InvalidDataException("Courier material is missing or outside its original catalog: " + entry.id);
                 }
-                foreach (var filter in entry.prefab.GetComponentsInChildren<MeshFilter>(true))
+                var meshes = entry.prefab.GetComponentsInChildren<MeshFilter>(true).Select(filter => filter.sharedMesh)
+                    .Concat(entry.prefab.GetComponentsInChildren<SkinnedMeshRenderer>(true).Select(renderer => renderer.sharedMesh));
+                foreach (var mesh in meshes)
                 {
-                    if (filter.sharedMesh == null) throw new InvalidDataException("Courier mesh is missing: " + entry.id);
-                    triangles += filter.sharedMesh.triangles.Length / 3;
-                    foreach (var vertex in filter.sharedMesh.vertices)
+                    if (mesh == null) throw new InvalidDataException("Courier mesh is missing: " + entry.id);
+                    triangles += mesh.triangles.Length / 3;
+                    foreach (var vertex in mesh.vertices)
                         if (!IsFinite(vertex.x) || !IsFinite(vertex.y) || !IsFinite(vertex.z))
                             throw new InvalidDataException("Non-finite courier vertex: " + entry.id);
                 }
-                if (triangles > 15000 || bounds.size.y < 1.2f || bounds.size.y > 3.5f)
+                if (triangles > 25000 || bounds.size.y < 1.2f || bounds.size.y > 3.5f)
                     throw new InvalidDataException("Courier triangle budget or scale is invalid: " + entry.id + " triangles=" + triangles);
                 foreach (string dependency in AssetDatabase.GetDependencies(AssetDatabase.GetAssetPath(entry.prefab), true))
                     if (dependency.StartsWith("Assets/Recovered/", StringComparison.Ordinal)
@@ -501,7 +508,7 @@ namespace RadioArchipelago.Editor
             return points;
         }
 
-        private static Sprite RenderThumbnail(GameObject source, string id)
+        internal static Sprite RenderThumbnail(GameObject source, string id)
         {
             var preview = UnityEngine.Object.Instantiate(source);
             var cameraObject = new GameObject("Temporary courier thumbnail camera");
@@ -518,8 +525,7 @@ namespace RadioArchipelago.Editor
                 foreach (var node in preview.GetComponentsInChildren<Transform>(true)) node.gameObject.layer = ThumbnailLayer;
                 var motion = preview.GetComponent<CourierMotion>(); motion.ManualSimulation = true; motion.ResetMotion();
                 preview.transform.rotation = Quaternion.Euler(0, -36, 0);
-                var bounds = preview.GetComponentsInChildren<Renderer>()[0].bounds;
-                foreach (var renderer in preview.GetComponentsInChildren<Renderer>()) bounds.Encapsulate(renderer.bounds);
+                var bounds = CourierVisualBounds.Measure(preview.GetComponentsInChildren<Renderer>());
                 var camera = cameraObject.AddComponent<Camera>(); camera.enabled = false;
                 camera.scene = source.scene;
                 camera.clearFlags = CameraClearFlags.SolidColor; camera.backgroundColor = new Color(1, 1, 1, 0);

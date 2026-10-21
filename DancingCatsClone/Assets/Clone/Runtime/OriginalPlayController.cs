@@ -186,6 +186,7 @@ namespace DancingCats.Clone
             }
             if (resetScore) _motion.ResetMotion();
             _motion.PlayIdle();
+            _motion.SetPaused(false);
             Phase = phase;
             FollowCamera(resetScore);
             if (phase == ClonePhase.Menu) PlayPreview();
@@ -364,12 +365,14 @@ namespace DancingCats.Clone
             _invincibleGrounded = false;
             Support = null; _jumpBegin = point; _jumpDistance = Mathf.Max(.01f, distance);
             _height = NativeRhythmRules.HeightForDistance(_jumpDistance); _jumping = true;
-            _motion.PlayJump();
+            _motion.PlayJump(_jumpDistance / Mathf.Max(.01f, Map.forwardSpeed * _rate));
+            _motion.SetFlightProgress(0);
         }
 
         private void Update()
         {
             if (Actor == null) return;
+            _motion.SetPaused(Phase == ClonePhase.Paused);
             if (Keyboard.current?.escapeKey.wasPressedThisFrame == true)
             {
                 if (Phase == ClonePhase.Playing) Pause();
@@ -456,6 +459,7 @@ namespace DancingCats.Clone
                     _lap++; Prepare(Selected, ClonePhase.Ready, false); BeginRun(); return;
                 }
                 }
+                if (_jumping) _motion.SetFlightProgress(JumpPercent);
                 FollowCamera(false);
             }
             else if (Phase == ClonePhase.Dead)
@@ -492,6 +496,7 @@ namespace DancingCats.Clone
             {
                 if (_jumping && !Descending) return;
                 tile.MarkConsumed(); Support = tile; _jumping = false; _invincibleGrounded = false; _endRun = true;
+                _motion.PlayLanding(1.1f);
                 _motion.PlayEnd(); _themeVisuals.Finish(); return;
             }
             if (tile.element.id == 8)
@@ -508,6 +513,8 @@ namespace DancingCats.Clone
             }
             if (_jumping && !Descending) return;
             if (_lastLanding != null && tile.element.pos.z <= _lastLanding.element.pos.z) return;
+            float arrivingFlight = _jumpDistance / Mathf.Max(.01f, Map.forwardSpeed * _rate);
+            _motion.PlayLanding(Mathf.Lerp(.65f, 1.25f, Mathf.InverseLerp(.3f, 1.3f, arrivingFlight)));
             tile.MarkConsumed(); _lastLanding = tile;
             bool slider = tile.element.id == 2 || tile.element.id == 3 || tile.element.id == 4;
             ScoreHit(tile, tile.element.id == 4 || NativeRhythmRules.IsPerfect(Actor.position.x - tile.CenterX, slider, tile.element.id == 6));
@@ -515,7 +522,7 @@ namespace DancingCats.Clone
             {
                 _jumping = false; _invincibleGrounded = false; Support = tile;
                 Actor.position = new Vector3(Actor.position.x, tile.TopY + .25f, Actor.position.z);
-                _motion.PlayHold(tile.element.id == 4);
+                PlaySupportedMotion(tile);
             }
             else BeginArc(tile.transform.position, tile.element.jumpDistance);
             if (tile.element.kind == "Theme") _themeVisuals.Advance(Actor.position.z);
@@ -540,6 +547,14 @@ namespace DancingCats.Clone
                 BeginArc(new Vector3(tile.CenterX, tile.TopY, tile.segment.endZ), tile.element.jumpDistance);
         }
 
+        private void PlaySupportedMotion(OriginalTile tile)
+        {
+            float remaining = tile.segment != null ? tile.segment.endZ - Actor.position.z
+                : tile.element.mfendPos - Mathf.Max(0, Actor.position.z - tile.initialZ);
+            float duration = Mathf.Max(.5f, remaining / Mathf.Max(.01f, Map.forwardSpeed * _rate));
+            _motion.PlayHold(tile.element.id == 4, duration, true);
+        }
+
         private void GroundDuringInvincibility()
         {
             // Native invincibility resets Y at the current chart position. It neither seeks
@@ -557,8 +572,8 @@ namespace DancingCats.Clone
             NotifyChanged();
         }
 
-        public void Pause() { if (Phase != ClonePhase.Playing || _won) return; _music.Stop(); Phase = ClonePhase.Paused; _dragging = false; NotifyChanged(); }
-        public void Resume() { if (Phase != ClonePhase.Paused) return; Schedule(GameTime); Phase = ClonePhase.Playing; NotifyChanged(); }
+        public void Pause() { if (Phase != ClonePhase.Playing || _won) return; _music.Stop(); Phase = ClonePhase.Paused; _motion.SetPaused(true); _dragging = false; NotifyChanged(); }
+        public void Resume() { if (Phase != ClonePhase.Paused) return; Schedule(GameTime); Phase = ClonePhase.Playing; _motion.SetPaused(false); NotifyChanged(); }
         public void Retry() { PaySettlement(); Prepare(Selected, ClonePhase.Ready, true); }
         public void Home() { PaySettlement(); ChallengeRun = false; Prepare(Selected, ClonePhase.Menu, true); }
         public void NextSong()
@@ -585,7 +600,7 @@ namespace DancingCats.Clone
             _destinationX = Actor.position.x; _dragging = false;
             if (previous != null && (previous.element.id == 2 || previous.element.id == 3 || previous.element.id == 4))
             {
-                Support = previous; _jumping = false; _motion.PlayHold(previous.element.id == 4);
+                Support = previous; _jumping = false; PlaySupportedMotion(previous);
                 if (previous.element.id == 2 || previous.element.id == 3)
                 {
                     foreach (var exit in _tiles.Where(t => t.element.id == 8 && t.element.sourceIndex == previous.element.sourceIndex)) exit.consumed = false;

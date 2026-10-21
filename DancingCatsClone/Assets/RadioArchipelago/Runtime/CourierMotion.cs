@@ -1,113 +1,323 @@
+using System;
 using UnityEngine;
 
 namespace RadioArchipelago
 {
-    /// <summary>Local presentation only: the session remains authoritative over the actor root and collisions.</summary>
+    /// <summary>
+    /// Local poses and damped secondary motion. The session alone moves the gameplay root;
+    /// animation never changes a collider or the musical flight trajectory.
+    /// </summary>
     [DisallowMultipleComponent]
     public sealed class CourierMotion : MonoBehaviour
     {
+        // Preserve the first-generation prefab bindings until imported replacements are authored.
         [SerializeField] private Transform visualPivot;
         [SerializeField] private Transform antennaPivot;
         [SerializeField] private Transform scarfPivot;
         [SerializeField] private Transform leftArm;
         [SerializeField] private Transform rightArm;
-        private Quaternion antennaRest, scarfRest, leftRest, rightRest;
-        private Vector3 visualRest;
-        private float elapsed, phase, facing, facingTarget, secondary;
+        [SerializeField] private CourierRigBinding rig;
+        private Part visual, head, armLeft, armRight, footLeft, footRight;
+        private Part[] antennas = Array.Empty<Part>(), crests = Array.Empty<Part>(), scarves = Array.Empty<Part>(), eyes = Array.Empty<Part>();
         private Pose pose;
-        private bool holdLeft;
-        private bool captured;
+        private bool captured, paused, externallyTimedFlight, holdLeft, spinning;
+        private float elapsed, phase, facing, facingTarget, flightDuration = .45f, flightProgress;
+        private float landingTime = 10, landingStrength, holdDuration = 2.6f;
+        private float bodyPitch, bodyRoll, bodyStretch, armLeftLift, armRightLift, footLeftLift, footRightLift;
+        private float spinAngle, headTilt, bob;
+        private int blinkIndex = -1;
+        private float blinkRest;
         private enum Pose { Idle, Jump, Hold, Celebrate }
 
         public bool ManualSimulation { get; set; }
+        public bool IsPaused => paused;
 
-        public void Configure(Transform visual, Transform antenna, Transform scarf, Transform armLeft, Transform armRight)
+        public void Configure(Transform visualRoot, Transform antenna, Transform scarf, Transform armL, Transform armR)
         {
-            visualPivot = visual; antennaPivot = antenna; scarfPivot = scarf;
-            leftArm = armLeft; rightArm = armRight;
-            captured = false;
+            RestoreRestPose();
+            visualPivot = visualRoot; antennaPivot = antenna; scarfPivot = scarf;
+            leftArm = armL; rightArm = armR; rig = null; captured = false;
+            ResetMotion();
+        }
+
+        public void ConfigureRig(CourierRigBinding binding)
+        {
+            if (binding == null) throw new ArgumentNullException(nameof(binding));
+            if (binding.visualPivot == null || binding.visualPivot == transform)
+                throw new ArgumentException("The courier visual pivot must be a child of its presentation root.", nameof(binding));
+            RestoreRestPose(); rig = binding; visualPivot = binding.visualPivot; captured = false;
             ResetMotion();
         }
 
         private void Awake() => CaptureRestPose();
-
         private bool CaptureRestPose()
         {
             if (captured) return true;
-            if (visualPivot == null) return false;
-            visualRest = visualPivot.localPosition;
-            antennaRest = antennaPivot != null ? antennaPivot.localRotation : Quaternion.identity;
-            scarfRest = scarfPivot != null ? scarfPivot.localRotation : Quaternion.identity;
-            leftRest = leftArm != null ? leftArm.localRotation : Quaternion.identity;
-            rightRest = rightArm != null ? rightArm.localRotation : Quaternion.identity;
-            captured = true;
-            return true;
+            Transform pivot = rig != null ? rig.visualPivot : visualPivot;
+            if (pivot == null || pivot == transform) return false;
+            visual = new Part(pivot, pivot); head = Part.Create(rig?.headPivot, pivot);
+            armLeft = Part.Create(rig != null ? rig.leftArm : leftArm, pivot);
+            armRight = Part.Create(rig != null ? rig.rightArm : rightArm, pivot);
+            footLeft = Part.Create(rig?.leftFoot, pivot); footRight = Part.Create(rig?.rightFoot, pivot);
+            antennas = MakeParts(rig != null ? rig.antennaChain : Single(antennaPivot), pivot);
+            crests = MakeParts(rig?.crestChain, pivot); scarves = MakeParts(rig != null ? rig.scarfChain : Single(scarfPivot), pivot);
+            eyes = MakeParts(rig?.blinkEyes, pivot);
+            blinkIndex = rig?.blinkRenderer != null && rig.blinkRenderer.sharedMesh != null && !string.IsNullOrEmpty(rig.blinkShapeName)
+                ? rig.blinkRenderer.sharedMesh.GetBlendShapeIndex(rig.blinkShapeName) : -1;
+            blinkRest = blinkIndex >= 0 ? rig.blinkRenderer.GetBlendShapeWeight(blinkIndex) : 0;
+            captured = true; return true;
         }
 
         public void ResetMotion()
         {
             if (!CaptureRestPose()) return;
-            elapsed = phase = facing = facingTarget = secondary = 0;
-            pose = Pose.Idle;
-            visualPivot.localPosition = visualRest;
-            visualPivot.localScale = Vector3.one;
-            visualPivot.localRotation = Quaternion.identity;
-            if (antennaPivot != null) antennaPivot.localRotation = antennaRest;
-            if (scarfPivot != null) scarfPivot.localRotation = scarfRest;
-            if (leftArm != null) leftArm.localRotation = leftRest;
-            if (rightArm != null) rightArm.localRotation = rightRest;
+            elapsed = phase = facing = facingTarget = flightProgress = 0;
+            bodyPitch = bodyRoll = bodyStretch = armLeftLift = armRightLift = footLeftLift = footRightLift = 0;
+            spinAngle = headTilt = bob = 0;
+            paused = externallyTimedFlight = holdLeft = spinning = false;
+            landingTime = 10; landingStrength = 0; flightDuration = .45f; holdDuration = 2.6f; pose = Pose.Idle;
+            RestoreRestPose();
         }
-
-        public void PlayIdle() { pose = Pose.Idle; elapsed = 0; }
-        public void PlayJump() { pose = Pose.Jump; elapsed = 0; }
-        public void PlayHold(bool left = false) { pose = Pose.Hold; holdLeft = left; elapsed = 0; }
-        public void PlayEnd() { pose = Pose.Celebrate; elapsed = 0; }
-        public void SetFacing(float horizonDegrees) => facingTarget = Mathf.Clamp(horizonDegrees, -70, 70);
+        public void PlayIdle() { pose = Pose.Idle; elapsed = 0; externallyTimedFlight = false; }
+        public void PlayJump() => PlayJump(.45f);
+        public void PlayJump(float durationSeconds)
+        {
+            flightDuration = Finite(durationSeconds) ? Mathf.Max(.08f, durationSeconds) : .45f;
+            flightProgress = 0; elapsed = 0; pose = Pose.Jump; externallyTimedFlight = false;
+        }
+        /// <summary>Follows the actual session arc, including long gaps, rather than an unrelated clip clock.</summary>
+        public void SetFlightProgress(float normalizedProgress)
+        {
+            if (!Finite(normalizedProgress)) return;
+            flightProgress = Mathf.Max(0, normalizedProgress); externallyTimedFlight = true;
+        }
+        public void PlayLanding(float strength = 1)
+        {
+            landingTime = 0; landingStrength = Finite(strength) ? Mathf.Clamp(strength, .25f, 1.5f) : 1;
+        }
+        public void PlayHold(bool left = false) => PlayHold(left, 2.6f, true);
+        public void PlayHold(bool left, float durationSeconds, bool spin = true)
+        {
+            pose = Pose.Hold; holdLeft = left; elapsed = 0;
+            holdDuration = Finite(durationSeconds) ? Mathf.Max(.5f, durationSeconds) : 2.6f;
+            spinning = spin && holdDuration >= .9f;
+        }
+        public void PlayEnd() { pose = Pose.Celebrate; elapsed = 0; externallyTimedFlight = false; }
+        public void SetFacing(float horizonDegrees) { if (Finite(horizonDegrees)) facingTarget = Mathf.Clamp(horizonDegrees, -70, 70); }
+        public void SetPaused(bool value) => paused = value;
 
         public void SimulateSprings(float deltaTime)
         {
-            if (!CaptureRestPose() || deltaTime <= 0 || float.IsNaN(deltaTime) || float.IsInfinity(deltaTime)) return;
-            float dt = Mathf.Min(deltaTime, .1f);
-            phase += dt; elapsed += dt;
-            facing = Mathf.Lerp(facing, facingTarget, 1 - Mathf.Exp(-12 * dt));
-            float bob = Mathf.Sin(phase * 3.2f) * .018f;
-            float tilt = Mathf.Sin(phase * 2.1f) * 2;
-            float pitch = 0, stretch = 0, armLift = 0;
-            switch (pose)
+            if (paused || !CaptureRestPose() || deltaTime <= 0 || !Finite(deltaTime)) return;
+            // Bounded substeps keep the damped chains stable through an Editor/render hitch.
+            float remaining = Mathf.Min(deltaTime, .25f);
+            while (remaining > .000001f)
             {
-                case Pose.Jump:
-                    float attack = Mathf.Sin(Mathf.Clamp01(elapsed / .32f) * Mathf.PI);
-                    stretch = attack * .075f;
-                    pitch = -attack * 8;
-                    armLift = attack * 20;
-                    if (elapsed > .34f) { pose = Pose.Idle; elapsed = 0; }
-                    break;
-                case Pose.Hold:
-                    tilt += (holdLeft ? -1 : 1) * 9;
-                    pitch = 5;
-                    bob *= .35f;
-                    armLift = 14 + Mathf.Sin(phase * 5) * 3;
-                    break;
-                case Pose.Celebrate:
-                    bob += Mathf.Abs(Mathf.Sin(elapsed * 7)) * .065f;
-                    tilt += Mathf.Sin(elapsed * 5) * 7;
-                    armLift = 115 + Mathf.Sin(elapsed * 7) * 8;
-                    break;
+                float dt = Mathf.Min(remaining, 1f / 120); Step(dt); remaining -= dt;
             }
-            visualPivot.localPosition = visualRest + Vector3.up * bob;
-            visualPivot.localRotation = Quaternion.Euler(pitch, facing, tilt);
-            visualPivot.localScale = new Vector3(1 - stretch * .45f, 1 + stretch, 1 - stretch * .45f);
-            float target = Mathf.Sin(phase * 4) * 3 + pitch * .6f - tilt * .65f;
-            secondary = Mathf.Lerp(secondary, target, 1 - Mathf.Exp(-7 * dt));
-            if (antennaPivot != null) antennaPivot.localRotation = antennaRest * Quaternion.Euler(secondary * .6f, 0, secondary);
-            if (scarfPivot != null) scarfPivot.localRotation = scarfRest * Quaternion.Euler(secondary * 1.5f, Mathf.Sin(phase * 5) * 5, secondary * .5f);
-            if (leftArm != null) leftArm.localRotation = leftRest * Quaternion.Euler(0, 0, -armLift);
-            if (rightArm != null) rightArm.localRotation = rightRest * Quaternion.Euler(0, 0, armLift);
+            ApplyPose();
         }
 
-        private void LateUpdate()
+        private void Step(float dt)
         {
-            if (!ManualSimulation) SimulateSprings(Time.deltaTime);
+            elapsed += dt; phase += dt; landingTime += dt;
+            if (pose == Pose.Jump && !externallyTimedFlight) flightProgress = elapsed / flightDuration;
+            float smooth = 1 - Mathf.Exp(-19 * dt);
+            facing = Mathf.Lerp(facing, facingTarget, 1 - Mathf.Exp(-12 * dt));
+            float pitch = 0, roll = Mathf.Sin(phase * 2.1f) * 1.3f, stretch = 0;
+            float liftL = 2, liftR = 2, footL = 0, footR = 0, turn = 0, nod = 0;
+            float height = Mathf.Sin(phase * 3.2f) * .012f, wind = 0;
+            switch (pose)
+            {
+                case Pose.Idle:
+                    float beat = phase * 5.4f;
+                    float hopL = Mathf.Max(0, Mathf.Sin(beat)), hopR = Mathf.Max(0, -Mathf.Sin(beat));
+                    height += (hopL * hopL + hopR * hopR) * .045f; roll += Mathf.Sin(beat) * 4.5f;
+                    stretch = Mathf.Cos(beat * 2) * .018f; footL = hopL * .07f; footR = hopR * .07f;
+                    liftL += hopR * 8; liftR += hopL * 8;
+                    float greeting = (phase + .8f) % 6.8f;
+                    if (greeting > 4.3f && greeting < 6.1f)
+                    {
+                        float envelope = Mathf.Sin((greeting - 4.3f) / 1.8f * Mathf.PI);
+                        // Blend out the idle hop gesture so the greeting stays a small shoulder swing.
+                        liftR = Mathf.Lerp(liftR, 20 + Mathf.Sin(greeting * 18) * 8, envelope); nod = envelope * -7;
+                    }
+                    break;
+                case Pose.Jump:
+                    float p = Mathf.Clamp01(flightProgress), airborne = Mathf.Sin(p * Mathf.PI);
+                    float longFlight = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.6f, 1.2f, flightDuration));
+                    stretch = .09f * Mathf.Exp(-Mathf.Pow((p - .13f) / .17f, 2))
+                        - .025f * Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.72f, 1, p));
+                    pitch = -9 * Mathf.Sin(p * Mathf.PI * 1.15f);
+                    liftL = liftR = 8 + airborne * (10 + longFlight * 10);
+                    float flap = Mathf.Sin(elapsed * 11) * longFlight * airborne * 6;
+                    liftL += flap; liftR -= flap; footL = footR = airborne * .05f;
+                    roll += Mathf.Sin(elapsed * 6) * longFlight * airborne * 2.5f; nod = -airborne * 4;
+                    wind = 8 + longFlight * 9 + airborne * 12;
+                    break;
+                case Pose.Hold:
+                    float direction = holdLeft ? -1 : 1;
+                    roll += direction * 7 + Mathf.Sin(elapsed * 3) * 2.5f;
+                    pitch = 6; stretch = -.045f; height -= .018f;
+                    liftL = 20 + Mathf.Sin(elapsed * 4.1f) * 5; liftR = 20 - Mathf.Sin(elapsed * 4.1f) * 5;
+                    nod = -3; wind = 14;
+                    if (spinning)
+                    {
+                        float turns = Mathf.Max(1, Mathf.Floor(holdDuration / 2.6f));
+                        turn = direction * 360 * turns * Mathf.SmoothStep(0, 1, Mathf.Clamp01(elapsed / holdDuration));
+                    }
+                    break;
+                case Pose.Celebrate:
+                    height += Mathf.Abs(Mathf.Sin(elapsed * 7)) * .10f; roll += Mathf.Sin(elapsed * 5) * 7;
+                    stretch = Mathf.Cos(elapsed * 14) * .035f;
+                    liftL = 30 + Mathf.Sin(elapsed * 9) * 5; liftR = 30 - Mathf.Sin(elapsed * 9) * 5;
+                    footL = Mathf.Max(0, Mathf.Sin(elapsed * 7)) * .06f; footR = Mathf.Max(0, -Mathf.Sin(elapsed * 7)) * .06f;
+                    nod = Mathf.Sin(elapsed * 5) * 5;
+                    break;
+            }
+            bodyPitch = Mathf.Lerp(bodyPitch, pitch, smooth); bodyRoll = Mathf.Lerp(bodyRoll, roll, smooth);
+            bodyStretch = Mathf.Lerp(bodyStretch, stretch, smooth);
+            armLeftLift = Mathf.Lerp(armLeftLift, liftL, smooth); armRightLift = Mathf.Lerp(armRightLift, liftR, smooth);
+            footLeftLift = Mathf.Lerp(footLeftLift, footL, smooth); footRightLift = Mathf.Lerp(footRightLift, footR, smooth);
+            headTilt = Mathf.Lerp(headTilt, nod, smooth); bob = Mathf.Lerp(bob, height, smooth);
+            if (pose == Pose.Hold) spinAngle = turn;
+            else spinAngle = Mathf.Lerp(Mathf.DeltaAngle(0, spinAngle), 0, 1 - Mathf.Exp(-13 * dt));
+            float impact = ImpactCompression(), sway = Mathf.Sin(phase * 3.6f) * 2.2f - bodyRoll * .55f - facing * .12f;
+            StepChain(antennas, dt, bodyPitch * -.75f - impact * 85, sway, 10.5f, .48f);
+            StepChain(crests, dt, bodyPitch * -.7f - impact * 65, -sway * .8f, 12, .55f);
+            StepChain(scarves, dt, -wind + bodyPitch * .8f + impact * 90, sway * .7f + Mathf.Sin(phase * 5) * 3, 8, .58f);
+        }
+
+        private void ApplyPose()
+        {
+            float stretch = Mathf.Clamp(bodyStretch - ImpactCompression(), -.24f, .16f);
+            visual.node.localPosition = visual.position + visual.rotation * Vector3.up * bob;
+            visual.node.localRotation = visual.rotation * Quaternion.Euler(bodyPitch, facing + spinAngle, bodyRoll);
+            float width = 1 / Mathf.Sqrt(1 + stretch);
+            visual.node.localScale = Vector3.Scale(visual.scale, new Vector3(width, 1 + stretch, width));
+            head?.Rotate(headTilt, 0, -bodyRoll * .15f);
+            armLeft?.Rotate(-Mathf.Sin(phase * 3) * 3, 0, -armLeftLift);
+            armRight?.Rotate(Mathf.Sin(phase * 3) * 3, 0, armRightLift);
+            if (footLeft != null) { footLeft.Rotate(-footLeftLift * 130, 0, -bodyRoll * .4f); footLeft.Lift(footLeftLift); }
+            if (footRight != null) { footRight.Rotate(-footRightLift * 130, 0, -bodyRoll * .4f); footRight.Lift(footRightLift); }
+            ApplyChains(antennas); ApplyChains(crests); ApplyChains(scarves);
+            float blink = BlinkAmount();
+            foreach (var eye in eyes) eye.node.localScale = Vector3.Scale(eye.scale, new Vector3(1, Mathf.Lerp(1, .045f, blink), 1));
+            if (blinkIndex >= 0 && rig?.blinkRenderer != null)
+                rig.blinkRenderer.SetBlendShapeWeight(blinkIndex, Mathf.Lerp(blinkRest, 100, blink));
+        }
+        private float ImpactCompression()
+        {
+            if (landingTime >= .36f) return 0;
+            float t = landingTime;
+            return landingStrength * (.16f * Mathf.Exp(-Mathf.Pow((t - .035f) / .05f, 2))
+                - .055f * Mathf.Exp(-Mathf.Pow((t - .14f) / .055f, 2)));
+        }
+        private float BlinkAmount()
+        {
+            float cycle = phase % 4.7f, blink = Pulse(cycle, 1.5f, .16f);
+            if (((int)(phase / 4.7f) & 1) != 0) blink = Mathf.Max(blink, Pulse(cycle, 1.76f, .13f));
+            return blink;
+        }
+        private static float Pulse(float t, float start, float duration)
+        {
+            float p = (t - start) / duration;
+            return p > 0 && p < 1 ? Mathf.Sin(p * Mathf.PI) : 0;
+        }
+        private static void StepChain(Part[] parts, float dt, float pitch, float roll, float frequency, float damping)
+        {
+            for (int i = 0; i < parts.Length; i++)
+            {
+                var part = parts[i];
+                // A scarf array can contain several independent tails. Distribute one total bend
+                // over each actual branch, rather than repeating the full angle at every joint.
+                Vector2 target = new Vector2(Mathf.Clamp(pitch, -32, 32), Mathf.Clamp(roll, -28, 28));
+                if (part.chainLength > 1) target = Vector2.ClampMagnitude(target, 32) * part.bendShare;
+                float omega = frequency * (1 - Mathf.Min(part.chainDepth, 4) * .055f);
+                part.velocity += (omega * omega * (target - part.bend) - 2 * damping * omega * part.velocity) * dt;
+                part.bend += part.velocity * dt;
+                if (part.chainLength > 1) part.bend = Vector2.ClampMagnitude(part.bend, 40 * part.bendShare);
+                else { part.bend.x = Mathf.Clamp(part.bend.x, -32, 32); part.bend.y = Mathf.Clamp(part.bend.y, -28, 28); }
+            }
+        }
+        private static void ApplyChains(Part[] parts) { foreach (var part in parts) part.Rotate(part.bend.x, 0, part.bend.y); }
+        private void RestoreRestPose()
+        {
+            if (!captured) return;
+            visual?.Reset(); head?.Reset(); armLeft?.Reset(); armRight?.Reset(); footLeft?.Reset(); footRight?.Reset();
+            ResetParts(antennas); ResetParts(crests); ResetParts(scarves); ResetParts(eyes);
+            if (blinkIndex >= 0 && rig?.blinkRenderer != null) rig.blinkRenderer.SetBlendShapeWeight(blinkIndex, blinkRest);
+        }
+        private static void ResetParts(Part[] parts) { foreach (var part in parts) part.Reset(); }
+        private static Transform[] Single(Transform node) => node != null ? new[] { node } : Array.Empty<Transform>();
+        private static Part[] MakeParts(Transform[] nodes, Transform frame)
+        {
+            if (nodes == null || nodes.Length == 0) return Array.Empty<Part>();
+            int count = 0;
+            foreach (var node in nodes) if (node != null) count++;
+            var parts = new Part[count]; int at = 0;
+            foreach (var node in nodes) if (node != null) parts[at++] = new Part(node, frame);
+            var indices = new System.Collections.Generic.Dictionary<Transform, int>(count);
+            for (int i = 0; i < count; i++) indices.Add(parts[i].node, i);
+            var parents = new int[count]; var roots = new int[count]; var lengths = new int[count];
+            for (int i = 0; i < count; i++)
+            {
+                parents[i] = -1;
+                // This hierarchy walk happens once when binding the rig; simulation uses only caches.
+                for (var ancestor = parts[i].node.parent; ancestor != null && ancestor != frame; ancestor = ancestor.parent)
+                    if (indices.TryGetValue(ancestor, out int parent)) { parents[i] = parent; break; }
+            }
+            for (int i = 0; i < count; i++)
+            {
+                int root = i, depth = 0;
+                while (parents[root] >= 0) { root = parents[root]; depth++; }
+                roots[i] = root; parts[i].chainDepth = depth;
+                lengths[root] = Mathf.Max(lengths[root], depth + 1);
+            }
+            for (int i = 0; i < count; i++)
+            {
+                int length = lengths[roots[i]];
+                parts[i].chainLength = length;
+                // A slightly softer tip retains one fixed angle budget for the whole branch.
+                float sum = length + .12f * length * (length - 1) * .5f;
+                parts[i].bendShare = (1 + .12f * parts[i].chainDepth) / sum;
+            }
+            return parts;
+        }
+        private static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
+        private void LateUpdate() { if (!ManualSimulation) SimulateSprings(Time.deltaTime); }
+
+        private sealed class Part
+        {
+            public readonly Transform node;
+            public readonly Vector3 position, scale;
+            public readonly Quaternion rotation;
+            private readonly Vector3 rightAxis, upAxis, forwardAxis, parentUp;
+            public Vector2 bend, velocity;
+            public int chainDepth, chainLength = 1;
+            public float bendShare = 1;
+            public Part(Transform target, Transform frame)
+            {
+                node = target; position = target.localPosition; rotation = target.localRotation; scale = target.localScale;
+                // FBX bone axes vary: use the visual frame expressed in this bone's rest space.
+                rightAxis = target.InverseTransformDirection(frame.right).normalized;
+                upAxis = target.InverseTransformDirection(frame.up).normalized;
+                forwardAxis = target.InverseTransformDirection(frame.forward).normalized;
+                parentUp = target.parent != null ? target.parent.InverseTransformDirection(frame.up).normalized : frame.up;
+            }
+            public static Part Create(Transform target, Transform frame) => target != null ? new Part(target, frame) : null;
+            public void Rotate(float pitch, float yaw, float roll)
+            {
+                node.localRotation = rotation * Quaternion.AngleAxis(pitch, rightAxis)
+                    * Quaternion.AngleAxis(yaw, upAxis) * Quaternion.AngleAxis(roll, forwardAxis);
+            }
+            public void Lift(float amount) => node.localPosition = position + parentUp * amount;
+            public void Reset()
+            {
+                if (node == null) return;
+                node.localPosition = position; node.localRotation = rotation; node.localScale = scale;
+                bend = velocity = Vector2.zero;
+            }
         }
     }
 }

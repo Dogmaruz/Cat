@@ -1,0 +1,403 @@
+{
+  "character": "Tiko",
+  "coordinate_system": "Blender Z up, facing -Y, feet at root origin; FBX export forward -Z/up Y",
+  "height": 2.6000001237158834,
+  "source_foot_offset": [
+    -0.17228884994983673,
+    -0.13007691502571106,
+    0.0
+  ],
+  "triangles": 23962,
+  "meshes": [
+    {
+      "name": "Tiko_Character",
+      "role": "Character",
+      "vertices": 11947,
+      "triangles": 23962
+    }
+  ],
+  "bones": [
+    {
+      "name": "root",
+      "parent": null,
+      "head": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        0.25
+      ]
+    },
+    {
+      "name": "body",
+      "parent": "root",
+      "head": [
+        0.0,
+        0.0,
+        0.4300000071525574
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        1.100000023841858
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "body",
+      "head": [
+        0.0,
+        -0.11999999731779099,
+        1.090000033378601
+      ],
+      "tail": [
+        0.0,
+        -0.11999999731779099,
+        1.75
+      ]
+    },
+    {
+      "name": "crest.01",
+      "parent": "head",
+      "head": [
+        -0.22771115601062775,
+        0.23007690906524658,
+        1.8200000524520874
+      ],
+      "tail": [
+        -0.41771113872528076,
+        0.32007691264152527,
+        1.7799999713897705
+      ]
+    },
+    {
+      "name": "crest.02",
+      "parent": "crest.01",
+      "head": [
+        -0.41771113872528076,
+        0.32007691264152527,
+        1.7799999713897705
+      ],
+      "tail": [
+        -0.547711193561554,
+        0.41007691621780396,
+        1.909999966621399
+      ]
+    },
+    {
+      "name": "arm.R",
+      "parent": "body",
+      "head": [
+        -0.42000001668930054,
+        0.07000000774860382,
+        0.9900000095367432
+      ],
+      "tail": [
+        -0.6577111482620239,
+        0.020076915621757507,
+        0.5600000023841858
+      ]
+    },
+    {
+      "name": "arm.L",
+      "parent": "body",
+      "head": [
+        0.5299999713897705,
+        0.07000000774860382,
+        0.9800000190734863
+      ],
+      "tail": [
+        0.8222888112068176,
+        0.020076915621757507,
+        0.5600000023841858
+      ]
+    },
+    {
+      "name": "foot.L",
+      "parent": "body",
+      "head": [
+        0.27000001072883606,
+        0.0,
+        0.20000000298023224
+      ],
+      "tail": [
+        0.27000001072883606,
+        -0.12999999523162842,
+        0.04500000178813934
+      ]
+    },
+    {
+      "name": "foot.R",
+      "parent": "body",
+      "head": [
+        -0.27000001072883606,
+        0.0,
+        0.20000000298023224
+      ],
+      "tail": [
+        -0.27000001072883606,
+        -0.12999999523162842,
+        0.04500000178813934
+      ]
+    },
+    {
+      "name": "antenna.01",
+      "parent": "body",
+      "head": [
+        -0.6477111577987671,
+        0.610076904296875,
+        1.5199999809265137
+      ],
+      "tail": [
+        -0.7877111434936523,
+        0.6900769472122192,
+        1.899999976158142
+      ]
+    },
+    {
+      "name": "antenna.02",
+      "parent": "antenna.01",
+      "head": [
+        -0.7877111434936523,
+        0.6900769472122192,
+        1.899999976158142
+      ],
+      "tail": [
+        -0.5277111530303955,
+        0.5100768804550171,
+        2.299999952316284
+      ]
+    },
+    {
+      "name": "antenna.03",
+      "parent": "antenna.02",
+      "head": [
+        -0.5277111530303955,
+        0.5100768804550171,
+        2.299999952316284
+      ],
+      "tail": [
+        -0.07771115005016327,
+        0.19007691740989685,
+        2.5199999809265137
+      ]
+    },
+    {
+      "name": "antenna.04",
+      "parent": "antenna.03",
+      "head": [
+        -0.07771115005016327,
+        0.19007691740989685,
+        2.5199999809265137
+      ],
+      "tail": [
+        0.2922888398170471,
+        -0.11992308497428894,
+        2.450000047683716
+      ]
+    },
+    {
+      "name": "antenna.05",
+      "parent": "antenna.04",
+      "head": [
+        0.2922888398170471,
+        -0.11992308497428894,
+        2.450000047683716
+      ],
+      "tail": [
+        0.38928884267807007,
+        -0.1699230968952179,
+        2.313999891281128
+      ]
+    },
+    {
+      "name": "scarf.L.01",
+      "parent": "body",
+      "head": [
+        0.46228885650634766,
+        0.5100768804550171,
+        1.0700000524520874
+      ],
+      "tail": [
+        0.802288830280304,
+        0.6800769567489624,
+        1.0099999904632568
+      ]
+    },
+    {
+      "name": "scarf.L.02",
+      "parent": "scarf.L.01",
+      "head": [
+        0.802288830280304,
+        0.6800769567489624,
+        1.0099999904632568
+      ],
+      "tail": [
+        1.2222888469696045,
+        0.8900768756866455,
+        1.0199999809265137
+      ]
+    },
+    {
+      "name": "scarf.R.01",
+      "parent": "body",
+      "head": [
+        0.4522888660430908,
+        -0.31992307305336,
+        0.9900000095367432
+      ],
+      "tail": [
+        0.23228885233402252,
+        -0.5499230623245239,
+        0.8100000023841858
+      ]
+    },
+    {
+      "name": "scarf.R.02",
+      "parent": "scarf.R.01",
+      "head": [
+        0.23228885233402252,
+        -0.5499230623245239,
+        0.8100000023841858
+      ],
+      "tail": [
+        -0.047711148858070374,
+        -0.7899230718612671,
+        0.6399999856948853
+      ]
+    }
+  ],
+  "blink_meshes": [
+    "Tiko_Character"
+  ],
+  "blink_shape": "Blink",
+  "has_crest": true,
+  "has_scarf": true,
+  "exporter": "export_prepared_rigs.py",
+  "blender_version": "5.2.1 LTS",
+  "source_review_sha256": "11736e110f3e66d3f9f8376a2b920a43f8b37b0da8385c4104b3e9a85ff6bbcd",
+  "source_review_manifest_sha256": "f40db632c4b07a7508eb35219d9200d8d4e20d90f7c76c7b3cb7d8e6afc42b7c",
+  "model": "Model.fbx",
+  "authoring_project": "Tiko_Rigged.blend",
+  "fbx_coordinates": "forward -Z, up Y; Blender source faces -Y, Unity import faces +Z",
+  "bounds_blender": {
+    "min": [
+      -0.9548558592796326,
+      -0.8798061609268188,
+      1.9335264056508095e-08
+    ],
+    "max": [
+      1.299433708190918,
+      1.1399599313735962,
+      2.6000001430511475
+    ]
+  },
+  "mesh_uv_geometry_sha256": {
+    "Tiko_Character": "5beba002c65f42cf997bd0817c028bddd707a4b6bd3b6350ad745c03d0ffa6e9"
+  },
+  "skinned_mesh_count": 1,
+  "bone_count": 18,
+  "texture_packing": {
+    "size": [
+      4096,
+      4096
+    ],
+    "channels": {
+      "R": "metallic",
+      "G": "0",
+      "B": "0",
+      "A": "1 - roughness"
+    },
+    "color_space": "linear",
+    "maximum_roundtrip_error": 1.1920928955078125e-07
+  },
+  "texture_sources": {
+    "BaseColor.png": {
+      "source_filename": "Tiko_basecolor.PNG",
+      "sha256": "198db50617de36383b3a2fccced8ab46c6a9c58fe334bdd1fcd9c72c43e3b3ce"
+    },
+    "Normal.png": {
+      "source_filename": "Tiko_normal.PNG",
+      "sha256": "4b97c9a2cb5d74b8701d328dc158f4a28de4133cef2eead4c83c9b67c9149a5d"
+    }
+  },
+  "fbx_options": {
+    "use_selection": true,
+    "object_types": [
+      "ARMATURE",
+      "MESH"
+    ],
+    "global_scale": 1.0,
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_ALL",
+    "use_space_transform": true,
+    "bake_space_transform": false,
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "use_mesh_modifiers": false,
+    "use_tspace": true,
+    "mesh_smooth_type": "OFF",
+    "use_custom_props": true,
+    "add_leaf_bones": false,
+    "primary_bone_axis": "Y",
+    "secondary_bone_axis": "X",
+    "use_armature_deform_only": false,
+    "armature_nodetype": "NULL",
+    "bake_anim": false,
+    "path_mode": "STRIP",
+    "embed_textures": false
+  },
+  "files": {
+    "Model.fbx": {
+      "bytes": 1936812,
+      "sha256": "c4bd9b39f62f08ca4ba3a33a3c14c2970187f314e9cdd873a3519920e3203349"
+    },
+    "Tiko_Rigged.blend": {
+      "bytes": 1157185,
+      "sha256": "f8676a37b9c7484f0e909de6e0d72c29e9b57e19d63f169c51651241eba58b50"
+    },
+    "BaseColor.png": {
+      "bytes": 20655264,
+      "sha256": "198db50617de36383b3a2fccced8ab46c6a9c58fe334bdd1fcd9c72c43e3b3ce"
+    },
+    "Normal.png": {
+      "bytes": 5409022,
+      "sha256": "4b97c9a2cb5d74b8701d328dc158f4a28de4133cef2eead4c83c9b67c9149a5d"
+    },
+    "MetallicSmoothness.png": {
+      "bytes": 12495498,
+      "sha256": "41ca9ea79cc687926c29db129e8cc0bb35e852a2cfc6ef0dca0bc16f36add792"
+    }
+  },
+  "verification": {
+    "portable_blend_reopened": true,
+    "fbx_reimported": true,
+    "mesh_names_match": true,
+    "bone_names_match": true,
+    "normalized_skin_weights": true,
+    "maximum_weight_error": 0.0,
+    "maximum_vertex_error": 4.6193599700927734e-07,
+    "maximum_uv_error": 0.0,
+    "maximum_normal_error": 0.00020895898342132568,
+    "maximum_blink_error": 4.6193599700927734e-07,
+    "maximum_normal_angle_degrees": 0.012242345779452614,
+    "maximum_bone_rest_matrix_error": 7.152557373046875e-07,
+    "image_sizes": {
+      "BaseColor.png": [
+        4096,
+        4096
+      ],
+      "MetallicSmoothness.png": [
+        4096,
+        4096
+      ],
+      "Normal.png": [
+        4096,
+        4096
+      ]
+    }
+  }
+}

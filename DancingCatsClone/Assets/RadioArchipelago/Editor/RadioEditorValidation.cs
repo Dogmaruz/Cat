@@ -37,6 +37,16 @@ namespace RadioArchipelago.Editor
         private static float dragOrigin, songLength;
         private static double deadline, readyAt, pauseClock, pauseDsp, startDsp, lastClock, lastDsp;
         private static bool bot, capturedHold, capturedGlide;
+        private static LocalPose[] pausedCourierPose;
+        private static BlendPose[] pausedCourierBlends;
+
+        private struct LocalPose
+        {
+            public Transform node;
+            public Vector3 position, scale;
+            public Quaternion rotation;
+        }
+        private struct BlendPose { public SkinnedMeshRenderer renderer; public int index; public float weight; }
 
         [Serializable] private sealed class SavedScene { public string path; public bool loaded, active; }
         [Serializable] private sealed class Snapshot
@@ -71,7 +81,7 @@ namespace RadioArchipelago.Editor
                     Check(!string.IsNullOrWhiteSpace(entry.id) && !string.IsNullOrWhiteSpace(entry.displayName), "courier " + entry.id + " has an identifier and display name");
                     Check(entry.prefab != null && entry.icon != null, "courier " + entry.id + " has its prefab and portrait");
                     Check(entry.prefab.GetComponentInChildren<CourierMotion>(true) != null, "courier " + entry.id + " has independent motion");
-                    Check(entry.prefab.GetComponentsInChildren<MeshFilter>(true).Any(filter => filter.sharedMesh != null), "courier " + entry.id + " contains real 3D mesh geometry");
+                    Check(CourierMeshes(entry.prefab, true).Any(), "courier " + entry.id + " contains real 3D mesh geometry");
                     Check(entry.prefab.GetComponentsInChildren<Renderer>(true).All(renderer => renderer.sharedMaterials.All(material => material != null && material.shader != null && !material.shader.name.Contains("InternalError"))), "courier " + entry.id + " has valid rendering materials");
                     var renderers = entry.prefab.GetComponentsInChildren<Renderer>(true);
                     var bounds = new Bounds(renderers[0].bounds.center, Vector3.zero);
@@ -293,11 +303,23 @@ namespace RadioArchipelago.Editor
                         Release();
                         if (game.Phase != ClonePhase.Paused) return;
                         pauseClock = game.GameTime; pauseDsp = AudioSettings.dspTime; scoreAtPause = game.Score; samplesAtPause = game.Music.timeSamples;
+                        pausedCourierPose = SnapshotCourier();
+                        pausedCourierBlends = game.Actor.GetComponentsInChildren<SkinnedMeshRenderer>(true)
+                            .Where(renderer => renderer.sharedMesh != null)
+                            .SelectMany(renderer => Enumerable.Range(0, renderer.sharedMesh.blendShapeCount)
+                                .Select(index => new BlendPose { renderer = renderer, index = index, weight = renderer.GetBlendShapeWeight(index) })).ToArray();
                         Next(21); break;
                     case 21:
                         if (AudioSettings.dspTime - pauseDsp < .8) return;
                         Check(game.Phase == ClonePhase.Paused && Math.Abs(game.GameTime - pauseClock) < .0001 && game.Score == scoreAtPause &&
                             !game.Music.isPlaying && game.Music.timeSamples == samplesAtPause, "pause freezes the chart, score and audio position");
+                        Check(pausedCourierPose != null && pausedCourierPose.All(pose => pose.node != null &&
+                            (pose.node.localPosition - pose.position).sqrMagnitude < 1e-9f &&
+                            (pose.node.localScale - pose.scale).sqrMagnitude < 1e-9f &&
+                            Quaternion.Angle(pose.node.localRotation, pose.rotation) < .02f),
+                            "pause freezes actual courier bones, squash, feet, blinking and secondary animation transforms");
+                        Check(pausedCourierBlends.All(pose => pose.renderer != null && Mathf.Abs(pose.renderer.GetBlendShapeWeight(pose.index) - pose.weight) < .001f),
+                            "pause freezes any actual courier blink blend shapes");
                         Capture("11-pause.png", 540, 960); BeginClick(Button("ResumeButton")); Next(22); break;
                     case 22:
                         if (Time.frameCount <= pressedFrame + 3) return;
@@ -366,10 +388,19 @@ namespace RadioArchipelago.Editor
             Check(motion != null && motion.transform.IsChildOf(game.Actor), "the active actor uses courier motion " + definition.id);
             Check(game.Actor.Cast<Transform>().Any(child => child.gameObject.activeInHierarchy && child.name == definition.id), "selected courier " + definition.id + " is installed on the real gameplay actor");
             Check(PlayerPrefs.GetInt(CourierKey, -1) == index, "courier selection " + index + " is persisted independently");
-            var expectedMeshes = new HashSet<Mesh>(definition.prefab.GetComponentsInChildren<MeshFilter>(true).Select(filter => filter.sharedMesh));
-            var activeMeshes = game.Actor.GetComponentsInChildren<MeshFilter>(false);
-            Check(activeMeshes.Any(filter => filter.sharedMesh != null) && activeMeshes.All(filter => expectedMeshes.Contains(filter.sharedMesh)), "the installed courier uses the selected definition's actual 3D meshes");
+            var expectedMeshes = new HashSet<Mesh>(CourierMeshes(definition.prefab, true));
+            var activeMeshes = CourierMeshes(motion.gameObject, false).ToArray();
+            Check(activeMeshes.Length > 0 && activeMeshes.All(expectedMeshes.Contains), "the installed courier uses the selected definition's actual 3D meshes");
         }
+
+        private static IEnumerable<Mesh> CourierMeshes(GameObject root, bool includeInactive) =>
+            root.GetComponentsInChildren<MeshFilter>(includeInactive).Select(filter => filter.sharedMesh)
+                .Concat(root.GetComponentsInChildren<SkinnedMeshRenderer>(includeInactive).Select(renderer => renderer.sharedMesh))
+                .Where(mesh => mesh != null);
+
+        private static LocalPose[] SnapshotCourier() => game.Actor.GetComponentsInChildren<CourierMotion>(false)
+            .SelectMany(motion => motion.GetComponentsInChildren<Transform>(true)).Distinct()
+            .Select(node => new LocalPose { node = node, position = node.localPosition, rotation = node.localRotation, scale = node.localScale }).ToArray();
 
         private static void Bot()
         {

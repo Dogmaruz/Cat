@@ -96,6 +96,38 @@ namespace DancingCats.Clone.Editor
                         RequireEditMode();
                         Invoke("RadioArchipelagoJobs", "Playtest");
                         break;
+                    case "radio-motion-checks":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "MotionChecks");
+                        break;
+                    case "radio-import-couriers":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "ImportCouriers");
+                        break;
+                    case "radio-rig-checks":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "RigChecks");
+                        break;
+                    case "radio-rig-render":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "RigRender");
+                        break;
+                    case "radio-animation-preview":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "OpenAnimationPreview");
+                        break;
+                    case "radio-animation-reel":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "AnimationReel");
+                        break;
+                    case "radio-first-courier":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "FirstCourierProbe");
+                        break;
+                    case "radio-open-scene":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "OpenGameScene");
+                        break;
                     default: throw new ArgumentException("Unknown musical authoring job: " + action);
                 }
                 WriteResponse(action, true, "Completed authoring job");

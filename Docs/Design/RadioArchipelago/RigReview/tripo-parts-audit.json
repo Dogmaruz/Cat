@@ -1,0 +1,826 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-10-21T20:17:50.551664+00:00",
+  "scope": "Read-only source ZIP/FBX audit and isolated Blender inspection; no rigging/import/promotion",
+  "coordinate_system": "Normalized Blender Z up, front -Y, height2.6, grounded foot center",
+  "decision": "Keep accepted connected original rigs and original4K maps. New parts are semantic references, not closed articulated replacements.",
+  "characters": {
+    "Tiko": {
+      "source_archive": "Docs/Design/RadioArchipelago/ModelReferences/Tiko/Tiko2.zip",
+      "source_bytes": 34511525,
+      "source_sha256": "dfee34addb686935ca5330bc8539a6e3108c3972c40b3ecc5d8e8c53a322661c",
+      "original_archive_sha256": "58cddf894dd4e209ed8722baf4fd6a6e0d676f1fd506368216bbdf918b65ec6d",
+      "new_fbx_member": "tripo_convert_3aa3e32e-06f2-46f2-9a8f-9c78b2986b29.fbx",
+      "new_fbx_sha256": "d2499b631453e37dfb5d89afbccc9f269ec310819da1e2008c9c08f136f613b9",
+      "original_fbx_sha256": "d6027fab71f034b69fbcce17907bce9d5d5975fdcd5e4093ce80216a534dee0a",
+      "format": {
+        "fbx_version": 7200,
+        "mesh_objects": 26,
+        "materials": 26,
+        "control_vertices": 5113,
+        "triangles": 9298,
+        "skin_deformers": 0,
+        "animation_stacks": 0
+      },
+      "textures": {
+        "png_count": 130,
+        "channels": "RGBA",
+        "part_texture_dimensions": [
+          [
+            32,
+            32
+          ],
+          [
+            64,
+            64
+          ],
+          [
+            128,
+            128
+          ],
+          [
+            256,
+            256
+          ],
+          [
+            512,
+            512
+          ],
+          [
+            1024,
+            1024
+          ]
+        ],
+        "original_texture_dimensions": [
+          4096,
+          4096
+        ],
+        "direct_original_texture_swap_safe": false,
+        "original4K_reuse": "Use semantic labels on original mesh unchanged, or transfer original per-corner UV using unique triangle correspondence. Do not simply attach old maps to new UVs."
+      },
+      "same_original_surface": {
+        "triangle_correspondence": {
+          "original_faces": 9298,
+          "new_faces": 9298,
+          "assigned_original_faces": 9298,
+          "ambiguous_original_faces": 0,
+          "ambiguous_triangle_coordinate_groups": 0,
+          "unmatched_original_faces": 0,
+          "unmatched_new_faces": 0,
+          "triangle_key_multiplicity_mismatches": 0
+        },
+        "translation_added_to_new_raw_fbx_units": [
+          0.7999990680639257,
+          8.342993164234258e-05,
+          -2.83689575226731e-05
+        ],
+        "new_to_old_vertex_drift_raw_fbx_cm": {
+          "max": 0.0019716195046019557,
+          "mean": 0.00035842704430177885,
+          "median": 0.00030577560734789685,
+          "p95": 0.0007597921387254411
+        },
+        "old_to_new_vertex_drift_raw_fbx_cm": {
+          "max": 0.0019716195046019557,
+          "mean": 0.00035164020039169745
+        },
+        "normalized_original_surface_to_new_surface": {
+          "median": 5.656207576976158e-06,
+          "p95": 1.7521121299068897e-05,
+          "max": 3.809116969932802e-05
+        },
+        "new_caps_or_joint_geometry": false
+      },
+      "part_topology": {
+        "all_parts_open": true,
+        "sum_part_boundary_edges": 998,
+        "part_counts": [
+          {
+            "part": 0,
+            "vertices": 1277,
+            "triangles": 2445,
+            "boundary_edges": 129,
+            "components": [
+              1271,
+              3,
+              3
+            ]
+          },
+          {
+            "part": 1,
+            "vertices": 520,
+            "triangles": 996,
+            "boundary_edges": 46,
+            "components": [
+              520
+            ]
+          },
+          {
+            "part": 10,
+            "vertices": 89,
+            "triangles": 163,
+            "boundary_edges": 13,
+            "components": [
+              89
+            ]
+          },
+          {
+            "part": 11,
+            "vertices": 74,
+            "triangles": 130,
+            "boundary_edges": 18,
+            "components": [
+              74
+            ]
+          },
+          {
+            "part": 12,
+            "vertices": 400,
+            "triangles": 690,
+            "boundary_edges": 126,
+            "components": [
+              400
+            ]
+          },
+          {
+            "part": 13,
+            "vertices": 328,
+            "triangles": 603,
+            "boundary_edges": 75,
+            "components": [
+              328
+            ]
+          },
+          {
+            "part": 14,
+            "vertices": 171,
+            "triangles": 312,
+            "boundary_edges": 30,
+            "components": [
+              171
+            ]
+          },
+          {
+            "part": 15,
+            "vertices": 75,
+            "triangles": 133,
+            "boundary_edges": 15,
+            "components": [
+              75
+            ]
+          },
+          {
+            "part": 16,
+            "vertices": 61,
+            "triangles": 87,
+            "boundary_edges": 33,
+            "components": [
+              61
+            ]
+          },
+          {
+            "part": 17,
+            "vertices": 14,
+            "triangles": 20,
+            "boundary_edges": 6,
+            "components": [
+              14
+            ]
+          },
+          {
+            "part": 18,
+            "vertices": 15,
+            "triangles": 19,
+            "boundary_edges": 9,
+            "components": [
+              15
+            ]
+          },
+          {
+            "part": 19,
+            "vertices": 14,
+            "triangles": 19,
+            "boundary_edges": 7,
+            "components": [
+              14
+            ]
+          },
+          {
+            "part": 2,
+            "vertices": 353,
+            "triangles": 645,
+            "boundary_edges": 87,
+            "components": [
+              353
+            ]
+          },
+          {
+            "part": 20,
+            "vertices": 13,
+            "triangles": 15,
+            "boundary_edges": 9,
+            "components": [
+              13
+            ]
+          },
+          {
+            "part": 21,
+            "vertices": 11,
+            "triangles": 12,
+            "boundary_edges": 8,
+            "components": [
+              11
+            ]
+          },
+          {
+            "part": 22,
+            "vertices": 14,
+            "triangles": 16,
+            "boundary_edges": 12,
+            "components": [
+              14
+            ]
+          },
+          {
+            "part": 23,
+            "vertices": 11,
+            "triangles": 13,
+            "boundary_edges": 7,
+            "components": [
+              11
+            ]
+          },
+          {
+            "part": 24,
+            "vertices": 8,
+            "triangles": 8,
+            "boundary_edges": 6,
+            "components": [
+              8
+            ]
+          },
+          {
+            "part": 25,
+            "vertices": 8,
+            "triangles": 7,
+            "boundary_edges": 7,
+            "components": [
+              8
+            ]
+          },
+          {
+            "part": 3,
+            "vertices": 520,
+            "triangles": 904,
+            "boundary_edges": 136,
+            "components": [
+              520
+            ]
+          },
+          {
+            "part": 4,
+            "vertices": 352,
+            "triangles": 701,
+            "boundary_edges": 9,
+            "components": [
+              352
+            ]
+          },
+          {
+            "part": 5,
+            "vertices": 222,
+            "triangles": 408,
+            "boundary_edges": 36,
+            "components": [
+              222
+            ]
+          },
+          {
+            "part": 6,
+            "vertices": 200,
+            "triangles": 358,
+            "boundary_edges": 44,
+            "components": [
+              200
+            ]
+          },
+          {
+            "part": 7,
+            "vertices": 159,
+            "triangles": 258,
+            "boundary_edges": 62,
+            "components": [
+              153,
+              3,
+              3
+            ]
+          },
+          {
+            "part": 8,
+            "vertices": 121,
+            "triangles": 193,
+            "boundary_edges": 47,
+            "components": [
+              121
+            ]
+          },
+          {
+            "part": 9,
+            "vertices": 83,
+            "triangles": 143,
+            "boundary_edges": 21,
+            "components": [
+              83
+            ]
+          }
+        ]
+      },
+      "arms": {
+        "R": {
+          "part": 7,
+          "mesh_name": "tripo_part_7",
+          "boundary_edges": 62,
+          "boundary_components": [
+            {
+              "vertices": 38,
+              "degree_histogram": {
+                "2": 32,
+                "4": 6
+              },
+              "min": [
+                -0.5454840064048767,
+                -0.09059979021549225,
+                0.598203718662262
+              ],
+              "max": [
+                -0.3770377039909363,
+                0.2335786521434784,
+                1.0048919916152954
+              ],
+              "mean": [
+                -0.4566638767719269,
+                0.02071101777255535,
+                0.8077421188354492
+              ]
+            },
+            {
+              "vertices": 12,
+              "degree_histogram": {
+                "2": 12
+              },
+              "min": [
+                -0.6296261548995972,
+                0.04825790971517563,
+                0.48725926876068115
+              ],
+              "max": [
+                -0.5662962198257446,
+                0.22752530872821808,
+                0.5696982741355896
+              ],
+              "mean": [
+                -0.5970305800437927,
+                0.13869860768318176,
+                0.5278782248497009
+              ]
+            },
+            {
+              "vertices": 3,
+              "degree_histogram": {
+                "2": 3
+              },
+              "min": [
+                -0.4768168330192566,
+                -0.07851329445838928,
+                0.7514204382896423
+              ],
+              "max": [
+                -0.4685567617416382,
+                -0.06516151130199432,
+                0.7750669717788696
+              ],
+              "mean": [
+                -0.4724573493003845,
+                -0.06993941217660904,
+                0.7650792598724365
+              ]
+            },
+            {
+              "vertices": 3,
+              "degree_histogram": {
+                "2": 3
+              },
+              "min": [
+                -0.4719984531402588,
+                -0.06614342331886292,
+                0.7687504291534424
+              ],
+              "max": [
+                -0.4396362900733948,
+                -0.06516151130199432,
+                0.7834080457687378
+              ],
+              "mean": [
+                -0.4600638747215271,
+                -0.06579587608575821,
+                0.7757418155670166
+              ]
+            }
+          ],
+          "current_shoulder_bone_head": [
+            -0.42000001668930054,
+            0.07000000774860382,
+            0.9900000095367432
+          ],
+          "nearest_boundary_vertex_to_current_shoulder": [
+            -0.4322670102119446,
+            0.06375067681074142,
+            1.0048919916152954
+          ],
+          "current_shoulder_distance_to_boundary_vertex": 0.020280640873004217,
+          "current_shoulder_z_minus_highest_boundary_z": -0.014891982078552246
+        },
+        "L": {
+          "part": 9,
+          "mesh_name": "tripo_part_9",
+          "boundary_edges": 21,
+          "boundary_components": [
+            {
+              "vertices": 21,
+              "degree_histogram": {
+                "2": 21
+              },
+              "min": [
+                0.451116144657135,
+                -0.055923014879226685,
+                0.49608445167541504
+              ],
+              "max": [
+                0.6937311887741089,
+                0.22140774130821228,
+                0.9660597443580627
+              ],
+              "mean": [
+                0.5681900978088379,
+                0.10599671304225922,
+                0.772019624710083
+              ]
+            }
+          ],
+          "current_shoulder_bone_head": [
+            0.5299999713897705,
+            0.07000000774860382,
+            0.9800000190734863
+          ],
+          "nearest_boundary_vertex_to_current_shoulder": [
+            0.5529805421829224,
+            0.06590332090854645,
+            0.9577591419219971
+          ],
+          "current_shoulder_distance_to_boundary_vertex": 0.032241992852945614,
+          "current_shoulder_z_minus_highest_boundary_z": 0.013940274715423584
+        }
+      },
+      "shoulder_observation": "Open boundaries extend down the inner hand/armpit, not a small closed shoulder socket. Removing arms exposes openings in body. Upper semantic attachment agrees with the accepted upper shoulder bones; boundary centroid is not a shoulder pivot.",
+      "reference_parts": {
+        "head": 1,
+        "body": 12,
+        "harness": [
+          2,
+          13
+        ],
+        "scarf_collar_front": 3,
+        "scarf_free_tails": [
+          5,
+          14
+        ],
+        "antenna": 4,
+        "eye_patches": [
+          17,
+          19
+        ]
+      },
+      "semantic_label_map": {
+        "path": "DancingCatsClone/Library/RadioRigging/Review/Tiko2/original-face-part-labels.json",
+        "sha256": "fcff641a96a8609e21e8253e455a09100d454f317776e83cf0ebfb307a0629f9",
+        "indexing": "Zero-based polygon face index in the original binary FBX Geometry PolygonVertexIndex sequence. Every original polygon is a triangle. This is not an importer-specific Blender or Unity face index.",
+        "summary": {
+          "original_faces": 9298,
+          "new_faces": 9298,
+          "assigned_original_faces": 9298,
+          "ambiguous_original_faces": 0,
+          "ambiguous_triangle_coordinate_groups": 0,
+          "unmatched_original_faces": 0,
+          "unmatched_new_faces": 0,
+          "triangle_key_multiplicity_mismatches": 0
+        }
+      },
+      "review_images": [
+        "DancingCatsClone/Library/RadioRigging/Review/Tiko2/source-front.png",
+        "DancingCatsClone/Library/RadioRigging/Review/Tiko2/source-three-quarter.png",
+        "DancingCatsClone/Library/RadioRigging/Review/Tiko2/arm-boundaries-front.png",
+        "DancingCatsClone/Library/RadioRigging/Review/Tiko2/arm-boundaries-three-quarter.png",
+        "DancingCatsClone/Library/RadioRigging/Review/Tiko2/body-without-arms-front.png",
+        "DancingCatsClone/Library/RadioRigging/Review/Tiko2/body-without-arms-three-quarter.png"
+      ]
+    },
+    "Nori": {
+      "source_archive": "Docs/Design/RadioArchipelago/ModelReferences/Nori/Nori2.zip",
+      "source_bytes": 30904910,
+      "source_sha256": "dbd06e454ff9e66dcd2ff6d4fa11eed220b5fbc729945edbb445b0cb86fb4517",
+      "original_archive_sha256": "7daf1330989f6bd7826f99533a496f53fac6e6010f1353bf2af141de59802f68",
+      "new_fbx_member": "tripo_convert_ca479c3c-9753-41b4-baa1-0fbce975c3a8.fbx",
+      "new_fbx_sha256": "5e06594feec9ddbae1f279792ca00db77a60d8c382955f2d8606532f196ad378",
+      "original_fbx_sha256": "d67ddcc37ff2f6f86d7e893abad18f8a04244498b4a3dfff70afd8750457d40f",
+      "format": {
+        "fbx_version": 7200,
+        "mesh_objects": 10,
+        "materials": 10,
+        "control_vertices": 4984,
+        "triangles": 9514,
+        "skin_deformers": 0,
+        "animation_stacks": 0
+      },
+      "textures": {
+        "png_count": 50,
+        "channels": "RGBA",
+        "part_texture_dimensions": [
+          [
+            128,
+            128
+          ],
+          [
+            256,
+            256
+          ],
+          [
+            512,
+            512
+          ],
+          [
+            1024,
+            1024
+          ]
+        ],
+        "original_texture_dimensions": [
+          4096,
+          4096
+        ],
+        "direct_original_texture_swap_safe": false,
+        "original4K_reuse": "Use semantic labels on original mesh unchanged, or transfer original per-corner UV using unique triangle correspondence. Do not simply attach old maps to new UVs.",
+        "measured_uv_comparison": {
+          "corner_uv_components_compared": 57084,
+          "max_abs_component_difference": 0.998779296875,
+          "mean_abs_component_difference": 0.34884237466250395,
+          "triangles_with_same_uv_at_1e6": 0,
+          "unmatched_geometry_triangles": 0,
+          "method": "Map new triangle vertices to nearest translated old coordinates, find old triangle by rounded1e-5 coordinate multiset, compare UV by corresponding coordinate. Existing original UVs can be transferred per triangle corner if all triangle multisets match; direct texture swap requires UVs already match."
+        }
+      },
+      "same_original_surface": {
+        "triangle_correspondence": {
+          "original_faces": 9514,
+          "new_faces": 9514,
+          "assigned_original_faces": 9514,
+          "ambiguous_original_faces": 0,
+          "ambiguous_triangle_coordinate_groups": 0,
+          "unmatched_original_faces": 0,
+          "unmatched_new_faces": 0,
+          "triangle_key_multiplicity_mismatches": 0
+        },
+        "translation_added_to_new_raw_fbx_units": [
+          5.99764404185521e-06,
+          -1.1938213347661986e-05,
+          8.642032318206816e-05
+        ],
+        "new_to_old_vertex_drift_raw_fbx_cm": {
+          "max": 0.0013599716653098224,
+          "mean": 0.00045956145120203655,
+          "median": 0.0005237423706104042,
+          "p95": 0.0008382451747560084
+        },
+        "old_to_new_vertex_drift_raw_fbx_cm": {
+          "max": 0.0013593467934377252,
+          "mean": 0.0004495318596572684
+        },
+        "normalized_original_surface_to_new_surface": {
+          "median": 7.576405550935306e-06,
+          "p95": 1.8851211279979907e-05,
+          "max": 3.257588832639158e-05
+        },
+        "new_caps_or_joint_geometry": false
+      },
+      "part_topology": {
+        "all_parts_open": true,
+        "sum_part_boundary_edges": 466,
+        "part_counts": [
+          {
+            "part": 0,
+            "vertices": 1520,
+            "triangles": 2976,
+            "boundary_edges": 86,
+            "components": [
+              1520
+            ]
+          },
+          {
+            "part": 1,
+            "vertices": 1389,
+            "triangles": 2658,
+            "boundary_edges": 118,
+            "components": [
+              1389
+            ]
+          },
+          {
+            "part": 2,
+            "vertices": 378,
+            "triangles": 747,
+            "boundary_edges": 13,
+            "components": [
+              378
+            ]
+          },
+          {
+            "part": 3,
+            "vertices": 452,
+            "triangles": 850,
+            "boundary_edges": 54,
+            "components": [
+              452
+            ]
+          },
+          {
+            "part": 4,
+            "vertices": 496,
+            "triangles": 878,
+            "boundary_edges": 112,
+            "components": [
+              496
+            ]
+          },
+          {
+            "part": 5,
+            "vertices": 356,
+            "triangles": 688,
+            "boundary_edges": 22,
+            "components": [
+              356
+            ]
+          },
+          {
+            "part": 6,
+            "vertices": 134,
+            "triangles": 247,
+            "boundary_edges": 19,
+            "components": [
+              134
+            ]
+          },
+          {
+            "part": 7,
+            "vertices": 128,
+            "triangles": 227,
+            "boundary_edges": 27,
+            "components": [
+              128
+            ]
+          },
+          {
+            "part": 8,
+            "vertices": 114,
+            "triangles": 220,
+            "boundary_edges": 6,
+            "components": [
+              114
+            ]
+          },
+          {
+            "part": 9,
+            "vertices": 17,
+            "triangles": 23,
+            "boundary_edges": 9,
+            "components": [
+              17
+            ]
+          }
+        ]
+      },
+      "arms": {
+        "R": {
+          "part": 7,
+          "mesh_name": "tripo_part_7",
+          "boundary_edges": 27,
+          "boundary_components": [
+            {
+              "vertices": 27,
+              "degree_histogram": {
+                "2": 27
+              },
+              "min": [
+                -0.7191146612167358,
+                0.01248052716255188,
+                0.4520357549190521
+              ],
+              "max": [
+                -0.6340690851211548,
+                0.36099380254745483,
+                0.8511648774147034
+              ],
+              "mean": [
+                -0.6763288974761963,
+                0.1966969221830368,
+                0.6556791663169861
+              ]
+            }
+          ],
+          "current_shoulder_bone_head": [
+            -0.6599999666213989,
+            0.2800000011920929,
+            0.8799999952316284
+          ],
+          "nearest_boundary_vertex_to_current_shoulder": [
+            -0.6721677780151367,
+            0.26043620705604553,
+            0.8383943438529968
+          ],
+          "current_shoulder_distance_to_boundary_vertex": 0.047558677918537864,
+          "current_shoulder_z_minus_highest_boundary_z": 0.02883511781692505
+        },
+        "L": {
+          "part": 6,
+          "mesh_name": "tripo_part_6",
+          "boundary_edges": 19,
+          "boundary_components": [
+            {
+              "vertices": 19,
+              "degree_histogram": {
+                "2": 19
+              },
+              "min": [
+                0.6311161518096924,
+                0.016653388738632202,
+                0.5181191563606262
+              ],
+              "max": [
+                0.7332801818847656,
+                0.3394230008125305,
+                0.8649803996086121
+              ],
+              "mean": [
+                0.6809093952178955,
+                0.1802770346403122,
+                0.7162056565284729
+              ]
+            }
+          ],
+          "current_shoulder_bone_head": [
+            0.6899999380111694,
+            0.28999999165534973,
+            0.8899999856948853
+          ],
+          "nearest_boundary_vertex_to_current_shoulder": [
+            0.6820359230041504,
+            0.28565511107444763,
+            0.8433719277381897
+          ],
+          "current_shoulder_distance_to_boundary_vertex": 0.04750241394659635,
+          "current_shoulder_z_minus_highest_boundary_z": 0.025019586086273193
+        }
+      },
+      "shoulder_observation": "Open boundaries extend down the inner hand/armpit, not a small closed shoulder socket. Removing arms exposes openings in body. Upper semantic attachment agrees with the accepted upper shoulder bones; boundary centroid is not a shoulder pivot.",
+      "reference_parts": {
+        "radio": 0,
+        "body_and_feet": 1,
+        "head": 3,
+        "scarf_collar": 4,
+        "scarf_tails": 5,
+        "antenna": 2,
+        "antenna_beacon": 8
+      },
+      "semantic_label_map": {
+        "path": "DancingCatsClone/Library/RadioRigging/Review/Nori2/original-face-part-labels.json",
+        "sha256": "4533eeb0adae6d7f2eeb958e55d3ea7456321d8d7cf06de9540525f130402bd3",
+        "indexing": "Zero-based polygon face index in the original binary FBX Geometry PolygonVertexIndex sequence. Every original polygon is a triangle. This is not an importer-specific Blender or Unity face index.",
+        "summary": {
+          "original_faces": 9514,
+          "new_faces": 9514,
+          "assigned_original_faces": 9514,
+          "ambiguous_original_faces": 0,
+          "ambiguous_triangle_coordinate_groups": 0,
+          "unmatched_original_faces": 0,
+          "unmatched_new_faces": 0,
+          "triangle_key_multiplicity_mismatches": 0
+        }
+      },
+      "review_images": [
+        "DancingCatsClone/Library/RadioRigging/Review/Nori2/source-front.png",
+        "DancingCatsClone/Library/RadioRigging/Review/Nori2/source-three-quarter.png",
+        "DancingCatsClone/Library/RadioRigging/Review/Nori2/arm-boundaries-front.png",
+        "DancingCatsClone/Library/RadioRigging/Review/Nori2/arm-boundaries-three-quarter.png",
+        "DancingCatsClone/Library/RadioRigging/Review/Nori2/body-without-arms-front.png",
+        "DancingCatsClone/Library/RadioRigging/Review/Nori2/body-without-arms-three-quarter.png"
+      ]
+    }
+  }
+}
