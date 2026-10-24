@@ -1,0 +1,636 @@
+{
+  "character": "Tiko",
+  "coordinate_system": "Blender Z up, facing -Y, feet at root origin; FBX export forward -Z/up Y",
+  "height": 2.6000001237158834,
+  "source_foot_offset": [
+    -0.17228884994983673,
+    -0.13007691502571106,
+    0.0
+  ],
+  "triangles": 26856,
+  "meshes": [
+    {
+      "name": "Tiko_Character",
+      "role": "Character",
+      "vertices": 10942,
+      "triangles": 21948
+    },
+    {
+      "name": "Tiko_Arm.R_Cut",
+      "role": "Arm.R",
+      "vertices": 1640,
+      "triangles": 3280
+    },
+    {
+      "name": "Tiko_Arm.L_Cut",
+      "role": "Arm.L",
+      "vertices": 816,
+      "triangles": 1628
+    }
+  ],
+  "bones": [
+    {
+      "name": "root",
+      "parent": null,
+      "head": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        0.25
+      ]
+    },
+    {
+      "name": "body",
+      "parent": "root",
+      "head": [
+        0.0,
+        0.0,
+        0.4300000071525574
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        1.100000023841858
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "body",
+      "head": [
+        0.0,
+        -0.11999999731779099,
+        1.090000033378601
+      ],
+      "tail": [
+        0.0,
+        -0.11999999731779099,
+        1.75
+      ]
+    },
+    {
+      "name": "crest.01",
+      "parent": "head",
+      "head": [
+        -0.22771115601062775,
+        0.23007690906524658,
+        1.8200000524520874
+      ],
+      "tail": [
+        -0.41771113872528076,
+        0.32007691264152527,
+        1.7799999713897705
+      ]
+    },
+    {
+      "name": "crest.02",
+      "parent": "crest.01",
+      "head": [
+        -0.41771113872528076,
+        0.32007691264152527,
+        1.7799999713897705
+      ],
+      "tail": [
+        -0.547711193561554,
+        0.41007691621780396,
+        1.909999966621399
+      ]
+    },
+    {
+      "name": "arm.R",
+      "parent": "body",
+      "head": [
+        -0.36500000953674316,
+        0.07000000774860382,
+        0.9900000095367432
+      ],
+      "tail": [
+        -0.6025809645652771,
+        0.03158683329820633,
+        0.6959256529808044
+      ]
+    },
+    {
+      "name": "arm.L",
+      "parent": "body",
+      "head": [
+        0.47499996423721313,
+        0.07000000774860382,
+        0.9800000190734863
+      ],
+      "tail": [
+        0.7416597604751587,
+        0.03310089930891991,
+        0.7118004560470581
+      ]
+    },
+    {
+      "name": "foot.L",
+      "parent": "body",
+      "head": [
+        0.27000001072883606,
+        0.0,
+        0.20000000298023224
+      ],
+      "tail": [
+        0.27000001072883606,
+        -0.12999999523162842,
+        0.04500000178813934
+      ]
+    },
+    {
+      "name": "foot.R",
+      "parent": "body",
+      "head": [
+        -0.27000001072883606,
+        0.0,
+        0.20000000298023224
+      ],
+      "tail": [
+        -0.27000001072883606,
+        -0.12999999523162842,
+        0.04500000178813934
+      ]
+    },
+    {
+      "name": "scarf.L.01",
+      "parent": "body",
+      "head": [
+        0.46228885650634766,
+        0.5100768804550171,
+        1.0700000524520874
+      ],
+      "tail": [
+        0.6322888135910034,
+        0.5950769186019897,
+        1.0399999618530273
+      ]
+    },
+    {
+      "name": "scarf.L.02",
+      "parent": "scarf.L.01",
+      "head": [
+        0.6322888135910034,
+        0.5950769186019897,
+        1.0399999618530273
+      ],
+      "tail": [
+        0.802288830280304,
+        0.6800769567489624,
+        1.0099999904632568
+      ]
+    },
+    {
+      "name": "scarf.L.03",
+      "parent": "scarf.L.02",
+      "head": [
+        0.802288830280304,
+        0.6800769567489624,
+        1.0099999904632568
+      ],
+      "tail": [
+        1.0122888088226318,
+        0.785076916217804,
+        1.0149999856948853
+      ]
+    },
+    {
+      "name": "scarf.L.04",
+      "parent": "scarf.L.03",
+      "head": [
+        1.0122888088226318,
+        0.785076916217804,
+        1.0149999856948853
+      ],
+      "tail": [
+        1.2222888469696045,
+        0.8900768756866455,
+        1.0199999809265137
+      ]
+    },
+    {
+      "name": "scarf.R.01",
+      "parent": "body",
+      "head": [
+        0.4522888660430908,
+        -0.31992307305336,
+        0.9900000095367432
+      ],
+      "tail": [
+        0.3422888517379761,
+        -0.43492305278778076,
+        0.8999999761581421
+      ]
+    },
+    {
+      "name": "scarf.R.02",
+      "parent": "scarf.R.01",
+      "head": [
+        0.3422888517379761,
+        -0.43492305278778076,
+        0.8999999761581421
+      ],
+      "tail": [
+        0.23228885233402252,
+        -0.5499230623245239,
+        0.8100000023841858
+      ]
+    },
+    {
+      "name": "scarf.R.03",
+      "parent": "scarf.R.02",
+      "head": [
+        0.23228885233402252,
+        -0.5499230623245239,
+        0.8100000023841858
+      ],
+      "tail": [
+        0.09228885173797607,
+        -0.6699230670928955,
+        0.7250000238418579
+      ]
+    },
+    {
+      "name": "scarf.R.04",
+      "parent": "scarf.R.03",
+      "head": [
+        0.09228885173797607,
+        -0.6699230670928955,
+        0.7250000238418579
+      ],
+      "tail": [
+        -0.047711148858070374,
+        -0.7899230718612671,
+        0.6399999856948853
+      ]
+    },
+    {
+      "name": "antenna.yaw",
+      "parent": "body",
+      "head": [
+        -0.7131679058074951,
+        0.6568266749382019,
+        1.6499981880187988
+      ],
+      "tail": [
+        -0.7131679058074951,
+        0.6568266749382019,
+        1.829998254776001
+      ]
+    },
+    {
+      "name": "antenna.01",
+      "parent": "antenna.yaw",
+      "head": [
+        -0.7131679058074951,
+        0.6568266749382019,
+        1.6499981880187988
+      ],
+      "tail": [
+        -0.7877111434936523,
+        0.6900769472122192,
+        1.899999976158142
+      ]
+    },
+    {
+      "name": "antenna.02",
+      "parent": "antenna.01",
+      "head": [
+        -0.7877111434936523,
+        0.6900769472122192,
+        1.899999976158142
+      ],
+      "tail": [
+        -0.5277111530303955,
+        0.5100768804550171,
+        2.299999952316284
+      ]
+    },
+    {
+      "name": "antenna.03",
+      "parent": "antenna.02",
+      "head": [
+        -0.5277111530303955,
+        0.5100768804550171,
+        2.299999952316284
+      ],
+      "tail": [
+        -0.07771115005016327,
+        0.19007691740989685,
+        2.5199999809265137
+      ]
+    },
+    {
+      "name": "antenna.04",
+      "parent": "antenna.03",
+      "head": [
+        -0.07771115005016327,
+        0.19007691740989685,
+        2.5199999809265137
+      ],
+      "tail": [
+        0.2922888398170471,
+        -0.11992308497428894,
+        2.450000047683716
+      ]
+    },
+    {
+      "name": "antenna.05",
+      "parent": "antenna.04",
+      "head": [
+        0.2922888398170471,
+        -0.11992308497428894,
+        2.450000047683716
+      ],
+      "tail": [
+        0.38928884267807007,
+        -0.1699230968952179,
+        2.313999891281128
+      ]
+    }
+  ],
+  "blink_meshes": [
+    "Tiko_Character"
+  ],
+  "blink_shape": "Blink",
+  "has_crest": true,
+  "has_scarf": true,
+  "exporter": "export_prepared_rigs.py",
+  "blender_version": "5.2.1 LTS",
+  "source_review_sha256": "01d9c89cab19b2f42ade3ff782345af40451265dc78681912e3fa3bd9651461d",
+  "source_review_manifest_sha256": "aca556c0393561c28a43028a302172b028984632deec05ee2ee0978e9badd406",
+  "model": "Model.fbx",
+  "authoring_project": "Tiko_Rigged.blend",
+  "fbx_coordinates": "forward -Z, up Y; Blender source faces -Y, Unity import faces +Z",
+  "bounds_blender": {
+    "min": [
+      -0.9577252864837646,
+      -0.8798061609268188,
+      1.9335264056508095e-08
+    ],
+    "max": [
+      1.2994338274002075,
+      1.1399600505828857,
+      2.6000001430511475
+    ]
+  },
+  "mesh_uv_geometry_sha256": {
+    "Tiko_Arm.L_Cut": "2fcbb0bcf1b67ba603be5bd14d76c27314a4f3ba3189493d6eb9549c0cb09166",
+    "Tiko_Arm.R_Cut": "930eb22e4a8cfea6f163a6b8dd45573daaccc8dfcf93d0ba32e2b237b845e9ec",
+    "Tiko_Character": "16a60ee8db638d8a880a00452c7b8a222b1ca464447d06aad5de23ce72c90a3c"
+  },
+  "skinned_mesh_count": 3,
+  "bone_count": 23,
+  "texture_packing": {
+    "size": [
+      4096,
+      4096
+    ],
+    "channels": {
+      "R": "metallic",
+      "G": "0",
+      "B": "0",
+      "A": "1 - roughness"
+    },
+    "color_space": "linear",
+    "maximum_roundtrip_error": 1.1920928955078125e-07
+  },
+  "texture_sources": {
+    "BaseColor.png": {
+      "source_filename": "Tiko_basecolor.PNG",
+      "sha256": "198db50617de36383b3a2fccced8ab46c6a9c58fe334bdd1fcd9c72c43e3b3ce"
+    },
+    "Normal.png": {
+      "source_filename": "Tiko_normal.PNG",
+      "sha256": "4b97c9a2cb5d74b8701d328dc158f4a28de4133cef2eead4c83c9b67c9149a5d"
+    }
+  },
+  "fbx_options": {
+    "use_selection": true,
+    "object_types": [
+      "ARMATURE",
+      "MESH"
+    ],
+    "global_scale": 1.0,
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_ALL",
+    "use_space_transform": true,
+    "bake_space_transform": false,
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "use_mesh_modifiers": false,
+    "use_tspace": true,
+    "mesh_smooth_type": "OFF",
+    "use_custom_props": true,
+    "add_leaf_bones": false,
+    "primary_bone_axis": "Y",
+    "secondary_bone_axis": "X",
+    "use_armature_deform_only": false,
+    "armature_nodetype": "NULL",
+    "bake_anim": false,
+    "path_mode": "STRIP",
+    "embed_textures": false
+  },
+  "files": {
+    "Model.fbx": {
+      "bytes": 2331020,
+      "sha256": "de8764614a54311dd18997cb5e59507c384b6857441b9c7c9a99144ebdb13217"
+    },
+    "Tiko_Rigged.blend": {
+      "bytes": 1409208,
+      "sha256": "8bf5d3b6781c9a7721e56f41d627736ea799de9cea548a855e10858f02f78273"
+    },
+    "BaseColor.png": {
+      "bytes": 20655264,
+      "sha256": "198db50617de36383b3a2fccced8ab46c6a9c58fe334bdd1fcd9c72c43e3b3ce"
+    },
+    "Normal.png": {
+      "bytes": 5409022,
+      "sha256": "4b97c9a2cb5d74b8701d328dc158f4a28de4133cef2eead4c83c9b67c9149a5d"
+    },
+    "MetallicSmoothness.png": {
+      "bytes": 12495498,
+      "sha256": "41ca9ea79cc687926c29db129e8cc0bb35e852a2cfc6ef0dca0bc16f36add792"
+    }
+  },
+  "verification": {
+    "portable_blend_reopened": true,
+    "fbx_reimported": true,
+    "mesh_names_match": true,
+    "bone_names_match": true,
+    "normalized_skin_weights": true,
+    "maximum_weight_error": 0.0,
+    "maximum_vertex_error": 5.369074642658234e-07,
+    "maximum_uv_error": 0.0,
+    "maximum_normal_error": 0.0011327564716339111,
+    "maximum_blink_error": 5.369074642658234e-07,
+    "maximum_normal_angle_degrees": 0.07777874654772123,
+    "maximum_bone_rest_matrix_error": 2.562999725341797e-06,
+    "image_sizes": {
+      "BaseColor.png": [
+        4096,
+        4096
+      ],
+      "MetallicSmoothness.png": [
+        4096,
+        4096
+      ],
+      "Normal.png": [
+        4096,
+        4096
+      ]
+    }
+  },
+  "accessory_revision": "mechanical-yaw-and-four-bone-scarves-v2",
+  "accessory_qa": {
+    "before": {
+      "vertices": 11947,
+      "triangles": 23962,
+      "boundary_edges": 40
+    },
+    "after": {
+      "vertices": 12203,
+      "triangles": 24454,
+      "boundary_edges": 40
+    },
+    "removed_brace_triangles": 0,
+    "hinge": [
+      -0.7131679058074951,
+      0.6568266749382019,
+      1.6499981880187988
+    ],
+    "detached_antenna_faces": 478,
+    "mechanical_cap_recess": 0.004,
+    "rigid_yaw_qa": {
+      "0": {
+        "max_edge_stretch": 1.0000043507190284,
+        "p99_edge_stretch": 1.0000007110224665,
+        "max_absolute_edge_change": 2.911025084040286e-07,
+        "finite": true
+      },
+      "90": {
+        "max_edge_stretch": 1.0000087214737292,
+        "p99_edge_stretch": 1.0000007722962447,
+        "max_absolute_edge_change": 2.911025084040286e-07,
+        "finite": true
+      },
+      "180": {
+        "max_edge_stretch": 1.000052214307449,
+        "p99_edge_stretch": 1.000000861904199,
+        "max_absolute_edge_change": 2.911025084040286e-07,
+        "finite": true
+      },
+      "270": {
+        "max_edge_stretch": 1.0000303588682724,
+        "p99_edge_stretch": 1.0000007959744448,
+        "max_absolute_edge_change": 2.911025084040286e-07,
+        "finite": true
+      }
+    },
+    "max_significant_weights": 3,
+    "blink_preserved": true
+  },
+  "arm_clearance_revision": "overlapping-rigid-source-paws-v1",
+  "arm_clearance_qa": {
+    "revision": "overlapping-rigid-source-paws-v1",
+    "pose_range_degrees": [
+      -10,
+      60
+    ],
+    "paws": {
+      "R": {
+        "vertices": 1640,
+        "triangles": 3280,
+        "root_faces": 1025,
+        "rigid_pose_checks": {
+          "-10": {
+            "maximum_edge_change": 1.6814293288258675e-07,
+            "finite": true
+          },
+          "30": {
+            "maximum_edge_change": 1.4830187554902563e-07,
+            "finite": true
+          },
+          "45": {
+            "maximum_edge_change": 2.189594093711389e-07,
+            "finite": true
+          },
+          "60": {
+            "maximum_edge_change": 2.3458212197041695e-07,
+            "finite": true
+          }
+        }
+      },
+      "L": {
+        "vertices": 816,
+        "triangles": 1628,
+        "root_faces": 439,
+        "rigid_pose_checks": {
+          "-10": {
+            "maximum_edge_change": 1.787756075122271e-07,
+            "finite": true
+          },
+          "30": {
+            "maximum_edge_change": 1.5560302367781387e-07,
+            "finite": true
+          },
+          "45": {
+            "maximum_edge_change": 1.4870619153076192e-07,
+            "finite": true
+          },
+          "60": {
+            "maximum_edge_change": 1.4689864140382536e-07,
+            "finite": true
+          }
+        }
+      }
+    },
+    "source_surface_audit": {
+      "Character": {
+        "checked_corners": 59660,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.0006796905738402678,
+        "local_body_vertices": 628,
+        "cleaned_contact_faces": 16
+      },
+      "Arm.R": {
+        "checked_corners": 6765,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.0024248355302092057,
+        "local_body_vertices": 0,
+        "cleaned_contact_faces": 101
+      },
+      "Arm.L": {
+        "checked_corners": 3567,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.00012121791292145447,
+        "local_body_vertices": 0,
+        "cleaned_contact_faces": 5
+      },
+      "source_face_count": 24454
+    },
+    "body_boundary_edges": 16,
+    "blink_preserved": true,
+    "format_stability_repair": "cap corners share original source vertex normal",
+    "fbx_hidden_root_normal_calibration": {
+      "point": [
+        -0.40888211131095886,
+        0.0034274067729711533,
+        0.8851207494735718
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "angle": -0.05,
+      "normal_roundtrip_max_degrees": 0.07777874655240714
+    }
+  }
+}

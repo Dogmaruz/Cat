@@ -142,7 +142,7 @@ namespace DancingCats.Clone.Editor
                 var options = Activator.CreateInstance(optionsType);
                 optionsType.GetField(fieldName).SetValue(options, invalid);
                 bool rejected = false;
-                try { generate.Invoke(null, new object[] { PulseTrack(8000, false), 8000, 1, "FiniteOptions", options }); }
+                try { generate.Invoke(null, new object[] { PulseTrack(8000, false), 8000, 1, "FiniteOptions", options, null }); }
                 catch (TargetInvocationException error) { rejected = error.InnerException is ArgumentException; }
                 Require(rejected, "non-finite " + fieldName + " is rejected before generating geometry");
             }
@@ -206,7 +206,7 @@ namespace DancingCats.Clone.Editor
 
         private static MapTimeline Generate(MethodInfo method, float[] samples, int rate)
         {
-            return (MapTimeline)method.Invoke(null, new object[] { samples, rate, 1, "SyntheticPulse", null });
+            return (MapTimeline)method.Invoke(null, new object[] { samples, rate, 1, "SyntheticPulse", null, null });
         }
         private static float[] PulseTrack(int rate, bool sustained)
         {

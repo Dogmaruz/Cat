@@ -1,0 +1,476 @@
+{
+  "character": "Lumen",
+  "coordinate_system": "Blender Z up, facing -Y, feet at root origin; FBX export forward -Z/up Y",
+  "height": 2.600000126671109,
+  "source_foot_offset": [
+    0.06811685860157013,
+    -0.19604754447937012,
+    0.0
+  ],
+  "triangles": 20114,
+  "meshes": [
+    {
+      "name": "Lumen_Character",
+      "role": "Character",
+      "vertices": 8592,
+      "triangles": 17202
+    },
+    {
+      "name": "Lumen_Arm.L_Cut",
+      "role": "Arm.L",
+      "vertices": 416,
+      "triangles": 828
+    },
+    {
+      "name": "Lumen_Arm.R_Cut",
+      "role": "Arm.R",
+      "vertices": 1044,
+      "triangles": 2084
+    }
+  ],
+  "bones": [
+    {
+      "name": "root",
+      "parent": null,
+      "head": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        0.25
+      ]
+    },
+    {
+      "name": "body",
+      "parent": "root",
+      "head": [
+        0.0,
+        0.0,
+        0.4300000071525574
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        1.100000023841858
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "body",
+      "head": [
+        0.0,
+        -0.11999999731779099,
+        1.090000033378601
+      ],
+      "tail": [
+        0.0,
+        -0.11999999731779099,
+        1.75
+      ]
+    },
+    {
+      "name": "arm.R",
+      "parent": "body",
+      "head": [
+        -0.2549999952316284,
+        0.1599999964237213,
+        0.8799999952316284
+      ],
+      "tail": [
+        -0.5080980062484741,
+        0.23027200996875763,
+        0.605403482913971
+      ]
+    },
+    {
+      "name": "arm.L",
+      "parent": "body",
+      "head": [
+        0.2849999666213989,
+        0.15000000596046448,
+        0.8700000047683716
+      ],
+      "tail": [
+        0.5105379819869995,
+        0.23556265234947205,
+        0.5763818025588989
+      ]
+    },
+    {
+      "name": "foot.L",
+      "parent": "body",
+      "head": [
+        0.27000001072883606,
+        0.0,
+        0.20000000298023224
+      ],
+      "tail": [
+        0.27000001072883606,
+        -0.12999999523162842,
+        0.04500000178813934
+      ]
+    },
+    {
+      "name": "foot.R",
+      "parent": "body",
+      "head": [
+        -0.27000001072883606,
+        0.0,
+        0.20000000298023224
+      ],
+      "tail": [
+        -0.27000001072883606,
+        -0.12999999523162842,
+        0.04500000178813934
+      ]
+    },
+    {
+      "name": "antenna.yaw",
+      "parent": "body",
+      "head": [
+        0.11801011115312576,
+        -0.033097438514232635,
+        1.8600003719329834
+      ],
+      "tail": [
+        0.11801011115312576,
+        -0.033097438514232635,
+        2.0400004386901855
+      ]
+    },
+    {
+      "name": "antenna.01",
+      "parent": "antenna.yaw",
+      "head": [
+        0.11801011115312576,
+        -0.033097438514232635,
+        1.8600003719329834
+      ],
+      "tail": [
+        0.11801011115312576,
+        -0.033097438514232635,
+        2.140000343322754
+      ]
+    },
+    {
+      "name": "antenna.02",
+      "parent": "antenna.01",
+      "head": [
+        -0.6831168532371521,
+        0.7160475254058838,
+        1.4500000476837158
+      ],
+      "tail": [
+        -0.5581168532371521,
+        0.5960475206375122,
+        1.940000057220459
+      ]
+    },
+    {
+      "name": "antenna.03",
+      "parent": "antenna.02",
+      "head": [
+        -0.5581168532371521,
+        0.5960475206375122,
+        1.940000057220459
+      ],
+      "tail": [
+        -0.26811686158180237,
+        0.30604755878448486,
+        2.309999942779541
+      ]
+    },
+    {
+      "name": "antenna.04",
+      "parent": "antenna.03",
+      "head": [
+        -0.26811686158180237,
+        0.30604755878448486,
+        2.309999942779541
+      ],
+      "tail": [
+        0.14188313484191895,
+        -0.05395245552062988,
+        2.5299999713897705
+      ]
+    }
+  ],
+  "blink_meshes": [
+    "Lumen_Character"
+  ],
+  "blink_shape": "Blink",
+  "has_crest": false,
+  "has_scarf": false,
+  "exporter": "export_prepared_rigs.py",
+  "blender_version": "5.2.1 LTS",
+  "source_review_sha256": "e32de93a2acc1098612999cdcdab61f54ac5630eba1cbccffe4763fac1213058",
+  "source_review_manifest_sha256": "308a9264e2a295f6ed7d284d0fc85a05a4169ae0a7a09fbf0c5ff80e3c3d0f76",
+  "model": "Model.fbx",
+  "authoring_project": "Lumen_Rigged.blend",
+  "fbx_coordinates": "forward -Z, up Y; Blender source faces -Y, Unity import faces +Z",
+  "bounds_blender": {
+    "min": [
+      -0.7444083094596863,
+      -0.3828098773956299,
+      1.6380038658780904e-08
+    ],
+    "max": [
+      0.6855734586715698,
+      0.7749049663543701,
+      2.6000001430511475
+    ]
+  },
+  "mesh_uv_geometry_sha256": {
+    "Lumen_Arm.L_Cut": "d31373d227d046cd5a973ceb4277d945d5ebaff2bbc5ad8db4d8b49f87f4565f",
+    "Lumen_Arm.R_Cut": "c63e7cc721f23e3a7253af0346f3e9e970229804a5fdc9e4154a461a34a17767",
+    "Lumen_Character": "d1c746f9403b5f67a3c08f63eff3892b6e04748aa2783baa575506368dd306a2"
+  },
+  "skinned_mesh_count": 3,
+  "bone_count": 12,
+  "texture_packing": {
+    "size": [
+      4096,
+      4096
+    ],
+    "channels": {
+      "R": "metallic",
+      "G": "0",
+      "B": "0",
+      "A": "1 - roughness"
+    },
+    "color_space": "linear",
+    "maximum_roundtrip_error": 1.1920928955078125e-07
+  },
+  "texture_sources": {
+    "BaseColor.png": {
+      "source_filename": "Lumen_basecolor.PNG",
+      "sha256": "74b39b321011a88ef8a017d7d6aa77efae677a64f08c5c1349de71792ca83608"
+    },
+    "Normal.png": {
+      "source_filename": "Lumen_normal.PNG",
+      "sha256": "d086a1fa99e198604704f18b3c433e440434d4317810f96d89dbea4e9ba7461f"
+    }
+  },
+  "fbx_options": {
+    "use_selection": true,
+    "object_types": [
+      "ARMATURE",
+      "MESH"
+    ],
+    "global_scale": 1.0,
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_ALL",
+    "use_space_transform": true,
+    "bake_space_transform": false,
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "use_mesh_modifiers": false,
+    "use_tspace": true,
+    "mesh_smooth_type": "OFF",
+    "use_custom_props": true,
+    "add_leaf_bones": false,
+    "primary_bone_axis": "Y",
+    "secondary_bone_axis": "X",
+    "use_armature_deform_only": false,
+    "armature_nodetype": "NULL",
+    "bake_anim": false,
+    "path_mode": "STRIP",
+    "embed_textures": false
+  },
+  "files": {
+    "Model.fbx": {
+      "bytes": 1790844,
+      "sha256": "df2ed35fe6518cdbc7f18be02ea5e0109e9b60a5542a66594a41c814e18299c3"
+    },
+    "Lumen_Rigged.blend": {
+      "bytes": 995889,
+      "sha256": "e9917f859b6ba0ac05e6f828effbd35cb2119f8ff9f5a676704edd8a4259b4d7"
+    },
+    "BaseColor.png": {
+      "bytes": 21533874,
+      "sha256": "74b39b321011a88ef8a017d7d6aa77efae677a64f08c5c1349de71792ca83608"
+    },
+    "Normal.png": {
+      "bytes": 5557925,
+      "sha256": "d086a1fa99e198604704f18b3c433e440434d4317810f96d89dbea4e9ba7461f"
+    },
+    "MetallicSmoothness.png": {
+      "bytes": 11274974,
+      "sha256": "9035db56b44c1fdf0115d2441bdede3715d120df21662fc7f3fef4fd1064ec69"
+    }
+  },
+  "verification": {
+    "portable_blend_reopened": true,
+    "fbx_reimported": true,
+    "mesh_names_match": true,
+    "bone_names_match": true,
+    "normalized_skin_weights": true,
+    "maximum_weight_error": 0.0,
+    "maximum_vertex_error": 5.140900611877441e-07,
+    "maximum_uv_error": 0.0,
+    "maximum_normal_error": 0.0003625450190156698,
+    "maximum_blink_error": 5.140900611877441e-07,
+    "maximum_normal_angle_degrees": 0.027641938874694044,
+    "maximum_bone_rest_matrix_error": 8.344650268554688e-07,
+    "image_sizes": {
+      "BaseColor.png": [
+        4096,
+        4096
+      ],
+      "MetallicSmoothness.png": [
+        4096,
+        4096
+      ],
+      "Normal.png": [
+        4096,
+        4096
+      ]
+    }
+  },
+  "accessory_revision": "mechanical-yaw-and-four-bone-scarves-v2",
+  "accessory_qa": {
+    "before": {
+      "vertices": 9370,
+      "triangles": 18764,
+      "boundary_edges": 0
+    },
+    "after": {
+      "vertices": 9431,
+      "triangles": 18878,
+      "boundary_edges": 0
+    },
+    "removed_brace_triangles": 183,
+    "hinge": [
+      0.11801011115312576,
+      -0.033097438514232635,
+      1.8600003719329834
+    ],
+    "detached_antenna_faces": 3323,
+    "mechanical_cap_recess": 0.004,
+    "rigid_yaw_qa": {
+      "0": {
+        "max_edge_stretch": 1.000005239359361,
+        "p99_edge_stretch": 1.0000006869438844,
+        "max_absolute_edge_change": 6.821900105924428e-08,
+        "finite": true
+      },
+      "90": {
+        "max_edge_stretch": 1.0000540487154868,
+        "p99_edge_stretch": 1.000001387966718,
+        "max_absolute_edge_change": 1.7844185819758385e-07,
+        "finite": true
+      },
+      "180": {
+        "max_edge_stretch": 1.0002713475374883,
+        "p99_edge_stretch": 1.0000019950937866,
+        "max_absolute_edge_change": 1.6801561319654268e-07,
+        "finite": true
+      },
+      "270": {
+        "max_edge_stretch": 1.000135672667888,
+        "p99_edge_stretch": 1.000001458286289,
+        "max_absolute_edge_change": 1.475967908708825e-07,
+        "finite": true
+      }
+    },
+    "max_significant_weights": 2,
+    "blink_preserved": true
+  },
+  "arm_clearance_revision": "overlapping-rigid-source-paws-v1",
+  "arm_clearance_qa": {
+    "revision": "overlapping-rigid-source-paws-v1",
+    "pose_range_degrees": [
+      -10,
+      60
+    ],
+    "paws": {
+      "L": {
+        "vertices": 416,
+        "triangles": 828,
+        "root_faces": 222,
+        "rigid_pose_checks": {
+          "-10": {
+            "maximum_edge_change": 1.1247919464579814e-07,
+            "finite": true
+          },
+          "30": {
+            "maximum_edge_change": 1.0613266433062707e-07,
+            "finite": true
+          },
+          "45": {
+            "maximum_edge_change": 1.1440615113513658e-07,
+            "finite": true
+          },
+          "60": {
+            "maximum_edge_change": 1.5312339918596707e-07,
+            "finite": true
+          }
+        }
+      },
+      "R": {
+        "vertices": 1044,
+        "triangles": 2084,
+        "root_faces": 474,
+        "rigid_pose_checks": {
+          "-10": {
+            "maximum_edge_change": 1.4362766976444563e-07,
+            "finite": true
+          },
+          "30": {
+            "maximum_edge_change": 1.333817114534952e-07,
+            "finite": true
+          },
+          "45": {
+            "maximum_edge_change": 1.5511146950544785e-07,
+            "finite": true
+          },
+          "60": {
+            "maximum_edge_change": 1.9000654869275047e-07,
+            "finite": true
+          }
+        }
+      }
+    },
+    "source_surface_audit": {
+      "Character": {
+        "checked_corners": 49665,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.003995596782343275,
+        "local_body_vertices": 100,
+        "cleaned_contact_faces": 0
+      },
+      "Arm.L": {
+        "checked_corners": 1818,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.003356605582847145,
+        "local_body_vertices": 0,
+        "cleaned_contact_faces": 2
+      },
+      "Arm.R": {
+        "checked_corners": 4830,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.0008304703445665193,
+        "local_body_vertices": 0,
+        "cleaned_contact_faces": 15
+      },
+      "source_face_count": 18878
+    },
+    "body_boundary_edges": 0,
+    "blink_preserved": true,
+    "hidden_contact_closure": {
+      "depth": 0.002,
+      "source_surface_delta": {
+        "position": 0.0,
+        "uv": 0.0,
+        "normal": 0.0001479239465066573
+      },
+      "removed_authored_nonmanifold_chords": 5
+    }
+  }
+}

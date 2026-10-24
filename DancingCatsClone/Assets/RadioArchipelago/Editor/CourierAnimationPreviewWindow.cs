@@ -20,7 +20,7 @@ namespace RadioArchipelago.Editor
         {
             "Переступает с ноги на ногу, дышит, моргает и иногда машет рукой. Полный цикл — 7,2 с.",
             "Короткая дуга: отталкивание, полёт и мягкое сжатие после касания плитки.",
-            "Длинная дуга: небольшие махи лапами от плеч, мягкое отставание антенны и шарфа.",
+            "Длинная дуга: заметные зеркальные махи лапами от плеч, свободный шарф и инерция антенны.",
             "Мягкое сжатие корпуса и упругий возврат; вторичные детали продолжают движение.",
             "Баланс на длинной плитке и полный плавный оборот вокруг своей оси.",
             "Праздничные подскоки и короткие махи лапами после финиша.",
@@ -51,6 +51,13 @@ namespace RadioArchipelago.Editor
             window.titleContent = new GUIContent("Анимации курьеров");
             window.minSize = new Vector2(560, 580);
             window.Show(); window.Focus();
+        }
+
+        public static void OpenFlight()
+        {
+            Open();
+            var window = GetWindow<CourierAnimationPreviewWindow>();
+            window.stateIndex = 2; window.playing = true; window.loop = true; window.Rebuild();
         }
 
         private void OnEnable()
@@ -154,6 +161,7 @@ namespace RadioArchipelago.Editor
         {
             stateTime = 0; landed = false;
             if (motion == null) return;
+            SetStagePose(0);
             motion.ResetMotion(); motion.ManualSimulation = true;
             switch (stateIndex)
             {
@@ -166,7 +174,7 @@ namespace RadioArchipelago.Editor
             }
             if (stateIndex == 6) StepMotion(1.35f);
             motion.SetPaused(!playing);
-            SetStageHeight();
+            SetStagePose(stateTime);
             lastUpdate = EditorApplication.timeSinceStartup;
         }
 
@@ -201,10 +209,11 @@ namespace RadioArchipelago.Editor
                     motion.SetFlightProgress(Mathf.Clamp01(next / flight));
                     if (next >= flight) { motion.PlayLanding(1); motion.PlayIdle(); landed = true; }
                 }
+                SetStagePose(next);
                 motion.SimulateSprings(dt); stateTime = next; seconds -= dt;
             }
             motion.SetPaused(!playing);
-            SetStageHeight();
+            SetStagePose(stateTime);
         }
 
         private void StepMotion(float seconds)
@@ -215,14 +224,16 @@ namespace RadioArchipelago.Editor
             }
         }
 
-        private void SetStageHeight()
+        private void SetStagePose(float time)
         {
             if (stage == null) return;
             float flight = stateIndex == 1 ? .45f : stateIndex == 2 ? 2.4f : 0;
-            float p = flight > 0 ? Mathf.Clamp01(stateTime / flight) : 0;
+            float p = flight > 0 ? Mathf.Clamp01(time / flight) : 0;
             // Only this disposable Editor stage displays a sample arc. The prefab root stays untouched.
             float height = flight > 0 ? 4 * p * (1 - p) * (stateIndex == 1 ? .5f : .9f) : 0;
-            stage.transform.position = Vector3.up * height;
+            float lateral = flight > 0 && p < 1 ? Mathf.Sin(p * Mathf.PI * 2) * .22f : 0;
+            stage.transform.position = new Vector3(lateral, height, 0);
+            motion?.SetFacing(lateral * 100);
         }
 
         private void Seek(float value)

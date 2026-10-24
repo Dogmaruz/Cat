@@ -150,7 +150,7 @@ namespace RadioArchipelago.Editor
                 {
                     var control = i == 0 ? rig.leftArm : rig.rightArm;
                     float angle = Quaternion.Angle(control.localRotation, rest[Array.IndexOf(nodes, control)].rotation);
-                    Require(angle > 15 && angle <= 36, entry.id + ": long flight needs a restrained arm gesture of 15–35 degrees; actual " + control.name + " angle=" + angle.ToString("F3"));
+                    Require(angle > 42 && angle <= 62, entry.id + ": the raised flight stroke must be visible from the shoulder; actual " + control.name + " angle=" + angle.ToString("F3"));
                     var posed = ArmCentroid(arms[i], rig.visualPivot);
                     float rise = posed.y - armRest[i].y;
                     float outward = Mathf.Abs(posed.x) - Mathf.Abs(armRest[i].x);
@@ -163,6 +163,7 @@ namespace RadioArchipelago.Editor
                     if (chain != null && chain.Length > 0) Require(chain.Any(node => Quaternion.Angle(node.localRotation, rest[Array.IndexOf(nodes, node)].rotation) > .1f),
                         entry.id + ": an authored appendage chain remains rigid during flight: " + chain[0].name);
                 Require(Deformed(before, Bake(actor)), entry.id + ": moving animation controls do not deform the supplied skin.");
+                CheckFlightStrokes(entry.id, motion, rig, arms);
                 motion.SetPaused(true); var paused = Snapshot(nodes); var blends = BlinkWeight(rig); Step(motion, .6f); Same(paused, nodes, entry.id + " paused rig");
                 Require(Mathf.Abs(BlinkWeight(rig) - blends) < .001f, entry.id + ": pause advances blinking.");
                 motion.SetPaused(false); motion.PlayLanding(1); Step(motion, .04f);
@@ -182,6 +183,44 @@ namespace RadioArchipelago.Editor
                 motion.ResetMotion(); Same(rest, nodes, entry.id + " rest restoration"); Same(root, new[] { actor.transform }, entry.id + " gameplay root");
             }
             finally { if (actor != null) UnityEngine.Object.DestroyImmediate(actor); EditorSceneManager.ClosePreviewScene(scene); }
+        }
+
+        private static void CheckFlightStrokes(string id, CourierMotion motion, CourierRigBinding rig, ArmVertexSample[][] arms)
+        {
+            motion.ResetMotion();
+            Quaternion leftRest = rig.leftArm.localRotation, rightRest = rig.rightArm.localRotation;
+            var leftShoulder = rig.visualPivot.InverseTransformPoint(rig.leftArm.position);
+            var rightShoulder = rig.visualPivot.InverseTransformPoint(rig.rightArm.position);
+            var leftRay = ArmCentroid(arms[0], rig.visualPivot) - leftShoulder;
+            var rightRay = ArmCentroid(arms[1], rig.visualPivot) - rightShoulder;
+            motion.PlayJump(2.4f); motion.SetFlightProgress(.5f); Step(motion, .5f);
+            float minimum = 180, maximum = 0, previous = 0, previousSlope = 0, error = 0, mirrorError = 0;
+            int peaks = 0; Vector3 low = Vector3.zero, high = Vector3.zero;
+            for (int frame = 0; frame <= 120; frame++)
+            {
+                motion.SimulateSprings(1f / 120);
+                float left = Quaternion.Angle(leftRest, rig.leftArm.localRotation);
+                float right = Quaternion.Angle(rightRest, rig.rightArm.localRotation);
+                error = Mathf.Max(error, Mathf.Abs(left - right));
+                var leftPosed = ArmCentroid(arms[0], rig.visualPivot) - leftShoulder;
+                var rightPosed = ArmCentroid(arms[1], rig.visualPivot) - rightShoulder;
+                leftPosed.z = rightPosed.z = 0;
+                mirrorError = Mathf.Max(mirrorError, Mathf.Abs(Vector3.SignedAngle(new Vector3(leftRay.x, leftRay.y, 0), leftPosed, Vector3.forward)
+                    + Vector3.SignedAngle(new Vector3(rightRay.x, rightRay.y, 0), rightPosed, Vector3.forward)));
+                if (left < minimum) { minimum = left; low = ArmCentroid(arms[0], rig.visualPivot); }
+                if (left > maximum) { maximum = left; high = ArmCentroid(arms[0], rig.visualPivot); }
+                float slope = left - previous;
+                if (frame > 1 && previousSlope > 0 && slope <= 0 && previous > 40) peaks++;
+                previous = left; previousSlope = slope;
+                if (frame % 10 == 0) Bake(motion.gameObject);
+            }
+            Require(peaks == 4, id + ": long flight must show four shoulder strokes per second, actual=" + peaks);
+            Require(maximum - minimum > 45 && maximum <= 62, id + ": flight stroke was flattened by blending, span=" + (maximum - minimum));
+            Require(error < 1, id + ": flight paws must stroke simultaneously and mirror each other, discrepancy=" + error);
+            Require(mirrorError < 10, id + ": actual left/right paw geometry must swing in opposite signed directions, discrepancy=" + mirrorError);
+            Require(Vector3.Distance(low, high) > .025f, id + ": shoulder controls move but the actual paw geometry remains stuck.");
+            Notes.Add(id + " flight: " + peaks + " mirrored shoulder strokes/s; angle excursion=" + (maximum - minimum).ToString("F2")
+                + "; actual paw-centroid excursion=" + Vector3.Distance(low, high).ToString("F5") + "; signed mirror error=" + mirrorError.ToString("F2"));
         }
 
         private static List<Vector3[]> Bake(GameObject actor)

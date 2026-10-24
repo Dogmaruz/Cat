@@ -229,6 +229,10 @@ namespace RadioArchipelago.Editor
                 motion.PlayIdle(); Step(.35f); Step(3.65f); Step(.6f); Step(.6f);
                 motion.PlayJump(2.4f);
                 foreach (float phase in new[] { .15f, .5f, .85f }) { motion.SetFlightProgress(phase); Step(.4f); }
+                // Four-Hz shoulder strokes need a full phase sweep: a few sparse flight
+                // samples can repeatedly land on the same stroke and miss the raised paws.
+                motion.SetFlightProgress(.5f);
+                for (int frame = 0; frame < 30; frame++) Step(1f / 120);
                 motion.PlayLanding(1.5f); Step(.04f); Step(.1f);
                 motion.PlayHold(false, 2.6f, true); Step(.6f); Step(.8f);
                 motion.PlayEnd(); Step(.5f); Step(.7f);

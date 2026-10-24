@@ -99,6 +99,12 @@ namespace DancingCats.Clone.Editor
             CourierAccessoryChecks.RunChecks();
         }
 
+        public static void RigidPawChecks()
+        {
+            RequireSavedEditor();
+            CourierRigidPawChecks.RunChecks();
+        }
+
         public static void RigRender()
         {
             RequireSavedEditor();
@@ -108,7 +114,7 @@ namespace DancingCats.Clone.Editor
         public static void OpenAnimationPreview()
         {
             RequireSavedEditor();
-            CourierAnimationPreviewWindow.Open();
+            CourierAnimationPreviewWindow.OpenFlight();
         }
 
         public static void AnimationReel()

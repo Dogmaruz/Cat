@@ -76,7 +76,7 @@ namespace RadioArchipelago.Editor
                 Require(Mathf.Max(firstHinge, oppositeHinge) > .6f, id + ": turning does not move the mounting hinge.");
                 skin.CheckGeometry(id + " turning");
 
-                float tipResponse = 0;
+                float tipResponse = 0, flightTipExcursion = 0, lateralTipResponse = 0;
                 if (tips.Length > 0)
                 {
                     motion.ResetMotion(); motion.PlayIdle(); motion.SetFacing(55); Step(motion, .14f);
@@ -91,6 +91,41 @@ namespace RadioArchipelago.Editor
                     Step(motion, .13f); var later = skin.TipCentroids(binding.visualPivot);
                     Require(MaxDistance(before, first) < height * .04f && MaxDistance(first, later) > height * .001f,
                         id + ": scarf turn response should develop over time instead of snapping instantly.");
+
+                    motion.ResetMotion();
+                    var restTips = skin.TipCentroids(binding.visualPivot);
+                    motion.PlayJump(2.4f);
+                    for (int frame = 0; frame < 240; frame++)
+                    {
+                        motion.SetFlightProgress(frame / 239f); motion.SimulateSprings(.01f);
+                        if (frame % 10 == 0)
+                        {
+                            flightTipExcursion = Mathf.Max(flightTipExcursion, MaxDistance(restTips, skin.TipCentroids(binding.visualPivot)));
+                            skin.CheckGeometry(id + " free scarf flight " + frame);
+                        }
+                    }
+                    Require(flightTipExcursion > height * .04f, id + ": scarf ends need a conspicuous flight response, actual=" + Number(flightTipExcursion));
+
+                    Vector3 rootPosition = motion.transform.position;
+                    Vector3[] MovingTips(float direction)
+                    {
+                        motion.transform.position = rootPosition; motion.ResetMotion(); motion.PlayIdle();
+                        for (int frame = 0; frame < 22; frame++)
+                        {
+                            // The real controller repeats this call every frame.
+                            motion.SetPaused(false);
+                            motion.transform.position += motion.transform.right * (direction * .025f);
+                            motion.SimulateSprings(Dt);
+                        }
+                        return skin.TipCentroids(binding.visualPivot);
+                    }
+                    try
+                    {
+                        var movingRight = MovingTips(1); var movingLeft = MovingTips(-1);
+                        lateralTipResponse = MaxDistance(movingRight, movingLeft);
+                        Require(lateralTipResponse > height * .01f, id + ": real lateral movement must affect the scarf even at a fixed facing.");
+                    }
+                    finally { motion.transform.position = rootPosition; motion.ResetMotion(); }
                 }
 
                 motion.ResetMotion(); motion.PlayJump(.42f);
@@ -129,8 +164,9 @@ namespace RadioArchipelago.Editor
                 }
                 motion.ResetMotion(); Same(rest, nodes, id + " reset");
                 notes.Add("PASS " + id + ": hinge=" + Number(Mathf.Max(firstHinge, oppositeHinge))
-                    + "deg; painted scarf turn response=" + Number(tipResponse) + "; short rotor=" + Number(shortYaw.rotor)
-                    + "deg; flight rotor=" + Number(flight.rotor) + "deg, peak=" + Number(flight.maximumRate)
+                    + "deg; painted scarf turn response=" + Number(tipResponse) + "; short rotor=" + Number(shortYaw.rotor) + "deg"
+                    + "; scarf flight excursion=" + Number(flightTipExcursion) + "; real lateral response=" + Number(lateralTipResponse)
+                    + "; flight rotor=" + Number(flight.rotor) + "deg, peak=" + Number(flight.maximumRate)
                     + "deg/s; ride [" + string.Join("; ", rideNotes) + "]; max accessory edge strain=" + Number(skin.MaximumStrain)
                     + "; finite skin, fixed attachments, pause/reset/hitch PASS.");
             }

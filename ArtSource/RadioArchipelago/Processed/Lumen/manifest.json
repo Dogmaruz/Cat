@@ -7,13 +7,25 @@
     -0.19604754447937012,
     0.0
   ],
-  "triangles": 18878,
+  "triangles": 20114,
   "meshes": [
     {
       "name": "Lumen_Character",
       "role": "Character",
-      "vertices": 9431,
-      "triangles": 18878
+      "vertices": 8592,
+      "triangles": 17202
+    },
+    {
+      "name": "Lumen_Arm.L_Cut",
+      "role": "Arm.L",
+      "vertices": 416,
+      "triangles": 828
+    },
+    {
+      "name": "Lumen_Arm.R_Cut",
+      "role": "Arm.R",
+      "vertices": 1044,
+      "triangles": 2084
     }
   ],
   "bones": [
@@ -63,28 +75,28 @@
       "name": "arm.R",
       "parent": "body",
       "head": [
-        -0.3100000023841858,
+        -0.2549999952316284,
         0.1599999964237213,
         0.8799999952316284
       ],
       "tail": [
-        -0.527999997138977,
-        0.23600000143051147,
-        0.5400000214576721
+        -0.5080980062484741,
+        0.23027200996875763,
+        0.605403482913971
       ]
     },
     {
       "name": "arm.L",
       "parent": "body",
       "head": [
-        0.3399999737739563,
+        0.2849999666213989,
         0.15000000596046448,
         0.8700000047683716
       ],
       "tail": [
-        0.5120000243186951,
-        0.23600000143051147,
-        0.5400000214576721
+        0.5105379819869995,
+        0.23556265234947205,
+        0.5763818025588989
       ]
     },
     {
@@ -194,8 +206,8 @@
   "has_scarf": false,
   "exporter": "export_prepared_rigs.py",
   "blender_version": "5.2.1 LTS",
-  "source_review_sha256": "c91be3db5abf3f551a6c995daafdb4891072a9572d26997f9a114bf59c572119",
-  "source_review_manifest_sha256": "12ccca8bfa2b71f47b06c5cd26cd571c17e063d82f55ffeecbc89d83e909a76e",
+  "source_review_sha256": "e32de93a2acc1098612999cdcdab61f54ac5630eba1cbccffe4763fac1213058",
+  "source_review_manifest_sha256": "308a9264e2a295f6ed7d284d0fc85a05a4169ae0a7a09fbf0c5ff80e3c3d0f76",
   "model": "Model.fbx",
   "authoring_project": "Lumen_Rigged.blend",
   "fbx_coordinates": "forward -Z, up Y; Blender source faces -Y, Unity import faces +Z",
@@ -206,15 +218,17 @@
       1.6380038658780904e-08
     ],
     "max": [
-      0.6081746220588684,
+      0.6855734586715698,
       0.7749049663543701,
       2.6000001430511475
     ]
   },
   "mesh_uv_geometry_sha256": {
-    "Lumen_Character": "942a4fbf26b39f50a486cf62ab89bd1d08a9f2e7b2b10be6b32924d5ef12a101"
+    "Lumen_Arm.L_Cut": "d31373d227d046cd5a973ceb4277d945d5ebaff2bbc5ad8db4d8b49f87f4565f",
+    "Lumen_Arm.R_Cut": "c63e7cc721f23e3a7253af0346f3e9e970229804a5fdc9e4154a461a34a17767",
+    "Lumen_Character": "d1c746f9403b5f67a3c08f63eff3892b6e04748aa2783baa575506368dd306a2"
   },
-  "skinned_mesh_count": 1,
+  "skinned_mesh_count": 3,
   "bone_count": 12,
   "texture_packing": {
     "size": [
@@ -268,12 +282,12 @@
   },
   "files": {
     "Model.fbx": {
-      "bytes": 1596940,
-      "sha256": "24283c30d046d3bd58420fec7d31ee00d8c6f876286006a5b5fe4b0fbf629d9a"
+      "bytes": 1790844,
+      "sha256": "df2ed35fe6518cdbc7f18be02ea5e0109e9b60a5542a66594a41c814e18299c3"
     },
     "Lumen_Rigged.blend": {
-      "bytes": 1024658,
-      "sha256": "2853662bf4dc4767450d5513591ca92cfb19fcfdf44c1a4e00ee3de781e6fe42"
+      "bytes": 995889,
+      "sha256": "e9917f859b6ba0ac05e6f828effbd35cb2119f8ff9f5a676704edd8a4259b4d7"
     },
     "BaseColor.png": {
       "bytes": 21533874,
@@ -297,10 +311,10 @@
     "maximum_weight_error": 0.0,
     "maximum_vertex_error": 5.140900611877441e-07,
     "maximum_uv_error": 0.0,
-    "maximum_normal_error": 0.00034822244197130203,
+    "maximum_normal_error": 0.0003625450190156698,
     "maximum_blink_error": 5.140900611877441e-07,
-    "maximum_normal_angle_degrees": 0.021036008903682717,
-    "maximum_bone_rest_matrix_error": 7.748603820800781e-07,
+    "maximum_normal_angle_degrees": 0.027641938874694044,
+    "maximum_bone_rest_matrix_error": 8.344650268554688e-07,
     "image_sizes": {
       "BaseColor.png": [
         4096,
@@ -364,5 +378,99 @@
     },
     "max_significant_weights": 2,
     "blink_preserved": true
+  },
+  "arm_clearance_revision": "overlapping-rigid-source-paws-v1",
+  "arm_clearance_qa": {
+    "revision": "overlapping-rigid-source-paws-v1",
+    "pose_range_degrees": [
+      -10,
+      60
+    ],
+    "paws": {
+      "L": {
+        "vertices": 416,
+        "triangles": 828,
+        "root_faces": 222,
+        "rigid_pose_checks": {
+          "-10": {
+            "maximum_edge_change": 1.1247919464579814e-07,
+            "finite": true
+          },
+          "30": {
+            "maximum_edge_change": 1.0613266433062707e-07,
+            "finite": true
+          },
+          "45": {
+            "maximum_edge_change": 1.1440615113513658e-07,
+            "finite": true
+          },
+          "60": {
+            "maximum_edge_change": 1.5312339918596707e-07,
+            "finite": true
+          }
+        }
+      },
+      "R": {
+        "vertices": 1044,
+        "triangles": 2084,
+        "root_faces": 474,
+        "rigid_pose_checks": {
+          "-10": {
+            "maximum_edge_change": 1.4362766976444563e-07,
+            "finite": true
+          },
+          "30": {
+            "maximum_edge_change": 1.333817114534952e-07,
+            "finite": true
+          },
+          "45": {
+            "maximum_edge_change": 1.5511146950544785e-07,
+            "finite": true
+          },
+          "60": {
+            "maximum_edge_change": 1.9000654869275047e-07,
+            "finite": true
+          }
+        }
+      }
+    },
+    "source_surface_audit": {
+      "Character": {
+        "checked_corners": 49665,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.003995596782343275,
+        "local_body_vertices": 100,
+        "cleaned_contact_faces": 0
+      },
+      "Arm.L": {
+        "checked_corners": 1818,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.003356605582847145,
+        "local_body_vertices": 0,
+        "cleaned_contact_faces": 2
+      },
+      "Arm.R": {
+        "checked_corners": 4830,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.0008304703445665193,
+        "local_body_vertices": 0,
+        "cleaned_contact_faces": 15
+      },
+      "source_face_count": 18878
+    },
+    "body_boundary_edges": 0,
+    "blink_preserved": true,
+    "hidden_contact_closure": {
+      "depth": 0.002,
+      "source_surface_delta": {
+        "position": 0.0,
+        "uv": 0.0,
+        "normal": 0.0001479239465066573
+      },
+      "removed_authored_nonmanifold_chords": 5
+    }
   }
 }

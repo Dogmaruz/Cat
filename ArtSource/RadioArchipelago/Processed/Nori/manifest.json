@@ -7,13 +7,25 @@
     -0.3341296315193176,
     0.0
   ],
-  "triangles": 14704,
+  "triangles": 15670,
   "meshes": [
     {
       "name": "Nori_Character",
       "role": "Character",
-      "vertices": 7344,
-      "triangles": 14704
+      "vertices": 6778,
+      "triangles": 13572
+    },
+    {
+      "name": "Nori_Arm.R_Cut",
+      "role": "Arm.R",
+      "vertices": 541,
+      "triangles": 1078
+    },
+    {
+      "name": "Nori_Arm.L_Cut",
+      "role": "Arm.L",
+      "vertices": 512,
+      "triangles": 1020
     }
   ],
   "bones": [
@@ -63,28 +75,28 @@
       "name": "arm.R",
       "parent": "body",
       "head": [
-        -0.6599999666213989,
+        -0.6049999594688416,
         0.2800000011920929,
         0.8799999952316284
       ],
       "tail": [
-        -0.8700000047683716,
-        0.3540000021457672,
-        0.49000000953674316
+        -0.8373004794120789,
+        0.34261640906333923,
+        0.5858645439147949
       ]
     },
     {
       "name": "arm.L",
       "parent": "body",
       "head": [
-        0.6899999380111694,
+        0.6349999308586121,
         0.28999999165534973,
         0.8899999856948853
       ],
       "tail": [
-        0.8399999141693115,
-        0.3540000021457672,
-        0.49000000953674316
+        0.8260525465011597,
+        0.34630054235458374,
+        0.5663811564445496
       ]
     },
     {
@@ -320,8 +332,8 @@
   "has_scarf": true,
   "exporter": "export_prepared_rigs.py",
   "blender_version": "5.2.1 LTS",
-  "source_review_sha256": "d0be2fdce860a7234a42a73d7ce2b889deda55be6bb5d598cbe2f24ca24be5d6",
-  "source_review_manifest_sha256": "448eda714d9ccde4cb440e8a216e1d283b75614ba3d81a35cd68584bf9908a35",
+  "source_review_sha256": "7e7a70b7d174649c126638361c4803e4f69e3b8f6d504751d0d9b6777725b6f0",
+  "source_review_manifest_sha256": "035c4725906d56243ced4482c411d6e11722a6b20189defe1f90abb53e787952",
   "model": "Model.fbx",
   "authoring_project": "Nori_Rigged.blend",
   "fbx_coordinates": "forward -Z, up Y; Blender source faces -Y, Unity import faces +Z",
@@ -332,15 +344,17 @@
       1.7020770570752575e-08
     ],
     "max": [
-      1.0269639492034912,
+      1.1093029975891113,
       1.484694480895996,
       2.6000003814697266
     ]
   },
   "mesh_uv_geometry_sha256": {
-    "Nori_Character": "372edab24e640fca9ced4295d04f6fc46570ea24c8f36cace0fef2c9421d93c8"
+    "Nori_Arm.L_Cut": "2cd7d99bc02f48761e5935c5f8a88a939a21cbaadee0892f493a63ea883709de",
+    "Nori_Arm.R_Cut": "31636075e910b603cc7dcf082d3961ea6cddc497be9a3077b97fd5b26a9e9a14",
+    "Nori_Character": "e22ecc760c3058743b8353f41e40930fa2799ce520c21b64332511a0d2f395f7"
   },
-  "skinned_mesh_count": 1,
+  "skinned_mesh_count": 3,
   "bone_count": 21,
   "texture_packing": {
     "size": [
@@ -394,12 +408,12 @@
   },
   "files": {
     "Model.fbx": {
-      "bytes": 1223724,
-      "sha256": "5e86d107f058609f2328d86c03c4309444654ccfd8e92464abdecf77398f87ef"
+      "bytes": 1395436,
+      "sha256": "6c708244c9933a83bff945bfc81b572c6e0e8c1de6c61d6a77cfaca5f1f32cf8"
     },
     "Nori_Rigged.blend": {
-      "bytes": 814749,
-      "sha256": "e8ee9028e19ff2cd300cf676051d936b626e3871ff643fc3ab641ecd46e08354"
+      "bytes": 881571,
+      "sha256": "8451be94bfec88e238268d75bca6c6fe4a36f9e320a5dd73c692d90f974415d7"
     },
     "BaseColor.png": {
       "bytes": 25226179,
@@ -423,9 +437,9 @@
     "maximum_weight_error": 0.0,
     "maximum_vertex_error": 2.980232238769531e-07,
     "maximum_uv_error": 0.0,
-    "maximum_normal_error": 0.00021508149802684784,
+    "maximum_normal_error": 0.0003399848937988281,
     "maximum_blink_error": 2.980232238769531e-07,
-    "maximum_normal_angle_degrees": 0.012584640281597104,
+    "maximum_normal_angle_degrees": 0.027848197531891244,
     "maximum_bone_rest_matrix_error": 1.7583370208740234e-06,
     "image_sizes": {
       "BaseColor.png": [
@@ -489,6 +503,91 @@
       }
     },
     "max_significant_weights": 3,
+    "blink_preserved": true
+  },
+  "arm_clearance_revision": "overlapping-rigid-source-paws-v1",
+  "arm_clearance_qa": {
+    "revision": "overlapping-rigid-source-paws-v1",
+    "pose_range_degrees": [
+      -10,
+      60
+    ],
+    "paws": {
+      "R": {
+        "vertices": 541,
+        "triangles": 1078,
+        "root_faces": 320,
+        "rigid_pose_checks": {
+          "-10": {
+            "maximum_edge_change": 1.4357532181208388e-07,
+            "finite": true
+          },
+          "30": {
+            "maximum_edge_change": 1.4495034696658526e-07,
+            "finite": true
+          },
+          "45": {
+            "maximum_edge_change": 1.5945960688337757e-07,
+            "finite": true
+          },
+          "60": {
+            "maximum_edge_change": 1.3603838475151342e-07,
+            "finite": true
+          }
+        }
+      },
+      "L": {
+        "vertices": 512,
+        "triangles": 1020,
+        "root_faces": 236,
+        "rigid_pose_checks": {
+          "-10": {
+            "maximum_edge_change": 2.182629994969265e-07,
+            "finite": true
+          },
+          "30": {
+            "maximum_edge_change": 1.9951944800478127e-07,
+            "finite": true
+          },
+          "45": {
+            "maximum_edge_change": 2.1442165596199936e-07,
+            "finite": true
+          },
+          "60": {
+            "maximum_edge_change": 2.535067360476262e-07,
+            "finite": true
+          }
+        }
+      }
+    },
+    "source_surface_audit": {
+      "Character": {
+        "checked_corners": 39016,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.00045648934089622333,
+        "local_body_vertices": 113,
+        "cleaned_contact_faces": 0
+      },
+      "Arm.R": {
+        "checked_corners": 2274,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.006486927541040828,
+        "local_body_vertices": 0,
+        "cleaned_contact_faces": 28
+      },
+      "Arm.L": {
+        "checked_corners": 2352,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.0001259726613746979,
+        "local_body_vertices": 0,
+        "cleaned_contact_faces": 19
+      },
+      "source_face_count": 14704
+    },
+    "body_boundary_edges": 0,
     "blink_preserved": true
   }
 }

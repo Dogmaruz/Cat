@@ -13,7 +13,7 @@ namespace RadioArchipelago.Editor
     {
         private const string CatalogPath = "Assets/RadioArchipelago/Content/CourierCatalog.asset";
         private const int Layer = 29;
-        private const int Width = 1200, Height = 600, FrameCount = 48;
+        private const int Width = 1200, Height = 600, FrameCount = 120;
         private const float Duration = 3, CourierHeight = 2.55f, Spacing = 3;
         private static readonly string Output = Path.GetFullPath(Path.Combine(Application.dataPath, "../Library/RadioRigging/UnityReel"));
 
@@ -73,9 +73,9 @@ namespace RadioArchipelago.Editor
                     "Characters screen left to right: " + string.Join(", ", catalog.entries.Reverse().Select(entry => entry.displayName + " (" + entry.id + ")")) + "\n" +
                     "flight: 2.4 second long flight + .6 second landing/settling.\n" +
                     "ride: 2.6 second turn + .4 second settling.\n" +
-                    "Each sequence: frame-000.png through frame-047.png, " + Width + "x" + Height + ", 3 seconds at nominal16fps.\n" +
-                    "Only the disposable preview stages follow the illustrative flight arc. Game roots, scene, catalog and player data remain untouched.\n");
-                Debug.Log("RADIO_COURIER_REEL PASS: 96 actual Unity frames at " + Output);
+                    "Each sequence: frame-000.png through frame-119.png, " + Width + "x" + Height + ", 3 seconds at 40fps.\n" +
+                    "Only the disposable preview stages follow the illustrative flight arc and small lateral turn. Movement is sampled at every simulation substep. Game scene, catalog and player data remain untouched.\n");
+                Debug.Log("RADIO_COURIER_REEL PASS: 240 actual Unity frames at " + Output);
             }
             finally
             {
@@ -114,6 +114,7 @@ namespace RadioArchipelago.Editor
                         }
                         float next = Mathf.Min(clock + 1f / 120, targetTime);
                         if (!settled) next = Mathf.Min(next, transition);
+                        PoseStages(stages, motions, next, transition, flight);
                         foreach (var motion in motions)
                         {
                             if (flight && !settled) motion.SetFlightProgress(Mathf.Clamp01(next / transition));
@@ -121,10 +122,9 @@ namespace RadioArchipelago.Editor
                         }
                         clock = next;
                     }
-                    float lift = flight && targetTime < transition ? Mathf.Sin(Mathf.PI * targetTime / transition) * .62f : 0;
+                    PoseStages(stages, motions, targetTime, transition, flight);
                     for (int i = 0; i < stages.Length; i++)
                     {
-                        stages[i].localPosition = new Vector3((i - 1) * Spacing, lift, 0);
                         var bounds = CourierVisualBounds.Measure(renderers[i]);
                         for (int x = -1; x <= 1; x += 2) for (int y = -1; y <= 1; y += 2) for (int z = -1; z <= 1; z += 2)
                         {
@@ -161,6 +161,7 @@ namespace RadioArchipelago.Editor
                     }
                     float next = Mathf.Min(clock + 1f / 120, targetTime);
                     if (!settled) next = Mathf.Min(next, transition);
+                    PoseStages(stages, motions, next, transition, flight);
                     foreach (var motion in motions)
                     {
                         if (flight && !settled) motion.SetFlightProgress(Mathf.Clamp01(next / transition));
@@ -168,16 +169,27 @@ namespace RadioArchipelago.Editor
                     }
                     clock = next;
                 }
-                float lift = flight && targetTime < transition ? Mathf.Sin(Mathf.PI * targetTime / transition) * .62f : 0;
+                PoseStages(stages, motions, targetTime, transition, flight);
                 for (int i = 0; i < stages.Length; i++)
                 {
-                    stages[i].localPosition = new Vector3((i - 1) * Spacing, lift, 0);
                     RequireVisible(camera, CourierVisualBounds.Measure(renderers[i]), name, frame, i);
                     bakes[i].Refresh();
                 }
                 camera.Render(); RenderTexture.active = target;
                 pixels.ReadPixels(new Rect(0, 0, Width, Height), 0, 0); pixels.Apply();
                 File.WriteAllBytes(Path.Combine(folder, "frame-" + frame.ToString("000") + ".png"), pixels.EncodeToPNG());
+            }
+        }
+
+        private static void PoseStages(Transform[] stages, CourierMotion[] motions, float time, float transition, bool flight)
+        {
+            float p = time / transition;
+            float lift = flight && p < 1 ? Mathf.Sin(Mathf.PI * p) * .62f : 0;
+            float lateral = flight && p < 1 ? Mathf.Sin(Mathf.PI * 2 * p) * .22f : 0;
+            for (int i = 0; i < stages.Length; i++)
+            {
+                stages[i].localPosition = new Vector3((i - 1) * Spacing + lateral, lift, 0);
+                motions[i].SetFacing(flight ? lateral * 100 : 0);
             }
         }
 

@@ -40,7 +40,7 @@ namespace RadioArchipelago.Editor
 
                 Invoke(motion, "PlayJump", new[] { typeof(float) }, 2.4f);
                 Invoke(motion, "SetFlightProgress", new[] { typeof(float) }, .6f);
-                Step(motion, .8f);
+                Step(motion, .9f);
                 Require(Quaternion.Angle(arm.localRotation, rest[1].rotation) > 15, "A long flight must keep the arms airborne after the old .32 second clip would end.");
                 var pausedPose = Snapshot(visual, arm, foot, antenna, eye);
                 Invoke(motion, "SetPaused", new[] { typeof(bool) }, true);
@@ -71,7 +71,7 @@ namespace RadioArchipelago.Editor
                 motion.ResetMotion(); Same(rootRest, root.transform);
                 CheckIndependentChains();
                 CheckShoulderArcs();
-                Debug.Log("RADIO_MOTION PASS: long flight, pause, landing compression, riding spin, separate idle feet, blink, rest-pose reuse, legacy binding, bounded independent secondary chains and gentle whole-arm shoulder swings.");
+                Debug.Log("RADIO_MOTION PASS: long flight, pause, landing compression, riding spin, separate idle feet, blink, rest-pose reuse, legacy binding, bounded independent secondary chains and whole-arm shoulder swings.");
             }
             finally { UnityEngine.Object.DestroyImmediate(root); }
         }
@@ -107,11 +107,11 @@ namespace RadioArchipelago.Editor
                     motion.SimulateSprings(1f / 60);
                     float bendL = Quaternion.Angle(leftRest, Quaternion.Inverse(visual.rotation) * left[2].rotation);
                     float bendR = Quaternion.Angle(rightRest, Quaternion.Inverse(visual.rotation) * right[2].rotation);
-                    Require(bendL <= 40.2f && bendR <= 40.2f, "A three-bone scarf must share its bend budget instead of folding by 90 degrees.");
+                    Require(bendL <= 68.2f && bendR <= 68.2f, "A scarf must share one bounded bend budget across its joints.");
                     Require(Mathf.Abs(bendL - bendR) < .2f, "Independent scarf tails must respond alike regardless of flattened binding order or FBX bone axes.");
                     greatest = Mathf.Max(greatest, bendL, bendR);
                 }
-                Require(greatest > 10, "The normalized scarf chains must retain visible secondary motion.");
+                Require(greatest > 30, "The scarf chains need visibly free secondary motion during flight.");
                 motion.ResetMotion();
                 Require(Quaternion.Angle(leftRest, Quaternion.Inverse(visual.rotation) * left[2].rotation) < .02f
                     && Quaternion.Angle(rightRest, Quaternion.Inverse(visual.rotation) * right[2].rotation) < .02f,
@@ -162,9 +162,9 @@ namespace RadioArchipelago.Editor
                 motion.PlayIdle(); Step(motion, 4.4f);
                 CheckShoulderPose("greeting", visual, arms, markers, shoulders, restReach, length, 8, 30, false);
                 motion.ResetMotion(); motion.PlayJump(.45f); motion.SetFlightProgress(.5f); Step(motion, .6f);
-                CheckShoulderPose("short jump", visual, arms, markers, shoulders, restReach, length, 15, 22);
+                CheckShoulderPose("short jump", visual, arms, markers, shoulders, restReach, length, 15, 34);
                 motion.ResetMotion(); motion.PlayJump(2.4f); motion.SetFlightProgress(.5f); Step(motion, .9f);
-                CheckShoulderPose("long flight", visual, arms, markers, shoulders, restReach, length, 20, 36);
+                CheckShoulderPose("long flight", visual, arms, markers, shoulders, restReach, length, 42, 62);
                 motion.ResetMotion(); motion.PlayHold(false, 2.2f, true); Step(motion, .9f);
                 CheckShoulderPose("riding", visual, arms, markers, shoulders, restReach, length, 14, 26);
                 motion.ResetMotion(); motion.PlayEnd(); Step(motion, .9f);
@@ -195,7 +195,7 @@ namespace RadioArchipelago.Editor
                 Require(outward > restReach[side] + length * .08f,
                     pose + ": the hand must swing gently outward from its shoulder, rather than folding upward beside the face.");
                 float elevation = Mathf.Atan2(tip.y, outward) * Mathf.Rad2Deg;
-                Require(elevation < 5, pose + ": the small shoulder swing raises the hand too high; elevation=" + elevation.ToString("F2"));
+                Require(elevation < Mathf.Max(5, maximumLift - 54), pose + ": shoulder swing raises the hand beyond its intended stroke; elevation=" + elevation.ToString("F2"));
                 float lift = elevation + 55;
                 Require(lift >= minimumLift && lift <= maximumLift,
                     pose + ": shoulder lift outside its expressive range; lift=" + lift.ToString("F2"));

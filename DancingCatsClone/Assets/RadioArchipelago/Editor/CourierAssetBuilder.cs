@@ -86,7 +86,10 @@ namespace RadioArchipelago.Editor
                         if (!IsFinite(vertex.x) || !IsFinite(vertex.y) || !IsFinite(vertex.z))
                             throw new InvalidDataException("Non-finite courier vertex: " + entry.id);
                 }
-                if (triangles > 25000 || bounds.size.y < 1.2f || bounds.size.y > 3.5f)
+                // The previous prepared Tiko contains 24,454 triangles. Closed, rounded
+                // detached paws and the repaired torso add 2,402; retain that source
+                // silhouette while bounding the complete imported courier at 30k.
+                if (triangles > 30000 || bounds.size.y < 1.2f || bounds.size.y > 3.5f)
                     throw new InvalidDataException("Courier triangle budget or scale is invalid: " + entry.id + " triangles=" + triangles);
                 foreach (string dependency in AssetDatabase.GetDependencies(AssetDatabase.GetAssetPath(entry.prefab), true))
                     if (dependency.StartsWith("Assets/Recovered/", StringComparison.Ordinal)

@@ -26,6 +26,8 @@ namespace RadioArchipelago
         private float bodyPitch, bodyRoll, bodyStretch, armLeftLift, armRightLift, footLeftLift, footRightLift;
         private float spinAngle, headTilt, bob;
         private float turnRate, turnAcceleration, rotorAngle, rotorWorldSpeed, rotorBlend, rotorReturnSpeed;
+        private Vector3 previousPosition, movementVelocity, movementAcceleration;
+        private bool movementCaptured;
         private int blinkIndex = -1;
         private float blinkRest;
         private enum Pose { Idle, Jump, Hold, Celebrate }
@@ -77,6 +79,7 @@ namespace RadioArchipelago
             bodyPitch = bodyRoll = bodyStretch = armLeftLift = armRightLift = footLeftLift = footRightLift = 0;
             spinAngle = headTilt = bob = 0;
             turnRate = turnAcceleration = rotorAngle = rotorWorldSpeed = rotorBlend = rotorReturnSpeed = 0;
+            previousPosition = transform.position; movementVelocity = movementAcceleration = Vector3.zero; movementCaptured = true;
             paused = externallyTimedFlight = holdLeft = spinning = false;
             landingTime = 10; landingStrength = 0; flightDuration = .45f; holdDuration = 2.6f; pose = Pose.Idle;
             RestoreRestPose();
@@ -107,11 +110,18 @@ namespace RadioArchipelago
         }
         public void PlayEnd() { pose = Pose.Celebrate; elapsed = 0; externallyTimedFlight = false; }
         public void SetFacing(float horizonDegrees) { if (Finite(horizonDegrees)) facingTarget = Mathf.Clamp(horizonDegrees, -70, 70); }
-        public void SetPaused(bool value) => paused = value;
+        public void SetPaused(bool value)
+        {
+            if (paused == value) return;
+            paused = value;
+            // A resumed presentation starts measuring displacement at the resumed location.
+            previousPosition = transform.position; movementVelocity = movementAcceleration = Vector3.zero;
+        }
 
         public void SimulateSprings(float deltaTime)
         {
             if (paused || !CaptureRestPose() || deltaTime <= 0 || !Finite(deltaTime)) return;
+            MeasureMovement(deltaTime);
             // Bounded substeps keep the damped chains stable through an Editor/render hitch.
             float remaining = Mathf.Min(deltaTime, .25f);
             while (remaining > .000001f)
@@ -119,6 +129,23 @@ namespace RadioArchipelago
                 float dt = Mathf.Min(remaining, 1f / 120); Step(dt); remaining -= dt;
             }
             ApplyPose();
+        }
+
+        private void MeasureMovement(float dt)
+        {
+            Vector3 position = transform.position;
+            Vector3 displacement = position - previousPosition; previousPosition = position;
+            if (!movementCaptured || displacement.sqrMagnitude > 100 || dt > .3f)
+            {
+                movementCaptured = true; movementVelocity = movementAcceleration = Vector3.zero; return;
+            }
+            // Presentation input only: never write back into the session's musical trajectory.
+            float scale = Mathf.Max(.1f, Mathf.Abs(transform.lossyScale.y));
+            Vector3 velocity = Vector3.ClampMagnitude(transform.InverseTransformDirection(displacement) / (dt * scale), 18);
+            Vector3 previousVelocity = movementVelocity;
+            movementVelocity = Vector3.Lerp(movementVelocity, velocity, 1 - Mathf.Exp(-14 * dt));
+            Vector3 acceleration = Vector3.ClampMagnitude((movementVelocity - previousVelocity) / dt, 80);
+            movementAcceleration = Vector3.Lerp(movementAcceleration, acceleration, 1 - Mathf.Exp(-12 * dt));
         }
 
         private void Step(float dt)
@@ -153,11 +180,18 @@ namespace RadioArchipelago
                     stretch = .09f * Mathf.Exp(-Mathf.Pow((p - .13f) / .17f, 2))
                         - .025f * Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.72f, 1, p));
                     pitch = -9 * Mathf.Sin(p * Mathf.PI * 1.15f);
-                    liftL = liftR = 8 + airborne * (10 + longFlight * 10);
-                    float flap = Mathf.Sin(elapsed * 11) * longFlight * airborne * 6;
-                    liftL += flap; liftR -= flap; footL = footR = airborne * .05f;
+                    // The reference cat uses simultaneous mirrored shoulder strokes at four Hz.
+                    // Keep that timing and eased stroke, retargeted to the couriers' short paws.
+                    float strokePhase = Mathf.Repeat(elapsed * 4, 1);
+                    float stroke = strokePhase < .52f ? Mathf.SmoothStep(0, 1, strokePhase / .52f)
+                        : 1 - Mathf.SmoothStep(0, 1, (strokePhase - .52f) / .48f);
+                    float flightBlend = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(0, .06f, p))
+                        * (1 - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.91f, 1, p)));
+                    float strokeRange = Mathf.Lerp(42, 70, longFlight);
+                    liftL = liftR = Mathf.Lerp(8, -10 + stroke * strokeRange, flightBlend);
+                    footL = footR = airborne * .05f;
                     roll += Mathf.Sin(elapsed * 6) * longFlight * airborne * 2.5f; nod = -airborne * 4;
-                    wind = 8 + longFlight * 9 + airborne * 12;
+                    wind = 10 + longFlight * 14 + airborne * 17;
                     rotorDemand = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.8f, 1.2f, flightDuration))
                         * Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.04f, .18f, p))
                         * (1 - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.84f, 1, p)));
@@ -186,7 +220,10 @@ namespace RadioArchipelago
             }
             bodyPitch = Mathf.Lerp(bodyPitch, pitch, smooth); bodyRoll = Mathf.Lerp(bodyRoll, roll, smooth);
             bodyStretch = Mathf.Lerp(bodyStretch, stretch, smooth);
-            armLeftLift = Mathf.Lerp(armLeftLift, liftL, smooth); armRightLift = Mathf.Lerp(armRightLift, liftR, smooth);
+            // A slow body blend erased the four-Hz paw strokes. The short shoulder gesture
+            // follows its own response while takeoff/landing still ease into the pose.
+            float armBlend = 1 - Mathf.Exp(-(pose == Pose.Jump ? 70 : 19) * dt);
+            armLeftLift = Mathf.Lerp(armLeftLift, liftL, armBlend); armRightLift = Mathf.Lerp(armRightLift, liftR, armBlend);
             footLeftLift = Mathf.Lerp(footLeftLift, footL, smooth); footRightLift = Mathf.Lerp(footRightLift, footR, smooth);
             headTilt = Mathf.Lerp(headTilt, nod, smooth); bob = Mathf.Lerp(bob, height, smooth);
             if (pose == Pose.Hold) spinAngle = turn;
@@ -197,12 +234,14 @@ namespace RadioArchipelago
             turnAcceleration = Mathf.Lerp(turnAcceleration, (turnRate - previousRate) / dt, 1 - Mathf.Exp(-12 * dt));
             StepSwivel(dt, rotorDemand, rotorDirection, yawDelta);
             float impact = ImpactCompression(), sway = Mathf.Sin(phase * 3.6f) * 2.2f - bodyRoll * .55f - facing * .12f;
-            float hingeLag = Mathf.Clamp(-turnRate * .025f - turnAcceleration * .002f, -12, 12);
-            float clothLag = Mathf.Clamp(-turnRate * .075f - turnAcceleration * .006f, -22, 22);
-            StepChain(antennas, dt, bodyPitch * -.75f - impact * 85, sway + hingeLag, 9.5f, .54f);
+            float lateralLag = Mathf.Clamp(-movementVelocity.x * 1.8f - movementAcceleration.x * .24f, -24, 24);
+            float verticalLag = Mathf.Clamp(-movementVelocity.y * 2.5f - movementAcceleration.y * .30f, -24, 24);
+            float hingeLag = Mathf.Clamp(-turnRate * .04f - turnAcceleration * .003f + lateralLag * .6f, -22, 22);
+            float clothLag = Mathf.Clamp(-turnRate * .11f - turnAcceleration * .009f + lateralLag, -42, 42);
+            StepChain(antennas, dt, bodyPitch * -.75f - impact * 100 + verticalLag * .45f, sway + hingeLag, 8.2f, .40f);
             StepChain(crests, dt, bodyPitch * -.7f - impact * 65, -sway * .8f, 12, .55f);
-            StepChain(scarves, dt, -wind + bodyPitch * .8f + impact * 90,
-                sway * .7f + clothLag, 8, .58f, phase, 2 + wind * .16f);
+            StepChain(scarves, dt, -wind + bodyPitch * .8f + impact * 125 + verticalLag,
+                sway + clothLag, 6.8f, .34f, phase, 5 + wind * .28f, 52, 68);
         }
 
         private void StepSwivel(float dt, float demand, float direction, float bodyYawDelta)
@@ -214,8 +253,8 @@ namespace RadioArchipelago
             // so a clockwise courier produces a visibly anticlockwise rotor in the scene.
             // Outside a spin the same hinge eases back to its nearest rest heading.
             float restWeight = 1 - rotorBlend;
-            float torque = Mathf.DeltaAngle(rotorAngle, 0) * 36 - rotorReturnSpeed * 10
-                - Mathf.Clamp(turnRate * 1.7f + turnAcceleration * .08f, -600, 600);
+            float torque = Mathf.DeltaAngle(rotorAngle, 0) * 27 - rotorReturnSpeed * 6.5f
+                - Mathf.Clamp(turnRate * 2.1f + turnAcceleration * .10f + movementAcceleration.x * 2, -700, 700);
             rotorReturnSpeed += torque * restWeight * dt;
             rotorReturnSpeed *= Mathf.Exp(-rotorBlend * 10 * dt);
             rotorAngle += (rotorWorldSpeed + rotorReturnSpeed * restWeight) * dt - bodyYawDelta * rotorBlend;
@@ -261,7 +300,7 @@ namespace RadioArchipelago
             return p > 0 && p < 1 ? Mathf.Sin(p * Mathf.PI) : 0;
         }
         private static void StepChain(Part[] parts, float dt, float pitch, float roll, float frequency, float damping,
-            float time = 0, float flutter = 0)
+            float time = 0, float flutter = 0, float targetLimit = 32, float bendLimit = 40)
         {
             // Read the previous state of every joint before writing any new state. This
             // keeps interleaved independent scarf branches independent of array order.
@@ -270,7 +309,7 @@ namespace RadioArchipelago
                 var part = parts[i];
                 // A scarf array can contain several independent tails. Distribute one total bend
                 // over each actual branch, rather than repeating the full angle at every joint.
-                Vector2 target = new Vector2(Mathf.Clamp(pitch, -32, 32), Mathf.Clamp(roll, -28, 28));
+                Vector2 target = new Vector2(Mathf.Clamp(pitch, -targetLimit, targetLimit), Mathf.Clamp(roll, -targetLimit * .875f, targetLimit * .875f));
                 if (part.chainParent != null)
                 {
                     var parent = part.chainParent;
@@ -279,7 +318,7 @@ namespace RadioArchipelago
                     target += new Vector2(Mathf.Sin(time * 6.3f - part.chainDepth * .72f),
                         Mathf.Sin(time * 5.1f - part.chainDepth * .88f) * .65f) * flutter * tip;
                 }
-                if (part.chainLength > 1) target = Vector2.ClampMagnitude(target, 32) * part.bendShare;
+                if (part.chainLength > 1) target = Vector2.ClampMagnitude(target, targetLimit) * part.bendShare;
                 part.targetBend = target;
             }
             foreach (var part in parts)
@@ -287,8 +326,8 @@ namespace RadioArchipelago
                 float omega = frequency * (1 - Mathf.Min(part.chainDepth, 4) * .055f);
                 part.velocity += (omega * omega * (part.targetBend - part.bend) - 2 * damping * omega * part.velocity) * dt;
                 part.bend += part.velocity * dt;
-                if (part.chainLength > 1) part.bend = Vector2.ClampMagnitude(part.bend, 40 * part.bendShare);
-                else { part.bend.x = Mathf.Clamp(part.bend.x, -32, 32); part.bend.y = Mathf.Clamp(part.bend.y, -28, 28); }
+                if (part.chainLength > 1) part.bend = Vector2.ClampMagnitude(part.bend, bendLimit * part.bendShare);
+                else { part.bend.x = Mathf.Clamp(part.bend.x, -targetLimit, targetLimit); part.bend.y = Mathf.Clamp(part.bend.y, -targetLimit * .875f, targetLimit * .875f); }
             }
         }
         private static void ApplyChains(Part[] parts) { foreach (var part in parts) part.Rotate(part.bend.x, 0, part.bend.y); }

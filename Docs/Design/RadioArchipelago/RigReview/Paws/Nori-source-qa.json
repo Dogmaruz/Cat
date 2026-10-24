@@ -1,0 +1,593 @@
+{
+  "character": "Nori",
+  "coordinate_system": "Blender Z up, facing -Y, feet at root origin; FBX export forward -Z/up Y",
+  "height": 2.600000364448956,
+  "source_foot_offset": [
+    0.2002236545085907,
+    -0.3341296315193176,
+    0.0
+  ],
+  "triangles": 15670,
+  "meshes": [
+    {
+      "name": "Nori_Character",
+      "role": "Character",
+      "vertices": 6778,
+      "triangles": 13572
+    },
+    {
+      "name": "Nori_Arm.R_Cut",
+      "role": "Arm.R",
+      "vertices": 541,
+      "triangles": 1078
+    },
+    {
+      "name": "Nori_Arm.L_Cut",
+      "role": "Arm.L",
+      "vertices": 512,
+      "triangles": 1020
+    }
+  ],
+  "bones": [
+    {
+      "name": "root",
+      "parent": null,
+      "head": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        0.25
+      ]
+    },
+    {
+      "name": "body",
+      "parent": "root",
+      "head": [
+        0.0,
+        0.0,
+        0.4300000071525574
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        1.100000023841858
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "body",
+      "head": [
+        0.0,
+        -0.11999999731779099,
+        1.090000033378601
+      ],
+      "tail": [
+        0.0,
+        -0.11999999731779099,
+        1.75
+      ]
+    },
+    {
+      "name": "arm.R",
+      "parent": "body",
+      "head": [
+        -0.6049999594688416,
+        0.2800000011920929,
+        0.8799999952316284
+      ],
+      "tail": [
+        -0.8373004794120789,
+        0.34261640906333923,
+        0.5858645439147949
+      ]
+    },
+    {
+      "name": "arm.L",
+      "parent": "body",
+      "head": [
+        0.6349999308586121,
+        0.28999999165534973,
+        0.8899999856948853
+      ],
+      "tail": [
+        0.8260525465011597,
+        0.34630054235458374,
+        0.5663811564445496
+      ]
+    },
+    {
+      "name": "foot.L",
+      "parent": "body",
+      "head": [
+        0.27000001072883606,
+        0.0,
+        0.20000000298023224
+      ],
+      "tail": [
+        0.27000001072883606,
+        -0.12999999523162842,
+        0.04500000178813934
+      ]
+    },
+    {
+      "name": "foot.R",
+      "parent": "body",
+      "head": [
+        -0.27000001072883606,
+        0.0,
+        0.20000000298023224
+      ],
+      "tail": [
+        -0.27000001072883606,
+        -0.12999999523162842,
+        0.04500000178813934
+      ]
+    },
+    {
+      "name": "scarf.L.01",
+      "parent": "body",
+      "head": [
+        -0.800223708152771,
+        0.8141295909881592,
+        0.8899999856948853
+      ],
+      "tail": [
+        -0.925223708152771,
+        0.949129581451416,
+        0.9350000023841858
+      ]
+    },
+    {
+      "name": "scarf.L.02",
+      "parent": "scarf.L.01",
+      "head": [
+        -0.925223708152771,
+        0.949129581451416,
+        0.9350000023841858
+      ],
+      "tail": [
+        -1.050223708152771,
+        1.0841295719146729,
+        0.9800000190734863
+      ]
+    },
+    {
+      "name": "scarf.L.03",
+      "parent": "scarf.L.02",
+      "head": [
+        -1.050223708152771,
+        1.0841295719146729,
+        0.9800000190734863
+      ],
+      "tail": [
+        -1.2352237701416016,
+        1.2791296243667603,
+        0.9600000381469727
+      ]
+    },
+    {
+      "name": "scarf.L.04",
+      "parent": "scarf.L.03",
+      "head": [
+        -1.2352237701416016,
+        1.2791296243667603,
+        0.9600000381469727
+      ],
+      "tail": [
+        -1.4202237129211426,
+        1.4741296768188477,
+        0.9399999976158142
+      ]
+    },
+    {
+      "name": "scarf.R.01",
+      "parent": "body",
+      "head": [
+        -0.800223708152771,
+        0.8141295909881592,
+        0.8500000238418579
+      ],
+      "tail": [
+        -0.925223708152771,
+        0.9291296005249023,
+        0.7850000262260437
+      ]
+    },
+    {
+      "name": "scarf.R.02",
+      "parent": "scarf.R.01",
+      "head": [
+        -0.925223708152771,
+        0.9291296005249023,
+        0.7850000262260437
+      ],
+      "tail": [
+        -1.050223708152771,
+        1.0441296100616455,
+        0.7200000286102295
+      ]
+    },
+    {
+      "name": "scarf.R.03",
+      "parent": "scarf.R.02",
+      "head": [
+        -1.050223708152771,
+        1.0441296100616455,
+        0.7200000286102295
+      ],
+      "tail": [
+        -1.175223708152771,
+        1.1691296100616455,
+        0.6399999856948853
+      ]
+    },
+    {
+      "name": "scarf.R.04",
+      "parent": "scarf.R.03",
+      "head": [
+        -1.175223708152771,
+        1.1691296100616455,
+        0.6399999856948853
+      ],
+      "tail": [
+        -1.300223708152771,
+        1.2941296100616455,
+        0.5600000023841858
+      ]
+    },
+    {
+      "name": "antenna.yaw",
+      "parent": "body",
+      "head": [
+        -0.841408908367157,
+        0.7466127872467041,
+        1.8300012350082397
+      ],
+      "tail": [
+        -0.841408908367157,
+        0.7466127872467041,
+        2.0100011825561523
+      ]
+    },
+    {
+      "name": "antenna.01",
+      "parent": "antenna.yaw",
+      "head": [
+        -0.841408908367157,
+        0.7466127872467041,
+        1.8300012350082397
+      ],
+      "tail": [
+        -0.8502236604690552,
+        0.7341296672821045,
+        1.9800000190734863
+      ]
+    },
+    {
+      "name": "antenna.02",
+      "parent": "antenna.01",
+      "head": [
+        -0.8502236604690552,
+        0.7341296672821045,
+        1.9800000190734863
+      ],
+      "tail": [
+        -0.5902236700057983,
+        0.4741296172142029,
+        2.299999952316284
+      ]
+    },
+    {
+      "name": "antenna.03",
+      "parent": "antenna.02",
+      "head": [
+        -0.5902236700057983,
+        0.4741296172142029,
+        2.299999952316284
+      ],
+      "tail": [
+        -0.16022366285324097,
+        0.044129639863967896,
+        2.4800000190734863
+      ]
+    },
+    {
+      "name": "antenna.04",
+      "parent": "antenna.03",
+      "head": [
+        -0.16022366285324097,
+        0.044129639863967896,
+        2.4800000190734863
+      ],
+      "tail": [
+        0.20977634191513062,
+        -0.3358703851699829,
+        2.4200000762939453
+      ]
+    },
+    {
+      "name": "antenna.05",
+      "parent": "antenna.04",
+      "head": [
+        0.20977634191513062,
+        -0.3358703851699829,
+        2.4200000762939453
+      ],
+      "tail": [
+        0.514776349067688,
+        -0.5958703756332397,
+        2.197000026702881
+      ]
+    }
+  ],
+  "blink_meshes": [
+    "Nori_Character"
+  ],
+  "blink_shape": "Blink",
+  "has_crest": false,
+  "has_scarf": true,
+  "exporter": "export_prepared_rigs.py",
+  "blender_version": "5.2.1 LTS",
+  "source_review_sha256": "7e7a70b7d174649c126638361c4803e4f69e3b8f6d504751d0d9b6777725b6f0",
+  "source_review_manifest_sha256": "035c4725906d56243ced4482c411d6e11722a6b20189defe1f90abb53e787952",
+  "model": "Model.fbx",
+  "authoring_project": "Nori_Rigged.blend",
+  "fbx_coordinates": "forward -Z, up Y; Blender source faces -Y, Unity import faces +Z",
+  "bounds_blender": {
+    "min": [
+      -1.4274113178253174,
+      -0.8164351582527161,
+      1.7020770570752575e-08
+    ],
+    "max": [
+      1.1093029975891113,
+      1.484694480895996,
+      2.6000003814697266
+    ]
+  },
+  "mesh_uv_geometry_sha256": {
+    "Nori_Arm.L_Cut": "2cd7d99bc02f48761e5935c5f8a88a939a21cbaadee0892f493a63ea883709de",
+    "Nori_Arm.R_Cut": "31636075e910b603cc7dcf082d3961ea6cddc497be9a3077b97fd5b26a9e9a14",
+    "Nori_Character": "e22ecc760c3058743b8353f41e40930fa2799ce520c21b64332511a0d2f395f7"
+  },
+  "skinned_mesh_count": 3,
+  "bone_count": 21,
+  "texture_packing": {
+    "size": [
+      4096,
+      4096
+    ],
+    "channels": {
+      "R": "metallic",
+      "G": "0",
+      "B": "0",
+      "A": "1 - roughness"
+    },
+    "color_space": "linear",
+    "maximum_roundtrip_error": 1.1920928955078125e-07
+  },
+  "texture_sources": {
+    "BaseColor.png": {
+      "source_filename": "Nori_basecolor.PNG",
+      "sha256": "491d3ba2578ad6920f166e4d65e821feacf39e08606a2c37106cf2359cba4983"
+    },
+    "Normal.png": {
+      "source_filename": "Nori_normal.PNG",
+      "sha256": "4b9942c9bf9fb7ac98776ff6b682135a183982f5696b759d985ed9c64c7fbb4d"
+    }
+  },
+  "fbx_options": {
+    "use_selection": true,
+    "object_types": [
+      "ARMATURE",
+      "MESH"
+    ],
+    "global_scale": 1.0,
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_ALL",
+    "use_space_transform": true,
+    "bake_space_transform": false,
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "use_mesh_modifiers": false,
+    "use_tspace": true,
+    "mesh_smooth_type": "OFF",
+    "use_custom_props": true,
+    "add_leaf_bones": false,
+    "primary_bone_axis": "Y",
+    "secondary_bone_axis": "X",
+    "use_armature_deform_only": false,
+    "armature_nodetype": "NULL",
+    "bake_anim": false,
+    "path_mode": "STRIP",
+    "embed_textures": false
+  },
+  "files": {
+    "Model.fbx": {
+      "bytes": 1395436,
+      "sha256": "6c708244c9933a83bff945bfc81b572c6e0e8c1de6c61d6a77cfaca5f1f32cf8"
+    },
+    "Nori_Rigged.blend": {
+      "bytes": 881571,
+      "sha256": "8451be94bfec88e238268d75bca6c6fe4a36f9e320a5dd73c692d90f974415d7"
+    },
+    "BaseColor.png": {
+      "bytes": 25226179,
+      "sha256": "491d3ba2578ad6920f166e4d65e821feacf39e08606a2c37106cf2359cba4983"
+    },
+    "Normal.png": {
+      "bytes": 5826473,
+      "sha256": "4b9942c9bf9fb7ac98776ff6b682135a183982f5696b759d985ed9c64c7fbb4d"
+    },
+    "MetallicSmoothness.png": {
+      "bytes": 10050964,
+      "sha256": "03f846c0fa3be237186104cf7bb5a68f2974bdfbd64472aa5e28fb4ad70b68a0"
+    }
+  },
+  "verification": {
+    "portable_blend_reopened": true,
+    "fbx_reimported": true,
+    "mesh_names_match": true,
+    "bone_names_match": true,
+    "normalized_skin_weights": true,
+    "maximum_weight_error": 0.0,
+    "maximum_vertex_error": 2.980232238769531e-07,
+    "maximum_uv_error": 0.0,
+    "maximum_normal_error": 0.0003399848937988281,
+    "maximum_blink_error": 2.980232238769531e-07,
+    "maximum_normal_angle_degrees": 0.027848197531891244,
+    "maximum_bone_rest_matrix_error": 1.7583370208740234e-06,
+    "image_sizes": {
+      "BaseColor.png": [
+        4096,
+        4096
+      ],
+      "MetallicSmoothness.png": [
+        4096,
+        4096
+      ],
+      "Normal.png": [
+        4096,
+        4096
+      ]
+    }
+  },
+  "accessory_revision": "mechanical-yaw-and-four-bone-scarves-v2",
+  "accessory_qa": {
+    "before": {
+      "vertices": 7244,
+      "triangles": 14508,
+      "boundary_edges": 0
+    },
+    "after": {
+      "vertices": 7344,
+      "triangles": 14704,
+      "boundary_edges": 0
+    },
+    "removed_brace_triangles": 0,
+    "hinge": [
+      -0.841408908367157,
+      0.7466127872467041,
+      1.8300012350082397
+    ],
+    "detached_antenna_faces": 609,
+    "mechanical_cap_recess": 0.004,
+    "rigid_yaw_qa": {
+      "0": {
+        "max_edge_stretch": 1.000007161447529,
+        "p99_edge_stretch": 1.000001183556639,
+        "max_absolute_edge_change": 2.6459460016059477e-07,
+        "finite": true
+      },
+      "90": {
+        "max_edge_stretch": 1.0000074033430002,
+        "p99_edge_stretch": 1.0000014378862914,
+        "max_absolute_edge_change": 4.0712561384659285e-07,
+        "finite": true
+      },
+      "180": {
+        "max_edge_stretch": 1.0000082014716067,
+        "p99_edge_stretch": 1.0000014735945064,
+        "max_absolute_edge_change": 3.677234146071129e-07,
+        "finite": true
+      },
+      "270": {
+        "max_edge_stretch": 1.0000081235054883,
+        "p99_edge_stretch": 1.000001425587376,
+        "max_absolute_edge_change": 4.553359295167425e-07,
+        "finite": true
+      }
+    },
+    "max_significant_weights": 3,
+    "blink_preserved": true
+  },
+  "arm_clearance_revision": "overlapping-rigid-source-paws-v1",
+  "arm_clearance_qa": {
+    "revision": "overlapping-rigid-source-paws-v1",
+    "pose_range_degrees": [
+      -10,
+      60
+    ],
+    "paws": {
+      "R": {
+        "vertices": 541,
+        "triangles": 1078,
+        "root_faces": 320,
+        "rigid_pose_checks": {
+          "-10": {
+            "maximum_edge_change": 1.4357532181208388e-07,
+            "finite": true
+          },
+          "30": {
+            "maximum_edge_change": 1.4495034696658526e-07,
+            "finite": true
+          },
+          "45": {
+            "maximum_edge_change": 1.5945960688337757e-07,
+            "finite": true
+          },
+          "60": {
+            "maximum_edge_change": 1.3603838475151342e-07,
+            "finite": true
+          }
+        }
+      },
+      "L": {
+        "vertices": 512,
+        "triangles": 1020,
+        "root_faces": 236,
+        "rigid_pose_checks": {
+          "-10": {
+            "maximum_edge_change": 2.182629994969265e-07,
+            "finite": true
+          },
+          "30": {
+            "maximum_edge_change": 1.9951944800478127e-07,
+            "finite": true
+          },
+          "45": {
+            "maximum_edge_change": 2.1442165596199936e-07,
+            "finite": true
+          },
+          "60": {
+            "maximum_edge_change": 2.535067360476262e-07,
+            "finite": true
+          }
+        }
+      }
+    },
+    "source_surface_audit": {
+      "Character": {
+        "checked_corners": 39016,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.00045648934089622333,
+        "local_body_vertices": 113,
+        "cleaned_contact_faces": 0
+      },
+      "Arm.R": {
+        "checked_corners": 2274,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.006486927541040828,
+        "local_body_vertices": 0,
+        "cleaned_contact_faces": 28
+      },
+      "Arm.L": {
+        "checked_corners": 2352,
+        "uv_error": 0.0,
+        "position_error": 0.0,
+        "normal_error": 0.0001259726613746979,
+        "local_body_vertices": 0,
+        "cleaned_contact_faces": 19
+      },
+      "source_face_count": 14704
+    },
+    "body_boundary_edges": 0,
+    "blink_preserved": true
+  }
+}

@@ -19,8 +19,8 @@ def main():
     args.output.mkdir(parents=True, exist_ok=True)
     for sequence in ("flight", "ride"):
         files = sorted((args.source / sequence).glob("*.png"))
-        if len(files) != 48:
-            raise ValueError(f"Expected 48 actual Unity frames for {sequence}, got {len(files)}")
+        if len(files) != 120:
+            raise ValueError(f"Expected 120 actual Unity frames for {sequence}, got {len(files)}")
         frames = []
         size = None
         for path in files:
@@ -31,14 +31,14 @@ def main():
                     raise ValueError(f"Inconsistent frame dimensions: {path}")
                 frames.append(source.convert("RGB").quantize(colors=256))
         target = args.output / f"couriers-{sequence}.gif"
-        # GIF frame duration is quantized to 10 ms: 3 seconds / 48 frames.
-        durations = [60 if i % 4 else 70 for i in range(48)]
+        # GIF duration is quantized to 10 ms: alternate 20/30 ms for 40 fps.
+        durations = [20 if i % 2 else 30 for i in range(120)]
         frames[0].save(target, save_all=True, append_images=frames[1:],
                        duration=durations, loop=0, optimize=False, disposal=2)
         with Image.open(target) as result:
-            if result.n_frames != 48 or result.size != size:
+            if result.n_frames != 120 or result.size != size:
                 raise ValueError(f"Encoded review lost frames: {target}")
-        print(json.dumps({"file": str(target.resolve()), "frames": 48,
+        print(json.dumps({"file": str(target.resolve()), "frames": 120,
                           "dimensions": size, "milliseconds": sum(durations),
                           "bytes": target.stat().st_size}))
 

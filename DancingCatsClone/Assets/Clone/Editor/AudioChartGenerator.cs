@@ -13,7 +13,8 @@ namespace DancingCats.Clone.Editor
     public static class AudioChartGenerator
     {
         public const string AlwaysRememberId = "AlwaysRememberMeowCat";
-        private const string Version = "pcm-spectral-chart-v3";
+        private const string Version = "pcm-phrase-chart-v4";
+        private const string VocalVersion = "pcm-vocal-phrase-chart-v5";
         private const double MinGap = .18, MaxGap = 1.95;
 
         [Serializable]
@@ -75,7 +76,7 @@ namespace DancingCats.Clone.Editor
                     throw new InvalidDataException("Audio PCM is unavailable. Use Decompress On Load and disable Load In Background on the music importer.");
                 var pcm = new float[checked(clip.samples * clip.channels)];
                 if (!clip.GetData(pcm, 0)) throw new InvalidDataException("AudioClip.GetData failed; import the song with Decompress On Load.");
-                map = GenerateFromSamples(pcm, clip.frequency, clip.channels, id, options);
+                map = GenerateFromSamples(pcm, clip.frequency, clip.channels, id, options, PcmVocalAnalysis.LoadForClip(clip));
             }
             map.audio.channels = clip.channels;
             if (File.Exists(source))
@@ -90,7 +91,8 @@ namespace DancingCats.Clone.Editor
         }
 
         /// <summary>Deterministic pure PCM entry point, also used by synthetic audio validation.</summary>
-        public static MapTimeline GenerateFromSamples(float[] interleaved, int sampleRate, int channels, string id, Options options = null)
+        public static MapTimeline GenerateFromSamples(float[] interleaved, int sampleRate, int channels, string id, Options options = null,
+            PcmVocalAnalysis.Evidence vocalEvidence = null)
         {
             options = options ?? new Options();
             ValidateOptions(id, options);
@@ -98,21 +100,44 @@ namespace DancingCats.Clone.Editor
             double duration = (double)(interleaved.Length / channels) / sampleRate;
             if (duration < 5) throw new InvalidDataException("A playable song must contain at least five seconds of decoded PCM.");
             var analysis = Analyze(interleaved, sampleRate, channels, out var spectral);
+            string digest = PcmHash(interleaved);
+            if (vocalEvidence != null) PcmVocalAnalysis.Validate(vocalEvidence, digest, sampleRate, channels, interleaved.Length / channels);
             if (spectral.accents.Length >= 4) analysis.accents = spectral.accents.ToList();
             double finishTime = Round(duration - Math.Max(1.1, 5 / options.forwardSpeed + .25));
             // The native Start is already support. Its next tile follows the first real attack,
             // rather than an extra invented landing at decoded-audio time zero.
             var cues = new List<MusicalCue>();
+            var movingPhrases = options.includeMovingJumps ? spectral.follows.Where(cue => cue.time >= 0 && cue.endTime <= finishTime - MinGap).ToArray()
+                : Array.Empty<MusicalCue>();
+            var vocalHolds = vocalEvidence != null && options.includeHolds ? PcmVocalAnalysis.Analyze(vocalEvidence, analysis.accents.ToArray())
+                .Where(cue => cue.time >= 0 && cue.endTime <= finishTime - MinGap
+                    && !movingPhrases.Any(phrase => cue.time < phrase.endTime + .078 && cue.endTime > phrase.time - .078)).ToArray()
+                : Array.Empty<MusicalCue>();
+            var confirmedSupports = movingPhrases.Concat(vocalHolds).OrderBy(cue => cue.time).ToArray();
+            int nextSupport = 0;
             double supportedUntil = double.NegativeInfinity;
-            foreach (double accent in analysis.accents)
+            // A separated vocal can reveal an attack hidden by the accompaniment. Its
+            // measured entry must participate even when the mixed-audio peaks missed it.
+            foreach (double accent in analysis.accents.Concat(confirmedSupports.Select(cue => cue.time)).Distinct().OrderBy(time => time))
             {
+                // Phrase entry is refined from the attack's rising edge and may precede its
+                // flux peak. Consume the whole phrase once, preserving its measured end.
+                while (nextSupport < confirmedSupports.Length && confirmedSupports[nextSupport].time <= accent + .08)
+                {
+                    var phrase = confirmedSupports[nextSupport++];
+                    if (phrase.time <= supportedUntil + .078) continue;
+                    cues.Add(phrase); supportedUntil = phrase.endTime;
+                }
                 if (accent < 0 || accent > finishTime - MinGap || accent <= supportedUntil + .078) continue;
-                var note = options.includeHolds ? spectral.sustained.FirstOrDefault(candidate => candidate.start <= accent + .08
+                var note = options.includeHolds && vocalEvidence == null ? spectral.sustained.FirstOrDefault(candidate => candidate.start <= accent + .08
                     && candidate.start >= accent - .35 && candidate.end - accent >= .45 && candidate.confidence >= .65) : null;
                 // A new independent articulation shortly afterwards is evidence for another
                 // jump, even when a backing instrument keeps the same harmonic pitch.
                 double nextAttack = analysis.accents.FirstOrDefault(time => time > accent + .078);
                 if (nextAttack > 0 && nextAttack - accent < .42) note = null;
+                // A verified recurrent glide takes priority over a weaker background note.
+                // Reject the ambiguous hold instead of inventing a release at the glide start.
+                if (note != null && nextSupport < confirmedSupports.Length && note.end >= confirmedSupports[nextSupport].time - .078) note = null;
                 double end = accent;
                 if (note != null)
                 {
@@ -134,15 +159,26 @@ namespace DancingCats.Clone.Editor
             var map = MusicalChartCompiler.Compile(new MusicalScore { id = id, audioDuration = duration, sampleRate = sampleRate,
                 bpm = 60 / analysis.period, beats = Array.Empty<double>(), cues = cues.ToArray() }, options, sampleRate, duration);
             map.tempoSections[0].startSample = (int)Math.Round(analysis.phase * sampleRate);
-            string digest = PcmHash(interleaved);
-            map.sourceMapBundle = Version; map.sourceMapBundleSha256 = digest;
+            string version = vocalEvidence == null ? Version : VocalVersion;
+            map.sourceMapBundle = version; map.sourceMapBundleSha256 = digest;
             map.audio.rawSha256 = digest; map.audio.channels = channels; map.audio.bitsPerSample = 32; map.audio.rawBytes = (long)interleaved.Length * sizeof(float);
-            map.timing.warning = "Mixed-audio spectral attacks and conservative harmonic note estimates; these do not identify an isolated singer. Uncertain moving paths still require authored score contours. Long rests are preserved.";
-            map.normalizationNotes = new[] { "Generator: " + Version + "; decoded PCM float32 SHA-256: " + digest,
+            map.timing.warning = "Mixed-audio attacks and conservative sustained-note estimates do not isolate a singer. Recurrent continuous phrases can form glides; their lateral paths use an authored palette. Long rests are preserved.";
+            map.normalizationNotes = new[] { "Generator: " + version + "; decoded PCM float32 SHA-256: " + digest,
                 "1024-sample Hann spectrum near 11kHz / 10ms hop; independent stereo magnitude combination; log spectral flux with local threshold and strength-ranked 160ms non-maximum suppression.",
                 "Detected BPM: " + (60 / analysis.period).ToString("F4", CultureInfo.InvariantCulture) + "; phase seconds: " + analysis.phase.ToString("F6", CultureInfo.InvariantCulture),
                 "Holds require a stable pitch ridge with at least three harmonic partials and use measured attack/release only; a sustained single-tone RMS bed is insufficient.",
+                "Follow proposals require repeated irregular articulation patterns, near-identical normalized spectra and continuous tonal energy. Boundaries come from measured attacks; six route samples use an independent authored lane palette.",
                 "No source identity, reference cues, arbitrary gap filler or periodic moving jumps. A musical score takes priority when its source hash matches." };
+            if (vocalEvidence != null)
+            {
+                map.timing.warning = "Locally separated vocal evidence drives conservative legato/plateau holds; mixed-audio recurrence drives glides. Lateral paths use an authored palette. This does not reproduce every designer-authored gesture.";
+                map.normalizationNotes = map.normalizationNotes.Concat(new[]
+                {
+                    "Vocal evidence: " + vocalEvidence.analysisVersion + "; verified decoded PCM and feature SHA-256: " + vocalEvidence.featureSha256,
+                    "Vocal holds use sustained plateaus with downward releases or descending legato across changing notes, followed to the measured voice envelope. Voice features take priority over mixed-pitch sustain guesses.",
+                    "Local separator model SHA-256: " + vocalEvidence.separatorModelSha256 + "; note model: " + vocalEvidence.noteModelSha256 + "; no audio upload."
+                }).ToArray();
+            }
             return map;
         }
 

@@ -11,6 +11,7 @@ namespace DancingCats.Clone.Editor
         {
             public double[] accents = Array.Empty<double>();
             public MusicalNote[] sustained = Array.Empty<MusicalNote>();
+            public MusicalCue[] follows = Array.Empty<MusicalCue>();
             public double highBandFraction;
         }
 
@@ -42,6 +43,8 @@ namespace DancingCats.Clone.Editor
             var whitened = new double[magnitude.Length];
             var fullFlux = new double[count]; var highFlux = new double[count];
             var times = new double[count]; var pitch = new double[count]; var confidence = new double[count]; var partials = new int[count];
+            // Offline phrase comparison owns the complete spectra; runtime playback never allocates these.
+            var phraseSpectra = new double[count][];
             double totalEnergy = 0, highEnergy = 0;
             int highFirst = Math.Max(1, (int)Math.Ceiling(2500 / analysisRate * size));
             int highLast = Math.Min(magnitude.Length - 1, (int)Math.Floor(5000 / analysisRate * size));
@@ -57,6 +60,7 @@ namespace DancingCats.Clone.Editor
                 }
                 // Combine channel magnitudes, not waveform sums: antiphase stereo stays audible to analysis.
                 times[frame] = (frame * hop + size / 2.0) / analysisRate;
+                phraseSpectra[frame] = (double[])magnitude.Clone();
                 for (int bin = 0; bin < magnitude.Length; bin++)
                 {
                     double value = Math.Log(1 + magnitude[bin] * 12);
@@ -100,7 +104,8 @@ namespace DancingCats.Clone.Editor
                 }
                 start = frame;
             }
-            return new Result { accents = accents, sustained = notes.ToArray(), highBandFraction = fraction };
+            return new Result { accents = accents, sustained = notes.ToArray(), highBandFraction = fraction,
+                follows = PcmPhraseAnalysis.Analyze(accents, times, phraseSpectra, brightAttacks ? highFlux : fullFlux, analysisRate / size) };
         }
 
         private static double[] Peaks(double[] novelty, double[] times, double threshold, double gap)
