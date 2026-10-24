@@ -1,6 +1,40 @@
-# Connected-source character review
+# Character source and animation review
 
-The selected rigs keep each original character in one connected mesh. Short
+## Current accessory authoring: 24 October 2026
+
+The current models keep the arms and body connected while adding a sealed
+mechanical antenna seam. `body → antenna.yaw → antenna.01` gives each assembly
+its actual mounting joint. Tiko/Nori have four bones in each scarf tail. Lumen's
+lower backpack brace is removed and the sail joint is above the head.
+
+| Character | Vertices / triangles | Bones |
+|---|---:|---:|
+| Tiko | 12,203 / 24,454 | 23 |
+| Lumen | 9,431 / 18,878 | 12 |
+| Nori | 7,344 / 14,704 | 21 |
+
+Every file matches its manifest's SHA-256 and size. Existing 4K maps are byte
+unchanged. Independent FBX roundtrip checks preserve the edited geometry, UVs,
+weights, normals, bone rest frames and Blink. Joint rotations 0/90/180/270° pass
+with maximum edge stretch 1.000272× and no new open boundaries. This is authoring
+and export evidence; it does not assert a new Unity playtest result.
+
+Revision v2 recesses each mechanical cap 0.004 source units into its own side.
+Closed sidewalls preserve the exterior rings and silhouette. Exact coincident
+fixed/moving cap triangle pairs fall from 28/14/23 to zero for Tiko/Lumen/Nori;
+joint vertices retain zero Blink displacement. See
+[cap clearance A/B](Accessories/mechanical-cap-clearance.json).
+
+- Mechanical reports: [Tiko](Accessories/Tiko-authoring-checks.json),
+  [Lumen](Accessories/Lumen-authoring-checks.json),
+  [Nori](Accessories/Nori-authoring-checks.json).
+- Lumen: [before](Accessories/lumen-before.png),
+  [brace removed](Accessories/lumen-yaw-000.png),
+  [joint turned 180°](Accessories/lumen-yaw-180.png).
+
+## Historical connected-source review: 21 October 2026
+
+The earlier rigs kept each original character in one connected mesh. Short
 shoulder bones follow the user's marked hand axes. Working waves are 15–30°;
 35° is a stress pose. No cuts, arm caps or replacement shoulder patches are used.
 
@@ -26,7 +60,7 @@ Root visually accepted all three at the working angles. Blender source QA is
 separate from the subsequent Unity renderer/gameplay checks.
 
 Exact per-character proof, frozen source digests, authoring checks and complete
-final Tiko 15/25/35° strain measurements:
+Tiko 15/25/35° strain measurements for that earlier revision:
 [`source-checks.json`](source-checks.json).
 
 Authoring commands and rig contract:
@@ -35,7 +69,7 @@ The earlier separated/pinned-shell/high-angle prototypes in Library are rejected
 fallbacks; the canonical `prepare_radio_rigs.py --stage rig` now creates one
 connected mesh for every character.
 
-## Actual Unity validation
+## Historical Unity validation: 21–22 October 2026
 
 The imported production prefabs passed the real-skin checks in
 [`unity-rig-checks.txt`](unity-rig-checks.txt): normalized weights, owned 4K
@@ -75,7 +109,7 @@ shoulder boundaries agree with the selected bone roots and do not justify
 replacing the connected rigs or original 4K atlases. See
 [`TRIPO_PARTS.md`](TRIPO_PARTS.md) for the comparison and source hashes.
 
-## Main menu framing and landing pad
+## Menu framing and landing pad: 22 October 2026
 
 The follow-up fixes double-applied skin scale, root-bone culling bounds and
 UI ancestor scaling. All three couriers now share a feet-to-head display size
@@ -88,7 +122,7 @@ Actual GameView frames:
 [Tiko](Menu/menu-signal-540x960.png), [Lumen](Menu/menu-sail-540x960.png),
 [Nori](Menu/menu-orbit-540x960.png).
 
-## Courier lighting in the actual menu and game
+## Courier lighting in the menu and game: 22 October 2026
 
 The shared studio profile adds a warm key, sky fill and soft rim, plus a static
 HDR reflection map for the supplied URP Lit materials. No realtime probe capture
@@ -100,3 +134,15 @@ rendering layer. The nine live menu cases check lighting as well as framing.
 - [Layer registration proof](Menu/lighting-layer-proof.txt): the previous defined
   mask `0x1` stripped bit 7; registered mask `0x81` preserves the light mask `0x80`.
 - [Lighting setup and authoring](../COURIER_LIGHTING.md).
+
+## Final Unity accessory review, 24 October
+
+All three revised imports passed actual weighted-skin, shoulder, Blink and world
+culling checks. Accessory checks verify turning lag, short/long flight, opposite
+world rotation on both riding directions, finite deformation, pause, reset and
+hitch stability. Mechanical cap clearance was reimported and checked again.
+
+- [Flight GIF](Accessories/couriers-flight.gif) and [riding GIF](Accessories/couriers-ride.gif): 48 actual Unity frames each, 1200×600.
+- [Accessory checks](Accessories/unity-accessory-checks.txt), [skin checks](Accessories/unity-rig-checks.txt), [nine menu cases](Accessories/unity-menu-checks.txt).
+- [Full 157.153-second playtest](Accessories/unity-full-song-playtest.txt).
+- [Separate Unstoppable comparison](../../../Clone/ChartCalibration/README.md), including its complete 67.004-second gameplay review.

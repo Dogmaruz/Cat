@@ -25,6 +25,8 @@ namespace RadioArchipelago.Editor
         private const string CourierKey = "RadioArchipelago.v1.courier";
         private const string GuideKey = "DancingCatsClone.v1.howToPlaySeen";
         private const string SongId = "AlwaysRememberMeowCat";
+        private const string ComparisonId = "UnstoppableGeneratorTest";
+        private static string ReviewSongId => SessionState.GetString(Key + ".song", SongId);
         private static readonly string Output = Path.GetFullPath(Path.Combine(Application.dataPath, "../Library/RadioArchipelagoReview"));
         private static readonly List<string> Notes = new List<string>();
         private static readonly List<string> Errors = new List<string>();
@@ -117,10 +119,12 @@ namespace RadioArchipelago.Editor
         [MenuItem("Radio Archipelago/Review/Play menu and full song")]
         public static void RunPlaytest() => StartReview(false);
 
+        public static void RunComparisonPlaytest() => StartReview(false, ComparisonId);
+
         [MenuItem("Radio Archipelago/Review/Check live menu preview framing")]
         public static void RunMenuPreviewReview() => StartReview(true);
 
-        private static void StartReview(bool menuOnly)
+        private static void StartReview(bool menuOnly, string songId = SongId)
         {
             if (SessionState.GetBool(Key, false)) throw new InvalidOperationException("A Radio Archipelago review is already running.");
             if (EditorApplication.isPlayingOrWillChangePlaymode || EditorApplication.isCompiling || EditorApplication.isUpdating)
@@ -140,6 +144,7 @@ namespace RadioArchipelago.Editor
             SessionState.SetString(Key + ".snapshot", JsonUtility.ToJson(snapshot));
             SessionState.SetBool(Key, true);
             SessionState.SetBool(Key + ".menuOnly", menuOnly);
+            SessionState.SetString(Key + ".song", songId);
             SessionState.SetBool(Key + ".finishing", false);
             SessionState.SetBool(Key + ".viewCaptured", false);
             SessionState.SetString(Key + ".viewSizes", "");
@@ -215,7 +220,7 @@ namespace RadioArchipelago.Editor
                         Check(game.Presenter.GetType().FullName == "RadioArchipelago.UI.RadioMenuPresenter", "the injected presentation is Radio Archipelago");
                         Check(!UnityEngine.Object.FindObjectsByType<OriginalUIPresenter>(FindObjectsInactive.Exclude, FindObjectsSortMode.None).Any(presenter => presenter.enabled), "the legacy UI presenter is inactive");
                         Check(game.Phase == ClonePhase.Menu, "startup opens the new home screen");
-                        Check(game.Songs.Any(song => song.id == SongId), "the existing custom recording remains in the catalog");
+                        Check(game.Songs.Any(song => song.id == ReviewSongId), "the reviewed recording remains in the catalog");
                         Capture("01-home-540x960.png", 540, 960);
                         InvokeButton("CourierButton_1"); Next(1); break;
                     case 1:
@@ -282,7 +287,7 @@ namespace RadioArchipelago.Editor
                         SelectGameViewSize(540, 960); Next(14); break;
                     case 14:
                         if (frames < 12 || Screen.width != 540 || Screen.height != 960) return;
-                        var song = game.Songs.Single(record => record.id == SongId);
+                        var song = game.Songs.Single(record => record.id == ReviewSongId);
                         Check(game.SelectSong(song.catalogId), "the existing custom song can be selected for the new menu");
                         game.Endless = false; Next(15); break;
                     case 15:
@@ -296,7 +301,8 @@ namespace RadioArchipelago.Editor
                         if (frames < 3 || game.Phase != ClonePhase.Playing) return;
                         Check(game.Music != null && game.Music.clip != null, "start uses the real scheduled song AudioSource");
                         songLength = game.Music.clip.length; startDsp = AudioSettings.dspTime;
-                        Check(songLength > 120 && songLength < 210, "the previously authored full recording is unchanged in duration");
+                        Check(ReviewSongId == ComparisonId ? Mathf.Abs(songLength - 67.004082f) < .002f : songLength > 120 && songLength < 210,
+                            "the complete source recording is unchanged in duration");
                         CheckActor(1); dragOrigin = game.Actor.position.x; bot = true; Hold(dragOrigin);
                         Next(18, songLength + 65); break;
                     case 18:
@@ -360,8 +366,12 @@ namespace RadioArchipelago.Editor
                         Check(game.GameTime - game.Map.delayTime >= songLength - .25 && AudioSettings.dspTime - startDsp >= (songLength - 1) / game.PlaybackRate,
                             "the complete recording was exercised without seeking, teleporting or shortening the chart");
                         Check(game.Score > 0 && game.RunStars == 3, "the result retains the earned score and three-star completion");
-                        Check(game.Tiles.Where(tile => tile.element.id == 2 || tile.element.id == 3 || tile.element.id == 8 || tile.element.id == 9).All(tile => tile.consumed), "sustains, checkpoints and their exits were crossed through actual contacts");
-                        Check(game.Tiles.Where(tile => tile.element.id == 4 || tile.element.id == 5 || tile.element.id == 6).All(tile => tile.consumed), "glide entries, scored midpoints and exits were crossed through actual contacts");
+                        var sustainTiles = game.Tiles.Where(tile => tile.element.id == 2 || tile.element.id == 3 || tile.element.id == 8 || tile.element.id == 9).ToArray();
+                        if (sustainTiles.Length > 0) Check(sustainTiles.All(tile => tile.consumed), "sustains, checkpoints and their exits were crossed through actual contacts");
+                        else Notes.Add("N/A: the reviewed chart contains no sustain tiles.");
+                        var glideTiles = game.Tiles.Where(tile => tile.element.id == 4 || tile.element.id == 5 || tile.element.id == 6).ToArray();
+                        if (glideTiles.Length > 0) Check(glideTiles.All(tile => tile.consumed), "glide entries, scored midpoints and exits were crossed through actual contacts");
+                        else Notes.Add("N/A: the reviewed chart contains no Follow/glide tiles.");
                         Next(25); break;
                     case 25:
                         if (frames < 30) return;
@@ -385,7 +395,7 @@ namespace RadioArchipelago.Editor
                         Capture("15-return-home.png", 540, 960);
                         Check(Errors.Count == 0, "the reviewed flow produced no runtime errors");
                         Finish(true, "New home, all three couriers, song navigation/library, settings, atlas, workshop, 540x960 and 390x844, actual pointer Start/Pause/Resume, full " +
-                            songLength.ToString("F3") + "s custom song, DSP continuity, real sustain/glide contacts, result and retry passed. No player build was requested or created."); break;
+                            songLength.ToString("F3") + "s custom song, DSP continuity, actual tile contacts, result and retry passed. No player build was requested or created."); break;
                 }
             }
             catch (Exception error) { Finish(false, error.ToString()); }
@@ -640,7 +650,8 @@ namespace RadioArchipelago.Editor
                 SessionState.SetBool(Key, false); SessionState.SetBool(Key + ".finishing", false);
                 Notes.Clear(); Notes.AddRange(SessionState.GetString(Key + ".notes", "").Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries));
             }
-            WriteResult(SessionState.GetBool(Key + ".menuOnly", false) ? "menu-result.txt" : "result.txt", success, details);
+            WriteResult(SessionState.GetBool(Key + ".menuOnly", false) ? "menu-result.txt"
+                : ReviewSongId == ComparisonId ? "comparison-result.txt" : "result.txt", success, details);
         }
 
         private static void RestoreGameView()

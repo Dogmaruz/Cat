@@ -137,18 +137,20 @@ namespace RadioArchipelago.Editor
                 var motion = root.AddComponent<CourierMotion>();
                 var blink = skins.FirstOrDefault(skin => FindBlinkShape(skin) != null);
                 if (blink == null) throw new InvalidDataException(id + ": prepared model has no authored Blink shape.");
-                motion.ConfigureRig(new CourierRigBinding
+                var binding = new CourierRigBinding
                 {
                     visualPivot = visual, headPivot = Find(model, "head", true),
                     leftArm = Find(model, "arm.L", true), rightArm = Find(model, "arm.R", true),
                     leftFoot = footL, rightFoot = footR,
-                    antennaChain = Chain(model, "antenna."), crestChain = Chain(model, "crest."),
+                    antennaYawPivot = Find(model, "antenna.yaw", true),
+                    antennaChain = Chain(model, "antenna.").Where(node => node.name != "antenna.yaw").ToArray(), crestChain = Chain(model, "crest."),
                     scarfChain = Chain(model, "scarf."),
                     blinkEyes = new[] { Find(model, "eye.L", false), Find(model, "eye.R", false) }.Where(node => node != null).ToArray(),
                     blinkRenderer = blink, blinkShapeName = FindBlinkShape(blink)
-                });
+                };
+                motion.ConfigureRig(binding);
                 motion.ResetMotion();
-                FitAnimationBounds(motion, skins);
+                FitAnimationBounds(motion, skins, binding);
                 string path = AssetRoot + "/Content/ImportedCouriers/Courier_" + id + ".prefab";
                 var prefab = PrefabUtility.SaveAsPrefabAsset(root, path);
                 var portrait = CourierAssetBuilder.RenderThumbnail(root, id);
@@ -174,14 +176,14 @@ namespace RadioArchipelago.Editor
             }
             return null;
         }
-        private static void FitAnimationBounds(CourierMotion motion, SkinnedMeshRenderer[] skins)
+        private static void FitAnimationBounds(CourierMotion motion, SkinnedMeshRenderer[] skins, CourierRigBinding binding)
         {
             var bounds = new Bounds[skins.Length];
             var found = new bool[skins.Length];
             var vertices = new List<Vector3>();
             var sample = new Mesh { name = "Owned courier animation bounds sample" };
             bool manual = motion.ManualSimulation;
-            void Capture()
+            void CaptureGeometry()
             {
                 for (int i = 0; i < skins.Length; i++)
                 {
@@ -195,6 +197,23 @@ namespace RadioArchipelago.Editor
                         else bounds[i].Encapsulate(point);
                     }
                 }
+            }
+            void Capture()
+            {
+                CaptureGeometry();
+                var rotor = binding.antennaYawPivot;
+                if (rotor == null) return;
+                var rotation = rotor.rotation;
+                try
+                {
+                    // The full rotor envelope is authored once; no offscreen skin updates are needed.
+                    for (int angle = 30; angle < 360; angle += 30)
+                    {
+                        rotor.rotation = Quaternion.AngleAxis(angle, binding.visualPivot.up) * rotation;
+                        CaptureGeometry();
+                    }
+                }
+                finally { rotor.rotation = rotation; }
             }
             void Step(float seconds)
             {

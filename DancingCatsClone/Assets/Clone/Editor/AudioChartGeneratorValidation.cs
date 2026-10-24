@@ -14,6 +14,7 @@ namespace DancingCats.Clone.Editor
         {
             RunSafetyChecks();
             RunMusicalFallbackChecks();
+            RunSpectralEvidenceChecks();
             var type = typeof(AudioChartGeneratorValidation).Assembly.GetType("DancingCats.Clone.Editor.AudioChartGenerator");
             Require(type != null, "PCM audio chart generator is missing");
             var method = type.GetMethod("GenerateFromSamples", BindingFlags.Public | BindingFlags.Static);
@@ -29,7 +30,7 @@ namespace DancingCats.Clone.Editor
             Require(JsonUtility.ToJson(map) == JsonUtility.ToJson(again), "identical decoded PCM must produce byte-identical JSON");
             double bpm = rate * 60 / map.tempoSections[0].samplesPerBeat;
             Require(Math.Abs(bpm - 80) < 2, "synthetic 80 BPM pulses retain tempo (actual " + bpm + ")");
-            var accents = map.elements.Where(e => e.audioTime > .3 && e.audioTime < 21 && e.kind == "Jump").ToArray();
+            var accents = map.elements.Where(e => e.audioTime > .3 && e.audioTime < 21 && (e.kind == "Jump" || e.kind == "BigJump")).ToArray();
             Require(accents.Count(e => Math.Abs((e.audioTime - .4) / .75 - Math.Round((e.audioTime - .4) / .75)) < .07) >= 16,
                 "ordinary landings follow measured off-grid pulse phase");
             ValidateMap(map);
@@ -37,6 +38,65 @@ namespace DancingCats.Clone.Editor
             Require(!sustained.segments.Any(s => s.kind == "Hold"), "a mixed-audio RMS bed alone must not invent a melodic hold");
             ValidateMap(sustained);
             Debug.Log("AUDIO_CHART_GENERATOR PASS: silence rejected; 80 BPM and measured phase; deterministic PCM output; preserved rests; no RMS-only holds; exit distances; finish before audio end");
+        }
+
+        private static void RunSpectralEvidenceChecks()
+        {
+            const int rate = 8000;
+            var mono = PulseTrack(rate, false);
+            Array.Clear(mono, rate * 6, (int)(rate * .8)); // Remove one pulse: a measured two-beat airborne gap.
+            var stereo = new float[mono.Length * 2];
+            for (int index = 0; index < mono.Length; index++) { stereo[index * 2] = mono[index]; stereo[index * 2 + 1] = -mono[index]; }
+            var source = AudioChartGenerator.GenerateFromSamples(mono, rate, 1, "StereoEvidence");
+            var antiphase = AudioChartGenerator.GenerateFromSamples(stereo, rate, 2, "StereoEvidence");
+            Require(source.events.Select(item => item.mStartSample).SequenceEqual(antiphase.events.Select(item => item.mStartSample)),
+                "antiphase stereo preserves the same measured musical attacks as mono");
+            var annotated = MusicalChartCompiler.Compile(new MusicalScore
+            {
+                id = "LargeJumpEvidence", sampleRate = rate, audioDuration = 5, bpm = 80,
+                cues = new[] { new MusicalCue { kind = "BigJump", time = 1, endTime = 1 },
+                    new MusicalCue { kind = "Jump", time = 2.25, endTime = 2.25 } }
+            }, new AudioChartGenerator.Options(), rate, 5);
+            Require(annotated.elements.Any(element => element.kind == "BigJump" && element.id == 1),
+                "an explicit large-jump annotation compiles to its native tile without guessing from gap length");
+            ValidateMap(annotated);
+            var harmonic = new float[rate * 5];
+            for (int index = rate; index < rate * 3; index++)
+            {
+                double time = (double)index / rate;
+                double edge = Math.Min(1, Math.Min((time - 1) / .025, (3 - time) / .025));
+                double value = 0;
+                for (int partial = 1; partial <= 5; partial++) value += Math.Sin(2 * Math.PI * 440 * partial * time) / partial;
+                harmonic[index] = (float)(value * .3 * edge);
+            }
+            var measured = PcmSpectralAnalysis.Analyze(harmonic, rate, 1);
+            Require(measured.sustained.Any(note => note.end - note.start >= 1.5 && note.confidence >= .65),
+                "a genuine stable multi-partial note provides positive sustained-pitch evidence");
+            var equalEnergy = new float[rate * 24];
+            for (int index = 0; index < equalEnergy.Length; index++)
+            {
+                double time = (double)index / rate;
+                double frequency = (int)(time / .75) % 2 == 0 ? 200 : 400;
+                double value = 0;
+                for (int partial = 1; partial <= 5; partial++) value += Math.Sin(2 * Math.PI * frequency * partial * time) / partial;
+                equalEnergy[index] = (float)(value * .3);
+            }
+            var changingPitch = AudioChartGenerator.GenerateFromSamples(equalEnergy, rate, 1, "EqualEnergyPitch");
+            var repeatedPitch = AudioChartGenerator.GenerateFromSamples(equalEnergy, rate, 1, "EqualEnergyPitch");
+            Require(JsonUtility.ToJson(changingPitch) == JsonUtility.ToJson(repeatedPitch),
+                "equal-energy spectral attacks generate a deterministic chart");
+            double changingBpm = rate * 60 / changingPitch.tempoSections[0].samplesPerBeat;
+            Require(Math.Abs(changingBpm - 80) < 2, "equal-energy pitch changes retain their measured 80 BPM pulse");
+            // A measured articulation can be a Hold release as well as a new support.
+            // All thirty changes before the finish cutoff must still score exactly once.
+            var changingAttacks = changingPitch.events.Where(item => item.command != 100).ToArray();
+            Require(changingAttacks.Length == 30 && Enumerable.Range(1, 30).All(index =>
+                changingAttacks.Any(item => Math.Abs(item.audioTime - index * .75) < .08)),
+                "equal-energy pitch changes preserve every articulation exactly once within 80ms");
+            double changingPhase = (double)changingPitch.tempoSections[0].startSample / rate;
+            Require(Math.Abs(changingPhase - .75 * Math.Round(changingPhase / .75)) < .08,
+                "equal-energy spectral attacks retain their measured phase");
+            ValidateMap(changingPitch);
         }
 
         public static void RunMusicalFallbackChecks()
@@ -92,6 +152,14 @@ namespace DancingCats.Clone.Editor
                 try { resolver.Invoke(null, identity); }
                 catch (TargetInvocationException error) { rejected = error.InnerException is InvalidDataException; }
                 Require(rejected, "catalog collisions are rejected before saving any resource");
+            }
+            foreach (float invalid in new[] { float.NaN, float.PositiveInfinity, float.NegativeInfinity })
+            {
+                var pcm = new float[8000 * 6]; pcm[32] = invalid;
+                bool rejected = false;
+                try { AudioChartGenerator.GenerateFromSamples(pcm, 8000, 1, "FinitePcm"); }
+                catch (InvalidDataException) { rejected = true; }
+                Require(rejected, "non-finite PCM is rejected before spectral analysis");
             }
         }
         public static void ValidateMap(MapTimeline map)

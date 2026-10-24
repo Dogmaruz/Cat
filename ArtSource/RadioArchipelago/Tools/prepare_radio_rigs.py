@@ -966,11 +966,15 @@ def analyze(name):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--stage", choices=("inspect", "analyze", "rig"), default="inspect")
+    parser.add_argument("--stage", choices=("inspect", "analyze", "rig", "accessories"), default="inspect")
     parser.add_argument("--character", choices=CHARACTERS)
     args = parser.parse_args(sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else [])
     for name in ((args.character,) if args.character else CHARACTERS):
-        {"inspect":inspect,"analyze":analyze,"rig":rig_character}[args.stage](name)
+        if args.stage == "accessories":
+            from prepare_radio_accessories import process
+            process(name, False)
+        else:
+            {"inspect":inspect,"analyze":analyze,"rig":rig_character}[args.stage](name)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,99 @@
+PASS New home, all three couriers, song navigation/library, settings, atlas, workshop, 540x960 and 390x844, actual pointer Start/Pause/Resume, full 67,004s custom song, DSP continuity, actual tile contacts, result and retry passed. No player build was requested or created. Restored the original profile, courier, guide, clean scenes, selection and input; returned to Edit Mode.
+
+PASS the injected presentation is Radio Archipelago
+PASS the legacy UI presenter is inactive
+PASS startup opens the new home screen
+PASS the reviewed recording remains in the catalog
+CAPTURE 01-home-540x960.png actual GameView 540x960
+PASS the active UI exposes CourierButton_1
+PASS the active actor uses courier motion sail
+PASS selected courier sail is installed on the real gameplay actor
+PASS courier selection 1 is persisted independently
+PASS the installed courier uses the selected definition's actual 3D meshes
+PASS actor: one live rig; three shadowless point lights [Warm key 5,3/r3,3, Sky fill 3,0/r3,3, Soft rim 4,0/r2,9]; isolated layer 0x80; custom HDR 128px/8 mips (RGBAHalf); 1 weighted skin(s), 1 URP Lit material(s) with normal, metallic and specular reflections.
+CAPTURE 02-courier-two.png actual GameView 540x960
+PASS the active UI exposes CourierButton_2
+PASS the active actor uses courier motion orbit
+PASS selected courier orbit is installed on the real gameplay actor
+PASS courier selection 2 is persisted independently
+PASS the installed courier uses the selected definition's actual 3D meshes
+PASS actor: one live rig; three shadowless point lights [Warm key 5,2/r3,2, Sky fill 2,9/r3,2, Soft rim 3,9/r2,9]; isolated layer 0x80; custom HDR 128px/8 mips (RGBAHalf); 1 weighted skin(s), 1 URP Lit material(s) with normal, metallic and specular reflections.
+CAPTURE 03-courier-three.png actual GameView 540x960
+PASS the active UI exposes CourierButton_0
+PASS the active actor uses courier motion signal
+PASS selected courier signal is installed on the real gameplay actor
+PASS courier selection 0 is persisted independently
+PASS the installed courier uses the selected definition's actual 3D meshes
+PASS actor: one live rig; three shadowless point lights [Warm key 6,1/r3,5, Sky fill 3,4/r3,5, Soft rim 4,6/r3,1]; isolated layer 0x80; custom HDR 128px/8 mips (RGBAHalf); 1 weighted skin(s), 1 URP Lit material(s) with normal, metallic and specular reflections.
+PASS the active UI exposes NextSongButton
+PASS next-song control changes the active song
+PASS the active UI exposes PreviousSongButton
+PASS previous-song control restores the previous selection
+PASS the active UI exposes SongLibraryButton
+PASS the song library blocks gameplay pointer input
+CAPTURE 04-song-library.png actual GameView 540x960
+PASS the active UI exposes ClosePanelButton_Songs
+PASS the active UI exposes SettingsButton
+PASS settings block gameplay pointer input
+PASS the active UI exposes SoundToggle
+PASS the new sound setting updates the actual profile
+PASS the active UI exposes SoundToggle
+PASS the sound setting can be restored through the same control
+PASS the active UI exposes CalibrationPlusButton
+PASS the calibration control updates the playback offset
+PASS the active UI exposes CalibrationMinusButton
+PASS calibration controls preserve the original offset after a round trip
+CAPTURE 05-settings.png actual GameView 540x960
+PASS the active UI exposes ClosePanelButton_Settings
+PASS the active UI exposes Navigation_Atlas
+CAPTURE 06-atlas.png actual GameView 540x960
+PASS the active UI exposes Navigation_Workshop
+CAPTURE 07-workshop.png actual GameView 540x960
+PASS the active UI exposes WorkshopCourierButton_1
+PASS the active actor uses courier motion sail
+PASS selected courier sail is installed on the real gameplay actor
+PASS courier selection 1 is persisted independently
+PASS the installed courier uses the selected definition's actual 3D meshes
+PASS actor: one live rig; three shadowless point lights [Warm key 5,3/r3,3, Sky fill 3,0/r3,3, Soft rim 4,0/r2,9]; isolated layer 0x80; custom HDR 128px/8 mips (RGBAHalf); 1 weighted skin(s), 1 URP Lit material(s) with normal, metallic and specular reflections.
+PASS the active UI exposes Navigation_Play
+CAPTURE 08-home-390x844.png actual GameView 390x844
+PASS primary start control remains available at 390x844
+PASS the existing custom song can be selected for the new menu
+CAPTURE 09-custom-song-menu.png actual GameView 540x960
+PASS an active pointer target is available
+PASS UI raycasting reaches PlayButton
+PASS start uses the real scheduled song AudioSource
+PASS the complete source recording is unchanged in duration
+PASS the active actor uses courier motion sail
+PASS selected courier sail is installed on the real gameplay actor
+PASS courier selection 1 is persisted independently
+PASS the installed courier uses the selected definition's actual 3D meshes
+PASS actor: one live rig; three shadowless point lights [Warm key 5,3/r3,3, Sky fill 3,0/r3,3, Soft rim 4,0/r2,9]; isolated layer 0x80; custom HDR 128px/8 mips (RGBAHalf); 1 weighted skin(s), 1 URP Lit material(s) with normal, metallic and specular reflections.
+PASS real pointer input scores actual landings while the recording plays
+CAPTURE 10-gameplay.png actual GameView 540x960
+PASS an active pointer target is available
+PASS UI raycasting reaches PauseButton
+PASS pause freezes the chart, score and audio position
+PASS pause freezes actual courier bones, squash, feet, blinking and secondary animation transforms
+PASS pause freezes any actual courier blink blend shapes
+CAPTURE 11-pause.png actual GameView 540x960
+PASS an active pointer target is available
+PASS UI raycasting reaches ResumeButton
+PASS resume continues from the preserved song position
+CAPTURE 12-sustain.png actual GameView 540x960
+PASS the new courier completes the full recording through real tile and final-platform contacts
+PASS the complete recording was exercised without seeking, teleporting or shortening the chart
+PASS the result retains the earned score and three-star completion
+PASS sustains, checkpoints and their exits were crossed through actual contacts
+N/A: the reviewed chart contains no Follow/glide tiles.
+CAPTURE 14-results.png actual GameView 540x960
+PASS the active UI exposes RetryButton
+PASS the new result retry control prepares or starts another attempt
+PASS the active UI exposes ReadyPlayButton
+PASS retry starts through the ready-screen control
+PASS the active UI exposes PauseButton
+PASS the retried attempt can be paused
+PASS the active UI exposes HomeButton
+PASS returning home restores the new menu
+CAPTURE 15-return-home.png actual GameView 540x960
+PASS the reviewed flow produced no runtime errors

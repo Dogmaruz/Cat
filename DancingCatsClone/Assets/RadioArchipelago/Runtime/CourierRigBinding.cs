@@ -11,6 +11,7 @@ namespace RadioArchipelago
         public Transform headPivot;
         public Transform leftArm, rightArm;
         public Transform leftFoot, rightFoot;
+        public Transform antennaYawPivot;
         public Transform[] antennaChain = Array.Empty<Transform>();
         public Transform[] crestChain = Array.Empty<Transform>();
         public Transform[] scarfChain = Array.Empty<Transform>();

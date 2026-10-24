@@ -15,11 +15,15 @@ interactive Blender scene and do not build a Unity player.
   skinning, localized shoulder/feature weights, Blink and authoring review renders.
 - `Tools/export_prepared_rigs.py`: portable artist project and verified Unity FBX
   payload export from an accepted authoring review.
+- `Tools/prepare_radio_accessories.py`: local sealed antenna joints, Lumen's
+  lower brace removal and four-bone scarf tails on the reviewed body/arm rigs.
 - `../../DancingCatsClone/Library/RadioRigging/Source/{Name}/`: extracted source
   FBX and atlases. `Library` is ignored by Git.
 - `../../DancingCatsClone/Library/RadioRigging/Review/{Name}/`: intermediate
   `rig-review.blend`, `rig-manifest.json` and pose renders. These are review
   artifacts, not accepted production assets.
+- `../../DancingCatsClone/Library/RadioRigging/AccessoryReview/{Name}/`: accessory
+  review, frozen `Before` backup, mechanical checks and ordinary Blender renders.
 - `../../DancingCatsClone/Library/RadioRigging/Technical/{Name}/`: intermediate
   payloads for checking FBX import, axes, skinning and blend shapes in Unity.
 - `Processed/{Tiko,Lumen,Nori}/`: destination for reviewed payloads. Each export
@@ -43,6 +47,11 @@ $blender = 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe'
   --python ArtSource/RadioArchipelago/Tools/export_prepared_rigs.py -- `
   --blend DancingCatsClone/Library/RadioRigging/Review/Tiko/rig-review.blend `
   --out ArtSource/RadioArchipelago/Processed/Tiko
+
+# Add the current mechanical joints and export the complete checked payload.
+& $blender --background --factory-startup --python-exit-code 1 `
+  --python ArtSource/RadioArchipelago/Tools/prepare_radio_rigs.py -- `
+  --stage accessories --character Tiko
 ```
 
 For a technical import experiment, replace `--out` with
@@ -70,8 +79,29 @@ geometry/UV verification, image dimensions, SHA-256 hashes and texture packing.
 Successful technical export does not substitute for visual approval of the rig
 or an animation playtest in Unity.
 
-The selected rig preserves one connected character mesh from each original ZIP.
+The selected rig preserves connected body and arms from each original ZIP.
 Short shoulder bones follow the user's [shoulder guide](../../Docs/Design/RadioArchipelago/RigReferences/shoulder-guide-user.png),
 with small arm swings and smooth local weights. Arms are not cut off the torso.
-The connected-source check compares rest geometry and interpolated UVs against
-the original, and distinguishes inherited source boundaries from newly added cuts.
+The first body/arm revision's connected-source check compares rest geometry and
+interpolated UVs against the original. The current accessory revision adds local
+sealed mechanical cuts and removes Lumen's lower gold brace. Its roundtrip check
+compares that edited rig with the exported FBX; the earlier source-surface error
+measurements must not be attributed to the new cut/cap geometry.
+
+Current `mechanical-yaw-and-four-bone-scarves-v2` payloads:
+
+| Character | Vertices | Triangles | Bones |
+|---|---:|---:|---:|
+| Tiko | 12,203 | 24,454 | 23 |
+| Lumen | 9,431 | 18,878 | 12 |
+| Nori | 7,344 | 14,704 | 21 |
+
+All three use `body → antenna.yaw → antenna.01`. Tiko/Nori have two independent
+four-bone scarf branches; Lumen's rigid sail turns above the head. The fixed and
+moving sides of each mechanical seam are separately capped. Their cap surfaces
+are recessed 0.004 source units with closed sidewalls, avoiding coincident
+triangles while preserving the exterior rings and assembly shape. Original open-edge
+counts remain 40/0/0. Current per-file hashes, strict export checks and mechanical
+QA are recorded in each manifest. Portable proof is in
+[RigReview/Accessories](../../Docs/Design/RadioArchipelago/RigReview/Accessories).
+Unity import and animation validation remain separate from these source checks.

@@ -13,7 +13,7 @@ namespace RadioArchipelago.Editor
     {
         private const string CatalogPath = "Assets/RadioArchipelago/Content/CourierCatalog.asset";
         private const int Layer = 29;
-        private const int Width = 900, Height = 440, FrameCount = 48;
+        private const int Width = 1200, Height = 600, FrameCount = 48;
         private const float Duration = 3, CourierHeight = 2.55f, Spacing = 3;
         private static readonly string Output = Path.GetFullPath(Path.Combine(Application.dataPath, "../Library/RadioRigging/UnityReel"));
 
@@ -56,7 +56,7 @@ namespace RadioArchipelago.Editor
                 var camera = Node(scene, "Courier reel camera").AddComponent<Camera>();
                 camera.enabled = false; camera.scene = scene; camera.cullingMask = 1 << Layer;
                 camera.clearFlags = CameraClearFlags.SolidColor; camera.backgroundColor = new Color(.957f, .949f, .925f, 1);
-                camera.orthographic = true; camera.orthographicSize = 2.55f; camera.aspect = (float)Width / Height;
+                camera.orthographic = true; camera.orthographicSize = 2.95f; camera.aspect = (float)Width / Height;
                 camera.nearClipPlane = .05f; camera.farClipPlane = 40; camera.allowHDR = false; camera.allowMSAA = true;
                 camera.transform.position = new Vector3(0, 2.55f, 10); camera.transform.LookAt(new Vector3(0, 1.8f, 0));
                 AddLight(scene, "Warm reel key", new Vector3(28, 145, 0), new Color(1, .96f, .9f), 1.2f);
@@ -64,6 +64,7 @@ namespace RadioArchipelago.Editor
                 target = new RenderTexture(Width, Height, 24, RenderTextureFormat.ARGB32) { antiAliasing = 4 };
                 target.Create(); camera.targetTexture = target; pixels = new Texture2D(Width, Height, TextureFormat.RGB24, false);
 
+                FitMotionEnvelope(camera, stages, motions, renderers);
                 CaptureSequence("flight", 2.4f, true, stages, motions, renderers, bakes, camera, target, pixels);
                 CaptureSequence("ride", 2.6f, false, stages, motions, renderers, bakes, camera, target, pixels);
                 Directory.CreateDirectory(Output);
@@ -72,7 +73,7 @@ namespace RadioArchipelago.Editor
                     "Characters screen left to right: " + string.Join(", ", catalog.entries.Reverse().Select(entry => entry.displayName + " (" + entry.id + ")")) + "\n" +
                     "flight: 2.4 second long flight + .6 second landing/settling.\n" +
                     "ride: 2.6 second turn + .4 second settling.\n" +
-                    "Each sequence: frame-000.png through frame-047.png, 900x440, 3 seconds at nominal16fps.\n" +
+                    "Each sequence: frame-000.png through frame-047.png, " + Width + "x" + Height + ", 3 seconds at nominal16fps.\n" +
                     "Only the disposable preview stages follow the illustrative flight arc. Game roots, scene, catalog and player data remain untouched.\n");
                 Debug.Log("RADIO_COURIER_REEL PASS: 96 actual Unity frames at " + Output);
             }
@@ -85,6 +86,57 @@ namespace RadioArchipelago.Editor
                 // Closing a preview scene disposes its temporary actors, bones, camera and lights.
                 EditorSceneManager.ClosePreviewScene(scene);
             }
+        }
+
+        private static void FitMotionEnvelope(Camera camera, Transform[] stages, CourierMotion[] motions, Renderer[][] renderers)
+        {
+            // A rotating curved antenna can extend past either side of its rest silhouette.
+            // Measure both complete sequences before capture, keeping one fixed camera for the GIF.
+            float halfHeight = 0;
+            foreach (bool flight in new[] { true, false })
+            {
+                float transition = flight ? 2.4f : 2.6f;
+                foreach (var motion in motions)
+                {
+                    motion.ResetMotion();
+                    if (flight) motion.PlayJump(transition); else motion.PlayHold(false, transition, true);
+                }
+                float clock = 0; bool settled = false;
+                for (int frame = 0; frame < FrameCount; frame++)
+                {
+                    float targetTime = Duration * frame / (FrameCount - 1);
+                    while (clock < targetTime - .000001f)
+                    {
+                        if (!settled && clock >= transition - .000001f)
+                        {
+                            settled = true;
+                            foreach (var motion in motions) { motion.PlayIdle(); if (flight) motion.PlayLanding(1); }
+                        }
+                        float next = Mathf.Min(clock + 1f / 120, targetTime);
+                        if (!settled) next = Mathf.Min(next, transition);
+                        foreach (var motion in motions)
+                        {
+                            if (flight && !settled) motion.SetFlightProgress(Mathf.Clamp01(next / transition));
+                            motion.SimulateSprings(next - clock);
+                        }
+                        clock = next;
+                    }
+                    float lift = flight && targetTime < transition ? Mathf.Sin(Mathf.PI * targetTime / transition) * .62f : 0;
+                    for (int i = 0; i < stages.Length; i++)
+                    {
+                        stages[i].localPosition = new Vector3((i - 1) * Spacing, lift, 0);
+                        var bounds = CourierVisualBounds.Measure(renderers[i]);
+                        for (int x = -1; x <= 1; x += 2) for (int y = -1; y <= 1; y += 2) for (int z = -1; z <= 1; z += 2)
+                        {
+                            var point = camera.transform.InverseTransformPoint(bounds.center + Vector3.Scale(bounds.extents, new Vector3(x, y, z)));
+                            halfHeight = Mathf.Max(halfHeight, Mathf.Abs(point.y), Mathf.Abs(point.x) / camera.aspect);
+                        }
+                    }
+                }
+            }
+            camera.orthographicSize = Mathf.Max(1, halfHeight / .94f);
+            for (int i = 0; i < stages.Length; i++)
+            { stages[i].localPosition = new Vector3((i - 1) * Spacing, 0, 0); motions[i].ResetMotion(); }
         }
 
         private static void CaptureSequence(string name, float transition, bool flight, Transform[] stages, CourierMotion[] motions,

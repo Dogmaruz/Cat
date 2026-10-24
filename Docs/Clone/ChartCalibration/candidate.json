@@ -1,0 +1,237 @@
+{
+    "stage": "candidate",
+    "referenceId": "UnstoppableCat054",
+    "referenceMapSha256": "277e5fd678a41323273dd786f32450291338d4edf4752d9ff83939b52548de90",
+    "sourceAudioSha256": "7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b",
+    "generator": "pcm-spectral-chart-v3",
+    "duration": 67.00408163265306,
+    "heldOutStart": 44.669387755102039,
+    "referenceElements": 162,
+    "generatedElements": 175,
+    "referenceEvents": 163,
+    "generatedEvents": 177,
+    "all": {
+        "within40ms": {
+            "referenceCount": 163,
+            "generatedCount": 177,
+            "matched": 111,
+            "precision": 0.6271186440677966,
+            "recall": 0.6809815950920245,
+            "f1": 0.6529411764705883,
+            "meanAbsoluteErrorMs": 16.674838103409774
+        },
+        "within80ms": {
+            "referenceCount": 163,
+            "generatedCount": 177,
+            "matched": 130,
+            "precision": 0.7344632768361582,
+            "recall": 0.7975460122699386,
+            "f1": 0.7647058823529411,
+            "meanAbsoluteErrorMs": 23.10640153497314
+        }
+    },
+    "calibration": {
+        "within40ms": {
+            "referenceCount": 113,
+            "generatedCount": 131,
+            "matched": 76,
+            "precision": 0.5801526717557252,
+            "recall": 0.672566371681416,
+            "f1": 0.6229508196721312,
+            "meanAbsoluteErrorMs": 16.481680391455059
+        },
+        "within80ms": {
+            "referenceCount": 113,
+            "generatedCount": 131,
+            "matched": 92,
+            "precision": 0.7022900763358778,
+            "recall": 0.8141592920353983,
+            "f1": 0.7540983606557377,
+            "meanAbsoluteErrorMs": 24.492753623188528
+        }
+    },
+    "heldOut": {
+        "within40ms": {
+            "referenceCount": 50,
+            "generatedCount": 46,
+            "matched": 35,
+            "precision": 0.7608695652173914,
+            "recall": 0.7,
+            "f1": 0.7291666666666666,
+            "meanAbsoluteErrorMs": 17.09426627794
+        },
+        "within80ms": {
+            "referenceCount": 50,
+            "generatedCount": 46,
+            "matched": 38,
+            "precision": 0.8260869565217391,
+            "recall": 0.76,
+            "f1": 0.7916666666666666,
+            "meanAbsoluteErrorMs": 19.749970163504309
+        }
+    },
+    "logicalSupports": {
+        "within40ms": {
+            "referenceCount": 138,
+            "generatedCount": 173,
+            "matched": 100,
+            "precision": 0.5780346820809249,
+            "recall": 0.7246376811594203,
+            "f1": 0.6430868167202573,
+            "meanAbsoluteErrorMs": 16.280690824083384
+        },
+        "within80ms": {
+            "referenceCount": 138,
+            "generatedCount": 173,
+            "matched": 114,
+            "precision": 0.6589595375722543,
+            "recall": 0.8260869565217391,
+            "f1": 0.7331189710610933,
+            "meanAbsoluteErrorMs": 21.752187031786403
+        }
+    },
+    "logicalHeldOut": {
+        "within40ms": {
+            "referenceCount": 42,
+            "generatedCount": 45,
+            "matched": 33,
+            "precision": 0.7333333333333333,
+            "recall": 0.7857142857142857,
+            "f1": 0.7586206896551724,
+            "meanAbsoluteErrorMs": 16.78183556077719
+        },
+        "within80ms": {
+            "referenceCount": 42,
+            "generatedCount": 45,
+            "matched": 34,
+            "precision": 0.7555555555555555,
+            "recall": 0.8095238095238095,
+            "f1": 0.7816091954022989,
+            "meanAbsoluteErrorMs": 17.480682403820138
+        }
+    },
+    "baselineLogicalSupports": {
+        "within40ms": {
+            "referenceCount": 138,
+            "generatedCount": 227,
+            "matched": 70,
+            "precision": 0.30837004405286347,
+            "recall": 0.5072463768115942,
+            "f1": 0.3835616438356164,
+            "meanAbsoluteErrorMs": 15.686876160757219
+        },
+        "within80ms": {
+            "referenceCount": 138,
+            "generatedCount": 227,
+            "matched": 99,
+            "precision": 0.43612334801762117,
+            "recall": 0.717391304347826,
+            "f1": 0.5424657534246575,
+            "meanAbsoluteErrorMs": 28.044517726608903
+        }
+    },
+    "baselineLogicalHeldOut": {
+        "within40ms": {
+            "referenceCount": 42,
+            "generatedCount": 73,
+            "matched": 24,
+            "precision": 0.3287671232876712,
+            "recall": 0.5714285714285714,
+            "f1": 0.41739130434782609,
+            "meanAbsoluteErrorMs": 13.704755079177567
+        },
+        "within80ms": {
+            "referenceCount": 42,
+            "generatedCount": 73,
+            "matched": 30,
+            "precision": 0.410958904109589,
+            "recall": 0.7142857142857143,
+            "f1": 0.5217391304347826,
+            "meanAbsoluteErrorMs": 21.994045109975486
+        }
+    },
+    "tileTypes": [
+        {
+            "kind": "Jump",
+            "onset80ms": {
+                "referenceCount": 111,
+                "generatedCount": 170,
+                "matched": 95,
+                "precision": 0.5588235294117647,
+                "recall": 0.8558558558558559,
+                "f1": 0.6761565836298933,
+                "meanAbsoluteErrorMs": 21.49503270531238
+            }
+        },
+        {
+            "kind": "BigJump",
+            "onset80ms": {
+                "referenceCount": 7,
+                "generatedCount": 0,
+                "matched": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "meanAbsoluteErrorMs": 0.0
+            }
+        },
+        {
+            "kind": "Hold",
+            "onset80ms": {
+                "referenceCount": 14,
+                "generatedCount": 3,
+                "matched": 2,
+                "precision": 0.6666666666666666,
+                "recall": 0.14285714285714286,
+                "f1": 0.23529411764705883,
+                "meanAbsoluteErrorMs": 10.079954256602797
+            }
+        },
+        {
+            "kind": "Follow",
+            "onset80ms": {
+                "referenceCount": 2,
+                "generatedCount": 0,
+                "matched": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "meanAbsoluteErrorMs": 0.0
+            }
+        },
+        {
+            "kind": "Theme",
+            "onset80ms": {
+                "referenceCount": 4,
+                "generatedCount": 0,
+                "matched": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "meanAbsoluteErrorMs": 0.0
+            }
+        }
+    ],
+    "matchedHeldNotes": 2,
+    "matchedHoldDurationErrorMs": 4.988455043247019,
+    "referenceTypes": [
+        "BigJump: 7",
+        "FinishJump: 1",
+        "Follow: 2",
+        "FollowEnd: 2",
+        "FollowMids: 10",
+        "Hold: 14",
+        "Jump: 111",
+        "MidShotItem: 10",
+        "Start: 1",
+        "Theme: 4"
+    ],
+    "generatedTypes": [
+        "FinishJump: 1",
+        "Hold: 3",
+        "Jump: 170",
+        "Start: 1"
+    ],
+    "referenceHeldSeconds": 14.23433062008449,
+    "generatedHeldSeconds": 2.085260999999999
+}

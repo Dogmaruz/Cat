@@ -43,6 +43,12 @@ namespace DancingCats.Clone.Editor
             RadioEditorValidation.RunPlaytest();
         }
 
+        public static void ComparisonPlaytest()
+        {
+            RequireSavedEditor();
+            RadioEditorValidation.RunComparisonPlaytest();
+        }
+
         public static void MenuPreviewChecks()
         {
             RequireSavedEditor();
@@ -85,6 +91,12 @@ namespace DancingCats.Clone.Editor
         {
             RequireSavedEditor();
             ImportedCourierValidation.RunChecks();
+        }
+
+        public static void AccessoryChecks()
+        {
+            RequireSavedEditor();
+            CourierAccessoryChecks.RunChecks();
         }
 
         public static void RigRender()

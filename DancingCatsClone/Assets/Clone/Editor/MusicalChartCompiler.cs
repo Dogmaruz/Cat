@@ -81,11 +81,11 @@ namespace DancingCats.Clone.Editor
                     segment.path = segment.elementIndices.Select(i => new ChartPoint { sourceIndex = i, kind = elements[i].kind, x = elements[i].pos.x, z = elements[i].pos.z, gameTime = elements[i].gameTime, audioTime = elements[i].audioTime, relativeTime = elements[i].audioTime - cue.time, updateType = elements[i].updateType }).ToArray();
                     segments.Add(segment);
                 }
-                else if (cue.kind == "Jump" || cue.kind == "Hold")
+                else if (cue.kind == "Jump" || cue.kind == "BigJump" || cue.kind == "Hold")
                 {
                     bool hold = cue.kind == "Hold";
                     if (hold && cue.endTime - cue.time < .18) throw new InvalidDataException("Hold needs a sustained interval.");
-                    var element = Element(map, hold ? 2 : 0, cue.kind, cue.time, cue.lane, elements.Count);
+                    var element = Element(map, hold ? 2 : cue.kind == "BigJump" ? 1 : 0, cue.kind, cue.time, cue.lane, elements.Count);
                     if (hold)
                     {
                         element.se = new Vector2(0, -(float)((cue.endTime - cue.time) * map.forwardSpeed));
@@ -95,7 +95,7 @@ namespace DancingCats.Clone.Editor
                     elements.Add(element); segments.Add(Segment(map, element, hold ? cue.endTime : cue.time));
                 }
                 else throw new InvalidDataException("Unknown musical cue kind: " + cue.kind);
-                priorEnd = cue.kind == "Jump" ? cue.time : cue.endTime;
+                priorEnd = cue.kind == "Jump" || cue.kind == "BigJump" ? cue.time : cue.endTime;
             }
             if (priorEnd > finishTime - .078) throw new InvalidDataException("The last authored cue leaves no finish arc.");
             var finish = Element(map, 1, "FinishJump", finishTime, 0, elements.Count);

@@ -1,17 +1,18 @@
 # Radioarchipelago: selected character rigs
 
-The selected approach starts from each supplied original ZIP and retains one
-connected character mesh. The hands remain joined to the body. Short shoulder
+The selected approach starts from each supplied original ZIP. The body and hands
+remain connected; the antenna now has a separate sealed mechanical seam so its
+mounting joint can turn without twisting body vertices. Short shoulder
 bones follow the diagonal of the original hands, matching the user's marked
 [Tiko reference](ModelReferences/Tiko/arm-axis-user-reference.png). Working waves
 are approximately 15–30°; 35° is a stress pose. There are no arm/body cuts,
-replacement shoulders, cap meshes or static hand stumps in these rigs.
+replacement shoulders, arm cap meshes or static hand stumps in these rigs.
 
 | Character | Meshes | Vertices | Triangles | Bones | Blink |
 |---|---:|---:|---:|---:|---|
-| Tiko | 1 | 11,947 | 23,962 | 18 | One local shape key |
-| Lumen | 1 | 9,370 | 18,764 | 11 | One local shape key |
-| Nori | 1 | 7,244 | 14,508 | 16 | One local shape key |
+| Tiko | 1 | 12,203 | 24,454 | 23 | One local shape key |
+| Lumen | 1 | 9,431 | 18,878 | 12 | One local shape key |
+| Nori | 1 | 7,344 | 14,704 | 21 | One local shape key |
 
 All characters use the supplied 4096² colour and normal textures unchanged.
 Only a derived URP metallic/smoothness image is added. Local subdivision of the
@@ -26,9 +27,11 @@ shape key. The eye change stays local to the painted eyes and is projected back
 onto the source face. The head is not compressed to imitate blinking.
 
 Common bones are `root`, `body`, `head`, `arm.L/R`, `foot.L/R` and an antenna
-chain. Tiko also has its original forelock chain; Tiko and Nori have two scarf
-chains. Lumen has its original sail/antenna assembly, with no invented scarf or
-forelock. The radio stays on the body. Runtime animation drives bone transforms
+chain under `body → antenna.yaw → antenna.01`. Tiko also has its original
+forelock chain; Tiko and Nori have two four-bone scarf chains. Lumen has its
+original sail/antenna assembly, with no invented scarf or forelock. Its lower
+brace to the backpack is removed; the sail joint is above the head. The radio
+stays on the body. Runtime animation drives bone transforms
 and Blink; separately authored action clips are unnecessary for procedural motion.
 
 Arm weights use a local harmonic field with soft transitions around the fused
@@ -36,11 +39,34 @@ source shoulder and harness. Distal anchors are kept away from fixed weight
 boundaries. This prevents a hard 0/1 jump across a few millimetres from pulling
 the hand into spikes during even a small wave. Linear skinning matches Unity.
 
-## Read-only authoring evidence
+## Mechanical accessory authoring: 24 October 2026
+
+Revision `mechanical-yaw-and-four-bone-scarves-v2` preserves the three existing
+texture files byte for byte. Mechanical cuts receive separate sealed caps on
+the fixed and rotating sides. Each cap is recessed 0.004 source units into its
+own side, with closed sidewalls and unchanged exterior rings; opposing cap
+triangles no longer occupy the same plane. Lumen's removed gold brace accounts for 183
+deleted triangles before local cuts/caps are triangulated; its fabric remains.
+Open-edge counts are unchanged: Tiko 40 inherited edges, Lumen/Nori zero.
+
+Rotating the joint by 0/90/180/270° keeps all vertices finite and changes edge
+lengths by at most 0.0272%. The strict FBX roundtrip reopens each portable artist
+project, independently imports the FBX, and checks bones, geometry, UVs, normals,
+weights and Blink. Maximum vertex error is below 5.4 × 10⁻⁷; UV and weight errors
+are zero. These compare the edited rig with its export, not with the untouched
+original surface. Current hashes and roundtrip results are in each
+`Processed/<Name>/manifest.json`. Portable mechanical reports and Lumen views
+are in [RigReview/Accessories](RigReview/Accessories).
+
+These authoring checks do not establish that the new Unity prefabs or gameplay
+have passed; Unity import, pose, camera and runtime validation are separate.
+
+## Historical connected-source evidence: 21 October 2026
 
 Each saved rig passed finite geometry, duplicate-face, normalized-weight and
-four-influence checks. Each has one connected component and no edges with more
-than two faces. Original surface/UV comparison measured:
+four-influence checks before mechanical seams were introduced. That earlier
+revision had one connected component and no edges with more than two faces.
+Its original surface/UV comparison measured:
 
 | Character | Max rest-surface distance | Max UV interpolation error | Boundary |
 |---|---:|---:|---|
@@ -67,7 +93,7 @@ without changing the source vertices. Actual Unity evidence is in
 
 The authoring guide and commands are in
 [`Tools/README.md`](../../../ArtSource/RadioArchipelago/Tools/README.md).
-Current review files live in the ignored
+The earlier connected-source review files live in the ignored
 `DancingCatsClone/Library/RadioRigging/Review/<Name>/` directory:
 
 - `rig-review.blend`, `rig-manifest.json`;
@@ -78,7 +104,7 @@ Current review files live in the ignored
 Earlier split-shell prototypes and high-angle PNGs in Library are fallback
 experiments, not the selected character design. Do not reimport them.
 
-Frozen reviewed source Blender SHA-256:
+Historical reviewed source Blender SHA-256, before the accessory revision:
 
 | Character | SHA-256 |
 |---|---|

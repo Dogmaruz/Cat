@@ -124,6 +124,26 @@ namespace DancingCats.Clone.Editor
                         RequireEditMode();
                         Invoke("RadioArchipelagoJobs", "RigChecks");
                         break;
+                    case "radio-accessory-checks":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "AccessoryChecks");
+                        break;
+                    case "chart-original-baseline":
+                        RequireEditMode();
+                        Invoke("OriginalChartCalibration", "RunBaseline");
+                        break;
+                    case "chart-original-checks":
+                        RequireEditMode();
+                        Invoke("OriginalChartCalibration", "RunChecks");
+                        break;
+                    case "chart-original-publish":
+                        RequireEditMode();
+                        Invoke("OriginalChartCalibration", "GenerateUnstoppableComparison");
+                        break;
+                    case "chart-original-playtest":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "ComparisonPlaytest");
+                        break;
                     case "radio-rig-render":
                         RequireEditMode();
                         Invoke("RadioArchipelagoJobs", "RigRender");

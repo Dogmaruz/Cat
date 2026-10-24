@@ -7,13 +7,13 @@
     -0.19604754447937012,
     0.0
   ],
-  "triangles": 18764,
+  "triangles": 18878,
   "meshes": [
     {
       "name": "Lumen_Character",
       "role": "Character",
-      "vertices": 9370,
-      "triangles": 18764
+      "vertices": 9431,
+      "triangles": 18878
     }
   ],
   "bones": [
@@ -116,17 +116,31 @@
       ]
     },
     {
-      "name": "antenna.01",
+      "name": "antenna.yaw",
       "parent": "body",
       "head": [
-        -0.26811686158180237,
-        0.35604754090309143,
-        1.3700000047683716
+        0.11801011115312576,
+        -0.033097438514232635,
+        1.8600003719329834
       ],
       "tail": [
-        -0.6831168532371521,
-        0.7160475254058838,
-        1.4500000476837158
+        0.11801011115312576,
+        -0.033097438514232635,
+        2.0400004386901855
+      ]
+    },
+    {
+      "name": "antenna.01",
+      "parent": "antenna.yaw",
+      "head": [
+        0.11801011115312576,
+        -0.033097438514232635,
+        1.8600003719329834
+      ],
+      "tail": [
+        0.11801011115312576,
+        -0.033097438514232635,
+        2.140000343322754
       ]
     },
     {
@@ -180,28 +194,28 @@
   "has_scarf": false,
   "exporter": "export_prepared_rigs.py",
   "blender_version": "5.2.1 LTS",
-  "source_review_sha256": "06200f75bb959b586b219e893224e0f4395844122c411c9a5ac22c34f6f7aa0b",
-  "source_review_manifest_sha256": "a3cee4332565cf6e99ab85c450a65c88a4ed0da33ce91f259a9ebc688e18102f",
+  "source_review_sha256": "c91be3db5abf3f551a6c995daafdb4891072a9572d26997f9a114bf59c572119",
+  "source_review_manifest_sha256": "12ccca8bfa2b71f47b06c5cd26cd571c17e063d82f55ffeecbc89d83e909a76e",
   "model": "Model.fbx",
   "authoring_project": "Lumen_Rigged.blend",
   "fbx_coordinates": "forward -Z, up Y; Blender source faces -Y, Unity import faces +Z",
   "bounds_blender": {
     "min": [
-      -0.744408369064331,
-      -0.38280993700027466,
+      -0.7444083094596863,
+      -0.3828098773956299,
       1.6380038658780904e-08
     ],
     "max": [
       0.6081746220588684,
-      0.7749050855636597,
+      0.7749049663543701,
       2.6000001430511475
     ]
   },
   "mesh_uv_geometry_sha256": {
-    "Lumen_Character": "67e2c882782472bcbe0f83bb896e77070cf39b44d9892a958155b79d8368d342"
+    "Lumen_Character": "942a4fbf26b39f50a486cf62ab89bd1d08a9f2e7b2b10be6b32924d5ef12a101"
   },
   "skinned_mesh_count": 1,
-  "bone_count": 11,
+  "bone_count": 12,
   "texture_packing": {
     "size": [
       4096,
@@ -254,12 +268,12 @@
   },
   "files": {
     "Model.fbx": {
-      "bytes": 1576556,
-      "sha256": "9041322c1b50ff15359ccfb0c4874e557e235a7e5b9c729eb5a22db35035f307"
+      "bytes": 1596940,
+      "sha256": "24283c30d046d3bd58420fec7d31ee00d8c6f876286006a5b5fe4b0fbf629d9a"
     },
     "Lumen_Rigged.blend": {
-      "bytes": 1014756,
-      "sha256": "2dec3283f7161458705fc71afe33407b66269faef2b4717835a42803ced91b43"
+      "bytes": 1024658,
+      "sha256": "2853662bf4dc4767450d5513591ca92cfb19fcfdf44c1a4e00ee3de781e6fe42"
     },
     "BaseColor.png": {
       "bytes": 21533874,
@@ -281,12 +295,12 @@
     "bone_names_match": true,
     "normalized_skin_weights": true,
     "maximum_weight_error": 0.0,
-    "maximum_vertex_error": 4.172325134277344e-07,
+    "maximum_vertex_error": 5.140900611877441e-07,
     "maximum_uv_error": 0.0,
-    "maximum_normal_error": 0.00034822430461645126,
-    "maximum_blink_error": 4.172325134277344e-07,
-    "maximum_normal_angle_degrees": 0.021033565934386468,
-    "maximum_bone_rest_matrix_error": 1.6689300537109375e-06,
+    "maximum_normal_error": 0.00034822244197130203,
+    "maximum_blink_error": 5.140900611877441e-07,
+    "maximum_normal_angle_degrees": 0.021036008903682717,
+    "maximum_bone_rest_matrix_error": 7.748603820800781e-07,
     "image_sizes": {
       "BaseColor.png": [
         4096,
@@ -301,5 +315,54 @@
         4096
       ]
     }
+  },
+  "accessory_revision": "mechanical-yaw-and-four-bone-scarves-v2",
+  "accessory_qa": {
+    "before": {
+      "vertices": 9370,
+      "triangles": 18764,
+      "boundary_edges": 0
+    },
+    "after": {
+      "vertices": 9431,
+      "triangles": 18878,
+      "boundary_edges": 0
+    },
+    "removed_brace_triangles": 183,
+    "hinge": [
+      0.11801011115312576,
+      -0.033097438514232635,
+      1.8600003719329834
+    ],
+    "detached_antenna_faces": 3323,
+    "mechanical_cap_recess": 0.004,
+    "rigid_yaw_qa": {
+      "0": {
+        "max_edge_stretch": 1.000005239359361,
+        "p99_edge_stretch": 1.0000006869438844,
+        "max_absolute_edge_change": 6.821900105924428e-08,
+        "finite": true
+      },
+      "90": {
+        "max_edge_stretch": 1.0000540487154868,
+        "p99_edge_stretch": 1.000001387966718,
+        "max_absolute_edge_change": 1.7844185819758385e-07,
+        "finite": true
+      },
+      "180": {
+        "max_edge_stretch": 1.0002713475374883,
+        "p99_edge_stretch": 1.0000019950937866,
+        "max_absolute_edge_change": 1.6801561319654268e-07,
+        "finite": true
+      },
+      "270": {
+        "max_edge_stretch": 1.000135672667888,
+        "p99_edge_stretch": 1.000001458286289,
+        "max_absolute_edge_change": 1.475967908708825e-07,
+        "finite": true
+      }
+    },
+    "max_significant_weights": 2,
+    "blink_preserved": true
   }
 }

@@ -107,6 +107,9 @@ namespace RadioArchipelago.Editor
             CheckControl(entry.id, "left foot", rig.leftFoot, motion.transform, weighted);
             CheckControl(entry.id, "right foot", rig.rightFoot, motion.transform, weighted);
             CheckChain(entry.id, "antenna", rig.antennaChain, 2, motion.transform, weighted);
+            Require(rig.antennaYawPivot != null && rig.antennaYawPivot.IsChildOf(motion.transform)
+                && rig.antennaChain.All(node => node.IsChildOf(rig.antennaYawPivot)),
+                entry.id + ": antenna needs a separate swivel above its true mounting point.");
             if (entry.id == "signal") CheckChain(entry.id, "crest", rig.crestChain, 2, motion.transform, weighted);
             if (entry.id == "signal" || entry.id == "orbit") CheckChain(entry.id, "scarf", rig.scarfChain, 4, motion.transform, weighted);
             if (entry.id == "sail") Require(rig.scarfChain == null || rig.scarfChain.Length == 0, "Lumen has no scarf in the supplied design.");

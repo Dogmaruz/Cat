@@ -1,0 +1,92 @@
+{
+    "stage": "baseline",
+    "referenceId": "UnstoppableCat054",
+    "referenceMapSha256": "277e5fd678a41323273dd786f32450291338d4edf4752d9ff83939b52548de90",
+    "sourceAudioSha256": "7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b",
+    "generator": "pcm-accent-chart-v2",
+    "duration": 67.00408163265306,
+    "heldOutStart": 44.669387755102039,
+    "referenceElements": 162,
+    "generatedElements": 229,
+    "referenceEvents": 163,
+    "generatedEvents": 228,
+    "all": {
+        "within40ms": {
+            "referenceCount": 163,
+            "generatedCount": 228,
+            "matched": 84,
+            "precision": 0.3684210526315789,
+            "recall": 0.5153374233128835,
+            "f1": 0.4296675191815857,
+            "meanAbsoluteErrorMs": 16.58811143505004
+        },
+        "within80ms": {
+            "referenceCount": 163,
+            "generatedCount": 228,
+            "matched": 120,
+            "precision": 0.5263157894736842,
+            "recall": 0.7361963190184049,
+            "f1": 0.6138107416879796,
+            "meanAbsoluteErrorMs": 28.6517384731669
+        }
+    },
+    "calibration": {
+        "within40ms": {
+            "referenceCount": 113,
+            "generatedCount": 154,
+            "matched": 57,
+            "precision": 0.37012987012987016,
+            "recall": 0.504424778761062,
+            "f1": 0.42696629213483147,
+            "meanAbsoluteErrorMs": 17.62183235867435
+        },
+        "within80ms": {
+            "referenceCount": 113,
+            "generatedCount": 154,
+            "matched": 84,
+            "precision": 0.5454545454545454,
+            "recall": 0.7433628318584071,
+            "f1": 0.6292134831460674,
+            "meanAbsoluteErrorMs": 30.356872907893295
+        }
+    },
+    "heldOut": {
+        "within40ms": {
+            "referenceCount": 50,
+            "generatedCount": 74,
+            "matched": 27,
+            "precision": 0.36486486486486488,
+            "recall": 0.54,
+            "f1": 0.43548387096774196,
+            "meanAbsoluteErrorMs": 14.405811707398712
+        },
+        "within80ms": {
+            "referenceCount": 50,
+            "generatedCount": 74,
+            "matched": 36,
+            "precision": 0.4864864864864865,
+            "recall": 0.72,
+            "f1": 0.5806451612903226,
+            "meanAbsoluteErrorMs": 24.673091458805314
+        }
+    },
+    "referenceTypes": [
+        "BigJump: 7",
+        "FinishJump: 1",
+        "Follow: 2",
+        "FollowEnd: 2",
+        "FollowMids: 10",
+        "Hold: 14",
+        "Jump: 111",
+        "MidShotItem: 10",
+        "Start: 1",
+        "Theme: 4"
+    ],
+    "generatedTypes": [
+        "FinishJump: 1",
+        "Jump: 227",
+        "Start: 1"
+    ],
+    "referenceHeldSeconds": 14.23433062008449,
+    "generatedHeldSeconds": 0.0
+}

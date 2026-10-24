@@ -9,11 +9,11 @@ using UnityEngine;
 
 namespace DancingCats.Clone.Editor
 {
-    /// <summary>Offline score compiler with a conservative mixed-audio onset fallback. It does not isolate vocals.</summary>
+    /// <summary>Offline score compiler with identity-free spectral attacks and harmonic sustain evidence. It does not isolate vocals.</summary>
     public static class AudioChartGenerator
     {
         public const string AlwaysRememberId = "AlwaysRememberMeowCat";
-        private const string Version = "pcm-accent-chart-v2";
+        private const string Version = "pcm-spectral-chart-v3";
         private const double MinGap = .18, MaxGap = 1.95;
 
         [Serializable]
@@ -97,23 +97,52 @@ namespace DancingCats.Clone.Editor
             if (interleaved == null || sampleRate < 1000 || channels < 1 || interleaved.Length % channels != 0) throw new ArgumentException("Invalid interleaved PCM, channels or sample rate.");
             double duration = (double)(interleaved.Length / channels) / sampleRate;
             if (duration < 5) throw new InvalidDataException("A playable song must contain at least five seconds of decoded PCM.");
-            var analysis = Analyze(interleaved, sampleRate, channels);
+            var analysis = Analyze(interleaved, sampleRate, channels, out var spectral);
+            if (spectral.accents.Length >= 4) analysis.accents = spectral.accents.ToList();
             double finishTime = Round(duration - Math.Max(1.1, 5 / options.forwardSpeed + .25));
-            // A mixed recording's energy bed is not evidence for a held melody. Fallback emits measured accents only.
-            var cues = new List<MusicalCue> { new MusicalCue { kind = "Jump", time = 0, endTime = 0, reason = "Initial support" } };
+            // The native Start is already support. Its next tile follows the first real attack,
+            // rather than an extra invented landing at decoded-audio time zero.
+            var cues = new List<MusicalCue>();
+            double supportedUntil = double.NegativeInfinity;
             foreach (double accent in analysis.accents)
             {
-                if (accent < MinGap || accent > finishTime - MinGap) continue;
-                cues.Add(new MusicalCue { kind = "Jump", time = accent, endTime = accent, lane = 0, reason = "Measured mixed-audio onset; melodic role unverified" });
+                if (accent < 0 || accent > finishTime - MinGap || accent <= supportedUntil + .078) continue;
+                var note = options.includeHolds ? spectral.sustained.FirstOrDefault(candidate => candidate.start <= accent + .08
+                    && candidate.start >= accent - .35 && candidate.end - accent >= .45 && candidate.confidence >= .65) : null;
+                // A new independent articulation shortly afterwards is evidence for another
+                // jump, even when a backing instrument keeps the same harmonic pitch.
+                double nextAttack = analysis.accents.FirstOrDefault(time => time > accent + .078);
+                if (nextAttack > 0 && nextAttack - accent < .42) note = null;
+                double end = accent;
+                if (note != null)
+                {
+                    end = Math.Min(finishTime - MinGap, note.end - .03);
+                    // A measured release/rearticulation near the harmonic note boundary makes
+                    // the support end, not a duplicate jump on the same musical accent.
+                    var releases = analysis.accents.Where(time => time > accent + .4 && Math.Abs(time - note.end) <= .1).ToArray();
+                    if (releases.Length > 0) end = releases.OrderBy(time => Math.Abs(time - note.end)).First();
+                    end = Math.Min(end, finishTime - MinGap);
+                    if (end - accent < .18) { note = null; end = accent; }
+                }
+                cues.Add(new MusicalCue { kind = note == null ? "Jump" : "Hold", time = Round(accent), endTime = Round(end),
+                    lane = 0, confidence = note?.confidence ?? .7,
+                    reason = note == null ? "Measured log spectral attack" : "Stable multi-partial pitch track; not inferred from RMS energy" });
+                supportedUntil = end;
             }
-            var beats = new List<double>();
-            for (double beat = analysis.phase; beat < duration; beat += analysis.period) beats.Add(Round(beat));
-            var map = MusicalChartCompiler.Compile(new MusicalScore { id = id, audioDuration = duration, sampleRate = sampleRate, bpm = 60 / analysis.period, beats = beats.ToArray(), cues = cues.ToArray() }, options, sampleRate, duration);
+            // Automatic long notes score their measured attack and release only. Pulse-grid
+            // checkpoints remain available to explicitly authored scores through Generate.
+            var map = MusicalChartCompiler.Compile(new MusicalScore { id = id, audioDuration = duration, sampleRate = sampleRate,
+                bpm = 60 / analysis.period, beats = Array.Empty<double>(), cues = cues.ToArray() }, options, sampleRate, duration);
+            map.tempoSections[0].startSample = (int)Math.Round(analysis.phase * sampleRate);
             string digest = PcmHash(interleaved);
             map.sourceMapBundle = Version; map.sourceMapBundleSha256 = digest;
             map.audio.rawSha256 = digest; map.audio.channels = channels; map.audio.bitsPerSample = 32; map.audio.rawBytes = (long)interleaved.Length * sizeof(float);
-            map.timing.warning = "Mixed-audio onset fallback; melodic roles and sustained pitches need authored score annotations. Long rests are preserved and may require a manually authored support before saving.";
-            map.normalizationNotes = new[] { "Generator: " + Version + "; decoded PCM float32 SHA-256: " + digest, "20ms channel-energy windows / 10ms hop; RMS novelty; strength-ranked non-maximum suppression; measured autocorrelation pulse.", "Detected BPM: " + (60 / analysis.period).ToString("F4", CultureInfo.InvariantCulture) + "; phase seconds: " + analysis.phase.ToString("F6", CultureInfo.InvariantCulture), "No arbitrary gap filler, energy-only holds, singer-isolation claim or periodic moving jumps. A musical score takes priority when its source hash matches." };
+            map.timing.warning = "Mixed-audio spectral attacks and conservative harmonic note estimates; these do not identify an isolated singer. Uncertain moving paths still require authored score contours. Long rests are preserved.";
+            map.normalizationNotes = new[] { "Generator: " + Version + "; decoded PCM float32 SHA-256: " + digest,
+                "1024-sample Hann spectrum near 11kHz / 10ms hop; independent stereo magnitude combination; log spectral flux with local threshold and strength-ranked 160ms non-maximum suppression.",
+                "Detected BPM: " + (60 / analysis.period).ToString("F4", CultureInfo.InvariantCulture) + "; phase seconds: " + analysis.phase.ToString("F6", CultureInfo.InvariantCulture),
+                "Holds require a stable pitch ridge with at least three harmonic partials and use measured attack/release only; a sustained single-tone RMS bed is insufficient.",
+                "No source identity, reference cues, arbitrary gap filler or periodic moving jumps. A musical score takes priority when its source hash matches." };
             return map;
         }
 
@@ -141,7 +170,7 @@ namespace DancingCats.Clone.Editor
             return selected.Select(i => times[i]).OrderBy(t => t).ToArray();
         }
 
-        private static Analysis Analyze(float[] pcm, int rate, int channels)
+        private static Analysis Analyze(float[] pcm, int rate, int channels, out PcmSpectralAnalysis.Result spectral)
         {
             int frames = pcm.Length / channels, hop = Math.Max(1, rate / 100), window = hop * 2;
             int count = (frames + hop - 1) / hop;
@@ -162,6 +191,7 @@ namespace DancingCats.Clone.Editor
             }
             double rms = Math.Sqrt(totalSquare / frames);
             if (rms < .00001) throw new InvalidDataException("Audio is silent; no playable rhythm can be generated.");
+            spectral = PcmSpectralAnalysis.Analyze(pcm, rate, channels);
             for (int n = 0; n < count; n++)
             {
                 int start = n * hop, end = Math.Min(frames, start + window);
@@ -183,7 +213,19 @@ namespace DancingCats.Clone.Editor
                 }
             }
             peaks = SelectAccentTimes(peaks.ToArray(), strengths.ToArray(), MinGap).ToList();
-            if (peaks.Count < 4 || maxNovelty < rms * .005) throw new InvalidDataException("Audio has insufficient rhythmic accents; author the chart manually or use a recording with a clear beat.");
+            if (peaks.Count < 4 || maxNovelty < rms * .005)
+            {
+                if (spectral.accents.Length < 4) throw new InvalidDataException("Audio has insufficient rhythmic accents; author the chart manually or use a recording with a clear beat.");
+                // Pitch/timbre attacks can retain constant RMS. Use their measured times
+                // as pulse evidence only when the original energy route has no usable attacks.
+                peaks = spectral.accents.ToList();
+                Array.Clear(novelty, 0, novelty.Length);
+                foreach (double accent in peaks)
+                {
+                    int index = Math.Max(0, Math.Min(count - 1, (int)Math.Round(accent * rate / hop)));
+                    novelty[index] = 1;
+                }
+            }
             double hopSeconds = (double)hop / rate, bestScore = double.MinValue; int bestLag = 0;
             int minLag = (int)Math.Ceiling(60 / 180.0 / hopSeconds), maxLag = Math.Min(count / 3, (int)Math.Floor(60 / 55.0 / hopSeconds));
             for (int lag = minLag; lag <= maxLag; lag++)
@@ -260,7 +302,7 @@ namespace DancingCats.Clone.Editor
             string path = ProjectFile("Assets/Resources/CustomData/songs.json");
             return File.Exists(path) ? RecoveredCatalog.FromJsonArray<SongRecord>(File.ReadAllText(path)) : Array.Empty<SongRecord>();
         }
-        private static void Save(MapTimeline map, AudioClip clip, Options options)
+        public static void Save(MapTimeline map, AudioClip clip, Options options)
         {
             AudioChartGeneratorValidation.ValidateMap(map);
             string assetPath = AssetDatabase.GetAssetPath(clip).Replace('\\', '/');
