@@ -103,17 +103,19 @@ def build_evidence(source,rate,pcm,vocals,notes):
                 pitchTimes=np.round(notes['times'],8).tolist(),pitch=pitch.tolist(),pitchConfidence=np.round(confidence,7).tolist(),onset=np.round(notes['onset'][:,34:64].max(axis=1),7).tolist(),rms=np.round(rms,8).tolist(),voiceStarts=envelope_starts(rms),
                 separatorModelSha256=SEP_SHA,noteModelSha256=NOTE_SHA,analysisVersion='vocal-phrase-1',audioUploaded=False)
 
-def classify(e,attacks):
+def classify_legato(e,attacks):
     times=np.array(e['pitchTimes']);pitch=np.array(e['pitch']);conf=np.array(e['pitchConfidence']);energy=np.array(e['rms']);dt=float(np.median(np.diff(times)));result=[]
     for t in sorted(set(attacks+e['voiceStarts'])):
         start=int(np.searchsorted(times,t+.08))
         if start+8>=len(times):continue
         p=int(pitch[start]);initial=float(conf[start:start+8].mean())
         if not 55<=p<=72 or initial<.5:continue
-        missing=0;end=start+1
+        gapPeak=max(.005,float(energy[max(0,math.ceil(t/.01)):min(len(energy),math.ceil((t+.8)/.01))].max()));missing=0;end=start+1
         for end in range(start+1,min(len(times),start+round(1.8/dt))):
             missing=missing+1 if conf[end]<.35 else 0
-            if missing>=round(.06/dt):end-=missing-1;break
+            # Repair brief pitch ambiguity only while the separated voice is
+            # physically present. A genuine quiet gap retains the shorter limit.
+            if missing>=round(.12/dt)or(missing>=round(.06/dt)and energy[min(len(energy)-1,math.ceil(times[end]/.01))]<gapPeak*.1):end-=missing-1;break
         if not .45<=times[end]-t<=1.9:continue
         runs=[];a=start
         for i in range(start+1,end+1):
@@ -124,7 +126,9 @@ def classify(e,attacks):
         first=runs[0];release=[r for r in runs[1:]if r['confidence']>=.35 and first['pitch']-r['pitch']>=2 and r['duration']>=.07];strong=[r for r in runs if r['confidence']>=.4]
         descending=len(strong)>=3 and all(strong[i]['pitch']<=strong[i-1]['pitch']for i in range(1,3))and strong[0]['pitch']-strong[2]['pitch']>=5
         plateau=.3<=first['duration']<=.75 and bool(release)
-        if not(plateau or descending)or any(r['confidence']>=.4 and r['pitch']>first['pitch']+1 for r in runs):continue
+        softRelease=.3<=first['duration']<=.75 and any(r['confidence']>=.35 and r['confidence']<=first['confidence']*.75 and first['pitch']-r['pitch']==1 and r['duration']>=.07 for r in runs[1:])
+        ornament=len(strong)>=3 and .08<=strong[0]['duration']<=.28 and strong[1]['duration']<=.2 and 2<=strong[1]['pitch']-strong[0]['pitch']<=4 and abs(strong[2]['pitch']-strong[0]['pitch'])<=1 and strong[2]['duration']>=.3
+        if not(plateau or descending or ornament or softRelease)or(not ornament and any(r['confidence']>=.4 and r['pitch']>first['pitch']+1 for r in runs)):continue
         if release:
             later=[r for r in runs if r['at']>release[0]['at']and r['pitch']>=release[0]['pitch']+2 and r['confidence']>=.35]
             if later:end=min(end,int(np.searchsorted(times,later[0]['at'])))
@@ -134,21 +138,139 @@ def classify(e,attacks):
             if missing>=4:amplitudeEnd=j-missing+1;break
         # A phrase releases over a short perceptual tail. Prefer the nearest
         # measured physical rearticulation when it lies within that release window.
-        finish=min(float(times[end]),amplitudeEnd*.01)+.06
+        finish=first['at']+first['duration'] if softRelease and not plateau else min(float(times[end]),amplitudeEnd*.01)+.06
         releases=[a for a in attacks if t+.45<=a<=t+1.4 and abs(a-finish)<=.18]
         if releases:finish=min(releases,key=lambda a:abs(a-finish))
         if not .45<=finish-t<=1.4:continue
         if any(min(finish,q['endTime'])-max(t,q['time'])>.25 for q in result):continue
-        result.append(dict(kind='Hold',time=t,endTime=finish,confidence=float(min(1,initial)),reason='Vocal-only continuous descending legato'if descending else 'Vocal plateau with downward release'))
+        reason='Vocal-only continuous descending legato'if descending else 'Vocal plateau with downward release'
+        if ornament:reason='Returning vocal ornament followed by a sustained body note'
+        elif softRelease and not plateau:reason='Stable vocal plateau ending in a weakening semitone fall; release at the main note boundary'
+        result.append(dict(kind='Hold',time=t,endTime=finish,confidence=float(min(1,initial)),reason=reason))
     return result
 
+def register_ceiling(e):
+    pitch=np.array(e['pitch']);confidence=np.array(e['pitchConfidence']);dt=float(np.median(np.diff(e['pitchTimes'])));values,counts=np.unique(pitch[confidence>=.45],return_counts=True);supported=values[counts*dt>=.2]
+    return int(supported.max())if len(supported)else None
+
+def upper_pickups(e):
+    times=np.array(e['pitchTimes']);pitch=np.array(e['pitch']);q=np.array(e['pitchConfidence']);on=np.array(e['onset']);ceiling=register_ceiling(e)
+    if ceiling is None:return []
+    peaks=find_peaks(on,height=.45,prominence=.08,distance=7)[0];candidates=[]
+    for onset in peaks:
+        start=float(times[onset]);low=int(pitch[onset]);initial=float(q[onset:onset+5].mean())
+        if low<ceiling-3 or low>=ceiling or initial<.25:continue
+        for high in range(max(ceiling-1,low+1),min(ceiling+1,low+4)):
+            upper=np.flatnonzero((times>=start+.04)&(times<=start+.25)&(pitch==high))
+            if not len(upper):continue
+            first=int(upper[0]);end=first
+            while end+1<len(times)and pitch[end+1]==high:end+=1
+            if times[end]-times[first]<.3 or float(q[first:end+1].mean())<.45:continue
+            releases=[i for i in peaks if start+.45<=times[i]<=start+1.1 and pitch[i]==high and on[i]>=.7]
+            if not releases:continue
+            if not has_audible_continuity(e,start,float(times[releases[0]])):continue
+            candidates.append(dict(kind='Hold',time=start,endTime=float(times[releases[0]]),confidence=float(on[onset]),reason='Brief pickup into the measured upper voice register; release at strong same-note rearticulation'));break
+    selected=[]
+    for candidate in sorted(candidates,key=lambda c:-c['confidence']):
+        if not any(abs(candidate['time']-c['time'])<.15 for c in selected):selected.append(candidate)
+    return sorted(selected,key=lambda c:c['time'])
+
+def cadence_rest_fills(e,attacks,beatPeriod):
+    if not .3<=beatPeriod<=1.2:return []
+    times=np.array(e['pitchTimes']);pitch=np.array(e['pitch']);q=np.array(e['pitchConfidence']);rms=np.array(e['rms']);et=np.arange(len(rms))*.01;dt=float(np.median(np.diff(times)));ceiling=register_ceiling(e);candidates=[]
+    if ceiling is None:return []
+    for start in sorted(set(list(attacks)+e['voiceStarts'])):
+        a=int(np.searchsorted(times,start+.08))
+        if a+8>=len(times):continue
+        initial=int(pitch[a]);confidence=float(q[a:a+8].mean())
+        if initial<ceiling-2 or confidence<.5:continue
+        upperEnd=a
+        while upperEnd+1<len(times)and pitch[upperEnd+1]==initial and q[upperEnd+1]>=.35:upperEnd+=1
+        plateau=times[upperEnd]-times[a]
+        if not .3<=plateau<=.75:continue
+        tail=upperEnd+1;releaseEnd=min(len(times),tail+round(.3/dt));released=np.flatnonzero((pitch[tail:releaseEnd]<=initial-2)&(pitch[tail:releaseEnd]>=initial-5)&(q[tail:releaseEnd]>=.35))
+        if len(released)<round(.07/dt):continue
+        begin=int(np.searchsorted(et,start));limit=min(len(rms)-1,int(np.searchsorted(et,start+1.3)));peak=max(float(rms[begin:limit].max()),.005);missing=0;voiceEnd=None
+        for i in range(begin+35,limit):
+            missing=missing+1 if rms[i]<peak*.15 else 0
+            if missing>=6:voiceEnd=i-missing+1;break
+        if voiceEnd is None:continue
+        response=None
+        for i in range(voiceEnd+6,min(len(rms)-6,voiceEnd+230)):
+            if rms[i:i+5].mean()<peak*.2:continue
+            j=min(len(times)-1,int(np.searchsorted(times,et[i]+.06)))
+            if q[j]<.4:continue
+            # The next confident vocal entry must be the lower answer; do not
+            # skip an intervening higher syllable and call that interval quiet.
+            if pitch[j]<=initial-5:response=i
+            break
+        if response is None or(response-voiceEnd)*.01<.6:continue
+        quiet=rms[voiceEnd+6:max(voiceEnd+7,response-5)]
+        if len(quiet)and np.percentile(quiet,90)>peak*.2:continue
+        real=[a for a in attacks if abs(a-et[response])<=.1];measured=min(real,key=lambda a:abs(a-et[response]))if real else float(et[response]);finish=min(measured-beatPeriod/2,start+1.6)
+        if finish-start<.9:continue  # The min above already enforces the upper bound.
+        candidates.append(dict(kind='Hold',time=float(start),endTime=float(finish),confidence=confidence,reason='Musical support policy: upper cadence and genuine vocal rest, ending before the next measured lower answer'))
+    selected=[]
+    for candidate in candidates:
+        if not any(min(candidate['endTime'],c['endTime'])-max(candidate['time'],c['time'])>.25 for c in selected):selected.append(candidate)
+    return selected
+
+def falling_glide_handoffs(e,attacks,confirmed,beatPeriod):
+    if not .3<=beatPeriod<=1.2:return []
+    times=np.array(e['pitchTimes']);pitch=np.array(e['pitch']);q=np.array(e['pitchConfidence']);dt=float(np.median(np.diff(times)));ceiling=register_ceiling(e);candidates=[]
+    if ceiling is None:return []
+    for start in sorted(set(list(attacks)+e['voiceStarts'])):
+        a=int(np.searchsorted(times,start));b=min(len(times)-1,int(np.searchsorted(times,start+1.3)));runs=[];last=a
+        for i in range(a+1,b+1):
+            if i==b or pitch[i]!=pitch[last]:
+                if(i-last)*dt>=.045:runs.append(dict(pitch=int(pitch[last]),duration=(i-last)*dt,confidence=float(q[last:i].mean()),at=float(times[last])))
+                last=i
+        if len(runs)<3:continue
+        body=None
+        for i in range(2,min(len(runs),5)):
+            prefix=runs[:i];candidate=runs[i];length=sum(r['duration']for r in prefix);values=[r['pitch']for r in prefix];confidence=sum(r['confidence']*r['duration']for r in prefix)/length
+            if not .1<=length<=.35 or max(values)-min(values)!=1 or min(values)<ceiling-5 or confidence>=.6:continue
+            if not .3<=candidate['duration']<=.75 or candidate['confidence']<.5 or max(values)-candidate['pitch']<2 or candidate['at']-start>.4:continue
+            body=candidate;break
+        if body is None:continue
+        nexts=[c for c in confirmed if start+.5<c['time']<start+1.5]
+        if not nexts:continue
+        nextCue=min(nexts,key=lambda c:c['time']);flight=max(beatPeriod/2,body['duration']);finish=min(body['at']+body['duration'],nextCue['time']-flight)
+        if not .4<=finish-start<=1.1:continue
+        if not has_audible_continuity(e,start,finish):continue
+        candidates.append(dict(kind='Hold',time=float(start),endTime=float(finish),confidence=float(body['confidence']),reason='Musical support policy: falling upper-register glide into a plateau, reserving a note-length airborne handoff to the next confirmed support'))
+    selected=[]
+    for candidate in candidates:
+        if not any(min(candidate['endTime'],c['endTime'])-max(candidate['time'],c['time'])>.25 for c in selected):selected.append(candidate)
+    return selected
+
+def has_audible_continuity(e,start,finish):
+    step=e.get('rmsStep',.01);begin=max(0,math.ceil(start/step));end=min(len(e['rms']),math.ceil(finish/step))
+    if end<=begin:return False
+    peak=max(.005,max(e['rms'][begin:end]));missing=0
+    for value in e['rms'][begin:end]:
+        missing=missing+1 if value<peak*.1 else 0
+        # Pitch confidence may persist through a real pause. Only the explicit
+        # cadence/rest policy may extend support across such silence.
+        if missing*step>=.06:return False
+    return True
+
+def classify(e,attacks,beatPeriod=0):
+    result=classify_legato(e,attacks)
+    for candidates in [upper_pickups(e),cadence_rest_fills(e,attacks,beatPeriod)]:
+        for candidate in candidates:
+            if not any(min(candidate['endTime'],c['endTime'])-max(candidate['time'],c['time'])>.25 for c in result):result.append(candidate)
+    for candidate in falling_glide_handoffs(e,attacks,result,beatPeriod):
+        if not any(min(candidate['endTime'],c['endTime'])-max(candidate['time'],c['time'])>.25 for c in result):result.append(candidate)
+    return sorted(result,key=lambda c:c['time'])
+
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--input',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--deps',type=Path);parser.add_argument('--cache-dir',type=Path,required=True);parser.add_argument('--model-dir',type=Path);parser.add_argument('--download-models',action='store_true');parser.add_argument('--diagnostics',type=Path);parser.add_argument('--decoded-pcm',type=Path,help='Optional actual Unity GetData interleaved float32 little-endian PCM');parser.add_argument('--decoded-metadata',type=Path,help='Verified sourceFileSha256/sourcePcmSha256/sampleRate/channels/sampleFrames metadata');args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--input',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--deps',type=Path);parser.add_argument('--cache-dir',type=Path,required=True);parser.add_argument('--model-dir',type=Path);parser.add_argument('--download-models',action='store_true');parser.add_argument('--diagnostics',type=Path);parser.add_argument('--decoded-pcm',type=Path,help='Optional actual Unity GetData interleaved float32 little-endian PCM');parser.add_argument('--decoded-metadata',type=Path,help='Verified sourceFileSha256/sourcePcmSha256/sampleRate/channels/sampleFrames metadata');parser.add_argument('--beat-period',type=float,default=0,help='Measured generator pulse period; enables musical cadence/handoff policies. Zero disables those policies.');args=parser.parse_args()
     if args.deps:sys.path.insert(0,str(args.deps.resolve()))
-    global np,ort,resample_poly,sosfiltfilt,butter,uniform_filter1d,percentile_filter,binary_closing,median_filter
+    global np,ort,resample_poly,sosfiltfilt,butter,uniform_filter1d,percentile_filter,binary_closing,median_filter,find_peaks
     import numpy as np
     import onnxruntime as ort
-    from scipy.signal import resample_poly,sosfiltfilt,butter
+    from scipy.signal import resample_poly,sosfiltfilt,butter,find_peaks
     from scipy.ndimage import uniform_filter1d,percentile_filter,binary_closing,median_filter
     from scipy.io import wavfile
     if bool(args.decoded_pcm)!=bool(args.decoded_metadata):raise ValueError('--decoded-pcm and --decoded-metadata must be supplied together')
@@ -178,7 +300,7 @@ def main():
     if not prediction.exists():np.savez_compressed(prediction,**transcribe(vocals,models/'nmp.onnx'))
     evidence=build_evidence(args.input,rate,pcm,vocals,np.load(prediction));evidence['featureSha256']=evidence_digest(evidence);args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(evidence,separators=(',',':'))+'\n')
     if args.diagnostics:
-        holds=classify(evidence,source_attacks(pcm,rate));args.diagnostics.parent.mkdir(parents=True,exist_ok=True);args.diagnostics.write_text(json.dumps(dict(sourcePcmSha256=evidence['sourcePcmSha256'],candidates=holds),indent=2)+'\n')
+        holds=classify(evidence,source_attacks(pcm,rate),args.beat_period);args.diagnostics.parent.mkdir(parents=True,exist_ok=True);args.diagnostics.write_text(json.dumps(dict(sourcePcmSha256=evidence['sourcePcmSha256'],beatPeriod=args.beat_period,candidates=holds),indent=2)+'\n')
     print(str(args.output))
 
 if __name__=='__main__':main()

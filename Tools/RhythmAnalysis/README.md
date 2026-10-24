@@ -47,13 +47,42 @@ Supply them with `--decoded-pcm source.f32 --decoded-metadata source.json`, keep
 byte length are verified before inference. This preserves import settings and
 lets Unity strictly validate that the analyzed audio is the audio being played.
 
-The classifier conservatively recognizes a vocal plateau followed by downward
-release, or a continuous descending legato phrase. It does not attempt to recover
-every artistic decision in a manually authored rhythm map. The first calibration
-recording produced 7 candidates matching 7 of 14 reference Hold intervals, with
-start/end tolerances 80/150 ms and no extra candidates. This is a single-recording
-calibration result, not an accuracy claim for unseen songs. The reference map was
-used only in a separate evaluation; it is not an inference input.
+The classifier recognizes continuous legato, plateau releases, returning ornaments
+and brief pickups into the measured upper voice register. Brief pitch uncertainty
+is bridged only when the separated voice is still audible. A weakening semitone
+release ends the main note instead of following its uncertain tail.
+Pickups and falling-glide supports also require measured vocal energy up to their
+endpoint: a continuous 60 ms below 10% of the phrase RMS peak rejects them. A
+0.005 peak floor prevents silent evidence from supporting a confident pitch trace.
+
+Two additional musical support policies use the generator's measured pulse period:
+an upper cadence may fill a genuine rest before a lower-register answer; a falling
+glide reserves an airborne handoff to an independently confirmed following support.
+Those endpoints are game phrasing decisions, not claims of continuous vocal sound.
+They are disabled when no period is provided. Unity passes `analysis.period`
+automatically. To reproduce those proposals in standalone `--diagnostics`, also
+pass `--beat-period MEASURED_SECONDS` (0.52 for the current calibration recording).
+This argument changes proposals only; the source measurements and cache remain
+the same.
+
+The v6 calibration recording produced 14 candidates matching all 14 reference Hold
+intervals, with start/end tolerances 80/150 ms and no extra candidates. The previous
+v5 found 7 of 14. This is repeated tuning on a single recording, not an accuracy
+claim for unseen songs or a claim that every tile type/path is reconstructed.
+The reference map is used only in a separate evaluation, not as an inference input.
+
+Run shared classifier counterexamples with:
+
+```powershell
+python Tools/RhythmAnalysis/test_vocal_holds.py --deps DancingCatsClone/Library/RhythmAnalysis/deps -v
+```
+
+The 26 cases in `gesture_fixtures.json` are also checked by Unity's
+`PcmVocalGestureValidation.RunChecks()`. They contrast real silence with pitch
+ambiguity, ornaments with vibrato, pickups with ordinary high notes, and measured
+rests/handoffs with ambiguous alternatives, including real 180 ms pauses and
+fully silent RMS traces in pickups and glides. They test classification rules using
+synthetic measurements; they do not measure neural source separation quality.
 
 CPU preprocessing took approximately 31 seconds for separation plus 1.2 seconds
 for note inference on the 67-second calibration recording. Unity consumes the

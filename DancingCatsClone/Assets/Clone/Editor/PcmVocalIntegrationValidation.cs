@@ -15,6 +15,7 @@ namespace DancingCats.Clone.Editor
         {
             Require(!EditorApplication.isPlayingOrWillChangePlaymode && !EditorApplication.isCompiling,
                 "Run vocal integration checks in Edit Mode after compilation.");
+            PcmVocalGestureValidation.RunChecks();
             // This is a named calibration recording, not a general claim that songs contain
             // a particular number of holds or moving phrases. Only its audio is loaded.
             var record = RecoveredCatalog.LoadOriginal().Single(song => song.id == "UnstoppableCat054");
@@ -38,16 +39,17 @@ namespace DancingCats.Clone.Editor
                 double duration = (double)clip.samples / clip.frequency;
                 double cutoff = Math.Round(duration - Math.Max(1.1, 5 / options.forwardSpeed + .25), 6) - .18;
                 var expectedGlides = spectral.follows.Where(cue => cue.time >= 0 && cue.endTime <= cutoff).ToArray();
-                var expectedHolds = PcmVocalAnalysis.Analyze(evidence, spectral.accents)
+                var map = AudioChartGenerator.GenerateFromSamples(pcm, clip.frequency, clip.channels, "VocalIntegration", options, evidence);
+                double beatPeriod = map.tempoSections[0].samplesPerBeat / clip.frequency;
+                var expectedHolds = PcmVocalAnalysis.Analyze(evidence, spectral.accents, beatPeriod)
                     .Where(cue => cue.time >= 0 && cue.endTime <= cutoff
                         && !expectedGlides.Any(glide => cue.time < glide.endTime + .078 && cue.endTime > glide.time - .078)).ToArray();
                 Require(expectedHolds.Length > 0 && expectedGlides.Length > 0,
                     "This integration fixture needs both separated-vocal and recurrent-phrase evidence.");
-                var map = AudioChartGenerator.GenerateFromSamples(pcm, clip.frequency, clip.channels, "VocalIntegration", options, evidence);
                 var again = AudioChartGenerator.GenerateFromSamples(pcm, clip.frequency, clip.channels, "VocalIntegration", Options(), evidence);
                 Require(JsonUtility.ToJson(map) == JsonUtility.ToJson(again),
                     "Identical decoded PCM and verified vocal evidence must compile deterministically.");
-                Require(map.audio.rawSha256 == digest && map.sourceMapBundle == "pcm-vocal-phrase-chart-v5",
+                Require(map.audio.rawSha256 == digest && map.sourceMapBundle == "pcm-vocal-phrase-chart-v6",
                     "The compiled chart must retain its actual PCM identity and vocal analysis provenance.");
                 SameSupports(map, "Hold", expectedHolds);
                 SameSupports(map, "Follow", expectedGlides);

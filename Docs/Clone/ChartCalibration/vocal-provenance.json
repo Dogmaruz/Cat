@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generator": "pcm-vocal-phrase-chart-v5",
+  "generator": "pcm-vocal-phrase-chart-v6",
   "audioUploaded": false,
   "runwayUsed": false,
   "runtimeInference": false,
@@ -65,15 +65,19 @@
   },
   "classifier": {
     "source": "DancingCatsClone/Assets/Clone/Editor/PcmVocalAnalysis.cs",
-    "sourceSha256": "575bd0fe6cff2440d1ed267400811dccd14a4283a3ecbde515c4509a81d4c86b",
-    "rule": "Continuous descending legato or vocal plateau with downward release",
+    "sourceSha256": "eb420a70eb7e7b4233ac73d6a5335daf389a59e0e80e253e590d0191c7fae124",
+    "rule": "Legato, plateau release, returning ornament, adaptive upper-register pickup, cadence/rest fill and confirmed glide handoff",
     "releaseSeconds": 0.06,
     "releaseSnapMaximumSeconds": 0.18,
-    "releaseSnapInput": "Physical high-frequency PCM attacks; vocal envelope starts excluded"
+    "releaseSnapInput": "Physical high-frequency PCM attacks; vocal envelope starts excluded",
+    "beatPeriodSeconds": 0.519999999999996,
+    "musicalPolicies": "Cadence/rest and glide handoff use measured pulse and note duration; their endpoints are gameplay phrasing, not literal vocal offsets",
+    "maximumExtendedHoldSeconds": 1.6,
+    "pickupAndGlideContinuity": "Reject 60 ms of consecutive RMS below 10% of phrase peak, with a 0.005 peak floor; explicit cadence/rest policy remains exempt"
   },
   "reproduction": {
     "cli": "Tools/RhythmAnalysis/analyze_vocal_holds.py",
-    "cliSha256": "705cead1999b4d1ae1cd34c3d75a17eaf482ed8e8e8ccf0ff686ef5a9df8c6c1",
+    "cliSha256": "65d3bd98e3ead3a86d95fcc06b62c53500e6b9ec3f5a68d46343b4f1aa6099cf",
     "instructions": "Tools/RhythmAnalysis/README.md",
     "licenses": "Tools/RhythmAnalysis/THIRD_PARTY_NOTICES.md",
     "cache": "Ignored Library only; model weights and intermediate audio are not committed"
@@ -85,5 +89,11 @@
     "perSupport": "candidate.supports.csv",
     "vocalDetectorMetrics": "vocal-final-metrics.json",
     "scope": "Repeated within-song calibration; not a blind or unseen-song test"
+  },
+  "classifierFixtures": {
+    "path": "Tools/RhythmAnalysis/gesture_fixtures.json",
+    "sha256": "9069fae00fa4a1c8d48d6a4ea08b0efe186fab0e833a9977616c6c17321e2f49",
+    "cases": 26,
+    "scope": "Synthetic counterfactual measurements; not a source-separation or unseen-song benchmark"
   }
 }

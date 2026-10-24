@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "generator": "pcm-vocal-phrase-chart-v5",
+  "audioUploaded": false,
+  "runwayUsed": false,
+  "runtimeInference": false,
+  "recording": {
+    "sourceFile": "DancingCatsClone/Assets/Resources/OriginalAudio/Music/UnstoppableCat054__-4692272782636974856.wav",
+    "sourceFileSha256": "7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b",
+    "sourcePcmSha256": "88ea37d6fc9b91863509c174e1aad914cff14704e6be6d20a57b5ffe21429102",
+    "sampleRate": 44100,
+    "channels": 2,
+    "sampleFrames": 2954880,
+    "durationSeconds": 67.00408163265305,
+    "decodedBy": "Unity AudioClip.GetData; original Vorbis importer retained",
+    "decodedExportMetadata": {
+      "sourceFileSha256": "7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b",
+      "sourcePcmSha256": "88ea37d6fc9b91863509c174e1aad914cff14704e6be6d20a57b5ffe21429102",
+      "sampleRate": 44100,
+      "channels": 2,
+      "sampleFrames": 2954880
+    }
+  },
+  "inferenceInputs": [
+    "Verified actual imported float32 little-endian PCM",
+    "Pinned local ONNX model weights"
+  ],
+  "referenceMapUsedForInference": false,
+  "models": [
+    {
+      "name": "UVR Kim Vocal 2",
+      "bytes": 66759214,
+      "sha256": "ce74ef3b6a6024ce44211a07be9cf8bc6d87728cc852a68ab34eb8e58cde9c8b",
+      "license": "UVR project code: MIT. For the public model, upstream asks users to credit UVR and its developers; no model weights are redistributed here.",
+      "credit": "Ultimate Vocal Remover; Anjok07, aufr33; Kim Vocal 2 model by UVR contributors",
+      "url": "https://github.com/TRvlvr/model_repo/releases/download/all_public_uvr_models/Kim_Vocal_2.onnx",
+      "officialSource": "https://github.com/Anjok07/ultimatevocalremovergui",
+      "modelConfiguration": {
+        "compensate": 1.009,
+        "mdx_dim_f_set": 3072,
+        "mdx_dim_t_set": 8,
+        "mdx_n_fft_scale_set": 7680,
+        "primary_stem": "Vocals"
+      }
+    },
+    {
+      "name": "Spotify Basic Pitch ICASSP 2022",
+      "bytes": 230444,
+      "sha256": "2c3c1d144bfa61ad236e92e169c13535c880469a12a047d4e73451f2c059a0ec",
+      "license": "Apache-2.0",
+      "credit": "Basic Pitch, Copyright 2022 Spotify AB",
+      "url": "https://raw.githubusercontent.com/spotify/basic-pitch/main/basic_pitch/saved_models/icassp_2022/nmp.onnx",
+      "officialSource": "https://github.com/spotify/basic-pitch"
+    }
+  ],
+  "featureEvidence": {
+    "path": "DancingCatsClone/Assets/Clone/Editor/AudioEvidence/7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b.voice.json",
+    "fileSha256": "06e6f76f254828c61f57433d0f59f5b84dd3ba5cf620823693d899823fbc3eee",
+    "bytes": 380970,
+    "canonicalFeatureSha256": "1087a84b2019acb19e88794e6286342e825530b8d89d30c5f619858dbc85ebae",
+    "canonicalEncoding": "Signed int64 little-endian, floor(value*1e8+0.5), including typed array lengths and recording/model identity",
+    "rmsHz": 100,
+    "pitchTiming": "Native Basic Pitch frame times, approximately 86 Hz",
+    "analysisVersion": "vocal-phrase-1"
+  },
+  "classifier": {
+    "source": "DancingCatsClone/Assets/Clone/Editor/PcmVocalAnalysis.cs",
+    "sourceSha256": "575bd0fe6cff2440d1ed267400811dccd14a4283a3ecbde515c4509a81d4c86b",
+    "rule": "Continuous descending legato or vocal plateau with downward release",
+    "releaseSeconds": 0.06,
+    "releaseSnapMaximumSeconds": 0.18,
+    "releaseSnapInput": "Physical high-frequency PCM attacks; vocal envelope starts excluded"
+  },
+  "reproduction": {
+    "cli": "Tools/RhythmAnalysis/analyze_vocal_holds.py",
+    "cliSha256": "705cead1999b4d1ae1cd34c3d75a17eaf482ed8e8e8ccf0ff686ef5a9df8c6c1",
+    "instructions": "Tools/RhythmAnalysis/README.md",
+    "licenses": "Tools/RhythmAnalysis/THIRD_PARTY_NOTICES.md",
+    "cache": "Ignored Library only; model weights and intermediate audio are not committed"
+  },
+  "evaluation": {
+    "referenceMapSha256": "277e5fd678a41323273dd786f32450291338d4edf4752d9ff83939b52548de90",
+    "referenceMapUsedOnlyForEvaluation": true,
+    "report": "candidate.json",
+    "perSupport": "candidate.supports.csv",
+    "vocalDetectorMetrics": "vocal-final-metrics.json",
+    "scope": "Repeated within-song calibration; not a blind or unseen-song test"
+  }
+}

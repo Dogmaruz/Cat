@@ -1,26 +1,32 @@
 {
-  "candidates": 7,
-  "startMatches": 7,
-  "fullMatches": 7,
+  "generator": "pcm-vocal-phrase-chart-v6",
+  "candidates": 14,
+  "startMatches": 14,
+  "fullMatches": 14,
   "referenceHoldCount": 14,
   "precision": 1.0,
-  "recall": 0.5,
-  "meanIoU": 0.9335471055797472,
-  "minIoU": 0.8457057266434331,
-  "meanAbsoluteStartErrorMs": 19.157386023440385,
-  "meanAbsoluteEndErrorMs": 37.25345282049248,
+  "recall": 1.0,
+  "meanIoU": 0.9207018200613349,
+  "minIoU": 0.8224152979098925,
+  "meanAbsoluteStartErrorMs": 19.179333405164837,
+  "meanAbsoluteEndErrorMs": 42.329015382482076,
   "sourceFileSha256": "7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b",
   "sourcePcmSha256": "88ea37d6fc9b91863509c174e1aad914cff14704e6be6d20a57b5ffe21429102",
   "featureSha256": "1087a84b2019acb19e88794e6286342e825530b8d89d30c5f619858dbc85ebae",
   "decodedBy": "Unity AudioClip.GetData from existing Vorbis import",
   "originalMapSha256": "277e5fd678a41323273dd786f32450291338d4edf4752d9ff83939b52548de90",
+  "startToleranceMs": 80,
+  "endToleranceMs": 150,
+  "beatPeriodSeconds": 0.519999999999996,
+  "releasePolicy": "Measured vocal ending and physical rearticulation; cadence/rest and confirmed-glide handoffs are explicit musical gameplay policies",
+  "evaluationScope": "Repeated within-song calibration; reference map used only for evaluation; no unseen-song accuracy claim",
   "matches": [
     {
       "start": 10.073650793650794,
       "end": 10.762086167800453,
       "startErrorMs": 18.662141183066083,
-      "endErrorMs": 9.183323677975253,
-      "iou": 0.9606200499121559
+      "endErrorMs": 9.183323677977029,
+      "iou": 0.9606200499121533
     },
     {
       "start": 21.10857142857143,
@@ -30,11 +36,39 @@
       "iou": 0.9950087975376912
     },
     {
+      "start": 23.19924762,
+      "end": 23.76813651,
+      "startErrorMs": 8.839394429596581,
+      "endErrorMs": -36.85221058731969,
+      "iou": 0.9256539942491039
+    },
+    {
+      "start": 25.937596371882087,
+      "end": 27.53759637188209,
+      "startErrorMs": -18.434673861314366,
+      "endErrorMs": 81.56518989950357,
+      "iou": 0.9375000851494888
+    },
+    {
+      "start": 28.7410585,
+      "end": 29.27511746,
+      "startErrorMs": 35.02745425659981,
+      "endErrorMs": 16.99937975866206,
+      "iou": 0.9085783235868935
+    },
+    {
       "start": 34.6,
       "end": 35.650000000000006,
       "startErrorMs": -7.073439019066541,
       "endErrorMs": -3.946395431242422,
       "iou": 0.9895442173358352
+    },
+    {
+      "start": 40.09541950113379,
+      "end": 41.17297052154195,
+      "startErrorMs": -16.868084090631896,
+      "endErrorMs": 45.05780007833948,
+      "iou": 0.9425309029492498
     },
     {
       "start": 46.0,
@@ -44,11 +78,32 @@
       "iou": 0.8457057266434331
     },
     {
+      "start": 48.36,
+      "end": 48.80852596739231,
+      "startErrorMs": 34.17220132691767,
+      "endErrorMs": -38.11924733563643,
+      "iou": 0.8611961765600054
+    },
+    {
+      "start": 49.28453514739229,
+      "end": 49.79117650999998,
+      "startErrorMs": -20.453505075437306,
+      "endErrorMs": 69.5182503697751,
+      "iou": 0.8224152979098925
+    },
+    {
       "start": 51.15,
       "end": 52.197913832199546,
       "startErrorMs": 27.301560980930617,
       "endErrorMs": 28.34461659531229,
       "iou": 0.9482464835146733
+    },
+    {
+      "start": 57.32,
+      "end": 58.35392290249433,
+      "startErrorMs": -0.6136524677273769,
+      "endErrorMs": 43.719967582063646,
+      "iou": 0.957120961395829
     },
     {
       "start": 60.28952380952381,
@@ -64,8 +119,5 @@
       "endErrorMs": -47.9176618095849,
       "iou": 0.9176334019082721
     }
-  ],
-  "startToleranceMs": 80,
-  "endToleranceMs": 150,
-  "releasePolicy": "0.06-second perceptual release, snapped to nearest physical HF accent within 0.18 seconds"
+  ]
 }

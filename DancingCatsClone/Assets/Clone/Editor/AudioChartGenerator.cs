@@ -14,7 +14,7 @@ namespace DancingCats.Clone.Editor
     {
         public const string AlwaysRememberId = "AlwaysRememberMeowCat";
         private const string Version = "pcm-phrase-chart-v4";
-        private const string VocalVersion = "pcm-vocal-phrase-chart-v5";
+        private const string VocalVersion = "pcm-vocal-phrase-chart-v6";
         private const double MinGap = .18, MaxGap = 1.95;
 
         [Serializable]
@@ -109,7 +109,7 @@ namespace DancingCats.Clone.Editor
             var cues = new List<MusicalCue>();
             var movingPhrases = options.includeMovingJumps ? spectral.follows.Where(cue => cue.time >= 0 && cue.endTime <= finishTime - MinGap).ToArray()
                 : Array.Empty<MusicalCue>();
-            var vocalHolds = vocalEvidence != null && options.includeHolds ? PcmVocalAnalysis.Analyze(vocalEvidence, analysis.accents.ToArray())
+            var vocalHolds = vocalEvidence != null && options.includeHolds ? PcmVocalAnalysis.Analyze(vocalEvidence, analysis.accents.ToArray(), analysis.period)
                 .Where(cue => cue.time >= 0 && cue.endTime <= finishTime - MinGap
                     && !movingPhrases.Any(phrase => cue.time < phrase.endTime + .078 && cue.endTime > phrase.time - .078)).ToArray()
                 : Array.Empty<MusicalCue>();
@@ -166,16 +166,17 @@ namespace DancingCats.Clone.Editor
             map.normalizationNotes = new[] { "Generator: " + version + "; decoded PCM float32 SHA-256: " + digest,
                 "1024-sample Hann spectrum near 11kHz / 10ms hop; independent stereo magnitude combination; log spectral flux with local threshold and strength-ranked 160ms non-maximum suppression.",
                 "Detected BPM: " + (60 / analysis.period).ToString("F4", CultureInfo.InvariantCulture) + "; phase seconds: " + analysis.phase.ToString("F6", CultureInfo.InvariantCulture),
-                "Holds require a stable pitch ridge with at least three harmonic partials and use measured attack/release only; a sustained single-tone RMS bed is insufficient.",
+                "Mixed-audio hold proposals require a stable pitch ridge with at least three harmonic partials and measured attack/release; a sustained single-tone RMS bed is insufficient.",
                 "Follow proposals require repeated irregular articulation patterns, near-identical normalized spectra and continuous tonal energy. Boundaries come from measured attacks; six route samples use an independent authored lane palette.",
                 "No source identity, reference cues, arbitrary gap filler or periodic moving jumps. A musical score takes priority when its source hash matches." };
             if (vocalEvidence != null)
             {
-                map.timing.warning = "Locally separated vocal evidence drives conservative legato/plateau holds; mixed-audio recurrence drives glides. Lateral paths use an authored palette. This does not reproduce every designer-authored gesture.";
+                map.timing.warning = "Locally separated vocal evidence drives legato/plateau holds and bounded musical support policies; mixed-audio recurrence drives glides. Lateral paths use an authored palette. This does not reproduce every designer-authored gesture.";
                 map.normalizationNotes = map.normalizationNotes.Concat(new[]
                 {
                     "Vocal evidence: " + vocalEvidence.analysisVersion + "; verified decoded PCM and feature SHA-256: " + vocalEvidence.featureSha256,
-                    "Vocal holds use sustained plateaus with downward releases or descending legato across changing notes, followed to the measured voice envelope. Voice features take priority over mixed-pitch sustain guesses.",
+                    "Vocal holds use measured plateaus, returning ornaments, register-relative pickups and descending legato. Pitch-confidence gaps require continuing vocal energy; real pauses remain separate.",
+                    "Musical support policies may extend an upper-register cadence through a bounded rest or end a glide before the next confirmed hold, reserving a tempo-relative flight. These endpoints express gameplay phrasing, not literal voice offsets. Voice features take priority over mixed-pitch sustain guesses.",
                     "Local separator model SHA-256: " + vocalEvidence.separatorModelSha256 + "; note model: " + vocalEvidence.noteModelSha256 + "; no audio upload."
                 }).ToArray();
             }
