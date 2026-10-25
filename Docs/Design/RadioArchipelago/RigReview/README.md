@@ -1,8 +1,20 @@
 # Character source and animation review
 
-## Current accessory authoring: 24 October 2026
+## Current rounded-paw repair: 25 October 2026
 
-The current models keep the arms and body connected while adding a sealed
+The current revision replaces the rough shoulder cuts with separate, elongated
+paws rounded at both ends, and repairs the exposed armpits and harness loops.
+The existing scarf, antenna, Blink and shoulder-driven animation remain part of
+the rig. Current evidence is in
+[`SmoothCouriers/README.md`](SmoothCouriers/README.md).
+
+The reports below describe earlier revisions. Their numeric PASS results did
+not catch all of the visible cut edges and material seams reported by the user;
+they are not approval evidence for the current surface repair.
+
+## Historical accessory authoring: 24 October 2026
+
+Those models kept the arms and body connected while adding a sealed
 mechanical antenna seam. `body → antenna.yaw → antenna.01` gives each assembly
 its actual mounting joint. Tiko/Nori have four bones in each scarf tail. Lumen's
 lower backpack brace is removed and the sail joint is above the head.

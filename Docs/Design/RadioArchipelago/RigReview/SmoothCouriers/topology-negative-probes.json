@@ -1,0 +1,50 @@
+{
+  "helper_sha256": "ac6425ff70fce5dc6fc92a2f0fd55c0e7cfd545e9ec72a6fd6b13b94d4f20864",
+  "positive": {
+    "Nori": {
+      "pass": true,
+      "input": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\RadioRigging\\SmoothCourierReview\\Accepted\\Nori-v2\\smooth-review.blend",
+      "sha256": "d086bd5ecb244fea0c54314c6f0131510cd90e4d52598d70f0ead8763443ad8a",
+      "body_boundary_edges": 0,
+      "body_nonmanifold_edges": 0,
+      "paws": [
+        "R",
+        "L"
+      ]
+    },
+    "Tiko": {
+      "pass": true,
+      "input": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\RadioRigging\\SmoothCourierReview\\Accepted\\Tiko\\smooth-review.blend",
+      "sha256": "7e3262a9ca2e4cbe3f7658d5ef318ea2c3e984958f15491762c73f6e1caa6a5e",
+      "body_boundary_edges": 4,
+      "body_nonmanifold_edges": 4,
+      "paws": [
+        "R",
+        "L"
+      ]
+    },
+    "Lumen": {
+      "pass": true,
+      "input": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\RadioRigging\\SmoothCourierReview\\Lumen\\CombinedDiagnostic\\coherent-pbr\\combined-review.blend",
+      "sha256": "1d2b5ddd589765735897f20bdd7b7d23bfa87f20fb5b657a411f2c93513b6779",
+      "body_boundary_edges": 0,
+      "body_nonmanifold_edges": 0,
+      "paws": [
+        "R",
+        "L"
+      ]
+    }
+  },
+  "negative": {
+    "Nori": {
+      "rejected": true,
+      "deleted_face": 9079,
+      "error": "New open body edges on Nori: 3, inherited allowance 0"
+    },
+    "Tiko": {
+      "rejected": true,
+      "deleted_face": 3311,
+      "error": "New body hole on Tiko: edge ('source', (7662, 7721)) was not inherited"
+    }
+  }
+}

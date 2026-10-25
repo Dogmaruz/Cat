@@ -128,6 +128,18 @@ namespace DancingCats.Clone.Editor
                         RequireEditMode();
                         Invoke("RadioArchipelagoJobs", "RigidPawChecks");
                         break;
+                    case "radio-surface-baseline":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "SurfaceBaseline");
+                        break;
+                    case "radio-surface-candidate":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "SurfaceCandidate");
+                        break;
+                    case "radio-rounded-paw-checks":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "RoundedPawChecks");
+                        break;
                     case "radio-accessory-checks":
                         RequireEditMode();
                         Invoke("RadioArchipelagoJobs", "AccessoryChecks");

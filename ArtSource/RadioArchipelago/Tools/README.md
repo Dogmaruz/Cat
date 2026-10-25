@@ -1,11 +1,73 @@
 # Radioarchipelago character authoring
 
-The supplied Tiko, Lumen and Nori FBX geometry is the source of every visible
-character part. The original ZIP archives and texture images remain unchanged.
+The supplied Tiko, Lumen and Nori models and texture atlases define the character
+appearance. The original ZIP archives and texture images remain unchanged.
 The pipeline uses Blender 5.2 in an isolated background process; it never opens
 or overwrites an interactive Blender scene. It does not build the Unity player.
 
-## Files and reproducible commands
+## Current pipeline: rounded paws and repaired harness contact surfaces
+
+`prepare_radio_rigs.py --stage rounded` rebuilds the current separated, rigid
+paws from the good distal source surface. It repairs the exposed body, replaces
+the harness loops and buckles, and keeps the existing accessory skeleton and
+Blink. The torso, paws and harness are separate skinned objects; the paws have
+100% shoulder weights, so a shoulder stroke cannot stretch the body texture.
+
+```powershell
+$radioBlender = 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe'
+& $radioBlender --background --factory-startup --threads 4 --python-exit-code 1 --python ArtSource/RadioArchipelago/Tools/rebuild_smooth_couriers.py -- --character Nori --torso --render
+# After inspecting the candidate from both sides and below, publish its package:
+& $radioBlender --background --factory-startup --threads 4 --python-exit-code 1 --python ArtSource/RadioArchipelago/Tools/prepare_radio_rigs.py -- --stage rounded --character Nori
+```
+
+The first command writes only ignored review candidates in
+`DancingCatsClone/Library/RadioRigging/SmoothCourierReview`. The second writes the
+six-file package in `Processed/Nori` after the portable FBX checks pass. Neither
+command imports assets into Unity or creates a player build. Use the existing
+Unity courier importer after reviewing and publishing a package. Omit
+`--character` from `prepare_radio_rigs.py` to process all three characters.
+
+The rebuild reads immutable source revisions from Git: `87bc426` for the
+separated rig, weights and accessories, and `d8019f2a8b00f1c6481c1a086056ebc543c6f1e9`
+for the original body surface. It verifies the cached Git blobs. Later manual
+changes in `Processed` are not merged into these revision inputs. Keep those
+commits available when making a shallow checkout.
+
+Reconstruction also requires the supplied local archives below, under
+`Docs/Design/RadioArchipelago/ModelReferences/`. These artist inputs are excluded
+from Git; restore them separately on a clean checkout. The original three ZIPs
+provide the source model and maps; `Tiko2.zip` and `Nori2.zip` supply the part
+labels when the ignored inspection cache is absent. Running the already imported
+Unity game does not require these archives.
+
+| Relative archive | Bytes | SHA-256 |
+|---|---:|---|
+| `Lumen/Lumen.zip` | 106926955 | `02176db05a89cb439563a92655db66e0d5022ac6d341b002d5410d5de340dddd` |
+| `Nori/Nori.zip` | 111496601 | `7daf1330989f6bd7826f99533a496f53fac6e6010f1353bf2af141de59802f68` |
+| `Nori/Nori2.zip` | 30904910 | `dbd06e454ff9e66dcd2ff6d4fa11eed220b5fbc729945edbb445b0cb86fb4517` |
+| `Tiko/Tiko.zip` | 111866610 | `58cddf894dd4e209ed8722baf4fd6a6e0d676f1fd506368216bbdf918b65ec6d` |
+| `Tiko/Tiko2.zip` | 34511525 | `dfee34addb686935ca5330bc8539a6e3108c3972c40b3ecc5d8e8c53a322661c` |
+
+- `rebuild_smooth_couriers.py`: mirrored distal paws, source preservation,
+  review renders, strict FBX export and package publication.
+- `repair_smooth_torso_harness.py`: local tissue reconstruction, protected source
+  clothing/case regions and native atlas charts at the exposed contact surfaces;
+  Lumen's closed body/back and separate Pack include a rounded leather contact
+  lid, with the original radio exterior preserved.
+- `repair_courier_rear_contact.py`: the local Nori contact-rim correction before
+  harness fitting, with the main case, scarf, head and feet preserved.
+- `repair_courier_harness.py`: closed body-weighted straps and buckles.
+- `repair_courier_contact_uv.py`: local source-material cleanup, preserving
+  geometry, skin weights, Blink and the original texture files.
+- `compose_surface_review.py`: side-by-side sheets from the actual Unity
+  before/after captures. These images complement the numeric checks.
+
+Review evidence and remaining qualifications belong in
+[`RigReview/SmoothCouriers`](../../../Docs/Design/RadioArchipelago/RigReview/SmoothCouriers/README.md).
+Source/FBX equivalence alone does not establish that the armpits look smooth.
+Check both sides, the underside, raised shoulders and actual Unity lighting.
+
+## Historical connected-body pipeline and commands
 
 Run from the repository root in PowerShell. Blender is installed at
 `C:/Program Files/Blender Foundation/Blender 5.2/blender.exe`.
@@ -72,9 +134,9 @@ Final artist/runtime packages are under
 Keep the six files together when moving the package; Blender materials reference
 the adjacent image files. No textures are embedded in the runtime FBX.
 
-## Rig contract
+## Historical connected-body rig contract
 
-The selected design keeps body and arms connected, with short shoulder bones
+The earlier design kept body and arms connected, with short shoulder bones
 and small 15–30° waves; 35° is a stress pose. `ANATOMY[character].continuous_skin`
 selects this profile. Earlier split-shell files in Library are fallbacks and must
 not be mistaken for the selected design. No arm/body cuts, cap geometry or
@@ -94,7 +156,7 @@ four-bone scarf chains (`scarf.L/R.01...04`).
 Lumen has no invented crest or scarf. Its metal antenna/sail moves as an assembly
 to keep the supplied frame and fabric intact, pivoting above the head.
 
-Current exported counts are Tiko 12,203 vertices / 24,454 triangles / 23 bones;
+That revision exported Tiko 12,203 vertices / 24,454 triangles / 23 bones;
 Lumen 9,431 / 18,878 / 12; Nori 7,344 / 14,704 / 21. Each remains one skinned mesh
 object, with body and rotating assembly separated topologically at sealed caps.
 Revision v2 recesses each cap 0.004 source units and closes the resulting thin

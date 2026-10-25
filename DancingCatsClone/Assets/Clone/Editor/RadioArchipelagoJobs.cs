@@ -105,6 +105,10 @@ namespace DancingCats.Clone.Editor
             CourierRigidPawChecks.RunChecks();
         }
 
+        public static void SurfaceBaseline() { RequireSavedEditor(); CourierSurfaceReview.RenderBaseline(); }
+        public static void SurfaceCandidate() { RequireSavedEditor(); CourierSurfaceReview.RenderCandidate(); }
+        public static void RoundedPawChecks() { RequireSavedEditor(); CourierRoundedPawChecks.RunChecks(); }
+
         public static void RigRender()
         {
             RequireSavedEditor();
