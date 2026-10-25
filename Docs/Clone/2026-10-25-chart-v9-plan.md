@@ -26,7 +26,7 @@
 - [x] Publish only the four separate test levels with transactional guards; preserve earlier playable maps and raw catalog records.
 - [x] Complete fresh full Editor checks/input-driven playthroughs on all four published test levels.
 - [x] Package honest results, limitations, paired reports, training/freeze provenance, runtime captures and integrity evidence.
-- [ ] Commit/push scoped changes and leave a test song ready in Unity.
+- [x] Commit/push scoped changes and leave a test song ready in Unity.
 
 ## Initial hypotheses
 
@@ -58,3 +58,9 @@ freeze hashes, 412 protected file hashes and the two old raw catalog records
 remain unchanged. Runtime success does not establish musical classification
 accuracy. The two control recordings have now been inspected and cannot be reused
 as unseen evidence for future tuning. See `ChartCalibration/V9/README.md`.
+
+Delivered on `feature/radio-archipelago`: trainer `9f9af68`, implementation,
+four test levels and evidence `82c9da4`, pushed to origin. Final Editor preview
+is Play Mode, Menu, `CanCanPianoGeneratorTestV9`, clock zero, no compilation
+and no unsaved scene changes. See `ChartCalibration/V9/unity-preview.json`.
+The four pre-existing user changes remain outside these commits.
