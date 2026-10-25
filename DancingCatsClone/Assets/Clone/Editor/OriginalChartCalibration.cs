@@ -18,7 +18,7 @@ namespace DancingCats.Clone.Editor
             public string stage, referenceId, referenceMapSha256, sourceAudioSha256, generator;
             public double duration, heldOutStart;
             public float referenceForwardSpeed, referenceDelayTime, generatedForwardSpeed, generatedDelayTime;
-            public string sourcePcmSha256, voiceFeatureSha256, voiceAnalysisVersion;
+            public string sourcePcmSha256, voiceFeatureSha256, voiceAnalysisVersion, instrumentFeatureSha256, instrumentAnalysisVersion;
             public bool geometryValid;
             public string geometryValidationError;
             public int referenceElements, generatedElements, referenceEvents, generatedEvents;
@@ -138,7 +138,8 @@ namespace DancingCats.Clone.Editor
 
         /// <summary>Evaluate a generated chart in memory; only Library reports are written, never a playable map or catalog.</summary>
         public static void EvaluateSong(SongRecord record, string stage, string outputDirectory,
-            float generatedDelayTime, PcmVocalAnalysis.Evidence vocalEvidence, string evaluationScope)
+            float generatedDelayTime, PcmVocalAnalysis.Evidence vocalEvidence, string evaluationScope,
+            bool experimentalShortSupports = false)
         {
             if (record == null) throw new ArgumentNullException(nameof(record));
             if (string.IsNullOrEmpty(stage) || stage.Any(character => !char.IsLetterOrDigit(character) && character != '-' && character != '_'))
@@ -165,12 +166,14 @@ namespace DancingCats.Clone.Editor
                     throw new InvalidDataException("The real imported calibration PCM is not ready.");
                 // Optional vocal features are generated from this audio only, validated
                 // against its decoded PCM. No score or reference cues enter generation.
-                var generated = AudioChartGenerator.GenerateFromSamples(pcm, clip.frequency, clip.channels,
+                var instrument = PcmInstrumentalEvidence.LoadForClip(clip);
+                var generated = AudioChartGenerator.GenerateWithInstrumentalSamples(pcm, clip.frequency, clip.channels,
                     "PcmEvaluation", new AudioChartGenerator.Options
                     {
                         catalogId = 29001, title = "PCM evaluation", artist = "Offline analysis",
-                        forwardSpeed = record.forwardSpeed, delayTime = generatedDelayTime
-                    }, vocalEvidence);
+                        forwardSpeed = record.forwardSpeed, delayTime = generatedDelayTime,
+                        includeExperimentalShortSupports = experimentalShortSupports
+                    }, vocalEvidence, instrument);
                 double duration = (double)clip.samples / clip.frequency;
                 double split = duration * 2 / 3;
                 var report = new Report
@@ -180,6 +183,8 @@ namespace DancingCats.Clone.Editor
                     sourcePcmSha256 = generated.sourceMapBundleSha256,
                     voiceFeatureSha256 = vocalEvidence?.featureSha256,
                     voiceAnalysisVersion = vocalEvidence?.analysisVersion,
+                    instrumentFeatureSha256 = instrument?.featureSha256,
+                    instrumentAnalysisVersion = instrument?.analysisVersion,
                     referenceForwardSpeed = reference.forwardSpeed, referenceDelayTime = reference.delayTime,
                     generatedForwardSpeed = generated.forwardSpeed, generatedDelayTime = generated.delayTime,
                     evaluationScope = evaluationScope,

@@ -1,0 +1,20 @@
+test_legacy_digest_ignores_optional_new_measurements (test_foreground_evidence.ForegroundEvidenceTests.test_legacy_digest_ignores_optional_new_measurements) ... ok
+test_native_attack_clock_stereo_phase_and_neural_confirmation (test_foreground_evidence.ForegroundEvidenceTests.test_native_attack_clock_stereo_phase_and_neural_confirmation) ... ok
+test_new_schema_binds_both_attack_times_and_confidence (test_foreground_evidence.ForegroundEvidenceTests.test_new_schema_binds_both_attack_times_and_confidence) ... ok
+test_new_schema_has_separate_digest_domain (test_foreground_evidence.ForegroundEvidenceTests.test_new_schema_has_separate_digest_domain) ... ok
+test_context_describes_each_pitch_candidate_and_its_own_release (test_instrumental_notes.InstrumentalNotesTests.test_context_describes_each_pitch_candidate_and_its_own_release) ... ok
+test_context_never_requires_absolute_song_time (test_instrumental_notes.InstrumentalNotesTests.test_context_never_requires_absolute_song_time) ... ok
+test_fft_preserves_antiphase_and_measures_release (test_instrumental_notes.InstrumentalNotesTests.test_fft_preserves_antiphase_and_measures_release) ... ok
+test_hash_binds_feature_semantics_and_event_boundaries (test_instrumental_notes.InstrumentalNotesTests.test_hash_binds_feature_semantics_and_event_boundaries) ... ok
+test_neural_offset_ends_on_same_pitch_reattack (test_instrumental_notes.InstrumentalNotesTests.test_neural_offset_ends_on_same_pitch_reattack) ... ok
+test_short_neural_event_has_no_required_reattack_frame (test_instrumental_notes.InstrumentalNotesTests.test_short_neural_event_has_no_required_reattack_frame) ... ok
+test_each_row_uses_actual_input_window_coordinates (test_transcribe_timing.TranscribeTimingTests.test_each_row_uses_actual_input_window_coordinates) ... ok
+test_late_window_marker_has_no_accumulated_drift (test_transcribe_timing.TranscribeTimingTests.test_late_window_marker_has_no_accumulated_drift) ... ok
+test_long_song_covers_tail_without_extrapolated_or_padded_rows (test_transcribe_timing.TranscribeTimingTests.test_long_song_covers_tail_without_extrapolated_or_padded_rows) ... ok
+test_short_clip_tail_drops_padded_model_frames (test_transcribe_timing.TranscribeTimingTests.test_short_clip_tail_drops_padded_model_frames) ... ok
+test_shared_counterfactual_gestures (test_vocal_holds.VocalGestureTests.test_shared_counterfactual_gestures) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.103s
+
+OK

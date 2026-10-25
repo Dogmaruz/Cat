@@ -1,0 +1,48 @@
+{
+    "stage": "baseline",
+    "referenceId": "MoonlightPop",
+    "referenceMapSha256": "ae158d469109c32c621cbe915062e3ff5129abe1c1001343f557f8ba0e7b3804",
+    "sourceAudioSha256": "35cb4620f0b6436f8c918538ecc6e3e81ef6180a2fb4ba4fd39931156909b843",
+    "sourcePcmSha256": "8dda2965be8c2c298300e2eec9c5644bbbec881b8b3f9285e67f6b908a1238b6",
+    "voiceFeatureSha256": "9e2dc68c37f4f6a3892418ab692ca93db1dc720543915b09291126a69cf2fc45",
+    "generator": "pcm-vocal-phrase-chart-v8",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 9.0,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold duration <=0.45s on both sides; onset <=80ms; end <=80ms; IoU >=0.5; maximum-cardinality one-to-one match.",
+        "referenceCount": 42,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 42,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "allHolds": {
+        "definition": "All Hold intervals; onset <=80ms; end <=80ms; IoU >=0.5; maximum-cardinality one-to-one match.",
+        "referenceCount": 42,
+        "generatedCount": 1,
+        "truePositive": 0,
+        "falsePositive": 1,
+        "falseNegative": 42,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "follows": {
+        "definition": "Follow intervals; onset <=80ms; end <=150ms; IoU >=0.5; maximum-cardinality one-to-one match.",
+        "referenceCount": 0,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    }
+}

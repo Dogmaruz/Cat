@@ -1,0 +1,922 @@
+{
+  "version": "short-support-experimental-v1",
+  "experimental": true,
+  "defaultEnabled": false,
+  "algorithm": "weighted CART; source-only inference features",
+  "maxDepth": 6,
+  "minLeaf": 8,
+  "positiveWeight": 2,
+  "rowWeight": "inverse candidate row count of each calibration recording",
+  "acceptancePrecision": 0.9,
+  "positiveLeafSupport": "at least two positive examples in at least two recordings",
+  "metric": "Hold duration <=.45s; start/end <=80ms; interval IoU >=.5; one-to-one matching",
+  "measuredReleasePolicy": "NN/harmonic release; nearby source attack; pulse fractions .25,.5,.75,1,1.5 only within120ms of measured release",
+  "temporalFeatureIndicesNormalizedByBeat": [
+    5,
+    10,
+    12,
+    13,
+    14
+  ],
+  "featureNames": [
+    "neuralOnset",
+    "neuralPeak",
+    "neuralBody",
+    "neuralLate",
+    "neuralTail",
+    "neuralDuration",
+    "harmonicPartials",
+    "harmonicBody",
+    "harmonicLate",
+    "harmonicTail",
+    "harmonicDuration",
+    "harmonicNovelty",
+    "nextGap",
+    "previousGap",
+    "localGap",
+    "nextPitchDelta",
+    "previousPitchDelta",
+    "insideAttacks",
+    "samePitchReattack",
+    "pitchRank",
+    "relativePitch",
+    "sourceAttack",
+    "selectedBeatDuration",
+    "durationToLocalGap",
+    "voiceBody",
+    "voiceTail",
+    "voicePeak",
+    "voiceBodyTail",
+    "voiceConfidence",
+    "voicePitchStability",
+    "vocalAudibility",
+    "durationToBeat",
+    "previousGapToBeat",
+    "nextGapToBeat",
+    "voicePitchAgreement",
+    "voicePitchDifference"
+  ],
+  "trainingInputs": [
+    {
+      "id": "UnstoppableCat054",
+      "sourceFileSha256": "7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b",
+      "referenceMapSha256": "277e5fd678a41323273dd786f32450291338d4edf4752d9ff83939b52548de90",
+      "beatPeriod": 0.519999999999996,
+      "sourcePcmSha256": "88ea37d6fc9b91863509c174e1aad914cff14704e6be6d20a57b5ffe21429102",
+      "instrumentFeatureSha256": "1820df054fdb7ef32b1e3de188ba53f2115a87ea0e87459e179a8fa87b4feaee",
+      "voiceFeatureSha256": "154c58c5b9baec4df3a03de09c5ed06a528bd110b21d6fd74bfe71d53f75b2bf"
+    },
+    {
+      "id": "TwinkleLittleStar",
+      "sourceFileSha256": "0cd8dc69f01e117562bf8d21afa17225c5594e7e1ba0920444275953fddec44f",
+      "referenceMapSha256": "96657140ead6377636747c6619bd3e060c60bfe41f32276c4436dbf6b15754db",
+      "beatPeriod": 0.490000000000002,
+      "sourcePcmSha256": "bdeae16d58c996bf0fdaef4d2e3572a7db57bad7ee5a263c2f06e59805642618",
+      "instrumentFeatureSha256": "2eaf0d81fabbd830e91ed088abdb98d773d0764e31638aaa2e85fd7a53b1489c",
+      "voiceFeatureSha256": "45e7bd67bf4c6bd770fde3d57e44012fd0bd546955c43e9d977268c865bd8fd3"
+    },
+    {
+      "id": "MoonlightPop",
+      "sourceFileSha256": "35cb4620f0b6436f8c918538ecc6e3e81ef6180a2fb4ba4fd39931156909b843",
+      "referenceMapSha256": "ae158d469109c32c621cbe915062e3ff5129abe1c1001343f557f8ba0e7b3804",
+      "beatPeriod": 0.5800000000000001,
+      "sourcePcmSha256": "8dda2965be8c2c298300e2eec9c5644bbbec881b8b3f9285e67f6b908a1238b6",
+      "instrumentFeatureSha256": "b37b497ae38276005bc0d28ec8f9757d95d3c95020a78880b7dbadff1cfb2cdd",
+      "voiceFeatureSha256": "9e2dc68c37f4f6a3892418ab692ca93db1dc720543915b09291126a69cf2fc45"
+    },
+    {
+      "id": "LABUBUSongsPop",
+      "sourceFileSha256": "dadc0644e3f1b2fe9d9f10f19b0df81eff5dcf087cc382d9a44e74a2a6a57190",
+      "referenceMapSha256": "1e9b3f9363637f19b2bcaa45fe361a6ab13ac8c4b9c3ad45d50a6d1d58ef108f",
+      "beatPeriod": 0.6099999999999994,
+      "sourcePcmSha256": "4a7c6b7d9ef3756c89e9c9be29a8b660509d58fab07b385dbbb306e48fffe9dc",
+      "instrumentFeatureSha256": "c8e9e269d2569b216d9bc5d21020794ff4ca6f298515fffcc5ebddabca069179",
+      "voiceFeatureSha256": "dd341172aa5f54e8528187597f5953deb58670521501ed275cf18e63072c65fa"
+    },
+    {
+      "id": "DisconnectPop",
+      "sourceFileSha256": "50e457b74a6c5189494d99db4c3b8cac6480c937e43cca03a270d71a39272c5f",
+      "referenceMapSha256": "2fdf744d7ad60b2df044a803cd5ef3877f6615f4b2c2938864864822f9f11b2a",
+      "beatPeriod": 0.46999999999999886,
+      "sourcePcmSha256": "f9fa7ab603d755ff3d3b069abed2aa71235e2d6e7b783a02769b6567478fde26",
+      "instrumentFeatureSha256": "b8e6761166bb6665f62696aef618603966c1ff24a4c2b1434cc5a1eae693ab56",
+      "voiceFeatureSha256": "3f5ee15dda955859f1af96ca896e40bd56be0536edd4d81c60bede2e752433ee"
+    },
+    {
+      "id": "CanCanPiano",
+      "sourceFileSha256": "8f53952f9f5002ed5f6b313ab170bb317e1494605d3cad8b183a0e78353ddcd3",
+      "referenceMapSha256": "2e04a04cc56346f6a4c6e5f832df5a55eb1abd52b16d1d1f61aee5120a6ee081",
+      "beatPeriod": 0.3699999999999975,
+      "sourcePcmSha256": "afc040b6717ffc0fbae20f91108eb64bea3a60cd09415a06b9347d94259ed7e2",
+      "instrumentFeatureSha256": "f9b0b5f4e916d155a23d63df6fd28d16c87dc7dc71731259e32bb9f4b09dc3a0",
+      "voiceFeatureSha256": "ec5a62eb9c16e3ba9ae7eb5fce974c177905a9fa557cda1f237165b7d0aeef0b"
+    }
+  ],
+  "producerSourceSha256": "a268924ef9a80cd4b2246fd62ecd4933043afd0919dae0e16131c353f8935ac6",
+  "trainerSourceSha256": "7e23e357751d3329ae776e4227d20d010f659e74fb3ea64348b716b266c13fe0",
+  "numpyVersion": "2.5.4",
+  "candidateRows": 21267,
+  "positiveCandidateRows": 581,
+  "positiveRules": [
+    {
+      "conditions": [
+        [
+          25,
+          "voiceTail",
+          ">",
+          0.1128373128163614
+        ],
+        [
+          24,
+          "voiceBody",
+          "<=",
+          0.12290058594036639
+        ],
+        [
+          27,
+          "voiceBodyTail",
+          ">",
+          0.2827520899624273
+        ],
+        [
+          22,
+          "selectedBeatDuration",
+          "<=",
+          0.6313237931034489
+        ],
+        [
+          14,
+          "localGap",
+          ">",
+          0.2597977338591345
+        ],
+        [
+          23,
+          "durationToLocalGap",
+          ">",
+          1.3581860437183202
+        ]
+      ],
+      "trainingRows": 54,
+      "positiveRows": 52,
+      "positiveGroups": 2,
+      "trainingPrecision": 0.9629629629629629
+    },
+    {
+      "conditions": [
+        [
+          25,
+          "voiceTail",
+          ">",
+          0.1128373128163614
+        ],
+        [
+          24,
+          "voiceBody",
+          ">",
+          0.12290058594036639
+        ],
+        [
+          26,
+          "voicePeak",
+          ">",
+          1.6384165719856725
+        ],
+        [
+          25,
+          "voiceTail",
+          "<=",
+          0.604104816520417
+        ],
+        [
+          21,
+          "sourceAttack",
+          ">",
+          0.5
+        ],
+        [
+          22,
+          "selectedBeatDuration",
+          "<=",
+          0.6866406170212782
+        ]
+      ],
+      "trainingRows": 31,
+      "positiveRows": 30,
+      "positiveGroups": 2,
+      "trainingPrecision": 0.967741935483871
+    }
+  ],
+  "calibration": {
+    "UnstoppableCat054": {
+      "reference": 1,
+      "proposed": 1,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1,
+      "f1": 0.0,
+      "matches": []
+    },
+    "TwinkleLittleStar": {
+      "reference": 2,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "f1": 0.0,
+      "matches": []
+    },
+    "MoonlightPop": {
+      "reference": 42,
+      "proposed": 8,
+      "tp": 8,
+      "fp": 0,
+      "fn": 34,
+      "f1": 0.32,
+      "matches": [
+        {
+          "time": 3.54721088,
+          "end": 3.7879365,
+          "refStart": 3.539364924033483,
+          "refEnd": 3.8310205969545574
+        },
+        {
+          "time": 4.71981859,
+          "end": 4.99519274,
+          "refStart": 4.7060315907001495,
+          "refEnd": 4.997687263621224
+        },
+        {
+          "time": 7.61687075,
+          "end": 7.8490703,
+          "refStart": 7.6174827184942036,
+          "refEnd": 7.909161279598871
+        },
+        {
+          "time": 8.18793651,
+          "end": 8.47793651,
+          "refStart": 8.200816051827537,
+          "refEnd": 8.492494612932205
+        },
+        {
+          "time": 10.53714286,
+          "end": 10.82714286,
+          "refStart": 10.528957158327103,
+          "refEnd": 10.820612831248177
+        },
+        {
+          "time": 12.8738322,
+          "end": 13.09678005,
+          "refStart": 12.857074528932571,
+          "refEnd": 13.148730201853645
+        },
+        {
+          "time": 30.31764172,
+          "end": 30.55492063,
+          "refStart": 30.331020146608353,
+          "refEnd": 30.622697012292015
+        },
+        {
+          "time": 32.68263039,
+          "end": 32.89469388,
+          "refStart": 32.65916210081842,
+          "refEnd": 32.95081523060799
+        }
+      ]
+    },
+    "LABUBUSongsPop": {
+      "reference": 4,
+      "proposed": 1,
+      "tp": 0,
+      "fp": 1,
+      "fn": 4,
+      "f1": 0.0,
+      "matches": []
+    },
+    "DisconnectPop": {
+      "reference": 41,
+      "proposed": 2,
+      "tp": 2,
+      "fp": 0,
+      "fn": 39,
+      "f1": 0.09302325581395349,
+      "matches": [
+        {
+          "time": 8.12807256,
+          "end": 8.36307256,
+          "refStart": 8.133106716654517,
+          "refEnd": 8.367483125491576
+        },
+        {
+          "time": 28.75120181,
+          "end": 28.98620181,
+          "refStart": 28.752903469584204,
+          "refEnd": 28.98727849125862
+        }
+      ]
+    },
+    "CanCanPiano": {
+      "reference": 5,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 5,
+      "f1": 0.0,
+      "matches": []
+    }
+  },
+  "tree": {
+    "count": 21267,
+    "positive": 581,
+    "probability": 0.027319321013777213,
+    "positiveGroups": 6,
+    "feature": 25,
+    "threshold": 0.1128373128163614,
+    "left": {
+      "count": 3598,
+      "positive": 353,
+      "probability": 0.0981100611450806,
+      "positiveGroups": 3,
+      "feature": 12,
+      "threshold": 0.22106098440939131,
+      "left": {
+        "count": 768,
+        "positive": 178,
+        "probability": 0.23177083333333334,
+        "positiveGroups": 2,
+        "feature": 21,
+        "threshold": 0.5,
+        "left": {
+          "count": 353,
+          "positive": 5,
+          "probability": 0.014164305949008499,
+          "positiveGroups": 1,
+          "feature": 4,
+          "threshold": 0.18323396,
+          "left": {
+            "count": 15,
+            "positive": 3,
+            "probability": 0.2,
+            "positiveGroups": 1
+          },
+          "right": {
+            "count": 338,
+            "positive": 2,
+            "probability": 0.005917159763313609,
+            "positiveGroups": 1,
+            "feature": 2,
+            "threshold": 0.9600922599999999,
+            "left": {
+              "count": 329,
+              "positive": 1,
+              "probability": 0.00303951367781155,
+              "positiveGroups": 0,
+              "feature": 20,
+              "threshold": -17.5,
+              "left": {
+                "count": 29,
+                "positive": 1,
+                "probability": 0.034482758620689655,
+                "positiveGroups": 0
+              },
+              "right": {
+                "count": 300,
+                "positive": 0,
+                "probability": 0.0,
+                "positiveGroups": 0
+              }
+            },
+            "right": {
+              "count": 9,
+              "positive": 1,
+              "probability": 0.1111111111111111,
+              "positiveGroups": 0
+            }
+          }
+        },
+        "right": {
+          "count": 415,
+          "positive": 173,
+          "probability": 0.41686746987951806,
+          "positiveGroups": 2,
+          "feature": 22,
+          "threshold": 0.6629134396551715,
+          "left": {
+            "count": 307,
+            "positive": 173,
+            "probability": 0.5635179153094463,
+            "positiveGroups": 2,
+            "feature": 28,
+            "threshold": 0.11756261636813481,
+            "left": {
+              "count": 29,
+              "positive": 1,
+              "probability": 0.034482758620689655,
+              "positiveGroups": 0,
+              "feature": 1,
+              "threshold": 0.255250845,
+              "left": {
+                "count": 8,
+                "positive": 1,
+                "probability": 0.125,
+                "positiveGroups": 0
+              },
+              "right": {
+                "count": 21,
+                "positive": 0,
+                "probability": 0.0,
+                "positiveGroups": 0
+              }
+            },
+            "right": {
+              "count": 278,
+              "positive": 172,
+              "probability": 0.6187050359712231,
+              "positiveGroups": 2,
+              "feature": 28,
+              "threshold": 0.5907634864250819,
+              "left": {
+                "count": 251,
+                "positive": 172,
+                "probability": 0.6852589641434262,
+                "positiveGroups": 2
+              },
+              "right": {
+                "count": 27,
+                "positive": 0,
+                "probability": 0.0,
+                "positiveGroups": 0
+              }
+            }
+          },
+          "right": {
+            "count": 108,
+            "positive": 0,
+            "probability": 0.0,
+            "positiveGroups": 0
+          }
+        }
+      },
+      "right": {
+        "count": 2830,
+        "positive": 175,
+        "probability": 0.061837455830388695,
+        "positiveGroups": 3,
+        "feature": 26,
+        "threshold": 0.7699976998622774,
+        "left": {
+          "count": 2564,
+          "positive": 116,
+          "probability": 0.0452418096723869,
+          "positiveGroups": 2,
+          "feature": 13,
+          "threshold": 2.8390122501834214,
+          "left": {
+            "count": 2550,
+            "positive": 107,
+            "probability": 0.04196078431372549,
+            "positiveGroups": 2,
+            "feature": 27,
+            "threshold": 0.7673966835130563,
+            "left": {
+              "count": 722,
+              "positive": 64,
+              "probability": 0.0886426592797784,
+              "positiveGroups": 2,
+              "feature": 28,
+              "threshold": 0.13435602312286696,
+              "left": {
+                "count": 484,
+                "positive": 11,
+                "probability": 0.022727272727272728,
+                "positiveGroups": 1
+              },
+              "right": {
+                "count": 238,
+                "positive": 53,
+                "probability": 0.22268907563025211,
+                "positiveGroups": 2
+              }
+            },
+            "right": {
+              "count": 1828,
+              "positive": 43,
+              "probability": 0.023522975929978117,
+              "positiveGroups": 2,
+              "feature": 11,
+              "threshold": 0.005404590000000001,
+              "left": {
+                "count": 389,
+                "positive": 35,
+                "probability": 0.08997429305912596,
+                "positiveGroups": 2
+              },
+              "right": {
+                "count": 1439,
+                "positive": 8,
+                "probability": 0.005559416261292564,
+                "positiveGroups": 2
+              }
+            }
+          },
+          "right": {
+            "count": 14,
+            "positive": 9,
+            "probability": 0.6428571428571429,
+            "positiveGroups": 1
+          }
+        },
+        "right": {
+          "count": 266,
+          "positive": 59,
+          "probability": 0.22180451127819548,
+          "positiveGroups": 3,
+          "feature": 14,
+          "threshold": 0.24882039429055974,
+          "left": {
+            "count": 98,
+            "positive": 0,
+            "probability": 0.0,
+            "positiveGroups": 0
+          },
+          "right": {
+            "count": 168,
+            "positive": 59,
+            "probability": 0.35119047619047616,
+            "positiveGroups": 3,
+            "feature": 11,
+            "threshold": 0.015829945,
+            "left": {
+              "count": 46,
+              "positive": 1,
+              "probability": 0.021739130434782608,
+              "positiveGroups": 0,
+              "feature": 20,
+              "threshold": -15.0,
+              "left": {
+                "count": 8,
+                "positive": 1,
+                "probability": 0.125,
+                "positiveGroups": 0
+              },
+              "right": {
+                "count": 38,
+                "positive": 0,
+                "probability": 0.0,
+                "positiveGroups": 0
+              }
+            },
+            "right": {
+              "count": 122,
+              "positive": 58,
+              "probability": 0.47540983606557374,
+              "positiveGroups": 3,
+              "feature": 22,
+              "threshold": 0.5341286914893582,
+              "left": {
+                "count": 86,
+                "positive": 58,
+                "probability": 0.6744186046511628,
+                "positiveGroups": 3
+              },
+              "right": {
+                "count": 36,
+                "positive": 0,
+                "probability": 0.0,
+                "positiveGroups": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "right": {
+      "count": 17669,
+      "positive": 228,
+      "probability": 0.012903956081272285,
+      "positiveGroups": 6,
+      "feature": 24,
+      "threshold": 0.12290058594036639,
+      "left": {
+        "count": 1053,
+        "positive": 75,
+        "probability": 0.07122507122507123,
+        "positiveGroups": 3,
+        "feature": 27,
+        "threshold": 0.2827520899624273,
+        "left": {
+          "count": 827,
+          "positive": 4,
+          "probability": 0.0048367593712212815,
+          "positiveGroups": 1,
+          "feature": 13,
+          "threshold": 0.1469090409836067,
+          "left": {
+            "count": 34,
+            "positive": 4,
+            "probability": 0.11764705882352941,
+            "positiveGroups": 1,
+            "feature": 12,
+            "threshold": 0.3900072912662523,
+            "left": {
+              "count": 21,
+              "positive": 0,
+              "probability": 0.0,
+              "positiveGroups": 0
+            },
+            "right": {
+              "count": 13,
+              "positive": 4,
+              "probability": 0.3076923076923077,
+              "positiveGroups": 1
+            }
+          },
+          "right": {
+            "count": 793,
+            "positive": 0,
+            "probability": 0.0,
+            "positiveGroups": 0
+          }
+        },
+        "right": {
+          "count": 226,
+          "positive": 71,
+          "probability": 0.3141592920353982,
+          "positiveGroups": 3,
+          "feature": 22,
+          "threshold": 0.6313237931034489,
+          "left": {
+            "count": 163,
+            "positive": 71,
+            "probability": 0.43558282208588955,
+            "positiveGroups": 3,
+            "feature": 14,
+            "threshold": 0.2597977338591345,
+            "left": {
+              "count": 83,
+              "positive": 16,
+              "probability": 0.1927710843373494,
+              "positiveGroups": 2,
+              "feature": 13,
+              "threshold": 0.42312957905355864,
+              "left": {
+                "count": 73,
+                "positive": 8,
+                "probability": 0.1095890410958904,
+                "positiveGroups": 1
+              },
+              "right": {
+                "count": 10,
+                "positive": 8,
+                "probability": 0.8,
+                "positiveGroups": 1
+              }
+            },
+            "right": {
+              "count": 80,
+              "positive": 55,
+              "probability": 0.6875,
+              "positiveGroups": 2,
+              "feature": 23,
+              "threshold": 1.3581860437183202,
+              "left": {
+                "count": 26,
+                "positive": 3,
+                "probability": 0.11538461538461539,
+                "positiveGroups": 1
+              },
+              "right": {
+                "count": 54,
+                "positive": 52,
+                "probability": 0.9629629629629629,
+                "positiveGroups": 2
+              }
+            }
+          },
+          "right": {
+            "count": 63,
+            "positive": 0,
+            "probability": 0.0,
+            "positiveGroups": 0
+          }
+        }
+      },
+      "right": {
+        "count": 16616,
+        "positive": 153,
+        "probability": 0.009207992296581608,
+        "positiveGroups": 5,
+        "feature": 26,
+        "threshold": 1.6384165719856725,
+        "left": {
+          "count": 16402,
+          "positive": 123,
+          "probability": 0.007499085477380808,
+          "positiveGroups": 5,
+          "feature": 14,
+          "threshold": 1.0375681756756827,
+          "left": {
+            "count": 16217,
+            "positive": 85,
+            "probability": 0.005241413331688968,
+            "positiveGroups": 4,
+            "feature": 5,
+            "threshold": 0.24722327066620203,
+            "left": {
+              "count": 661,
+              "positive": 23,
+              "probability": 0.03479576399394856,
+              "positiveGroups": 1,
+              "feature": 24,
+              "threshold": 0.15876666666666667,
+              "left": {
+                "count": 81,
+                "positive": 13,
+                "probability": 0.16049382716049382,
+                "positiveGroups": 1
+              },
+              "right": {
+                "count": 580,
+                "positive": 10,
+                "probability": 0.017241379310344827,
+                "positiveGroups": 1
+              }
+            },
+            "right": {
+              "count": 15556,
+              "positive": 62,
+              "probability": 0.003985600411416817,
+              "positiveGroups": 4,
+              "feature": 12,
+              "threshold": 1.1421259368592769,
+              "left": {
+                "count": 15490,
+                "positive": 58,
+                "probability": 0.0037443511943189155,
+                "positiveGroups": 4
+              },
+              "right": {
+                "count": 66,
+                "positive": 4,
+                "probability": 0.06060606060606061,
+                "positiveGroups": 1
+              }
+            }
+          },
+          "right": {
+            "count": 185,
+            "positive": 38,
+            "probability": 0.20540540540540542,
+            "positiveGroups": 1,
+            "feature": 23,
+            "threshold": 0.9373276631258568,
+            "left": {
+              "count": 121,
+              "positive": 1,
+              "probability": 0.008264462809917356,
+              "positiveGroups": 0,
+              "feature": 18,
+              "threshold": 0.85528654,
+              "left": {
+                "count": 112,
+                "positive": 0,
+                "probability": 0.0,
+                "positiveGroups": 0
+              },
+              "right": {
+                "count": 9,
+                "positive": 1,
+                "probability": 0.1111111111111111,
+                "positiveGroups": 0
+              }
+            },
+            "right": {
+              "count": 64,
+              "positive": 37,
+              "probability": 0.578125,
+              "positiveGroups": 1,
+              "feature": 27,
+              "threshold": 0.8180958343938078,
+              "left": {
+                "count": 15,
+                "positive": 0,
+                "probability": 0.0,
+                "positiveGroups": 0
+              },
+              "right": {
+                "count": 49,
+                "positive": 37,
+                "probability": 0.7551020408163265,
+                "positiveGroups": 1
+              }
+            }
+          }
+        },
+        "right": {
+          "count": 214,
+          "positive": 30,
+          "probability": 0.14018691588785046,
+          "positiveGroups": 2,
+          "feature": 25,
+          "threshold": 0.604104816520417,
+          "left": {
+            "count": 74,
+            "positive": 30,
+            "probability": 0.40540540540540543,
+            "positiveGroups": 2,
+            "feature": 21,
+            "threshold": 0.5,
+            "left": {
+              "count": 29,
+              "positive": 0,
+              "probability": 0.0,
+              "positiveGroups": 0
+            },
+            "right": {
+              "count": 45,
+              "positive": 30,
+              "probability": 0.6666666666666666,
+              "positiveGroups": 2,
+              "feature": 22,
+              "threshold": 0.6866406170212782,
+              "left": {
+                "count": 31,
+                "positive": 30,
+                "probability": 0.967741935483871,
+                "positiveGroups": 2
+              },
+              "right": {
+                "count": 14,
+                "positive": 0,
+                "probability": 0.0,
+                "positiveGroups": 0
+              }
+            }
+          },
+          "right": {
+            "count": 140,
+            "positive": 0,
+            "probability": 0.0,
+            "positiveGroups": 0
+          }
+        }
+      }
+    }
+  },
+  "leaveOneSongOut": {
+    "UnstoppableCat054": {
+      "reference": 1,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "f1": 0.0,
+      "matches": []
+    },
+    "TwinkleLittleStar": {
+      "reference": 2,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "f1": 0.0,
+      "matches": []
+    },
+    "MoonlightPop": {
+      "reference": 42,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 42,
+      "f1": 0.0,
+      "matches": []
+    },
+    "LABUBUSongsPop": {
+      "reference": 4,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 4,
+      "f1": 0.0,
+      "matches": []
+    },
+    "DisconnectPop": {
+      "reference": 41,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 41,
+      "f1": 0.0,
+      "matches": []
+    },
+    "CanCanPiano": {
+      "reference": 5,
+      "proposed": 1,
+      "tp": 0,
+      "fp": 1,
+      "fn": 5,
+      "f1": 0.0,
+      "matches": []
+    }
+  }
+}

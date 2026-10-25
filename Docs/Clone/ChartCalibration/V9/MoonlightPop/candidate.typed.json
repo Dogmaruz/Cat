@@ -1,0 +1,227 @@
+{
+    "stage": "candidate",
+    "referenceId": "MoonlightPop",
+    "referenceMapSha256": "ae158d469109c32c621cbe915062e3ff5129abe1c1001343f557f8ba0e7b3804",
+    "sourceAudioSha256": "35cb4620f0b6436f8c918538ecc6e3e81ef6180a2fb4ba4fd39931156909b843",
+    "sourcePcmSha256": "8dda2965be8c2c298300e2eec9c5644bbbec881b8b3f9285e67f6b908a1238b6",
+    "voiceFeatureSha256": "9e2dc68c37f4f6a3892418ab692ca93db1dc720543915b09291126a69cf2fc45",
+    "generator": "pcm-vocal-phrase-chart-v9+short-test",
+    "generatedTimelineSha256": "0d5e977349f79dbf684fa350c4efadc6441b209dc913dc92794c1a98525c140f",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 9.0,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold duration <=0.45s on both sides; onset <=80ms; end <=80ms; IoU >=0.5; maximum-cardinality one-to-one match.",
+        "referenceCount": 42,
+        "generatedCount": 8,
+        "truePositive": 8,
+        "falsePositive": 0,
+        "falseNegative": 34,
+        "precision": 1.0,
+        "recall": 0.19047619047619047,
+        "f1": 0.32,
+        "matches": [
+            {
+                "referenceIndex": 7,
+                "generatedIndex": 12,
+                "referenceStart": 3.539364924033483,
+                "referenceEnd": 3.8310205969545576,
+                "generatedStart": 3.54721088,
+                "generatedEnd": 3.7879365,
+                "onsetErrorMs": 7.84595596651716,
+                "endErrorMs": -43.084096954557619,
+                "intersectionOverUnion": 0.8253760936278546
+            },
+            {
+                "referenceIndex": 10,
+                "generatedIndex": 15,
+                "referenceStart": 4.7060315907001499,
+                "referenceEnd": 4.997687263621224,
+                "generatedStart": 4.71981859,
+                "generatedEnd": 4.99519274,
+                "onsetErrorMs": 13.7869992998505,
+                "endErrorMs": -2.494523621224154,
+                "intersectionOverUnion": 0.9441755315163007
+            },
+            {
+                "referenceIndex": 15,
+                "generatedIndex": 24,
+                "referenceStart": 7.6174827184942039,
+                "referenceEnd": 7.909161279598871,
+                "generatedStart": 7.61687075,
+                "generatedEnd": 7.8490703,
+                "onsetErrorMs": -0.6119684942031967,
+                "endErrorMs": -60.09097959887111,
+                "intersectionOverUnion": 0.7923198258377346
+            },
+            {
+                "referenceIndex": 16,
+                "generatedIndex": 25,
+                "referenceStart": 8.200816051827538,
+                "referenceEnd": 8.492494612932206,
+                "generatedStart": 8.18793651,
+                "generatedEnd": 8.47793651,
+                "onsetErrorMs": -12.879541827537367,
+                "endErrorMs": -14.55810293220594,
+                "intersectionOverUnion": 0.9099099827074673
+            },
+            {
+                "referenceIndex": 21,
+                "generatedIndex": 31,
+                "referenceStart": 10.528957158327105,
+                "referenceEnd": 10.820612831248177,
+                "generatedStart": 10.53714286,
+                "generatedEnd": 10.82714286,
+                "onsetErrorMs": 8.185701672895008,
+                "endErrorMs": 6.530028751823735,
+                "intersectionOverUnion": 0.9506491077802864
+            },
+            {
+                "referenceIndex": 25,
+                "generatedIndex": 38,
+                "referenceStart": 12.857074528932572,
+                "referenceEnd": 13.148730201853644,
+                "generatedStart": 12.8738322,
+                "generatedEnd": 13.09678005,
+                "onsetErrorMs": 16.757671067429315,
+                "endErrorMs": -51.950151853644047,
+                "intersectionOverUnion": 0.7644214417880805
+            },
+            {
+                "referenceIndex": 64,
+                "generatedIndex": 96,
+                "referenceStart": 30.331020146608354,
+                "referenceEnd": 30.622697012292016,
+                "generatedStart": 30.31764172,
+                "generatedEnd": 30.55492063,
+                "onsetErrorMs": -13.378426608351646,
+                "endErrorMs": -67.77638229201344,
+                "intersectionOverUnion": 0.7339668874759934
+            },
+            {
+                "referenceIndex": 69,
+                "generatedIndex": 103,
+                "referenceStart": 32.65916210081842,
+                "referenceEnd": 32.950815230607989,
+                "generatedStart": 32.68263039,
+                "generatedEnd": 32.89469388,
+                "onsetErrorMs": 23.468289181579395,
+                "endErrorMs": -56.12135060798806,
+                "intersectionOverUnion": 0.7271085695291762
+            }
+        ]
+    },
+    "allHolds": {
+        "definition": "All Hold intervals; onset <=80ms; end <=80ms; IoU >=0.5; maximum-cardinality one-to-one match.",
+        "referenceCount": 42,
+        "generatedCount": 9,
+        "truePositive": 8,
+        "falsePositive": 1,
+        "falseNegative": 34,
+        "precision": 0.8888888888888888,
+        "recall": 0.19047619047619047,
+        "f1": 0.3137254901960784,
+        "matches": [
+            {
+                "referenceIndex": 7,
+                "generatedIndex": 12,
+                "referenceStart": 3.539364924033483,
+                "referenceEnd": 3.8310205969545576,
+                "generatedStart": 3.54721088,
+                "generatedEnd": 3.7879365,
+                "onsetErrorMs": 7.84595596651716,
+                "endErrorMs": -43.084096954557619,
+                "intersectionOverUnion": 0.8253760936278546
+            },
+            {
+                "referenceIndex": 10,
+                "generatedIndex": 15,
+                "referenceStart": 4.7060315907001499,
+                "referenceEnd": 4.997687263621224,
+                "generatedStart": 4.71981859,
+                "generatedEnd": 4.99519274,
+                "onsetErrorMs": 13.7869992998505,
+                "endErrorMs": -2.494523621224154,
+                "intersectionOverUnion": 0.9441755315163007
+            },
+            {
+                "referenceIndex": 15,
+                "generatedIndex": 24,
+                "referenceStart": 7.6174827184942039,
+                "referenceEnd": 7.909161279598871,
+                "generatedStart": 7.61687075,
+                "generatedEnd": 7.8490703,
+                "onsetErrorMs": -0.6119684942031967,
+                "endErrorMs": -60.09097959887111,
+                "intersectionOverUnion": 0.7923198258377346
+            },
+            {
+                "referenceIndex": 16,
+                "generatedIndex": 25,
+                "referenceStart": 8.200816051827538,
+                "referenceEnd": 8.492494612932206,
+                "generatedStart": 8.18793651,
+                "generatedEnd": 8.47793651,
+                "onsetErrorMs": -12.879541827537367,
+                "endErrorMs": -14.55810293220594,
+                "intersectionOverUnion": 0.9099099827074673
+            },
+            {
+                "referenceIndex": 21,
+                "generatedIndex": 31,
+                "referenceStart": 10.528957158327105,
+                "referenceEnd": 10.820612831248177,
+                "generatedStart": 10.53714286,
+                "generatedEnd": 10.82714286,
+                "onsetErrorMs": 8.185701672895008,
+                "endErrorMs": 6.530028751823735,
+                "intersectionOverUnion": 0.9506491077802864
+            },
+            {
+                "referenceIndex": 25,
+                "generatedIndex": 38,
+                "referenceStart": 12.857074528932572,
+                "referenceEnd": 13.148730201853644,
+                "generatedStart": 12.8738322,
+                "generatedEnd": 13.09678005,
+                "onsetErrorMs": 16.757671067429315,
+                "endErrorMs": -51.950151853644047,
+                "intersectionOverUnion": 0.7644214417880805
+            },
+            {
+                "referenceIndex": 64,
+                "generatedIndex": 96,
+                "referenceStart": 30.331020146608354,
+                "referenceEnd": 30.622697012292016,
+                "generatedStart": 30.31764172,
+                "generatedEnd": 30.55492063,
+                "onsetErrorMs": -13.378426608351646,
+                "endErrorMs": -67.77638229201344,
+                "intersectionOverUnion": 0.7339668874759934
+            },
+            {
+                "referenceIndex": 69,
+                "generatedIndex": 103,
+                "referenceStart": 32.65916210081842,
+                "referenceEnd": 32.950815230607989,
+                "generatedStart": 32.68263039,
+                "generatedEnd": 32.89469388,
+                "onsetErrorMs": 23.468289181579395,
+                "endErrorMs": -56.12135060798806,
+                "intersectionOverUnion": 0.7271085695291762
+            }
+        ]
+    },
+    "follows": {
+        "definition": "Follow intervals; onset <=80ms; end <=150ms; IoU >=0.5; maximum-cardinality one-to-one match.",
+        "referenceCount": 0,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    }
+}

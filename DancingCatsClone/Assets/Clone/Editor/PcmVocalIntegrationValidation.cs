@@ -49,7 +49,7 @@ namespace DancingCats.Clone.Editor
                 var again = AudioChartGenerator.GenerateFromSamples(pcm, clip.frequency, clip.channels, "VocalIntegration", Options(), evidence);
                 Require(JsonUtility.ToJson(map) == JsonUtility.ToJson(again),
                     "Identical decoded PCM and verified vocal evidence must compile deterministically.");
-                Require(map.audio.rawSha256 == digest && map.sourceMapBundle == "pcm-vocal-phrase-chart-v8",
+                Require(map.audio.rawSha256 == digest && map.sourceMapBundle == "pcm-vocal-phrase-chart-v9",
                     "The compiled chart must retain its actual PCM identity and vocal analysis provenance.");
                 SameSupports(map, "Hold", expectedHolds);
                 SameSupports(map, "Follow", expectedGlides);

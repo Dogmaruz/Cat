@@ -50,7 +50,10 @@ namespace DancingCats.Clone.Editor
                 if (cue.time < priorEnd - .00001) throw new InvalidDataException("Musical playable cues overlap: " + cue.time);
                 if (cue.kind == "Follow")
                 {
-                    if (cue.endTime - cue.time < 1 || cue.endTime - cue.time > 6) throw new InvalidDataException("Follow contours must span one to six seconds.");
+                    // The native ride contract also supports short two-point gestures.
+                    // Point spacing and lateral speed are checked independently below.
+                    if (cue.endTime - cue.time < .25 - .000001 || cue.endTime - cue.time > 6)
+                        throw new InvalidDataException("Follow contours must span .25 to six seconds.");
                     var sourcePoints = cue.points ?? Array.Empty<MusicalPoint>();
                     if (sourcePoints.Any(p => p == null)) throw new InvalidDataException("Follow points cannot contain null entries.");
                     var points = sourcePoints.OrderBy(p => p.time).ToList();

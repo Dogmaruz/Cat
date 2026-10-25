@@ -13,8 +13,8 @@ namespace DancingCats.Clone.Editor
     public static class AudioChartGenerator
     {
         public const string AlwaysRememberId = "AlwaysRememberMeowCat";
-        private const string Version = "pcm-phrase-chart-v8";
-        private const string VocalVersion = "pcm-vocal-phrase-chart-v8";
+        private const string Version = "pcm-phrase-chart-v9";
+        private const string VocalVersion = "pcm-vocal-phrase-chart-v9";
         private const double MinGap = .18, MaxGap = 1.95;
 
         [Serializable]
@@ -25,6 +25,7 @@ namespace DancingCats.Clone.Editor
             public float forwardSpeed = 6.5f, delayTime = .6f;
             public bool includeHolds = true, includeMovingJumps = true, includeBigJumps = true,
                 includeForegroundAccents = true, includeRouteChoreography = true, preferAuthoredScore = true;
+            public bool includeExperimentalShortSupports = false;
         }
         private sealed class Analysis
         {
@@ -104,7 +105,8 @@ namespace DancingCats.Clone.Editor
                     throw new InvalidDataException("Audio PCM is unavailable. Use Decompress On Load and disable Load In Background on the music importer.");
                 var pcm = new float[checked(clip.samples * clip.channels)];
                 if (!clip.GetData(pcm, 0)) throw new InvalidDataException("AudioClip.GetData failed; import the song with Decompress On Load.");
-                map = GenerateFromSamples(pcm, clip.frequency, clip.channels, id, options, PcmVocalAnalysis.LoadForClip(clip));
+                map = GenerateWithInstrumentalSamples(pcm, clip.frequency, clip.channels, id, options,
+                    PcmVocalAnalysis.LoadForClip(clip), PcmInstrumentalEvidence.LoadForClip(clip));
             }
             map.audio.channels = clip.channels;
             if (File.Exists(source))
@@ -121,6 +123,11 @@ namespace DancingCats.Clone.Editor
         /// <summary>Deterministic pure PCM entry point, also used by synthetic audio validation.</summary>
         public static MapTimeline GenerateFromSamples(float[] interleaved, int sampleRate, int channels, string id, Options options = null,
             PcmVocalAnalysis.Evidence vocalEvidence = null)
+            => GenerateWithInstrumentalSamples(interleaved, sampleRate, channels, id, options, vocalEvidence, null);
+
+        /// <summary>Explicit independent mixed-note input; the original six-argument PCM API remains pure and compatible.</summary>
+        public static MapTimeline GenerateWithInstrumentalSamples(float[] interleaved, int sampleRate, int channels, string id, Options options,
+            PcmVocalAnalysis.Evidence vocalEvidence, PcmInstrumentalEvidence.Evidence instrumentalEvidence)
         {
             options = options ?? new Options();
             ValidateOptions(id, options);
@@ -130,6 +137,7 @@ namespace DancingCats.Clone.Editor
             var analysis = Analyze(interleaved, sampleRate, channels, out var spectral);
             string digest = PcmHash(interleaved);
             if (vocalEvidence != null) PcmVocalAnalysis.Validate(vocalEvidence, digest, sampleRate, channels, interleaved.Length / channels);
+            if (instrumentalEvidence != null) PcmInstrumentalEvidence.Validate(instrumentalEvidence, digest, sampleRate, channels, interleaved.Length / channels);
             if (spectral.accents.Length >= 4) analysis.accents = spectral.accents.ToList();
             double finishTime = Round(duration - Math.Max(1.1, 5 / options.forwardSpeed + .25));
             // The native Start is already support. Its next tile follows the first real attack,
@@ -141,6 +149,27 @@ namespace DancingCats.Clone.Editor
                 .Where(cue => cue.time >= 0 && cue.endTime <= finishTime - MinGap
                     && !movingPhrases.Any(phrase => cue.time < phrase.endTime + .078 && cue.endTime > phrase.time - .078)).ToArray()
                 : Array.Empty<MusicalCue>();
+            var legacySupports = movingPhrases.Concat(vocalHolds).ToArray();
+            var measuredFlights = vocalEvidence != null && options.includeBigJumps
+                ? PcmFlightAnalysis.Analyze(vocalEvidence, analysis.accents.ToArray(), analysis.period, legacySupports)
+                : Array.Empty<PcmFlightAnalysis.Flight>();
+            measuredFlights = EligibleFlights(measuredFlights, vocalEvidence, finishTime - MinGap, legacySupports);
+            var reservedFlights = measuredFlights.Select(f => new MusicalCue { kind = "BigJump", time = f.time,
+                endTime = f.landingTime, confidence = f.confidence }).ToArray();
+            if (instrumentalEvidence != null && options.includeMovingJumps)
+            {
+                var protectedSupports = legacySupports.Concat(reservedFlights).ToArray();
+                var shortGlides = PcmMelodicFollowAnalysis.Analyze(instrumentalEvidence, protectedSupports, analysis.period)
+                    .Where(cue => cue.time >= 0 && cue.endTime <= finishTime - MinGap).ToArray();
+                movingPhrases = MergeProtectedSupports(movingPhrases, shortGlides);
+            }
+            if (instrumentalEvidence != null && options.includeHolds && options.includeExperimentalShortSupports)
+            {
+                var protectedSupports = movingPhrases.Concat(vocalHolds).Concat(reservedFlights).ToArray();
+                var shortHolds = PcmShortSupportAnalysis.Analyze(instrumentalEvidence, vocalEvidence, analysis.period, protectedSupports)
+                    .Where(cue => cue.time >= 0 && cue.endTime <= finishTime - MinGap).ToArray();
+                vocalHolds = MergeProtectedSupports(vocalHolds, shortHolds);
+            }
             var confirmedSupports = movingPhrases.Concat(vocalHolds).OrderBy(cue => cue.time).ToArray();
             int nextSupport = 0;
             double supportedUntil = double.NegativeInfinity;
@@ -187,8 +216,7 @@ namespace DancingCats.Clone.Editor
             // actual Hold/Follow supports always keep priority.
             if (vocalEvidence != null && options.includeBigJumps)
             {
-                ApplyFlights(cues, PcmFlightAnalysis.Analyze(vocalEvidence, analysis.accents.ToArray(), analysis.period, confirmedSupports),
-                    vocalEvidence, finishTime - MinGap);
+                ApplyFlights(cues, measuredFlights, vocalEvidence, finishTime - MinGap);
             }
             // Keep physical mixed attacks authoritative for the preceding
             // support/flight analysis. Foreground selection changes ordinary
@@ -206,7 +234,8 @@ namespace DancingCats.Clone.Editor
             var map = MusicalChartCompiler.Compile(new MusicalScore { id = id, audioDuration = duration, sampleRate = sampleRate,
                 bpm = 60 / analysis.period, beats = Array.Empty<double>(), cues = cues.ToArray() }, options, sampleRate, duration);
             map.tempoSections[0].startSample = (int)Math.Round(analysis.phase * sampleRate);
-            string version = vocalEvidence == null ? Version : VocalVersion;
+            string version = (vocalEvidence == null ? Version : VocalVersion)
+                + (options.includeExperimentalShortSupports && instrumentalEvidence != null ? "+short-test" : "");
             map.sourceMapBundle = version; map.sourceMapBundleSha256 = digest;
             map.audio.rawSha256 = digest; map.audio.channels = channels; map.audio.bitsPerSample = 32; map.audio.rawBytes = (long)interleaved.Length * sizeof(float);
             map.timing.warning = "Mixed-audio attacks and conservative sustained-note estimates do not isolate a singer. Recurrent continuous phrases can form glides; their lateral paths use explicit settle/scoop/sweep choreography. Long rests are preserved.";
@@ -234,6 +263,15 @@ namespace DancingCats.Clone.Editor
                     "Local separator model SHA-256: " + vocalEvidence.separatorModelSha256 + "; note model: " + vocalEvidence.noteModelSha256 + "; no audio upload."
                 }).ToArray();
             }
+            if (instrumentalEvidence != null)
+                map.normalizationNotes = map.normalizationNotes.Concat(new[] { "Verified mixed-note evidence: " + instrumentalEvidence.analysisVersion
+                    + "; feature SHA-256: " + instrumentalEvidence.featureSha256 + "; native input-window timing; local pinned inference only.",
+                    "Additional short glides require repeated, source-confirmed descending note cells and measured releases. Legacy vocal supports and recurrent glides retain priority. No source chart times, labels or song identities enter inference."
+                }).ToArray();
+            if (instrumentalEvidence != null && options.includeExperimentalShortSupports)
+                map.normalizationNotes = map.normalizationNotes.Concat(new[] { "Experimental short supports: "
+                    + PcmShortSupportAnalysis.Version + "; calibration-trained conservative rules; opt-in only. "
+                    + "Musical-pulse endpoints stay within 120ms of measured note releases. Calibration leaf precision is not unseen-song accuracy." }).ToArray();
             if (options.includeRouteChoreography)
             {
                 if (options.includeMovingJumps) ChartRouteComposer.Apply(map);
@@ -242,17 +280,24 @@ namespace DancingCats.Clone.Editor
             return map;
         }
 
+        internal static MusicalCue[] MergeProtectedSupports(MusicalCue[] primary, MusicalCue[] proposals)
+        {
+            var result = primary.ToList();
+            foreach (var cue in proposals.OrderByDescending(c => c.confidence).ThenBy(c => c.time))
+            {
+                if (result.Any(s => cue.time < s.endTime + .078 - 1e-6 && cue.endTime > s.time - .078 + 1e-6)) continue;
+                result.Add(cue);
+            }
+            return result.OrderBy(c => c.time).ToArray();
+        }
+
         // Inputs already passed PCM/evidence validation. Foreground entries remain
         // authoritative even when onset refinement replaces nearby accompaniment.
         internal static void ApplyFlights(List<MusicalCue> cues, PcmFlightAnalysis.Flight[] flights,
             PcmVocalAnalysis.Evidence evidence, double latestLanding)
         {
-            foreach (var flight in flights)
+            foreach (var flight in EligibleFlights(flights, evidence, latestLanding, cues.ToArray()))
             {
-                if (flight.time < 0 || flight.landingTime > latestLanding) continue;
-                if (evidence.voiceStarts.Any(start => start > flight.time + .10 && start < flight.landingTime - .12)) continue;
-                if (cues.Any(cue => (cue.kind == "Hold" || cue.kind == "Follow")
-                    && cue.time < flight.landingTime - .078 && cue.endTime >= flight.time - .078)) continue;
                 cues.RemoveAll(cue => (cue.kind == "Jump" || cue.kind == "BigJump")
                     && cue.time >= flight.time - .16 && cue.time < flight.landingTime - .078
                     && !(cue.time < flight.time - .078 && evidence.voiceStarts.Any(start => start < flight.time - .078
@@ -260,6 +305,16 @@ namespace DancingCats.Clone.Editor
                 cues.Add(new MusicalCue { kind = "BigJump", time = Round(flight.time), endTime = Round(flight.time),
                     lane = 0, confidence = flight.confidence, reason = flight.reason });
             }
+        }
+
+        internal static PcmFlightAnalysis.Flight[] EligibleFlights(PcmFlightAnalysis.Flight[] flights,
+            PcmVocalAnalysis.Evidence evidence, double latestLanding, MusicalCue[] supports)
+        {
+            if (evidence == null || flights == null) return Array.Empty<PcmFlightAnalysis.Flight>();
+            return flights.Where(f => f != null && f.time >= 0 && f.landingTime > f.time && f.landingTime <= latestLanding
+                && !(evidence.voiceStarts ?? Array.Empty<double>()).Any(start => start > f.time + .10 && start < f.landingTime - .12)
+                && !(supports ?? Array.Empty<MusicalCue>()).Any(cue => (cue.kind == "Hold" || cue.kind == "Follow")
+                    && cue.time < f.landingTime - .078 && cue.endTime >= f.time - .078)).ToArray();
         }
 
         public static void ValidateOptions(string id, Options options)

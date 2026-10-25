@@ -240,6 +240,86 @@ namespace DancingCats.Clone.Editor
                         RequireEditMode();
                         Invoke("ChartRouteComposerValidation", "RunChecks");
                         break;
+                    case "chart-v9-export-calibration":
+                        RequireEditMode();
+                        Invoke("PcmChartStudyV9", "ExportCalibrationPcm");
+                        break;
+                    case "chart-v9-export-frozen":
+                        RequireEditMode();
+                        Invoke("PcmChartStudyV9", "ExportFrozenPcm");
+                        break;
+                    case "chart-v9-baseline-calibration":
+                        RequireEditMode();
+                        Invoke("PcmChartStudyV9", "RunCalibrationBaseline");
+                        break;
+                    case "chart-v9-baseline-frozen":
+                        RequireEditMode();
+                        Invoke("PcmChartStudyV9", "RunFrozenBaseline");
+                        break;
+                    case "chart-v9-baseline-regression":
+                        RequireEditMode();
+                        Invoke("PcmChartStudyV9", "RunRegressionBaseline");
+                        break;
+                    case "chart-v9-calibration":
+                        RequireEditMode();
+                        Invoke("PcmChartStudyV9", "RunCalibrationCandidate");
+                        break;
+                    case "chart-v9-frozen":
+                        RequireEditMode();
+                        Invoke("PcmChartStudyV9", "RunFrozenCandidate");
+                        break;
+                    case "chart-v9-regression":
+                        RequireEditMode();
+                        Invoke("PcmChartStudyV9", "RunRegressionCandidate");
+                        break;
+                    case "chart-v9-metric-checks":
+                        RequireEditMode();
+                        Invoke("PcmChartStudyV9", "RunMetricChecks");
+                        break;
+                    case "chart-short-native-checks":
+                        RequireEditMode();
+                        Invoke("ShortNativeSupportValidation", "RunChecks");
+                        break;
+                    case "chart-instrument-evidence-checks":
+                        RequireEditMode();
+                        Invoke("PcmInstrumentalEvidenceValidation", "RunChecks");
+                        break;
+                    case "chart-melodic-follow-checks":
+                        RequireEditMode();
+                        Invoke("PcmMelodicFollowValidation", "RunChecks");
+                        break;
+                    case "chart-short-support-checks":
+                        RequireEditMode();
+                        Invoke("PcmShortSupportAnalysisValidation", "RunChecks");
+                        break;
+                    case "chart-instrument-integration":
+                        RequireEditMode();
+                        Invoke("InstrumentalChartIntegrationValidation", "RunChecks");
+                        break;
+                    case "chart-v9-publication-guards":
+                        RequireEditMode();
+                        Invoke("ChartTestPublicationV9", "RunGuardChecks");
+                        break;
+                    case "chart-v9-publish-tests":
+                        RequireEditMode();
+                        Invoke("ChartTestPublicationV9", "PublishTests");
+                        break;
+                    case "chart-v9-play-disconnect":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "V9DisconnectPlaytest");
+                        break;
+                    case "chart-v9-play-cancan":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "V9CanCanPlaytest");
+                        break;
+                    case "chart-v9-play-dance":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "V9DancePlaytest");
+                        break;
+                    case "chart-v9-play-clouds":
+                        RequireEditMode();
+                        Invoke("RadioArchipelagoJobs", "V9CloudsPlaytest");
+                        break;
                     case "chart-route-integration":
                         RequireEditMode();
                         Invoke("ChartRouteIntegrationValidation", "RunChecks");
@@ -286,6 +366,9 @@ namespace DancingCats.Clone.Editor
                         break;
                     case "radio-select-custom-song":
                         Invoke("RadioArchipelagoJobs", "SelectCustomSongPreview");
+                        break;
+                    case "chart-v9-preview-cancan":
+                        Invoke("RadioArchipelagoJobs", "SelectV9CanCanPreview");
                         break;
                     default: throw new ArgumentException("Unknown musical authoring job: " + action);
                 }

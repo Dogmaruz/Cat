@@ -43,6 +43,20 @@ namespace DancingCats.Clone.Editor
 
         private static void RunFlightMergeChecks()
         {
+            var eligible = typeof(AudioChartGenerator).GetMethod("EligibleFlights", BindingFlags.NonPublic | BindingFlags.Static);
+            Require(eligible != null, "flight reservations need the same eligibility filter as actual flight application");
+            var sourceFlight = new[] { new PcmFlightAnalysis.Flight { time = 2, landingTime = 2.7, confidence = .8 } };
+            var minimalVoice = new PcmVocalAnalysis.Evidence { voiceStarts = new[] { 2.0, 2.25 } };
+            PcmFlightAnalysis.Flight[] Filter(double latest, MusicalCue[] supports)
+                => (PcmFlightAnalysis.Flight[])eligible.Invoke(null, new object[] { sourceFlight, minimalVoice, latest, supports });
+            Require(Filter(5, Array.Empty<MusicalCue>()).Length == 0,
+                "a later independent syllable must reject the reservation as well as the emitted flight");
+            minimalVoice.voiceStarts = new[] { 2.0 };
+            Require(Filter(2.6, Array.Empty<MusicalCue>()).Length == 0,
+                "a landing beyond the finish cutoff must not reserve a support interval");
+            Require(Filter(5, new[] { new MusicalCue { kind = "Hold", time = 2.1, endTime = 2.4 } }).Length == 0,
+                "existing held support blocks both reservation and emission");
+            Require(Filter(5, Array.Empty<MusicalCue>()).Length == 1, "a genuinely applicable flight remains reserved");
             var merge = typeof(AudioChartGenerator).GetMethod("ApplyFlights", BindingFlags.NonPublic | BindingFlags.Static);
             Require(merge != null, "flight replacement needs a merge boundary which protects measured foreground articulations");
             var flight = new[] { new PcmFlightAnalysis.Flight { time = 2, landingTime = 2.7, confidence = .8, reason = "Synthetic measured flight" } };
@@ -234,7 +248,11 @@ namespace DancingCats.Clone.Editor
                 if (exit.sourceIndex + 1 >= map.elements.Length) continue;
                 var next = map.elements[exit.sourceIndex + 1];
                 double gap = next.gameTime - segment.endGameTime;
-                Require(gap >= .077 && gap <= 1.964, "takeoff-to-landing interval exceeds measured native arc range; annotate sustained support rather than scoring filler: " + gap);
+                // 1.95s is our ordinary-route policy, not a native physics limit.
+                // A final fading tail can remain one last arc instead of scoring an
+                // unsupported extra note. The native curve still ends at progress=1.
+                Require(gap >= .077 && (next.kind == "FinishJump" || gap <= 1.964),
+                    "ordinary takeoff-to-landing interval exceeds the supported authoring range: " + gap);
                 Require(Math.Abs(exit.jumpDistance - (next.pos.z - segment.endZ)) < .0003, "sustained support exit determines outgoing arc");
                 Require(Math.Abs(ChartRouteComposer.LandingX(next) - ChartRouteComposer.LandingX(exit))
                     <= ChartRouteComposer.MaxLateralShift(gap) + .001,

@@ -146,3 +146,49 @@ Its aggregate transition measurements inform the separate `ChartRouteComposer`
 policy; no reference chart coordinates or song identity are read by that composer.
 Current published routes and actual Editor checks are documented in
 `Docs/Clone/ChartChoreography/README.md`.
+
+## V9 mixed-note evidence and experimental short supports
+
+Export the selected Unity audio with **Assets → Dancing Cats → Export selected
+audio PCM for vocal analysis** first. Use its actual `AudioClip.GetData` bytes and
+metadata, keeping `--input` pointed at the original asset. From the repository
+root, this example uses the existing dependencies and pinned local model:
+
+```powershell
+$sourceAsset = 'DancingCatsClone/Assets/Resources/OriginalAudio/Music/CanCan__-6816999517090791341.ogg'
+$sourceSha = (Get-FileHash -LiteralPath $sourceAsset -Algorithm SHA256).Hash.ToLowerInvariant()
+$decodedFolder = "DancingCatsClone/Library/VocalAnalysis/$sourceSha"
+python Tools/RhythmAnalysis/analyze_instrumental_notes.py `
+  --input $sourceAsset `
+  --decoded-pcm "$decodedFolder/source.f32" `
+  --decoded-metadata "$decodedFolder/source.json" `
+  --output "DancingCatsClone/Assets/Clone/Editor/InstrumentEvidence/$sourceSha.notes.json" `
+  --cache-dir DancingCatsClone/Library/ChartGenerationV9/InstrumentAnalysis `
+  --model-dir DancingCatsClone/Library/OriginalChartCalibration/v4/stem-model `
+  --deps DancingCatsClone/Library/OriginalChartCalibration/v4/ml-deps
+```
+
+All six path arguments above are required; `--model-dir` must contain the existing
+SHA-pinned `nmp.onnx`. The producer verifies source/PCM hashes and metadata before
+inference. Model inference runs separately per channel and combines activations;
+spectral analysis combines magnitudes, preserving anti-phase stereo evidence.
+The output has 22 named note/context features on the native input-window clock.
+Unity checks their names/order, provenance, values and quantized integrity digest
+against the actual source PCM. No reference map enters measurement or inference.
+
+To reproduce the separate offline short-Hold experiment, the six calibration
+recordings' committed instrument/vocal evidence and reference labels must exist:
+
+```powershell
+python Tools/RhythmAnalysis/train_short_support_style.py `
+  --deps DancingCatsClone/Library/OriginalChartCalibration/v4/ml-deps `
+  --output DancingCatsClone/Library/ChartGenerationV9/training-proof `
+  --leave-one-song-out
+```
+
+Only this training step reads calibration labels. It writes its recipe and
+leave-one-song-out report inside ignored `Library`; it does not publish maps or
+enable a policy. Generalization was insufficient, so
+`includeExperimentalShortSupports` remains `false` by default. The four v9 test
+maps explicitly opt in. See the [v9 results and limitations](../../Docs/Clone/ChartCalibration/V9/README.md)
+for the first frozen evaluation, typed interval metrics and complete Editor runs.

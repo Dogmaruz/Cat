@@ -1,0 +1,48 @@
+{
+    "stage": "baseline",
+    "referenceId": "CanCanPiano",
+    "referenceMapSha256": "2e04a04cc56346f6a4c6e5f832df5a55eb1abd52b16d1d1f61aee5120a6ee081",
+    "sourceAudioSha256": "8f53952f9f5002ed5f6b313ab170bb317e1494605d3cad8b183a0e78353ddcd3",
+    "sourcePcmSha256": "afc040b6717ffc0fbae20f91108eb64bea3a60cd09415a06b9347d94259ed7e2",
+    "voiceFeatureSha256": "ec5a62eb9c16e3ba9ae7eb5fce974c177905a9fa557cda1f237165b7d0aeef0b",
+    "generator": "pcm-vocal-phrase-chart-v8",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 10.0,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold duration <=0.45s on both sides; onset <=80ms; end <=80ms; IoU >=0.5; maximum-cardinality one-to-one match.",
+        "referenceCount": 5,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "allHolds": {
+        "definition": "All Hold intervals; onset <=80ms; end <=80ms; IoU >=0.5; maximum-cardinality one-to-one match.",
+        "referenceCount": 13,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 13,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "follows": {
+        "definition": "Follow intervals; onset <=80ms; end <=150ms; IoU >=0.5; maximum-cardinality one-to-one match.",
+        "referenceCount": 20,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 20,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    }
+}

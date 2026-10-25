@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "8a376c5",
+  "selectionPolicy": "Stratified selection using aggregate type counts and short-duration counts. Frozen per-event times, audio features and candidate errors must not guide tuning before algorithm freeze.",
+  "sourceCatalogSha256": "27541bd294668d686a8346caf379c7b1236fe70dfd8a03c898764cc0116e95aa",
+  "excludedIds": [
+    "LABUBUSongsPop",
+    "MoonlightPop",
+    "TwinkleLittleStar",
+    "UnstoppableCat054"
+  ],
+  "selection": [
+    {
+      "role": "calibration-short-hold",
+      "criterion": "max shortHoldDensity; ordinal ID tie-break; exclude four earlier analyzed songs and duplicate audio",
+      "id": "DisconnectPop",
+      "title": "Disconnect",
+      "catalogId": 52,
+      "duration": 50.25959183673469,
+      "audioResource": "OriginalAudio/Music/Disconnect__-1922482105454753078",
+      "timelineResource": "OriginalData/Maps/DisconnectPop.timeline",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/Disconnect__-1922482105454753078.ogg",
+      "sourceFileSha256": "50e457b74a6c5189494d99db4c3b8cac6480c937e43cca03a270d71a39272c5f",
+      "referenceMapSha256": "2fdf744d7ad60b2df044a803cd5ef3877f6615f4b2c2938864864822f9f11b2a",
+      "typeCounts": {
+        "Start": 1,
+        "Jump": 114,
+        "Hold": 42,
+        "Theme": 4,
+        "BigJump": 6,
+        "Follow": 1,
+        "FinishJump": 1
+      },
+      "shortHoldCount": 41,
+      "shortHoldDensity": 48.945880977130976,
+      "followDensity": 1.193801975051975,
+      "forwardSpeed": 11.0,
+      "delayTime": 0.44501134753227234
+    },
+    {
+      "role": "calibration-follow",
+      "criterion": "max followDensity; ordinal ID tie-break; exclude four earlier analyzed songs and duplicate audio",
+      "id": "CanCanPiano",
+      "title": "Can Can",
+      "catalogId": 19,
+      "duration": 117.99510204081632,
+      "audioResource": "OriginalAudio/Music/CanCan__-6816999517090791341",
+      "timelineResource": "OriginalData/Maps/CanCanPiano.timeline",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/CanCan__-6816999517090791341.ogg",
+      "sourceFileSha256": "8f53952f9f5002ed5f6b313ab170bb317e1494605d3cad8b183a0e78353ddcd3",
+      "referenceMapSha256": "2e04a04cc56346f6a4c6e5f832df5a55eb1abd52b16d1d1f61aee5120a6ee081",
+      "typeCounts": {
+        "Start": 1,
+        "Hold": 13,
+        "Jump": 173,
+        "BigJump": 76,
+        "Follow": 20,
+        "Theme": 11,
+        "FinishJump": 1
+      },
+      "shortHoldCount": 5,
+      "shortHoldDensity": 2.542478414877131,
+      "followDensity": 10.169913659508524,
+      "forwardSpeed": 10.0,
+      "delayTime": 0.44501134753227234
+    },
+    {
+      "role": "frozen-short-hold",
+      "criterion": "max shortHoldDensity; ordinal ID tie-break; exclude four earlier analyzed songs and duplicate audio",
+      "id": "IJustWannaDancePop",
+      "title": "I Just Wanna Dance",
+      "catalogId": 41,
+      "duration": 35.44816326530612,
+      "audioResource": "OriginalAudio/Music/IJustWannaDance__-1609347653232031427",
+      "timelineResource": "OriginalData/Maps/IJustWannaDancePop.timeline",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/IJustWannaDance__-1609347653232031427.ogg",
+      "sourceFileSha256": "bea4e85a21807ee88b90b745209a8057dedaf9a0fea82671cb0f8056f87ccc40",
+      "referenceMapSha256": "9283d289245f52a5e0ce3a29c61a46fcd16f84298a96e81ccceaf69fdaa1b376",
+      "typeCounts": {
+        "Start": 1,
+        "Jump": 59,
+        "Hold": 26,
+        "Theme": 4,
+        "Follow": 1,
+        "BigJump": 4,
+        "FinishJump": 1
+      },
+      "shortHoldCount": 26,
+      "shortHoldDensity": 44.007921886514374,
+      "followDensity": 1.6926123802505528,
+      "forwardSpeed": 8.5,
+      "delayTime": 0.44501134753227234
+    },
+    {
+      "role": "frozen-follow",
+      "criterion": "max followDensity; ordinal ID tie-break; exclude four earlier analyzed songs and duplicate audio",
+      "id": "MoonlightCloudsPiano",
+      "title": "月光の云海",
+      "catalogId": 903,
+      "duration": 66.01142857142857,
+      "audioResource": "OriginalAudio/Music/MoonlightCloudsPiano__-6882153158820711397",
+      "timelineResource": "OriginalData/Maps/MoonlightCloudsPiano.timeline",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/MoonlightCloudsPiano__-6882153158820711397.ogg",
+      "sourceFileSha256": "9d99efd063bb86889578244439258c1f1692de1f5939e9a8693aa0dfbf9d7ed6",
+      "referenceMapSha256": "25752621169c96f26c49e211e03373fdf27584eeef912950a642f022e60761ef",
+      "typeCounts": {
+        "Start": 1,
+        "Jump": 35,
+        "Hold": 16,
+        "BigJump": 11,
+        "Follow": 11,
+        "Theme": 6,
+        "FinishJump": 1
+      },
+      "shortHoldCount": 4,
+      "shortHoldDensity": 3.635734072022161,
+      "followDensity": 9.998268698060942,
+      "forwardSpeed": 8.0,
+      "delayTime": 0.41376417875289917
+    }
+  ]
+}

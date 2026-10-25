@@ -1,0 +1,95 @@
+{
+    "stage": "candidate",
+    "referenceId": "DisconnectPop",
+    "referenceMapSha256": "2fdf744d7ad60b2df044a803cd5ef3877f6615f4b2c2938864864822f9f11b2a",
+    "sourceAudioSha256": "50e457b74a6c5189494d99db4c3b8cac6480c937e43cca03a270d71a39272c5f",
+    "sourcePcmSha256": "f9fa7ab603d755ff3d3b069abed2aa71235e2d6e7b783a02769b6567478fde26",
+    "voiceFeatureSha256": "3f5ee15dda955859f1af96ca896e40bd56be0536edd4d81c60bede2e752433ee",
+    "generator": "pcm-vocal-phrase-chart-v9+short-test",
+    "generatedTimelineSha256": "c2bb5f957e1bad865f2d1aa5e61eeb9cc0b58f1c6c07b4f423b3ed0b0b6b885c",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 11.0,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold duration <=0.45s on both sides; onset <=80ms; end <=80ms; IoU >=0.5; maximum-cardinality one-to-one match.",
+        "referenceCount": 41,
+        "generatedCount": 2,
+        "truePositive": 2,
+        "falsePositive": 0,
+        "falseNegative": 39,
+        "precision": 1.0,
+        "recall": 0.04878048780487805,
+        "f1": 0.09302325581395349,
+        "matches": [
+            {
+                "referenceIndex": 29,
+                "generatedIndex": 31,
+                "referenceStart": 8.133106716654517,
+                "referenceEnd": 8.367483125491577,
+                "generatedStart": 8.12807256,
+                "generatedEnd": 8.36307256,
+                "onsetErrorMs": -5.034156654517119,
+                "endErrorMs": -4.410565491575369,
+                "intersectionOverUnion": 0.960550103013625
+            },
+            {
+                "referenceIndex": 102,
+                "generatedIndex": 129,
+                "referenceStart": 28.752903469584206,
+                "referenceEnd": 28.98727849125862,
+                "generatedStart": 28.75120181,
+                "generatedEnd": 28.98620181,
+                "onsetErrorMs": -1.7016595842029859,
+                "endErrorMs": -1.0766812586204822,
+                "intersectionOverUnion": 0.9882311932376759
+            }
+        ]
+    },
+    "allHolds": {
+        "definition": "All Hold intervals; onset <=80ms; end <=80ms; IoU >=0.5; maximum-cardinality one-to-one match.",
+        "referenceCount": 42,
+        "generatedCount": 2,
+        "truePositive": 2,
+        "falsePositive": 0,
+        "falseNegative": 40,
+        "precision": 1.0,
+        "recall": 0.047619047619047619,
+        "f1": 0.0909090909090909,
+        "matches": [
+            {
+                "referenceIndex": 29,
+                "generatedIndex": 31,
+                "referenceStart": 8.133106716654517,
+                "referenceEnd": 8.367483125491577,
+                "generatedStart": 8.12807256,
+                "generatedEnd": 8.36307256,
+                "onsetErrorMs": -5.034156654517119,
+                "endErrorMs": -4.410565491575369,
+                "intersectionOverUnion": 0.960550103013625
+            },
+            {
+                "referenceIndex": 102,
+                "generatedIndex": 129,
+                "referenceStart": 28.752903469584206,
+                "referenceEnd": 28.98727849125862,
+                "generatedStart": 28.75120181,
+                "generatedEnd": 28.98620181,
+                "onsetErrorMs": -1.7016595842029859,
+                "endErrorMs": -1.0766812586204822,
+                "intersectionOverUnion": 0.9882311932376759
+            }
+        ]
+    },
+    "follows": {
+        "definition": "Follow intervals; onset <=80ms; end <=150ms; IoU >=0.5; maximum-cardinality one-to-one match.",
+        "referenceCount": 1,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    }
+}

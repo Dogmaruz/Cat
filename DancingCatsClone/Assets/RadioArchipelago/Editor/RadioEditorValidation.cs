@@ -122,6 +122,10 @@ namespace RadioArchipelago.Editor
         public static void RunPlaytest() => StartReview(false);
 
         public static void RunComparisonPlaytest() => StartReview(false, ComparisonId);
+        public static void RunV9DisconnectPlaytest() => StartReview(false, "DisconnectPopGeneratorTestV9");
+        public static void RunV9CanCanPlaytest() => StartReview(false, "CanCanPianoGeneratorTestV9");
+        public static void RunV9DancePlaytest() => StartReview(false, "IJustWannaDancePopGeneratorTestV9");
+        public static void RunV9CloudsPlaytest() => StartReview(false, "MoonlightCloudsPianoGeneratorTestV9");
 
         [MenuItem("Radio Archipelago/Review/Check live menu preview framing")]
         public static void RunMenuPreviewReview() => StartReview(true);
@@ -304,7 +308,8 @@ namespace RadioArchipelago.Editor
                         if (frames < 3 || game.Phase != ClonePhase.Playing) return;
                         Check(game.Music != null && game.Music.clip != null, "start uses the real scheduled song AudioSource");
                         songLength = game.Music.clip.length; startDsp = AudioSettings.dspTime;
-                        Check(ReviewSongId == ComparisonId ? Mathf.Abs(songLength - 67.004082f) < .002f : songLength > 120 && songLength < 210,
+                        Check(songLength > 5 && Math.Abs(songLength - game.Selected.audioLengthSeconds) < .002
+                            && Math.Abs(songLength - game.Map.audio.declaredLengthSeconds) < .002,
                             "the complete source recording is unchanged in duration");
                         CheckActor(1); dragOrigin = game.Actor.position.x; bot = true; Hold(dragOrigin);
                         Next(18, songLength + 65); break;
@@ -385,8 +390,11 @@ namespace RadioArchipelago.Editor
                             Check(sideways.All(tile => tile.consumed), "every sideways moving target was reached through actual tile contacts");
                             Check(sideways.All(tile => MovingRanges.TryGetValue(tile.element.sourceIndex, out var range) && range.y - range.x > .15f),
                                 "native sideways target transforms moved visibly during actual playback");
-                            Check(sideways.Any(tile => tile.element.msLeft == 0) && sideways.Any(tile => tile.element.msLeft != 0),
-                                "the reviewed chart exercised both sideways movement directions");
+                            if (game.Map.elements.Any(e => e.updateType == 3 && e.msLeft == 0)
+                                && game.Map.elements.Any(e => e.updateType == 3 && e.msLeft != 0))
+                                Check(sideways.Any(tile => tile.element.msLeft == 0) && sideways.Any(tile => tile.element.msLeft != 0),
+                                    "the reviewed chart exercised both authored sideways movement directions");
+                            else Notes.Add("N/A: this source route authors one sideways movement direction only; the opposite flag is covered by native motion fixtures.");
                         }
                         Next(25); break;
                     case 25:

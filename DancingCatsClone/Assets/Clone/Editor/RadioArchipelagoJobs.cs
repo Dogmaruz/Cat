@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using RadioArchipelago.Editor;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -48,6 +49,11 @@ namespace DancingCats.Clone.Editor
             RequireSavedEditor();
             RadioEditorValidation.RunComparisonPlaytest();
         }
+
+        public static void V9DisconnectPlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV9DisconnectPlaytest(); }
+        public static void V9CanCanPlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV9CanCanPlaytest(); }
+        public static void V9DancePlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV9DancePlaytest(); }
+        public static void V9CloudsPlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV9CloudsPlaytest(); }
 
         public static void MenuPreviewChecks()
         {
@@ -158,6 +164,18 @@ namespace DancingCats.Clone.Editor
             var game = UnityEngine.Object.FindFirstObjectByType<OriginalPlayController>();
             if (game == null || game.Phase != ClonePhase.Menu || !game.SelectSong(20001))
                 throw new InvalidOperationException("The custom-song menu is not ready.");
+        }
+
+        public static void SelectV9CanCanPreview()
+        {
+            if (!EditorApplication.isPlaying) throw new InvalidOperationException("Open the game menu in Play Mode first.");
+            var game = UnityEngine.Object.FindFirstObjectByType<OriginalPlayController>();
+            if (game == null || game.Phase != ClonePhase.Menu)
+                throw new InvalidOperationException("The song menu is not ready.");
+            var song = game.Songs.Single(record => record.id == "CanCanPianoGeneratorTestV9");
+            if (!game.SelectSong(song.catalogId)) throw new InvalidOperationException("The Can Can v9 test cannot be selected.");
+            game.Endless = false;
+            Debug.Log("CHART_V9_PREVIEW PASS: CanCanPianoGeneratorTestV9 selected in the menu.");
         }
 
         private static void RequireSavedEditor()
