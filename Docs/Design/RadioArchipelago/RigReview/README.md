@@ -1,11 +1,18 @@
 # Character source and animation review
 
-## Current rounded-paw repair: 25 October 2026
+## Current joint and case corrections: 25 October 2026
+
+Tiko's inner case contact and antenna bearing are repaired. Lumen's shoulders
+are fitted inside the harness openings, with local leather clearance behind the
+paws. Current canonical export and actual Unity evidence is in
+[`JointCorrections/README.md`](JointCorrections/README.md).
+
+## Previous rounded-paw baseline: 50caaf5
 
 The current revision replaces the rough shoulder cuts with separate, elongated
 paws rounded at both ends, and repairs the exposed armpits and harness loops.
 The existing scarf, antenna, Blink and shoulder-driven animation remain part of
-the rig. Current evidence is in
+the rig. Evidence for that baseline is in
 [`SmoothCouriers/README.md`](SmoothCouriers/README.md).
 
 The reports below describe earlier revisions. Their numeric PASS results did

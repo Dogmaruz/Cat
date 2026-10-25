@@ -13,6 +13,13 @@ the harness loops and buckles, and keeps the existing accessory skeleton and
 Blink. The torso, paws and harness are separate skinned objects; the paws have
 100% shoulder weights, so a shoulder stroke cannot stretch the body texture.
 
+The final anatomical pass repairs Tiko's two inner case contacts, replaces the
+diagonal antenna cut with a concentric bearing below the complete coupler, and
+seats Lumen's shoulders inside the harness openings. Lumen's small leather
+backplate recess clears the natural paw position; a global fore/aft separation
+plane would push the paws too far toward the front buckle. The current final
+pass runs before the complete geometry checks and strict FBX export.
+
 ```powershell
 $radioBlender = 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe'
 & $radioBlender --background --factory-startup --threads 4 --python-exit-code 1 --python ArtSource/RadioArchipelago/Tools/rebuild_smooth_couriers.py -- --character Nori --torso --render
@@ -59,11 +66,22 @@ Unity game does not require these archives.
 - `repair_courier_harness.py`: closed body-weighted straps and buckles.
 - `repair_courier_contact_uv.py`: local source-material cleanup, preserving
   geometry, skin weights, Blink and the original texture files.
+- `repair_courier_case_edges.py`: Tiko's local case/body contact replacement,
+  with separate cream tissue and green case charts; gold trim is retained.
+- `repair_courier_antenna_joint.py`: Tiko's coaxial closed bearing, complete
+  coupler yaw and higher flexible hinge. Its audit checks actual overlapping
+  surfaces, not only the terminal ring radii.
+- `adjust_courier_shoulders.py`: Lumen's rigid paw/rest-bone translation, measured
+  harness margins and a recess restricted to the generated leather backplate.
 - `compose_surface_review.py`: side-by-side sheets from the actual Unity
   before/after captures. These images complement the numeric checks.
+- `compose_joint_review.py`: targeted case, bearing and shoulder comparison sheets
+  from the recorded Unity captures.
 
 Review evidence and remaining qualifications belong in
-[`RigReview/SmoothCouriers`](../../../Docs/Design/RadioArchipelago/RigReview/SmoothCouriers/README.md).
+[`RigReview/JointCorrections`](../../../Docs/Design/RadioArchipelago/RigReview/JointCorrections/README.md).
+The preceding rounded-paw baseline remains in
+[`SmoothCouriers`](../../../Docs/Design/RadioArchipelago/RigReview/SmoothCouriers/README.md).
 Source/FBX equivalence alone does not establish that the armpits look smooth.
 Check both sides, the underside, raised shoulders and actual Unity lighting.
 

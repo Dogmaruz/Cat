@@ -1,5 +1,11 @@
 # Rounded paws and underarm repair — 25 October 2026
 
+This report preserves the `50caaf5` baseline. The later case, antenna and shoulder
+corrections, with current package evidence, are in
+[JointCorrections](../JointCorrections/README.md). The package paths below now
+contain that newer revision; this folder's images and integrity snapshot remain
+the historical baseline.
+
 Tiko-v3, Nori-v3 and Lumen-v2 are exported, imported and reviewed in Unity
 6000.5.4f1. Final pose, animation, menu and full Unstoppable comparison-flow
 checks passed. No player build was created.

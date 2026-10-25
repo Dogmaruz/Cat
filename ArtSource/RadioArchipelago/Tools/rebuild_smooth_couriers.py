@@ -16,7 +16,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[3]
 REVIEW = ROOT / "DancingCatsClone/Library/RadioRigging/SmoothCourierReview"
 PROCESSED = ROOT / "ArtSource/RadioArchipelago/Processed"
 BASELINE_REVISION = "87bc426"
-REVISION = "rounded-distal-couriers-v1"
+REVISION = "rounded-couriers-anatomical-joints-v2"
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from prepare_radio_rigs import render_setup, aim, extract_source
 from export_prepared_rigs import reset_pose
@@ -945,8 +945,36 @@ def process(name, do_render=False, publish=False, repair_torso=False):
         objects = [
             obj for obj in bpy.context.scene.objects if obj.type == "MESH" and "mesh_role" in obj
         ]
-    reports.append({"matched_pair_template": selected})
+    attachment_report = {}
+    if repair_torso:
+        reset_pose(rig, objects)
+        if name == "Tiko":
+            from repair_courier_case_edges import apply as repair_case_edges
+            from repair_courier_antenna_joint import apply as repair_antenna_joint
+
+            attachment_report["case_edges"] = repair_case_edges(body, rig, character=name)
+            attachment_report["antenna_joint"] = repair_antenna_joint(rig, body)
+        elif name == "Lumen":
+            from adjust_courier_shoulders import apply as adjust_shoulders
+
+            attachment_report["shoulders"] = adjust_shoulders(rig, objects)
+        objects = [
+            obj for obj in bpy.context.scene.objects if obj.type == "MESH" and "mesh_role" in obj
+        ]
+    reports.append({
+        "matched_pair_template": selected,
+        "coordinate_stage": "source paw construction before final anatomical attachment adjustments",
+    })
+    if attachment_report:
+        reports.append({"attachment_adjustments": attachment_report})
     qa = geometry_checks(name, rig, objects, before)
+    if attachment_report:
+        qa["attachment_adjustments"] = attachment_report
+        qa["inherited_report_scope"] = (
+            "Torso and source accessory reports describe their construction stages. "
+            "Final attachments and any local topology changes are measured by "
+            "attachment_adjustments and the top-level geometry checks."
+        )
     qa["total_triangles"] = sum(len(obj.data.polygons) for obj in objects)
     if torso_report is not None:
         qa["torso"] = torso_report

@@ -7,7 +7,7 @@
     -0.19604754447937012,
     0.0
   ],
-  "triangles": 26868,
+  "triangles": 29972,
   "meshes": [
     {
       "name": "Lumen_Character",
@@ -16,10 +16,10 @@
       "triangles": 12458
     },
     {
-      "name": "Lumen_IndependentPack",
-      "role": "Pack",
-      "vertices": 3347,
-      "triangles": 6698
+      "name": "Lumen_Arm.L_Rounded",
+      "role": "Arm.L",
+      "vertices": 982,
+      "triangles": 1960
     },
     {
       "name": "Lumen_Arm.R_Rounded",
@@ -28,10 +28,10 @@
       "triangles": 1960
     },
     {
-      "name": "Lumen_Arm.L_Rounded",
-      "role": "Arm.L",
-      "vertices": 982,
-      "triangles": 1960
+      "name": "Lumen_IndependentPack",
+      "role": "Pack",
+      "vertices": 4899,
+      "triangles": 9802
     },
     {
       "name": "Lumen_Harness",
@@ -87,13 +87,13 @@
       "name": "arm.R",
       "parent": "body",
       "head": [
-        -0.2549999952316284,
-        0.1599999964237213,
+        -0.25378283858299255,
+        0.08999999612569809,
         0.8799999952316284
       ],
       "tail": [
-        -0.5080980062484741,
-        0.23027200996875763,
+        -0.5068808794021606,
+        0.1602720022201538,
         0.605403482913971
       ]
     },
@@ -101,13 +101,13 @@
       "name": "arm.L",
       "parent": "body",
       "head": [
-        0.2849999666213989,
-        0.15000000596046448,
+        0.2892145812511444,
+        0.08000000566244125,
         0.8700000047683716
       ],
       "tail": [
-        0.5105379819869995,
-        0.23556265234947205,
+        0.5147526264190674,
+        0.16556265950202942,
         0.5763818025588989
       ]
     },
@@ -218,8 +218,8 @@
   "has_scarf": false,
   "exporter": "export_prepared_rigs.py",
   "blender_version": "5.2.1 LTS",
-  "source_review_sha256": "b5490aa0efe0018db677ddc514269324158e16725773d86fefa8200a2acc3c7c",
-  "source_review_manifest_sha256": "ef98d45e05fbadba43582c0444733d03b79df5bb3fb53538de491403f6f46eb7",
+  "source_review_sha256": "49f63d021938adfd63dfbeaabfa4bd63bf0cc51b261404b44f1bae07f7dcee65",
+  "source_review_manifest_sha256": "e22804b261634258066c7c21dced299dd0f886c376afebae82a96b4b77a2ca33",
   "model": "Model.fbx",
   "authoring_project": "Lumen_Rigged.blend",
   "fbx_coordinates": "forward -Z, up Y; Blender source faces -Y, Unity import faces +Z",
@@ -230,17 +230,17 @@
       1.6380038658780904e-08
     ],
     "max": [
-      0.5762654542922974,
+      0.5804800987243652,
       0.7749049663543701,
       2.6000001430511475
     ]
   },
   "mesh_uv_geometry_sha256": {
-    "Lumen_Arm.L_Rounded": "647366a12d354064dd1a27e41b5d7de3d9bfdb7b4fbd9d288b14c48aa06cb580",
-    "Lumen_Arm.R_Rounded": "d03b673c0378461cd1163a201156210eb05462749f74907c29dffd21d96a77dc",
+    "Lumen_Arm.L_Rounded": "ffacfd6a00bc92aa06611ee1dd0de3118280411b95baee4ee056bd55bbc19e33",
+    "Lumen_Arm.R_Rounded": "52971f6c7028dd69aa8e967257565552a589a90761113b6b820de26b25500da3",
     "Lumen_Character": "beb1f7e3bf245e1b4a11927089ad35de6b00de7e6dfdece1a8aa4cf055ded898",
     "Lumen_Harness": "3345e9203d0ee5eb12bd6650a577be5d6337c36e1d2fd8d431b56cfbb27169a1",
-    "Lumen_IndependentPack": "a40d96d502a77f3e36aa34e86b76f15ecc54d2a91d6297e9c45e19cd6f1c6157"
+    "Lumen_IndependentPack": "4675966784c0aff88e6dca1221642cb116efde992a76654cf0f084e16088778c"
   },
   "skinned_mesh_count": 5,
   "bone_count": 12,
@@ -343,36 +343,11 @@
     "max_significant_weights": 2,
     "blink_preserved": true
   },
-  "rounded_courier_revision": "rounded-distal-couriers-v1",
+  "rounded_courier_revision": "rounded-couriers-anatomical-joints-v2",
   "rounded_courier_qa": {
-    "revision": "rounded-distal-couriers-v1",
+    "revision": "rounded-couriers-anatomical-joints-v2",
     "baseline_revision": "87bc426",
     "paws": {
-      "R": {
-        "vertices": 982,
-        "triangles": 1960,
-        "boundary_edges": 0,
-        "nonmanifold_edges": 0,
-        "inward_radial_faces": 0,
-        "rigid_weight": "arm.R",
-        "construction": "mirrored-clean-distal-template",
-        "poses": {
-          "-10": {
-            "maximum_edge_change": 1.4793256551681733e-07
-          },
-          "30": {
-            "maximum_edge_change": 1.2480216673646516e-07
-          },
-          "60": {
-            "maximum_edge_change": 9.759659847473345e-08
-          }
-        },
-        "simplification": {
-          "before_triangles": 5504,
-          "after_triangles": 1960,
-          "maximum_bidirectional_surface_distance": 0.00023689247609581798
-        }
-      },
       "L": {
         "vertices": 982,
         "triangles": 1960,
@@ -383,13 +358,13 @@
         "construction": "retopologized-source-half-mirrored-equator",
         "poses": {
           "-10": {
-            "maximum_edge_change": 9.876495256702644e-08
+            "maximum_edge_change": 1.106511937909449e-07
           },
           "30": {
-            "maximum_edge_change": 1.0220792644871635e-07
+            "maximum_edge_change": 1.1137021204907227e-07
           },
           "60": {
-            "maximum_edge_change": 9.952426358039723e-08
+            "maximum_edge_change": 1.349283642419763e-07
           }
         },
         "simplification": {
@@ -404,7 +379,7 @@
           ],
           "extent_uv": [
             0.11020993880813133,
-            0.04102721770242807
+            0.04102721770242808
           ],
           "pixels": [
             468,
@@ -412,17 +387,45 @@
           ],
           "cloth_coverage": 1.0,
           "base_color_mean": [
-            0.1355530023574829,
-            0.159898579120636,
-            0.25359663367271423
+            0.13519741594791412,
+            0.15960392355918884,
+            0.2534359395503998
           ],
           "base_color_std": [
-            0.021883448585867882,
-            0.013470573350787163,
-            0.012833320535719395
+            0.020056121051311493,
+            0.011446566320955753,
+            0.012675303965806961
           ],
+          "footprint_fraction": 1.0,
+          "semantic_body_fabric_only": false,
+          "material_region": null,
           "measured_source_uv_area_per_world_area": 0.0312001493762607,
-          "repaired_uv_area_per_world_area": 0.0312001493762607
+          "repaired_uv_area_per_world_area": 0.031200149376260703
+        }
+      },
+      "R": {
+        "vertices": 982,
+        "triangles": 1960,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "inward_radial_faces": 0,
+        "rigid_weight": "arm.R",
+        "construction": "mirrored-clean-distal-template",
+        "poses": {
+          "-10": {
+            "maximum_edge_change": 1.1770771426999893e-07
+          },
+          "30": {
+            "maximum_edge_change": 1.4438307538618134e-07
+          },
+          "60": {
+            "maximum_edge_change": 1.2382432446923775e-07
+          }
+        },
+        "simplification": {
+          "before_triangles": 5504,
+          "after_triangles": 1960,
+          "maximum_bidirectional_surface_distance": 0.00023689247609581798
         }
       }
     },
@@ -450,8 +453,8 @@
     },
     "additional_meshes": {
       "Pack": {
-        "vertices": 3347,
-        "triangles": 6698,
+        "vertices": 4899,
+        "triangles": 9802,
         "boundary_edges": 0,
         "nonmanifold_edges": 0,
         "normalised_skin_weights": true
@@ -465,7 +468,483 @@
       "rigid_weight": "body"
     },
     "blink_preserved": true,
-    "total_triangles": 26868,
+    "attachment_adjustments": {
+      "shoulders": {
+        "revision": "lumen-aperture-centered-shoulders-v2",
+        "shoulders": {
+          "L": {
+            "head": [
+              0.2892145812511444,
+              0.08000000566244125,
+              0.8700000047683716
+            ],
+            "torso_side_surface": [
+              0.3012145757675171,
+              0.08000000566244125,
+              0.8700000047683716
+            ],
+            "torso_lateral_embed": 0.01199999451637268,
+            "torso_signed_distance": -0.011588983237743378,
+            "head_forward_of_pack_front": 0.029999978840351105,
+            "harness_aperture": {
+              "height": 0.8700000047683716,
+              "front": -0.05656024177983208,
+              "rear": 0.27373690978347975,
+              "strap_sections": [
+                [
+                  -0.12509894562428572,
+                  -0.05656024177983208
+                ],
+                [
+                  0.27373690978347975,
+                  0.34245147322606323
+                ]
+              ]
+            }
+          },
+          "R": {
+            "head": [
+              -0.25378283858299255,
+              0.08999999612569809,
+              0.8799999952316284
+            ],
+            "torso_side_surface": [
+              -0.26578283309936523,
+              0.08999999612569809,
+              0.8799999952316284
+            ],
+            "torso_lateral_embed": 0.01199999451637268,
+            "torso_signed_distance": -0.011606844142079353,
+            "head_forward_of_pack_front": 0.01999998837709427,
+            "harness_aperture": {
+              "height": 0.8799999952316284,
+              "front": -0.048089314180287,
+              "rear": 0.26595020875639863,
+              "strap_sections": [
+                [
+                  -0.1213977548293541,
+                  -0.048089314180287
+                ],
+                [
+                  0.26595020875639863,
+                  0.33968117781909934
+                ]
+              ]
+            }
+          }
+        },
+        "poses": {
+          "-10": {
+            "L": {
+              "pack_clearance": {
+                "minimum_vertex_surface_distance": 0.023651717230677605,
+                "arm_edge_pack_crossings": 0,
+                "arm_vertices_inside_pack": 0
+              },
+              "harness_aperture_margin": 0.029329805797485543,
+              "maximum_edge_length_change": 1.106511937909449e-07,
+              "proximal_vertices_inside_torso": 221,
+              "proximal_vertices_outside_torso": 206,
+              "proximal_deepest_contact": -0.08693645149469376,
+              "proximal_nearest_surface_distance": 0.0001253393420483917
+            },
+            "R": {
+              "pack_clearance": {
+                "minimum_vertex_surface_distance": 0.013619245029985905,
+                "arm_edge_pack_crossings": 0,
+                "arm_vertices_inside_pack": 0
+              },
+              "harness_aperture_margin": 0.030858879837068198,
+              "maximum_edge_length_change": 1.1770771426999893e-07,
+              "proximal_vertices_inside_torso": 234,
+              "proximal_vertices_outside_torso": 193,
+              "proximal_deepest_contact": -0.08852091431617737,
+              "proximal_nearest_surface_distance": 1.1016312782885507e-05
+            }
+          },
+          "0": {
+            "L": {
+              "pack_clearance": {
+                "minimum_vertex_surface_distance": 0.025272855535149574,
+                "arm_edge_pack_crossings": 0,
+                "arm_vertices_inside_pack": 0
+              },
+              "harness_aperture_margin": 0.029329809522775842,
+              "maximum_edge_length_change": 5.666792182203173e-08,
+              "proximal_vertices_inside_torso": 222,
+              "proximal_vertices_outside_torso": 205,
+              "proximal_deepest_contact": -0.08308988064527512,
+              "proximal_nearest_surface_distance": 0.0007215748191811144
+            },
+            "R": {
+              "pack_clearance": {
+                "minimum_vertex_surface_distance": 0.01642516814172268,
+                "arm_edge_pack_crossings": 0,
+                "arm_vertices_inside_pack": 0
+              },
+              "harness_aperture_margin": 0.03085889846351969,
+              "maximum_edge_length_change": 6.370588170878655e-08,
+              "proximal_vertices_inside_torso": 239,
+              "proximal_vertices_outside_torso": 188,
+              "proximal_deepest_contact": -0.0828133374452591,
+              "proximal_nearest_surface_distance": 0.00024255485914181918
+            }
+          },
+          "30": {
+            "L": {
+              "pack_clearance": {
+                "minimum_vertex_surface_distance": 0.02634880132973194,
+                "arm_edge_pack_crossings": 0,
+                "arm_vertices_inside_pack": 0
+              },
+              "harness_aperture_margin": 0.029329826286582185,
+              "maximum_edge_length_change": 1.1137021204907227e-07,
+              "proximal_vertices_inside_torso": 223,
+              "proximal_vertices_outside_torso": 204,
+              "proximal_deepest_contact": -0.07307399809360504,
+              "proximal_nearest_surface_distance": 0.00018125446513295174
+            },
+            "R": {
+              "pack_clearance": {
+                "minimum_vertex_surface_distance": 0.01808350160717964,
+                "arm_edge_pack_crossings": 0,
+                "arm_vertices_inside_pack": 0
+              },
+              "harness_aperture_margin": 0.030858905914100287,
+              "maximum_edge_length_change": 1.4438307538618134e-07,
+              "proximal_vertices_inside_torso": 248,
+              "proximal_vertices_outside_torso": 179,
+              "proximal_deepest_contact": -0.07311469316482544,
+              "proximal_nearest_surface_distance": 0.00014346267562359571
+            }
+          },
+          "60": {
+            "L": {
+              "pack_clearance": {
+                "minimum_vertex_surface_distance": 0.022199686616659164,
+                "arm_edge_pack_crossings": 0,
+                "arm_vertices_inside_pack": 0
+              },
+              "harness_aperture_margin": 0.029329802072195245,
+              "maximum_edge_length_change": 1.349283642419763e-07,
+              "proximal_vertices_inside_torso": 202,
+              "proximal_vertices_outside_torso": 225,
+              "proximal_deepest_contact": -0.07322737574577332,
+              "proximal_nearest_surface_distance": 0.0002992111840285361
+            },
+            "R": {
+              "pack_clearance": {
+                "minimum_vertex_surface_distance": 0.011944015510380268,
+                "arm_edge_pack_crossings": 0,
+                "arm_vertices_inside_pack": 0
+              },
+              "harness_aperture_margin": 0.03085892640319693,
+              "maximum_edge_length_change": 1.2382432446923775e-07,
+              "proximal_vertices_inside_torso": 243,
+              "proximal_vertices_outside_torso": 184,
+              "proximal_deepest_contact": -0.07087661325931549,
+              "proximal_nearest_surface_distance": 0.00012127775698900223
+            }
+          }
+        },
+        "already_applied": false,
+        "translations": {
+          "L": {
+            "delta": [
+              0.004214614629745483,
+              -0.07000000029802322,
+              0.0
+            ],
+            "old_head": [
+              0.2849999666213989,
+              0.15000000596046448,
+              0.8700000047683716
+            ],
+            "new_head": [
+              0.2892145812511444,
+              0.08000000566244125,
+              0.8700000047683716
+            ],
+            "old_tail": [
+              0.5105379819869995,
+              0.23556265234947205,
+              0.5763818025588989
+            ],
+            "new_tail": [
+              0.5147526264190674,
+              0.16556265950202942,
+              0.5763818025588989
+            ]
+          },
+          "R": {
+            "delta": [
+              0.0012171566486358643,
+              -0.07000000029802322,
+              0.0
+            ],
+            "old_head": [
+              -0.2549999952316284,
+              0.1599999964237213,
+              0.8799999952316284
+            ],
+            "new_head": [
+              -0.25378283858299255,
+              0.08999999612569809,
+              0.8799999952316284
+            ],
+            "old_tail": [
+              -0.5080980062484741,
+              0.23027200996875763,
+              0.605403482913971
+            ],
+            "new_tail": [
+              -0.5068808794021606,
+              0.1602720022201538,
+              0.605403482913971
+            ]
+          }
+        },
+        "before": {
+          "L": {
+            "head": [
+              0.2849999666213989,
+              0.15000000596046448,
+              0.8700000047683716
+            ],
+            "torso_side_surface": [
+              0.2771873474121094,
+              0.15000000596046448,
+              0.8700000047683716
+            ],
+            "torso_lateral_embed": -0.00781261920928955,
+            "torso_signed_distance": 0.00698052067309618,
+            "head_forward_of_pack_front": -0.04000002145767212
+          },
+          "R": {
+            "head": [
+              -0.2549999952316284,
+              0.1599999964237213,
+              0.8799999952316284
+            ],
+            "torso_side_surface": [
+              -0.2342700958251953,
+              0.1599999964237213,
+              0.8799999952316284
+            ],
+            "torso_lateral_embed": -0.020729899406433105,
+            "torso_signed_distance": 0.016630273312330246,
+            "head_forward_of_pack_front": -0.050000011920928955
+          }
+        },
+        "preservation": {
+          "Character": {
+            "maximum_residual_from_rigid_translation": 0.0,
+            "maximum_corner_normal_component_change": 0.0,
+            "protected_attributes_unchanged": true,
+            "shape_key_residuals": {
+              "Basis": 0.0,
+              "Blink": 0.0
+            }
+          },
+          "Arm.L": {
+            "maximum_residual_from_rigid_translation": 2.9802322387695312e-08,
+            "maximum_corner_normal_component_change": 1.0564923286437988e-05,
+            "protected_attributes_unchanged": true,
+            "shape_key_residuals": {}
+          },
+          "Arm.R": {
+            "maximum_residual_from_rigid_translation": 2.9802322387695312e-08,
+            "maximum_corner_normal_component_change": 1.1354684829711914e-05,
+            "protected_attributes_unchanged": true,
+            "shape_key_residuals": {}
+          },
+          "Pack": {
+            "authorized_generated_lid_recess": true,
+            "protected_source_and_retained_contact_delta": 0.0,
+            "protected_geometry_uv_weights_unchanged": true
+          },
+          "Harness": {
+            "maximum_residual_from_rigid_translation": 0.0,
+            "maximum_corner_normal_component_change": 0.0,
+            "protected_attributes_unchanged": true,
+            "shape_key_residuals": {}
+          }
+        },
+        "unchanged_rest_bones": [
+          "root",
+          "body",
+          "head",
+          "foot.L",
+          "foot.R",
+          "antenna.yaw",
+          "antenna.01",
+          "antenna.02",
+          "antenna.03",
+          "antenna.04"
+        ],
+        "unchanged_roles": [
+          "Character",
+          "Harness"
+        ],
+        "all_other_roles_maximum_delta": 0.0,
+        "generated_pack_recess": {
+          "scope": "IndependentHiddenCap==2 generated leather only",
+          "vertices_before": 3347,
+          "triangles_before": 6698,
+          "vertices_after": 4899,
+          "triangles_after": 9802,
+          "modified_generated_vertices": 1270,
+          "maximum_recess_depth": 0.14088287204504013,
+          "original_changed_bounds": [
+            [
+              -0.4949999749660492,
+              0.10999998450279236,
+              0.5789999961853027
+            ],
+            [
+              0.2849999964237213,
+              0.4178432524204254,
+              1.0684444904327393
+            ]
+          ],
+          "protected_source_and_retained_contact_faces": 3998,
+          "protected_source_and_retained_contact_delta": 0.0,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "folded_planar_side_faces": 0,
+          "planar_retopology": [
+            {
+              "side": "R",
+              "before_faces": 55,
+              "after_faces": 79
+            },
+            {
+              "side": "L",
+              "before_faces": 49,
+              "after_faces": 73
+            }
+          ],
+          "native_leather_paint": [
+            {
+              "origin_uv": [
+                0.2275390625,
+                0.361328125
+              ],
+              "extent_uv": [
+                0.017328147338734,
+                0.08294326563279016
+              ],
+              "pixels": [
+                88,
+                356
+              ],
+              "cloth_coverage": 1.0,
+              "base_color_mean": [
+                0.5450300574302673,
+                0.24772751331329346,
+                0.033538706600666046
+              ],
+              "base_color_std": [
+                0.009023090824484825,
+                0.0075599015690386295,
+                0.008636418730020523
+              ],
+              "footprint_fraction": 0.7303370786516854,
+              "semantic_body_fabric_only": false,
+              "material_region": "radio_leather"
+            },
+            {
+              "origin_uv": [
+                0.203125,
+                0.3369140625
+              ],
+              "extent_uv": [
+                0.05271508872056314,
+                0.11059103352014088
+              ],
+              "pixels": [
+                232,
+                472
+              ],
+              "cloth_coverage": 0.9999999999999999,
+              "base_color_mean": [
+                0.5440477728843689,
+                0.24866268038749695,
+                0.036155860871076584
+              ],
+              "base_color_std": [
+                0.01689448393881321,
+                0.016389967873692513,
+                0.01559822354465723
+              ],
+              "footprint_fraction": 0.5369666861484512,
+              "semantic_body_fabric_only": false,
+              "material_region": "radio_leather"
+            },
+            {
+              "origin_uv": [
+                0.208984375,
+                0.365234375
+              ],
+              "extent_uv": [
+                0.044240633705411835,
+                0.07372734934188359
+              ],
+              "pixels": [
+                200,
+                320
+              ],
+              "cloth_coverage": 0.9999999999999999,
+              "base_color_mean": [
+                0.5451592206954956,
+                0.24843573570251465,
+                0.03308531269431114
+              ],
+              "base_color_std": [
+                0.00852002203464508,
+                0.007721175905317068,
+                0.008470100350677967
+              ],
+              "footprint_fraction": 0.60375,
+              "semantic_body_fabric_only": false,
+              "material_region": "radio_leather"
+            },
+            {
+              "origin_uv": [
+                0.2041015625,
+                0.3388671875
+              ],
+              "extent_uv": [
+                0.050160444520722554,
+                0.11059103352014088
+              ],
+              "pixels": [
+                224,
+                472
+              ],
+              "cloth_coverage": 1.0,
+              "base_color_mean": [
+                0.5449450612068176,
+                0.249132439494133,
+                0.03669210150837898
+              ],
+              "base_color_std": [
+                0.01704346388578415,
+                0.01694146730005741,
+                0.0167271438986063
+              ],
+              "footprint_fraction": 0.6675242130750605,
+              "semantic_body_fabric_only": false,
+              "material_region": "radio_leather"
+            }
+          ],
+          "protected_signature": "1c1e5fa23f196ce06602dab5f413a29cb8a76fde47b557e4d8249302491acbbf"
+        },
+        "total_triangles": 29972
+      }
+    },
+    "inherited_report_scope": "Torso and source accessory reports describe their construction stages. Final attachments and any local topology changes are measured by attachment_adjustments and the top-level geometry checks.",
+    "total_triangles": 29972,
     "torso": {
       "revision": "source-cdt-curvature-cloth-v4",
       "character": "Lumen",
@@ -500,6 +979,7 @@
             ],
             "footprint_fraction": 0.7730563885028889,
             "semantic_body_fabric_only": true,
+            "material_region": null,
             "normal_rgb_mean": [
               0.4976179599761963,
               0.5041961073875427,
@@ -541,6 +1021,7 @@
                 ],
                 "footprint_fraction": 0.7730563885028889,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.4976179599761963,
                   0.5041961073875427,
@@ -582,6 +1063,7 @@
                 ],
                 "footprint_fraction": 0.5437575757575758,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5012505650520325,
                   0.4952419698238373,
@@ -623,6 +1105,7 @@
                 ],
                 "footprint_fraction": 0.6887880506712044,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.4975878894329071,
                   0.5038521885871887,
@@ -664,6 +1147,7 @@
                 ],
                 "footprint_fraction": 0.5480093676814989,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.4964614808559418,
                   0.4990881383419037,
@@ -705,6 +1189,7 @@
                 ],
                 "footprint_fraction": 0.7365765422696116,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.497455894947052,
                   0.5038774609565735,
@@ -746,6 +1231,7 @@
                 ],
                 "footprint_fraction": 0.5900537634408602,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.4977201521396637,
                   0.5041070580482483,
@@ -787,6 +1273,7 @@
                 ],
                 "footprint_fraction": 0.5733695652173914,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.4964304566383362,
                   0.49816158413887024,
@@ -828,6 +1315,7 @@
                 ],
                 "footprint_fraction": 0.22641509433962265,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5021475553512573,
                   0.4990662932395935,
@@ -869,6 +1357,7 @@
                 ],
                 "footprint_fraction": 0.2994652406417112,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5020308494567871,
                   0.4990662932395935,
@@ -910,6 +1399,7 @@
                 ],
                 "footprint_fraction": 0.29457364341085274,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5020381808280945,
                   0.49829724431037903,
@@ -951,6 +1441,7 @@
                 ],
                 "footprint_fraction": 0.18849449204406366,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5005347728729248,
                   0.500076413154602,
@@ -992,6 +1483,7 @@
                 ],
                 "footprint_fraction": 0.1597222222222222,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5008525252342224,
                   0.49931800365448,
@@ -1033,6 +1525,7 @@
                 ],
                 "footprint_fraction": 0.23214285714285715,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018602609634399,
                   0.49793869256973267,
@@ -1074,6 +1567,7 @@
                 ],
                 "footprint_fraction": 0.14642857142857144,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.502439022064209,
                   0.4973697066307068,
@@ -1115,6 +1609,7 @@
                 ],
                 "footprint_fraction": 0.125,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.501960813999176,
                   0.49756866693496704,
@@ -1156,6 +1651,7 @@
                 ],
                 "footprint_fraction": 0.20077220077220076,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.501960813999176,
                   0.4991704523563385,
@@ -1197,6 +1693,7 @@
                 ],
                 "footprint_fraction": 0.16326530612244897,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.4997549057006836,
                   0.5002450942993164,
@@ -1238,6 +1735,7 @@
                 ],
                 "footprint_fraction": 0.2727272727272727,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5016246438026428,
                   0.49856212735176086,
@@ -1279,6 +1777,7 @@
                 ],
                 "footprint_fraction": 0.19285714285714287,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5015977025032043,
                   0.49796661734580994,
@@ -1320,6 +1819,7 @@
                 ],
                 "footprint_fraction": 0.19285714285714287,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5015977025032043,
                   0.49796661734580994,
@@ -1361,6 +1861,7 @@
                 ],
                 "footprint_fraction": 0.2,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5025209784507751,
                   0.4988095462322235,
@@ -1402,6 +1903,7 @@
                 ],
                 "footprint_fraction": 0.2217391304347826,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.502268373966217,
                   0.49788546562194824,
@@ -1443,6 +1945,7 @@
                 ],
                 "footprint_fraction": 0.23671497584541062,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5022808909416199,
                   0.4979592263698578,
@@ -1484,6 +1987,7 @@
                 ],
                 "footprint_fraction": 0.16149068322981366,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5027149319648743,
                   0.4989442229270935,
@@ -1525,6 +2029,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.4995531439781189,
                   0.5004650950431824,
@@ -1566,6 +2071,7 @@
                 ],
                 "footprint_fraction": 0.18181818181818182,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5023284554481506,
                   0.49767160415649414,
@@ -1607,6 +2113,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.4995531439781189,
                   0.5004650950431824,
@@ -1648,6 +2155,7 @@
                 ],
                 "footprint_fraction": 0.10196078431372549,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5019607543945312,
                   0.49743592739105225,
@@ -1689,6 +2197,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5015448331832886,
                   0.4987819492816925,
@@ -1730,6 +2239,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.49968254566192627,
                   0.5005228519439697,
@@ -1771,6 +2281,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.4996269643306732,
                   0.5005069375038147,
@@ -1812,6 +2323,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018039345741272,
                   0.49849021434783936,
@@ -1853,6 +2365,7 @@
                 ],
                 "footprint_fraction": 0.05417956656346749,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018487572669983,
                   0.497927188873291,
@@ -1894,6 +2407,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.49968254566192627,
                   0.5005228519439697,
@@ -1935,6 +2449,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5017865300178528,
                   0.4986274838447571,
@@ -1976,6 +2491,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018224120140076,
                   0.49859288334846497,
@@ -2017,6 +2533,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018263459205627,
                   0.4986218810081482,
@@ -2058,6 +2575,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018028020858765,
                   0.49868902564048767,
@@ -2099,6 +2617,7 @@
                 ],
                 "footprint_fraction": 0.3638888888888889,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5021106600761414,
                   0.4988027811050415,
@@ -2140,6 +2659,7 @@
                 ],
                 "footprint_fraction": 0.1111111111111111,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5011204481124878,
                   0.49817928671836853,
@@ -2181,6 +2701,7 @@
                 ],
                 "footprint_fraction": 0.1564625850340136,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.50136399269104,
                   0.49812451004981995,
@@ -2222,6 +2743,7 @@
                 ],
                 "footprint_fraction": 0.2159468438538206,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5020813941955566,
                   0.4991855323314667,
@@ -2263,6 +2785,7 @@
                 ],
                 "footprint_fraction": 0.14166666666666666,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5013840794563293,
                   0.49803924560546875,
@@ -2304,6 +2827,7 @@
                 ],
                 "footprint_fraction": 0.21646341463414634,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.502402663230896,
                   0.4986467957496643,
@@ -2345,6 +2869,7 @@
                 ],
                 "footprint_fraction": 0.26744186046511625,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5014492273330688,
                   0.49851664900779724,
@@ -2386,6 +2911,7 @@
                 ],
                 "footprint_fraction": 0.15057915057915058,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5021619200706482,
                   0.4977375864982605,
@@ -2427,6 +2953,7 @@
                 ],
                 "footprint_fraction": 0.24473684210526317,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018342733383179,
                   0.4981235861778259,
@@ -2468,6 +2995,7 @@
                 ],
                 "footprint_fraction": 0.35110294117647056,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5023508667945862,
                   0.49857306480407715,
@@ -2509,6 +3037,7 @@
                 ],
                 "footprint_fraction": 0.15567765567765568,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5015225410461426,
                   0.49870821833610535,
@@ -2550,6 +3079,7 @@
                 ],
                 "footprint_fraction": 0.35059523809523807,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018171668052673,
                   0.498867005109787,
@@ -2591,6 +3121,7 @@
                 ],
                 "footprint_fraction": 0.05128205128205128,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.49852943420410156,
                   0.5009803771972656,
@@ -2632,6 +3163,7 @@
                 ],
                 "footprint_fraction": 0.11363636363636363,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.501960813999176,
                   0.49756866693496704,
@@ -2673,6 +3205,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.49968254566192627,
                   0.5005228519439697,
@@ -2714,6 +3247,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.4995531439781189,
                   0.5004650950431824,
@@ -2755,6 +3289,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018300414085388,
                   0.49916666746139526,
@@ -2796,6 +3331,7 @@
                 ],
                 "footprint_fraction": 0.31066176470588236,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5017983317375183,
                   0.49838730692863464,
@@ -2837,6 +3373,7 @@
                 ],
                 "footprint_fraction": 0.11324786324786325,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5013688802719116,
                   0.4984092116355896,
@@ -2878,6 +3415,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018627643585205,
                   0.49855393171310425,
@@ -2919,6 +3457,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.501568615436554,
                   0.4986405372619629,
@@ -2960,6 +3499,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5016571879386902,
                   0.4986211359500885,
@@ -3001,6 +3541,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5016091465950012,
                   0.49860718846321106,
@@ -3042,6 +3583,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5016436576843262,
                   0.4985623061656952,
@@ -3083,6 +3625,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5017740726470947,
                   0.4983006715774536,
@@ -3124,6 +3667,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5014259815216064,
                   0.49896615743637085,
@@ -3165,6 +3709,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5014259815216064,
                   0.49896615743637085,
@@ -3206,6 +3751,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5013810396194458,
                   0.49899405241012573,
@@ -3247,6 +3793,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5014259815216064,
                   0.49896615743637085,
@@ -3288,6 +3835,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5014259815216064,
                   0.49896615743637085,
@@ -3329,6 +3877,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5014259815216064,
                   0.49896615743637085,
@@ -3370,6 +3919,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5014259815216064,
                   0.49896615743637085,
@@ -3411,6 +3961,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5013810396194458,
                   0.49899405241012573,
@@ -3452,6 +4003,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5015686750411987,
                   0.4987330436706543,
@@ -3493,6 +4045,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5015251040458679,
                   0.4987654387950897,
@@ -3534,6 +4087,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5016903281211853,
                   0.49844491481781006,
@@ -3575,6 +4129,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5015966296195984,
                   0.49859946966171265,
@@ -3616,6 +4171,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5015251040458679,
                   0.4987654387950897,
@@ -3657,6 +4213,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5015966296195984,
                   0.49859946966171265,
@@ -3698,6 +4255,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5015966296195984,
                   0.49859946966171265,
@@ -3739,6 +4297,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5016091465950012,
                   0.49860718846321106,
@@ -3780,6 +4339,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018224120140076,
                   0.49859288334846497,
@@ -3821,6 +4381,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018181800842285,
                   0.49858587980270386,
@@ -3862,6 +4423,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5016091465950012,
                   0.49860718846321106,
@@ -3903,6 +4465,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.501568615436554,
                   0.4986405372619629,
@@ -3944,6 +4507,7 @@
                 ],
                 "footprint_fraction": 0.1111111111111111,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5014297366142273,
                   0.4990196228027344,
@@ -3985,6 +4549,7 @@
                 ],
                 "footprint_fraction": 0.2886671418389166,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5015563368797302,
                   0.4994259178638458,
@@ -4026,6 +4591,7 @@
                 ],
                 "footprint_fraction": 0.3583743842364532,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5019210577011108,
                   0.4989561140537262,
@@ -4067,6 +4633,7 @@
                 ],
                 "footprint_fraction": 0.32298850574712645,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018495321273804,
                   0.4990304410457611,
@@ -4108,6 +4675,7 @@
                 ],
                 "footprint_fraction": 0.05901639344262295,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.4996732473373413,
                   0.5004720091819763,
@@ -4149,6 +4717,7 @@
                 ],
                 "footprint_fraction": 0.0546218487394958,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.49947211146354675,
                   0.5007541179656982,
@@ -4190,6 +4759,7 @@
                 ],
                 "footprint_fraction": 0.25,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5015391111373901,
                   0.49858739972114563,
@@ -4231,6 +4801,7 @@
                 ],
                 "footprint_fraction": 0.21634615384615385,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018736720085144,
                   0.49808281660079956,
@@ -4272,6 +4843,7 @@
                 ],
                 "footprint_fraction": 0.3162878787878788,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5020312070846558,
                   0.4986732602119446,
@@ -4313,6 +4885,7 @@
                 ],
                 "footprint_fraction": 0.11858974358974358,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.501430869102478,
                   0.49835720658302307,
@@ -4354,6 +4927,7 @@
                 ],
                 "footprint_fraction": 0.22340425531914893,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018207430839539,
                   0.4982726573944092,
@@ -4395,6 +4969,7 @@
                 ],
                 "footprint_fraction": 0.14285714285714285,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5011918544769287,
                   0.4985005855560303,
@@ -4436,6 +5011,7 @@
                 ],
                 "footprint_fraction": 0.17346938775510204,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5020472407341003,
                   0.4987601041793823,
@@ -4477,6 +5053,7 @@
                 ],
                 "footprint_fraction": 0.13506261180679785,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.4995853900909424,
                   0.5001567602157593,
@@ -4518,6 +5095,7 @@
                 ],
                 "footprint_fraction": 0.38544891640866874,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5017402768135071,
                   0.4983227252960205,
@@ -4559,6 +5137,7 @@
                 ],
                 "footprint_fraction": 0.25,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5020914673805237,
                   0.49758175015449524,
@@ -4600,6 +5179,7 @@
                 ],
                 "footprint_fraction": 0.26666666666666666,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.501960813999176,
                   0.49795010685920715,
@@ -4641,6 +5221,7 @@
                 ],
                 "footprint_fraction": 0.3076923076923077,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5023692846298218,
                   0.49852943420410156,
@@ -4682,6 +5263,7 @@
                 ],
                 "footprint_fraction": 0.22549019607843138,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5017334818840027,
                   0.49849390983581543,
@@ -4723,6 +5305,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5014259815216064,
                   0.49896615743637085,
@@ -4764,6 +5347,7 @@
                 ],
                 "footprint_fraction": 0.19381313131313133,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5014126300811768,
                   0.4989854693412781,
@@ -4805,6 +5389,7 @@
                 ],
                 "footprint_fraction": 0.24624624624624625,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018172860145569,
                   0.4976566731929779,
@@ -4846,6 +5431,7 @@
                 ],
                 "footprint_fraction": 0.27702702702702703,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5020564198493958,
                   0.4977204203605652,
@@ -4887,6 +5473,7 @@
                 ],
                 "footprint_fraction": 0.11278195488721804,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.501960813999176,
                   0.4979085326194763,
@@ -4928,6 +5515,7 @@
                 ],
                 "footprint_fraction": 0.27419354838709675,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.501883864402771,
                   0.4982442855834961,
@@ -4969,6 +5557,7 @@
                 ],
                 "footprint_fraction": 0.29444444444444445,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5015538334846497,
                   0.49848318099975586,
@@ -5010,6 +5599,7 @@
                 ],
                 "footprint_fraction": 0.20915032679738563,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5022058486938477,
                   0.49779415130615234,
@@ -5051,6 +5641,7 @@
                 ],
                 "footprint_fraction": 0.172,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.501641571521759,
                   0.4987916350364685,
@@ -5092,6 +5683,7 @@
                 ],
                 "footprint_fraction": 0.3201864919354839,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.49710044264793396,
                   0.5017669796943665,
@@ -5153,6 +5745,7 @@
             ],
             "footprint_fraction": 0.7035472972972973,
             "semantic_body_fabric_only": true,
+            "material_region": null,
             "normal_rgb_mean": [
               0.49765902757644653,
               0.5045230984687805,
@@ -5194,6 +5787,7 @@
                 ],
                 "footprint_fraction": 0.7035472972972973,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.49765902757644653,
                   0.5045230984687805,
@@ -5235,6 +5829,7 @@
                 ],
                 "footprint_fraction": 0.5302937576499388,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5013386011123657,
                   0.4952266216278076,
@@ -5276,6 +5871,7 @@
                 ],
                 "footprint_fraction": 0.6643719190889003,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.4975336194038391,
                   0.5038841366767883,
@@ -5317,6 +5913,7 @@
                 ],
                 "footprint_fraction": 0.5648148148148148,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5009394884109497,
                   0.4958769679069519,
@@ -5358,6 +5955,7 @@
                 ],
                 "footprint_fraction": 0.40756302521008403,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.4996705949306488,
                   0.5004119277000427,
@@ -5399,6 +5997,7 @@
                 ],
                 "footprint_fraction": 0.19166666666666668,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.501960813999176,
                   0.4970162510871887,
@@ -5440,6 +6039,7 @@
                 ],
                 "footprint_fraction": 0.19047619047619047,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.501960813999176,
                   0.4968954622745514,
@@ -5481,6 +6081,7 @@
                 ],
                 "footprint_fraction": 0.23015873015873015,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.502231240272522,
                   0.4979040324687958,
@@ -5522,6 +6123,7 @@
                 ],
                 "footprint_fraction": 0.1622222222222222,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5020682215690613,
                   0.49750205874443054,
@@ -5563,6 +6165,7 @@
                 ],
                 "footprint_fraction": 0.30451127819548873,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.501960813999176,
                   0.49839428067207336,
@@ -5604,6 +6207,7 @@
                 ],
                 "footprint_fraction": 0.23325062034739455,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5020442008972168,
                   0.498289555311203,
@@ -5645,6 +6249,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5017973780632019,
                   0.4982026517391205,
@@ -5686,6 +6291,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5023420453071594,
                   0.4981481730937958,
@@ -5727,6 +6333,7 @@
                 ],
                 "footprint_fraction": 0.16875,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5031227469444275,
                   0.498184472322464,
@@ -5768,6 +6375,7 @@
                 ],
                 "footprint_fraction": 0.18716577540106952,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5021848678588867,
                   0.49859946966171265,
@@ -5809,6 +6417,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5019607543945312,
                   0.49828824400901794,
@@ -5850,6 +6459,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018953680992126,
                   0.49797388911247253,
@@ -5891,6 +6501,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5017994046211243,
                   0.4984588325023651,
@@ -5932,6 +6543,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5024276375770569,
                   0.49803924560546875,
@@ -5973,6 +6585,7 @@
                 ],
                 "footprint_fraction": 0.16176470588235295,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.502495527267456,
                   0.49839574098587036,
@@ -6014,6 +6627,7 @@
                 ],
                 "footprint_fraction": 1.0,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5020307898521423,
                   0.49810928106307983,
@@ -6055,6 +6669,7 @@
                 ],
                 "footprint_fraction": 0.16666666666666666,
                 "semantic_body_fabric_only": true,
+                "material_region": null,
                 "normal_rgb_mean": [
                   0.5018060207366943,
                   0.49819403886795044,
@@ -6101,7 +6716,7 @@
       "removed_hardware_faces": 3194,
       "modified_source_vertices": 539,
       "paws_untouched": true,
-      "harness_status": "rebuilt on independent Character; Pack original panels calibrate texel density",
+      "harness_status": "rebuilt from restored cloth; contact clearance evaluated separately",
       "protected_source_charts": [
         {
           "length": 98,
@@ -9114,46 +9729,6 @@
           "triangles": 6698
         },
         "pack_blink_keys": 0,
-        "contact_window": {
-          "zlow": 0.45,
-          "zhigh": 1.243643169403076,
-          "ycut": 0.1
-        },
-        "removed_bad_back_faces": 2062,
-        "body_cut_loops": [
-          {
-            "vertices": 192,
-            "bounds": [
-              [
-                -0.30707502365112305,
-                0.10000000149011612,
-                0.44999998807907104
-              ],
-              [
-                0.319143682718277,
-                0.26990389823913574,
-                1.2436431646347046
-              ]
-            ],
-            "xz_crossings": 0
-          }
-        ],
-        "body_topology": {
-          "boundary": 0,
-          "nonmanifold": 0,
-          "triangles": 12458
-        },
-        "new_body_faces": 4568,
-        "body_blink_keys": [
-          "Basis",
-          "Blink"
-        ],
-        "back_shading_join": {
-          "faces": 4568,
-          "authentic_boundary_vertices": 192,
-          "transition_rings": 2,
-          "geometry_uv_weights_blink_changed": false
-        },
         "pack_contact_finish": {
           "revision": "closed-bevelled-native-leather-lid-v3",
           "retained_contact_faces": 532,
@@ -13657,9 +14232,52 @@
               "semantic_body_fabric_only": false,
               "material_region": "radio_leather"
             }
-          ],
-          "locked_mesh_signatures_unchanged": true
+          ]
+        },
+        "contact_window": {
+          "zlow": 0.45,
+          "zhigh": 1.243643169403076,
+          "ycut": 0.1
+        },
+        "removed_bad_back_faces": 2062,
+        "body_cut_loops": [
+          {
+            "vertices": 192,
+            "bounds": [
+              [
+                -0.30707502365112305,
+                0.10000000149011612,
+                0.44999998807907104
+              ],
+              [
+                0.319143682718277,
+                0.26990389823913574,
+                1.2436431646347046
+              ]
+            ],
+            "xz_crossings": 0
+          }
+        ],
+        "body_topology": {
+          "boundary": 0,
+          "nonmanifold": 0,
+          "triangles": 12458
+        },
+        "new_body_faces": 4568,
+        "body_blink_keys": [
+          "Basis",
+          "Blink"
+        ],
+        "back_shading_join": {
+          "faces": 4568,
+          "authentic_boundary_vertices": 192,
+          "transition_rings": 2,
+          "geometry_uv_weights_blink_changed": false
         }
+      },
+      "rear_contact_repair": {
+        "character": "Lumen",
+        "moved_vertices": 0
       },
       "rebuilt_harness": {
         "revision": "rounded-source-cloth-harness-v1",
@@ -13813,4580 +14431,25 @@
         "triangles": 3792,
         "boundary_edges": 0,
         "rigid_weight": "body"
-      }
-    },
-    "locked_roles_unchanged": {
-      "Character": {
-        "position_and_uv_signature_equal": true,
-        "maximum_corner_normal_error": 0.0,
-        "weights_equal": true,
-        "shape_keys_equal": true
       },
-      "Arm.R": {
-        "position_and_uv_signature_equal": true,
-        "maximum_corner_normal_error": 0.0,
-        "weights_equal": true,
-        "shape_keys_equal": true
+      "harness_contact_finish": {
+        "character": "Lumen",
+        "adjusted": false
       },
-      "Arm.L": {
-        "position_and_uv_signature_equal": true,
-        "maximum_corner_normal_error": 0.0,
-        "weights_equal": true,
-        "shape_keys_equal": true
-      },
-      "Harness": {
-        "position_and_uv_signature_equal": true,
-        "maximum_corner_normal_error": 0.0,
-        "weights_equal": true,
-        "shape_keys_equal": true
-      }
-    }
-  },
-  "pack_contact_finish_v2": {
-    "revision": "closed-bevelled-native-leather-lid-v3",
-    "retained_contact_faces": 532,
-    "new_lid_faces": 2700,
-    "panel_front_y": 0.11,
-    "bevel_radius": 0.085,
-    "lid_center": [
-      -0.10499999672174454,
-      0.26499998569488525,
-      0.9240000247955322
-    ],
-    "lid_half_extents": [
-      0.38999998569488525,
-      0.1550000011920929,
-      0.3449999988079071
-    ],
-    "new_leather_native_blocks_fully_covered": true,
-    "original_outer_case_vertices_changed": 0,
-    "boundary_edges": 0,
-    "nonmanifold_edges": 0,
-    "triangles": 6698,
-    "vertices": 3347,
-    "native_leather_charts": [
-      {
-        "origin_uv": [
-          0.22265625,
-          0.3603515625
-        ],
-        "extent_uv": [
-          0.04383437534304495,
-          0.05896135583695017
-        ],
-        "pixels": [
-          196,
-          260
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5445006489753723,
-          0.2493065595626831,
-          0.03301454707980156
-        ],
-        "base_color_std": [
-          0.007578480057418346,
-          0.006194815505295992,
-          0.007490080781280994
-        ],
-        "footprint_fraction": 0.2879120879120879,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.2333984375,
-          0.083984375
-        ],
-        "extent_uv": [
-          0.12554504459946653,
-          0.07709197279179399
-        ],
-        "pixels": [
-          532,
-          332
-        ],
-        "cloth_coverage": 0.9966887417218544,
-        "base_color_mean": [
-          0.5298745036125183,
-          0.24502217769622803,
-          0.03759530186653137
-        ],
-        "base_color_std": [
-          0.06333016604185104,
-          0.0356253944337368,
-          0.022486967965960503
-        ],
-        "footprint_fraction": 0.3282906060331552,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.1923828125,
-          0.4091796875
-        ],
-        "extent_uv": [
-          0.10290405871389673,
-          0.04575978784004872
-        ],
-        "pixels": [
-          440,
-          204
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5428429245948792,
-          0.24907198548316956,
-          0.03447208181023598
-        ],
-        "base_color_std": [
-          0.01616397127509117,
-          0.01965186931192875,
-          0.014379366301000118
-        ],
-        "footprint_fraction": 0.33689839572192515,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.2041015625,
-          0.3115234375
-        ],
-        "extent_uv": [
-          0.07093573701200731,
-          0.14881598634439253
-        ],
-        "pixels": [
-          308,
-          628
-        ],
-        "cloth_coverage": 0.9784878203100285,
-        "base_color_mean": [
-          0.5406861305236816,
-          0.2525426745414734,
-          0.04343201592564583
-        ],
-        "base_color_std": [
-          0.03245536983013153,
-          0.030122576281428337,
-          0.02698385715484619
-        ],
-        "footprint_fraction": 0.2614773761270577,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.248046875,
-          0.09765625
-        ],
-        "extent_uv": [
-          0.18078649276433081,
-          0.04899304149004371
-        ],
-        "pixels": [
-          760,
-          220
-        ],
-        "cloth_coverage": 0.9402800658978581,
-        "base_color_mean": [
-          0.5543646216392517,
-          0.27419453859329224,
-          0.06139906123280525
-        ],
-        "base_color_std": [
-          0.05016227811574936,
-          0.05834706127643585,
-          0.05750316008925438
-        ],
-        "footprint_fraction": 0.2323444976076555,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.1943359375,
-          0.32421875
-        ],
-        "extent_uv": [
-          0.08931178517533499,
-          0.13515789521425342
-        ],
-        "pixels": [
-          384,
-          572
-        ],
-        "cloth_coverage": 0.9749564114756697,
-        "base_color_mean": [
-          0.5425229072570801,
-          0.253078430891037,
-          0.0395638570189476
-        ],
-        "base_color_std": [
-          0.029051437973976135,
-          0.030279604718089104,
-          0.026316531002521515
-        ],
-        "footprint_fraction": 0.45957167832167833,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.1865234375,
-          0.3134765625
-        ],
-        "extent_uv": [
-          0.10680652954091435,
-          0.1377559971511485
-        ],
-        "pixels": [
-          456,
-          584
-        ],
-        "cloth_coverage": 0.9770080016205815,
-        "base_color_mean": [
-          0.5418726801872253,
-          0.25717440247535706,
-          0.046054866164922714
-        ],
-        "base_color_std": [
-          0.03450995683670044,
-          0.04245318844914436,
-          0.05113952234387398
-        ],
-        "footprint_fraction": 0.5931867339581831,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.2412109375,
-          0.08203125
-        ],
-        "extent_uv": [
-          0.14996691789654248,
-          0.06478280791562244
-        ],
-        "pixels": [
-          632,
-          284
-        ],
-        "cloth_coverage": 0.9931849159472966,
-        "base_color_mean": [
-          0.5320316553115845,
-          0.24350506067276,
-          0.033993080258369446
-        ],
-        "base_color_std": [
-          0.03662769868969917,
-          0.025711899623274803,
-          0.01790405623614788
-        ],
-        "footprint_fraction": 0.1962025316455696,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.2470703125,
-          0.109375
-        ],
-        "extent_uv": [
-          0.1068065246928632,
-          0.06244127235533523
-        ],
-        "pixels": [
-          456,
-          272
-        ],
-        "cloth_coverage": 0.9997556804300025,
-        "base_color_mean": [
-          0.5434528589248657,
-          0.25513961911201477,
-          0.042992010712623596
-        ],
-        "base_color_std": [
-          0.05062711983919144,
-          0.03301761671900749,
-          0.02120818756520748
-        ],
-        "footprint_fraction": 0.5279927760577915,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.2353515625,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.027435575667267963,
-          0.028000653586190322
-        ],
-        "pixels": [
-          132,
-          132
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5440258979797363,
-          0.24933169782161713,
-          0.03316634148359299
-        ],
-        "base_color_std": [
-          0.007261344231665134,
-          0.006055482197552919,
-          0.006830030120909214
-        ],
-        "footprint_fraction": 0.49586776859504134,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.2841796875,
-          0.080078125
-        ],
-        "extent_uv": [
-          0.08417898677153347,
-          0.13773001856236017
-        ],
-        "pixels": [
-          364,
-          584
-        ],
-        "cloth_coverage": 0.947412180419871,
-        "base_color_mean": [
-          0.4880262017250061,
-          0.23278284072875977,
-          0.04287182539701462
-        ],
-        "base_color_std": [
-          0.11686523258686066,
-          0.06637632846832275,
-          0.03123030811548233
-        ],
-        "footprint_fraction": 0.36211049224747854,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.2080078125,
-          0.2958984375
-        ],
-        "extent_uv": [
-          0.05165467705918006,
-          0.16041254212135767
-        ],
-        "pixels": [
-          228,
-          676
-        ],
-        "cloth_coverage": 0.9710482529118136,
-        "base_color_mean": [
-          0.5407690405845642,
-          0.25532177090644836,
-          0.04663803055882454
-        ],
-        "base_color_std": [
-          0.040138810873031616,
-          0.04303116351366043,
-          0.03902745246887207
-        ],
-        "footprint_fraction": 0.3119485103290771,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.21875,
-          0.3798828125
-        ],
-        "extent_uv": [
-          0.054362459913421965,
-          0.031738132248870884
-        ],
-        "pixels": [
-          240,
-          148
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5447549223899841,
-          0.24932503700256348,
-          0.0327557697892189
-        ],
-        "base_color_std": [
-          0.007479431573301554,
-          0.00626423629000783,
-          0.007364420685917139
-        ],
-        "footprint_fraction": 0.24009009009009008,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.2119140625,
-          0.3681640625
-        ],
-        "extent_uv": [
-          0.07482301950886484,
-          0.054348454444573105
-        ],
-        "pixels": [
-          324,
-          240
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5429571270942688,
-          0.250573992729187,
-          0.03423817455768585
-        ],
-        "base_color_std": [
-          0.008264617994427681,
-          0.008740854449570179,
-          0.009131625294685364
-        ],
-        "footprint_fraction": 0.1551440329218107,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.267578125,
-          0.103515625
-        ],
-        "extent_uv": [
-          0.14818322502179165,
-          0.03422807226940453
-        ],
-        "pixels": [
-          624,
-          160
-        ],
-        "cloth_coverage": 0.9936642027455121,
-        "base_color_mean": [
-          0.5308743715286255,
-          0.24935966730117798,
-          0.045687898993492126
-        ],
-        "base_color_std": [
-          0.04530080407857895,
-          0.03544485196471214,
-          0.02364484593272209
-        ],
-        "footprint_fraction": 0.1517628205128205,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.2138671875,
-          0.3515625
-        ],
-        "extent_uv": [
-          0.021580115292762273,
-          0.10833866235696073
-        ],
-        "pixels": [
-          108,
-          460
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5428233742713928,
-          0.24626703560352325,
-          0.03645886480808258
-        ],
-        "base_color_std": [
-          0.00919458456337452,
-          0.00948294810950756,
-          0.013712432235479355
-        ],
-        "footprint_fraction": 0.21578099838969403,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.19921875,
-          0.32421875
-        ],
-        "extent_uv": [
-          0.06591013643578503,
-          0.128748330271543
-        ],
-        "pixels": [
-          288,
-          544
-        ],
-        "cloth_coverage": 0.9983622666229937,
-        "base_color_mean": [
-          0.544450581073761,
-          0.2527574896812439,
-          0.0388016514480114
-        ],
-        "base_color_std": [
-          0.02219841070473194,
-          0.02088468335568905,
-          0.018881594762206078
-        ],
-        "footprint_fraction": 0.31178513071895425,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.2392578125,
-          0.3759765625
-        ],
-        "extent_uv": [
-          0.020902394744140122,
-          0.05279283014760845
-        ],
-        "pixels": [
-          104,
-          236
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5440459251403809,
-          0.24806134402751923,
-          0.033441249281167984
-        ],
-        "base_color_std": [
-          0.0063910833559930325,
-          0.005629670340567827,
-          0.006636757869273424
-        ],
-        "footprint_fraction": 0.2014341590612777,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.19140625,
-          0.2958984375
-        ],
-        "extent_uv": [
-          0.05749487081959158,
-          0.1573797172725122
-        ],
-        "pixels": [
-          252,
-          664
-        ],
-        "cloth_coverage": 0.9733840304182511,
-        "base_color_mean": [
-          0.5440341830253601,
-          0.2530684769153595,
-          0.045784056186676025
-        ],
-        "base_color_std": [
-          0.03249114006757736,
-          0.04077770933508873,
-          0.03808208927512169
-        ],
-        "footprint_fraction": 0.2766303308471983,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.21875,
-          0.33203125
-        ],
-        "extent_uv": [
-          0.048917381865263135,
-          0.11481452310396767
-        ],
-        "pixels": [
-          220,
-          488
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5311093926429749,
-          0.2478269785642624,
-          0.03869013115763664
-        ],
-        "base_color_std": [
-          0.019627297297120094,
-          0.012624586001038551,
-          0.015168627724051476
-        ],
-        "footprint_fraction": 0.014456035767511177,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.21484375,
-          0.3779296875
-        ],
-        "extent_uv": [
-          0.04208353931884358,
-          0.06293858468851761
-        ],
-        "pixels": [
-          192,
-          276
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.54356849193573,
-          0.248336061835289,
-          0.03459256514906883
-        ],
-        "base_color_std": [
-          0.006537576671689749,
-          0.0070566036738455296,
-          0.007968162186443806
-        ],
-        "footprint_fraction": 0.06582125603864734,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather_contact"
-      },
-      {
-        "origin_uv": [
-          0.1953125,
-          0.3955078125
-        ],
-        "extent_uv": [
-          0.08835939709576408,
-          0.013567427673175578
-        ],
-        "pixels": [
-          380,
-          72
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5434264540672302,
-          0.2503930926322937,
-          0.033455487340688705
-        ],
-        "base_color_std": [
-          0.010047012940049171,
-          0.010591492056846619,
-          0.010250160470604897
-        ],
-        "footprint_fraction": 0.7584795321637426,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1962890625,
-          0.3984375
-        ],
-        "extent_uv": [
-          0.08526337972130872,
-          0.010861209339921022
-        ],
-        "pixels": [
-          368,
-          64
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5446541905403137,
-          0.250807523727417,
-          0.033859722316265106
-        ],
-        "base_color_std": [
-          0.009715490974485874,
-          0.010174710303544998,
-          0.009858121164143085
-        ],
-        "footprint_fraction": 0.6222826086956522,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2158203125,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.035197593143369996,
-          0.06077440026910015
-        ],
-        "pixels": [
-          164,
-          268
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5448111891746521,
-          0.2470332384109497,
-          0.03187436982989311
-        ],
-        "base_color_std": [
-          0.007998282089829445,
-          0.007316742558032274,
-          0.007876464165747166
-        ],
-        "footprint_fraction": 0.6567164179104478,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2041015625,
-          0.3759765625
-        ],
-        "extent_uv": [
-          0.050241573566876,
-          0.060336305461945065
-        ],
-        "pixels": [
-          224,
-          264
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5456356406211853,
-          0.24792511761188507,
-          0.0322054885327816
-        ],
-        "base_color_std": [
-          0.008051463402807713,
-          0.007516572717577219,
-          0.008051091805100441
-        ],
-        "footprint_fraction": 0.6366341991341992,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1953125,
-          0.390625
-        ],
-        "extent_uv": [
-          0.08552864978001876,
-          0.0569735133679523
-        ],
-        "pixels": [
-          368,
-          252
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5443733334541321,
-          0.2531057298183441,
-          0.04004526138305664
-        ],
-        "base_color_std": [
-          0.014257940463721752,
-          0.017908474430441856,
-          0.01836881972849369
-        ],
-        "footprint_fraction": 0.6854727398205659,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.232421875,
-          0.3759765625
-        ],
-        "extent_uv": [
-          0.035248869967053266,
-          0.057223598072829805
-        ],
-        "pixels": [
-          164,
-          252
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5442779064178467,
-          0.2513161301612854,
-          0.03369820863008499
-        ],
-        "base_color_std": [
-          0.009330944158136845,
-          0.007869016379117966,
-          0.00921897403895855
-        ],
-        "footprint_fraction": 0.6422764227642277,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.203125,
-          0.365234375
-        ],
-        "extent_uv": [
-          0.05022894178245187,
-          0.05674205960520875
-        ],
-        "pixels": [
-          224,
-          252
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5450984239578247,
-          0.24834370613098145,
-          0.0325651615858078
-        ],
-        "base_color_std": [
-          0.008652625605463982,
-          0.007521603722125292,
-          0.008456286042928696
-        ],
-        "footprint_fraction": 0.6261337868480725,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1953125,
-          0.390625
-        ],
-        "extent_uv": [
-          0.08552866190860185,
-          0.056973521447209866
-        ],
-        "pixels": [
-          368,
-          252
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5442693829536438,
-          0.25256770849227905,
-          0.03967208042740822
-        ],
-        "base_color_std": [
-          0.01404703501611948,
-          0.017618441954255104,
-          0.018136704340577126
-        ],
-        "footprint_fraction": 0.7092822636300897,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.197265625,
-          0.3349609375
-        ],
-        "extent_uv": [
-          0.06595711548694433,
-          0.11150666149093223
-        ],
-        "pixels": [
-          288,
-          476
-        ],
-        "cloth_coverage": 0.9999999999999997,
-        "base_color_mean": [
-          0.5436205863952637,
-          0.24716931581497192,
-          0.03391082212328911
-        ],
-        "base_color_std": [
-          0.013680939562618732,
-          0.013355180621147156,
-          0.012639167718589306
-        ],
-        "footprint_fraction": 0.31442577030812324,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.23828125,
-          0.3818359375
-        ],
-        "extent_uv": [
-          0.009704938758912533,
-          0.06100195376910124
-        ],
-        "pixels": [
-          56,
-          268
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5463771224021912,
-          0.2495265007019043,
-          0.0342072993516922
-        ],
-        "base_color_std": [
-          0.007182767614722252,
-          0.006440645083785057,
-          0.007744297850877047
-        ],
-        "footprint_fraction": 0.6385927505330491,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.234375,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.013227190350292526,
-          0.05967710796010425
-        ],
-        "pixels": [
-          72,
-          264
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5465764403343201,
-          0.2493424266576767,
-          0.033759236335754395
-        ],
-        "base_color_std": [
-          0.007244333624839783,
-          0.006366662681102753,
-          0.007555776741355658
-        ],
-        "footprint_fraction": 0.6818181818181818,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.224609375,
-          0.37890625
-        ],
-        "extent_uv": [
-          0.050241584931766496,
-          0.06033632690808133
-        ],
-        "pixels": [
-          224,
-          264
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.543915331363678,
-          0.2503833770751953,
-          0.033346351236104965
-        ],
-        "base_color_std": [
-          0.009720736183226109,
-          0.008797168731689453,
-          0.009331044740974903
-        ],
-        "footprint_fraction": 0.6723484848484849,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.224609375,
-          0.380859375
-        ],
-        "extent_uv": [
-          0.0351504514103638,
-          0.060663232036463864
-        ],
-        "pixels": [
-          160,
-          268
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5451107025146484,
-          0.24937354028224945,
-          0.0340132974088192
-        ],
-        "base_color_std": [
-          0.009015883319079876,
-          0.008573644794523716,
-          0.009107531048357487
-        ],
-        "footprint_fraction": 0.6936567164179105,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1904296875,
-          0.4140625
-        ],
-        "extent_uv": [
-          0.0852000218401212,
-          0.010769975606155792
-        ],
-        "pixels": [
-          368,
-          64
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5423564314842224,
-          0.24714605510234833,
-          0.032508548349142075
-        ],
-        "base_color_std": [
-          0.009583705104887486,
-          0.010317263193428516,
-          0.009463142603635788
-        ],
-        "footprint_fraction": 0.6283967391304348,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.185546875,
-          0.427734375
-        ],
-        "extent_uv": [
-          0.08836548246079501,
-          0.013568383007164968
-        ],
-        "pixels": [
-          380,
-          72
-        ],
-        "cloth_coverage": 0.9999999999999997,
-        "base_color_mean": [
-          0.5396214127540588,
-          0.2449810653924942,
-          0.03358130529522896
-        ],
-        "base_color_std": [
-          0.00992484949529171,
-          0.011601868085563183,
-          0.009740405716001987
-        ],
-        "footprint_fraction": 0.7619883040935672,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2255859375,
-          0.35546875
-        ],
-        "extent_uv": [
-          0.013567445470830558,
-          0.0883593766595016
-        ],
-        "pixels": [
-          72,
-          380
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5455132722854614,
-          0.24804070591926575,
-          0.03386973962187767
-        ],
-        "base_color_std": [
-          0.009079460054636002,
-          0.008265329524874687,
-          0.00964770931750536
-        ],
-        "footprint_fraction": 0.7584795321637426,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.23828125,
-          0.3603515625
-        ],
-        "extent_uv": [
-          0.0108612133032565,
-          0.0852634108345455
-        ],
-        "pixels": [
-          64,
-          368
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5448666214942932,
-          0.24910633265972137,
-          0.034625254571437836
-        ],
-        "base_color_std": [
-          0.00916675291955471,
-          0.007910579442977905,
-          0.00920888688415289
-        ],
-        "footprint_fraction": 0.6175271739130435,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1943359375,
-          0.359375
-        ],
-        "extent_uv": [
-          0.07039297075757191,
-          0.08545002036456868
-        ],
-        "pixels": [
-          308,
-          368
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5433465242385864,
-          0.2471102625131607,
-          0.03388860821723938
-        ],
-        "base_color_std": [
-          0.011163739487528801,
-          0.01097711268812418,
-          0.011296316049993038
-        ],
-        "footprint_fraction": 0.6957933370976849,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1943359375,
-          0.3642578125
-        ],
-        "extent_uv": [
-          0.0668342809192788,
-          0.08552865018415913
-        ],
-        "pixels": [
-          292,
-          368
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5449367761611938,
-          0.25039634108543396,
-          0.036570314317941666
-        ],
-        "base_color_std": [
-          0.012509210035204887,
-          0.01275583915412426,
-          0.014504180289804935
-        ],
-        "footprint_fraction": 0.7084574151280524,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1962890625,
-          0.359375
-        ],
-        "extent_uv": [
-          0.06679513042714817,
-          0.0854785425542697
-        ],
-        "pixels": [
-          292,
-          368
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5433898568153381,
-          0.24682094156742096,
-          0.03379785642027855
-        ],
-        "base_color_std": [
-          0.01090729795396328,
-          0.010731169953942299,
-          0.011181359179317951
-        ],
-        "footprint_fraction": 0.6944609886837403,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1943359375,
-          0.3642578125
-        ],
-        "extent_uv": [
-          0.06683428823799994,
-          0.08552865328210002
-        ],
-        "pixels": [
-          292,
-          368
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5447380542755127,
-          0.2502347230911255,
-          0.03657635301351547
-        ],
-        "base_color_std": [
-          0.012581775896251202,
-          0.012856979854404926,
-          0.014516460709273815
-        ],
-        "footprint_fraction": 0.7083085169743896,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2236328125,
-          0.1171875
-        ],
-        "extent_uv": [
-          0.13525258244301958,
-          0.019989919384507015
-        ],
-        "pixels": [
-          572,
-          100
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5521277189254761,
-          0.254577100276947,
-          0.0409938283264637
-        ],
-        "base_color_std": [
-          0.04096340015530586,
-          0.03231625631451607,
-          0.022086992859840393
-        ],
-        "footprint_fraction": 0.20727272727272728,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.193359375,
-          0.359375
-        ],
-        "extent_uv": [
-          0.07000573111760278,
-          0.08642246763481085
-        ],
-        "pixels": [
-          304,
-          372
-        ],
-        "cloth_coverage": 0.9999999999999997,
-        "base_color_mean": [
-          0.5423749685287476,
-          0.2519312798976898,
-          0.040024127811193466
-        ],
-        "base_color_std": [
-          0.017378460615873337,
-          0.01703576371073723,
-          0.017606200650334358
-        ],
-        "footprint_fraction": 0.15435766836445955,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.208984375,
-          0.3740234375
-        ],
-        "extent_uv": [
-          0.0659997759371314,
-          0.06548739279630027
-        ],
-        "pixels": [
-          288,
-          288
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5437796711921692,
-          0.24784836173057556,
-          0.03217831254005432
-        ],
-        "base_color_std": [
-          0.009183187037706375,
-          0.009357433766126633,
-          0.008912191726267338
-        ],
-        "footprint_fraction": 0.5817901234567902,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1943359375,
-          0.3642578125
-        ],
-        "extent_uv": [
-          0.07032930317630731,
-          0.08540882085723098
-        ],
-        "pixels": [
-          308,
-          368
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5446034669876099,
-          0.2500757575035095,
-          0.036247268319129944
-        ],
-        "base_color_std": [
-          0.012737398967146873,
-          0.013326075859367847,
-          0.014416747726500034
-        ],
-        "footprint_fraction": 0.7192264257481649,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2392578125,
-          0.3603515625
-        ],
-        "extent_uv": [
-          0.0107699727223547,
-          0.08520016008131472
-        ],
-        "pixels": [
-          64,
-          368
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5448815226554871,
-          0.2493150383234024,
-          0.03494753688573837
-        ],
-        "base_color_std": [
-          0.009135322645306587,
-          0.008210823871195316,
-          0.009268042631447315
-        ],
-        "footprint_fraction": 0.6229619565217391,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2265625,
-          0.3544921875
-        ],
-        "extent_uv": [
-          0.013568365991880027,
-          0.08836537164701105
-        ],
-        "pixels": [
-          72,
-          380
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5453926920890808,
-          0.24786677956581116,
-          0.03383120521903038
-        ],
-        "base_color_std": [
-          0.008926444686949253,
-          0.007753224577754736,
-          0.00910887960344553
-        ],
-        "footprint_fraction": 0.7573099415204678,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.236328125,
-          0.314453125
-        ],
-        "extent_uv": [
-          0.013524399951477759,
-          0.14090804652561342
-        ],
-        "pixels": [
-          72,
-          596
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5348026156425476,
-          0.2485996037721634,
-          0.03981230780482292
-        ],
-        "base_color_std": [
-          0.0347464494407177,
-          0.025427959859371185,
-          0.020575303584337234
-        ],
-        "footprint_fraction": 0.6539895600298284,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2431640625,
-          0.32421875
-        ],
-        "extent_uv": [
-          0.010631515408695277,
-          0.13247837858366657
-        ],
-        "pixels": [
-          60,
-          560
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5383384227752686,
-          0.2517123222351074,
-          0.03991502523422241
-        ],
-        "base_color_std": [
-          0.029494134709239006,
-          0.023388730362057686,
-          0.020742328837513924
-        ],
-        "footprint_fraction": 0.5604761904761905,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1982421875,
-          0.3759765625
-        ],
-        "extent_uv": [
-          0.07289833837682981,
-          0.01676035313597517
-        ],
-        "pixels": [
-          316,
-          88
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5454622507095337,
-          0.24962927401065826,
-          0.032448410987854004
-        ],
-        "base_color_std": [
-          0.00804989505559206,
-          0.007836711592972279,
-          0.007974542677402496
-        ],
-        "footprint_fraction": 0.6835443037974683,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.21484375,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06949744665405133,
-          0.007033654763169368
-        ],
-        "pixels": [
-          304,
-          48
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5440700054168701,
-          0.2490512579679489,
-          0.03282734006643295
-        ],
-        "base_color_std": [
-          0.007453823462128639,
-          0.0070520672015845776,
-          0.007182273082435131
-        ],
-        "footprint_fraction": 0.2719298245614035,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.197265625,
-          0.375
-        ],
-        "extent_uv": [
-          0.06876555080100274,
-          0.055652180710342246
-        ],
-        "pixels": [
-          300,
-          244
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5449817180633545,
-          0.2511218786239624,
-          0.03370651602745056
-        ],
-        "base_color_std": [
-          0.00936194509267807,
-          0.008860206231474876,
-          0.009523135609924793
-        ],
-        "footprint_fraction": 0.5632786885245902,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2158203125,
-          0.3486328125
-        ],
-        "extent_uv": [
-          0.06876555129184742,
-          0.11130434307789061
-        ],
-        "pixels": [
-          300,
-          472
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5422114133834839,
-          0.2491837590932846,
-          0.03359533101320267
-        ],
-        "base_color_std": [
-          0.010433399118483067,
-          0.010408269241452217,
-          0.01120594423264265
-        ],
-        "footprint_fraction": 0.2929943502824859,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2373046875,
-          0.119140625
-        ],
-        "extent_uv": [
-          0.1413187272321301,
-          0.013350677239499096
-        ],
-        "pixels": [
-          596,
-          72
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5374754071235657,
-          0.24611350893974304,
-          0.03658581152558327
-        ],
-        "base_color_std": [
-          0.03943023085594177,
-          0.028425443917512894,
-          0.018805451691150665
-        ],
-        "footprint_fraction": 0.6111111111111112,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1982421875,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06588800872126739,
-          0.0035134562024108818
-        ],
-        "pixels": [
-          288,
-          32
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5449861884117126,
-          0.25033944845199585,
-          0.03280546888709068
-        ],
-        "base_color_std": [
-          0.007544393185526133,
-          0.006838145200163126,
-          0.007464284542948008
-        ],
-        "footprint_fraction": 0.5416666666666666,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1982421875,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06588801796011844,
-          0.0035134564375879657
-        ],
-        "pixels": [
-          288,
-          32
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5449861884117126,
-          0.25033944845199585,
-          0.03280546888709068
-        ],
-        "base_color_std": [
-          0.007544393185526133,
-          0.006838145200163126,
-          0.007464284542948008
-        ],
-        "footprint_fraction": 0.5416666666666666,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.19140625,
-          0.3681640625
-        ],
-        "extent_uv": [
-          0.06525193424529498,
-          0.055624589023118905
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5453380942344666,
-          0.2501251697540283,
-          0.03342233970761299
-        ],
-        "base_color_std": [
-          0.008824530057609081,
-          0.008191758766770363,
-          0.008930203504860401
-        ],
-        "footprint_fraction": 0.5317478642345879,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2646484375,
-          0.1220703125
-        ],
-        "extent_uv": [
-          0.13177601482243645,
-          0.003513455961569104
-        ],
-        "pixels": [
-          556,
-          32
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5318374633789062,
-          0.2402181625366211,
-          0.032340362668037415
-        ],
-        "base_color_std": [
-          0.02654295600950718,
-          0.017444688826799393,
-          0.012220310047268867
-        ],
-        "footprint_fraction": 0.4919064748201439,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.21484375,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06528954856916194,
-          0.059138216083557175
-        ],
-        "pixels": [
-          284,
-          260
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5444974303245544,
-          0.2490594983100891,
-          0.03256732597947121
-        ],
-        "base_color_std": [
-          0.0093117356300354,
-          0.009653711691498756,
-          0.009123366326093674
-        ],
-        "footprint_fraction": 0.5588299024918744,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.236328125,
-          0.310546875
-        ],
-        "extent_uv": [
-          0.01343814198808779,
-          0.14000921311743308
-        ],
-        "pixels": [
-          72,
-          592
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5378238558769226,
-          0.2503761053085327,
-          0.040473610162734985
-        ],
-        "base_color_std": [
-          0.030978789553046227,
-          0.023669172078371048,
-          0.02005276456475258
-        ],
-        "footprint_fraction": 0.7323573573573574,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.22265625,
-          0.3193359375
-        ],
-        "extent_uv": [
-          0.010719750697025854,
-          0.13255411699146913
-        ],
-        "pixels": [
-          60,
-          560
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5419913530349731,
-          0.24942372739315033,
-          0.0404827743768692
-        ],
-        "base_color_std": [
-          0.024097003042697906,
-          0.01749536208808422,
-          0.01939563639461994
-        ],
-        "footprint_fraction": 0.5642857142857143,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.212890625,
-          0.3525390625
-        ],
-        "extent_uv": [
-          0.06525192734825122,
-          0.0556245831436729
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5441229343414307,
-          0.24918024241924286,
-          0.03275536000728607
-        ],
-        "base_color_std": [
-          0.009196564555168152,
-          0.008341295644640923,
-          0.00907445140182972
-        ],
-        "footprint_fraction": 0.5322096513507273,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.208984375,
-          0.3544921875
-        ],
-        "extent_uv": [
-          0.0687655459790355,
-          0.05565219594518546
-        ],
-        "pixels": [
-          300,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.544435441493988,
-          0.2492772340774536,
-          0.032605960965156555
-        ],
-        "base_color_std": [
-          0.009197164326906204,
-          0.008491968736052513,
-          0.009089694358408451
-        ],
-        "footprint_fraction": 0.5293989071038251,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2080078125,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06946583589925098,
-          0.007030455521373111
-        ],
-        "pixels": [
-          304,
-          48
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5452951788902283,
-          0.25006094574928284,
-          0.032974980771541595
-        ],
-        "base_color_std": [
-          0.0077024223282933235,
-          0.007018533069640398,
-          0.007361040450632572
-        ],
-        "footprint_fraction": 0.5098684210526315,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.203125,
-          0.3759765625
-        ],
-        "extent_uv": [
-          0.07380661553813446,
-          0.013228199495583869
-        ],
-        "pixels": [
-          320,
-          72
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5452722311019897,
-          0.2503579556941986,
-          0.032893285155296326
-        ],
-        "base_color_std": [
-          0.008199019357562065,
-          0.0077761635184288025,
-          0.007943722419440746
-        ],
-        "footprint_fraction": 0.6625,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.193359375,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06532296751088351,
-          0.06265186917787048
-        ],
-        "pixels": [
-          284,
-          276
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5449731945991516,
-          0.24891361594200134,
-          0.0330924317240715
-        ],
-        "base_color_std": [
-          0.008827302604913712,
-          0.008891736157238483,
-          0.008848429657518864
-        ],
-        "footprint_fraction": 0.5658297611757501,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.212890625,
-          0.3525390625
-        ],
-        "extent_uv": [
-          0.0652519307967732,
-          0.05562458608339598
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5441229343414307,
-          0.24918024241924286,
-          0.03275536000728607
-        ],
-        "base_color_std": [
-          0.009196564555168152,
-          0.008341295644640923,
-          0.00907445140182972
-        ],
-        "footprint_fraction": 0.5322096513507273,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.212890625,
-          0.3525390625
-        ],
-        "extent_uv": [
-          0.06525193249804517,
-          0.05562462578925259
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5441229343414307,
-          0.24918024241924286,
-          0.03275536000728607
-        ],
-        "base_color_std": [
-          0.009196564555168152,
-          0.008341295644640923,
-          0.00907445140182972
-        ],
-        "footprint_fraction": 0.5322096513507273,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.212890625,
-          0.380859375
-        ],
-        "extent_uv": [
-          0.065888010886068,
-          0.007026950749242468
-        ],
-        "pixels": [
-          288,
-          48
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5443863272666931,
-          0.2488899677991867,
-          0.03244456276297569
-        ],
-        "base_color_std": [
-          0.007814993150532246,
-          0.006829055957496166,
-          0.006890151649713516
-        ],
-        "footprint_fraction": 0.5081018518518519,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.197265625,
-          0.3740234375
-        ],
-        "extent_uv": [
-          0.07000577091084724,
-          0.013227184201158619
-        ],
-        "pixels": [
-          304,
-          72
-        ],
-        "cloth_coverage": 0.9999999999999997,
-        "base_color_mean": [
-          0.5443324446678162,
-          0.2504577934741974,
-          0.03255373239517212
-        ],
-        "base_color_std": [
-          0.00875826645642519,
-          0.00752505287528038,
-          0.007712079677730799
-        ],
-        "footprint_fraction": 0.6988304093567251,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.20703125,
-          0.3759765625
-        ],
-        "extent_uv": [
-          0.07000577997469004,
-          0.013227185913719122
-        ],
-        "pixels": [
-          304,
-          72
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5452929735183716,
-          0.2504633069038391,
-          0.033008843660354614
-        ],
-        "base_color_std": [
-          0.008231662213802338,
-          0.007763523142784834,
-          0.007851728238165379
-        ],
-        "footprint_fraction": 0.6673976608187134,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2373046875,
-          0.119140625
-        ],
-        "extent_uv": [
-          0.14131872397339548,
-          0.01335067644244138
-        ],
-        "pixels": [
-          596,
-          72
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5374754071235657,
-          0.24611350893974304,
-          0.03658581152558327
-        ],
-        "base_color_std": [
-          0.03943023085594177,
-          0.028425443917512894,
-          0.018805451691150665
-        ],
-        "footprint_fraction": 0.6111111111111112,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.193359375,
-          0.3671875
-        ],
-        "extent_uv": [
-          0.06532297009953661,
-          0.06613513481826024
-        ],
-        "pixels": [
-          284,
-          288
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5456013083457947,
-          0.25015220046043396,
-          0.03328389301896095
-        ],
-        "base_color_std": [
-          0.009164666756987572,
-          0.008603204973042011,
-          0.009410161525011063
-        ],
-        "footprint_fraction": 0.5553599374021909,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1982421875,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06588802137240275,
-          0.003513456619546881
-        ],
-        "pixels": [
-          288,
-          32
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5449861884117126,
-          0.25033944845199585,
-          0.03280546888709068
-        ],
-        "base_color_std": [
-          0.007544393185526133,
-          0.006838145200163126,
-          0.007464284542948008
-        ],
-        "footprint_fraction": 0.5416666666666666,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.19140625,
-          0.3681640625
-        ],
-        "extent_uv": [
-          0.0652519307967732,
-          0.05562458608339598
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5453380942344666,
-          0.2501251697540283,
-          0.03342233970761299
-        ],
-        "base_color_std": [
-          0.008824530057609081,
-          0.008191758766770363,
-          0.008930203504860401
-        ],
-        "footprint_fraction": 0.5317478642345879,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.212890625,
-          0.380859375
-        ],
-        "extent_uv": [
-          0.06588801997830734,
-          0.007026912744423578
-        ],
-        "pixels": [
-          288,
-          48
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5443863272666931,
-          0.2488899677991867,
-          0.03244456276297569
-        ],
-        "base_color_std": [
-          0.007814993150532246,
-          0.006829055957496166,
-          0.006890151649713516
-        ],
-        "footprint_fraction": 0.5081018518518519,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1962890625,
-          0.375
-        ],
-        "extent_uv": [
-          0.07377489324591288,
-          0.016961343984420577
-        ],
-        "pixels": [
-          320,
-          88
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5451327562332153,
-          0.25101613998413086,
-          0.03286910057067871
-        ],
-        "base_color_std": [
-          0.00877134408801794,
-          0.008111619390547276,
-          0.008152595721185207
-        ],
-        "footprint_fraction": 0.5954545454545455,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1982421875,
-          0.3759765625
-        ],
-        "extent_uv": [
-          0.06941845565925586,
-          0.007028650893103627
-        ],
-        "pixels": [
-          304,
-          48
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5446760654449463,
-          0.24990569055080414,
-          0.0326557531952858
-        ],
-        "base_color_std": [
-          0.007497195154428482,
-          0.006935037672519684,
-          0.007336900103837252
-        ],
-        "footprint_fraction": 0.5361842105263158,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.19140625,
-          0.3681640625
-        ],
-        "extent_uv": [
-          0.06876554517745675,
-          0.055652180031153534
-        ],
-        "pixels": [
-          300,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5452292561531067,
-          0.2501927614212036,
-          0.03343281149864197
-        ],
-        "base_color_std": [
-          0.008984053507447243,
-          0.008238721638917923,
-          0.009018933400511742
-        ],
-        "footprint_fraction": 0.5149726775956284,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.212890625,
-          0.3525390625
-        ],
-        "extent_uv": [
-          0.06525193337166978,
-          0.05562460740618576
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5441229343414307,
-          0.24918024241924286,
-          0.03275536000728607
-        ],
-        "base_color_std": [
-          0.009196564555168152,
-          0.008341295644640923,
-          0.00907445140182972
-        ],
-        "footprint_fraction": 0.5322096513507273,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.19140625,
-          0.3681640625
-        ],
-        "extent_uv": [
-          0.06525192734825122,
-          0.0556245831436729
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5453380942344666,
-          0.2501251697540283,
-          0.03342233970761299
-        ],
-        "base_color_std": [
-          0.008824530057609081,
-          0.008191758766770363,
-          0.008930203504860401
-        ],
-        "footprint_fraction": 0.5317478642345879,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2431640625,
-          0.32421875
-        ],
-        "extent_uv": [
-          0.010620191605729442,
-          0.1323372736707124
-        ],
-        "pixels": [
-          60,
-          560
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5388426184654236,
-          0.25141480565071106,
-          0.03964436426758766
-        ],
-        "base_color_std": [
-          0.02885321155190468,
-          0.02241092547774315,
-          0.02003420703113079
-        ],
-        "footprint_fraction": 0.6223809523809524,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2333984375,
-          0.3203125
-        ],
-        "extent_uv": [
-          0.013512748453433195,
-          0.14078654325110748
-        ],
-        "pixels": [
-          72,
-          596
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.537809431552887,
-          0.25030219554901123,
-          0.04036961495876312
-        ],
-        "base_color_std": [
-          0.0320604145526886,
-          0.024882983416318893,
-          0.02113565430045128
-        ],
-        "footprint_fraction": 0.5991797166293811,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.193359375,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06532296770224114,
-          0.06265186936140336
-        ],
-        "pixels": [
-          284,
-          276
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5449731945991516,
-          0.24891361594200134,
-          0.0330924317240715
-        ],
-        "base_color_std": [
-          0.008827302604913712,
-          0.008891736157238483,
-          0.008848429657518864
-        ],
-        "footprint_fraction": 0.5658297611757501,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.212890625,
-          0.3525390625
-        ],
-        "extent_uv": [
-          0.06525193424529498,
-          0.055624589023118905
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5441229343414307,
-          0.24918024241924286,
-          0.03275536000728607
-        ],
-        "base_color_std": [
-          0.009196564555168152,
-          0.008341295644640923,
-          0.00907445140182972
-        ],
-        "footprint_fraction": 0.5322096513507273,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.212890625,
-          0.3525390625
-        ],
-        "extent_uv": [
-          0.06525193249804517,
-          0.05562462578925259
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5441229343414307,
-          0.24918024241924286,
-          0.03275536000728607
-        ],
-        "base_color_std": [
-          0.009196564555168152,
-          0.008341295644640923,
-          0.00907445140182972
-        ],
-        "footprint_fraction": 0.5322096513507273,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.205078125,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06588801042740969,
-          0.007026912586780706
-        ],
-        "pixels": [
-          288,
-          48
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.54559326171875,
-          0.24985983967781067,
-          0.03288907930254936
-        ],
-        "base_color_std": [
-          0.00744826951995492,
-          0.007051889318972826,
-          0.00758857186883688
-        ],
-        "footprint_fraction": 0.4699074074074074,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.25,
-          0.1171875
-        ],
-        "extent_uv": [
-          0.1413187282776687,
-          0.013350677338273324
-        ],
-        "pixels": [
-          596,
-          72
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5352895259857178,
-          0.24356922507286072,
-          0.033928804099559784
-        ],
-        "base_color_std": [
-          0.032052505761384964,
-          0.022847138345241547,
-          0.015858257189393044
-        ],
-        "footprint_fraction": 0.598806860551827,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1962890625,
-          0.31640625
-        ],
-        "extent_uv": [
-          0.06967136657613218,
-          0.1322664451374659
-        ],
-        "pixels": [
-          304,
-          560
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5448483824729919,
-          0.25201302766799927,
-          0.03810490667819977
-        ],
-        "base_color_std": [
-          0.014916004613041878,
-          0.014657605439424515,
-          0.016348619014024734
-        ],
-        "footprint_fraction": 0.3774436090225564,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.22265625,
-          0.31640625
-        ],
-        "extent_uv": [
-          0.010735475563254876,
-          0.1327485010700712
-        ],
-        "pixels": [
-          60,
-          560
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5433107018470764,
-          0.24813312292099,
-          0.03726072236895561
-        ],
-        "base_color_std": [
-          0.018517006188631058,
-          0.013440834358334541,
-          0.016057388857007027
-        ],
-        "footprint_fraction": 0.4614285714285714,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2353515625,
-          0.3095703125
-        ],
-        "extent_uv": [
-          0.01344900868347147,
-          0.14012243096192414
-        ],
-        "pixels": [
-          72,
-          592
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5377609133720398,
-          0.25031593441963196,
-          0.04068693518638611
-        ],
-        "base_color_std": [
-          0.030992556363344193,
-          0.02333170920610428,
-          0.020226772874593735
-        ],
-        "footprint_fraction": 0.7192192192192193,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1953125,
-          0.3955078125
-        ],
-        "extent_uv": [
-          0.0883594000591762,
-          0.013567428128202217
-        ],
-        "pixels": [
-          380,
-          72
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5433474779129028,
-          0.2505025863647461,
-          0.033542849123477936
-        ],
-        "base_color_std": [
-          0.009974085725843906,
-          0.010556383989751339,
-          0.010261939838528633
-        ],
-        "footprint_fraction": 0.7596491228070176,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1982421875,
-          0.3984375
-        ],
-        "extent_uv": [
-          0.08526337835945533,
-          0.010861209166442386
-        ],
-        "pixels": [
-          368,
-          64
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.543972373008728,
-          0.2512744963169098,
-          0.03372100740671158
-        ],
-        "base_color_std": [
-          0.009701061062514782,
-          0.0104423388838768,
-          0.00961789395660162
-        ],
-        "footprint_fraction": 0.6216032608695652,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2119140625,
-          0.3740234375
-        ],
-        "extent_uv": [
-          0.050241582273711914,
-          0.0603363041990019
-        ],
-        "pixels": [
-          224,
-          264
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5457656979560852,
-          0.24811352789402008,
-          0.03222329542040825
-        ],
-        "base_color_std": [
-          0.007967086508870125,
-          0.007638030685484409,
-          0.008195347152650356
-        ],
-        "footprint_fraction": 0.6607142857142857,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2197265625,
-          0.375
-        ],
-        "extent_uv": [
-          0.035197585085427543,
-          0.060774403319363554
-        ],
-        "pixels": [
-          164,
-          268
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5450124144554138,
-          0.24789510667324066,
-          0.03220594674348831
-        ],
-        "base_color_std": [
-          0.007937708869576454,
-          0.007563162595033646,
-          0.007851449772715569
-        ],
-        "footprint_fraction": 0.6643611212231525,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2158203125,
-          0.365234375
-        ],
-        "extent_uv": [
-          0.035248865445622356,
-          0.057223590732664135
-        ],
-        "pixels": [
-          164,
-          252
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5447432398796082,
-          0.24702271819114685,
-          0.03182554990053177
-        ],
-        "base_color_std": [
-          0.007890131324529648,
-          0.0074462443590164185,
-          0.008220935240387917
-        ],
-        "footprint_fraction": 0.6329849012775842,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2021484375,
-          0.3662109375
-        ],
-        "extent_uv": [
-          0.0502674329907459,
-          0.05678554191556193
-        ],
-        "pixels": [
-          224,
-          252
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5450794696807861,
-          0.24703899025917053,
-          0.03195807337760925
-        ],
-        "base_color_std": [
-          0.008407016284763813,
-          0.007897848263382912,
-          0.00840854924172163
-        ],
-        "footprint_fraction": 0.6374716553287982,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1962890625,
-          0.3935546875
-        ],
-        "extent_uv": [
-          0.08547855095639438,
-          0.0569401408547088
-        ],
-        "pixels": [
-          368,
-          252
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.542845606803894,
-          0.2509680688381195,
-          0.035697292536497116
-        ],
-        "base_color_std": [
-          0.012652470730245113,
-          0.01540672779083252,
-          0.014489167369902134
-        ],
-        "footprint_fraction": 0.700655624568668,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1943359375,
-          0.37890625
-        ],
-        "extent_uv": [
-          0.08524696909349293,
-          0.05678587637846924
-        ],
-        "pixels": [
-          368,
-          252
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5422552227973938,
-          0.24949994683265686,
-          0.033303920179605484
-        ],
-        "base_color_std": [
-          0.010651334188878536,
-          0.011897945776581764,
-          0.010614668019115925
-        ],
-        "footprint_fraction": 0.6535541752933057,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2177734375,
-          0.337890625
-        ],
-        "extent_uv": [
-          0.06221174448990257,
-          0.11296684708168163
-        ],
-        "pixels": [
-          272,
-          480
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5410815477371216,
-          0.2553197145462036,
-          0.036873091012239456
-        ],
-        "base_color_std": [
-          0.013871784321963787,
-          0.013943357393145561,
-          0.016202062368392944
-        ],
-        "footprint_fraction": 0.13541666666666666,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2197265625,
-          0.380859375
-        ],
-        "extent_uv": [
-          0.05546835050948501,
-          0.0557272678354274
-        ],
-        "pixels": [
-          244,
-          248
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5437314510345459,
-          0.2493530511856079,
-          0.03287963941693306
-        ],
-        "base_color_std": [
-          0.008485967293381691,
-          0.008809341117739677,
-          0.008385052904486656
-        ],
-        "footprint_fraction": 0.4574299312533051,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1962890625,
-          0.390625
-        ],
-        "extent_uv": [
-          0.08200889383451394,
-          0.05878189139660242
-        ],
-        "pixels": [
-          352,
-          260
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5398011207580566,
-          0.254516065120697,
-          0.036346860229969025
-        ],
-        "base_color_std": [
-          0.013089797459542751,
-          0.014752713032066822,
-          0.014461424201726913
-        ],
-        "footprint_fraction": 0.23111888111888113,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1962890625,
-          0.38671875
-        ],
-        "extent_uv": [
-          0.08589287285627792,
-          0.06082513321455272
-        ],
-        "pixels": [
-          368,
-          268
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5430606007575989,
-          0.25275859236717224,
-          0.03769048675894737
-        ],
-        "base_color_std": [
-          0.012980245985090733,
-          0.01604314148426056,
-          0.01498104352504015
-        ],
-        "footprint_fraction": 0.695165476963011,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1904296875,
-          0.4140625
-        ],
-        "extent_uv": [
-          0.08520003527099886,
-          0.010769976680264394
-        ],
-        "pixels": [
-          368,
-          64
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5420054197311401,
-          0.24683211743831635,
-          0.03245460242033005
-        ],
-        "base_color_std": [
-          0.009425550699234009,
-          0.010233333334326744,
-          0.009319689124822617
-        ],
-        "footprint_fraction": 0.6277173913043478,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.185546875,
-          0.427734375
-        ],
-        "extent_uv": [
-          0.0883654802846913,
-          0.013568382673027611
-        ],
-        "pixels": [
-          380,
-          72
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.539432168006897,
-          0.24470055103302002,
-          0.03338576480746269
-        ],
-        "base_color_std": [
-          0.009794306010007858,
-          0.011559429578483105,
-          0.00959416851401329
-        ],
-        "footprint_fraction": 0.7608187134502924,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2255859375,
-          0.35546875
-        ],
-        "extent_uv": [
-          0.01356745095123448,
-          0.08835941235119281
-        ],
-        "pixels": [
-          72,
-          380
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5454741716384888,
-          0.24789322912693024,
-          0.03363262116909027
-        ],
-        "base_color_std": [
-          0.009013219736516476,
-          0.008149733766913414,
-          0.009495547972619534
-        ],
-        "footprint_fraction": 0.7578947368421053,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2265625,
-          0.35546875
-        ],
-        "extent_uv": [
-          0.01086121378100708,
-          0.08526341458501452
-        ],
-        "pixels": [
-          64,
-          368
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5451677441596985,
-          0.2474951297044754,
-          0.03321073204278946
-        ],
-        "base_color_std": [
-          0.008462653495371342,
-          0.00732865696772933,
-          0.008240438997745514
-        ],
-        "footprint_fraction": 0.6202445652173914,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1953125,
-          0.36328125
-        ],
-        "extent_uv": [
-          0.07039296846536323,
-          0.0854500175820568
-        ],
-        "pixels": [
-          308,
-          368
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5433506965637207,
-          0.24757571518421173,
-          0.034580495208501816
-        ],
-        "base_color_std": [
-          0.011033933609724045,
-          0.011105186305940151,
-          0.012284262105822563
-        ],
-        "footprint_fraction": 0.7125917560700169,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1953125,
-          0.3623046875
-        ],
-        "extent_uv": [
-          0.06683429851608026,
-          0.08552867270300209
-        ],
-        "pixels": [
-          292,
-          368
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5449749231338501,
-          0.2504154145717621,
-          0.03664189577102661
-        ],
-        "base_color_std": [
-          0.01327486988157034,
-          0.014159481972455978,
-          0.014864125289022923
-        ],
-        "footprint_fraction": 0.6916319237641453,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1962890625,
-          0.3623046875
-        ],
-        "extent_uv": [
-          0.0667951231338143,
-          0.08547853322090146
-        ],
-        "pixels": [
-          292,
-          368
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5431259274482727,
-          0.24697232246398926,
-          0.034077975898981094
-        ],
-        "base_color_std": [
-          0.010857950896024704,
-          0.010640029795467854,
-          0.011468729004263878
-        ],
-        "footprint_fraction": 0.714711137581894,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1953125,
-          0.3623046875
-        ],
-        "extent_uv": [
-          0.06683428131246535,
-          0.08552864441940898
-        ],
-        "pixels": [
-          292,
-          368
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5450860857963562,
-          0.25075024366378784,
-          0.036689408123493195
-        ],
-        "base_color_std": [
-          0.01331686694175005,
-          0.01403223816305399,
-          0.014854338951408863
-        ],
-        "footprint_fraction": 0.6986301369863014,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2265625,
-          0.1123046875
-        ],
-        "extent_uv": [
-          0.13525277613235123,
-          0.01998994305524002
-        ],
-        "pixels": [
-          572,
-          100
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.531670093536377,
-          0.24033764004707336,
-          0.03231059014797211
-        ],
-        "base_color_std": [
-          0.02778330259025097,
-          0.018539519980549812,
-          0.014868967235088348
-        ],
-        "footprint_fraction": 0.2537062937062937,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1943359375,
-          0.361328125
-        ],
-        "extent_uv": [
-          0.0700058580501796,
-          0.086422629464126
-        ],
-        "pixels": [
-          304,
-          372
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5402756929397583,
-          0.2474612593650818,
-          0.03969073295593262
-        ],
-        "base_color_std": [
-          0.015376411378383636,
-          0.015494653023779392,
-          0.016087064519524574
-        ],
-        "footprint_fraction": 0.1494057724957555,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.19921875,
-          0.3701171875
-        ],
-        "extent_uv": [
-          0.06599974989931541,
-          0.06548737179737871
-        ],
-        "pixels": [
-          288,
-          288
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5437411069869995,
-          0.24599981307983398,
-          0.031714171171188354
-        ],
-        "base_color_std": [
-          0.009070592932403088,
-          0.008719264529645443,
-          0.008544349111616611
-        ],
-        "footprint_fraction": 0.5883487654320988,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1962890625,
-          0.3623046875
-        ],
-        "extent_uv": [
-          0.07032930040216474,
-          0.08540881748827614
-        ],
-        "pixels": [
-          308,
-          368
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5453193783760071,
-          0.2511497437953949,
-          0.036716558039188385
-        ],
-        "base_color_std": [
-          0.013527587987482548,
-          0.014798612333834171,
-          0.015346909873187542
-        ],
-        "footprint_fraction": 0.7014398644833427,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2265625,
-          0.3564453125
-        ],
-        "extent_uv": [
-          0.010769970664179668,
-          0.08520013886556517
-        ],
-        "pixels": [
-          64,
-          368
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5455701351165771,
-          0.2476426512002945,
-          0.03352413699030876
-        ],
-        "base_color_std": [
-          0.00839425902813673,
-          0.007448483724147081,
-          0.008517422713339329
-        ],
-        "footprint_fraction": 0.6277173913043478,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2265625,
-          0.3544921875
-        ],
-        "extent_uv": [
-          0.013568373472816796,
-          0.08836542036737711
-        ],
-        "pixels": [
-          72,
-          380
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5454727411270142,
-          0.24797162413597107,
-          0.03389823064208031
-        ],
-        "base_color_std": [
-          0.008937920443713665,
-          0.007778408005833626,
-          0.009079654701054096
-        ],
-        "footprint_fraction": 0.7608187134502924,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.24609375,
-          0.3232421875
-        ],
-        "extent_uv": [
-          0.013512747541594518,
-          0.1407865337508481
-        ],
-        "pixels": [
-          72,
-          596
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5368496775627136,
-          0.25204896926879883,
-          0.03902766481041908
-        ],
-        "base_color_std": [
-          0.031120480969548225,
-          0.023837009444832802,
-          0.020431017503142357
-        ],
-        "footprint_fraction": 0.5842654735272185,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2431640625,
-          0.32421875
-        ],
-        "extent_uv": [
-          0.010620192080889062,
-          0.13233727959163466
-        ],
-        "pixels": [
-          60,
-          560
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.539961576461792,
-          0.25265705585479736,
-          0.04051749035716057
-        ],
-        "base_color_std": [
-          0.028707413002848625,
-          0.022782398387789726,
-          0.021063271909952164
-        ],
-        "footprint_fraction": 0.6223809523809524,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1962890625,
-          0.375
-        ],
-        "extent_uv": [
-          0.07412649258111753,
-          0.013291528196189777
-        ],
-        "pixels": [
-          320,
-          72
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5458210706710815,
-          0.250651478767395,
-          0.032801076769828796
-        ],
-        "base_color_std": [
-          0.008117186836898327,
-          0.008032376877963543,
-          0.007921294309198856
-        ],
-        "footprint_fraction": 0.7243055555555555,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.201171875,
-          0.3798828125
-        ],
-        "extent_uv": [
-          0.06949746443650599,
-          0.007033675895677572
-        ],
-        "pixels": [
-          304,
-          48
-        ],
-        "cloth_coverage": 0.9999999999999997,
-        "base_color_mean": [
-          0.5439220070838928,
-          0.24838942289352417,
-          0.03183187171816826
-        ],
-        "base_color_std": [
-          0.0070883664302527905,
-          0.006905816495418549,
-          0.007269976194947958
-        ],
-        "footprint_fraction": 0.3651315789473684,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.201171875,
-          0.373046875
-        ],
-        "extent_uv": [
-          0.06528955581891917,
-          0.0591382226502699
-        ],
-        "pixels": [
-          284,
-          260
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.544393002986908,
-          0.24614207446575165,
-          0.031026514247059822
-        ],
-        "base_color_std": [
-          0.008306929841637611,
-          0.008050106465816498,
-          0.007738467305898666
-        ],
-        "footprint_fraction": 0.513759479956663,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.298828125,
-          0.064453125
-        ],
-        "extent_uv": [
-          0.06876552374271953,
-          0.11130431397455716
-        ],
-        "pixels": [
-          300,
-          472
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5305693745613098,
-          0.24643659591674805,
-          0.03957542032003403
-        ],
-        "base_color_std": [
-          0.044132933020591736,
-          0.029320746660232544,
-          0.021684588864445686
-        ],
-        "footprint_fraction": 0.2927683615819209,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2255859375,
-          0.1162109375
-        ],
-        "extent_uv": [
-          0.13958384482760822,
-          0.013186778768510321
-        ],
-        "pixels": [
-          588,
-          72
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5382185578346252,
-          0.2461513876914978,
-          0.03685213252902031
-        ],
-        "base_color_std": [
-          0.04308769851922989,
-          0.029449215158820152,
-          0.019939985126256943
-        ],
-        "footprint_fraction": 0.6352985638699924,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.193359375,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.0653229727732565,
-          0.06265181677919951
-        ],
-        "pixels": [
-          284,
-          276
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5439353585243225,
-          0.24769490957260132,
-          0.033449236303567886
-        ],
-        "base_color_std": [
-          0.009658998809754848,
-          0.00984681025147438,
-          0.009291006252169609
-        ],
-        "footprint_fraction": 0.5815472545417432,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.205078125,
-          0.3798828125
-        ],
-        "extent_uv": [
-          0.06588804184610494,
-          0.007026915422600353
-        ],
-        "pixels": [
-          288,
-          48
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5447874665260315,
-          0.24873489141464233,
-          0.0321073941886425
-        ],
-        "base_color_std": [
-          0.007597733289003372,
-          0.00662157591432333,
-          0.006776435300707817
-        ],
-        "footprint_fraction": 0.5497685185185185,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.20703125,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06525192992314914,
-          0.05562460446646279
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.544197142124176,
-          0.2466566115617752,
-          0.031117895618081093
-        ],
-        "base_color_std": [
-          0.008336775004863739,
-          0.008124102838337421,
-          0.007804287597537041
-        ],
-        "footprint_fraction": 0.516277995843916,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.20703125,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.0652519307967732,
-          0.05562458608339598
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.544197142124176,
-          0.2466566115617752,
-          0.031117895618081093
-        ],
-        "base_color_std": [
-          0.008336775004863739,
-          0.008124102838337421,
-          0.007804287597537041
-        ],
-        "footprint_fraction": 0.516277995843916,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.236328125,
-          0.310546875
-        ],
-        "extent_uv": [
-          0.013452975750099946,
-          0.1401638711477961
-        ],
-        "pixels": [
-          72,
-          592
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5379206538200378,
-          0.25036466121673584,
-          0.04051363840699196
-        ],
-        "base_color_std": [
-          0.03077320195734501,
-          0.02331583946943283,
-          0.01994355395436287
-        ],
-        "footprint_fraction": 0.7188438438438438,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2216796875,
-          0.31640625
-        ],
-        "extent_uv": [
-          0.010742295972880398,
-          0.13274986142351552
-        ],
-        "pixels": [
-          64,
-          560
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.543260395526886,
-          0.24798212945461273,
-          0.03686169907450676
-        ],
-        "base_color_std": [
-          0.017180336639285088,
-          0.013222407549619675,
-          0.015752920880913734
-        ],
-        "footprint_fraction": 0.4388392857142857,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.21875,
-          0.3447265625
-        ],
-        "extent_uv": [
-          0.06879631547232402,
-          0.11135415731493453
-        ],
-        "pixels": [
-          300,
-          476
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5449416637420654,
-          0.25228720903396606,
-          0.03789902478456497
-        ],
-        "base_color_std": [
-          0.012082119472324848,
-          0.011798987165093422,
-          0.015746688470244408
-        ],
-        "footprint_fraction": 0.2927731092436975,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2041015625,
-          0.3798828125
-        ],
-        "extent_uv": [
-          0.06946579591921968,
-          0.007030490123064625
-        ],
-        "pixels": [
-          304,
-          48
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5446048378944397,
-          0.249106302857399,
-          0.03234119713306427
-        ],
-        "base_color_std": [
-          0.007665986195206642,
-          0.0071517000906169415,
-          0.007039334625005722
-        ],
-        "footprint_fraction": 0.5460526315789473,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2001953125,
-          0.3798828125
-        ],
-        "extent_uv": [
-          0.07380662043786382,
-          0.013228160247639129
-        ],
-        "pixels": [
-          320,
-          72
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5440035462379456,
-          0.24813677370548248,
-          0.031725578010082245
-        ],
-        "base_color_std": [
-          0.007746928371489048,
-          0.0070426007732748985,
-          0.007139298133552074
-        ],
-        "footprint_fraction": 0.6784722222222223,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1884765625,
-          0.3681640625
-        ],
-        "extent_uv": [
-          0.06525193424529498,
-          0.055624589023118905
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.544578492641449,
-          0.24649469554424286,
-          0.03180038556456566
-        ],
-        "base_color_std": [
-          0.008615118451416492,
-          0.008283221162855625,
-          0.008340995758771896
-        ],
-        "footprint_fraction": 0.5476795197413992,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1884765625,
-          0.37109375
-        ],
-        "extent_uv": [
-          0.06528955331724587,
-          0.05913827780076735
-        ],
-        "pixels": [
-          284,
-          260
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5446739792823792,
-          0.24647435545921326,
-          0.03214268758893013
-        ],
-        "base_color_std": [
-          0.008590376004576683,
-          0.008506334386765957,
-          0.008689059875905514
-        ],
-        "footprint_fraction": 0.5293607800650054,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2470703125,
-          0.1201171875
-        ],
-        "extent_uv": [
-          0.13177603529614332,
-          0.00351345650744589
-        ],
-        "pixels": [
-          556,
-          32
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5344674587249756,
-          0.24113187193870544,
-          0.03278544545173645
-        ],
-        "base_color_std": [
-          0.025112362578511238,
-          0.015904564410448074,
-          0.01133563183248043
-        ],
-        "footprint_fraction": 0.4892086330935252,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.20703125,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06528954870294432,
-          0.05913827362120364
-        ],
-        "pixels": [
-          284,
-          260
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5435503125190735,
-          0.24639011919498444,
-          0.03108830749988556
-        ],
-        "base_color_std": [
-          0.008504634723067284,
-          0.008411290124058723,
-          0.007686350028961897
-        ],
-        "footprint_fraction": 0.5477789815817985,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1923828125,
-          0.375
-        ],
-        "extent_uv": [
-          0.07000576653291293,
-          0.013227184343319666
-        ],
-        "pixels": [
-          304,
-          72
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5454440712928772,
-          0.25015076994895935,
-          0.03278461471199989
-        ],
-        "base_color_std": [
-          0.008520828559994698,
-          0.007476689759641886,
-          0.007697827182710171
-        ],
-        "footprint_fraction": 0.6820175438596491,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.203125,
-          0.3798828125
-        ],
-        "extent_uv": [
-          0.07000577544276877,
-          0.013227185057438896
-        ],
-        "pixels": [
-          304,
-          72
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5440435409545898,
-          0.24794115126132965,
-          0.03166983649134636
-        ],
-        "base_color_std": [
-          0.007714488077908754,
-          0.006963689345866442,
-          0.0070226253010332584
-        ],
-        "footprint_fraction": 0.6842105263157895,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.259765625,
-          0.119140625
-        ],
-        "extent_uv": [
-          0.14131871573120525,
-          0.013350676152982547
-        ],
-        "pixels": [
-          596,
-          72
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5328434705734253,
-          0.24215194582939148,
-          0.033708423376083374
-        ],
-        "base_color_std": [
-          0.028330136090517044,
-          0.019519776105880737,
-          0.014384991489350796
-        ],
-        "footprint_fraction": 0.6114839671886652,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.193359375,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06532296492758702,
-          0.06265180925435143
-        ],
-        "pixels": [
-          284,
-          276
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5439353585243225,
-          0.24769490957260132,
-          0.033449236303567886
-        ],
-        "base_color_std": [
-          0.009658998809754848,
-          0.00984681025147438,
-          0.009291006252169609
-        ],
-        "footprint_fraction": 0.5815472545417432,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.201171875,
-          0.37890625
-        ],
-        "extent_uv": [
-          0.06588804134710483,
-          0.01054037305407349
-        ],
-        "pixels": [
-          288,
-          60
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5454589128494263,
-          0.24889755249023438,
-          0.032210953533649445
-        ],
-        "base_color_std": [
-          0.0072861057706177235,
-          0.00673834839835763,
-          0.007443287875503302
-        ],
-        "footprint_fraction": 0.5370370370370371,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.20703125,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06525193337166978,
-          0.05562460740618576
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.544197142124176,
-          0.2466566115617752,
-          0.031117895618081093
-        ],
-        "base_color_std": [
-          0.008336775004863739,
-          0.008124102838337421,
-          0.007804287597537041
-        ],
-        "footprint_fraction": 0.516277995843916,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.20703125,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06525193424529498,
-          0.055624589023118905
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.544197142124176,
-          0.2466566115617752,
-          0.031117895618081093
-        ],
-        "base_color_std": [
-          0.008336775004863739,
-          0.008124102838337421,
-          0.007804287597537041
-        ],
-        "footprint_fraction": 0.516277995843916,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1962890625,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.072898339323909,
-          0.016760353353721995
-        ],
-        "pixels": [
-          316,
-          88
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5449944734573364,
-          0.25015178322792053,
-          0.033106446266174316
-        ],
-        "base_color_std": [
-          0.008682632818818092,
-          0.008197097107768059,
-          0.009106483310461044
-        ],
-        "footprint_fraction": 0.6869965477560415,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.197265625,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06944974186911042,
-          0.007028827175505751
-        ],
-        "pixels": [
-          304,
-          48
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5446862578392029,
-          0.2500517666339874,
-          0.03247245401144028
-        ],
-        "base_color_std": [
-          0.0075189583003520966,
-          0.006899798754602671,
-          0.00761391082778573
-        ],
-        "footprint_fraction": 0.4769736842105263,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1982421875,
-          0.3447265625
-        ],
-        "extent_uv": [
-          0.0688001337893777,
-          0.11484333953639651
-        ],
-        "pixels": [
-          300,
-          488
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.5445424914360046,
-          0.25302237272262573,
-          0.03620047867298126
-        ],
-        "base_color_std": [
-          0.01947767660021782,
-          0.01976807601749897,
-          0.017921991646289825
-        ],
-        "footprint_fraction": 0.29114754098360657,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2392578125,
-          0.326171875
-        ],
-        "extent_uv": [
-          0.010631521920647879,
-          0.13247849869103484
-        ],
-        "pixels": [
-          60,
-          560
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5393908619880676,
-          0.25109773874282837,
-          0.040021996945142746
-        ],
-        "base_color_std": [
-          0.02883422188460827,
-          0.023394007235765457,
-          0.020332027226686478
-        ],
-        "footprint_fraction": 0.550952380952381,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2333984375,
-          0.3125
-        ],
-        "extent_uv": [
-          0.013524410851178224,
-          0.1409080513713985
-        ],
-        "pixels": [
-          72,
-          596
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5356064438819885,
-          0.24965159595012665,
-          0.04121443256735802
-        ],
-        "base_color_std": [
-          0.0328466035425663,
-          0.024183636531233788,
-          0.02059921808540821
-        ],
-        "footprint_fraction": 0.6677852348993288,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1884765625,
-          0.3681640625
-        ],
-        "extent_uv": [
-          0.0652519307967732,
-          0.05562458608339598
-        ],
-        "pixels": [
-          284,
-          244
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.544578492641449,
-          0.24649469554424286,
-          0.03180038556456566
-        ],
-        "base_color_std": [
-          0.008615118451416492,
-          0.008283221162855625,
-          0.008340995758771896
-        ],
-        "footprint_fraction": 0.5476795197413992,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.197265625,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.06588802456000974,
-          0.007026913241105337
-        ],
-        "pixels": [
-          288,
-          48
-        ],
-        "cloth_coverage": 0.9999999999999998,
-        "base_color_mean": [
-          0.545386791229248,
-          0.2504609525203705,
-          0.0333637073636055
-        ],
-        "base_color_std": [
-          0.007704705931246281,
-          0.006904034409672022,
-          0.0074004558846354485
-        ],
-        "footprint_fraction": 0.5243055555555556,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2392578125,
-          0.0830078125
-        ],
-        "extent_uv": [
-          0.13070570306435025,
-          0.06268053122222968
-        ],
-        "pixels": [
-          552,
-          276
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5434900522232056,
-          0.25353631377220154,
-          0.04045099765062332
-        ],
-        "base_color_std": [
-          0.048104990273714066,
-          0.03079981356859207,
-          0.021201234310865402
-        ],
-        "footprint_fraction": 0.30392774627179164,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.19140625,
-          0.376953125
-        ],
-        "extent_uv": [
-          0.07156002158691677,
-          0.00970493672101063
-        ],
-        "pixels": [
-          312,
-          56
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.545066773891449,
-          0.2498764991760254,
-          0.032503243535757065
-        ],
-        "base_color_std": [
-          0.007906869985163212,
-          0.007162268273532391,
-          0.007603379897773266
-        ],
-        "footprint_fraction": 0.6446886446886447,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.203125,
-          0.3798828125
-        ],
-        "extent_uv": [
-          0.0700057745363845,
-          0.013227184886182847
-        ],
-        "pixels": [
-          304,
-          72
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5440435409545898,
-          0.24794115126132965,
-          0.03166983649134636
-        ],
-        "base_color_std": [
-          0.007714488077908754,
-          0.006963689345866442,
-          0.0070226253010332584
-        ],
-        "footprint_fraction": 0.6842105263157895,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2021484375,
-          0.34765625
-        ],
-        "extent_uv": [
-          0.06874895131965368,
-          0.11127750113580588
-        ],
-        "pixels": [
-          300,
-          472
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5432106256484985,
-          0.24978163838386536,
-          0.03544675186276436
-        ],
-        "base_color_std": [
-          0.01667959801852703,
-          0.017501452937722206,
-          0.01602897234261036
-        ],
-        "footprint_fraction": 0.5180790960451978,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.1884765625,
-          0.3681640625
-        ],
-        "extent_uv": [
-          0.06881001839317817,
-          0.06265521735504599
-        ],
-        "pixels": [
-          300,
-          276
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5447280406951904,
-          0.24652889370918274,
-          0.032025765627622604
-        ],
-        "base_color_std": [
-          0.00873546302318573,
-          0.008477280847728252,
-          0.008583080023527145
-        ],
-        "footprint_fraction": 0.5089855072463768,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.19140625,
-          0.373046875
-        ],
-        "extent_uv": [
-          0.07377488825425514,
-          0.01696138388217589
-        ],
-        "pixels": [
-          320,
-          88
-        ],
-        "cloth_coverage": 0.9999999999999999,
-        "base_color_mean": [
-          0.5451904535293579,
-          0.24978530406951904,
-          0.03258731588721275
-        ],
-        "base_color_std": [
-          0.008176031522452831,
-          0.007252326235175133,
-          0.007685855962336063
-        ],
-        "footprint_fraction": 0.5153409090909091,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2265625,
-          0.3173828125
-        ],
-        "extent_uv": [
-          0.010631518969724562,
-          0.13247850088231683
-        ],
-        "pixels": [
-          60,
-          560
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5433534979820251,
-          0.2506864666938782,
-          0.04115588963031769
-        ],
-        "base_color_std": [
-          0.024541884660720825,
-          0.0184934101998806,
-          0.019544340670108795
-        ],
-        "footprint_fraction": 0.5552380952380952,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      },
-      {
-        "origin_uv": [
-          0.2353515625,
-          0.3134765625
-        ],
-        "extent_uv": [
-          0.01343937171826929,
-          0.1400220254210396
-        ],
-        "pixels": [
-          72,
-          592
-        ],
-        "cloth_coverage": 1.0,
-        "base_color_mean": [
-          0.5393204092979431,
-          0.25120779871940613,
-          0.04133012145757675
-        ],
-        "base_color_std": [
-          0.03140653669834137,
-          0.024248477071523666,
-          0.02153884992003441
-        ],
-        "footprint_fraction": 0.7406156156156156,
-        "semantic_body_fabric_only": false,
-        "material_region": "radio_leather"
-      }
-    ],
-    "locked_mesh_signatures_unchanged": true
-  },
-  "pack_contact_provenance": {
-    "base_review": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\RadioRigging\\SmoothCourierReview\\Accepted\\Lumen\\smooth-review.blend",
-    "base_review_sha256": "b94bc058a838a310076cad888dbaf475955235a9b44870402b25bdd02f1b00a3",
-    "helper_sha256": "acabf4fbe5078ad4f466bad9a0824f6bb991d4ad70057745e93a5585040926ec",
-    "locked_roles": {
-      "Character": {
-        "position_and_uv_signature_equal": true,
-        "maximum_corner_normal_error": 0.0,
-        "weights_equal": true,
-        "shape_keys_equal": true
-      },
-      "Arm.R": {
-        "position_and_uv_signature_equal": true,
-        "maximum_corner_normal_error": 0.0,
-        "weights_equal": true,
-        "shape_keys_equal": true
-      },
-      "Arm.L": {
-        "position_and_uv_signature_equal": true,
-        "maximum_corner_normal_error": 0.0,
-        "weights_equal": true,
-        "shape_keys_equal": true
-      },
-      "Harness": {
-        "position_and_uv_signature_equal": true,
-        "maximum_corner_normal_error": 0.0,
-        "weights_equal": true,
-        "shape_keys_equal": true
+      "localized_contact_uv": {
+        "character": "Lumen",
+        "changed_source_faces": []
       }
     }
   },
   "files": {
     "Model.fbx": {
-      "bytes": 2512476,
-      "sha256": "9a3bf7bfa081ca65d4bc9827f9c1c5bd1ebaeb2f0e1177f28c948e1b0016246e"
+      "bytes": 2836876,
+      "sha256": "f13db95fb17eb0f9ad751043e903bb6661da874f06481998ecbf6676334ca51c"
     },
     "Lumen_Rigged.blend": {
-      "bytes": 1174621,
-      "sha256": "ba69dde03c3b2be01a95f527ea0bc9d5ba58b19d3d01ec9328c3fad7fe90cdfe"
+      "bytes": 1297038,
+      "sha256": "b284cc77b23d4ce69f37efdb6a4af42676def1099418028558f9e23c75a8959a"
     },
     "BaseColor.png": {
       "bytes": 21533874,
@@ -18410,9 +14473,9 @@
     "maximum_weight_error": 0.0,
     "maximum_vertex_error": 5.140900611877441e-07,
     "maximum_uv_error": 0.0,
-    "maximum_normal_error": 0.0005236268043518066,
+    "maximum_normal_error": 0.0005754828453063965,
     "maximum_blink_error": 5.140900611877441e-07,
-    "maximum_normal_angle_degrees": 0.035034162018326855,
+    "maximum_normal_angle_degrees": 0.04083072652841141,
     "maximum_bone_rest_matrix_error": 8.344650268554688e-07,
     "image_sizes": {
       "BaseColor.png": [

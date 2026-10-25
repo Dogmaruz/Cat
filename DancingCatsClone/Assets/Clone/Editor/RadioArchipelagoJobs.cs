@@ -108,6 +108,9 @@ namespace DancingCats.Clone.Editor
         public static void SurfaceBaseline() { RequireSavedEditor(); CourierSurfaceReview.RenderBaseline(); }
         public static void SurfaceCandidate() { RequireSavedEditor(); CourierSurfaceReview.RenderCandidate(); }
         public static void RoundedPawChecks() { RequireSavedEditor(); CourierRoundedPawChecks.RunChecks(); }
+        public static void JointBaseline() { RequireSavedEditor(); CourierJointReview.Baseline(); }
+        public static void JointCandidate() { RequireSavedEditor(); CourierJointReview.Candidate(); }
+        public static void ShoulderTrials() { RequireSavedEditor(); CourierJointReview.ShoulderTrials(); }
 
         public static void RigRender()
         {
