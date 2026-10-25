@@ -45,6 +45,26 @@ namespace DancingCats.Clone
 
         public float CenterX => transform.position.x;
         public float TopY => transform.position.y;
+
+        /// <summary>World contact at this tile's chart time, without advancing its live pose.</summary>
+        public Vector3 ContactPosition
+        {
+            get
+            {
+                if (element == null) return transform.position;
+                var position = element.pos;
+                if (element.updateType == 1)
+                {
+                    float progress = NativeRhythmRules.MovePercent(0, element.begin, element.end);
+                    position.x = Mathf.Lerp(element.mstartPos.x, initialX, progress);
+                    position.y = Mathf.Lerp(element.mstartPos.y, element.pos.y, progress);
+                }
+                else if (element.updateType == 3)
+                    position.x = NativeRhythmRules.MoveCycleX(initialX, 0, element.msLeft != 0);
+                return position;
+            }
+        }
+
         public void MarkConsumed() { consumed = true; }
 
         public bool ContainsSphere(Vector3 center, float radius)

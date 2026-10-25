@@ -236,6 +236,26 @@ namespace DancingCats.Clone.Editor
                         RequireEditMode();
                         Invoke("OriginalChartCalibration", "GenerateUnstoppableComparison");
                         break;
+                    case "chart-route-checks":
+                        RequireEditMode();
+                        Invoke("ChartRouteComposerValidation", "RunChecks");
+                        break;
+                    case "chart-route-integration":
+                        RequireEditMode();
+                        Invoke("ChartRouteIntegrationValidation", "RunChecks");
+                        break;
+                    case "chart-route-publish":
+                        RequireEditMode();
+                        Invoke("ChartRouteJobs", "ApplyAllCustomLevels");
+                        break;
+                    case "chart-route-real-audio":
+                        RequireEditMode();
+                        Invoke("ChartRouteIntegrationValidation", "CheckPublishedGeneration");
+                        break;
+                    case "chart-native-moving-checks":
+                        RequireEditMode();
+                        Invoke("NativeMovingTileValidation", "RunChecks");
+                        break;
                     case "chart-original-playtest":
                         RequireEditMode();
                         Invoke("RadioArchipelagoJobs", "ComparisonPlaytest");

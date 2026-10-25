@@ -137,3 +137,12 @@ errors are recorded in `Docs/Clone/ChartCalibration/V8/README.md`.
 CPU preprocessing took approximately 31 seconds for separation plus 1.2 seconds
 for note inference on the 67-second calibration recording. Unity consumes the
 compact evidence without any ML inference at runtime. See THIRD_PARTY_NOTICES.md.
+
+The independent spatial route study is reproducible with
+`python Tools/RhythmAnalysis/study_chart_routes.py` from the repository root.
+It reads the 58 original chart assets, verifies their hashes and writes only
+`DancingCatsClone/Library/ChartChoreographyV1/Reference/study.json`.
+Its aggregate transition measurements inform the separate `ChartRouteComposer`
+policy; no reference chart coordinates or song identity are read by that composer.
+Current published routes and actual Editor checks are documented in
+`Docs/Clone/ChartChoreography/README.md`.

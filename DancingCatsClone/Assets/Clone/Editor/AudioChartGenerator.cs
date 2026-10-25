@@ -24,7 +24,7 @@ namespace DancingCats.Clone.Editor
             public string title = "Always Remember Meow", artist = "Meow Cat";
             public float forwardSpeed = 6.5f, delayTime = .6f;
             public bool includeHolds = true, includeMovingJumps = true, includeBigJumps = true,
-                includeForegroundAccents = true, preferAuthoredScore = true;
+                includeForegroundAccents = true, includeRouteChoreography = true, preferAuthoredScore = true;
         }
         private sealed class Analysis
         {
@@ -233,6 +233,11 @@ namespace DancingCats.Clone.Editor
                     "BigJump policy: a stable upper-register foreground syllable with a measured release and subsequent physical landing may reserve one airborne gesture. Ordinary long gaps, silence, foreground rearticulation and confirmed supports do not imply a large launch. No original tile times or types enter this decision.",
                     "Local separator model SHA-256: " + vocalEvidence.separatorModelSha256 + "; note model: " + vocalEvidence.noteModelSha256 + "; no audio upload."
                 }).ToArray();
+            }
+            if (options.includeRouteChoreography)
+            {
+                if (options.includeMovingJumps) ChartRouteComposer.Apply(map);
+                else ChartRouteComposer.ApplyStationary(map);
             }
             return map;
         }

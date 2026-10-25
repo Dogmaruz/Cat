@@ -38,7 +38,9 @@ namespace RadioArchipelago.Editor
         private static int step, frames, pressedFrame, scoreAtPause, samplesAtPause, selectedSong;
         private static float dragOrigin, songLength;
         private static double deadline, readyAt, pauseClock, pauseDsp, startDsp, lastClock, lastDsp;
-        private static bool bot, capturedHold, capturedGlide;
+        private static bool bot, capturedHold, capturedGlide, capturedSideways;
+        private static readonly Dictionary<int, Vector2> MovingRanges = new Dictionary<int, Vector2>();
+        private static LocalPose[] pausedMovingTiles;
         private static readonly Vector2Int[] MenuSizes = { new Vector2Int(540, 960), new Vector2Int(390, 844), new Vector2Int(1080, 1920) };
         private static int menuSize, menuCourier;
         private static LocalPose[] pausedCourierPose;
@@ -177,7 +179,8 @@ namespace RadioArchipelago.Editor
                 priorMouse = Mouse.current; pointer = InputSystem.AddDevice<Mouse>("Radio Archipelago QA pointer"); pointer.MakeCurrent();
                 foreach (var device in InputSystem.devices.Where(device => device.native && device.enabled && (device is Mouse || device is Keyboard)).ToArray())
                 { DisabledDevices.Add(device); InputSystem.DisableDevice(device); }
-                game = null; couriers = null; bot = false; capturedHold = capturedGlide = false;
+                game = null; couriers = null; bot = false; capturedHold = capturedGlide = capturedSideways = false;
+                MovingRanges.Clear();
                 step = frames = 0; readyAt = -1; deadline = EditorApplication.timeSinceStartup + 40;
                 // VContainer can start entry points before EnteredPlayMode. Preserve faults
                 // captured by the InitializeOnLoad log hook even when no UI was created.
@@ -320,6 +323,8 @@ namespace RadioArchipelago.Editor
                         if (game.Phase != ClonePhase.Paused) return;
                         pauseClock = game.GameTime; pauseDsp = AudioSettings.dspTime; scoreAtPause = game.Score; samplesAtPause = game.Music.timeSamples;
                         pausedCourierPose = SnapshotCourier();
+                        pausedMovingTiles = game.Tiles.Where(tile => tile.element.updateType == 3)
+                            .Select(tile => new LocalPose { node = tile.transform, position = tile.transform.localPosition }).ToArray();
                         pausedCourierBlends = game.Actor.GetComponentsInChildren<SkinnedMeshRenderer>(true)
                             .Where(renderer => renderer.sharedMesh != null)
                             .SelectMany(renderer => Enumerable.Range(0, renderer.sharedMesh.blendShapeCount)
@@ -336,6 +341,8 @@ namespace RadioArchipelago.Editor
                             "pause freezes actual courier bones, squash, feet, blinking and secondary animation transforms");
                         Check(pausedCourierBlends.All(pose => pose.renderer != null && Mathf.Abs(pose.renderer.GetBlendShapeWeight(pose.index) - pose.weight) < .001f),
                             "pause freezes any actual courier blink blend shapes");
+                        Check(pausedMovingTiles.All(pose => pose.node != null && (pose.node.localPosition - pose.position).sqrMagnitude < 1e-9f),
+                            "pause freezes actual sideways moving tile transforms");
                         Capture("11-pause.png", 540, 960); BeginClick(Button("ResumeButton")); Next(22); break;
                     case 22:
                         if (Time.frameCount <= pressedFrame + 3) return;
@@ -372,6 +379,15 @@ namespace RadioArchipelago.Editor
                         var glideTiles = game.Tiles.Where(tile => tile.element.id == 4 || tile.element.id == 5 || tile.element.id == 6).ToArray();
                         if (glideTiles.Length > 0) Check(glideTiles.All(tile => tile.consumed), "glide entries, scored midpoints and exits were crossed through actual contacts");
                         else Notes.Add("N/A: the reviewed chart contains no Follow/glide tiles.");
+                        var sideways = game.Tiles.Where(tile => tile.element.updateType == 3 && (tile.element.id == 0 || tile.element.id == 1)).ToArray();
+                        if (sideways.Length > 0)
+                        {
+                            Check(sideways.All(tile => tile.consumed), "every sideways moving target was reached through actual tile contacts");
+                            Check(sideways.All(tile => MovingRanges.TryGetValue(tile.element.sourceIndex, out var range) && range.y - range.x > .15f),
+                                "native sideways target transforms moved visibly during actual playback");
+                            Check(sideways.Any(tile => tile.element.msLeft == 0) && sideways.Any(tile => tile.element.msLeft != 0),
+                                "the reviewed chart exercised both sideways movement directions");
+                        }
                         Next(25); break;
                     case 25:
                         if (frames < 30) return;
@@ -456,6 +472,14 @@ namespace RadioArchipelago.Editor
         {
             if (!bot || game.Phase != ClonePhase.Playing) return;
             float z = game.Actor.position.z;
+            foreach (var tile in game.Tiles.Where(tile => tile.element.updateType == 3))
+            {
+                int index = tile.element.sourceIndex;
+                var range = MovingRanges.TryGetValue(index, out var observed) ? observed : new Vector2(tile.CenterX, tile.CenterX);
+                MovingRanges[index] = new Vector2(Mathf.Min(range.x, tile.CenterX), Mathf.Max(range.y, tile.CenterX));
+                if (!capturedSideways && !tile.consumed && tile.initialZ - z > 1 && tile.initialZ - z < 12)
+                { Capture("16-sideways.png", 540, 960); capturedSideways = true; }
+            }
             float target;
             if (game.Support != null && game.Support.element.id != 4) target = game.Support.CenterX;
             else

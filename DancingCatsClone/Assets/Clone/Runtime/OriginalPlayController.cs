@@ -599,7 +599,8 @@ namespace DancingCats.Clone
             GameTime = previous != null ? previous.element.gameTime : 0;
             _invincibleUntil = Time.unscaledTime + 3;
             _invincibleGrounded = false;
-            Actor.position = previous != null ? previous.element.pos + Vector3.up * .25f : Vector3.up * .25f;
+            var contact = previous != null ? previous.ContactPosition : Vector3.zero;
+            Actor.position = contact + Vector3.up * .25f;
             _destinationX = Actor.position.x; _dragging = false;
             if (previous != null && (previous.element.id == 2 || previous.element.id == 3 || previous.element.id == 4))
             {
@@ -610,7 +611,7 @@ namespace DancingCats.Clone
                     OriginalTileVisuals.RestartHold(previous.gameObject, Actor.position.z);
                 }
             }
-            else BeginArc(previous != null ? previous.element.pos : Vector3.zero, previous?.element.jumpDistance ?? 3.25f);
+            else BeginArc(contact, previous?.element.jumpDistance ?? 3.25f);
             Schedule(GameTime); Phase = ClonePhase.Playing; NotifyChanged();
         }
 

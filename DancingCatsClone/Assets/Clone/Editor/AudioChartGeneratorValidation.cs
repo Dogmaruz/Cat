@@ -236,7 +236,13 @@ namespace DancingCats.Clone.Editor
                 double gap = next.gameTime - segment.endGameTime;
                 Require(gap >= .077 && gap <= 1.964, "takeoff-to-landing interval exceeds measured native arc range; annotate sustained support rather than scoring filler: " + gap);
                 Require(Math.Abs(exit.jumpDistance - (next.pos.z - segment.endZ)) < .0003, "sustained support exit determines outgoing arc");
-                Require(Math.Abs(next.pos.x - exit.pos.x) <= 1.001, "lane changes stay reachable");
+                Require(Math.Abs(ChartRouteComposer.LandingX(next) - ChartRouteComposer.LandingX(exit))
+                    <= ChartRouteComposer.MaxLateralShift(gap) + .001,
+                    "actual contact lanes stay within the interval-aware route envelope");
+                if (element.updateType == 3)
+                    Require((element.kind == "Jump" || element.kind == "BigJump") && segment.motion.updateType == 3
+                        && segment.motion.msLeft == element.msLeft,
+                        "only airborne targets oscillate, with coherent native direction metadata");
             }
             var finish = map.elements.Last();
             Require(finish.kind == "FinishJump" && Math.Abs(finish.jumpDistance - 5) < .00001, "real finish jumps five units to the original end platform");
