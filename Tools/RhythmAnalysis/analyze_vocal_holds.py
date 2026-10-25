@@ -8,6 +8,8 @@ from pathlib import Path
 
 SEP_SHA='ce74ef3b6a6024ce44211a07be9cf8bc6d87728cc852a68ab34eb8e58cde9c8b'
 NOTE_SHA='2c3c1d144bfa61ad236e92e169c13535c880469a12a047d4e73451f2c059a0ec'
+TRANSCRIPTION_VERSION='input-window-time-v2'
+ANALYSIS_VERSION='vocal-phrase-2-window-time'
 MODELS={
  'Kim_Vocal_2.onnx':('https://github.com/TRvlvr/model_repo/releases/download/all_public_uvr_models/Kim_Vocal_2.onnx',SEP_SHA),
  'nmp.onnx':('https://raw.githubusercontent.com/spotify/basic-pitch/main/basic_pitch/saved_models/icassp_2022/nmp.onnx',NOTE_SHA)}
@@ -62,15 +64,24 @@ def separate(audio,model):
 
 def transcribe(vocals,model):
     original=resample_poly(vocals.mean(axis=0),1,2).astype(np.float32);original*=min(5,.9/max(.01,float(abs(original).max())))
-    n=len(original);audio=np.r_[np.zeros(3840,np.float32),original];engine=session(model);arrays={k:[]for k in ['note','onset']}
-    for a in range(0,len(audio),36164):
-        chunk=audio[a:a+43844]
-        if len(chunk)<43844:chunk=np.pad(chunk,(0,43844-len(chunk)))
+    rate=22050;frame_hop=256;window=43844;trim=15;pad=trim*frame_hop;hop=window-2*pad
+    n=len(original);audio=np.r_[np.zeros(pad,np.float32),original];engine=session(model);arrays={k:[]for k in ['note','onset']};times=[]
+    for a in range(0,n,hop):
+        chunk=audio[a:a+window]
+        if len(chunk)<window:chunk=np.pad(chunk,(0,window-len(chunk)))
         values=engine.run(['StatefulPartitionedCall:1','StatefulPartitionedCall:2'],{'serving_default_input_2:0':chunk[None,:,None]})
-        for k,v in zip(arrays,values):arrays[k].append(v[:,15:-15])
-    for k in arrays:
-        v=np.concatenate(arrays[k]);arrays[k]=v.reshape(-1,v.shape[-1])[:int(n*86/22050)]
-    ix=np.arange(len(arrays['note']));arrays['times']=ix*256/22050-((256/22050)*(172-43844/256)+.0018)*np.floor(ix/172)
+        if len(values)!=2 or any(v.ndim!=3 or v.shape[0]!=1 or v.shape[1]!=172 for v in values):
+            raise ValueError('Unexpected pinned Basic Pitch model output shape')
+        # Each native frame is centered at j*256 in THIS input window. Its
+        # absolute coordinate includes the true window hop and removes initial
+        # zero-padding. Flattened-frame correction accumulates the wrong offset
+        # because edge trimming retains 142 frames, rather than 172.
+        native_frames=np.arange(trim,172-trim);samples=a+native_frames*frame_hop-pad
+        valid=(samples>=0)&(samples<n)
+        times.append(samples[valid]/rate)
+        for k,v in zip(arrays,values):arrays[k].append(v[0,trim:-trim][valid])
+    for k in arrays:arrays[k]=np.concatenate(arrays[k],axis=0)
+    arrays['times']=np.concatenate(times);arrays['timingVersion']=np.array(TRANSCRIPTION_VERSION)
     return arrays
 
 def envelope_starts(energy):
@@ -101,7 +112,7 @@ def build_evidence(source,rate,pcm,vocals,notes):
     rms=np.sqrt(uniform_filter1d(filtered*filtered,round(.025*44100)))[::441]
     return dict(schemaVersion=1,featureQuantization=100000000,sourceFileSha256=digest(source.read_bytes()),sourcePcmSha256=digest(pcm.astype('<f4').tobytes()),sampleRate=rate,channels=pcm.shape[1],sampleFrames=pcm.shape[0],rmsStep=.01,
                 pitchTimes=np.round(notes['times'],8).tolist(),pitch=pitch.tolist(),pitchConfidence=np.round(confidence,7).tolist(),onset=np.round(notes['onset'][:,34:64].max(axis=1),7).tolist(),rms=np.round(rms,8).tolist(),voiceStarts=envelope_starts(rms),
-                separatorModelSha256=SEP_SHA,noteModelSha256=NOTE_SHA,analysisVersion='vocal-phrase-1',audioUploaded=False)
+                separatorModelSha256=SEP_SHA,noteModelSha256=NOTE_SHA,analysisVersion=ANALYSIS_VERSION,audioUploaded=False)
 
 def classify_legato(e,attacks):
     times=np.array(e['pitchTimes']);pitch=np.array(e['pitch']);conf=np.array(e['pitchConfidence']);energy=np.array(e['rms']);dt=float(np.median(np.diff(times)));result=[]
@@ -296,9 +307,13 @@ def main():
         g=math.gcd(rate,44100);audio=resample_poly(audio,44100//g,rate//g,axis=1).astype(np.float32)
     stem=work/'vocals.npz'
     if not stem.exists():np.savez_compressed(stem,samples=separate(audio,models/'Kim_Vocal_2.onnx'))
-    vocals=np.load(stem)['samples'];prediction=work/'notes.npz'
+    # Keep the costly source separation cache. The old flattened-frame notes
+    # remain historical; never silently reuse them with the corrected axis.
+    vocals=np.load(stem)['samples'];prediction=work/('notes-'+TRANSCRIPTION_VERSION+'.npz')
     if not prediction.exists():np.savez_compressed(prediction,**transcribe(vocals,models/'nmp.onnx'))
-    evidence=build_evidence(args.input,rate,pcm,vocals,np.load(prediction));evidence['featureSha256']=evidence_digest(evidence);args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(evidence,separators=(',',':'))+'\n')
+    notes=np.load(prediction)
+    if 'timingVersion'not in notes or str(notes['timingVersion'])!=TRANSCRIPTION_VERSION:raise ValueError('Transcription cache timing version mismatch; regenerate notes')
+    evidence=build_evidence(args.input,rate,pcm,vocals,notes);evidence['featureSha256']=evidence_digest(evidence);args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(evidence,separators=(',',':'))+'\n')
     if args.diagnostics:
         holds=classify(evidence,source_attacks(pcm,rate),args.beat_period);args.diagnostics.parent.mkdir(parents=True,exist_ok=True);args.diagnostics.write_text(json.dumps(dict(sourcePcmSha256=evidence['sourcePcmSha256'],beatPeriod=args.beat_period,candidates=holds),indent=2)+'\n')
     print(str(args.output))

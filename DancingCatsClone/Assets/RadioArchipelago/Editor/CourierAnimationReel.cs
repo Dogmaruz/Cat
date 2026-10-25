@@ -72,7 +72,7 @@ namespace RadioArchipelago.Editor
                     "Actual Unity skinning, supplied textures and CourierMotion.ManualSimulation.\n" +
                     "Characters screen left to right: " + string.Join(", ", catalog.entries.Reverse().Select(entry => entry.displayName + " (" + entry.id + ")")) + "\n" +
                     "flight: 2.4 second long flight + .6 second landing/settling.\n" +
-                    "ride: 2.6 second turn + .4 second settling.\n" +
+                    "ride: two 1.3 second supported turns, opposite directions, then .4 second settling.\n" +
                     "Each sequence: frame-000.png through frame-119.png, " + Width + "x" + Height + ", 3 seconds at 40fps.\n" +
                     "Only the disposable preview stages follow the illustrative flight arc and small lateral turn. Movement is sampled at every simulation substep. Game scene, catalog and player data remain untouched.\n");
                 Debug.Log("RADIO_COURIER_REEL PASS: 240 actual Unity frames at " + Output);
@@ -99,20 +99,26 @@ namespace RadioArchipelago.Editor
                 foreach (var motion in motions)
                 {
                     motion.ResetMotion();
-                    if (flight) motion.PlayJump(transition); else motion.PlayHold(false, transition, true);
+                    if (flight) motion.PlayJump(transition); else motion.PlaySupportedRide(transition * .5f);
                 }
-                float clock = 0; bool settled = false;
+                float clock = 0; bool settled = false, secondRide = false;
                 for (int frame = 0; frame < FrameCount; frame++)
                 {
                     float targetTime = Duration * frame / (FrameCount - 1);
                     while (clock < targetTime - .000001f)
                     {
+                        if (!flight && !secondRide && clock >= transition * .5f - .000001f)
+                        {
+                            secondRide = true;
+                            foreach (var motion in motions) motion.PlaySupportedRide(transition * .5f);
+                        }
                         if (!settled && clock >= transition - .000001f)
                         {
                             settled = true;
                             foreach (var motion in motions) { motion.PlayIdle(); if (flight) motion.PlayLanding(1); }
                         }
                         float next = Mathf.Min(clock + 1f / 120, targetTime);
+                        if (!flight && !secondRide) next = Mathf.Min(next, transition * .5f);
                         if (!settled) next = Mathf.Min(next, transition);
                         PoseStages(stages, motions, next, transition, flight);
                         foreach (var motion in motions)
@@ -146,20 +152,26 @@ namespace RadioArchipelago.Editor
             for (int i = 0; i < motions.Length; i++)
             {
                 stages[i].localPosition = new Vector3((i - 1) * Spacing, 0, 0); motions[i].ResetMotion();
-                if (flight) motions[i].PlayJump(transition); else motions[i].PlayHold(false, transition, true);
+                if (flight) motions[i].PlayJump(transition); else motions[i].PlaySupportedRide(transition * .5f);
             }
-            float clock = 0; bool settled = false;
+            float clock = 0; bool settled = false, secondRide = false;
             for (int frame = 0; frame < FrameCount; frame++)
             {
                 float targetTime = Duration * frame / (FrameCount - 1);
                 while (clock < targetTime - .000001f)
                 {
+                    if (!flight && !secondRide && clock >= transition * .5f - .000001f)
+                    {
+                        secondRide = true;
+                        foreach (var motion in motions) motion.PlaySupportedRide(transition * .5f);
+                    }
                     if (!settled && clock >= transition - .000001f)
                     {
                         settled = true;
                         foreach (var motion in motions) { motion.PlayIdle(); if (flight) motion.PlayLanding(1); }
                     }
                     float next = Mathf.Min(clock + 1f / 120, targetTime);
+                    if (!flight && !secondRide) next = Mathf.Min(next, transition * .5f);
                     if (!settled) next = Mathf.Min(next, transition);
                     PoseStages(stages, motions, next, transition, flight);
                     foreach (var motion in motions)

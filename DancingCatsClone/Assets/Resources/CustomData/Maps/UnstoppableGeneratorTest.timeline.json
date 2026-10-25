@@ -3,7 +3,7 @@
     "sampleRate": 44100,
     "id": "UnstoppableGeneratorTest",
     "mapAssetId": "custom:UnstoppableGeneratorTest",
-    "sourceMapBundle": "pcm-vocal-phrase-chart-v6",
+    "sourceMapBundle": "pcm-vocal-phrase-chart-v7",
     "sourceMapBundleSha256": "88ea37d6fc9b91863509c174e1aad914cff14704e6be6d20a57b5ffe21429102",
     "sourceMapUrl": "",
     "forwardSpeed": 7.0,
@@ -54,7 +54,7 @@
         "gameTime": "audioTime + delayTime",
         "audioTime": "gameTime - delayTime",
         "eventGameTime": "sample / sampleRate + delayTime",
-        "warning": "Locally separated vocal evidence drives legato/plateau holds and bounded musical support policies; mixed-audio recurrence drives glides. Lateral paths use an authored palette. This does not reproduce every designer-authored gesture."
+        "warning": "Locally separated vocal evidence drives holds and conservative upper-register flights; mixed-audio recurrence drives glides. Spatial choreography is a game-design policy. This does not reproduce every designer-authored gesture."
     },
     "tempoSections": [
         {
@@ -943,7 +943,7 @@
             "kind": "FollowMid",
             "ext": "",
             "pos": {
-                "x": 0.6499999761581421,
+                "x": 0.0,
                 "y": 0.0,
                 "z": 58.88016128540039
             },
@@ -974,7 +974,7 @@
             "kind": "FollowMid",
             "ext": "",
             "pos": {
-                "x": -0.6499999761581421,
+                "x": -0.34285715222358706,
                 "y": 0.0,
                 "z": 60.75190353393555
             },
@@ -1005,7 +1005,7 @@
             "kind": "FollowMid",
             "ext": "",
             "pos": {
-                "x": 0.6499999761581421,
+                "x": -0.800000011920929,
                 "y": 0.0,
                 "z": 62.623653411865237
             },
@@ -1036,7 +1036,7 @@
             "kind": "FollowMid",
             "ext": "",
             "pos": {
-                "x": -0.6499999761581421,
+                "x": 2.220446049250313e-16,
                 "y": 0.0,
                 "z": 64.49539947509766
             },
@@ -1067,7 +1067,7 @@
             "kind": "FollowEnd",
             "ext": "",
             "pos": {
-                "x": 0.0,
+                "x": 0.800000011920929,
                 "y": 0.0,
                 "z": 66.36714172363281
             },
@@ -2070,7 +2070,7 @@
             "kind": "FollowMid",
             "ext": "",
             "pos": {
-                "x": 0.5,
+                "x": 0.800000011920929,
                 "y": 0.0,
                 "z": 136.12460327148438
             },
@@ -2101,7 +2101,7 @@
             "kind": "FollowMid",
             "ext": "",
             "pos": {
-                "x": 0.20000000298023225,
+                "x": 0.47999998927116396,
                 "y": 0.0,
                 "z": 137.99635314941407
             },
@@ -2132,7 +2132,7 @@
             "kind": "FollowMid",
             "ext": "",
             "pos": {
-                "x": -0.20000000298023225,
+                "x": 0.053333334624767306,
                 "y": 0.0,
                 "z": 139.8680877685547
             },
@@ -2163,7 +2163,7 @@
             "kind": "FollowMid",
             "ext": "",
             "pos": {
-                "x": -0.5,
+                "x": -0.3733333349227905,
                 "y": 0.0,
                 "z": 141.73985290527345
             },
@@ -2967,24 +2967,24 @@
             "begin": 50.0,
             "end": 5.0,
             "mfendPos": 0.0,
-            "jumpDistance": 1.8158721923828126,
+            "jumpDistance": 2.689208984375,
             "gameTime": 31.560839347532274,
             "audioTime": 31.115828,
             "audioSampleFromPosition": 1372208.0148,
             "holdTicks": []
         },
         {
-            "id": 0,
+            "id": 1,
             "sourceIndex": 92,
             "updateType": 0,
             "msLeft": 0,
-            "name": "Jump",
-            "kind": "Jump",
+            "name": "BigJump",
+            "kind": "BigJump",
             "ext": "",
             "pos": {
                 "x": 0.0,
                 "y": 0.0,
-                "z": 222.7417449951172
+                "z": 223.61508178710938
             },
             "mstartPos": {
                 "x": 0.0,
@@ -2998,81 +2998,19 @@
             "begin": 50.0,
             "end": 5.0,
             "mfendPos": 0.0,
-            "jumpDistance": 1.885711669921875,
-            "gameTime": 31.820249347532273,
-            "audioTime": 31.375238,
-            "audioSampleFromPosition": 1383647.9958,
+            "jumpDistance": 4.5044403076171879,
+            "gameTime": 31.945011347532274,
+            "audioTime": 31.5,
+            "audioSampleFromPosition": 1389150.0,
             "holdTicks": []
         },
         {
-            "id": 0,
+            "id": 1,
             "sourceIndex": 93,
             "updateType": 0,
             "msLeft": 0,
-            "name": "Jump",
-            "kind": "Jump",
-            "ext": "",
-            "pos": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 224.62745666503907
-            },
-            "mstartPos": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "se": {
-                "x": 0.7749999761581421,
-                "y": -0.7749999761581421
-            },
-            "begin": 50.0,
-            "end": 5.0,
-            "mfendPos": 0.0,
-            "jumpDistance": 2.3047637939453127,
-            "gameTime": 32.089637347532278,
-            "audioTime": 31.644626,
-            "audioSampleFromPosition": 1395528.0066,
-            "holdTicks": []
-        },
-        {
-            "id": 0,
-            "sourceIndex": 94,
-            "updateType": 0,
-            "msLeft": 0,
-            "name": "Jump",
-            "kind": "Jump",
-            "ext": "",
-            "pos": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 226.93222045898438
-            },
-            "mstartPos": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "se": {
-                "x": 0.7749999761581421,
-                "y": -0.7749999761581421
-            },
-            "begin": 50.0,
-            "end": 5.0,
-            "mfendPos": 0.0,
-            "jumpDistance": 1.1873016357421876,
-            "gameTime": 32.41888934753227,
-            "audioTime": 31.973878,
-            "audioSampleFromPosition": 1410048.0198,
-            "holdTicks": []
-        },
-        {
-            "id": 0,
-            "sourceIndex": 95,
-            "updateType": 0,
-            "msLeft": 0,
-            "name": "Jump",
-            "kind": "Jump",
+            "name": "BigJump",
+            "kind": "BigJump",
             "ext": "",
             "pos": {
                 "x": 0.0,
@@ -3098,12 +3036,12 @@
             "holdTicks": []
         },
         {
-            "id": 0,
-            "sourceIndex": 96,
+            "id": 1,
+            "sourceIndex": 94,
             "updateType": 0,
             "msLeft": 0,
-            "name": "Jump",
-            "kind": "Jump",
+            "name": "BigJump",
+            "kind": "BigJump",
             "ext": "",
             "pos": {
                 "x": 0.0,
@@ -3130,7 +3068,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 97,
+            "sourceIndex": 95,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3161,7 +3099,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 98,
+            "sourceIndex": 96,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3192,7 +3130,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 99,
+            "sourceIndex": 97,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3223,7 +3161,7 @@
         },
         {
             "id": 2,
-            "sourceIndex": 100,
+            "sourceIndex": 98,
             "updateType": 0,
             "msLeft": 0,
             "name": "Hold",
@@ -3265,7 +3203,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 101,
+            "sourceIndex": 99,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3296,7 +3234,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 102,
+            "sourceIndex": 100,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3327,7 +3265,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 103,
+            "sourceIndex": 101,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3358,7 +3296,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 104,
+            "sourceIndex": 102,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3389,7 +3327,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 105,
+            "sourceIndex": 103,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3420,7 +3358,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 106,
+            "sourceIndex": 104,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3451,7 +3389,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 107,
+            "sourceIndex": 105,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3482,7 +3420,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 108,
+            "sourceIndex": 106,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3513,7 +3451,7 @@
         },
         {
             "id": 2,
-            "sourceIndex": 109,
+            "sourceIndex": 107,
             "updateType": 0,
             "msLeft": 0,
             "name": "Hold",
@@ -3555,7 +3493,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 110,
+            "sourceIndex": 108,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3586,7 +3524,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 111,
+            "sourceIndex": 109,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3617,7 +3555,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 112,
+            "sourceIndex": 110,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3648,7 +3586,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 113,
+            "sourceIndex": 111,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3679,7 +3617,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 114,
+            "sourceIndex": 112,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3710,7 +3648,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 115,
+            "sourceIndex": 113,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3741,7 +3679,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 116,
+            "sourceIndex": 114,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3771,12 +3709,12 @@
             "holdTicks": []
         },
         {
-            "id": 0,
-            "sourceIndex": 117,
+            "id": 1,
+            "sourceIndex": 115,
             "updateType": 0,
             "msLeft": 0,
-            "name": "Jump",
-            "kind": "Jump",
+            "name": "BigJump",
+            "kind": "BigJump",
             "ext": "",
             "pos": {
                 "x": 0.0,
@@ -3795,7 +3733,7 @@
             "begin": 50.0,
             "end": 5.0,
             "mfendPos": 0.0,
-            "jumpDistance": 1.18731689453125,
+            "jumpDistance": 4.958740234375,
             "gameTime": 44.371723347532277,
             "audioTime": 43.926712,
             "audioSampleFromPosition": 1937167.9992000003,
@@ -3803,38 +3741,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 118,
-            "updateType": 0,
-            "msLeft": 0,
-            "name": "Jump",
-            "kind": "Jump",
-            "ext": "",
-            "pos": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 311.78936767578127
-            },
-            "mstartPos": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "se": {
-                "x": 0.7749999761581421,
-                "y": -0.7749999761581421
-            },
-            "begin": 50.0,
-            "end": 5.0,
-            "mfendPos": 0.0,
-            "jumpDistance": 3.77142333984375,
-            "gameTime": 44.541338347532278,
-            "audioTime": 44.096327,
-            "audioSampleFromPosition": 1944648.0207,
-            "holdTicks": []
-        },
-        {
-            "id": 0,
-            "sourceIndex": 119,
+            "sourceIndex": 116,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3865,7 +3772,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 120,
+            "sourceIndex": 117,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3896,7 +3803,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 121,
+            "sourceIndex": 118,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3927,7 +3834,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 122,
+            "sourceIndex": 119,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -3958,7 +3865,7 @@
         },
         {
             "id": 2,
-            "sourceIndex": 123,
+            "sourceIndex": 120,
             "updateType": 0,
             "msLeft": 0,
             "name": "Hold",
@@ -4000,7 +3907,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 124,
+            "sourceIndex": 121,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4031,7 +3938,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 125,
+            "sourceIndex": 122,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4062,7 +3969,7 @@
         },
         {
             "id": 2,
-            "sourceIndex": 126,
+            "sourceIndex": 123,
             "updateType": 0,
             "msLeft": 0,
             "name": "Hold",
@@ -4104,7 +4011,7 @@
         },
         {
             "id": 2,
-            "sourceIndex": 127,
+            "sourceIndex": 124,
             "updateType": 0,
             "msLeft": 0,
             "name": "Hold",
@@ -4146,7 +4053,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 128,
+            "sourceIndex": 125,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4177,7 +4084,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 129,
+            "sourceIndex": 126,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4208,7 +4115,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 130,
+            "sourceIndex": 127,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4239,7 +4146,7 @@
         },
         {
             "id": 2,
-            "sourceIndex": 131,
+            "sourceIndex": 128,
             "updateType": 0,
             "msLeft": 0,
             "name": "Hold",
@@ -4281,7 +4188,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 132,
+            "sourceIndex": 129,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4312,7 +4219,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 133,
+            "sourceIndex": 130,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4343,7 +4250,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 134,
+            "sourceIndex": 131,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4374,7 +4281,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 135,
+            "sourceIndex": 132,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4405,7 +4312,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 136,
+            "sourceIndex": 133,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4436,7 +4343,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 137,
+            "sourceIndex": 134,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4467,7 +4374,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 138,
+            "sourceIndex": 135,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4498,7 +4405,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 139,
+            "sourceIndex": 136,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4529,7 +4436,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 140,
+            "sourceIndex": 137,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4560,7 +4467,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 141,
+            "sourceIndex": 138,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4591,7 +4498,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 142,
+            "sourceIndex": 139,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4622,7 +4529,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 143,
+            "sourceIndex": 140,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4653,7 +4560,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 144,
+            "sourceIndex": 141,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4684,7 +4591,7 @@
         },
         {
             "id": 2,
-            "sourceIndex": 145,
+            "sourceIndex": 142,
             "updateType": 0,
             "msLeft": 0,
             "name": "Hold",
@@ -4726,7 +4633,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 146,
+            "sourceIndex": 143,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4757,7 +4664,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 147,
+            "sourceIndex": 144,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4788,7 +4695,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 148,
+            "sourceIndex": 145,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4819,7 +4726,7 @@
         },
         {
             "id": 2,
-            "sourceIndex": 149,
+            "sourceIndex": 146,
             "updateType": 0,
             "msLeft": 0,
             "name": "Hold",
@@ -4861,7 +4768,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 150,
+            "sourceIndex": 147,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4892,7 +4799,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 151,
+            "sourceIndex": 148,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4923,7 +4830,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 152,
+            "sourceIndex": 149,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4954,7 +4861,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 153,
+            "sourceIndex": 150,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -4985,7 +4892,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 154,
+            "sourceIndex": 151,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -5016,7 +4923,7 @@
         },
         {
             "id": 2,
-            "sourceIndex": 155,
+            "sourceIndex": 152,
             "updateType": 0,
             "msLeft": 0,
             "name": "Hold",
@@ -5058,7 +4965,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 156,
+            "sourceIndex": 153,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -5089,7 +4996,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 157,
+            "sourceIndex": 154,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -5120,7 +5027,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 158,
+            "sourceIndex": 155,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -5151,7 +5058,7 @@
         },
         {
             "id": 0,
-            "sourceIndex": 159,
+            "sourceIndex": 156,
             "updateType": 0,
             "msLeft": 0,
             "name": "Jump",
@@ -5182,7 +5089,7 @@
         },
         {
             "id": 1,
-            "sourceIndex": 160,
+            "sourceIndex": 157,
             "updateType": 0,
             "msLeft": 0,
             "name": "FinishJump",
@@ -6251,7 +6158,7 @@
                     "updateType": 0,
                     "msLeft": 0,
                     "kind": "FollowMid",
-                    "x": 0.6499999761581421,
+                    "x": 0.0,
                     "z": 58.88016128540039,
                     "gameTime": 8.411451347532273,
                     "audioTime": 7.96644,
@@ -6262,7 +6169,7 @@
                     "updateType": 0,
                     "msLeft": 0,
                     "kind": "FollowMid",
-                    "x": -0.6499999761581421,
+                    "x": -0.34285715222358706,
                     "z": 60.75190353393555,
                     "gameTime": 8.678843347532272,
                     "audioTime": 8.233832,
@@ -6273,7 +6180,7 @@
                     "updateType": 0,
                     "msLeft": 0,
                     "kind": "FollowMid",
-                    "x": 0.6499999761581421,
+                    "x": -0.800000011920929,
                     "z": 62.623653411865237,
                     "gameTime": 8.946236347532273,
                     "audioTime": 8.501225,
@@ -6284,7 +6191,7 @@
                     "updateType": 0,
                     "msLeft": 0,
                     "kind": "FollowMid",
-                    "x": -0.6499999761581421,
+                    "x": 2.220446049250313e-16,
                     "z": 64.49539947509766,
                     "gameTime": 9.213628347532273,
                     "audioTime": 8.768617,
@@ -6295,7 +6202,7 @@
                     "updateType": 0,
                     "msLeft": 0,
                     "kind": "FollowEnd",
-                    "x": 0.0,
+                    "x": 0.800000011920929,
                     "z": 66.36714172363281,
                     "gameTime": 9.481020347532273,
                     "audioTime": 9.036009,
@@ -7481,7 +7388,7 @@
                     "updateType": 0,
                     "msLeft": 0,
                     "kind": "FollowMid",
-                    "x": 0.5,
+                    "x": 0.800000011920929,
                     "z": 136.12460327148438,
                     "gameTime": 19.44637134753227,
                     "audioTime": 19.00136,
@@ -7492,7 +7399,7 @@
                     "updateType": 0,
                     "msLeft": 0,
                     "kind": "FollowMid",
-                    "x": 0.20000000298023225,
+                    "x": 0.47999998927116396,
                     "z": 137.99635314941407,
                     "gameTime": 19.713764347532274,
                     "audioTime": 19.268753,
@@ -7503,7 +7410,7 @@
                     "updateType": 0,
                     "msLeft": 0,
                     "kind": "FollowMid",
-                    "x": -0.20000000298023225,
+                    "x": 0.053333334624767306,
                     "z": 139.8680877685547,
                     "gameTime": 19.981156347532275,
                     "audioTime": 19.536145,
@@ -7514,7 +7421,7 @@
                     "updateType": 0,
                     "msLeft": 0,
                     "kind": "FollowMid",
-                    "x": -0.5,
+                    "x": -0.3733333349227905,
                     "z": 141.73985290527345,
                     "gameTime": 20.248549347532273,
                     "audioTime": 19.803538,
@@ -8433,7 +8340,7 @@
                 "begin": 50.0,
                 "end": 5.0,
                 "mfendPos": 0.0,
-                "jumpDistance": 1.8158721923828126,
+                "jumpDistance": 2.689208984375,
                 "mstartPos": {
                     "x": 0.0,
                     "y": 0.0,
@@ -8448,16 +8355,16 @@
         },
         {
             "sourceIndex": 92,
-            "id": 0,
-            "kind": "Jump",
-            "name": "Jump",
+            "id": 1,
+            "kind": "BigJump",
+            "name": "BigJump",
             "x": 0.0,
-            "z": 222.7417449951172,
-            "endZ": 222.7417449951172,
-            "gameTime": 31.820249347532273,
-            "audioTime": 31.375238,
-            "endGameTime": 31.820249347532273,
-            "endAudioTime": 31.375238,
+            "z": 223.61508178710938,
+            "endZ": 223.61508178710938,
+            "gameTime": 31.945011347532274,
+            "audioTime": 31.5,
+            "endGameTime": 31.945011347532274,
+            "endAudioTime": 31.5,
             "duration": 0.0,
             "elementIndices": [
                 92
@@ -8470,7 +8377,7 @@
                 "begin": 50.0,
                 "end": 5.0,
                 "mfendPos": 0.0,
-                "jumpDistance": 1.885711669921875,
+                "jumpDistance": 4.5044403076171879,
                 "mstartPos": {
                     "x": 0.0,
                     "y": 0.0,
@@ -8485,83 +8392,9 @@
         },
         {
             "sourceIndex": 93,
-            "id": 0,
-            "kind": "Jump",
-            "name": "Jump",
-            "x": 0.0,
-            "z": 224.62745666503907,
-            "endZ": 224.62745666503907,
-            "gameTime": 32.089637347532278,
-            "audioTime": 31.644626,
-            "endGameTime": 32.089637347532278,
-            "endAudioTime": 31.644626,
-            "duration": 0.0,
-            "elementIndices": [
-                93
-            ],
-            "holdTicks": [],
-            "path": [],
-            "motion": {
-                "updateType": 0,
-                "msLeft": 0,
-                "begin": 50.0,
-                "end": 5.0,
-                "mfendPos": 0.0,
-                "jumpDistance": 2.3047637939453127,
-                "mstartPos": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "se": {
-                    "x": 0.7749999761581421,
-                    "y": -0.7749999761581421
-                },
-                "ext": ""
-            }
-        },
-        {
-            "sourceIndex": 94,
-            "id": 0,
-            "kind": "Jump",
-            "name": "Jump",
-            "x": 0.0,
-            "z": 226.93222045898438,
-            "endZ": 226.93222045898438,
-            "gameTime": 32.41888934753227,
-            "audioTime": 31.973878,
-            "endGameTime": 32.41888934753227,
-            "endAudioTime": 31.973878,
-            "duration": 0.0,
-            "elementIndices": [
-                94
-            ],
-            "holdTicks": [],
-            "path": [],
-            "motion": {
-                "updateType": 0,
-                "msLeft": 0,
-                "begin": 50.0,
-                "end": 5.0,
-                "mfendPos": 0.0,
-                "jumpDistance": 1.1873016357421876,
-                "mstartPos": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "se": {
-                    "x": 0.7749999761581421,
-                    "y": -0.7749999761581421
-                },
-                "ext": ""
-            }
-        },
-        {
-            "sourceIndex": 95,
-            "id": 0,
-            "kind": "Jump",
-            "name": "Jump",
+            "id": 1,
+            "kind": "BigJump",
+            "name": "BigJump",
             "x": 0.0,
             "z": 228.11952209472657,
             "endZ": 228.11952209472657,
@@ -8571,7 +8404,7 @@
             "endAudioTime": 32.143492,
             "duration": 0.0,
             "elementIndices": [
-                95
+                93
             ],
             "holdTicks": [],
             "path": [],
@@ -8595,10 +8428,10 @@
             }
         },
         {
-            "sourceIndex": 96,
-            "id": 0,
-            "kind": "Jump",
-            "name": "Jump",
+            "sourceIndex": 94,
+            "id": 1,
+            "kind": "BigJump",
+            "name": "BigJump",
             "x": 0.0,
             "z": 233.00840759277345,
             "endZ": 233.00840759277345,
@@ -8608,7 +8441,7 @@
             "endAudioTime": 32.841905,
             "duration": 0.0,
             "elementIndices": [
-                96
+                94
             ],
             "holdTicks": [],
             "path": [],
@@ -8632,7 +8465,7 @@
             }
         },
         {
-            "sourceIndex": 97,
+            "sourceIndex": 95,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -8645,7 +8478,7 @@
             "endAudioTime": 33.570249,
             "duration": 0.0,
             "elementIndices": [
-                97
+                95
             ],
             "holdTicks": [],
             "path": [],
@@ -8669,7 +8502,7 @@
             }
         },
         {
-            "sourceIndex": 98,
+            "sourceIndex": 96,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -8682,7 +8515,7 @@
             "endAudioTime": 33.889524,
             "duration": 0.0,
             "elementIndices": [
-                98
+                96
             ],
             "holdTicks": [],
             "path": [],
@@ -8706,7 +8539,7 @@
             }
         },
         {
-            "sourceIndex": 99,
+            "sourceIndex": 97,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -8719,7 +8552,7 @@
             "endAudioTime": 34.248707,
             "duration": 0.0,
             "elementIndices": [
-                99
+                97
             ],
             "holdTicks": [],
             "path": [],
@@ -8743,7 +8576,7 @@
             }
         },
         {
-            "sourceIndex": 100,
+            "sourceIndex": 98,
             "id": 2,
             "kind": "Hold",
             "name": "Hold",
@@ -8756,7 +8589,7 @@
             "endAudioTime": 35.650000000000009,
             "duration": 1.0500000000000043,
             "elementIndices": [
-                100
+                98
             ],
             "holdTicks": [
                 {
@@ -8791,7 +8624,7 @@
             }
         },
         {
-            "sourceIndex": 101,
+            "sourceIndex": 99,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -8804,7 +8637,7 @@
             "endAudioTime": 36.274104,
             "duration": 0.0,
             "elementIndices": [
-                101
+                99
             ],
             "holdTicks": [],
             "path": [],
@@ -8828,7 +8661,7 @@
             }
         },
         {
-            "sourceIndex": 102,
+            "sourceIndex": 100,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -8841,7 +8674,7 @@
             "endAudioTime": 36.633288,
             "duration": 0.0,
             "elementIndices": [
-                102
+                100
             ],
             "holdTicks": [],
             "path": [],
@@ -8865,7 +8698,7 @@
             }
         },
         {
-            "sourceIndex": 103,
+            "sourceIndex": 101,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -8878,7 +8711,7 @@
             "endAudioTime": 36.822857,
             "duration": 0.0,
             "elementIndices": [
-                103
+                101
             ],
             "holdTicks": [],
             "path": [],
@@ -8902,7 +8735,7 @@
             }
         },
         {
-            "sourceIndex": 104,
+            "sourceIndex": 102,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -8915,7 +8748,7 @@
             "endAudioTime": 37.142132,
             "duration": 0.0,
             "elementIndices": [
-                104
+                102
             ],
             "holdTicks": [],
             "path": [],
@@ -8939,7 +8772,7 @@
             }
         },
         {
-            "sourceIndex": 105,
+            "sourceIndex": 103,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -8952,7 +8785,7 @@
             "endAudioTime": 37.750748,
             "duration": 0.0,
             "elementIndices": [
-                105
+                103
             ],
             "holdTicks": [],
             "path": [],
@@ -8976,7 +8809,7 @@
             }
         },
         {
-            "sourceIndex": 106,
+            "sourceIndex": 104,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -8989,7 +8822,7 @@
             "endAudioTime": 39.037823,
             "duration": 0.0,
             "elementIndices": [
-                106
+                104
             ],
             "holdTicks": [],
             "path": [],
@@ -9013,7 +8846,7 @@
             }
         },
         {
-            "sourceIndex": 107,
+            "sourceIndex": 105,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9026,7 +8859,7 @@
             "endAudioTime": 39.397007,
             "duration": 0.0,
             "elementIndices": [
-                107
+                105
             ],
             "holdTicks": [],
             "path": [],
@@ -9050,7 +8883,7 @@
             }
         },
         {
-            "sourceIndex": 108,
+            "sourceIndex": 106,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9063,7 +8896,7 @@
             "endAudioTime": 39.826032,
             "duration": 0.0,
             "elementIndices": [
-                108
+                106
             ],
             "holdTicks": [],
             "path": [],
@@ -9087,7 +8920,7 @@
             }
         },
         {
-            "sourceIndex": 109,
+            "sourceIndex": 107,
             "id": 2,
             "kind": "Hold",
             "name": "Hold",
@@ -9100,7 +8933,7 @@
             "endAudioTime": 41.17297052154195,
             "duration": 1.0775510204081585,
             "elementIndices": [
-                109
+                107
             ],
             "holdTicks": [
                 {
@@ -9135,7 +8968,7 @@
             }
         },
         {
-            "sourceIndex": 110,
+            "sourceIndex": 108,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9148,7 +8981,7 @@
             "endAudioTime": 41.592018,
             "duration": 0.0,
             "elementIndices": [
-                110
+                108
             ],
             "holdTicks": [],
             "path": [],
@@ -9172,7 +9005,7 @@
             }
         },
         {
-            "sourceIndex": 111,
+            "sourceIndex": 109,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9185,7 +9018,7 @@
             "endAudioTime": 41.77161,
             "duration": 0.0,
             "elementIndices": [
-                111
+                109
             ],
             "holdTicks": [],
             "path": [],
@@ -9209,7 +9042,7 @@
             }
         },
         {
-            "sourceIndex": 112,
+            "sourceIndex": 110,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9222,7 +9055,7 @@
             "endAudioTime": 42.200635,
             "duration": 0.0,
             "elementIndices": [
-                112
+                110
             ],
             "holdTicks": [],
             "path": [],
@@ -9246,7 +9079,7 @@
             }
         },
         {
-            "sourceIndex": 113,
+            "sourceIndex": 111,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9257,6 +9090,80 @@
             "audioTime": 42.509932,
             "endGameTime": 42.95494334753227,
             "endAudioTime": 42.509932,
+            "duration": 0.0,
+            "elementIndices": [
+                111
+            ],
+            "holdTicks": [],
+            "path": [],
+            "motion": {
+                "updateType": 0,
+                "msLeft": 0,
+                "begin": 50.0,
+                "end": 5.0,
+                "mfendPos": 0.0,
+                "jumpDistance": 2.374603271484375,
+                "mstartPos": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "se": {
+                    "x": 0.7749999761581421,
+                    "y": -0.7749999761581421
+                },
+                "ext": ""
+            }
+        },
+        {
+            "sourceIndex": 112,
+            "id": 0,
+            "kind": "Jump",
+            "name": "Jump",
+            "x": 0.0,
+            "z": 303.0592041015625,
+            "endZ": 303.0592041015625,
+            "gameTime": 43.294172347532278,
+            "audioTime": 42.849161,
+            "endGameTime": 43.294172347532278,
+            "endAudioTime": 42.849161,
+            "duration": 0.0,
+            "elementIndices": [
+                112
+            ],
+            "holdTicks": [],
+            "path": [],
+            "motion": {
+                "updateType": 0,
+                "msLeft": 0,
+                "begin": 50.0,
+                "end": 5.0,
+                "mfendPos": 0.0,
+                "jumpDistance": 2.304779052734375,
+                "mstartPos": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "se": {
+                    "x": 0.7749999761581421,
+                    "y": -0.7749999761581421
+                },
+                "ext": ""
+            }
+        },
+        {
+            "sourceIndex": 113,
+            "id": 0,
+            "kind": "Jump",
+            "name": "Jump",
+            "x": 0.0,
+            "z": 305.3639831542969,
+            "endZ": 305.3639831542969,
+            "gameTime": 43.62342434753227,
+            "audioTime": 43.178413,
+            "endGameTime": 43.62342434753227,
+            "endAudioTime": 43.178413,
             "duration": 0.0,
             "elementIndices": [
                 113
@@ -9288,80 +9195,6 @@
             "kind": "Jump",
             "name": "Jump",
             "x": 0.0,
-            "z": 303.0592041015625,
-            "endZ": 303.0592041015625,
-            "gameTime": 43.294172347532278,
-            "audioTime": 42.849161,
-            "endGameTime": 43.294172347532278,
-            "endAudioTime": 42.849161,
-            "duration": 0.0,
-            "elementIndices": [
-                114
-            ],
-            "holdTicks": [],
-            "path": [],
-            "motion": {
-                "updateType": 0,
-                "msLeft": 0,
-                "begin": 50.0,
-                "end": 5.0,
-                "mfendPos": 0.0,
-                "jumpDistance": 2.304779052734375,
-                "mstartPos": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "se": {
-                    "x": 0.7749999761581421,
-                    "y": -0.7749999761581421
-                },
-                "ext": ""
-            }
-        },
-        {
-            "sourceIndex": 115,
-            "id": 0,
-            "kind": "Jump",
-            "name": "Jump",
-            "x": 0.0,
-            "z": 305.3639831542969,
-            "endZ": 305.3639831542969,
-            "gameTime": 43.62342434753227,
-            "audioTime": 43.178413,
-            "endGameTime": 43.62342434753227,
-            "endAudioTime": 43.178413,
-            "duration": 0.0,
-            "elementIndices": [
-                115
-            ],
-            "holdTicks": [],
-            "path": [],
-            "motion": {
-                "updateType": 0,
-                "msLeft": 0,
-                "begin": 50.0,
-                "end": 5.0,
-                "mfendPos": 0.0,
-                "jumpDistance": 2.374603271484375,
-                "mstartPos": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "se": {
-                    "x": 0.7749999761581421,
-                    "y": -0.7749999761581421
-                },
-                "ext": ""
-            }
-        },
-        {
-            "sourceIndex": 116,
-            "id": 0,
-            "kind": "Jump",
-            "name": "Jump",
-            "x": 0.0,
             "z": 307.73858642578127,
             "endZ": 307.73858642578127,
             "gameTime": 43.962653347532278,
@@ -9370,7 +9203,7 @@
             "endAudioTime": 43.517642,
             "duration": 0.0,
             "elementIndices": [
-                116
+                114
             ],
             "holdTicks": [],
             "path": [],
@@ -9394,10 +9227,10 @@
             }
         },
         {
-            "sourceIndex": 117,
-            "id": 0,
-            "kind": "Jump",
-            "name": "Jump",
+            "sourceIndex": 115,
+            "id": 1,
+            "kind": "BigJump",
+            "name": "BigJump",
             "x": 0.0,
             "z": 310.60205078125,
             "endZ": 310.60205078125,
@@ -9407,7 +9240,7 @@
             "endAudioTime": 43.926712,
             "duration": 0.0,
             "elementIndices": [
-                117
+                115
             ],
             "holdTicks": [],
             "path": [],
@@ -9417,7 +9250,7 @@
                 "begin": 50.0,
                 "end": 5.0,
                 "mfendPos": 0.0,
-                "jumpDistance": 1.18731689453125,
+                "jumpDistance": 4.958740234375,
                 "mstartPos": {
                     "x": 0.0,
                     "y": 0.0,
@@ -9431,44 +9264,7 @@
             }
         },
         {
-            "sourceIndex": 118,
-            "id": 0,
-            "kind": "Jump",
-            "name": "Jump",
-            "x": 0.0,
-            "z": 311.78936767578127,
-            "endZ": 311.78936767578127,
-            "gameTime": 44.541338347532278,
-            "audioTime": 44.096327,
-            "endGameTime": 44.541338347532278,
-            "endAudioTime": 44.096327,
-            "duration": 0.0,
-            "elementIndices": [
-                118
-            ],
-            "holdTicks": [],
-            "path": [],
-            "motion": {
-                "updateType": 0,
-                "msLeft": 0,
-                "begin": 50.0,
-                "end": 5.0,
-                "mfendPos": 0.0,
-                "jumpDistance": 3.77142333984375,
-                "mstartPos": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "se": {
-                    "x": 0.7749999761581421,
-                    "y": -0.7749999761581421
-                },
-                "ext": ""
-            }
-        },
-        {
-            "sourceIndex": 119,
+            "sourceIndex": 116,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9481,7 +9277,7 @@
             "endAudioTime": 44.635102,
             "duration": 0.0,
             "elementIndices": [
-                119
+                116
             ],
             "holdTicks": [],
             "path": [],
@@ -9505,7 +9301,7 @@
             }
         },
         {
-            "sourceIndex": 120,
+            "sourceIndex": 117,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9518,7 +9314,7 @@
             "endAudioTime": 44.944399,
             "duration": 0.0,
             "elementIndices": [
-                120
+                117
             ],
             "holdTicks": [],
             "path": [],
@@ -9542,7 +9338,7 @@
             }
         },
         {
-            "sourceIndex": 121,
+            "sourceIndex": 118,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9555,7 +9351,7 @@
             "endAudioTime": 45.283628,
             "duration": 0.0,
             "elementIndices": [
-                121
+                118
             ],
             "holdTicks": [],
             "path": [],
@@ -9579,7 +9375,7 @@
             }
         },
         {
-            "sourceIndex": 122,
+            "sourceIndex": 119,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9592,7 +9388,7 @@
             "endAudioTime": 45.642812,
             "duration": 0.0,
             "elementIndices": [
-                122
+                119
             ],
             "holdTicks": [],
             "path": [],
@@ -9616,7 +9412,7 @@
             }
         },
         {
-            "sourceIndex": 123,
+            "sourceIndex": 120,
             "id": 2,
             "kind": "Hold",
             "name": "Hold",
@@ -9629,7 +9425,7 @@
             "endAudioTime": 46.74,
             "duration": 0.740000000000002,
             "elementIndices": [
-                123
+                120
             ],
             "holdTicks": [
                 {
@@ -9664,7 +9460,7 @@
             }
         },
         {
-            "sourceIndex": 124,
+            "sourceIndex": 121,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9677,7 +9473,7 @@
             "endAudioTime": 47.299048,
             "duration": 0.0,
             "elementIndices": [
-                124
+                121
             ],
             "holdTicks": [],
             "path": [],
@@ -9701,7 +9497,7 @@
             }
         },
         {
-            "sourceIndex": 125,
+            "sourceIndex": 122,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9714,7 +9510,7 @@
             "endAudioTime": 48.017415,
             "duration": 0.0,
             "elementIndices": [
-                125
+                122
             ],
             "holdTicks": [],
             "path": [],
@@ -9738,7 +9534,7 @@
             }
         },
         {
-            "sourceIndex": 126,
+            "sourceIndex": 123,
             "id": 2,
             "kind": "Hold",
             "name": "Hold",
@@ -9751,7 +9547,7 @@
             "endAudioTime": 48.80852596739231,
             "duration": 0.4485259673923139,
             "elementIndices": [
-                126
+                123
             ],
             "holdTicks": [
                 {
@@ -9786,7 +9582,7 @@
             }
         },
         {
-            "sourceIndex": 127,
+            "sourceIndex": 124,
             "id": 2,
             "kind": "Hold",
             "name": "Hold",
@@ -9799,7 +9595,7 @@
             "endAudioTime": 49.79117650999998,
             "duration": 0.506641362607688,
             "elementIndices": [
-                127
+                124
             ],
             "holdTicks": [
                 {
@@ -9834,7 +9630,7 @@
             }
         },
         {
-            "sourceIndex": 128,
+            "sourceIndex": 125,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9847,7 +9643,7 @@
             "endAudioTime": 50.072744,
             "duration": 0.0,
             "elementIndices": [
-                128
+                125
             ],
             "holdTicks": [],
             "path": [],
@@ -9871,7 +9667,7 @@
             }
         },
         {
-            "sourceIndex": 129,
+            "sourceIndex": 126,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9884,7 +9680,7 @@
             "endAudioTime": 50.42195,
             "duration": 0.0,
             "elementIndices": [
-                129
+                126
             ],
             "holdTicks": [],
             "path": [],
@@ -9908,7 +9704,7 @@
             }
         },
         {
-            "sourceIndex": 130,
+            "sourceIndex": 127,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -9921,7 +9717,7 @@
             "endAudioTime": 50.791111,
             "duration": 0.0,
             "elementIndices": [
-                130
+                127
             ],
             "holdTicks": [],
             "path": [],
@@ -9945,7 +9741,7 @@
             }
         },
         {
-            "sourceIndex": 131,
+            "sourceIndex": 128,
             "id": 2,
             "kind": "Hold",
             "name": "Hold",
@@ -9958,7 +9754,7 @@
             "endAudioTime": 52.197913832199549,
             "duration": 1.0479138321995479,
             "elementIndices": [
-                131
+                128
             ],
             "holdTicks": [
                 {
@@ -9993,7 +9789,7 @@
             }
         },
         {
-            "sourceIndex": 132,
+            "sourceIndex": 129,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10006,7 +9802,7 @@
             "endAudioTime": 52.656871,
             "duration": 0.0,
             "elementIndices": [
-                132
+                129
             ],
             "holdTicks": [],
             "path": [],
@@ -10030,7 +9826,7 @@
             }
         },
         {
-            "sourceIndex": 133,
+            "sourceIndex": 130,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10043,7 +9839,7 @@
             "endAudioTime": 52.836463,
             "duration": 0.0,
             "elementIndices": [
-                133
+                130
             ],
             "holdTicks": [],
             "path": [],
@@ -10067,7 +9863,7 @@
             }
         },
         {
-            "sourceIndex": 134,
+            "sourceIndex": 131,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10080,7 +9876,7 @@
             "endAudioTime": 53.225578,
             "duration": 0.0,
             "elementIndices": [
-                134
+                131
             ],
             "holdTicks": [],
             "path": [],
@@ -10104,7 +9900,7 @@
             }
         },
         {
-            "sourceIndex": 135,
+            "sourceIndex": 132,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10117,7 +9913,7 @@
             "endAudioTime": 53.574785,
             "duration": 0.0,
             "elementIndices": [
-                135
+                132
             ],
             "holdTicks": [],
             "path": [],
@@ -10141,7 +9937,7 @@
             }
         },
         {
-            "sourceIndex": 136,
+            "sourceIndex": 133,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10154,7 +9950,7 @@
             "endAudioTime": 53.894059,
             "duration": 0.0,
             "elementIndices": [
-                136
+                133
             ],
             "holdTicks": [],
             "path": [],
@@ -10178,7 +9974,7 @@
             }
         },
         {
-            "sourceIndex": 137,
+            "sourceIndex": 134,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10191,7 +9987,7 @@
             "endAudioTime": 54.063673,
             "duration": 0.0,
             "elementIndices": [
-                137
+                134
             ],
             "holdTicks": [],
             "path": [],
@@ -10215,7 +10011,7 @@
             }
         },
         {
-            "sourceIndex": 138,
+            "sourceIndex": 135,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10228,7 +10024,7 @@
             "endAudioTime": 54.592472,
             "duration": 0.0,
             "elementIndices": [
-                138
+                135
             ],
             "holdTicks": [],
             "path": [],
@@ -10252,7 +10048,7 @@
             }
         },
         {
-            "sourceIndex": 139,
+            "sourceIndex": 136,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10265,7 +10061,7 @@
             "endAudioTime": 54.981587,
             "duration": 0.0,
             "elementIndices": [
-                139
+                136
             ],
             "holdTicks": [],
             "path": [],
@@ -10289,7 +10085,7 @@
             }
         },
         {
-            "sourceIndex": 140,
+            "sourceIndex": 137,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10302,7 +10098,7 @@
             "endAudioTime": 55.480454,
             "duration": 0.0,
             "elementIndices": [
-                140
+                137
             ],
             "holdTicks": [],
             "path": [],
@@ -10326,7 +10122,7 @@
             }
         },
         {
-            "sourceIndex": 141,
+            "sourceIndex": 138,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10339,7 +10135,7 @@
             "endAudioTime": 55.93941,
             "duration": 0.0,
             "elementIndices": [
-                141
+                138
             ],
             "holdTicks": [],
             "path": [],
@@ -10363,7 +10159,7 @@
             }
         },
         {
-            "sourceIndex": 142,
+            "sourceIndex": 139,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10376,7 +10172,7 @@
             "endAudioTime": 56.298594,
             "duration": 0.0,
             "elementIndices": [
-                142
+                139
             ],
             "holdTicks": [],
             "path": [],
@@ -10400,7 +10196,7 @@
             }
         },
         {
-            "sourceIndex": 143,
+            "sourceIndex": 140,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10413,7 +10209,7 @@
             "endAudioTime": 56.637823,
             "duration": 0.0,
             "elementIndices": [
-                143
+                140
             ],
             "holdTicks": [],
             "path": [],
@@ -10437,7 +10233,7 @@
             }
         },
         {
-            "sourceIndex": 144,
+            "sourceIndex": 141,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10450,7 +10246,7 @@
             "endAudioTime": 56.817415,
             "duration": 0.0,
             "elementIndices": [
-                144
+                141
             ],
             "holdTicks": [],
             "path": [],
@@ -10474,7 +10270,7 @@
             }
         },
         {
-            "sourceIndex": 145,
+            "sourceIndex": 142,
             "id": 2,
             "kind": "Hold",
             "name": "Hold",
@@ -10487,7 +10283,7 @@
             "endAudioTime": 58.35392290249433,
             "duration": 1.0339229024943322,
             "elementIndices": [
-                145
+                142
             ],
             "holdTicks": [
                 {
@@ -10522,7 +10318,7 @@
             }
         },
         {
-            "sourceIndex": 146,
+            "sourceIndex": 143,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10535,7 +10331,7 @@
             "endAudioTime": 58.882721,
             "duration": 0.0,
             "elementIndices": [
-                146
+                143
             ],
             "holdTicks": [],
             "path": [],
@@ -10559,7 +10355,7 @@
             }
         },
         {
-            "sourceIndex": 147,
+            "sourceIndex": 144,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10572,7 +10368,7 @@
             "endAudioTime": 59.052336,
             "duration": 0.0,
             "elementIndices": [
-                147
+                144
             ],
             "holdTicks": [],
             "path": [],
@@ -10596,7 +10392,7 @@
             }
         },
         {
-            "sourceIndex": 148,
+            "sourceIndex": 145,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10609,7 +10405,7 @@
             "endAudioTime": 59.601088,
             "duration": 0.0,
             "elementIndices": [
-                148
+                145
             ],
             "holdTicks": [],
             "path": [],
@@ -10633,7 +10429,7 @@
             }
         },
         {
-            "sourceIndex": 149,
+            "sourceIndex": 146,
             "id": 2,
             "kind": "Hold",
             "name": "Hold",
@@ -10646,7 +10442,7 @@
             "endAudioTime": 60.997913832199547,
             "duration": 0.7083900226757365,
             "elementIndices": [
-                149
+                146
             ],
             "holdTicks": [
                 {
@@ -10681,7 +10477,7 @@
             }
         },
         {
-            "sourceIndex": 150,
+            "sourceIndex": 147,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10694,7 +10490,7 @@
             "endAudioTime": 61.167528,
             "duration": 0.0,
             "elementIndices": [
-                150
+                147
             ],
             "holdTicks": [],
             "path": [],
@@ -10718,7 +10514,7 @@
             }
         },
         {
-            "sourceIndex": 151,
+            "sourceIndex": 148,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10731,7 +10527,7 @@
             "endAudioTime": 61.616508,
             "duration": 0.0,
             "elementIndices": [
-                151
+                148
             ],
             "holdTicks": [],
             "path": [],
@@ -10755,7 +10551,7 @@
             }
         },
         {
-            "sourceIndex": 152,
+            "sourceIndex": 149,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10768,7 +10564,7 @@
             "endAudioTime": 61.786122,
             "duration": 0.0,
             "elementIndices": [
-                152
+                149
             ],
             "holdTicks": [],
             "path": [],
@@ -10792,7 +10588,7 @@
             }
         },
         {
-            "sourceIndex": 153,
+            "sourceIndex": 150,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10805,7 +10601,7 @@
             "endAudioTime": 62.145306,
             "duration": 0.0,
             "elementIndices": [
-                153
+                150
             ],
             "holdTicks": [],
             "path": [],
@@ -10829,7 +10625,7 @@
             }
         },
         {
-            "sourceIndex": 154,
+            "sourceIndex": 151,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10842,7 +10638,7 @@
             "endAudioTime": 62.324898,
             "duration": 0.0,
             "elementIndices": [
-                154
+                151
             ],
             "holdTicks": [],
             "path": [],
@@ -10866,7 +10662,7 @@
             }
         },
         {
-            "sourceIndex": 155,
+            "sourceIndex": 152,
             "id": 2,
             "kind": "Hold",
             "name": "Hold",
@@ -10879,7 +10675,7 @@
             "endAudioTime": 63.6424907,
             "duration": 0.812490700000005,
             "elementIndices": [
-                155
+                152
             ],
             "holdTicks": [
                 {
@@ -10914,7 +10710,7 @@
             }
         },
         {
-            "sourceIndex": 156,
+            "sourceIndex": 153,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10927,7 +10723,7 @@
             "endAudioTime": 64.260499,
             "duration": 0.0,
             "elementIndices": [
-                156
+                153
             ],
             "holdTicks": [],
             "path": [],
@@ -10951,7 +10747,7 @@
             }
         },
         {
-            "sourceIndex": 157,
+            "sourceIndex": 154,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -10964,7 +10760,7 @@
             "endAudioTime": 64.579773,
             "duration": 0.0,
             "elementIndices": [
-                157
+                154
             ],
             "holdTicks": [],
             "path": [],
@@ -10988,7 +10784,7 @@
             }
         },
         {
-            "sourceIndex": 158,
+            "sourceIndex": 155,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -11001,7 +10797,7 @@
             "endAudioTime": 65.118549,
             "duration": 0.0,
             "elementIndices": [
-                158
+                155
             ],
             "holdTicks": [],
             "path": [],
@@ -11025,7 +10821,7 @@
             }
         },
         {
-            "sourceIndex": 159,
+            "sourceIndex": 156,
             "id": 0,
             "kind": "Jump",
             "name": "Jump",
@@ -11038,7 +10834,7 @@
             "endAudioTime": 65.627392,
             "duration": 0.0,
             "elementIndices": [
-                159
+                156
             ],
             "holdTicks": [],
             "path": [],
@@ -11062,7 +10858,7 @@
             }
         },
         {
-            "sourceIndex": 160,
+            "sourceIndex": 157,
             "id": 1,
             "kind": "FinishJump",
             "name": "FinishJump",
@@ -11075,7 +10871,7 @@
             "endAudioTime": 65.904082,
             "duration": 0.0,
             "elementIndices": [
-                160
+                157
             ],
             "holdTicks": [],
             "path": [],
@@ -12061,39 +11857,19 @@
             "endGameTime": 31.560839011931365
         },
         {
-            "mStartSample": 1383648,
-            "mEndSample": 1383648,
+            "mStartSample": 1389150,
+            "mEndSample": 1389150,
             "index": 96,
             "command": 0,
-            "audioTime": 31.375238095238097,
-            "endAudioTime": 31.375238095238097,
-            "gameTime": 31.82024944277037,
-            "endGameTime": 31.82024944277037
-        },
-        {
-            "mStartSample": 1395528,
-            "mEndSample": 1395528,
-            "index": 97,
-            "command": 0,
-            "audioTime": 31.644625850340139,
-            "endAudioTime": 31.644625850340139,
-            "gameTime": 32.089637197872409,
-            "endGameTime": 32.089637197872409
-        },
-        {
-            "mStartSample": 1410048,
-            "mEndSample": 1410048,
-            "index": 98,
-            "command": 0,
-            "audioTime": 31.973877551020409,
-            "endAudioTime": 31.973877551020409,
-            "gameTime": 32.41888889855268,
-            "endGameTime": 32.41888889855268
+            "audioTime": 31.5,
+            "endAudioTime": 31.5,
+            "gameTime": 31.945011347532274,
+            "endGameTime": 31.945011347532274
         },
         {
             "mStartSample": 1417528,
             "mEndSample": 1417528,
-            "index": 99,
+            "index": 97,
             "command": 0,
             "audioTime": 32.14349206349206,
             "endAudioTime": 32.14349206349206,
@@ -12103,7 +11879,7 @@
         {
             "mStartSample": 1448328,
             "mEndSample": 1448328,
-            "index": 100,
+            "index": 98,
             "command": 0,
             "audioTime": 32.841904761904768,
             "endAudioTime": 32.841904761904768,
@@ -12113,7 +11889,7 @@
         {
             "mStartSample": 1480448,
             "mEndSample": 1480448,
-            "index": 101,
+            "index": 99,
             "command": 0,
             "audioTime": 33.570249433106578,
             "endAudioTime": 33.570249433106578,
@@ -12123,7 +11899,7 @@
         {
             "mStartSample": 1494528,
             "mEndSample": 1494528,
-            "index": 102,
+            "index": 100,
             "command": 0,
             "audioTime": 33.88952380952381,
             "endAudioTime": 33.88952380952381,
@@ -12133,7 +11909,7 @@
         {
             "mStartSample": 1510368,
             "mEndSample": 1510368,
-            "index": 103,
+            "index": 101,
             "command": 0,
             "audioTime": 34.2487074829932,
             "endAudioTime": 34.2487074829932,
@@ -12143,7 +11919,7 @@
         {
             "mStartSample": 1525860,
             "mEndSample": 1525860,
-            "index": 104,
+            "index": 102,
             "command": 0,
             "audioTime": 34.6,
             "endAudioTime": 34.6,
@@ -12153,7 +11929,7 @@
         {
             "mStartSample": 1572165,
             "mEndSample": 1572165,
-            "index": 105,
+            "index": 103,
             "command": 0,
             "audioTime": 35.65,
             "endAudioTime": 35.65,
@@ -12163,7 +11939,7 @@
         {
             "mStartSample": 1599688,
             "mEndSample": 1599688,
-            "index": 106,
+            "index": 104,
             "command": 0,
             "audioTime": 36.27410430839002,
             "endAudioTime": 36.27410430839002,
@@ -12173,7 +11949,7 @@
         {
             "mStartSample": 1615528,
             "mEndSample": 1615528,
-            "index": 107,
+            "index": 105,
             "command": 0,
             "audioTime": 36.63328798185941,
             "endAudioTime": 36.63328798185941,
@@ -12183,7 +11959,7 @@
         {
             "mStartSample": 1623888,
             "mEndSample": 1623888,
-            "index": 108,
+            "index": 106,
             "command": 0,
             "audioTime": 36.822857142857149,
             "endAudioTime": 36.822857142857149,
@@ -12193,7 +11969,7 @@
         {
             "mStartSample": 1637968,
             "mEndSample": 1637968,
-            "index": 109,
+            "index": 107,
             "command": 0,
             "audioTime": 37.14213151927438,
             "endAudioTime": 37.14213151927438,
@@ -12203,7 +11979,7 @@
         {
             "mStartSample": 1664808,
             "mEndSample": 1664808,
-            "index": 110,
+            "index": 108,
             "command": 0,
             "audioTime": 37.75074829931973,
             "endAudioTime": 37.75074829931973,
@@ -12213,7 +11989,7 @@
         {
             "mStartSample": 1721568,
             "mEndSample": 1721568,
-            "index": 111,
+            "index": 109,
             "command": 0,
             "audioTime": 39.0378231292517,
             "endAudioTime": 39.0378231292517,
@@ -12223,7 +11999,7 @@
         {
             "mStartSample": 1737408,
             "mEndSample": 1737408,
-            "index": 112,
+            "index": 110,
             "command": 0,
             "audioTime": 39.39700680272109,
             "endAudioTime": 39.39700680272109,
@@ -12233,7 +12009,7 @@
         {
             "mStartSample": 1756328,
             "mEndSample": 1756328,
-            "index": 113,
+            "index": 111,
             "command": 0,
             "audioTime": 39.826031746031748,
             "endAudioTime": 39.826031746031748,
@@ -12243,7 +12019,7 @@
         {
             "mStartSample": 1768208,
             "mEndSample": 1768208,
-            "index": 114,
+            "index": 112,
             "command": 0,
             "audioTime": 40.09541950113379,
             "endAudioTime": 40.09541950113379,
@@ -12253,7 +12029,7 @@
         {
             "mStartSample": 1815728,
             "mEndSample": 1815728,
-            "index": 115,
+            "index": 113,
             "command": 0,
             "audioTime": 41.17297052154195,
             "endAudioTime": 41.17297052154195,
@@ -12263,7 +12039,7 @@
         {
             "mStartSample": 1834208,
             "mEndSample": 1834208,
-            "index": 116,
+            "index": 114,
             "command": 0,
             "audioTime": 41.592018140589569,
             "endAudioTime": 41.592018140589569,
@@ -12273,7 +12049,7 @@
         {
             "mStartSample": 1842128,
             "mEndSample": 1842128,
-            "index": 117,
+            "index": 115,
             "command": 0,
             "audioTime": 41.77160997732426,
             "endAudioTime": 41.77160997732426,
@@ -12283,7 +12059,7 @@
         {
             "mStartSample": 1861048,
             "mEndSample": 1861048,
-            "index": 118,
+            "index": 116,
             "command": 0,
             "audioTime": 42.20063492063492,
             "endAudioTime": 42.20063492063492,
@@ -12293,7 +12069,7 @@
         {
             "mStartSample": 1874688,
             "mEndSample": 1874688,
-            "index": 119,
+            "index": 117,
             "command": 0,
             "audioTime": 42.50993197278912,
             "endAudioTime": 42.50993197278912,
@@ -12303,7 +12079,7 @@
         {
             "mStartSample": 1889648,
             "mEndSample": 1889648,
-            "index": 120,
+            "index": 118,
             "command": 0,
             "audioTime": 42.849160997732429,
             "endAudioTime": 42.849160997732429,
@@ -12313,7 +12089,7 @@
         {
             "mStartSample": 1904168,
             "mEndSample": 1904168,
-            "index": 121,
+            "index": 119,
             "command": 0,
             "audioTime": 43.1784126984127,
             "endAudioTime": 43.1784126984127,
@@ -12323,7 +12099,7 @@
         {
             "mStartSample": 1919128,
             "mEndSample": 1919128,
-            "index": 122,
+            "index": 120,
             "command": 0,
             "audioTime": 43.51764172335601,
             "endAudioTime": 43.51764172335601,
@@ -12333,7 +12109,7 @@
         {
             "mStartSample": 1937168,
             "mEndSample": 1937168,
-            "index": 123,
+            "index": 121,
             "command": 0,
             "audioTime": 43.92671201814059,
             "endAudioTime": 43.92671201814059,
@@ -12341,19 +12117,9 @@
             "endGameTime": 44.371723365672867
         },
         {
-            "mStartSample": 1944648,
-            "mEndSample": 1944648,
-            "index": 124,
-            "command": 0,
-            "audioTime": 44.096326530612248,
-            "endAudioTime": 44.096326530612248,
-            "gameTime": 44.54133787814452,
-            "endGameTime": 44.54133787814452
-        },
-        {
             "mStartSample": 1968408,
             "mEndSample": 1968408,
-            "index": 125,
+            "index": 122,
             "command": 0,
             "audioTime": 44.63510204081633,
             "endAudioTime": 44.63510204081633,
@@ -12363,7 +12129,7 @@
         {
             "mStartSample": 1982048,
             "mEndSample": 1982048,
-            "index": 126,
+            "index": 123,
             "command": 0,
             "audioTime": 44.94439909297052,
             "endAudioTime": 44.94439909297052,
@@ -12373,7 +12139,7 @@
         {
             "mStartSample": 1997008,
             "mEndSample": 1997008,
-            "index": 127,
+            "index": 124,
             "command": 0,
             "audioTime": 45.283628117913838,
             "endAudioTime": 45.283628117913838,
@@ -12383,7 +12149,7 @@
         {
             "mStartSample": 2012848,
             "mEndSample": 2012848,
-            "index": 128,
+            "index": 125,
             "command": 0,
             "audioTime": 45.64281179138322,
             "endAudioTime": 45.64281179138322,
@@ -12393,7 +12159,7 @@
         {
             "mStartSample": 2028600,
             "mEndSample": 2028600,
-            "index": 129,
+            "index": 126,
             "command": 0,
             "audioTime": 46.0,
             "endAudioTime": 46.0,
@@ -12403,7 +12169,7 @@
         {
             "mStartSample": 2061234,
             "mEndSample": 2061234,
-            "index": 130,
+            "index": 127,
             "command": 0,
             "audioTime": 46.74,
             "endAudioTime": 46.74,
@@ -12413,7 +12179,7 @@
         {
             "mStartSample": 2085888,
             "mEndSample": 2085888,
-            "index": 131,
+            "index": 128,
             "command": 0,
             "audioTime": 47.29904761904762,
             "endAudioTime": 47.29904761904762,
@@ -12423,7 +12189,7 @@
         {
             "mStartSample": 2117568,
             "mEndSample": 2117568,
-            "index": 132,
+            "index": 129,
             "command": 0,
             "audioTime": 48.0174149659864,
             "endAudioTime": 48.0174149659864,
@@ -12433,7 +12199,7 @@
         {
             "mStartSample": 2132676,
             "mEndSample": 2132676,
-            "index": 133,
+            "index": 130,
             "command": 0,
             "audioTime": 48.36,
             "endAudioTime": 48.36,
@@ -12443,7 +12209,7 @@
         {
             "mStartSample": 2152456,
             "mEndSample": 2152456,
-            "index": 134,
+            "index": 131,
             "command": 0,
             "audioTime": 48.808526077097507,
             "endAudioTime": 48.808526077097507,
@@ -12453,7 +12219,7 @@
         {
             "mStartSample": 2173448,
             "mEndSample": 2173448,
-            "index": 135,
+            "index": 132,
             "command": 0,
             "audioTime": 49.28453514739229,
             "endAudioTime": 49.28453514739229,
@@ -12463,7 +12229,7 @@
         {
             "mStartSample": 2195791,
             "mEndSample": 2195791,
-            "index": 136,
+            "index": 133,
             "command": 0,
             "audioTime": 49.79117913832199,
             "endAudioTime": 49.79117913832199,
@@ -12473,7 +12239,7 @@
         {
             "mStartSample": 2208208,
             "mEndSample": 2208208,
-            "index": 137,
+            "index": 134,
             "command": 0,
             "audioTime": 50.07274376417234,
             "endAudioTime": 50.07274376417234,
@@ -12483,7 +12249,7 @@
         {
             "mStartSample": 2223608,
             "mEndSample": 2223608,
-            "index": 138,
+            "index": 135,
             "command": 0,
             "audioTime": 50.421950113378688,
             "endAudioTime": 50.421950113378688,
@@ -12493,7 +12259,7 @@
         {
             "mStartSample": 2239888,
             "mEndSample": 2239888,
-            "index": 139,
+            "index": 136,
             "command": 0,
             "audioTime": 50.791111111111117,
             "endAudioTime": 50.791111111111117,
@@ -12503,7 +12269,7 @@
         {
             "mStartSample": 2255715,
             "mEndSample": 2255715,
-            "index": 140,
+            "index": 137,
             "command": 0,
             "audioTime": 51.15,
             "endAudioTime": 51.15,
@@ -12513,7 +12279,7 @@
         {
             "mStartSample": 2301928,
             "mEndSample": 2301928,
-            "index": 141,
+            "index": 138,
             "command": 0,
             "audioTime": 52.197913832199549,
             "endAudioTime": 52.197913832199549,
@@ -12523,7 +12289,7 @@
         {
             "mStartSample": 2322168,
             "mEndSample": 2322168,
-            "index": 142,
+            "index": 139,
             "command": 0,
             "audioTime": 52.65687074829932,
             "endAudioTime": 52.65687074829932,
@@ -12533,7 +12299,7 @@
         {
             "mStartSample": 2330088,
             "mEndSample": 2330088,
-            "index": 143,
+            "index": 140,
             "command": 0,
             "audioTime": 52.83646258503401,
             "endAudioTime": 52.83646258503401,
@@ -12543,7 +12309,7 @@
         {
             "mStartSample": 2347248,
             "mEndSample": 2347248,
-            "index": 144,
+            "index": 141,
             "command": 0,
             "audioTime": 53.225578231292519,
             "endAudioTime": 53.225578231292519,
@@ -12553,7 +12319,7 @@
         {
             "mStartSample": 2362648,
             "mEndSample": 2362648,
-            "index": 145,
+            "index": 142,
             "command": 0,
             "audioTime": 53.574784580498867,
             "endAudioTime": 53.574784580498867,
@@ -12563,7 +12329,7 @@
         {
             "mStartSample": 2376728,
             "mEndSample": 2376728,
-            "index": 146,
+            "index": 143,
             "command": 0,
             "audioTime": 53.8940589569161,
             "endAudioTime": 53.8940589569161,
@@ -12573,7 +12339,7 @@
         {
             "mStartSample": 2384208,
             "mEndSample": 2384208,
-            "index": 147,
+            "index": 144,
             "command": 0,
             "audioTime": 54.06367346938776,
             "endAudioTime": 54.06367346938776,
@@ -12583,7 +12349,7 @@
         {
             "mStartSample": 2407528,
             "mEndSample": 2407528,
-            "index": 148,
+            "index": 145,
             "command": 0,
             "audioTime": 54.5924716553288,
             "endAudioTime": 54.5924716553288,
@@ -12593,7 +12359,7 @@
         {
             "mStartSample": 2424688,
             "mEndSample": 2424688,
-            "index": 149,
+            "index": 146,
             "command": 0,
             "audioTime": 54.981587301587307,
             "endAudioTime": 54.981587301587307,
@@ -12603,7 +12369,7 @@
         {
             "mStartSample": 2446688,
             "mEndSample": 2446688,
-            "index": 150,
+            "index": 147,
             "command": 0,
             "audioTime": 55.48045351473923,
             "endAudioTime": 55.48045351473923,
@@ -12613,7 +12379,7 @@
         {
             "mStartSample": 2466928,
             "mEndSample": 2466928,
-            "index": 151,
+            "index": 148,
             "command": 0,
             "audioTime": 55.939410430839007,
             "endAudioTime": 55.939410430839007,
@@ -12623,7 +12389,7 @@
         {
             "mStartSample": 2482768,
             "mEndSample": 2482768,
-            "index": 152,
+            "index": 149,
             "command": 0,
             "audioTime": 56.29859410430839,
             "endAudioTime": 56.29859410430839,
@@ -12633,7 +12399,7 @@
         {
             "mStartSample": 2497728,
             "mEndSample": 2497728,
-            "index": 153,
+            "index": 150,
             "command": 0,
             "audioTime": 56.6378231292517,
             "endAudioTime": 56.6378231292517,
@@ -12643,7 +12409,7 @@
         {
             "mStartSample": 2505648,
             "mEndSample": 2505648,
-            "index": 154,
+            "index": 151,
             "command": 0,
             "audioTime": 56.817414965986397,
             "endAudioTime": 56.817414965986397,
@@ -12653,7 +12419,7 @@
         {
             "mStartSample": 2527812,
             "mEndSample": 2527812,
-            "index": 155,
+            "index": 152,
             "command": 0,
             "audioTime": 57.32,
             "endAudioTime": 57.32,
@@ -12663,7 +12429,7 @@
         {
             "mStartSample": 2573408,
             "mEndSample": 2573408,
-            "index": 156,
+            "index": 153,
             "command": 0,
             "audioTime": 58.35392290249433,
             "endAudioTime": 58.35392290249433,
@@ -12673,7 +12439,7 @@
         {
             "mStartSample": 2596728,
             "mEndSample": 2596728,
-            "index": 157,
+            "index": 154,
             "command": 0,
             "audioTime": 58.882721088435378,
             "endAudioTime": 58.882721088435378,
@@ -12683,7 +12449,7 @@
         {
             "mStartSample": 2604208,
             "mEndSample": 2604208,
-            "index": 158,
+            "index": 155,
             "command": 0,
             "audioTime": 59.05233560090703,
             "endAudioTime": 59.05233560090703,
@@ -12693,7 +12459,7 @@
         {
             "mStartSample": 2628408,
             "mEndSample": 2628408,
-            "index": 159,
+            "index": 156,
             "command": 0,
             "audioTime": 59.60108843537415,
             "endAudioTime": 59.60108843537415,
@@ -12703,7 +12469,7 @@
         {
             "mStartSample": 2658768,
             "mEndSample": 2658768,
-            "index": 160,
+            "index": 157,
             "command": 0,
             "audioTime": 60.28952380952381,
             "endAudioTime": 60.28952380952381,
@@ -12713,7 +12479,7 @@
         {
             "mStartSample": 2690008,
             "mEndSample": 2690008,
-            "index": 161,
+            "index": 158,
             "command": 0,
             "audioTime": 60.997913832199547,
             "endAudioTime": 60.997913832199547,
@@ -12723,7 +12489,7 @@
         {
             "mStartSample": 2697488,
             "mEndSample": 2697488,
-            "index": 162,
+            "index": 159,
             "command": 0,
             "audioTime": 61.167528344671207,
             "endAudioTime": 61.167528344671207,
@@ -12733,7 +12499,7 @@
         {
             "mStartSample": 2717288,
             "mEndSample": 2717288,
-            "index": 163,
+            "index": 160,
             "command": 0,
             "audioTime": 61.616507936507939,
             "endAudioTime": 61.616507936507939,
@@ -12743,7 +12509,7 @@
         {
             "mStartSample": 2724768,
             "mEndSample": 2724768,
-            "index": 164,
+            "index": 161,
             "command": 0,
             "audioTime": 61.78612244897959,
             "endAudioTime": 61.78612244897959,
@@ -12753,7 +12519,7 @@
         {
             "mStartSample": 2740608,
             "mEndSample": 2740608,
-            "index": 165,
+            "index": 162,
             "command": 0,
             "audioTime": 62.14530612244898,
             "endAudioTime": 62.14530612244898,
@@ -12763,7 +12529,7 @@
         {
             "mStartSample": 2748528,
             "mEndSample": 2748528,
-            "index": 166,
+            "index": 163,
             "command": 0,
             "audioTime": 62.32489795918367,
             "endAudioTime": 62.32489795918367,
@@ -12773,7 +12539,7 @@
         {
             "mStartSample": 2770803,
             "mEndSample": 2770803,
-            "index": 167,
+            "index": 164,
             "command": 0,
             "audioTime": 62.83,
             "endAudioTime": 62.83,
@@ -12783,7 +12549,7 @@
         {
             "mStartSample": 2806634,
             "mEndSample": 2806634,
-            "index": 168,
+            "index": 165,
             "command": 0,
             "audioTime": 63.64249433106576,
             "endAudioTime": 63.64249433106576,
@@ -12793,7 +12559,7 @@
         {
             "mStartSample": 2833888,
             "mEndSample": 2833888,
-            "index": 169,
+            "index": 166,
             "command": 0,
             "audioTime": 64.26049886621316,
             "endAudioTime": 64.26049886621316,
@@ -12803,7 +12569,7 @@
         {
             "mStartSample": 2847968,
             "mEndSample": 2847968,
-            "index": 170,
+            "index": 167,
             "command": 0,
             "audioTime": 64.57977324263038,
             "endAudioTime": 64.57977324263038,
@@ -12813,7 +12579,7 @@
         {
             "mStartSample": 2871728,
             "mEndSample": 2871728,
-            "index": 171,
+            "index": 168,
             "command": 0,
             "audioTime": 65.11854875283447,
             "endAudioTime": 65.11854875283447,
@@ -12823,7 +12589,7 @@
         {
             "mStartSample": 2894168,
             "mEndSample": 2894168,
-            "index": 172,
+            "index": 169,
             "command": 0,
             "audioTime": 65.62739229024943,
             "endAudioTime": 65.62739229024943,
@@ -12833,7 +12599,7 @@
         {
             "mStartSample": 2906370,
             "mEndSample": 2906370,
-            "index": 173,
+            "index": 170,
             "command": 100,
             "audioTime": 65.90408163265306,
             "endAudioTime": 65.90408163265306,
@@ -12842,15 +12608,17 @@
         }
     ],
     "normalizationNotes": [
-        "Generator: pcm-vocal-phrase-chart-v6; decoded PCM float32 SHA-256: 88ea37d6fc9b91863509c174e1aad914cff14704e6be6d20a57b5ffe21429102",
+        "Generator: pcm-vocal-phrase-chart-v7; decoded PCM float32 SHA-256: 88ea37d6fc9b91863509c174e1aad914cff14704e6be6d20a57b5ffe21429102",
         "1024-sample Hann spectrum near 11kHz / 10ms hop; independent stereo magnitude combination; log spectral flux with local threshold and strength-ranked 160ms non-maximum suppression.",
         "Detected BPM: 115.3846; phase seconds: 0.110000",
         "Mixed-audio hold proposals require a stable pitch ridge with at least three harmonic partials and measured attack/release; a sustained single-tone RMS bed is insufficient.",
-        "Follow proposals require repeated irregular articulation patterns, near-identical normalized spectra and continuous tonal energy. Boundaries come from measured attacks; six route samples use an independent authored lane palette.",
+        "Follow proposals require repeated irregular articulation patterns, near-identical normalized spectra and continuous tonal energy. Measured boundaries retain six spatial samples with an entry settle and at most one broad reversal, alternating scoop and sweep choreography.",
         "No source identity, reference cues, arbitrary gap filler or periodic moving jumps. A musical score takes priority when its source hash matches.",
+        "Sparse passages beyond the 1.95-second airborne envelope may recover an audible foreground entry or a measured multi-partial harmonic body. Existing supports and subsequent attacks remain protected; actual silence receives no timer-based filler.",
         "Vocal evidence: vocal-phrase-1; verified decoded PCM and feature SHA-256: 1087a84b2019acb19e88794e6286342e825530b8d89d30c5f619858dbc85ebae",
         "Vocal holds use measured plateaus, returning ornaments, register-relative pickups and descending legato. Pitch-confidence gaps require continuing vocal energy; real pauses remain separate.",
         "Musical support policies may extend an upper-register cadence through a bounded rest or end a glide before the next confirmed hold, reserving a tempo-relative flight. These endpoints express gameplay phrasing, not literal voice offsets. Voice features take priority over mixed-pitch sustain guesses.",
+        "BigJump policy: a stable upper-register foreground syllable with a measured release and subsequent physical landing may reserve one airborne gesture. Ordinary long gaps, silence, foreground rearticulation and confirmed supports do not imply a large launch. No original tile times or types enter this decision.",
         "Local separator model SHA-256: ce74ef3b6a6024ce44211a07be9cf8bc6d87728cc852a68ab34eb8e58cde9c8b; note model: 2c3c1d144bfa61ad236e92e169c13535c880469a12a047d4e73451f2c059a0ec; no audio upload.",
         "Imported source SHA-256: 7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b"
     ]

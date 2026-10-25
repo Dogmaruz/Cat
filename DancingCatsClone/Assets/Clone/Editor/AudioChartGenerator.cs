@@ -13,8 +13,8 @@ namespace DancingCats.Clone.Editor
     public static class AudioChartGenerator
     {
         public const string AlwaysRememberId = "AlwaysRememberMeowCat";
-        private const string Version = "pcm-phrase-chart-v4";
-        private const string VocalVersion = "pcm-vocal-phrase-chart-v6";
+        private const string Version = "pcm-phrase-chart-v7";
+        private const string VocalVersion = "pcm-vocal-phrase-chart-v7";
         private const double MinGap = .18, MaxGap = 1.95;
 
         [Serializable]
@@ -23,7 +23,7 @@ namespace DancingCats.Clone.Editor
             public int catalogId = 20001;
             public string title = "Always Remember Meow", artist = "Meow Cat";
             public float forwardSpeed = 6.5f, delayTime = .6f;
-            public bool includeHolds = true, includeMovingJumps = true;
+            public bool includeHolds = true, includeMovingJumps = true, includeBigJumps = true, preferAuthoredScore = true;
         }
         private sealed class Analysis
         {
@@ -38,6 +38,33 @@ namespace DancingCats.Clone.Editor
             if (clip == null) throw new FileNotFoundException("Import the complete song at Resources/CustomAudio/Music/" + AlwaysRememberId + " first.");
             var options = new Options();
             Save(Generate(clip, AlwaysRememberId, options), clip, options);
+        }
+
+        public static void ExportAlwaysRememberPcm() => VocalPcmExport.Export(
+            Resources.Load<AudioClip>("CustomAudio/Music/" + AlwaysRememberId));
+
+        public static void ExportAlwaysRememberSpectralEvidence()
+        {
+            var clip = Resources.Load<AudioClip>("CustomAudio/Music/" + AlwaysRememberId);
+            if (clip.loadState != AudioDataLoadState.Loaded) clip.LoadAudioData();
+            var pcm = new float[checked(clip.samples * clip.channels)];
+            if (!clip.GetData(pcm, 0)) throw new InvalidDataException("Custom PCM is unavailable.");
+            var spectral = PcmSpectralAnalysis.Analyze(pcm, clip.frequency, clip.channels);
+            Directory.CreateDirectory("Library/GeneratedCharts");
+            File.WriteAllText("Library/GeneratedCharts/" + AlwaysRememberId + ".spectral.json", JsonUtility.ToJson(spectral, true));
+        }
+
+        [MenuItem("Dancing Cats/Regenerate Always Remember Meow From Audio")]
+        public static void RegenerateAlwaysRememberFromAudio()
+        {
+            var clip = Resources.Load<AudioClip>("CustomAudio/Music/" + AlwaysRememberId);
+            if (clip == null) throw new FileNotFoundException("The complete custom song is missing.");
+            var options = new Options { preferAuthoredScore = false };
+            var map = Generate(clip, AlwaysRememberId, options);
+            string review = Path.GetFullPath("Library/GeneratedCharts");
+            Directory.CreateDirectory(review);
+            File.WriteAllText(Path.Combine(review, AlwaysRememberId + ".candidate.json"), JsonUtility.ToJson(map, true));
+            Save(map, clip, options);
         }
 
         [MenuItem("Assets/Dancing Cats/Generate Chart From Selected Audio")]
@@ -63,7 +90,7 @@ namespace DancingCats.Clone.Editor
                 using (var stream = File.OpenRead(source)) using (var sha = SHA256.Create()) hash = Hex(sha.ComputeHash(stream));
             string scorePath = ProjectFile("Assets/Clone/Editor/MusicalScores/" + id + ".score.json");
             MapTimeline map;
-            if (File.Exists(scorePath))
+            if (options.preferAuthoredScore && File.Exists(scorePath))
             {
                 var score = JsonUtility.FromJson<MusicalScore>(File.ReadAllText(scorePath));
                 ValidateScoreSource(score, id, hash);
@@ -154,6 +181,16 @@ namespace DancingCats.Clone.Editor
                     reason = note == null ? "Measured log spectral attack" : "Stable multi-partial pitch track; not inferred from RMS energy" });
                 supportedUntil = end;
             }
+            // A large launch is a separate musical gesture, not a long held platform.
+            // Reserve its measured foreground syllable against accompaniment peaks;
+            // actual Hold/Follow supports always keep priority.
+            if (vocalEvidence != null && options.includeBigJumps)
+            {
+                ApplyFlights(cues, PcmFlightAnalysis.Analyze(vocalEvidence, analysis.accents.ToArray(), analysis.period, confirmedSupports),
+                    vocalEvidence, finishTime - MinGap);
+            }
+            cues = PcmSparsePhraseAnalysis.Complete(cues.ToArray(), vocalEvidence,
+                options.includeHolds ? spectral.sustained : Array.Empty<MusicalNote>(), finishTime, MaxGap).ToList();
             // Automatic long notes score their measured attack and release only. Pulse-grid
             // checkpoints remain available to explicitly authored scores through Generate.
             var map = MusicalChartCompiler.Compile(new MusicalScore { id = id, audioDuration = duration, sampleRate = sampleRate,
@@ -162,25 +199,49 @@ namespace DancingCats.Clone.Editor
             string version = vocalEvidence == null ? Version : VocalVersion;
             map.sourceMapBundle = version; map.sourceMapBundleSha256 = digest;
             map.audio.rawSha256 = digest; map.audio.channels = channels; map.audio.bitsPerSample = 32; map.audio.rawBytes = (long)interleaved.Length * sizeof(float);
-            map.timing.warning = "Mixed-audio attacks and conservative sustained-note estimates do not isolate a singer. Recurrent continuous phrases can form glides; their lateral paths use an authored palette. Long rests are preserved.";
+            map.timing.warning = "Mixed-audio attacks and conservative sustained-note estimates do not isolate a singer. Recurrent continuous phrases can form glides; their lateral paths use explicit settle/scoop/sweep choreography. Long rests are preserved.";
             map.normalizationNotes = new[] { "Generator: " + version + "; decoded PCM float32 SHA-256: " + digest,
                 "1024-sample Hann spectrum near 11kHz / 10ms hop; independent stereo magnitude combination; log spectral flux with local threshold and strength-ranked 160ms non-maximum suppression.",
                 "Detected BPM: " + (60 / analysis.period).ToString("F4", CultureInfo.InvariantCulture) + "; phase seconds: " + analysis.phase.ToString("F6", CultureInfo.InvariantCulture),
                 "Mixed-audio hold proposals require a stable pitch ridge with at least three harmonic partials and measured attack/release; a sustained single-tone RMS bed is insufficient.",
-                "Follow proposals require repeated irregular articulation patterns, near-identical normalized spectra and continuous tonal energy. Boundaries come from measured attacks; six route samples use an independent authored lane palette.",
+                "Follow proposals require repeated irregular articulation patterns, near-identical normalized spectra and continuous tonal energy. Measured boundaries retain six spatial samples with an entry settle and at most one broad reversal, alternating scoop and sweep choreography.",
                 "No source identity, reference cues, arbitrary gap filler or periodic moving jumps. A musical score takes priority when its source hash matches." };
+            map.normalizationNotes = map.normalizationNotes.Concat(new[] {
+                "Sparse passages beyond the 1.95-second airborne envelope may recover an audible foreground entry or a measured multi-partial harmonic body. Existing supports and subsequent attacks remain protected; actual silence receives no timer-based filler."
+            }).ToArray();
             if (vocalEvidence != null)
             {
-                map.timing.warning = "Locally separated vocal evidence drives legato/plateau holds and bounded musical support policies; mixed-audio recurrence drives glides. Lateral paths use an authored palette. This does not reproduce every designer-authored gesture.";
+                map.timing.warning = "Locally separated vocal evidence drives holds and conservative upper-register flights; mixed-audio recurrence drives glides. Spatial choreography is a game-design policy. This does not reproduce every designer-authored gesture.";
                 map.normalizationNotes = map.normalizationNotes.Concat(new[]
                 {
                     "Vocal evidence: " + vocalEvidence.analysisVersion + "; verified decoded PCM and feature SHA-256: " + vocalEvidence.featureSha256,
                     "Vocal holds use measured plateaus, returning ornaments, register-relative pickups and descending legato. Pitch-confidence gaps require continuing vocal energy; real pauses remain separate.",
                     "Musical support policies may extend an upper-register cadence through a bounded rest or end a glide before the next confirmed hold, reserving a tempo-relative flight. These endpoints express gameplay phrasing, not literal voice offsets. Voice features take priority over mixed-pitch sustain guesses.",
+                    "BigJump policy: a stable upper-register foreground syllable with a measured release and subsequent physical landing may reserve one airborne gesture. Ordinary long gaps, silence, foreground rearticulation and confirmed supports do not imply a large launch. No original tile times or types enter this decision.",
                     "Local separator model SHA-256: " + vocalEvidence.separatorModelSha256 + "; note model: " + vocalEvidence.noteModelSha256 + "; no audio upload."
                 }).ToArray();
             }
             return map;
+        }
+
+        // Inputs already passed PCM/evidence validation. Foreground entries remain
+        // authoritative even when onset refinement replaces nearby accompaniment.
+        internal static void ApplyFlights(List<MusicalCue> cues, PcmFlightAnalysis.Flight[] flights,
+            PcmVocalAnalysis.Evidence evidence, double latestLanding)
+        {
+            foreach (var flight in flights)
+            {
+                if (flight.time < 0 || flight.landingTime > latestLanding) continue;
+                if (evidence.voiceStarts.Any(start => start > flight.time + .10 && start < flight.landingTime - .12)) continue;
+                if (cues.Any(cue => (cue.kind == "Hold" || cue.kind == "Follow")
+                    && cue.time < flight.landingTime - .078 && cue.endTime >= flight.time - .078)) continue;
+                cues.RemoveAll(cue => (cue.kind == "Jump" || cue.kind == "BigJump")
+                    && cue.time >= flight.time - .16 && cue.time < flight.landingTime - .078
+                    && !(cue.time < flight.time - .078 && evidence.voiceStarts.Any(start => start < flight.time - .078
+                        && Math.Abs(start - cue.time) <= .08)));
+                cues.Add(new MusicalCue { kind = "BigJump", time = Round(flight.time), endTime = Round(flight.time),
+                    lane = 0, confidence = flight.confidence, reason = flight.reason });
+            }
         }
 
         public static void ValidateOptions(string id, Options options)
@@ -365,7 +426,7 @@ namespace DancingCats.Clone.Editor
             File.WriteAllText(ProjectFile(catalogPath), "[\n" + string.Join(",\n", songs.OrderBy(s => s.catalogId).Select(s => JsonUtility.ToJson(s, true)).ToArray()) + "\n]\n");
             AssetDatabase.ImportAsset(mapPath, ImportAssetOptions.ForceSynchronousImport);
             AssetDatabase.ImportAsset(catalogPath, ImportAssetOptions.ForceSynchronousImport);
-            Debug.Log("AUDIO_CHART_GENERATED " + map.id + ": " + map.audio.declaredLengthSeconds.ToString("F3", CultureInfo.InvariantCulture) + " seconds, " + map.elements.Length + " elements, " + map.elements.Count(e => e.kind == "Hold") + " holds, " + map.elements.Count(e => e.updateType == 3) + " moving jumps, " + map.segments.Count(s => s.kind == "Follow") + " glides; source SHA-256 " + map.audio.rawSha256);
+            Debug.Log("AUDIO_CHART_GENERATED " + map.id + ": " + map.audio.declaredLengthSeconds.ToString("F3", CultureInfo.InvariantCulture) + " seconds, " + map.elements.Length + " elements, " + map.elements.Count(e => e.kind == "Hold") + " holds, " + map.elements.Count(e => e.kind == "BigJump") + " large launches, " + map.segments.Count(s => s.kind == "Follow") + " glides; " + map.sourceMapBundle + "; source SHA-256 " + map.audio.rawSha256);
         }
     }
 }

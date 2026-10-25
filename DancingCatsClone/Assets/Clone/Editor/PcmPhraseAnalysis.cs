@@ -80,22 +80,36 @@ namespace DancingCats.Clone.Editor
                 if (bestCosine == 0) continue;
                 double start = RefineStart(candidate.start, times, novelty), end = candidate.end;
                 if (cues.Count > 0 && start < cues[cues.Count - 1].endTime + .078) continue;
-                // This is an authored lateral style, not a claim to have measured pitch-to-lane mapping.
-                float[] lanes = (cues.Count & 1) == 0 ? new[] { 0f, .65f, -.65f, .65f, -.65f, 0f }
-                    : new[] { .8f, .5f, .2f, -.2f, -.5f, -.8f };
-                var points = new MusicalPoint[lanes.Length];
+                // Spatial movement is an independent gameplay style: settle the entry,
+                // then make one broad gesture. Repeated phrases alternate a scoop and
+                // an opposite sweep; no pitch estimate or reference path is claimed.
+                var points = new MusicalPoint[6];
                 start = Round(start); end = Round(end);
                 for (int point = 0; point < points.Length; point++)
-                    points[point] = new MusicalPoint { time = Round(start + (end - start) * point / (points.Length - 1)), lane = lanes[point] };
+                {
+                    double phase = point / (double)(points.Length - 1);
+                    points[point] = new MusicalPoint { time = Round(start + (end - start) * phase),
+                        lane = ChoreographyLane(phase, (cues.Count & 1) != 0) };
+                }
                 cues.Add(new MusicalCue
                 {
-                    kind = "Follow", time = start, endTime = end, lane = lanes[0], points = points,
+                    kind = "Follow", time = start, endTime = end, lane = points[0].lane, points = points,
                     confidence = .5 * (bestCosine + Math.Min(candidate.continuity, partnerContinuity)),
                     phraseId = "recurrent-legato-" + cues.Count,
-                    reason = "Repeated spectrally continuous articulation phrase; measured terminal accent. Six spatial samples use an authored lane palette, not inferred pitch."
+                    reason = "Repeated spectrally continuous articulation phrase; measured terminal accent. Six spatial samples use a settled scoop/sweep gameplay style, not inferred pitch."
                 });
             }
             return cues.ToArray();
+        }
+
+        private static float ChoreographyLane(double phase, bool sweep)
+        {
+            const double settle = .25, turn = .6, reach = .8;
+            if (sweep)
+                return (float)(phase <= settle ? reach : reach - 2 * reach * (phase - settle) / (1 - settle));
+            if (phase <= settle) return 0;
+            return (float)(phase <= turn ? -reach * (phase - settle) / (turn - settle)
+                : -reach + 2 * reach * (phase - turn) / (1 - turn));
         }
 
         private static double RefineStart(double attack, double[] times, double[] novelty)

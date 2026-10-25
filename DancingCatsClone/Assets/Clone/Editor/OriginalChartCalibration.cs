@@ -84,6 +84,8 @@ namespace DancingCats.Clone.Editor
             CheckMetricFixtures();
             AudioChartGeneratorValidation.RunChecks();
             PcmPhraseAnalysisValidation.RunChecks();
+            PcmFlightAnalysisValidation.RunChecks();
+            PcmSparsePhraseAnalysisValidation.RunChecks();
             PcmVocalIntegrationValidation.RunChecks();
             Run("candidate");
         }

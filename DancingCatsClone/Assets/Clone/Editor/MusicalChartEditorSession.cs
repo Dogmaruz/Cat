@@ -172,6 +172,26 @@ namespace DancingCats.Clone.Editor
                         RequireEditMode();
                         Invoke("OriginalChartCalibration", "ExportPcmForAnalysis");
                         break;
+                    case "chart-custom-export-pcm":
+                        RequireEditMode();
+                        Invoke("AudioChartGenerator", "ExportAlwaysRememberPcm");
+                        break;
+                    case "chart-custom-publish":
+                        RequireEditMode();
+                        Invoke("AudioChartGenerator", "RegenerateAlwaysRememberFromAudio");
+                        break;
+                    case "chart-flight-checks":
+                        RequireEditMode();
+                        Invoke("PcmFlightAnalysisValidation", "RunChecks");
+                        break;
+                    case "chart-sparse-checks":
+                        RequireEditMode();
+                        Invoke("PcmSparsePhraseAnalysisValidation", "RunChecks");
+                        break;
+                    case "chart-custom-spectral":
+                        RequireEditMode();
+                        Invoke("AudioChartGenerator", "ExportAlwaysRememberSpectralEvidence");
+                        break;
                     case "chart-original-publish":
                         RequireEditMode();
                         Invoke("OriginalChartCalibration", "GenerateUnstoppableComparison");
@@ -203,6 +223,9 @@ namespace DancingCats.Clone.Editor
                     case "radio-show-menu":
                         RequireEditMode();
                         Invoke("RadioArchipelagoJobs", "ShowMainMenu");
+                        break;
+                    case "radio-select-custom-song":
+                        Invoke("RadioArchipelagoJobs", "SelectCustomSongPreview");
                         break;
                     default: throw new ArgumentException("Unknown musical authoring job: " + action);
                 }

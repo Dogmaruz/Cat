@@ -152,6 +152,14 @@ namespace DancingCats.Clone.Editor
             EditorApplication.isPlaying = true;
         }
 
+        public static void SelectCustomSongPreview()
+        {
+            if (!EditorApplication.isPlaying) throw new InvalidOperationException("Open the game menu in Play Mode first.");
+            var game = UnityEngine.Object.FindFirstObjectByType<OriginalPlayController>();
+            if (game == null || game.Phase != ClonePhase.Menu || !game.SelectSong(20001))
+                throw new InvalidOperationException("The custom-song menu is not ready.");
+        }
+
         private static void RequireSavedEditor()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Stop Play Mode first.");

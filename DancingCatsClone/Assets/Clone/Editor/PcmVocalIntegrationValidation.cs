@@ -49,10 +49,17 @@ namespace DancingCats.Clone.Editor
                 var again = AudioChartGenerator.GenerateFromSamples(pcm, clip.frequency, clip.channels, "VocalIntegration", Options(), evidence);
                 Require(JsonUtility.ToJson(map) == JsonUtility.ToJson(again),
                     "Identical decoded PCM and verified vocal evidence must compile deterministically.");
-                Require(map.audio.rawSha256 == digest && map.sourceMapBundle == "pcm-vocal-phrase-chart-v6",
+                Require(map.audio.rawSha256 == digest && map.sourceMapBundle == "pcm-vocal-phrase-chart-v7",
                     "The compiled chart must retain its actual PCM identity and vocal analysis provenance.");
                 SameSupports(map, "Hold", expectedHolds);
                 SameSupports(map, "Follow", expectedGlides);
+                var withoutFlightsOptions = Options(); withoutFlightsOptions.includeBigJumps = false;
+                var withoutFlights = AudioChartGenerator.GenerateFromSamples(pcm, clip.frequency, clip.channels, "VocalNoFlights", withoutFlightsOptions, evidence);
+                Require(!withoutFlights.segments.Any(segment => segment.kind == "BigJump")
+                    && map.segments.Any(segment => segment.kind == "BigJump"),
+                    "includeBigJumps controls large launches independently of Holds and Follow.");
+                SameSupports(withoutFlights, "Hold", expectedHolds);
+                SameSupports(withoutFlights, "Follow", expectedGlides);
                 AudioChartGeneratorValidation.ValidateMap(map);
                 var voiceOnly = expectedHolds.Where(cue => !spectral.accents.Any(attack => Math.Abs(attack - cue.time) <= .08)).ToArray();
                 Require(voiceOnly.Length > 0,

@@ -554,8 +554,8 @@ namespace DancingCats.Clone
         {
             float remaining = tile.segment != null ? tile.segment.endZ - Actor.position.z
                 : tile.element.mfendPos - Mathf.Max(0, Actor.position.z - tile.initialZ);
-            float duration = Mathf.Max(.5f, remaining / Mathf.Max(.01f, Map.forwardSpeed * _rate));
-            _motion.PlayHold(tile.element.id == 4, duration, true);
+            float duration = Mathf.Max(.08f, remaining / Mathf.Max(.01f, Map.forwardSpeed * _rate));
+            _motion.PlaySupportedRide(duration);
         }
 
         private void GroundDuringInvincibility()

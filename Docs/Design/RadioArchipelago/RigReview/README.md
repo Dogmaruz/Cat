@@ -1,5 +1,13 @@
 # Character source and animation review
 
+## Current animation: alternating turns and world-space inertia
+
+Every long support now gets a full turn, alternating direction. The scarf,
+antenna and sail visibly trail lateral input even while their separate hinges
+rotate. Continual squash/stretch, pause/reset and actual-skin geometry checks
+are documented in [`MotionV2/README.md`](MotionV2/README.md).
+The accepted model geometry and textures below remain unchanged.
+
 ## Current joint and case corrections: 25 October 2026
 
 Tiko's inner case contact and antenna bearing are repaired. Lumen's shoulders

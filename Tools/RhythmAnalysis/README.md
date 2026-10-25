@@ -37,6 +37,20 @@ little-endian signed 64-bit integers at 1e-8 precision, avoiding JSON parser
 rounding differences across Python, .NET and Unity. Unity rejects mismatched or damaged evidence.
 Pitch retains native Basic Pitch frame times (approximately 86 Hz); RMS is 100 Hz.
 
+New preprocessing uses `vocal-phrase-2-window-time`. Each retained pitch frame
+is placed from its actual 22.05 kHz input-window start, native 256-sample frame
+position and initial 3840-sample padding. The 43844-sample window advances by
+36164 samples; trimming 15 frames at either edge retains 142 predictions. This
+means a seam is not a uniform flattened-frame interval. Only predictions whose
+centers fall within the source recording are retained, including its final
+partial window. No duration stretching or extrapolated pitch values are used.
+
+The corrected notes are cached as `notes-input-window-time-v2.npz`, with a
+checked timing-version tag, so historical `notes.npz` cannot silently supply
+the old time axis. The expensive `vocals.npz` separation cache is reusable.
+Existing committed Unstoppable evidence remains the historical v1 measurement
+for its calibration; it is not silently recomputed or relabeled by this change.
+
 For Unity audio imported with Vorbis or another lossy codec, analyze the actual
 `AudioClip.GetData` PCM rather than the original WAV decoder output. The Editor
 command **Assets → Dancing Cats → Export selected audio PCM for vocal analysis**
@@ -75,7 +89,13 @@ Run shared classifier counterexamples with:
 
 ```powershell
 python Tools/RhythmAnalysis/test_vocal_holds.py --deps DancingCatsClone/Library/RhythmAnalysis/deps -v
+python Tools/RhythmAnalysis/test_transcribe_timing.py --deps DancingCatsClone/Library/RhythmAnalysis/deps -v
 ```
+
+The timing tests use known native-frame coordinates to check an entire
+157-second recording, a marker in a late input window, every stitching boundary
+and a short final partial window. They test transform timing independently of
+the learned model's pitch or onset accuracy.
 
 The 26 cases in `gesture_fixtures.json` are also checked by Unity's
 `PcmVocalGestureValidation.RunChecks()`. They contrast real silence with pitch

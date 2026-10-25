@@ -22,8 +22,44 @@ namespace DancingCats.Clone.Editor
                 "Repeated isolated drum attacks do not imply continuous Follow support.");
             Require(PcmSpectralAnalysis.Analyze(Recording(true, false), 11025, 1).follows.Length == 0,
                 "A single occurrence is insufficient evidence for this recurrence detector.");
+            CheckChoreography(repeated);
             CheckCompilation(recording, repeated);
-            Debug.Log("PCM_PHRASE_ANALYSIS PASS: repeated tonal gesture, measured boundaries, isolated drum rejection, single-occurrence rejection, native Follow compilation, support suppression, disabled options and finish cutoff.");
+            Debug.Log("PCM_PHRASE_ANALYSIS PASS: repeated tonal gesture, measured boundaries, isolated drum rejection, single-occurrence rejection, settled single-turn choreography, opposite sweep, bounded route, native Follow compilation, support suppression, disabled options and finish cutoff.");
+        }
+
+        private static void CheckChoreography(MusicalCue[] phrases)
+        {
+            foreach (var phrase in phrases)
+            {
+                var points = phrase.points;
+                Require(points != null && points.Length == 6, "The style policy retains six route samples.");
+                Require(Math.Abs(points[0].time - phrase.time) < .000001
+                    && Math.Abs(points[points.Length - 1].time - phrase.endTime) < .000001,
+                    "The route must cover the complete independently detected support interval.");
+                Require(Math.Abs(points[1].lane - points[0].lane) < .000001,
+                    "A Follow must settle on its entry lane before the broad gesture, rather than immediately zigzag.");
+                int reversals = 0, priorDirection = 0;
+                for (int index = 1; index < points.Length; index++)
+                {
+                    double interval = points[index].time - points[index - 1].time;
+                    double change = points[index].lane - points[index - 1].lane;
+                    Require(Math.Abs(points[index].lane) <= 1 && interval >= .0624
+                        && Math.Abs(change) <= 12.01 * interval,
+                        "The gesture must remain inside the lane and custom authoring speed/spacing envelope.");
+                    int direction = Math.Abs(change) < .000001 ? 0 : Math.Sign(change);
+                    if (direction == 0) continue;
+                    if (priorDirection != 0 && direction != priorDirection) reversals++;
+                    priorDirection = direction;
+                }
+                Require(reversals <= 1, "A continuous phrase must not produce repeated alternating left/right turns.");
+            }
+            var first = phrases[0].points; var second = phrases[1].points;
+            Require(first.Min(point => point.lane) < first[0].lane - .5f
+                && first[first.Length - 1].lane > first[0].lane + .5f,
+                "The first gesture must make one broad scoop and exit on its opposite side.");
+            Require(second[second.Length - 1].lane < second[0].lane - 1.2f
+                && Enumerable.Range(1, second.Length - 1).All(index => second[index].lane <= second[index - 1].lane),
+                "The repeated gesture uses an opposite broad sweep, with no release reset.");
         }
 
         private static void CheckCompilation(float[] recording, MusicalCue[] proposals)

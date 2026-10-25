@@ -13,6 +13,7 @@ namespace DancingCats.Clone.Editor
         public static void RunChecks()
         {
             RunSafetyChecks();
+            RunFlightMergeChecks();
             RunMusicalFallbackChecks();
             RunSpectralEvidenceChecks();
             var type = typeof(AudioChartGeneratorValidation).Assembly.GetType("DancingCats.Clone.Editor.AudioChartGenerator");
@@ -38,6 +39,44 @@ namespace DancingCats.Clone.Editor
             Require(!sustained.segments.Any(s => s.kind == "Hold"), "a mixed-audio RMS bed alone must not invent a melodic hold");
             ValidateMap(sustained);
             Debug.Log("AUDIO_CHART_GENERATOR PASS: silence rejected; 80 BPM and measured phase; deterministic PCM output; preserved rests; no RMS-only holds; exit distances; finish before audio end");
+        }
+
+        private static void RunFlightMergeChecks()
+        {
+            var merge = typeof(AudioChartGenerator).GetMethod("ApplyFlights", BindingFlags.NonPublic | BindingFlags.Static);
+            Require(merge != null, "flight replacement needs a merge boundary which protects measured foreground articulations");
+            var flight = new[] { new PcmFlightAnalysis.Flight { time = 2, landingTime = 2.7, confidence = .8, reason = "Synthetic measured flight" } };
+            System.Collections.Generic.List<MusicalCue> Cues() => new System.Collections.Generic.List<MusicalCue>
+            {
+                new MusicalCue { kind = "Jump", time = 1.88, endTime = 1.88 },
+                new MusicalCue { kind = "Jump", time = 2.20, endTime = 2.20 },
+                new MusicalCue { kind = "Jump", time = 2.35, endTime = 2.35 },
+                new MusicalCue { kind = "Jump", time = 2.70, endTime = 2.70 }
+            };
+            void Apply(System.Collections.Generic.List<MusicalCue> cues, double[] starts)
+            {
+                var evidence = new PcmVocalAnalysis.Evidence { voiceStarts = starts, rmsStep = .01, rms = new double[800] };
+                for (int i = 188; i < 250; i++) evidence.rms[i] = .14;
+                merge.Invoke(null, new object[] { cues, flight, evidence, 6.0 });
+            }
+
+            var priorVoice = Cues(); Apply(priorVoice, new[] { 1.88, 2.0 });
+            Require(priorVoice.Any(cue => cue.kind == "Jump" && Math.Abs(cue.time - 1.88) < 1e-8),
+                "a real foreground syllable 120ms before the large launch must survive onset refinement");
+            Require(priorVoice.Count(cue => cue.kind == "BigJump" && Math.Abs(cue.time - 2) < 1e-8) == 1,
+                "protecting a prior articulation still permits exactly one non-overlapping large launch");
+
+            var accompaniment = Cues(); Apply(accompaniment, new[] { 2.0 });
+            Require(!accompaniment.Any(cue => Math.Abs(cue.time - 1.88) < 1e-8 || Math.Abs(cue.time - 2.20) < 1e-8 || Math.Abs(cue.time - 2.35) < 1e-8)
+                && accompaniment.Any(cue => Math.Abs(cue.time - 2.70) < 1e-8),
+                "refining one vocal onset may remove nearby accompaniment but must retain the measured landing");
+
+            var interrupted = Cues(); interrupted.Add(new MusicalCue { kind = "Jump", time = 2.25, endTime = 2.25 });
+            Apply(interrupted, new[] { 2.0, 2.25 });
+            Require(interrupted.Any(cue => cue.kind == "Jump" && Math.Abs(cue.time - 2.25) < 1e-8)
+                && !interrupted.Any(cue => cue.kind == "BigJump"),
+                "an independent foreground reattack inside a proposed flight must keep its tile and reject that reservation");
+            Debug.Log("AUDIO_FLIGHT_MERGE PASS: preceding foreground syllable, accompaniment refinement, measured landing and interior reattack protection.");
         }
 
         private static void RunSpectralEvidenceChecks()

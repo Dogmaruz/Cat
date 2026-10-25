@@ -77,6 +77,80 @@ namespace RadioArchipelago.Editor
                 skin.CheckGeometry(id + " turning");
 
                 float tipResponse = 0, flightTipExcursion = 0, lateralTipResponse = 0;
+                Vector3 rootPositionForLag = motion.transform.position;
+                (Vector3 antenna, Vector3[] scarf) LagSample(float direction, int frames)
+                {
+                    motion.transform.position = rootPositionForLag; motion.ResetMotion(); motion.PlayIdle();
+                    for (int frame = 0; frame < frames; frame++)
+                    {
+                        motion.SetPaused(false);
+                        motion.transform.position += motion.transform.right * (direction * .025f);
+                        motion.SimulateSprings(Dt);
+                    }
+                    skin.CheckGeometry(id + " lateral movement " + direction + " frames=" + frames);
+                    return (skin.AntennaTipCentroid(binding.visualPivot), skin.TipCentroids(binding.visualPivot));
+                }
+                float antennaLateral, scarfLateral = 0;
+                try
+                {
+                    var initialRight = LagSample(1, 1); var initialLeft = LagSample(-1, 1);
+                    var positiveLag = LagSample(1, 22); var negativeLag = LagSample(-1, 22);
+                    antennaLateral = positiveLag.antenna.x - negativeLag.antenna.x;
+                    Require(antennaLateral < -height * .025f,
+                        id + ": the painted antenna must visibly trail OPPOSITE lateral motion; signed right-minus-left=" + Number(antennaLateral));
+                    Require(Mathf.Abs(initialRight.antenna.x - initialLeft.antenna.x) < Mathf.Abs(antennaLateral) * .1f,
+                        id + ": antenna inertia must develop over time rather than snapping to the drag.");
+                    if (tips.Length > 0)
+                    {
+                        scarfLateral = positiveLag.scarf.Average(value => value.x) - negativeLag.scarf.Average(value => value.x);
+                        var positiveLater = LagSample(1, 44); var negativeLater = LagSample(-1, 44);
+                        File.WriteAllText(Path.Combine(Output, id + "-lateral-diagnostic.txt"),
+                            "Body height=" + Number(height) + "; antenna=" + Number(antennaLateral)
+                            + "; scarf at183ms=" + string.Join(",", positiveLag.scarf.Select((value, index) => Number(value.x - negativeLag.scarf[index].x)))
+                            + "; scarf at367ms=" + string.Join(",", positiveLater.scarf.Select((value, index) => Number(value.x - negativeLater.scarf[index].x))) + "\n");
+                        Require(scarfLateral < -height * .04f,
+                            id + ": the painted scarf must visibly trail OPPOSITE lateral motion; signed right-minus-left=" + Number(scarfLateral));
+                        float firstScarf = initialRight.scarf.Average(value => value.x) - initialLeft.scarf.Average(value => value.x);
+                        Require(Mathf.Abs(firstScarf) < Mathf.Abs(scarfLateral) * .1f,
+                            id + ": scarf inertia must develop over time rather than snapping to the drag.");
+                    }
+                }
+                finally { motion.transform.position = rootPositionForLag; motion.ResetMotion(); }
+                var worldLagNotes = new List<string>();
+                foreach (float progress in new[] { .3263518f, .5f })
+                {
+                    (Vector3 antenna, Vector3[] scarf) TurningLag(float direction)
+                    {
+                        motion.transform.position = rootPositionForLag; motion.ResetMotion();
+                        motion.PlayHold(false, 2.6f, true);
+                        Step(motion, 2.6f * progress - 22 * Dt);
+                        for (int frame = 0; frame < 22; frame++)
+                        {
+                            motion.transform.position += Vector3.right * (direction * .025f);
+                            motion.SimulateSprings(Dt);
+                        }
+                        skin.CheckGeometry(id + " spinning lateral movement " + direction + " phase=" + Number(progress));
+                        // The actor frame is fixed in world space while the visual body spins.
+                        return (skin.AntennaTipCentroid(motion.transform), skin.TipCentroids(motion.transform));
+                    }
+                    try
+                    {
+                        var rightLag = TurningLag(1); var leftLag = TurningLag(-1);
+                        float antennaDelta = rightLag.antenna.x - leftLag.antenna.x;
+                        float scarfDelta = tips.Length > 0
+                            ? rightLag.scarf.Average(value => value.x) - leftLag.scarf.Average(value => value.x) : 0;
+                        Require(antennaDelta < height * .002f && scarfDelta < height * .002f,
+                            id + ": inertia must not lead world input while the body turns; phase=" + Number(progress)
+                            + ", antenna=" + Number(antennaDelta) + ", scarf=" + Number(scarfDelta));
+                        if (progress == .5f)
+                        {
+                            Require(antennaDelta < -height * .015f && (tips.Length == 0 || scarfDelta < -height * .02f),
+                                id + ": a half-turned courier still needs conspicuous opposite WORLD lag.");
+                        }
+                        worldLagNotes.Add(Number(progress) + " antenna=" + Number(antennaDelta) + "/scarf=" + Number(scarfDelta));
+                    }
+                    finally { motion.transform.position = rootPositionForLag; motion.ResetMotion(); }
+                }
                 if (tips.Length > 0)
                 {
                     motion.ResetMotion(); motion.PlayIdle(); motion.SetFacing(55); Step(motion, .14f);
@@ -166,6 +240,8 @@ namespace RadioArchipelago.Editor
                 notes.Add("PASS " + id + ": hinge=" + Number(Mathf.Max(firstHinge, oppositeHinge))
                     + "deg; painted scarf turn response=" + Number(tipResponse) + "; short rotor=" + Number(shortYaw.rotor) + "deg"
                     + "; scarf flight excursion=" + Number(flightTipExcursion) + "; real lateral response=" + Number(lateralTipResponse)
+                    + "; signed opposite antenna=" + Number(antennaLateral) + "/scarf=" + Number(scarfLateral)
+                    + "; world lag during turn [" + string.Join("; ", worldLagNotes) + "]"
                     + "; flight rotor=" + Number(flight.rotor) + "deg, peak=" + Number(flight.maximumRate)
                     + "deg/s; ride [" + string.Join("; ", rideNotes) + "]; max accessory edge strain=" + Number(skin.MaximumStrain)
                     + "; finite skin, fixed attachments, pause/reset/hitch PASS.");
@@ -213,6 +289,7 @@ namespace RadioArchipelago.Editor
                 public Mesh scratch;
                 public Vector3[] rest;
                 public int[][] tips;
+                public int[] antennaTip;
                 public Vector2Int[] edges;
             }
             private readonly Transform actor;
@@ -226,6 +303,11 @@ namespace RadioArchipelago.Editor
                 Require(renderers.Length > 0, "Accessory checks require actual imported skins.");
                 Height = CourierVisualBounds.MeasureBody(renderers).size.y;
                 var accessory = new HashSet<Transform>((binding.antennaChain ?? Array.Empty<Transform>()).Concat(binding.scarfChain ?? Array.Empty<Transform>())) { binding.antennaYawPivot };
+                // Some imported chains end in an unweighted orientation marker. Track
+                // the furthest bone which actually controls painted surface vertices.
+                Transform antennaTip = binding.antennaChain.Reverse().FirstOrDefault(bone =>
+                    renderers.Sum(renderer => WeightedVertexCount(renderer, bone)) >= 3);
+                Require(antennaTip != null, "Antenna chain does not control actual painted geometry.");
                 skins = new Skin[renderers.Length];
                 for (int index = 0; index < renderers.Length; index++)
                 {
@@ -237,6 +319,7 @@ namespace RadioArchipelago.Editor
                     var counts = mesh.GetBonesPerVertex(); var weights = mesh.GetAllBoneWeights();
                     var selected = new bool[mesh.vertexCount];
                     var tipSamples = tips.Select(_ => new List<int>()).ToArray(); int at = 0;
+                    var antennaSamples = new List<int>();
                     for (int vertex = 0; vertex < counts.Length; vertex++)
                     {
                         float accessoryWeight = 0;
@@ -244,11 +327,13 @@ namespace RadioArchipelago.Editor
                         {
                             var weight = weights[at++]; var bone = bones[weight.boneIndex];
                             if (accessory.Contains(bone)) accessoryWeight += weight.weight;
+                            if (bone == antennaTip && weight.weight >= .5f) antennaSamples.Add(vertex);
                             for (int t = 0; t < tips.Length; t++) if (bone == tips[t] && weight.weight >= .5f) tipSamples[t].Add(vertex);
                         }
                         selected[vertex] = accessoryWeight > .05f;
                     }
                     for (int t = 0; t < tips.Length; t++) item.tips[t] = tipSamples[t].ToArray();
+                    item.antennaTip = antennaSamples.ToArray();
                     var edges = new HashSet<ulong>();
                     foreach (int[] triangle in Enumerable.Range(0, mesh.subMeshCount).Select(sub => mesh.GetTriangles(sub)))
                         for (int t = 0; t < triangle.Length; t += 3)
@@ -264,6 +349,23 @@ namespace RadioArchipelago.Editor
                 }
                 for (int t = 0; t < tips.Length; t++) Require(skins.Sum(item => item.tips[t].Length) >= 3,
                     "Scarf tip bone does not control actual painted geometry: " + tips[t].name);
+                Require(skins.Sum(item => item.antennaTip.Length) >= 3, "Antenna tip bone does not control actual painted geometry.");
+            }
+
+            private static int WeightedVertexCount(SkinnedMeshRenderer renderer, Transform bone)
+            {
+                int index = Array.IndexOf(renderer.bones, bone);
+                if (index < 0) return 0;
+                var counts = renderer.sharedMesh.GetBonesPerVertex(); var weights = renderer.sharedMesh.GetAllBoneWeights();
+                int result = 0, at = 0;
+                foreach (byte count in counts)
+                {
+                    bool found = false;
+                    for (int i = 0; i < count; i++)
+                    { var w = weights[at++]; if (w.boneIndex == index && w.weight >= .5f) found = true; }
+                    if (found) result++;
+                }
+                return result;
             }
 
             private Vector3[] Bake(Skin skin)
@@ -274,6 +376,18 @@ namespace RadioArchipelago.Editor
                 return values;
             }
             public Vector3[] AllVertices() => skins.SelectMany(Bake).ToArray();
+            public Vector3 AntennaTipCentroid(Transform visual)
+            {
+                Vector3 sum = Vector3.zero; int count = 0;
+                foreach (var item in skins)
+                {
+                    var values = Bake(item);
+                    foreach (int vertex in item.antennaTip)
+                    { sum += visual.InverseTransformPoint(actor.TransformPoint(values[vertex])); count++; }
+                }
+                Require(count > 0, "Antenna has no weighted tip samples.");
+                return sum / count;
+            }
             public Vector3[] TipCentroids(Transform visual)
             {
                 int count = skins[0].tips.Length; var sums = new Vector3[count]; var counts = new int[count];
@@ -297,9 +411,20 @@ namespace RadioArchipelago.Editor
                     {
                         float ratio = (values[edge.x] - values[edge.y]).magnitude / (item.rest[edge.x] - item.rest[edge.y]).magnitude;
                         MaximumStrain = Mathf.Max(MaximumStrain, ratio);
-                        Require(ratio < 10, context + ": accessory edge stretched into a tear; vertices=" + edge.x + "/" + edge.y + ", ratio=" + Number(ratio));
+                        Require(ratio < 10, context + ": accessory edge stretched into a tear; mesh=" + item.renderer.name
+                            + "; vertices=" + edge.x + "/" + edge.y + ", ratio=" + Number(ratio)
+                            + "; influences=" + Influences(item.renderer, edge.x) + " / " + Influences(item.renderer, edge.y));
                     }
                 }
+            }
+            private static string Influences(SkinnedMeshRenderer renderer, int vertex)
+            {
+                var counts = renderer.sharedMesh.GetBonesPerVertex(); var weights = renderer.sharedMesh.GetAllBoneWeights();
+                int at = 0; for (int i = 0; i < vertex; i++) at += counts[i];
+                var labels = new List<string>();
+                for (int i = 0; i < counts[vertex]; i++)
+                { var w = weights[at + i]; labels.Add(renderer.bones[w.boneIndex].name + "=" + Number(w.weight)); }
+                return string.Join(",", labels);
             }
             public void Dispose() { foreach (var item in skins) if (item?.scratch != null) UnityEngine.Object.DestroyImmediate(item.scratch); }
         }

@@ -9,6 +9,8 @@ namespace RadioArchipelago.Editor
     {
         public static void Run()
         {
+            CheckEverySupportTurn();
+            CheckContinuousBounce();
             var root = new GameObject("Courier motion test");
             try
             {
@@ -72,6 +74,80 @@ namespace RadioArchipelago.Editor
                 CheckIndependentChains();
                 CheckShoulderArcs();
                 Debug.Log("RADIO_MOTION PASS: long flight, pause, landing compression, riding spin, separate idle feet, blink, rest-pose reuse, legacy binding, bounded independent secondary chains and whole-arm shoulder swings.");
+            }
+            finally { UnityEngine.Object.DestroyImmediate(root); }
+        }
+
+        private static void CheckEverySupportTurn()
+        {
+            var root = new GameObject("Every supported tile turns");
+            try
+            {
+                var visual = Child(root.transform, "visual", Vector3.zero);
+                var motion = root.AddComponent<CourierMotion>(); motion.ManualSimulation = true;
+                motion.Configure(visual, null, null, null, null);
+                float Turn(float duration)
+                {
+                    float previous = Heading(visual.forward), sum = 0;
+                    int frames = Mathf.CeilToInt(duration * 240);
+                    for (int frame = 0; frame < frames; frame++)
+                    {
+                        motion.SimulateSprings(duration / frames);
+                        float next = Heading(visual.forward);
+                        sum += Mathf.DeltaAngle(previous, next); previous = next;
+                    }
+                    return sum;
+                }
+                foreach (float duration in new[] { .18f, .35f, .65f, 1.4f })
+                {
+                    motion.ResetMotion(); motion.PlayHold(false, duration, true);
+                    Require(Mathf.Abs(Turn(duration) - 360) < .5f,
+                        "Every long support, including a short " + duration + " second tile, needs a complete 360 degree turn.");
+                }
+                motion.ResetMotion();
+                float last = 0;
+                foreach (float duration in new[] { .35f, .65f, 1.4f, .18f })
+                {
+                    Invoke(motion, "PlaySupportedRide", new[] { typeof(float) }, duration);
+                    float turn = Turn(duration);
+                    Require(Mathf.Abs(Mathf.Abs(turn) - 360) < .5f && (last == 0 || turn * last < 0),
+                        "Successive supported tiles must alternate complete clockwise and anticlockwise turns independently of tile type.");
+                    last = turn;
+                    motion.PlayJump(.3f); Step(motion, .3f);
+                }
+                motion.ResetMotion();
+                Invoke(motion, "PlaySupportedRide", new[] { typeof(float) }, .35f);
+                Require(Turn(.35f) > 359.5f, "Restarting a run must reset the supported-turn sequence.");
+            }
+            finally { UnityEngine.Object.DestroyImmediate(root); }
+        }
+
+        private static float Heading(Vector3 forward) => Mathf.Atan2(forward.x, forward.z) * Mathf.Rad2Deg;
+
+        private static void CheckContinuousBounce()
+        {
+            var root = new GameObject("Continuous courier bounce");
+            try
+            {
+                var visual = Child(root.transform, "visual", Vector3.zero);
+                var motion = root.AddComponent<CourierMotion>(); motion.ManualSimulation = true;
+                motion.Configure(visual, null, null, null, null);
+                foreach (bool riding in new[] { false, true })
+                {
+                    motion.ResetMotion();
+                    if (riding) motion.PlayHold(false, 2.4f, true); else motion.PlayIdle();
+                    float low = 10, high = 0;
+                    for (int frame = 0; frame < 144; frame++)
+                    {
+                        motion.SimulateSprings(1f / 60);
+                        if (frame < 30) continue;
+                        low = Mathf.Min(low, visual.localScale.y); high = Mathf.Max(high, visual.localScale.y);
+                        Require(Mathf.Abs(visual.localScale.x * visual.localScale.y * visual.localScale.z - 1) < .001f,
+                            "Squash and stretch must preserve visual volume.");
+                    }
+                    Require(high - low > .075f,
+                        "The courier needs a visible continuing squash/stretch cycle during " + (riding ? "a supported ride." : "idle."));
+                }
             }
             finally { UnityEngine.Object.DestroyImmediate(root); }
         }

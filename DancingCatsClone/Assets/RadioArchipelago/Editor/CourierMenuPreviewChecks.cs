@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using RadioArchipelago.UI;
 using UnityEditor;
@@ -235,7 +236,7 @@ namespace RadioArchipelago.Editor
             var viewportMin = Vector3.one * float.PositiveInfinity;
             var viewportMax = Vector3.one * float.NegativeInfinity;
             int total = 0, outside = 0, nonFinite = 0;
-            float bodyHeight = float.NaN, footAnchorError = float.PositiveInfinity;
+            float bodyHeight = float.NaN, normalizedBodyHeight = float.NaN, squashScale = 1, footAnchorError = float.PositiveInfinity;
             Mesh sample = null;
             var vertices = new List<Vector3>();
             try
@@ -279,7 +280,22 @@ namespace RadioArchipelago.Editor
                     .Append(" vertices=").Append(total).Append(" outside=").Append(outside)
                     .Append(" nonFinite=").Append(nonFinite);
                 bodyHeight = CourierVisualBounds.MeasureBody(renderers).size.y;
-                details.Append(" bodyHeight=").Append(Number(bodyHeight));
+                // The menu normalizes the rest body to 2.1 units. Live squash is
+                // intentional; compare the base size while still checking every
+                // animated vertex and its actual foot anchor above/below.
+                var motion = stage.GetComponentInChildren<CourierMotion>(false);
+                if (motion != null)
+                {
+                    var part = typeof(CourierMotion).GetField("visual", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(motion);
+                    if (part == null) throw new InvalidOperationException("The menu courier has no captured presentation pose.");
+                    var node = (Transform)part.GetType().GetField("node").GetValue(part);
+                    var restScale = (Vector3)part.GetType().GetField("scale").GetValue(part);
+                    squashScale = node.localScale.y / restScale.y;
+                }
+                normalizedBodyHeight = bodyHeight / squashScale;
+                details.Append(" bodyHeight=").Append(Number(bodyHeight))
+                    .Append(" squashScale=").Append(Number(squashScale))
+                    .Append(" normalizedBodyHeight=").Append(Number(normalizedBodyHeight));
                 var background = canvas.GetComponentsInChildren<RectTransform>(false)
                     .SingleOrDefault(rect => rect.name == "SkyIslandsBackground");
                 if (image != null && background != null)
@@ -312,7 +328,8 @@ namespace RadioArchipelago.Editor
                     else UnityEngine.Object.DestroyImmediate(sample);
                 }
             }
-            if (total == 0 || outside != 0 || !Finite(bodyHeight) || Mathf.Abs(bodyHeight - 2.1f) > .12f ||
+            if (total == 0 || outside != 0 || !Finite(bodyHeight) || !Finite(squashScale) || squashScale < .90f || squashScale > 1.10f ||
+                !Finite(normalizedBodyHeight) || Mathf.Abs(normalizedBodyHeight - 2.1f) > .12f ||
                 !Finite(footAnchorError) || footAnchorError > 1.5f)
                 throw new InvalidOperationException("MENU_PREVIEW FAIL " + details);
             return "MENU_PREVIEW PASS " + details;

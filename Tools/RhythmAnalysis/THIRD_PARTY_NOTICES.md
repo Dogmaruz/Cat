@@ -37,9 +37,18 @@ The complete upstream LICENSE and NOTICE are included beside this document.
 
 Pinned ICASSP 2022 ONNX model: `nmp.onnx`, 230,444 bytes.
 SHA-256: `2c3c1d144bfa61ad236e92e169c13535c880469a12a047d4e73451f2c059a0ec`.
-Inference follows the official 22.05 kHz input, overlapping audio windows,
-15-frame edge trimming and frame-time correction contract. The Basic Pitch
-Python package is not imported; only the official ONNX graph is executed.
+Inference follows the official 22.05 kHz input, 43844-sample overlapping audio
+windows and 15-frame edge trimming. Our v2 adapter retains each native frame's
+actual input-window coordinate rather than applying the upstream flattened
+172-frame timing correction to an already trimmed 142-frame sequence. References:
+
+- https://github.com/spotify/basic-pitch/blob/main/basic_pitch/constants.py
+- https://github.com/spotify/basic-pitch/blob/main/basic_pitch/inference.py
+- https://github.com/spotify/basic-pitch/blob/main/basic_pitch/note_creation.py
+
+The Basic Pitch Python package is not imported; only the official ONNX graph is
+executed. Timestamp tests establish the adapter's coordinate mapping, not a
+claim of zero perceptual latency in the learned onset estimates.
 
 ## Dependency licenses
 
