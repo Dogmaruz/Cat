@@ -24,7 +24,12 @@
 - [x] Extend geometry validation to actual moving contact lanes and interval-aware lateral limits; retain authored-score behavior.
 - [x] Verify moving tiles through actual Editor ticks, pause and real pointer-driven full playthroughs of both levels. Cover moving-tile retry/revival if affected.
 - [x] Save numerical route comparisons, current previews and limitations.
-- [ ] Commit/push scoped changes and leave the custom song ready in Unity.
+- [x] Commit/push scoped changes and leave the custom song ready in Unity.
+
+Implementation `4bf85cb` was pushed to `feature/radio-archipelago` after the
+fresh full Editor playthroughs. Final inspection shows the clean game scene in
+Play Mode at the menu with `AlwaysRememberMeowCat` selected. The four existing
+user changes remain outside the implementation commit.
 
 ## Evidence baseline
 
