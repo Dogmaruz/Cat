@@ -48,8 +48,31 @@ partial window. No duration stretching or extrapolated pitch values are used.
 The corrected notes are cached as `notes-input-window-time-v2.npz`, with a
 checked timing-version tag, so historical `notes.npz` cannot silently supply
 the old time axis. The expensive `vocals.npz` separation cache is reusable.
-Existing committed Unstoppable evidence remains the historical v1 measurement
-for its calibration; it is not silently recomputed or relabeled by this change.
+The classic pitch/hold group in committed Unstoppable evidence remains the
+historical v1 measurement for compatibility. Its schema2 extension described
+below adds independent attacks on the corrected v2 clock; the old group is not
+silently recomputed or relabeled.
+
+Schema2 adds `attackAnalysisVersion=stem-high-flux-1`, `vocalAttackTimes` and
+`vocalAttackConfidence`. Attacks come from high-band spectral flux in the actual
+separated voice, with native-window note-onset confidence around each attack.
+The digest has a separate schema2 domain and covers the new version and arrays.
+Schema1 hashes remain byte-compatible. Unity validates finite sorted times,
+array lengths, confidence ranges, model/analysis provenance and integrity.
+Absent or unconfident attack features preserve conservative physical routing.
+
+Optional `--base-evidence VERIFIED.voice.json` preserves an existing classic
+pitch/RMS/voice-start group while adding newly measured attacks. It verifies
+the old digest, actual source/PCM/rate/channel/frame metadata and pinned model
+hashes before combining groups. This is an explicit compatibility mode, not a
+claim that legacy pitch measurements were recomputed on the new clock.
+Unstoppable uses `vocal-phrase-1+stem-high-flux-1`; the custom song and three v8
+benchmark recordings use `vocal-phrase-2-window-time+stem-high-flux-1`.
+
+The measured old/new interior clock difference on Unstoppable is about
+−8.24 to +10.23 ms. The old tail deficit (about .460 s on Unstoppable and
+1.061 s on the custom recording) mainly came from truncating row counts at
+86 fps. It must not be described as that much accumulated interior drift.
 
 For Unity audio imported with Vorbis or another lossy codec, analyze the actual
 `AudioClip.GetData` PCM rather than the original WAV decoder output. The Editor
@@ -90,6 +113,7 @@ Run shared classifier counterexamples with:
 ```powershell
 python Tools/RhythmAnalysis/test_vocal_holds.py --deps DancingCatsClone/Library/RhythmAnalysis/deps -v
 python Tools/RhythmAnalysis/test_transcribe_timing.py --deps DancingCatsClone/Library/RhythmAnalysis/deps -v
+python Tools/RhythmAnalysis/test_foreground_evidence.py --deps DancingCatsClone/Library/RhythmAnalysis/deps -v
 ```
 
 The timing tests use known native-frame coordinates to check an entire
@@ -103,6 +127,12 @@ ambiguity, ornaments with vibrato, pickups with ordinary high notes, and measure
 rests/handoffs with ambiguous alternatives, including real 180 ms pauses and
 fully silent RMS traces in pickups and glides. They test classification rules using
 synthetic measurements; they do not measure neural source separation quality.
+
+V8 adds physical tests of actual FFT attacks, anti-phase stereo, native-window
+confidence timing, silence and schema integrity. Unity also checks conservative
+foreground filtering, rapid vocal/instrumental runs and 28 flight counterexamples.
+The wider paired/frozen evaluation and its substantial remaining support-type
+errors are recorded in `Docs/Clone/ChartCalibration/V8/README.md`.
 
 CPU preprocessing took approximately 31 seconds for separation plus 1.2 seconds
 for note inference on the 67-second calibration recording. Unity consumes the

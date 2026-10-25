@@ -1,0 +1,372 @@
+{
+  "baselineCommit": "609db3aba74b56fc80ed0b5bc9323c81d9855085",
+  "metric": "One-to-one event matching on audio time; 80ms tolerance. F1 is not game similarity.",
+  "recordings": [
+    {
+      "id": "Unstoppable",
+      "role": "calibration",
+      "eventF1_80ms": [
+        0.8622754491017964,
+        0.8841463414634146
+      ],
+      "logicalEntryF1_80ms": [
+        0.852112676056338,
+        0.8776978417266187
+      ],
+      "elements": [
+        158,
+        152
+      ],
+      "geometryValid": true,
+      "types": [
+        {
+          "kind": "Jump",
+          "onset80ms": {
+            "referenceCount": 111,
+            "generatedCount": 117,
+            "matched": 95,
+            "precision": 0.811965811965812,
+            "recall": 0.8558558558558559,
+            "f1": 0.8333333333333334,
+            "meanAbsoluteErrorMs": 21.49503270531238
+          }
+        },
+        {
+          "kind": "BigJump",
+          "onset80ms": {
+            "referenceCount": 7,
+            "generatedCount": 7,
+            "matched": 7,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "meanAbsoluteErrorMs": 25.22775131315326
+          }
+        },
+        {
+          "kind": "Hold",
+          "onset80ms": {
+            "referenceCount": 14,
+            "generatedCount": 14,
+            "matched": 14,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "meanAbsoluteErrorMs": 19.179333405164837
+          }
+        },
+        {
+          "kind": "Follow",
+          "onset80ms": {
+            "referenceCount": 2,
+            "generatedCount": 2,
+            "matched": 2,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "meanAbsoluteErrorMs": 5.975865129743685
+          }
+        },
+        {
+          "kind": "Theme",
+          "onset80ms": {
+            "referenceCount": 4,
+            "generatedCount": 0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "meanAbsoluteErrorMs": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "TwinkleLittleStar",
+      "role": "calibration",
+      "eventF1_80ms": [
+        0.6742424242424242,
+        0.8825396825396825
+      ],
+      "logicalEntryF1_80ms": [
+        0.6982758620689655,
+        0.9222614840989399
+      ],
+      "elements": [
+        191,
+        293
+      ],
+      "geometryValid": true,
+      "types": [
+        {
+          "kind": "Jump",
+          "onset80ms": {
+            "referenceCount": 234,
+            "generatedCount": 291,
+            "matched": 225,
+            "precision": 0.7731958762886598,
+            "recall": 0.9615384615384616,
+            "f1": 0.8571428571428571,
+            "meanAbsoluteErrorMs": 23.37929187139186
+          }
+        },
+        {
+          "kind": "BigJump",
+          "onset80ms": {
+            "referenceCount": 25,
+            "generatedCount": 0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "meanAbsoluteErrorMs": 0.0
+          }
+        },
+        {
+          "kind": "Hold",
+          "onset80ms": {
+            "referenceCount": 9,
+            "generatedCount": 0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "meanAbsoluteErrorMs": 0.0
+          }
+        },
+        {
+          "kind": "Follow",
+          "onset80ms": {
+            "referenceCount": 0,
+            "generatedCount": 0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "meanAbsoluteErrorMs": 0.0
+          }
+        },
+        {
+          "kind": "Theme",
+          "onset80ms": {
+            "referenceCount": 7,
+            "generatedCount": 0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "meanAbsoluteErrorMs": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "MoonlightPop",
+      "role": "calibration",
+      "eventF1_80ms": [
+        0.9322709163346613,
+        0.9311740890688259
+      ],
+      "logicalEntryF1_80ms": [
+        0.7378640776699029,
+        0.7326732673267327
+      ],
+      "elements": [
+        130,
+        126
+      ],
+      "geometryValid": true,
+      "types": [
+        {
+          "kind": "Jump",
+          "onset80ms": {
+            "referenceCount": 33,
+            "generatedCount": 123,
+            "matched": 32,
+            "precision": 0.2601626016260163,
+            "recall": 0.9696969696969697,
+            "f1": 0.41025641025641024,
+            "meanAbsoluteErrorMs": 10.16070151069412
+          }
+        },
+        {
+          "kind": "BigJump",
+          "onset80ms": {
+            "referenceCount": 0,
+            "generatedCount": 0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "meanAbsoluteErrorMs": 0.0
+          }
+        },
+        {
+          "kind": "Hold",
+          "onset80ms": {
+            "referenceCount": 42,
+            "generatedCount": 1,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "meanAbsoluteErrorMs": 0.0
+          }
+        },
+        {
+          "kind": "Follow",
+          "onset80ms": {
+            "referenceCount": 0,
+            "generatedCount": 0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "meanAbsoluteErrorMs": 0.0
+          }
+        },
+        {
+          "kind": "Theme",
+          "onset80ms": {
+            "referenceCount": 3,
+            "generatedCount": 0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "meanAbsoluteErrorMs": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "LABUBUSongsPop",
+      "role": "frozen-validation",
+      "eventF1_80ms": [
+        0.5097276264591439,
+        0.5177865612648221
+      ],
+      "logicalEntryF1_80ms": [
+        0.5157232704402516,
+        0.5161290322580645
+      ],
+      "elements": [
+        180,
+        172
+      ],
+      "geometryValid": true,
+      "types": [
+        {
+          "kind": "Jump",
+          "onset80ms": {
+            "referenceCount": 98,
+            "generatedCount": 169,
+            "matched": 50,
+            "precision": 0.2958579881656805,
+            "recall": 0.5102040816326531,
+            "f1": 0.37453183520599254,
+            "meanAbsoluteErrorMs": 28.429178492854913
+          }
+        },
+        {
+          "kind": "BigJump",
+          "onset80ms": {
+            "referenceCount": 20,
+            "generatedCount": 1,
+            "matched": 1,
+            "precision": 1.0,
+            "recall": 0.05,
+            "f1": 0.09523809523809523,
+            "meanAbsoluteErrorMs": 39.56876323339653
+          }
+        },
+        {
+          "kind": "Hold",
+          "onset80ms": {
+            "referenceCount": 4,
+            "generatedCount": 0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "meanAbsoluteErrorMs": 0.0
+          }
+        },
+        {
+          "kind": "Follow",
+          "onset80ms": {
+            "referenceCount": 16,
+            "generatedCount": 0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "meanAbsoluteErrorMs": 0.0
+          }
+        },
+        {
+          "kind": "Theme",
+          "onset80ms": {
+            "referenceCount": 2,
+            "generatedCount": 0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "meanAbsoluteErrorMs": 0.0
+          }
+        }
+      ]
+    }
+  ],
+  "playableMaps": [
+    {
+      "id": "AlwaysRememberMeowCat",
+      "sha256": "dfdd4516041f5f5928619278540fb5b48f82d812b9d0d817b7ae0d7a2e05c9cd",
+      "generator": "pcm-vocal-phrase-chart-v8",
+      "duration": 157.1526530612245,
+      "countsBefore": {
+        "Start": 1,
+        "Jump": 357,
+        "Hold": 13,
+        "Follow": 2,
+        "BigJump": 1,
+        "FinishJump": 1
+      },
+      "countsAfter": {
+        "Start": 1,
+        "Jump": 300,
+        "Hold": 14,
+        "BigJump": 5,
+        "Follow": 2,
+        "FinishJump": 1
+      },
+      "elementsBefore": 385,
+      "elementsAfter": 333
+    },
+    {
+      "id": "UnstoppableGeneratorTest",
+      "sha256": "c4aed621160d028ffb803d65dc21a58ef368b2f64df7c0cb2f48732bf8ce12fa",
+      "generator": "pcm-vocal-phrase-chart-v8",
+      "duration": 67.00408163265305,
+      "countsBefore": {
+        "Start": 1,
+        "Jump": 126,
+        "Follow": 2,
+        "Hold": 14,
+        "BigJump": 4,
+        "FinishJump": 1
+      },
+      "countsAfter": {
+        "Start": 1,
+        "Jump": 117,
+        "BigJump": 7,
+        "Follow": 2,
+        "Hold": 14,
+        "FinishJump": 1
+      },
+      "elementsBefore": 158,
+      "elementsAfter": 152
+    }
+  ]
+}

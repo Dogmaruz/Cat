@@ -22,6 +22,8 @@ namespace DancingCats.Clone.Editor
             public string sourceFileSha256, sourcePcmSha256, featureSha256, separatorModelSha256, noteModelSha256, analysisVersion;
             public double rmsStep;
             public double[] pitchTimes, pitchConfidence, onset, rms, voiceStarts;
+            public string attackAnalysisVersion;
+            public double[] vocalAttackTimes = Array.Empty<double>(), vocalAttackConfidence = Array.Empty<double>();
             public int[] pitch;
             public bool audioUploaded;
         }
@@ -56,7 +58,7 @@ namespace DancingCats.Clone.Editor
 
         private static void ValidateStructure(Evidence e)
         {
-            if (e == null || e.schemaVersion != 1 || e.featureQuantization != 100000000 || e.audioUploaded || e.sampleRate < 8000 || e.channels < 1 || e.channels > 2 || e.sampleFrames < e.sampleRate
+            if (e == null || (e.schemaVersion != 1 && e.schemaVersion != 2) || e.featureQuantization != 100000000 || e.audioUploaded || e.sampleRate < 8000 || e.channels < 1 || e.channels > 2 || e.sampleFrames < e.sampleRate
                 || double.IsNaN(e.rmsStep) || double.IsInfinity(e.rmsStep) || Math.Abs(e.rmsStep - .01) > 1e-9 || e.separatorModelSha256 != SeparatorHash || e.noteModelSha256 != NoteHash
                 || !IsHash(e.sourcePcmSha256) || !IsHash(e.sourceFileSha256) || !IsHash(e.featureSha256))
                 throw new InvalidDataException("Unsupported vocal evidence schema, audio metadata or model provenance.");
@@ -71,6 +73,14 @@ namespace DancingCats.Clone.Editor
             CheckFinite(e.onset, 0, 1.00001, false); CheckFinite(e.rms, 0, 10, false); CheckFinite(e.voiceStarts, 0, duration, true);
             if (e.pitch.Any(value => value < 48 || value > 84))
                 throw new InvalidDataException("Vocal evidence pitch lies outside the measured model range.");
+            if (e.schemaVersion == 2)
+            {
+                if (e.attackAnalysisVersion != "stem-high-flux-1" || e.vocalAttackTimes == null || e.vocalAttackConfidence == null
+                    || e.vocalAttackTimes.Length != e.vocalAttackConfidence.Length)
+                    throw new InvalidDataException("Foreground attack measurements or provenance are invalid.");
+                CheckFinite(e.vocalAttackTimes, 0, duration, true);
+                CheckFinite(e.vocalAttackConfidence, 0, 1.00001, false);
+            }
             string actualHash = FeatureHash(e);
             if (actualHash != e.featureSha256)
                 throw new InvalidDataException("Vocal evidence integrity digest is invalid; regenerate the evidence. Expected " + e.featureSha256 + "; calculated " + actualHash);
@@ -369,12 +379,19 @@ namespace DancingCats.Clone.Editor
         {
             using (var stream = new MemoryStream()) using (var writer = new BinaryWriter(stream))
             {
-                writer.Write(Encoding.ASCII.GetBytes("RadioArchipelagoVoiceEvidence/quantized-1e8/1\n" + e.sourcePcmSha256 + "\n" + e.sourceFileSha256 + "\n"));
+                writer.Write(Encoding.ASCII.GetBytes("RadioArchipelagoVoiceEvidence/quantized-1e8/" + (e.schemaVersion == 2 ? "2" : "1") + "\n" + e.sourcePcmSha256 + "\n" + e.sourceFileSha256 + "\n"));
                 writer.Write(e.sampleRate); writer.Write(e.channels); writer.Write(e.sampleFrames); writer.Write(Quantize(e.rmsStep));
                 foreach (var values in new[] { e.pitchTimes, e.pitchConfidence, e.onset, e.rms, e.voiceStarts })
                 { writer.Write(values.Length); foreach (double value in values) writer.Write(Quantize(value)); }
                 writer.Write(e.pitch.Length); foreach (int value in e.pitch) writer.Write(value);
-                writer.Write(Encoding.ASCII.GetBytes(e.separatorModelSha256 + "\n" + e.noteModelSha256 + "\n")); writer.Flush();
+                writer.Write(Encoding.ASCII.GetBytes(e.separatorModelSha256 + "\n" + e.noteModelSha256 + "\n"));
+                if (e.schemaVersion == 2)
+                {
+                    writer.Write(Encoding.ASCII.GetBytes(e.attackAnalysisVersion + "\n"));
+                    foreach (var values in new[] { e.vocalAttackTimes, e.vocalAttackConfidence })
+                    { writer.Write(values.Length); foreach (double value in values) writer.Write(Quantize(value)); }
+                }
+                writer.Flush();
                 using (var sha = SHA256.Create()) return Hex(sha.ComputeHash(stream.ToArray()));
             }
         }

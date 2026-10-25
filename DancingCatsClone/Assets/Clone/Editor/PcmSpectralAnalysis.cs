@@ -10,6 +10,7 @@ namespace DancingCats.Clone.Editor
         public sealed class Result
         {
             public double[] accents = Array.Empty<double>();
+            public double[] rapidAttacks = Array.Empty<double>();
             public MusicalNote[] sustained = Array.Empty<MusicalNote>();
             public MusicalCue[] follows = Array.Empty<MusicalCue>();
             public double highBandFraction;
@@ -105,6 +106,8 @@ namespace DancingCats.Clone.Editor
                 start = frame;
             }
             return new Result { accents = accents, sustained = notes.ToArray(), highBandFraction = fraction,
+                rapidAttacks = PcmRapidArticulationAnalysis.Analyze(Peaks(fullFlux, times, 1.2, .08), times, phraseSpectra,
+                    filteredPitch, confidence, partials, analysisRate / size),
                 follows = PcmPhraseAnalysis.Analyze(accents, times, phraseSpectra, brightAttacks ? highFlux : fullFlux, analysisRate / size) };
         }
 

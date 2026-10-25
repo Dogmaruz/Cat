@@ -13,8 +13,8 @@ namespace DancingCats.Clone.Editor
     public static class AudioChartGenerator
     {
         public const string AlwaysRememberId = "AlwaysRememberMeowCat";
-        private const string Version = "pcm-phrase-chart-v7";
-        private const string VocalVersion = "pcm-vocal-phrase-chart-v7";
+        private const string Version = "pcm-phrase-chart-v8";
+        private const string VocalVersion = "pcm-vocal-phrase-chart-v8";
         private const double MinGap = .18, MaxGap = 1.95;
 
         [Serializable]
@@ -23,7 +23,8 @@ namespace DancingCats.Clone.Editor
             public int catalogId = 20001;
             public string title = "Always Remember Meow", artist = "Meow Cat";
             public float forwardSpeed = 6.5f, delayTime = .6f;
-            public bool includeHolds = true, includeMovingJumps = true, includeBigJumps = true, preferAuthoredScore = true;
+            public bool includeHolds = true, includeMovingJumps = true, includeBigJumps = true,
+                includeForegroundAccents = true, preferAuthoredScore = true;
         }
         private sealed class Analysis
         {
@@ -189,6 +190,15 @@ namespace DancingCats.Clone.Editor
                 ApplyFlights(cues, PcmFlightAnalysis.Analyze(vocalEvidence, analysis.accents.ToArray(), analysis.period, confirmedSupports),
                     vocalEvidence, finishTime - MinGap);
             }
+            // Keep physical mixed attacks authoritative for the preceding
+            // support/flight analysis. Foreground selection changes ordinary
+            // tiles only after those measured decisions are protected.
+            if (options.includeForegroundAccents)
+            {
+                cues = PcmForegroundAnalysis.Apply(cues.ToArray(), vocalEvidence, finishTime - MinGap).ToList();
+                cues = PcmForegroundAnalysis.ApplyInstrumentalRuns(cues.ToArray(), vocalEvidence,
+                    spectral.rapidAttacks, finishTime - MinGap).ToList();
+            }
             cues = PcmSparsePhraseAnalysis.Complete(cues.ToArray(), vocalEvidence,
                 options.includeHolds ? spectral.sustained : Array.Empty<MusicalNote>(), finishTime, MaxGap).ToList();
             // Automatic long notes score their measured attack and release only. Pulse-grid
@@ -207,11 +217,14 @@ namespace DancingCats.Clone.Editor
                 "Follow proposals require repeated irregular articulation patterns, near-identical normalized spectra and continuous tonal energy. Measured boundaries retain six spatial samples with an entry settle and at most one broad reversal, alternating scoop and sweep choreography.",
                 "No source identity, reference cues, arbitrary gap filler or periodic moving jumps. A musical score takes priority when its source hash matches." };
             map.normalizationNotes = map.normalizationNotes.Concat(new[] {
-                "Sparse passages beyond the 1.95-second airborne envelope may recover an audible foreground entry or a measured multi-partial harmonic body. Existing supports and subsequent attacks remain protected; actual silence receives no timer-based filler."
+                "Sparse passages beyond the 1.95-second airborne envelope may recover an audible foreground entry or a measured multi-partial harmonic body. Existing supports and subsequent attacks remain protected; actual silence receives no timer-based filler.",
+                options.includeForegroundAccents
+                    ? "Foreground selection uses source-verified separated-vocal spectral attacks and corrected-window neural onset confidence. Only a reliable foreground body can suppress accompaniment-only ordinary tiles; weak transcription, actual vocal rests and unavailable foreground evidence retain physical attacks. Strong rapid vocal articulation or source-confirmed harmonic instrumental runs during a vocal rest can restore native 125ms notes. Hold/Follow intervals and BigJump outgoing landings remain protected."
+                    : "Foreground selection disabled: ordinary physical attack cues are retained."
             }).ToArray();
             if (vocalEvidence != null)
             {
-                map.timing.warning = "Locally separated vocal evidence drives holds and conservative upper-register flights; mixed-audio recurrence drives glides. Spatial choreography is a game-design policy. This does not reproduce every designer-authored gesture.";
+                map.timing.warning = "Locally separated vocal evidence drives holds, foreground articulations and conservative flights; physical mixed-audio attacks remain inputs for support analysis. Spatial choreography is a game-design policy. This does not reproduce every designer-authored gesture.";
                 map.normalizationNotes = map.normalizationNotes.Concat(new[]
                 {
                     "Vocal evidence: " + vocalEvidence.analysisVersion + "; verified decoded PCM and feature SHA-256: " + vocalEvidence.featureSha256,

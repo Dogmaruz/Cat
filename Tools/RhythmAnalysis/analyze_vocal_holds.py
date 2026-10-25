@@ -18,10 +18,15 @@ def digest(data):return hashlib.sha256(data).hexdigest()
 
 def evidence_digest(e):
     quantize=lambda value:int(math.floor(value*100000000+.5))
-    chunks=[b'RadioArchipelagoVoiceEvidence/quantized-1e8/1\n',(e['sourcePcmSha256']+'\n'+e['sourceFileSha256']+'\n').encode('ascii'),struct.pack('<iiiq',e['sampleRate'],e['channels'],e['sampleFrames'],quantize(e['rmsStep']))]
+    schema=e.get('schemaVersion',1)
+    chunks=[f'RadioArchipelagoVoiceEvidence/quantized-1e8/{schema}\n'.encode('ascii'),(e['sourcePcmSha256']+'\n'+e['sourceFileSha256']+'\n').encode('ascii'),struct.pack('<iiiq',e['sampleRate'],e['channels'],e['sampleFrames'],quantize(e['rmsStep']))]
     for key in ['pitchTimes','pitchConfidence','onset','rms','voiceStarts']:
         values=e[key];chunks.extend([struct.pack('<i',len(values)),struct.pack('<'+'q'*len(values),*(quantize(value)for value in values))])
     chunks.extend([struct.pack('<i',len(e['pitch'])),struct.pack('<'+'i'*len(e['pitch']),*e['pitch']),(e['separatorModelSha256']+'\n'+e['noteModelSha256']+'\n').encode('ascii')])
+    if schema==2:
+        chunks.append((e['attackAnalysisVersion']+'\n').encode('ascii'))
+        for key in ['vocalAttackTimes','vocalAttackConfidence']:
+            values=e[key];chunks.extend([struct.pack('<i',len(values)),struct.pack('<'+'q'*len(values),*(quantize(value)for value in values))])
     return digest(b''.join(chunks))
 
 def model_files(folder,download):
@@ -91,18 +96,31 @@ def envelope_starts(energy):
         starts.extend(float(i*.01)for i,j in zip(a,b)if .4<=(j-i)*.01<=1.8)
     return sorted(set(starts))
 
-def source_attacks(x,rate):
+def source_attacks(x,rate,threshold=1.6,minimum_gap=.16):
     step=max(1,rate//11025);dsrate=rate/step;hop=round(dsrate*.01);mags=0
     for ch in range(x.shape[1]):
         samples=np.convolve(x[:,ch],np.ones(step*2+1)/(step*2+1),'same')[::step]
         if len(samples)<1024:return []
         frames=np.lib.stride_tricks.sliding_window_view(samples,1024)[::hop];mags+=abs(np.fft.rfft(frames*np.hanning(1024),axis=1))/x.shape[1]
     times=(np.arange(len(mags))*hop+512)/dsrate;freq=np.fft.rfftfreq(1024,1/dsrate);z=np.log1p(mags[:,(freq>=2500)&(freq<=5000)]*12);flux=np.maximum(0,np.diff(z,axis=0,prepend=z[:1])).mean(axis=1)
+    if float(flux.max())<1e-8:return []
     mean=np.convolve(flux,np.ones(81),'same')/np.convolve(np.ones(len(flux)),np.ones(81),'same');peaks=np.flatnonzero((flux[1:-1]>=flux[:-2])&(flux[1:-1]>flux[2:]))+1
-    peaks=[i for i in peaks if flux[i]>max(float(flux.max())*.02,mean[i]*1.6)];selected=[]
+    peaks=[i for i in peaks if flux[i]>max(float(flux.max())*.02,mean[i]*threshold)];selected=[]
     for i in sorted(peaks,key=lambda i:-flux[i]):
-        if all(abs(times[i]-times[j])>=.16-1e-6 for j in selected):selected.append(i)
+        if all(abs(times[i]-times[j])>=minimum_gap-1e-6 for j in selected):selected.append(i)
     return sorted(float(times[i])for i in selected)
+
+def foreground_attack_features(vocals,notes):
+    if vocals.ndim!=2 or vocals.shape[0]not in(1,2)or not np.isfinite(vocals).all():
+        raise ValueError('Expected finite channel-first separated vocals at 44100 Hz')
+    attacks=source_attacks(vocals.T,44100,threshold=1.2,minimum_gap=.08)
+    times=np.asarray(notes['times']);onset=np.asarray(notes['onset'])[:,27:64].max(axis=1)
+    confidence=[]
+    for attack in attacks:
+        first=int(np.searchsorted(times,attack-.025));last=int(np.searchsorted(times,attack+.10,side='right'))
+        confidence.append(float(onset[first:last].max())if last>first else 0.)
+    return dict(attackAnalysisVersion='stem-high-flux-1',vocalAttackTimes=np.round(attacks,8).tolist(),
+                vocalAttackConfidence=np.round(confidence,7).tolist())
 
 def build_evidence(source,rate,pcm,vocals,notes):
     # Pitch keeps its native neural frame times; RMS is exactly 100Hz. Keeping native
@@ -276,7 +294,7 @@ def classify(e,attacks,beatPeriod=0):
     return sorted(result,key=lambda c:c['time'])
 
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--input',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--deps',type=Path);parser.add_argument('--cache-dir',type=Path,required=True);parser.add_argument('--model-dir',type=Path);parser.add_argument('--download-models',action='store_true');parser.add_argument('--diagnostics',type=Path);parser.add_argument('--decoded-pcm',type=Path,help='Optional actual Unity GetData interleaved float32 little-endian PCM');parser.add_argument('--decoded-metadata',type=Path,help='Verified sourceFileSha256/sourcePcmSha256/sampleRate/channels/sampleFrames metadata');parser.add_argument('--beat-period',type=float,default=0,help='Measured generator pulse period; enables musical cadence/handoff policies. Zero disables those policies.');args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--input',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--deps',type=Path);parser.add_argument('--cache-dir',type=Path,required=True);parser.add_argument('--model-dir',type=Path);parser.add_argument('--download-models',action='store_true');parser.add_argument('--diagnostics',type=Path);parser.add_argument('--decoded-pcm',type=Path,help='Optional actual Unity GetData interleaved float32 little-endian PCM');parser.add_argument('--decoded-metadata',type=Path,help='Verified sourceFileSha256/sourcePcmSha256/sampleRate/channels/sampleFrames metadata');parser.add_argument('--base-evidence',type=Path,help='Preserve a verified historical pitch/hold measurement group while adding independent native-clock foreground attacks');parser.add_argument('--beat-period',type=float,default=0,help='Measured generator pulse period; enables musical cadence/handoff policies. Zero disables those policies.');args=parser.parse_args()
     if args.deps:sys.path.insert(0,str(args.deps.resolve()))
     global np,ort,resample_poly,sosfiltfilt,butter,uniform_filter1d,percentile_filter,binary_closing,median_filter,find_peaks
     import numpy as np
@@ -313,7 +331,17 @@ def main():
     if not prediction.exists():np.savez_compressed(prediction,**transcribe(vocals,models/'nmp.onnx'))
     notes=np.load(prediction)
     if 'timingVersion'not in notes or str(notes['timingVersion'])!=TRANSCRIPTION_VERSION:raise ValueError('Transcription cache timing version mismatch; regenerate notes')
-    evidence=build_evidence(args.input,rate,pcm,vocals,notes);evidence['featureSha256']=evidence_digest(evidence);args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(evidence,separators=(',',':'))+'\n')
+    evidence=build_evidence(args.input,rate,pcm,vocals,notes)
+    if args.base_evidence:
+        base=json.loads(args.base_evidence.read_text())
+        if base.get('schemaVersion')not in(1,2)or base.get('audioUploaded')or base.get('featureSha256')!=evidence_digest(base):
+            raise ValueError('Base evidence schema/integrity is invalid')
+        for key in ['sourcePcmSha256','sourceFileSha256','sampleRate','channels','sampleFrames','rmsStep','separatorModelSha256','noteModelSha256']:
+            if base[key]!=evidence[key]:raise ValueError('Historical measurement input mismatch: '+key)
+        evidence=base
+    evidence.update(foreground_attack_features(vocals,notes));evidence['schemaVersion']=2
+    evidence['analysisVersion']=evidence['analysisVersion'].split('+stem-high-flux-1')[0]+'+stem-high-flux-1'
+    evidence['featureSha256']=evidence_digest(evidence);args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(evidence,separators=(',',':'))+'\n')
     if args.diagnostics:
         holds=classify(evidence,source_attacks(pcm,rate),args.beat_period);args.diagnostics.parent.mkdir(parents=True,exist_ok=True);args.diagnostics.write_text(json.dumps(dict(sourcePcmSha256=evidence['sourcePcmSha256'],beatPeriod=args.beat_period,candidates=holds),indent=2)+'\n')
     print(str(args.output))

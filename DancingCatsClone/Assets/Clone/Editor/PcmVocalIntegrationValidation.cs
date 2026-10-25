@@ -49,7 +49,7 @@ namespace DancingCats.Clone.Editor
                 var again = AudioChartGenerator.GenerateFromSamples(pcm, clip.frequency, clip.channels, "VocalIntegration", Options(), evidence);
                 Require(JsonUtility.ToJson(map) == JsonUtility.ToJson(again),
                     "Identical decoded PCM and verified vocal evidence must compile deterministically.");
-                Require(map.audio.rawSha256 == digest && map.sourceMapBundle == "pcm-vocal-phrase-chart-v7",
+                Require(map.audio.rawSha256 == digest && map.sourceMapBundle == "pcm-vocal-phrase-chart-v8",
                     "The compiled chart must retain its actual PCM identity and vocal analysis provenance.");
                 SameSupports(map, "Hold", expectedHolds);
                 SameSupports(map, "Follow", expectedGlides);
@@ -60,6 +60,12 @@ namespace DancingCats.Clone.Editor
                     "includeBigJumps controls large launches independently of Holds and Follow.");
                 SameSupports(withoutFlights, "Hold", expectedHolds);
                 SameSupports(withoutFlights, "Follow", expectedGlides);
+                var physicalOnlyOptions = Options(); physicalOnlyOptions.includeForegroundAccents = false;
+                var physicalOnly = AudioChartGenerator.GenerateFromSamples(pcm, clip.frequency, clip.channels, "VocalPhysicalOnly", physicalOnlyOptions, evidence);
+                SameSupports(physicalOnly, "Hold", expectedHolds);
+                SameSupports(physicalOnly, "Follow", expectedGlides);
+                Require(physicalOnly.segments.Count(segment => segment.kind == "Jump") > map.segments.Count(segment => segment.kind == "Jump"),
+                    "Foreground articulation must filter ordinary accompaniment accents while preserving support boundaries.");
                 AudioChartGeneratorValidation.ValidateMap(map);
                 var voiceOnly = expectedHolds.Where(cue => !spectral.accents.Any(attack => Math.Abs(attack - cue.time) <= .08)).ToArray();
                 Require(voiceOnly.Length > 0,

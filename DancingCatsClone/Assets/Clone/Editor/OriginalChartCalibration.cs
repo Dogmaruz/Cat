@@ -17,6 +17,10 @@ namespace DancingCats.Clone.Editor
         {
             public string stage, referenceId, referenceMapSha256, sourceAudioSha256, generator;
             public double duration, heldOutStart;
+            public float referenceForwardSpeed, referenceDelayTime, generatedForwardSpeed, generatedDelayTime;
+            public string sourcePcmSha256, voiceFeatureSha256, voiceAnalysisVersion;
+            public bool geometryValid;
+            public string geometryValidationError;
             public int referenceElements, generatedElements, referenceEvents, generatedEvents;
             public Evaluation all, calibration, heldOut;
             public Evaluation logicalSupports, logicalHeldOut;
@@ -78,12 +82,16 @@ namespace DancingCats.Clone.Editor
         }
 
         public static void RunBaseline() => Run("baseline");
+        public static void RunCandidate() => Run("candidate");
         public static void ExportPcmForAnalysis() => VocalPcmExport.Export(RecoveredCatalog.LoadOriginal().Single(song => song.id == ReferenceId).LoadAudio());
         public static void RunChecks()
         {
             CheckMetricFixtures();
             AudioChartGeneratorValidation.RunChecks();
             PcmPhraseAnalysisValidation.RunChecks();
+            PcmVocalEvidenceValidation.RunChecks();
+            PcmForegroundAnalysisValidation.RunChecks();
+            PcmRapidArticulationAnalysisValidation.RunChecks();
             PcmFlightAnalysisValidation.RunChecks();
             PcmSparsePhraseAnalysisValidation.RunChecks();
             PcmVocalIntegrationValidation.RunChecks();
@@ -122,6 +130,26 @@ namespace DancingCats.Clone.Editor
         {
             if (stage == "candidate") ArchivePreviousCandidate();
             var record = RecoveredCatalog.LoadOriginal().Single(song => song.id == ReferenceId);
+            var clip = record.LoadAudio();
+            if (clip == null) throw new FileNotFoundException("Calibration AudioClip is missing: " + record.audioResource);
+            EvaluateSong(record, stage, Output, record.delayTime, PcmVocalAnalysis.LoadForClip(clip),
+                "Repeated within-song calibration; the last third is not an independent or blind generalization test.");
+        }
+
+        /// <summary>Evaluate a generated chart in memory; only Library reports are written, never a playable map or catalog.</summary>
+        public static void EvaluateSong(SongRecord record, string stage, string outputDirectory,
+            float generatedDelayTime, PcmVocalAnalysis.Evidence vocalEvidence, string evaluationScope)
+        {
+            if (record == null) throw new ArgumentNullException(nameof(record));
+            if (string.IsNullOrEmpty(stage) || stage.Any(character => !char.IsLetterOrDigit(character) && character != '-' && character != '_'))
+                throw new ArgumentException("A report stage must be a simple file name.", nameof(stage));
+            outputDirectory = Path.GetFullPath(outputDirectory);
+            string library = Path.GetFullPath("Library") + Path.DirectorySeparatorChar;
+            if (!outputDirectory.StartsWith(library, StringComparison.OrdinalIgnoreCase))
+                throw new ArgumentException("Calibration output must remain inside this project's Library.", nameof(outputDirectory));
+            string reportPath = Path.Combine(outputDirectory, stage + ".json");
+            if (stage == "baseline" && File.Exists(reportPath))
+                throw new InvalidOperationException("The existing baseline is immutable; archive it explicitly before repeating baseline capture.");
             string referencePath = Path.GetFullPath("Assets/Resources/" + record.timelineResource + ".json");
             string originalHash = Hash(referencePath);
             var reference = JsonUtility.FromJson<MapTimeline>(File.ReadAllText(referencePath));
@@ -141,14 +169,20 @@ namespace DancingCats.Clone.Editor
                     "PcmEvaluation", new AudioChartGenerator.Options
                     {
                         catalogId = 29001, title = "PCM evaluation", artist = "Offline analysis",
-                        forwardSpeed = reference.forwardSpeed, delayTime = reference.delayTime
-                    }, PcmVocalAnalysis.LoadForClip(clip));
+                        forwardSpeed = record.forwardSpeed, delayTime = generatedDelayTime
+                    }, vocalEvidence);
                 double duration = (double)clip.samples / clip.frequency;
                 double split = duration * 2 / 3;
                 var report = new Report
                 {
-                    stage = stage, referenceId = ReferenceId, referenceMapSha256 = originalHash,
+                    stage = stage, referenceId = record.id, referenceMapSha256 = originalHash,
                     sourceAudioSha256 = audioHash, duration = duration, heldOutStart = split,
+                    sourcePcmSha256 = generated.sourceMapBundleSha256,
+                    voiceFeatureSha256 = vocalEvidence?.featureSha256,
+                    voiceAnalysisVersion = vocalEvidence?.analysisVersion,
+                    referenceForwardSpeed = reference.forwardSpeed, referenceDelayTime = reference.delayTime,
+                    generatedForwardSpeed = generated.forwardSpeed, generatedDelayTime = generated.delayTime,
+                    evaluationScope = evaluationScope,
                     generator = generated.sourceMapBundle,
                     referenceElements = reference.elements.Length, generatedElements = generated.elements.Length,
                     referenceEvents = reference.events.Length, generatedEvents = generated.events.Length,
@@ -161,7 +195,9 @@ namespace DancingCats.Clone.Editor
                     referenceHeldSeconds = reference.segments.Where(IsHeld).Sum(segment => segment.duration),
                     generatedHeldSeconds = generated.segments.Where(IsHeld).Sum(segment => segment.duration)
                 };
-                string baselineMapPath = Path.Combine(Output, "baseline.generated.timeline.json");
+                try { AudioChartGeneratorValidation.ValidateMap(generated); report.geometryValid = true; }
+                catch (Exception error) { report.geometryValidationError = error.Message; }
+                string baselineMapPath = Path.Combine(outputDirectory, "baseline.generated.timeline.json");
                 if (File.Exists(baselineMapPath))
                 {
                     var baselineMap = JsonUtility.FromJson<MapTimeline>(File.ReadAllText(baselineMapPath));
@@ -188,16 +224,13 @@ namespace DancingCats.Clone.Editor
                 report.supportDetails = SupportDetails(reference, generated);
                 report.falsePositiveSupports = FalsePositiveSupports(reference, generated);
                 report.followPaths = FollowPaths(reference, generated);
-                string previousV3Map = Path.Combine(Output, "v4/pre-v4.generated.timeline.json");
+                string previousV3Map = Path.Combine(outputDirectory, "v4/pre-v4.generated.timeline.json");
                 if (File.Exists(previousV3Map))
                     report.previousV3SustainedSupports = SustainedMetrics(reference, JsonUtility.FromJson<MapTimeline>(File.ReadAllText(previousV3Map)));
-                Directory.CreateDirectory(Output);
-                string reportPath = Path.Combine(Output, stage + ".json");
-                if (stage == "baseline" && File.Exists(reportPath))
-                    throw new InvalidOperationException("The existing baseline is immutable; archive it explicitly before repeating baseline capture.");
-                File.WriteAllText(Path.Combine(Output, stage + ".generated.timeline.json"), JsonUtility.ToJson(generated, true));
+                Directory.CreateDirectory(outputDirectory);
+                File.WriteAllText(Path.Combine(outputDirectory, stage + ".generated.timeline.json"), JsonUtility.ToJson(generated, true));
                 File.WriteAllText(reportPath, JsonUtility.ToJson(report, true));
-                WriteSupportCsv(Path.Combine(Output, stage + ".supports.csv"), report);
+                WriteSupportCsv(Path.Combine(outputDirectory, stage + ".supports.csv"), report);
                 Debug.Log("ORIGINAL_CHART_CALIBRATION " + stage + ": F1@40=" + report.all.within40ms.f1.ToString("F4", CultureInfo.InvariantCulture)
                     + ", F1@80=" + report.all.within80ms.f1.ToString("F4", CultureInfo.InvariantCulture)
                     + ", final-third F1@80=" + report.heldOut.within80ms.f1.ToString("F4", CultureInfo.InvariantCulture)

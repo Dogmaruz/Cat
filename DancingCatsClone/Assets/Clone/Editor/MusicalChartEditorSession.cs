@@ -168,6 +168,10 @@ namespace DancingCats.Clone.Editor
                         RequireEditMode();
                         Invoke("OriginalChartCalibration", "RunChecks");
                         break;
+                    case "chart-original-measure":
+                        RequireEditMode();
+                        Invoke("OriginalChartCalibration", "RunCandidate");
+                        break;
                     case "chart-original-export-pcm":
                         RequireEditMode();
                         Invoke("OriginalChartCalibration", "ExportPcmForAnalysis");
@@ -191,6 +195,42 @@ namespace DancingCats.Clone.Editor
                     case "chart-custom-spectral":
                         RequireEditMode();
                         Invoke("AudioChartGenerator", "ExportAlwaysRememberSpectralEvidence");
+                        break;
+                    case "chart-benchmark-export-calibration":
+                        RequireEditMode();
+                        Invoke("PcmChartBenchmark", "ExportCalibrationPcm");
+                        break;
+                    case "chart-benchmark-export-validation":
+                        RequireEditMode();
+                        Invoke("PcmChartBenchmark", "ExportValidationPcm");
+                        break;
+                    case "chart-benchmark-baseline":
+                        RequireEditMode();
+                        Invoke("PcmChartBenchmark", "RunCalibrationBaseline");
+                        break;
+                    case "chart-evidence-checks":
+                        RequireEditMode();
+                        Invoke("PcmVocalEvidenceValidation", "RunChecks");
+                        break;
+                    case "chart-foreground-checks":
+                        RequireEditMode();
+                        Invoke("PcmForegroundAnalysisValidation", "RunChecks");
+                        break;
+                    case "chart-rapid-checks":
+                        RequireEditMode();
+                        Invoke("PcmRapidArticulationAnalysisValidation", "RunChecks");
+                        break;
+                    case "chart-benchmark-candidate":
+                        RequireEditMode();
+                        Invoke("PcmChartBenchmark", "RunCalibrationCandidate");
+                        break;
+                    case "chart-validation-baseline":
+                        RequireEditMode();
+                        Invoke("PcmChartBenchmark", "RunFrozenBaseline");
+                        break;
+                    case "chart-validation-candidate":
+                        RequireEditMode();
+                        Invoke("PcmChartBenchmark", "RunFrozenCandidate");
                         break;
                     case "chart-original-publish":
                         RequireEditMode();

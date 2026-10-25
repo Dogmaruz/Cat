@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "createdDate": "2026-10-25",
+  "baselineCommit": "609db3aba74b56fc80ed0b5bc9323c81d9855085",
+  "sourceCatalogCount": 58,
+  "sourceCatalogSha256": "27541bd294668d686a8346caf379c7b1236fe70dfd8a03c898764cc0116e95aa",
+  "policy": "Read source metadata/counts for stratification only. Frozen validation signal features, event times and candidate errors must not guide tuning. This is stratified frozen validation, not a claim that selection ignored all labels.",
+  "selection": [
+    {
+      "role": "calibration-dense",
+      "criterion": "max jumpDensityPerMinute; tie: ordinal id; exclude Unstoppable and already selected source audio",
+      "id": "TwinkleLittleStar",
+      "title": "Twinkle Twinkle Little Star",
+      "catalogId": 26,
+      "duration": 67.03020408163265,
+      "audioResource": "OriginalAudio/Music/TwinkleLittleStar__7681580570051076149",
+      "timelineResource": "OriginalData/Maps/TwinkleLittleStar.timeline",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/TwinkleLittleStar__7681580570051076149.ogg",
+      "sourceFileSha256": "0cd8dc69f01e117562bf8d21afa17225c5594e7e1ba0920444275953fddec44f",
+      "referenceMapSha256": "96657140ead6377636747c6619bd3e060c60bfe41f32276c4436dbf6b15754db",
+      "typeCounts": {
+        "Start": 1,
+        "BigJump": 25,
+        "Jump": 234,
+        "Theme": 7,
+        "FinishJump": 1,
+        "Hold": 9
+      },
+      "jumpDensityPerMinute": 231.83578526890105,
+      "holdDensityPerMinute": 8.0560697583788,
+      "followDensityPerMinute": 0.0,
+      "forwardSpeed": 10.5,
+      "delayTime": 0.44999998807907104
+    },
+    {
+      "role": "calibration-sustain",
+      "criterion": "max holdDensityPerMinute; tie: ordinal id; exclude Unstoppable and already selected source audio",
+      "id": "MoonlightPop",
+      "title": "Moonlight",
+      "catalogId": 38,
+      "duration": 40.01959183673469,
+      "audioResource": "OriginalAudio/Music/Moonlight__6113832926828226045",
+      "timelineResource": "OriginalData/Maps/MoonlightPop.timeline",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/Moonlight__6113832926828226045.ogg",
+      "sourceFileSha256": "35cb4620f0b6436f8c918538ecc6e3e81ef6180a2fb4ba4fd39931156909b843",
+      "referenceMapSha256": "ae158d469109c32c621cbe915062e3ff5129abe1c1001343f557f8ba0e7b3804",
+      "typeCounts": {
+        "Start": 1,
+        "Hold": 42,
+        "Jump": 33,
+        "Theme": 3,
+        "FinishJump": 1
+      },
+      "jumpDensityPerMinute": 49.47576697127938,
+      "holdDensityPerMinute": 62.96915796344648,
+      "followDensityPerMinute": 0.0,
+      "forwardSpeed": 9.0,
+      "delayTime": 0.44501134753227234
+    },
+    {
+      "role": "frozen-validation-follow",
+      "criterion": "max followDensityPerMinute; tie: ordinal id; exclude Unstoppable and already selected source audio",
+      "id": "LABUBUSongsPop",
+      "title": "LABUBU Songs",
+      "catalogId": 12,
+      "duration": 57.49551020408163,
+      "audioResource": "OriginalAudio/Music/LABUBUSongsPop__594992986718749422",
+      "timelineResource": "OriginalData/Maps/LABUBUSongsPop.timeline",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/LABUBUSongsPop__594992986718749422.ogg",
+      "sourceFileSha256": "dadc0644e3f1b2fe9d9f10f19b0df81eff5dcf087cc382d9a44e74a2a6a57190",
+      "referenceMapSha256": "1e9b3f9363637f19b2bcaa45fe361a6ab13ac8c4b9c3ad45d50a6d1d58ef108f",
+      "typeCounts": {
+        "Start": 1,
+        "Jump": 98,
+        "Follow": 16,
+        "BigJump": 20,
+        "Theme": 2,
+        "FinishJump": 1,
+        "Hold": 4
+      },
+      "jumpDensityPerMinute": 123.14004997728306,
+      "holdDensityPerMinute": 4.174238982280781,
+      "followDensityPerMinute": 16.696955929123124,
+      "forwardSpeed": 9.0,
+      "delayTime": 0.13231292366981506
+    }
+  ],
+  "duplicateSourceGroups": [
+    {
+      "sourceFileSha256": "21c88c00e98b1202c469982c751c95a795c321e109245801e745512062b8f8ef",
+      "ids": [
+        "UnityPop054",
+        "UnityPop"
+      ]
+    }
+  ]
+}

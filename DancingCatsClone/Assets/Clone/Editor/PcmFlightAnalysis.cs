@@ -5,8 +5,8 @@ using System.Linq;
 namespace DancingCats.Clone.Editor
 {
     /// <summary>
-    /// Optional musical policy: an articulated, stable upper-register vocal body may
-    /// launch a large airborne gesture until a measured post-release attack. This is
+    /// Optional musical policy: an articulated, stable upper-register or common-tone
+    /// vocal body may launch an airborne gesture until a measured post-release attack. This is
     /// a conservative authoring decision, not a reconstruction of a designer's tile labels.
     /// </summary>
     public static class PcmFlightAnalysis
@@ -85,7 +85,68 @@ namespace DancingCats.Clone.Editor
                     reason = "Upper-register flight policy: stable articulated foreground body, measured vocal release and post-release attack; accompaniment peaks remain airborne."
                 });
             }
-            return result.ToArray();
+            AddModalCadences(evidence, attacks, beatPeriod, supports, starts, result);
+            return result.OrderBy(flight => flight.time).ToArray();
+        }
+
+        private static void AddModalCadences(PcmVocalAnalysis.Evidence evidence, double[] attacks,
+            double beatPeriod, MusicalCue[] supports, List<double> envelopeStarts, List<Flight> result)
+        {
+            // An RMS envelope can fuse a short pickup and a sustained syllable on
+            // the same pitch. Independently measured stem attacks retain that
+            // articulation, and distinguish a cadence from repeated short notes.
+            if (evidence.schemaVersion < 2 || evidence.vocalAttackTimes.Length == 0) return;
+            var audiblePitches = new Dictionary<int, int>();
+            for (int i = 0; i < evidence.pitch.Length; i++)
+            {
+                int frame = Math.Min(evidence.rms.Length - 1, (int)Math.Floor(evidence.pitchTimes[i] / evidence.rmsStep));
+                if (evidence.pitchConfidence[i] < .45 || evidence.rms[frame] < .005) continue;
+                int pitch = evidence.pitch[i];
+                audiblePitches.TryGetValue(pitch, out int count); audiblePitches[pitch] = count + 1;
+            }
+            if (audiblePitches.Count == 0) return;
+            int commonPitch = audiblePitches.OrderByDescending(pair => pair.Value).ThenBy(pair => pair.Key).First().Key;
+            var articulations = evidence.vocalAttackTimes.Where((time, i) => evidence.vocalAttackConfidence[i] >= .60).ToArray();
+            foreach (double start in articulations)
+            {
+                int first = LowerBound(evidence.pitchTimes, start + .14 * beatPeriod);
+                int last = LowerBound(evidence.pitchTimes, start + .92 * beatPeriod);
+                if (first >= last || last - first < 10) continue;
+                int mode = Enumerable.Range(first, last - first).GroupBy(i => evidence.pitch[i])
+                    .OrderByDescending(group => group.Count()).ThenBy(group => group.Key).First().Key;
+                if (mode != commonPitch) continue;
+                double stable = 0, confidence = 0;
+                for (int i = first; i < last; i++)
+                { if (Math.Abs(evidence.pitch[i] - mode) <= 1) stable++; confidence += evidence.pitchConfidence[i]; }
+                stable /= last - first; confidence /= last - first;
+                if (stable < .90 || confidence < .40) continue;
+                int peakFirst = (int)Math.Ceiling(start / evidence.rmsStep);
+                int peakLast = Math.Min(evidence.rms.Length, (int)Math.Ceiling((start + 1.06 * beatPeriod) / evidence.rmsStep));
+                double peak = 0;
+                for (int i = peakFirst; i < peakLast; i++) peak = Math.Max(peak, evidence.rms[i]);
+                if (peak < .005 || BelowFor(evidence, start + .03, start + .64 * beatPeriod, peak * .10, .06)) continue;
+                double release = FindRelease(evidence, start + .68 * beatPeriod, start + 2.12 * beatPeriod, peak * .30);
+                if (!Finite(release)) continue;
+                var landings = attacks.Where(time => time >= release && time > start + beatPeriod && time < start + 2.22 * beatPeriod).ToArray();
+                if (landings.Length == 0) continue;
+                double landing = landings[0];
+                var near = attacks.Where(time => Math.Abs(time - start) <= .08).OrderBy(time => Math.Abs(time - start)).ThenBy(time => time).ToArray();
+                double launch = near.Length == 0 ? start : near[0];
+                if (near.Length == 0)
+                {
+                    var envelopes = envelopeStarts.Where(time => Math.Abs(time - start) <= .08)
+                        .OrderBy(time => Math.Abs(time - start)).ThenBy(time => time).ToArray();
+                    if (envelopes.Length > 0) launch = envelopes[0];
+                }
+                if (articulations.Any(time => time > start + .12 && time < Math.Min(release, landing - .12))) continue;
+                if (supports.Any(cue => launch < cue.endTime + .078 && landing > cue.time + .001)) continue;
+                // Earlier upper-register proposals have priority. Repeated nearby
+                // spectral peaks which describe this same body cannot duplicate it.
+                if (result.Any(flight => launch < flight.landingTime - .078 && landing > flight.time + .078)) continue;
+                result.Add(new Flight { time = launch, landingTime = landing, vocalStart = start, releaseTime = release,
+                    confidence = Math.Min(stable, confidence),
+                    reason = "Common-tone cadence policy: a confirmed stem articulation, stable audible modal body and measured release; repeated same-pitch syllables remain separate." });
+            }
         }
 
         private static double FindRelease(PcmVocalAnalysis.Evidence e, double from, double to, double threshold)

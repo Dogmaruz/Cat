@@ -56,7 +56,85 @@ namespace DancingCats.Clone.Editor
             var shiftedActual = Invoke(analyze, shifted, new[] { 3.03, 3.20, 3.35, 3.70 }, .5);
             Require(shiftedActual.Length == 1 && Math.Abs(Number(shiftedActual.GetValue(0), "time") - 3.03) < 1e-8,
                 "moving the phrase in time moves its flight instead of retaining a song-specific timestamp");
-            Debug.Log("PCM_FLIGHT_ANALYSIS PASS: 16 counterfactual cases; foreground plateau versus silence, percussion, low/flat register, pitch outlier, ornament and rearticulation; protected support, measured landing, tempo-relative pulse, malformed input, pitch/time invariance.");
+            CheckModalCadences(analyze);
+            Debug.Log("PCM_FLIGHT_ANALYSIS PASS: legacy upper-register and measured modal-cadence cases; silence, uncertainty, repeated same-pitch articulation, non-modal notes, protected support, real landing, malformed input and pitch/time invariance.");
+        }
+
+        private static void CheckModalCadences(MethodInfo analyze)
+        {
+            var positive = ModalFixture();
+            var actual = Invoke(analyze, positive, new[] { 2.03, 2.20, 2.35, 2.70 }, .5);
+            Require(actual.Length == 1 && Math.Abs(Number(actual.GetValue(0), "time") - 2.03) < 1e-8
+                && Math.Abs(Number(actual.GetValue(0), "landingTime") - 2.70) < 1e-8,
+                "a confirmed stable cadence on the recording's common audible pitch can launch below the upper register");
+            var repeated = ModalFixture();
+            repeated.vocalAttackTimes = new[] { 2.0, 2.20, 2.40 };
+            repeated.vocalAttackConfidence = new[] { .8, .8, .8 }; Seal(repeated);
+            Require(Invoke(analyze, repeated, new[] { 2.03, 2.20, 2.40, 2.70 }, .5).Length == 0,
+                "repeated same-pitch vocal attacks remain separate rather than being swallowed by one modal flight");
+            var nonmodal = ModalFixture(); PaintPitch(nonmodal, 2, 2.5, 69); Seal(nonmodal);
+            Require(Invoke(analyze, nonmodal, new[] { 2.03, 2.70 }, .5).Length == 0,
+                "an ordinary lower note does not become a cadence merely because its pitch is stable");
+            var silent = ModalFixture();
+            for (int i = 200; i < 250; i++) silent.rms[i] = 0;
+            Seal(silent);
+            Require(Invoke(analyze, silent, new[] { 2.03, 2.70 }, .5).Length == 0,
+                "a confirmed attack probability over actual vocal silence cannot launch a modal flight");
+            var quiet = ModalFixture();
+            for (int i = 200; i < 250; i++) quiet.rms[i] = .001;
+            Seal(quiet);
+            Require(Invoke(analyze, quiet, new[] { 2.03, 2.70 }, .5).Length == 0,
+                "near-silent residual energy cannot support a modal flight even with confident synthetic pitch and attack traces");
+            var weak = ModalFixture(); weak.vocalAttackConfidence[0] = .59; Seal(weak);
+            Require(Invoke(analyze, weak, new[] { 2.03, 2.70 }, .5).Length == 0,
+                "a weak neural confirmation cannot turn a stem fluctuation into a new modal flight");
+            var legacy = ModalFixture(); legacy.schemaVersion = 1; legacy.attackAnalysisVersion = null;
+            legacy.vocalAttackTimes = legacy.vocalAttackConfidence = null; Seal(legacy);
+            Require(Invoke(analyze, legacy, new[] { 2.03, 2.70 }, .5).Length == 0,
+                "legacy evidence without independently measured vocal attacks keeps the conservative upper-register policy");
+            Require(Invoke(analyze, positive, new[] { 2.03, 2.70 }, .5,
+                new[] { new MusicalCue { kind = "Hold", time = 2.2, endTime = 2.6 } }).Length == 0,
+                "a modal cadence cannot replace a confirmed sustained support");
+            Require(Invoke(analyze, positive, new[] { 2.03, 2.35 }, .5).Length == 0,
+                "a modal cadence needs a measured post-release landing");
+            var transposed = ModalFixture();
+            for (int i = 0; i < transposed.pitch.Length; i++) transposed.pitch[i] -= 7;
+            Seal(transposed);
+            Require(Invoke(analyze, transposed, new[] { 2.03, 2.70 }, .5).Length == 1,
+                "a whole-recording pitch transposition preserves common-tone cadence decisions");
+            var shifted = ModalFixture(1);
+            var shiftedActual = Invoke(analyze, shifted, new[] { 3.03, 3.20, 3.35, 3.70 }, .5);
+            Require(shiftedActual.Length == 1 && Math.Abs(Number(shiftedActual.GetValue(0), "time") - 3.03) < 1e-8,
+                "a time-shifted cadence follows measured attack times rather than a fixed song position");
+            var both = ModalFixture();
+            for (int i = 500; i < 640; i++) { both.rms[i] = 0; both.pitchConfidence[i] = .1; }
+            PaintAudible(both, 5, 5.5, 75, .8, .16);
+            PaintAudible(both, 6, 6.9, 75, .8, .08);
+            both.voiceStarts = new[] { 2.0, 5.0 };
+            both.vocalAttackTimes = new[] { 2.0, 5.0 }; both.vocalAttackConfidence = new[] { .8, .8 }; Seal(both);
+            var composed = Invoke(analyze, both, new[] { 2.03, 2.70, 5.03, 5.70 }, .5);
+            Require(composed.Length == 2 && Math.Abs(Number(composed.GetValue(0), "time") - 2.03) < 1e-8
+                && Math.Abs(Number(composed.GetValue(1), "time") - 5.03) < 1e-8,
+                "the new common-tone cadence composes with the existing upper flight and returns chronological launches");
+        }
+
+        private static PcmVocalAnalysis.Evidence ModalFixture(double offset = 0)
+        {
+            var e = Fixture(offset);
+            e.schemaVersion = 2; e.attackAnalysisVersion = "stem-high-flux-1";
+            e.vocalAttackTimes = new[] { 2 + offset }; e.vocalAttackConfidence = new[] { .8 };
+            for (int i = 0; i < e.pitch.Length; i++) { e.pitch[i] = 67; e.pitchConfidence[i] = .1; e.rms[i] = 0; }
+            PaintAudible(e, offset, 1.8 + offset, 67, .7, .08);
+            PaintAudible(e, 5 + offset, 6.4 + offset, 75, .8, .08);
+            for (int i = (int)Math.Round((2 + offset) * 100); i < (int)Math.Round((2.5 + offset) * 100); i++)
+            { e.pitch[i] = 67; e.pitchConfidence[i] = .75; e.rms[i] = .12 + .08 * (i - (2 + offset) * 100) / 50; }
+            Seal(e); return e;
+        }
+
+        private static void PaintAudible(PcmVocalAnalysis.Evidence e, double from, double to, int pitch, double confidence, double rms)
+        {
+            for (int i = (int)Math.Round(from * 100); i < (int)Math.Round(to * 100); i++)
+            { e.pitch[i] = pitch; e.pitchConfidence[i] = confidence; e.rms[i] = rms; }
         }
 
         private static Array Invoke(MethodInfo method, PcmVocalAnalysis.Evidence evidence, double[] attacks, double period, MusicalCue[] supports = null)
