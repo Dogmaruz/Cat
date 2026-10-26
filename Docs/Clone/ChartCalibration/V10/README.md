@@ -218,6 +218,8 @@ I Just Wanna Dance и Disconnect; это калибровка, а не неза�
 Для просмотра отдельно оставлен `CanCanPianoGeneratorTestV10` в меню
 Unity Play Mode: время 0, сцена без несохранённых изменений.
 Состояние зафиксировано в [протоколе превью](unity-preview.json).
+Код, шесть тестовых карт и материалы проверки отправлены в ветку
+`feature/radio-archipelago`, коммит `c2ff06a`.
 Снимки настоящего воспроизведения: [прокат Can Can](cancan-glide.png) и
 [короткий Hold Moonlight](moonlight-short-hold.png).
 
