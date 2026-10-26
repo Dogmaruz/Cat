@@ -173,6 +173,10 @@ namespace DancingCats.Clone.Editor
             CourierAnimationReel.Render();
         }
 
+        public static void HopBaseline() { RequireSavedEditor(); CourierHopVisualReview.Baseline(); }
+        public static void HopCandidate() { RequireSavedEditor(); CourierHopVisualReview.Candidate(); }
+        public static void HopChecks() { RequireSavedEditor(); CourierHopChecks.Run(); }
+
         public static void FirstCourierProbe()
         {
             RequireSavedEditor();

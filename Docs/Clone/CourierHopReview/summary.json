@@ -1,0 +1,752 @@
+{
+  "source": "Matched actual Unity render sheets; no invented or interpolated poses.",
+  "baselineFrames": 117,
+  "candidateFrames": 117,
+  "allViewsFit": true,
+  "sameFraming": true,
+  "sameLighting": true,
+  "samePrefabPathsAndScales": true,
+  "motionSourceSha256": {
+    "baseline": "b4942a984fb8fa72a2ff79b5fea16f407e2ef5b310fcea88ce823542b21ed957",
+    "candidate": "e837c8a41a46a37884a66fb7822458fff20f093ba4ed68a127b0818f858f4d82"
+  },
+  "diagnosticFramingMargin": "60% over common rest silhouette (framing values match exactly).",
+  "gifTiming": "Actual sample intervals rounded to nearest 10ms; every captured pose preserved; final captured pose held400ms for loop readability.",
+  "gameplayCrop": {
+    "rectangleLeftTopRightBottom": [
+      76,
+      142,
+      221,
+      358
+    ],
+    "sharedAcrossBothCapturesAndAllCouriers": true,
+    "resampled": false
+  },
+  "feetInspectionCrops": [
+    {
+      "courier": "signal",
+      "cell": 5,
+      "box": [
+        120,
+        233,
+        167,
+        270
+      ],
+      "scale": 4,
+      "resampling": "nearest"
+    },
+    {
+      "courier": "signal",
+      "cell": 13,
+      "box": [
+        121,
+        223,
+        169,
+        259
+      ],
+      "scale": 4,
+      "resampling": "nearest"
+    },
+    {
+      "courier": "sail",
+      "cell": 5,
+      "box": [
+        123,
+        235,
+        163,
+        270
+      ],
+      "scale": 4,
+      "resampling": "nearest"
+    },
+    {
+      "courier": "sail",
+      "cell": 13,
+      "box": [
+        125,
+        224,
+        165,
+        259
+      ],
+      "scale": 4,
+      "resampling": "nearest"
+    },
+    {
+      "courier": "orbit",
+      "cell": 5,
+      "box": [
+        119,
+        234,
+        167,
+        271
+      ],
+      "scale": 4,
+      "resampling": "nearest"
+    },
+    {
+      "courier": "orbit",
+      "cell": 13,
+      "box": [
+        121,
+        223,
+        169,
+        260
+      ],
+      "scale": 4,
+      "resampling": "nearest"
+    }
+  ],
+  "comparisons": {
+    "signal": {
+      "short-pair": {
+        "baseline": {
+          "rollDegrees": [
+            -2.860182523727417,
+            1.291233777999878
+          ],
+          "scaleYRatio": [
+            0.8500168919563293,
+            1.1098228693008423
+          ],
+          "actualBodyAabbHeight": [
+            0.7722880244255066,
+            0.9995467662811279
+          ],
+          "actualFootCentroidYDifference": [
+            -0.011832952499389648,
+            0.0025983788073062897
+          ]
+        },
+        "candidate": {
+          "rollDegrees": [
+            -7.4184770584106445,
+            8.992140769958496
+          ],
+          "scaleYRatio": [
+            0.7897859811782837,
+            1.1480824947357178
+          ],
+          "actualBodyAabbHeight": [
+            0.7177647948265076,
+            1.052267611026764
+          ],
+          "actualFootCentroidYDifference": [
+            -0.09530675411224365,
+            0.09118998050689697
+          ]
+        },
+        "midHop1": {
+          "baseline": {
+            "time": 0.18000000715255737,
+            "progress": 0.5,
+            "rollDegrees": 0.3551328778266907,
+            "scaleYRatio": 1.0547343492507935,
+            "leftMinusRightActualFootCentroidY": -0.0003809928894042969,
+            "leftMinusRightFootControlLocalY": 0.0
+          },
+          "candidate": {
+            "time": 0.18000000715255737,
+            "progress": 0.5,
+            "rollDegrees": 7.208197593688965,
+            "scaleYRatio": 0.9191164970397949,
+            "leftMinusRightActualFootCentroidY": -0.08571594953536987,
+            "leftMinusRightFootControlLocalY": -0.10600170493125916
+          }
+        },
+        "midHop2": {
+          "baseline": {
+            "time": 0.5699999928474426,
+            "progress": 0.5,
+            "rollDegrees": 1.1580016613006592,
+            "scaleYRatio": 1.0584498643875122,
+            "leftMinusRightActualFootCentroidY": -0.003758668899536133,
+            "leftMinusRightFootControlLocalY": 1.9371509552001953e-07
+          },
+          "candidate": {
+            "time": 0.5699999928474426,
+            "progress": 0.5,
+            "rollDegrees": -6.088680744171143,
+            "scaleYRatio": 0.9417861700057983,
+            "leftMinusRightActualFootCentroidY": 0.08379197120666504,
+            "leftMinusRightFootControlLocalY": 0.10924738645553589
+          }
+        }
+      },
+      "long-flight": {
+        "baseline": {
+          "rollDegrees": [
+            -0.7096686363220215,
+            4.365558624267578
+          ],
+          "scaleYRatio": [
+            0.8262349367141724,
+            1.0893560647964478
+          ],
+          "actualBodyAabbHeight": [
+            0.7568212151527405,
+            0.9932332038879395
+          ],
+          "actualFootCentroidYDifference": [
+            -0.009088397026062012,
+            0.009477220475673676
+          ]
+        },
+        "candidate": {
+          "rollDegrees": [
+            0.0,
+            9.667197227478027
+          ],
+          "scaleYRatio": [
+            0.7599999904632568,
+            1.154333472251892
+          ],
+          "actualBodyAabbHeight": [
+            0.6990465521812439,
+            1.0586438179016113
+          ],
+          "actualFootCentroidYDifference": [
+            -0.12246966361999512,
+            0.009464792907238007
+          ]
+        },
+        "midHop1": {
+          "baseline": {
+            "time": 0.6000000238418579,
+            "progress": 0.5,
+            "rollDegrees": 0.7827675938606262,
+            "scaleYRatio": 0.9968377351760864,
+            "leftMinusRightActualFootCentroidY": -0.0026073455810546875,
+            "leftMinusRightFootControlLocalY": 7.450580596923828e-08
+          },
+          "candidate": {
+            "time": 0.6000000238418579,
+            "progress": 0.5,
+            "rollDegrees": 9.667197227478027,
+            "scaleYRatio": 0.9521616697311401,
+            "leftMinusRightActualFootCentroidY": -0.12246966361999512,
+            "leftMinusRightFootControlLocalY": -0.16181789338588715
+          }
+        }
+      }
+    },
+    "sail": {
+      "short-pair": {
+        "baseline": {
+          "rollDegrees": [
+            -2.860182523727417,
+            1.291233777999878
+          ],
+          "scaleYRatio": [
+            0.8500168919563293,
+            1.1098228693008423
+          ],
+          "actualBodyAabbHeight": [
+            0.7244895398616791,
+            0.9383635520935059
+          ],
+          "actualFootCentroidYDifference": [
+            -0.012789025902748108,
+            0.0028875283896923065
+          ]
+        },
+        "candidate": {
+          "rollDegrees": [
+            -7.4184770584106445,
+            8.992140769958496
+          ],
+          "scaleYRatio": [
+            0.7897859811782837,
+            1.1480824947357178
+          ],
+          "actualBodyAabbHeight": [
+            0.6705571711063385,
+            0.9840865135192871
+          ],
+          "actualFootCentroidYDifference": [
+            -0.08086621761322021,
+            0.08189547061920166
+          ]
+        },
+        "midHop1": {
+          "baseline": {
+            "time": 0.18000000715255737,
+            "progress": 0.5,
+            "rollDegrees": 0.3551328778266907,
+            "scaleYRatio": 1.0547343492507935,
+            "leftMinusRightActualFootCentroidY": 0.001376330852508545,
+            "leftMinusRightFootControlLocalY": 2.2351741790771484e-07
+          },
+          "candidate": {
+            "time": 0.18000000715255737,
+            "progress": 0.5,
+            "rollDegrees": 7.208197593688965,
+            "scaleYRatio": 0.9191164970397949,
+            "leftMinusRightActualFootCentroidY": -0.07138210535049438,
+            "leftMinusRightFootControlLocalY": -0.10600140690803528
+          }
+        },
+        "midHop2": {
+          "baseline": {
+            "time": 0.5699999928474426,
+            "progress": 0.5,
+            "rollDegrees": 1.1580016613006592,
+            "scaleYRatio": 1.0584498643875122,
+            "leftMinusRightActualFootCentroidY": -0.0012210607528686523,
+            "leftMinusRightFootControlLocalY": -2.9802322387695312e-08
+          },
+          "candidate": {
+            "time": 0.5699999928474426,
+            "progress": 0.5,
+            "rollDegrees": -6.088680744171143,
+            "scaleYRatio": 0.9417861700057983,
+            "leftMinusRightActualFootCentroidY": 0.0741117000579834,
+            "leftMinusRightFootControlLocalY": 0.10924708843231201
+          }
+        }
+      },
+      "long-flight": {
+        "baseline": {
+          "rollDegrees": [
+            -0.7096686363220215,
+            4.365558624267578
+          ],
+          "scaleYRatio": [
+            0.8262349367141724,
+            1.0893560647964478
+          ],
+          "actualBodyAabbHeight": [
+            0.7046839594841003,
+            0.9294905662536621
+          ],
+          "actualFootCentroidYDifference": [
+            -0.005299568176269531,
+            0.013241313397884369
+          ]
+        },
+        "candidate": {
+          "rollDegrees": [
+            0.0,
+            9.667197227478027
+          ],
+          "scaleYRatio": [
+            0.7599999904632568,
+            1.154333472251892
+          ],
+          "actualBodyAabbHeight": [
+            0.6497223377227783,
+            0.9895789623260498
+          ],
+          "actualFootCentroidYDifference": [
+            -0.10423171520233154,
+            0.01323014497756958
+          ]
+        },
+        "midHop1": {
+          "baseline": {
+            "time": 0.6000000238418579,
+            "progress": 0.5,
+            "rollDegrees": 0.7827675938606262,
+            "scaleYRatio": 0.9968377351760864,
+            "leftMinusRightActualFootCentroidY": -0.0002682209014892578,
+            "leftMinusRightFootControlLocalY": 5.960464477539063e-08
+          },
+          "candidate": {
+            "time": 0.6000000238418579,
+            "progress": 0.5,
+            "rollDegrees": 9.667197227478027,
+            "scaleYRatio": 0.9521616697311401,
+            "leftMinusRightActualFootCentroidY": -0.10423171520233154,
+            "leftMinusRightFootControlLocalY": -0.16181793808937073
+          }
+        }
+      }
+    },
+    "orbit": {
+      "short-pair": {
+        "baseline": {
+          "rollDegrees": [
+            -2.860182523727417,
+            1.291233777999878
+          ],
+          "scaleYRatio": [
+            0.8500168919563293,
+            1.1098228693008423
+          ],
+          "actualBodyAabbHeight": [
+            0.7090825736522675,
+            0.9073014259338379
+          ],
+          "actualFootCentroidYDifference": [
+            -0.00786656141281128,
+            0.005625519901514053
+          ]
+        },
+        "candidate": {
+          "rollDegrees": [
+            -7.4184770584106445,
+            8.992140769958496
+          ],
+          "scaleYRatio": [
+            0.7897859811782837,
+            1.1480824947357178
+          ],
+          "actualBodyAabbHeight": [
+            0.6521629989147186,
+            0.9681967496871948
+          ],
+          "actualFootCentroidYDifference": [
+            -0.09531998634338379,
+            0.09538412094116211
+          ]
+        },
+        "midHop1": {
+          "baseline": {
+            "time": 0.18000000715255737,
+            "progress": 0.5,
+            "rollDegrees": 0.3551328778266907,
+            "scaleYRatio": 1.0547343492507935,
+            "leftMinusRightActualFootCentroidY": 0.002180337905883789,
+            "leftMinusRightFootControlLocalY": 2.2351741790771484e-07
+          },
+          "candidate": {
+            "time": 0.18000000715255737,
+            "progress": 0.5,
+            "rollDegrees": 7.208197593688965,
+            "scaleYRatio": 0.9191164970397949,
+            "leftMinusRightActualFootCentroidY": -0.08604156970977783,
+            "leftMinusRightFootControlLocalY": -0.10600140690803528
+          }
+        },
+        "midHop2": {
+          "baseline": {
+            "time": 0.5699999928474426,
+            "progress": 0.5,
+            "rollDegrees": 1.1580016613006592,
+            "scaleYRatio": 1.0584498643875122,
+            "leftMinusRightActualFootCentroidY": -0.001400589942932129,
+            "leftMinusRightFootControlLocalY": -2.9802322387695312e-08
+          },
+          "candidate": {
+            "time": 0.5699999928474426,
+            "progress": 0.5,
+            "rollDegrees": -6.088680744171143,
+            "scaleYRatio": 0.9417861700057983,
+            "leftMinusRightActualFootCentroidY": 0.08793675899505615,
+            "leftMinusRightFootControlLocalY": 0.10924708843231201
+          }
+        }
+      },
+      "long-flight": {
+        "baseline": {
+          "rollDegrees": [
+            -0.7096686363220215,
+            4.365558624267578
+          ],
+          "scaleYRatio": [
+            0.8262349367141724,
+            1.0893560647964478
+          ],
+          "actualBodyAabbHeight": [
+            0.7185592949390411,
+            0.9174753129482269
+          ],
+          "actualFootCentroidYDifference": [
+            -0.0072329044342041016,
+            0.010577723383903503
+          ]
+        },
+        "candidate": {
+          "rollDegrees": [
+            0.0,
+            9.667197227478027
+          ],
+          "scaleYRatio": [
+            0.7599999904632568,
+            1.154333472251892
+          ],
+          "actualBodyAabbHeight": [
+            0.6677508652210236,
+            0.9758801460266113
+          ],
+          "actualFootCentroidYDifference": [
+            -0.12389826774597168,
+            0.01056518405675888
+          ]
+        },
+        "midHop1": {
+          "baseline": {
+            "time": 0.6000000238418579,
+            "progress": 0.5,
+            "rollDegrees": 0.7827675938606262,
+            "scaleYRatio": 0.9968377351760864,
+            "leftMinusRightActualFootCentroidY": -0.0004105567932128906,
+            "leftMinusRightFootControlLocalY": 5.960464477539063e-08
+          },
+          "candidate": {
+            "time": 0.6000000238418579,
+            "progress": 0.5,
+            "rollDegrees": 9.667197227478027,
+            "scaleYRatio": 0.9521616697311401,
+            "leftMinusRightActualFootCentroidY": -0.12389826774597168,
+            "leftMinusRightFootControlLocalY": -0.16181793808937073
+          }
+        }
+      }
+    }
+  },
+  "outputs": [
+    "signal-comparison.gif",
+    "signal-long-comparison.gif",
+    "sail-comparison.gif",
+    "sail-long-comparison.gif",
+    "orbit-comparison.gif",
+    "orbit-long-comparison.gif",
+    "gameplay-comparison.gif",
+    "rear-keyframes.png",
+    "gameplay-keyframes.png",
+    "gameplay-feet-detail.png"
+  ],
+  "animationChecks": [
+    {
+      "file": "signal-comparison.gif",
+      "frames": 22,
+      "size": [
+        772,
+        460
+      ],
+      "totalDurationMs": 1540,
+      "frameDurationsMs": [
+        40,
+        30,
+        50,
+        60,
+        60,
+        60,
+        50,
+        10,
+        30,
+        30,
+        70,
+        70,
+        70,
+        80,
+        60,
+        10,
+        40,
+        40,
+        60,
+        100,
+        120,
+        400
+      ]
+    },
+    {
+      "file": "signal-long-comparison.gif",
+      "frames": 17,
+      "size": [
+        772,
+        460
+      ],
+      "totalDurationMs": 1960,
+      "frameDurationsMs": [
+        40,
+        40,
+        70,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        10,
+        30,
+        40,
+        60,
+        100,
+        120,
+        400
+      ]
+    },
+    {
+      "file": "sail-comparison.gif",
+      "frames": 22,
+      "size": [
+        772,
+        460
+      ],
+      "totalDurationMs": 1540,
+      "frameDurationsMs": [
+        40,
+        30,
+        50,
+        60,
+        60,
+        60,
+        50,
+        10,
+        30,
+        30,
+        70,
+        70,
+        70,
+        80,
+        60,
+        10,
+        40,
+        40,
+        60,
+        100,
+        120,
+        400
+      ]
+    },
+    {
+      "file": "sail-long-comparison.gif",
+      "frames": 17,
+      "size": [
+        772,
+        460
+      ],
+      "totalDurationMs": 1960,
+      "frameDurationsMs": [
+        40,
+        40,
+        70,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        10,
+        30,
+        40,
+        60,
+        100,
+        120,
+        400
+      ]
+    },
+    {
+      "file": "orbit-comparison.gif",
+      "frames": 22,
+      "size": [
+        772,
+        460
+      ],
+      "totalDurationMs": 1540,
+      "frameDurationsMs": [
+        40,
+        30,
+        50,
+        60,
+        60,
+        60,
+        50,
+        10,
+        30,
+        30,
+        70,
+        70,
+        70,
+        80,
+        60,
+        10,
+        40,
+        40,
+        60,
+        100,
+        120,
+        400
+      ]
+    },
+    {
+      "file": "orbit-long-comparison.gif",
+      "frames": 17,
+      "size": [
+        772,
+        460
+      ],
+      "totalDurationMs": 1960,
+      "frameDurationsMs": [
+        40,
+        40,
+        70,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        10,
+        30,
+        40,
+        60,
+        100,
+        120,
+        400
+      ]
+    },
+    {
+      "file": "gameplay-comparison.gif",
+      "frames": 22,
+      "size": [
+        900,
+        312
+      ],
+      "totalDurationMs": 1540,
+      "frameDurationsMs": [
+        40,
+        30,
+        50,
+        60,
+        60,
+        60,
+        50,
+        10,
+        30,
+        30,
+        70,
+        70,
+        70,
+        80,
+        60,
+        10,
+        40,
+        40,
+        60,
+        100,
+        120,
+        400
+      ]
+    }
+  ],
+  "visualAssessment": {
+    "actualSkinVerified": "Inspected native gameplay keyframes, rear-threequarter keyframes and4x nearest-pixel crops of actual boots. Left boot is lower/visible at first midhop; right boot is lower/visible at second midhop for all3couriers. Body/pack silhouette alternates lean and compresses on contact.",
+    "shortHopMidpointRollDegrees": [
+      7.208197593688965,
+      -6.088680744171143
+    ],
+    "shortHopScaleYRangeBaseline": [
+      0.8500168919563293,
+      1.1098228693008423
+    ],
+    "shortHopScaleYRangeCandidate": [
+      0.7897859811782837,
+      1.1480824947357178
+    ],
+    "longFlightScaleYRangeBaseline": [
+      0.8262349367141724,
+      1.0893560647964478
+    ],
+    "longFlightScaleYRangeCandidate": [
+      0.7599999904632568,
+      1.154333472251892
+    ],
+    "remainingLimitation": "At the288x512 gameplay capture the boots occupy only a few pixels and the raised foot is partly or fully occluded by the body/pack, especially orbit. The alternating silhouette is readable; the two individual feet are easier to distinguish in the closeup. This is capture scale/occlusion, not an absent skin deformation.",
+    "coverageLimit": "These are isolated real-model captures with gameplay camera geometry and runtime motion. They do not prove tile-contact timing or visibility against the full moving gameplay environment."
+  }
+}

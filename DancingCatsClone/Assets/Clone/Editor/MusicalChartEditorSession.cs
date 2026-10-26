@@ -45,6 +45,9 @@ namespace DancingCats.Clone.Editor
                 switch (action)
                 {
                     case "inspect": break;
+                    case "radio-hop-baseline": Invoke("RadioArchipelagoJobs", "HopBaseline"); break;
+                    case "radio-hop-candidate": Invoke("RadioArchipelagoJobs", "HopCandidate"); break;
+                    case "radio-hop-checks": Invoke("RadioArchipelagoJobs", "HopChecks"); break;
                     case "refresh":
                         RequireEditMode();
                         AssetDatabase.Refresh();

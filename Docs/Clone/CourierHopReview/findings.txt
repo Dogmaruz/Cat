@@ -1,0 +1,13 @@
+Matched before/after hop review
+
+117actual imported-skin samples per capture; all351 projected-bounds checks fit each stage. Identical cameras, .47instance scale, prefab paths and existing studio lighting.
+
+Actual rendered feet alternate: first hop left lower, second hop right lower across signal, sail and orbit. At midhop the left-minus-right skinned-foot centroid difference changes from about0 before to -0.071..-0.086world units then +0.074..+0.088. Matching pivot roll changes +7.21degrees then -6.09degrees.
+
+Short-hop/landing Y scale expands from baseline0.850..1.110 to0.790..1.148; long-flight/landing from0.826..1.089 to0.760..1.154. The stronger compression is visible in body/pack silhouette, not only numeric controls.
+
+Gameplay caveat: at288x512 boot surfaces remain a few pixels and the raised foot is partly hidden, especially orbit. Lower support foot/lean alternation is visible; closeups show the detailed foot change more clearly.
+
+GIFs use actual matched render cells and sampled timing, with10ms GIF timing quantization and a400ms final-pose hold. No pose interpolation. Gameplay comparison uses one fixed shared native-pixel crop.
+
+Coverage: isolated real-model review; full-environment gameplay/contact timing requires the root validation.

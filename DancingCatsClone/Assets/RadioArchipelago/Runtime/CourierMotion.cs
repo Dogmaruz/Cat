@@ -21,10 +21,12 @@ namespace RadioArchipelago
         private Part[] antennas = Array.Empty<Part>(), crests = Array.Empty<Part>(), scarves = Array.Empty<Part>(), eyes = Array.Empty<Part>();
         private Pose pose;
         private bool captured, paused, externallyTimedFlight, holdLeft, spinning, nextRideLeft;
+        private bool nextHopLeft = true;
         private float elapsed, phase, facing, facingTarget, flightDuration = .45f, flightProgress;
         private float landingTime = 10, landingStrength, holdDuration = 2.6f;
         private float bodyPitch, bodyRoll, bodyStretch, armLeftLift, armRightLift, footLeftLift, footRightLift;
         private float spinAngle, headTilt, bob;
+        private float hopSide = -1, hopYaw, hopOffset;
         private float turnRate, turnAcceleration, rotorAngle, rotorWorldSpeed, rotorBlend, rotorReturnSpeed;
         private Vector3 previousPosition, movementVelocity, movementAcceleration;
         private bool movementCaptured;
@@ -97,6 +99,7 @@ namespace RadioArchipelago
             elapsed = phase = facing = facingTarget = flightProgress = 0;
             bodyPitch = bodyRoll = bodyStretch = armLeftLift = armRightLift = footLeftLift = footRightLift = 0;
             spinAngle = headTilt = bob = 0;
+            hopSide = -1; hopYaw = hopOffset = 0; nextHopLeft = true;
             turnRate = turnAcceleration = rotorAngle = rotorWorldSpeed = rotorBlend = rotorReturnSpeed = 0;
             previousPosition = transform.position; movementVelocity = movementAcceleration = Vector3.zero; movementCaptured = true;
             paused = externallyTimedFlight = holdLeft = spinning = nextRideLeft = false;
@@ -108,6 +111,10 @@ namespace RadioArchipelago
         public void PlayJump(float durationSeconds)
         {
             flightDuration = Finite(durationSeconds) ? Mathf.Max(.08f, durationSeconds) : .45f;
+            // A takeoff owns one side. Landing feedback and progress samples never
+            // consume a step, including the checkpoints inside a supported ride.
+            hopSide = nextHopLeft ? -1 : 1;
+            nextHopLeft = !nextHopLeft;
             flightProgress = 0; elapsed = 0; pose = Pose.Jump; externallyTimedFlight = false;
         }
         /// <summary>Follows the actual session arc, including long gaps, rather than an unrelated clip clock.</summary>
@@ -175,7 +182,7 @@ namespace RadioArchipelago
 
         private void Step(float dt)
         {
-            float previousYaw = facing + spinAngle;
+            float previousYaw = facing + spinAngle + hopYaw;
             elapsed += dt; phase += dt; landingTime += dt;
             if (pose == Pose.Jump && !externallyTimedFlight) flightProgress = elapsed / flightDuration;
             float smooth = 1 - Mathf.Exp(-19 * dt);
@@ -183,6 +190,7 @@ namespace RadioArchipelago
             float pitch = 0, roll = Mathf.Sin(phase * 2.1f) * 1.3f, stretch = 0;
             float liftL = 2, liftR = 2, footL = 0, footR = 0, turn = 0, nod = 0;
             float height = Mathf.Sin(phase * 3.2f) * .012f, wind = 0, rotorDemand = 0, rotorDirection = -1;
+            hopYaw = hopOffset = 0;
             switch (pose)
             {
                 case Pose.Idle:
@@ -202,10 +210,20 @@ namespace RadioArchipelago
                 case Pose.Jump:
                     float p = Mathf.Clamp01(flightProgress), airborne = Mathf.Sin(p * Mathf.PI);
                     float longFlight = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.6f, 1.2f, flightDuration));
-                    stretch = .09f * Mathf.Exp(-Mathf.Pow((p - .13f) / .17f, 2))
-                        - .025f * Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.72f, 1, p))
-                        + .045f * Mathf.Sin(elapsed * 11) * airborne;
+                    // Readable shape changes across the complete measured arc:
+                    // release the planted pose, stretch upward, gather at the
+                    // apex, extend for the next foot, then prepare for contact.
+                    stretch = .145f * Gaussian(p, .16f, .17f)
+                        - .105f * Gaussian(p, .50f, .18f)
+                        + .12f * Gaussian(p, .80f, .15f)
+                        - .075f * Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.9f, 1, p))
+                        - .08f * Gaussian(p, 0, .07f)
+                        + Mathf.Lerp(.025f, .055f, longFlight) * Mathf.Sin(phase * Mathf.PI * 4) * airborne;
                     pitch = -9 * Mathf.Sin(p * Mathf.PI * 1.15f);
+                    float weight = airborne * airborne;
+                    roll += -hopSide * 12 * weight;
+                    hopYaw = hopSide * 16 * weight;
+                    hopOffset = hopSide * .03f * weight;
                     // The reference cat uses simultaneous mirrored shoulder strokes at four Hz.
                     // Keep that timing and eased stroke, retargeted to the couriers' short paws.
                     float strokePhase = Mathf.Repeat(elapsed * 4, 1);
@@ -215,7 +233,10 @@ namespace RadioArchipelago
                         * (1 - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.91f, 1, p)));
                     float strokeRange = Mathf.Lerp(42, 70, longFlight);
                     liftL = liftR = Mathf.Lerp(8, -10 + stroke * strokeRange, flightBlend);
-                    footL = footR = airborne * .05f;
+                    float plantedFoot = airborne * .012f;
+                    float freeFoot = airborne * Mathf.Lerp(.14f, .18f, longFlight);
+                    footL = hopSide < 0 ? plantedFoot : freeFoot;
+                    footR = hopSide < 0 ? freeFoot : plantedFoot;
                     roll += Mathf.Sin(elapsed * 6) * longFlight * airborne * 2.5f; nod = -airborne * 4;
                     wind = 10 + longFlight * 14 + airborne * 17;
                     rotorDemand = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.8f, 1.2f, flightDuration))
@@ -245,7 +266,9 @@ namespace RadioArchipelago
                     break;
             }
             bodyPitch = Mathf.Lerp(bodyPitch, pitch, smooth); bodyRoll = Mathf.Lerp(bodyRoll, roll, smooth);
-            bodyStretch = Mathf.Lerp(bodyStretch, stretch, smooth);
+            // Flight progress is already an eased, authoritative visual clock.
+            // Filtering a .30 s arc again erased its interior compression.
+            bodyStretch = pose == Pose.Jump ? stretch : Mathf.Lerp(bodyStretch, stretch, smooth);
             // A slow body blend erased the four-Hz paw strokes. The short shoulder gesture
             // follows its own response while takeoff/landing still ease into the pose.
             float armBlend = 1 - Mathf.Exp(-(pose == Pose.Jump ? 70 : 19) * dt);
@@ -254,7 +277,7 @@ namespace RadioArchipelago
             headTilt = Mathf.Lerp(headTilt, nod, smooth); bob = Mathf.Lerp(bob, height, smooth);
             if (pose == Pose.Hold) spinAngle = turn;
             else spinAngle = Mathf.Lerp(Mathf.DeltaAngle(0, spinAngle), 0, 1 - Mathf.Exp(-13 * dt));
-            float yawDelta = Mathf.DeltaAngle(previousYaw, facing + spinAngle);
+            float yawDelta = Mathf.DeltaAngle(previousYaw, facing + spinAngle + hopYaw);
             float previousRate = turnRate;
             turnRate = Mathf.Lerp(turnRate, yawDelta / dt, 1 - Mathf.Exp(-9 * dt));
             turnAcceleration = Mathf.Lerp(turnAcceleration, (turnRate - previousRate) / dt, 1 - Mathf.Exp(-12 * dt));
@@ -311,9 +334,14 @@ namespace RadioArchipelago
         }
         private void ApplyFramePose()
         {
-            float stretch = Mathf.Clamp(bodyStretch - ImpactCompression(), -.24f, .16f);
-            visual.node.localPosition = visual.position + visual.rotation * Vector3.up * bob;
-            visual.node.localRotation = visual.rotation * Quaternion.Euler(bodyPitch, facing + spinAngle, bodyRoll);
+            float impact = ImpactCompression(), flightShape = bodyStretch;
+            // The next arc starts at the contact itself. Its positive takeoff
+            // stretch must not cancel the landing compression on that frame.
+            if (pose == Pose.Jump && flightShape > 0 && impact > 0)
+                flightShape *= 1 - Mathf.SmoothStep(0, 1, Mathf.Clamp01(impact / .09f));
+            float stretch = Mathf.Clamp(flightShape - impact, -.24f, .16f);
+            visual.node.localPosition = visual.position + visual.rotation * new Vector3(hopOffset, bob, 0);
+            visual.node.localRotation = visual.rotation * Quaternion.Euler(bodyPitch, facing + spinAngle + hopYaw, bodyRoll);
             float width = 1 / Mathf.Sqrt(1 + stretch);
             visual.node.localScale = Vector3.Scale(visual.scale, new Vector3(width, 1 + stretch, width));
             head?.Rotate(headTilt, 0, -bodyRoll * .15f);
@@ -321,10 +349,15 @@ namespace RadioArchipelago
         }
         private float ImpactCompression()
         {
-            if (landingTime >= .36f) return 0;
+            if (landingTime >= .4f) return 0;
             float t = landingTime;
-            return landingStrength * (.16f * Mathf.Exp(-Mathf.Pow((t - .035f) / .05f, 2))
-                - .055f * Mathf.Exp(-Mathf.Pow((t - .14f) / .055f, 2)));
+            return landingStrength * (.22f * Gaussian(t, .035f, .065f)
+                - .06f * Gaussian(t, .16f, .065f));
+        }
+        private static float Gaussian(float value, float center, float width)
+        {
+            float distance = (value - center) / width;
+            return Mathf.Exp(-distance * distance);
         }
         private float BlinkAmount()
         {
