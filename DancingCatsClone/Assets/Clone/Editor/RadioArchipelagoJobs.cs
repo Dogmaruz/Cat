@@ -54,6 +54,12 @@ namespace DancingCats.Clone.Editor
         public static void V9CanCanPlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV9CanCanPlaytest(); }
         public static void V9DancePlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV9DancePlaytest(); }
         public static void V9CloudsPlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV9CloudsPlaytest(); }
+        public static void V10DisconnectPlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV10DisconnectPlaytest(); }
+        public static void V10CanCanPlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV10CanCanPlaytest(); }
+        public static void V10DancePlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV10DancePlaytest(); }
+        public static void V10MoonlightPlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV10MoonlightPlaytest(); }
+        public static void V10ElisePlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV10ElisePlaytest(); }
+        public static void V10JinglePlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV10JinglePlaytest(); }
 
         public static void MenuPreviewChecks()
         {
@@ -167,15 +173,21 @@ namespace DancingCats.Clone.Editor
         }
 
         public static void SelectV9CanCanPreview()
+            => SelectTestPreview("CanCanPianoGeneratorTestV9");
+
+        public static void SelectV10CanCanPreview()
+            => SelectTestPreview("CanCanPianoGeneratorTestV10");
+
+        private static void SelectTestPreview(string id)
         {
             if (!EditorApplication.isPlaying) throw new InvalidOperationException("Open the game menu in Play Mode first.");
             var game = UnityEngine.Object.FindFirstObjectByType<OriginalPlayController>();
             if (game == null || game.Phase != ClonePhase.Menu)
                 throw new InvalidOperationException("The song menu is not ready.");
-            var song = game.Songs.Single(record => record.id == "CanCanPianoGeneratorTestV9");
-            if (!game.SelectSong(song.catalogId)) throw new InvalidOperationException("The Can Can v9 test cannot be selected.");
+            var song = game.Songs.Single(record => record.id == id);
+            if (!game.SelectSong(song.catalogId)) throw new InvalidOperationException("The requested test cannot be selected.");
             game.Endless = false;
-            Debug.Log("CHART_V9_PREVIEW PASS: CanCanPianoGeneratorTestV9 selected in the menu.");
+            Debug.Log("CHART_TEST_PREVIEW PASS: " + id + " selected in the menu.");
         }
 
         private static void RequireSavedEditor()

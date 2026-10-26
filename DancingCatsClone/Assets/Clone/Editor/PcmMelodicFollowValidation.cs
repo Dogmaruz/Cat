@@ -31,6 +31,20 @@ namespace DancingCats.Clone.Editor
             Require(Analyze(percussion).Length == 0, "Repeated bright percussion without a tonal note body must be rejected.");
             var silent = Fixture(); foreach (var n in silent.events) Set(n, "harmonicNovelty", 0);
             Require(Analyze(silent).Length == 0, "A stable or silent background must not invent fresh melodic entries.");
+            var quietEntries = Fixture();
+            foreach (var n in quietEntries.events.Where(n => n.midi == 80))
+            { Set(n, "neuralOnset", .67); Set(n, "harmonicNovelty", .017); }
+            Require(Analyze(quietEntries).Length == 5,
+                "Reliable recurring tonal responses retain quieter first notes when the measured source attack and note body remain clear.");
+            var missedFlux = Fixture(); foreach (var n in missedFlux.events.Where(n => n.midi == 78)) Set(n, "sourceAttack", 0);
+            Require(Analyze(missedFlux).Length == 5,
+                "An independent neural and growing-harmonic reply can survive a missing mixed-flux flag within a verified recurring cell.");
+            var semitoneBleed = Fixture();
+            var neighbors = semitoneBleed.events.Where(n => n.midi == 78).Select(n =>
+            { var other = Note(n.time, n.endTime, 77, .55); Set(other, "harmonicNovelty", .3); return other; }).ToArray();
+            semitoneBleed.events = semitoneBleed.events.Concat(neighbors).OrderBy(n => n.time).ThenBy(n => n.midi).ToArray();
+            Require(Analyze(semitoneBleed).Length == 0,
+                "A weaker neighboring-semitone neural activation must not override the stronger measured harmonic attack beside it.");
             var samePitch = Fixture(); foreach (var n in samePitch.events.Where(n => n.midi == 78)) n.midi = 80;
             Require(Analyze(samePitch).Length == 0, "A repeated pitch is not a descending two-note gesture.");
             var irregular = Fixture(); var clocks = new[] { 2.0, 2.6, 3.7, 5.3, 7.7 };
@@ -79,6 +93,86 @@ namespace DancingCats.Clone.Editor
                 "Only new paths may adapt; protected legacy path points are immutable.");
             CheckCompiledRoute(tightResult);
             CheckCompiledRoute(anchors.Concat(anchored).OrderBy(c => c.time).ToArray());
+            var turnSource = PatternFixture(new[] { 72, 69, 71, 72, 71, 69, 67 });
+            var turns = Analyze(turnSource);
+            Require(turns.Length == 2 && turns.All(c => Math.Abs(c.endTime - c.time - 1.08) < 1e-7),
+                "An isolated recurring scalar turn must become a measured long contour rather than isolated short cells.");
+            var ascentSource = PatternFixture(new[] { 68, 69, 71, 73, 76, 74, 74 });
+            var ascents = Analyze(ascentSource);
+            Require(ascents.Length == 2, "A recurring strong scalar ascent needs its complete measured phrase.");
+            var pedalSource = PatternFixture(new[] { 68, 69, 71, 73, 74, 69, 73, 69, 74, 69, 73, 69, 74 });
+            var pedals = Analyze(pedalSource);
+            Require(pedals.Length == 2 && pedals.All(c => Math.Abs(c.endTime - c.time - 1.98) < 1e-7),
+                "An ascent that continues as a repeated pedal ornament ends on its last confirmed pedal, before the separate cadence attack.");
+            var replySource = PatternFixture(new[] { 72, 76, 72, 76, 74, 74, 71 });
+            var replies = Analyze(replySource);
+            Require(replies.Length == 2, "A recurring broken-chord call and repeated descending answer needs a measured Follow phrase.");
+            var stepSource = PatternFixture(new[] { 76, 71, 71, 73, 71, 69 });
+            var steps = Analyze(stepSource);
+            Require(steps.Length == 2, "A repeated upper-register descending answer with a neighboring turn needs its full contour.");
+            var octaveAlias = PatternFixture(new[] { 76, 71, 71, 73, 71, 69 });
+            var lowerAttacks = octaveAlias.events.Where(n => n.midi == 76).Select(n => Note(n.time, n.endTime, 64, .95)).ToArray();
+            octaveAlias.events = octaveAlias.events.Concat(lowerAttacks).OrderBy(n => n.time).ThenBy(n => n.midi).ToArray();
+            Require(Analyze(octaveAlias).Length == 0,
+                "An upper octave alias cannot promote a lower-register accompaniment answer into a leading melodic glide.");
+            var trillSource = PatternFixture(new[] { 83, 81, 83, 81, 83, 81, 83, 81, 83, 81, 83 }, 1);
+            var trills = Analyze(trillSource);
+            Require(trills.Length == 1 && Math.Abs(trills[0].endTime - trills[0].time - 1.8) < 1e-7,
+                "A continuous whole-tone trill is one sustained moving phrase ending on its measured return note.");
+            var tremoloSource = PatternFixture(new[] { 80, 76, 80, 76, 80, 76, 80, 76 }, 1);
+            foreach (var n in tremoloSource.events.Where(n => n.midi > 60)) Set(n, "neuralDuration", .15);
+            var tremolos = Analyze(tremoloSource);
+            Require(tremolos.Length == 1 && Math.Abs(tremolos[0].endTime - tremolos[0].time - 1.08) < 1e-7,
+                "A densely articulated wider tremolo needs one complete return-note contour, without absorbing the unpaired next-phrase pickup.");
+            var sustainedActivation = JsonUtility.FromJson<PcmInstrumentalEvidence.Evidence>(JsonUtility.ToJson(tremoloSource));
+            foreach (var n in sustainedActivation.events.Where(n => n.midi > 60)) Set(n, "neuralDuration", .4);
+            Require(Analyze(sustainedActivation).Length == 0,
+                "A sustained neural activation reused across several pulses must not masquerade as an independently articulated tremolo.");
+            var weakPickup = JsonUtility.FromJson<PcmInstrumentalEvidence.Evidence>(JsonUtility.ToJson(tremoloSource));
+            var pickup = Note(1.82, 1.95, 66, .5); Set(pickup, "harmonicBody", .3);
+            weakPickup.events = weakPickup.events.Concat(new[] { pickup }).OrderBy(n => n.time).ThenBy(n => n.midi).ToArray();
+            Require(Analyze(weakPickup).Length == 1 && Math.Abs(Analyze(weakPickup)[0].time - 2) < 1e-7,
+                "A weak pickup must not pull a measured tremolo entry backwards.");
+            var strongPickup = JsonUtility.FromJson<PcmInstrumentalEvidence.Evidence>(JsonUtility.ToJson(tremoloSource));
+            pickup = Note(1.82, 1.95, 66, .9); Set(pickup, "harmonicBody", .3);
+            var upperPickup = Note(1.82, 1.95, 78, .85); Set(upperPickup, "harmonicBody", .3);
+            Set(pickup, "sourceAttack", 0); Set(upperPickup, "sourceAttack", 0);
+            strongPickup.events = strongPickup.events.Concat(new[] { pickup, upperPickup }).OrderBy(n => n.time).ThenBy(n => n.midi).ToArray();
+            Require(Analyze(strongPickup).Length == 1 && Math.Abs(Analyze(strongPickup)[0].time - 1.82) < 1e-7,
+                "An independently confirmed dominant pickup belongs to its following tremolo phrase.");
+            Require(Analyze(PatternFixture(new[] { 72, 69, 71, 72, 71, 69, 67 }, 1)).Length == 0,
+                "A single isolated turn does not establish a recurring long-phrase family.");
+            var irregularTurn = PatternFixture(new[] { 72, 69, 71, 72, 71, 69, 67 });
+            foreach (var n in irregularTurn.events.Where(n => n.time > 2.15 && n.time < 2.2)) { n.time += .07; n.endTime += .07; }
+            Require(Analyze(irregularTurn).Length == 0,
+                "An irregular isolated turn must not acquire a long phrase merely because its pitches resemble a known family.");
+            var weakAscent = PatternFixture(new[] { 68, 69, 71, 73, 76, 74, 74 });
+            foreach (var n in weakAscent.events.Where(n => n.midi > 60)) Set(n, "harmonicBody", .2);
+            Require(Analyze(weakAscent).Length == 0, "Uncertain pitch ladders without an audible tonal body do not create scalar glides.");
+            foreach (var longCue in turns.Concat(ascents).Concat(pedals).Concat(replies).Concat(steps).Concat(trills).Concat(tremolos).Concat(Analyze(strongPickup)))
+            {
+                Require(longCue.points.Length >= 2 && longCue.points.Length <= 32 && longCue.points.First().time == longCue.time
+                    && longCue.points.Last().time == longCue.endTime, "Long contours retain measured entries, native path markers and releases.");
+                Require(longCue.points.Max(p => p.lane) - longCue.points.Min(p => p.lane) >= .2f
+                    && longCue.points.All(p => Math.Abs(p.lane) <= 1), "Every long contour has meaningful bounded lateral movement.");
+                Require(longCue.points.Zip(longCue.points.Skip(1), (a, b) => b.time - a.time >= .0624
+                    && Math.Abs(b.lane - a.lane) <= 12.01 * (b.time - a.time)).All(x => x), "Measured long contour points remain natively reachable.");
+            }
+            foreach (var collection in new[] { turns, ascents, pedals, replies, steps, trills, tremolos, Analyze(strongPickup) }) CheckCompiledRoute(collection);
+            var protectedLong = new[] { Follow(turns[0].time, turns[0].endTime, -.8f, 0) };
+            string protectedLongBefore = JsonUtility.ToJson(new CueSnapshot { cues = protectedLong });
+            Require(Analyze(turnSource, protectedLong).Length == 1
+                && JsonUtility.ToJson(new CueSnapshot { cues = protectedLong }) == protectedLongBefore,
+                "A confirmed long support suppresses the overlapping proposal without modifying its native path.");
+            foreach (var original in new[] { turnSource, ascentSource, pedalSource, replySource, stepSource, trillSource, tremoloSource, strongPickup })
+            {
+                var translated = JsonUtility.FromJson<PcmInstrumentalEvidence.Evidence>(JsonUtility.ToJson(original));
+                foreach (var note in translated.events) { note.time += .314159; note.endTime += .314159; note.midi += 5; }
+                var baseline = Analyze(original); var changed = Analyze(translated);
+                Require(baseline.Length == changed.Length && baseline.Zip(changed, (a, b) =>
+                    Math.Abs(b.time - a.time - .314159) < 1e-7 && Math.Abs(b.endTime - a.endTime - .314159) < 1e-7).All(x => x),
+                    "Long musical families must transpose and translate with their source, without cue-time or absolute-pitch lookups.");
+            }
             foreach (var cue in cues.Concat(Analyze(released)).Concat(tightResult).Concat(anchored))
             {
                 Require(cue.points.Length >= 2 && cue.points.Length <= 6 && cue.points.First().time == cue.time && cue.points.Last().time == cue.endTime,
@@ -89,7 +183,8 @@ namespace DancingCats.Clone.Editor
                     "A corridor-constrained Follow must retain meaningful lateral movement.");
             }
             Debug.Log("PCM_MELODIC_FOLLOW PASS: recurring source-confirmed upper cells, measured release/articulation ends, weak/percussion/silence rejection, "
-                + "unrepeated/irregular/continuous-run rejection, protected supports and airborne flights, immutable deterministic evidence, pitch/time invariance and short native paths.");
+                + "unrepeated/irregular/continuous-run rejection, measured scalar turns/ascents/pedal ornaments/replies/trills, protected supports and airborne flights, "
+                + "immutable deterministic evidence, pitch/time invariance, endpoint corridors and native paths.");
         }
 
         private static void RequireReachable(MusicalCue[] cues)
@@ -106,8 +201,9 @@ namespace DancingCats.Clone.Editor
             if (compiler == null) return;
             var compile = compiler.GetMethod("Compile");
             var options = Activator.CreateInstance(compile.GetParameters()[1].ParameterType);
-            var score = new MusicalScore { id = "TightMeasuredFollows", sampleRate = 1000, audioDuration = 6, bpm = 120, cues = cues };
-            var map = compile.Invoke(null, new object[] { score, options, 1000, 6.0 });
+            double duration = Math.Max(6, cues.Last().endTime + 2);
+            var score = new MusicalScore { id = "TightMeasuredFollows", sampleRate = 1000, audioDuration = duration, bpm = 120, cues = cues };
+            var map = compile.Invoke(null, new object[] { score, options, 1000, duration });
             typeof(ChartRouteComposer).GetMethod("Apply").Invoke(null, new[] { map });
         }
         private static MusicalCue Follow(double start, double end, float entry, float exit)
@@ -116,6 +212,24 @@ namespace DancingCats.Clone.Editor
         private static PcmInstrumentalEvidence.Evidence TightFixture()
             => new PcmInstrumentalEvidence.Evidence { events = Enumerable.Range(0, 3).SelectMany(i => new[]
                 { Note(2 + i * .45, 2.2 + i * .45, 80, .8), Note(2.15 + i * .45, 2.3 + i * .45, 78, .8) }).ToArray() };
+        private static PcmInstrumentalEvidence.Evidence PatternFixture(int[] pitches, int copies = 2)
+        {
+            var notes = new System.Collections.Generic.List<PcmInstrumentalEvidence.NoteEvent>();
+            for (int copy = 0; copy < copies; copy++)
+            {
+                double start = 2 + copy * 4;
+                notes.Add(Note(start - .36, start - .2, 55, .85));
+                for (int i = 0; i < pitches.Length; i++)
+                {
+                    var melody = Note(start + i * .18, start + i * .18 + .18, pitches[i], .85);
+                    Set(melody, "harmonicPartials", 4); notes.Add(melody);
+                    notes.Add(Note(melody.time, melody.endTime, 48, .7));
+                }
+                double end = start + (pitches.Length - 1) * .18;
+                notes.Add(Note(end + .36, end + .54, 55, .85));
+            }
+            return new PcmInstrumentalEvidence.Evidence { events = notes.OrderBy(n => n.time).ThenBy(n => n.midi).ToArray() };
+        }
 
         private static PcmInstrumentalEvidence.Evidence Fixture(int count = 5)
         {

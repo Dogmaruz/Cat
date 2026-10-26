@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DancingCats.Clone.Editor
 {
-    /// <summary>Conservative short moving supports from recurring, source-confirmed two-note cells.</summary>
+    /// <summary>Conservative moving supports from independently measured recurring melodic figures.</summary>
     public static class PcmMelodicFollowAnalysis
     {
         private sealed class Cell
@@ -26,21 +26,17 @@ namespace DancingCats.Clone.Editor
             var cells = new List<Cell>();
             foreach (var first in notes)
             {
-                if (first.midi < upperRegister) continue;
-                PcmInstrumentalEvidence.NoteEvent second = null; double best = double.NegativeInfinity;
+                if (first.midi < upperRegister || Get(first, "sourceAttack") < .5) continue;
                 foreach (var candidate in notes)
                 {
                     double interval = candidate.time - first.time;
                     if (interval < .10 - 1e-7 || interval > .30 + 1e-7 || first.midi - candidate.midi < 2 || first.midi - candidate.midi > 5
-                        || first.endTime < candidate.time - .10 - 1e-7) continue;
-                    double end = End(candidate), duration = end - first.time;
+                        || first.endTime < candidate.time - .10 - 1e-7 || Get(candidate, "harmonicNovelty") < .025
+                        || ((Get(first, "harmonicNovelty") < .02 || Get(candidate, "sourceAttack") < .5) && first.midi - candidate.midi > 2)
+                        || HasStrongerSemitone(candidate, evidence.events)) continue;
+                    double end = End(candidate, attacks), duration = end - first.time;
                     if (duration < .25 - 1e-7 || duration > .7 + 1e-7) continue;
-                    double strength = Get(candidate, "neuralOnset") * Get(candidate, "harmonicBody");
-                    if (strength <= best) continue;
-                    best = strength; second = candidate;
-                }
-                if (second == null) continue;
-                var cell = new Cell { first = first, second = second, interval = second.time - first.time, end = End(second) };
+                var cell = new Cell { first = first, second = candidate, interval = interval, end = end };
                 int at = Nearest(attacks, first.time), left = at, right = at;
                 double connectedGap = Math.Max(.205, 1.2 * cell.interval);
                 while (left > 0 && attacks[left] - attacks[left - 1] <= connectedGap + 1e-7) left--;
@@ -49,6 +45,7 @@ namespace DancingCats.Clone.Editor
                 // into a short support. Its larger phrasing remains unresolved.
                 if (attacks[right] - attacks[left] > 8 * cell.interval + 1e-7) continue;
                 cells.Add(cell);
+                }
             }
             var accepted = new List<Cell>();
             foreach (var cell in cells)
@@ -68,7 +65,7 @@ namespace DancingCats.Clone.Editor
                 accepted.Add(cell);
             }
             var result = new List<MusicalCue>();
-            foreach (var cell in accepted.OrderBy(c => c.first.time))
+            foreach (var cell in accepted.OrderBy(c => c.first.time).ThenByDescending(c => Get(c.second, "neuralOnset") * Get(c.second, "harmonicBody")))
             {
                 if (result.Count > 0 && cell.first.time < result[result.Count - 1].endTime + .078) continue;
                 double start = cell.first.time, end = cell.end;
@@ -85,9 +82,280 @@ namespace DancingCats.Clone.Editor
                     phraseId = "mixed-recurrent-cell-" + result.Count,
                     reason = "Recurring source-confirmed upper two-note response; measured harmonic release or actual subsequent articulation ends the short support. Lateral direction is independent gameplay choreography." });
             }
+            foreach (var cue in LongContours(evidence, attacks).OrderBy(c => c.time))
+            {
+                if ((protectedSupports ?? Array.Empty<MusicalCue>()).Concat(result).Any(s => s != null
+                    && (s.kind == "Hold" || s.kind == "Follow" || s.kind == "BigJump")
+                    && cue.time < s.endTime + .078 && cue.endTime > s.time - .078)) continue;
+                result.Add(cue);
+            }
+            result = result.OrderBy(c => c.time).ToList();
             FitNewPathCorridors(result, protectedSupports ?? Array.Empty<MusicalCue>());
             return result.ToArray();
         }
+
+        private sealed class NoteGroup
+        {
+            public double time, strength;
+            public PcmInstrumentalEvidence.NoteEvent[] notes;
+        }
+        private sealed class Contour
+        {
+            public string family, signature;
+            public double period;
+            public double[] times;
+        }
+
+        private static IEnumerable<MusicalCue> LongContours(PcmInstrumentalEvidence.Evidence evidence, double[] attacks)
+        {
+            var groups = Groups(evidence.events, false);
+            var tonalGroups = Groups(evidence.events, true);
+            var reliable = evidence.events.Where(Qualifies).Select(n => (double)n.midi).OrderBy(p => p).ToArray();
+            if (reliable.Length < 8) return Array.Empty<MusicalCue>();
+            double middleRegister = Quantile(reliable, .5), upperResponseRegister = Quantile(reliable, .6), upperRegister = Quantile(reliable, .8);
+            var contours = new List<Contour>();
+            int start = 0;
+            for (int end = 1; end <= groups.Length; end++)
+            {
+                if (end < groups.Length && groups[end].time - groups[end - 1].time <= .265 + 1e-7) continue;
+                var run = groups.Skip(start).Take(end - start).ToArray();
+                double priorGap = start == 0 ? double.PositiveInfinity : groups[start].time - groups[start - 1].time;
+                double afterGap = end == groups.Length ? double.PositiveInfinity : groups[end].time - groups[end - 1].time;
+                start = end;
+                if (run.Length < 7 || run.Length > 24 || !Regular(run, .12, .25, .13, out double period)
+                    || priorGap < 1.7 * period - 1e-7 || afterGap < 1.7 * period - 1e-7) continue;
+                if (run.Length == 7)
+                {
+                    var turn = BestPath(run, n => Tone(n, .68, .45, .025, 1), p =>
+                    {
+                        int i = p.Count - 1;
+                        return (i != 2 || Step(p[1], p[2]) >= 1 && Step(p[1], p[2]) <= 3)
+                            && (i != 3 || Same(p[0], p[3]) && Step(p[2], p[3]) >= 1 && Step(p[2], p[3]) <= 3)
+                            && (i != 4 || Same(p[2], p[4]) && Step(p[3], p[4]) >= -3 && Step(p[3], p[4]) <= -1)
+                            && (i != 5 || Same(p[1], p[5]) && Step(p[4], p[5]) >= -3 && Step(p[4], p[5]) <= -1)
+                            && (i != 6 || Step(p[5], p[6]) >= -3 && Step(p[5], p[6]) <= -1);
+                    });
+                    if (turn != null) contours.Add(MakeContour("scalar-turn", run, turn, period));
+                }
+                var ascent = BestPath(run.Take(4).ToArray(), n => Tone(n, .8, .6, .05, 3), p => p.Count < 2
+                    || p[p.Count - 1].midi - p[p.Count - 2].midi >= 1 && p[p.Count - 1].midi - p[p.Count - 2].midi <= 3);
+                if (ascent == null || ascent[3].midi - ascent[0].midi < 5) continue;
+                var phrase = run;
+                if (run.Length > 9)
+                {
+                    // Repeated pedal responses distinguish the ornament's body
+                    // from the separate cadence attack that follows it.
+                    int lastPedal = -1, count = 0;
+                    foreach (var pedal in run[5].notes.Where(n => Tone(n, .6, .55, .025, 2)))
+                    {
+                        int last = 3, repeats = 0;
+                        for (int i = 5; i < run.Length; i += 2)
+                        {
+                            if (!run[i].notes.Any(n => Same(n, pedal) && Tone(n, .6, .55, .025, 2))) break;
+                            repeats++; last = i;
+                        }
+                        if (repeats > count) { count = repeats; lastPedal = last; }
+                    }
+                    if (count < 3) continue;
+                    phrase = run.Take(lastPedal + 1).ToArray();
+                }
+                contours.Add(MakeContour(run.Length > 9 ? "ascent-pedal" : "scalar-ascent", phrase, ascent, period));
+            }
+            for (int i = 0; i + 5 < groups.Length; i++)
+            {
+                var run = groups.Skip(i).Take(6).ToArray();
+                if (!Regular(run, .12, .25, .12, out double period)) continue;
+                var reply = BestPath(run, n => Tone(n, .68, .45, .025, 1), p =>
+                {
+                    int at = p.Count - 1;
+                    return (at != 0 || p[0].midi >= middleRegister)
+                        && (at != 1 || Step(p[0], p[1]) >= 2 && Step(p[0], p[1]) <= 5)
+                        && (at != 2 || Same(p[0], p[2])) && (at != 3 || Same(p[1], p[3]))
+                        && (at != 4 || Step(p[3], p[4]) >= -4 && Step(p[3], p[4]) <= -1)
+                        && (at != 5 || Same(p[4], p[5]));
+                });
+                if (reply == null) continue;
+                double release = attacks.FirstOrDefault(t => t > run[5].time + .078 && t < run[5].time + 1.4 * period);
+                if (release <= 0) continue;
+                var contour = MakeContour("broken-chord-reply", run, reply, period);
+                var times = contour.times.Concat(new[] { release }).ToList();
+                var pickup = evidence.events.Where(n => n != null && Math.Abs(n.time - (run[0].time - period)) < .04
+                    && reply[0].midi - n.midi >= 1 && reply[0].midi - n.midi <= 2
+                    && Get(n, "sourceAttack") >= .5 && Tone(n, .65, .2, .01, 2)
+                    && !evidence.events.Any(o => o != null && Math.Abs(o.time - n.time) < 1e-7 && Math.Abs(o.midi - n.midi) == 12
+                        && Get(o, "neuralOnset") > Get(n, "neuralOnset"))).OrderByDescending(n => Get(n, "neuralOnset")).FirstOrDefault();
+                if (pickup != null) times.Insert(0, pickup.time);
+                contour.times = times.ToArray(); contours.Add(contour);
+            }
+            for (int i = 0; i + 5 < tonalGroups.Length; i++)
+            {
+                var run = tonalGroups.Skip(i).Take(6).ToArray();
+                if (!Regular(run, .13, .25, .12, out double period)) continue;
+                var answer = BestPath(run, Qualifies, p =>
+                {
+                    int at = p.Count - 1;
+                    return (at != 0 || p[0].midi >= upperResponseRegister && !run[0].notes.Any(n => n != p[0]
+                            && Same(n, p[0]) && Get(n, "neuralOnset") > Get(p[0], "neuralOnset")))
+                        && (at != 1 || Step(p[0], p[1]) >= -5 && Step(p[0], p[1]) <= -4)
+                        && (at != 2 || Same(p[1], p[2]))
+                        && (at != 3 || Step(p[2], p[3]) >= 1 && Step(p[2], p[3]) <= 3)
+                        && (at != 4 || Same(p[1], p[4]))
+                        && (at != 5 || Step(p[4], p[5]) >= -3 && Step(p[4], p[5]) <= -1);
+                });
+                if (answer != null) contours.Add(MakeContour("stepwise-answer", run, answer, period));
+            }
+            var upperNotes = evidence.events.Where(n => Qualifies(n) && n.midi >= upperRegister - 2 && !HasStrongerSemitone(n, evidence.events))
+                .GroupBy(n => n.time).Select(g => g.OrderByDescending(n => Get(n, "neuralOnset") * Math.Pow(Get(n, "harmonicNovelty"), .2)).First()).ToArray();
+            var trillNotes = new List<PcmInstrumentalEvidence.NoteEvent>();
+            foreach (var note in upperNotes)
+            {
+                if (trillNotes.Count > 0 && note.time - trillNotes.Last().time < .11)
+                {
+                    if (Get(note, "neuralOnset") * Math.Pow(Get(note, "harmonicNovelty"), .2)
+                        <= Get(trillNotes.Last(), "neuralOnset") * Math.Pow(Get(trillNotes.Last(), "harmonicNovelty"), .2)) continue;
+                    trillNotes.RemoveAt(trillNotes.Count - 1);
+                }
+                trillNotes.Add(note);
+            }
+            for (int i = 0; i + 8 < trillNotes.Count; i++)
+            {
+                var first = trillNotes[i]; var second = trillNotes[i + 1];
+                if (first.midi < upperRegister || first.midi - second.midi < 1 || first.midi - second.midi > 2) continue;
+                int end = i + 1;
+                while (end < trillNotes.Count && trillNotes[end].midi == ((end - i) % 2 == 0 ? first.midi : second.midi)
+                    && trillNotes[end].time - trillNotes[end - 1].time >= .1 - 1e-7 && trillNotes[end].time - trillNotes[end - 1].time <= .3 + 1e-7) end++;
+                if (end - i < 9) continue;
+                int count = (end - i) % 2 == 0 ? end - i - 1 : end - i;
+                var run = trillNotes.Skip(i).Take(count).Select(n => new NoteGroup { time = n.time, notes = new[] { n } }).ToArray();
+                if (Regular(run, .1, .3, .18, out double period)) contours.Add(new Contour
+                    { family = "continuous-neighbor-trill", signature = "", period = period, times = run.Select(n => n.time).ToArray() });
+                i = end - 1;
+            }
+            // Wider tremolos require source articulation rather than merely
+            // reusing a sustained neural activation at successive mixed peaks.
+            var articulatedNotes = evidence.events.Where(n => Qualifies(n) && n.midi >= upperRegister - 5 && !HasStrongerSemitone(n, evidence.events))
+                .GroupBy(n => n.time).Select(g => g.OrderByDescending(n => Get(n, "neuralOnset") * Math.Pow(Get(n, "harmonicNovelty"), .2)).First()).ToArray();
+            var articulated = new List<PcmInstrumentalEvidence.NoteEvent>();
+            foreach (var note in articulatedNotes)
+            {
+                if (articulated.Count > 0 && note.time - articulated.Last().time < .11)
+                {
+                    if (Get(note, "neuralOnset") * Math.Pow(Get(note, "harmonicNovelty"), .2)
+                        <= Get(articulated.Last(), "neuralOnset") * Math.Pow(Get(articulated.Last(), "harmonicNovelty"), .2)) continue;
+                    articulated.RemoveAt(articulated.Count - 1);
+                }
+                articulated.Add(note);
+            }
+            for (int i = 0; i + 6 < articulated.Count; i++)
+            {
+                var first = articulated[i]; var second = articulated[i + 1];
+                if (first.midi < upperRegister || first.midi - second.midi < 1 || first.midi - second.midi > 5) continue;
+                int end = i + 1;
+                while (end < articulated.Count && articulated[end].midi == ((end - i) % 2 == 0 ? first.midi : second.midi)
+                    && articulated[end].time - articulated[end - 1].time >= .1 - 1e-7 && articulated[end].time - articulated[end - 1].time <= .3 + 1e-7) end++;
+                if (end - i < 7) continue;
+                int count = (end - i) % 2 == 0 ? end - i - 1 : end - i;
+                var run = articulated.Skip(i).Take(count).Select(n => new NoteGroup { time = n.time, notes = new[] { n } }).ToArray();
+                if (Regular(run, .1, .3, .18, out double period) && Get(first, "neuralDuration") > 0
+                    && Get(first, "neuralDuration") <= 1.5 * period)
+                {
+                    var times = run.Select(n => n.time).ToList();
+                    var pickup = evidence.events.Where(n => n != null && Math.Abs(n.time - (first.time - period)) < .04
+                        && Step(n, first) >= 1 && Step(n, first) <= 2 && Tone(n, .65, .2, .01, 2)
+                        && (Get(n, "sourceAttack") >= .5 || Tone(n, .85, .3, .05, 2))
+                        && !evidence.events.Any(o => o != null && Math.Abs(o.time - n.time) < 1e-7 && Math.Abs(o.midi - n.midi) == 12
+                            && Get(o, "neuralOnset") > Get(n, "neuralOnset"))).OrderByDescending(n => Get(n, "neuralOnset")).FirstOrDefault();
+                    if (pickup != null) times.Insert(0, pickup.time);
+                    contours.Add(new Contour { family = "articulated-tremolo", signature = "", period = period, times = times.ToArray() });
+                }
+                i = end - 1;
+            }
+            var accepted = contours.Where(c => c.family == "continuous-neighbor-trill" || c.family == "articulated-tremolo" || contours.Any(other => other != c
+                && FamilyKey(other.family) == FamilyKey(c.family) && other.signature == c.signature && Math.Abs(other.period - c.period) < .04
+                && Math.Abs(other.times[0] - c.times[0]) > .5)).OrderBy(c => c.times[0]).ToArray();
+            var result = new List<MusicalCue>();
+            foreach (var contour in accepted)
+            {
+                double begin = contour.times.First(), end = contour.times.Last();
+                if (end - begin < .7 || end - begin > 6 || contour.times.Zip(contour.times.Skip(1), (a, b) => b - a >= .0624).Any(valid => !valid)) continue;
+                if (result.Any(c => begin < c.endTime + .078 && end > c.time - .078)) continue;
+                // The broader articulation family has its own choreography
+                // stream, so discovering it does not mirror existing paths.
+                int ordinal = result.Count(c => c.phraseId.StartsWith("mixed-articulated-tremolo-", StringComparison.Ordinal)
+                    == (contour.family == "articulated-tremolo"));
+                float direction = ordinal % 2 == 0 ? -1 : 1;
+                var points = contour.times.Select((time, index) => new MusicalPoint { time = time,
+                    lane = ContourLane(contour.family, index, contour.times.Length, direction) }).ToArray();
+                result.Add(new MusicalCue { kind = "Follow", time = begin, endTime = end, lane = points[0].lane, points = points,
+                    confidence = .8, phraseId = "mixed-" + contour.family + "-" + ordinal,
+                    reason = "Measured recurring tonal " + contour.family + "; native markers follow actual articulations and the source-confirmed phrase boundary. Lateral choreography is independent of the reference map." });
+            }
+            return result;
+        }
+
+        private static float ContourLane(string family, int index, int count, float direction)
+        {
+            if (index == count - 1) return 0;
+            if (family == "ascent-pedal") return index == 0 ? direction * .4f : (float)(.7 * Math.Sin((index - 1) * Math.PI / 4));
+            double phase = (double)index / (count - 1);
+            if (family == "scalar-turn" || family == "broken-chord-reply") return phase <= .34 ? direction * .8f : phase <= .68 ? -direction * .8f : 0;
+            return index < 2 ? direction * .8f : (float)(direction * .8 * (1 - 2.0 * (index - 1) / (count - 3)));
+        }
+        private static string FamilyKey(string family) => family == "ascent-pedal" ? "scalar-ascent" : family;
+
+        private static NoteGroup[] Groups(PcmInstrumentalEvidence.NoteEvent[] notes, bool tonal)
+        {
+            var result = new List<NoteGroup>();
+            foreach (var group in notes.Where(n => n != null).GroupBy(n => n.time).OrderBy(g => g.Key))
+            {
+                var eligible = group.Where(n => tonal ? Qualifies(n) : Tone(n, .68, .25, .025, 1)).ToArray();
+                if (eligible.Length == 0) continue;
+                var item = new NoteGroup { time = group.Key, notes = group.ToArray(),
+                    strength = eligible.Max(n => Get(n, "neuralOnset") * Math.Min(1, Get(n, "harmonicNovelty") / .1)) };
+                if (!tonal && result.Count > 0 && item.time - result.Last().time < .11)
+                {
+                    if (item.strength <= result.Last().strength) continue;
+                    result.RemoveAt(result.Count - 1);
+                }
+                result.Add(item);
+            }
+            return result.ToArray();
+        }
+        private static PcmInstrumentalEvidence.NoteEvent[] BestPath(NoteGroup[] groups, Func<PcmInstrumentalEvidence.NoteEvent, bool> eligible,
+            Func<List<PcmInstrumentalEvidence.NoteEvent>, bool> validPrefix)
+        {
+            var options = groups.Select(g => g.notes.Where(eligible).ToArray()).ToArray();
+            if (options.Any(p => p.Length == 0)) return null;
+            var path = new List<PcmInstrumentalEvidence.NoteEvent>(); PcmInstrumentalEvidence.NoteEvent[] best = null;
+            double bestScore = double.NegativeInfinity;
+            void Search(int at, double score)
+            {
+                if (at == options.Length) { if (score > bestScore) { bestScore = score; best = path.ToArray(); } return; }
+                foreach (var note in options[at])
+                {
+                    path.Add(note);
+                    if (validPrefix(path)) Search(at + 1, score + Get(note, "neuralOnset"));
+                    path.RemoveAt(path.Count - 1);
+                }
+            }
+            Search(0, 0); return best;
+        }
+        private static bool Regular(NoteGroup[] groups, double minimum, double maximum, double variability, out double period)
+        {
+            var gaps = groups.Zip(groups.Skip(1), (a, b) => b.time - a.time).ToArray();
+            period = gaps.Length == 0 ? 0 : Quantile(gaps.OrderBy(g => g).ToArray(), .5);
+            if (period <= 0 || gaps.Any(g => g < minimum - 1e-7 || g > maximum + 1e-7)) return false;
+            double mean = gaps.Average();
+            return Math.Sqrt(gaps.Average(g => (g - mean) * (g - mean))) / period <= variability;
+        }
+        private static Contour MakeContour(string family, NoteGroup[] groups, PcmInstrumentalEvidence.NoteEvent[] notes, double period)
+            => new Contour { family = family, period = period, times = groups.Select(g => g.time).ToArray(),
+                signature = string.Join(",", notes.Select(n => (n.midi - notes[0].midi + 120) % 12)) };
+        private static int Step(PcmInstrumentalEvidence.NoteEvent first, PcmInstrumentalEvidence.NoteEvent second) => (second.midi - first.midi + 126) % 12 - 6;
+        private static bool Same(PcmInstrumentalEvidence.NoteEvent first, PcmInstrumentalEvidence.NoteEvent second) => (first.midi - second.midi) % 12 == 0;
+        private static bool Tone(PcmInstrumentalEvidence.NoteEvent n, double neural, double body, double novelty, double partials)
+            => n != null && Get(n, "neuralOnset") >= neural && Get(n, "harmonicBody") >= body
+                && Get(n, "harmonicNovelty") >= novelty && Get(n, "harmonicPartials") >= partials;
 
         private sealed class PathSupport
         {
@@ -131,8 +399,9 @@ namespace DancingCats.Clone.Editor
                     bool right = support.exit > support.entry;
                     // A tiny numeric margin keeps the serialized float span at
                     // or above the compiler's meaningful-movement threshold.
-                    stepLower[entry] = right ? .20001 : -.8;
-                    stepUpper[entry] = right ? .8 : -.20001;
+                    double maximumSpan = Math.Max(.20001, Math.Abs(support.exit - support.entry));
+                    stepLower[entry] = right ? .20001 : -maximumSpan;
+                    stepUpper[entry] = right ? maximumSpan : -.20001;
                 }
                 else
                 {
@@ -175,7 +444,7 @@ namespace DancingCats.Clone.Editor
                 var cue = support.cue; float entry = (float)fitted[2 * i], exit = (float)fitted[2 * i + 1];
                 cue.lane = entry;
                 foreach (var point in cue.points)
-                    point.lane = (float)(entry + (exit - entry) * (point.time - cue.time) / (cue.endTime - cue.time));
+                    point.lane = (float)Clamp(entry + (point.lane - support.entry) * (exit - entry) / (support.exit - support.entry), -1, 1);
             }
             return true;
         }
@@ -184,8 +453,13 @@ namespace DancingCats.Clone.Editor
 
         private static bool Qualifies(PcmInstrumentalEvidence.NoteEvent n)
             => n != null && Get(n, "neuralOnset") >= .6 && Get(n, "harmonicPartials") >= 1
-                && Get(n, "harmonicBody") >= .45 && Get(n, "harmonicNovelty") >= .02 && Get(n, "sourceAttack") >= .5;
-        private static double End(PcmInstrumentalEvidence.NoteEvent n) => Math.Min(n.endTime, n.time + Get(n, "nextGap"));
+                && Get(n, "harmonicBody") >= .45 && Get(n, "harmonicNovelty") >= .015;
+        private static double End(PcmInstrumentalEvidence.NoteEvent n, double[] attacks)
+            => Math.Min(n.endTime, attacks.FirstOrDefault(t => t > n.time + .078) is double next && next > 0 ? next : n.endTime);
+        private static bool HasStrongerSemitone(PcmInstrumentalEvidence.NoteEvent note, PcmInstrumentalEvidence.NoteEvent[] notes)
+            => notes.Any(n => n != null && Math.Abs(n.time - note.time) < 1e-7 && Math.Abs(n.midi - note.midi) == 1
+                && Get(n, "neuralOnset") >= .55 && Get(n, "harmonicPartials") >= 1 && Get(n, "harmonicBody") >= .4
+                && Get(n, "harmonicNovelty") > 1.5 * Get(note, "harmonicNovelty"));
         private static double Get(PcmInstrumentalEvidence.NoteEvent n, string feature) => PcmInstrumentalEvidence.Get(n, feature);
         private static double Quantile(double[] sorted, double q)
         { double at = (sorted.Length - 1) * q; int lower = (int)at; return sorted[lower] + (sorted[Math.Min(lower + 1, sorted.Length - 1)] - sorted[lower]) * (at - lower); }

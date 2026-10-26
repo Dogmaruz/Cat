@@ -1,0 +1,105 @@
+{
+    "stage": "baseline",
+    "referenceId": "CanCanPiano",
+    "referenceMapSha256": "2e04a04cc56346f6a4c6e5f832df5a55eb1abd52b16d1d1f61aee5120a6ee081",
+    "sourceAudioSha256": "8f53952f9f5002ed5f6b313ab170bb317e1494605d3cad8b183a0e78353ddcd3",
+    "sourcePcmSha256": "afc040b6717ffc0fbae20f91108eb64bea3a60cd09415a06b9347d94259ed7e2",
+    "voiceFeatureSha256": "ec5a62eb9c16e3ba9ae7eb5fce974c177905a9fa557cda1f237165b7d0aeef0b",
+    "generator": "pcm-vocal-phrase-chart-v9+short-test",
+    "generatedTimelineSha256": "d39c86fec2a036117f1cc427fbb34f5b974c020b151e32abb9b925d90065887b",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 10.0,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold duration <=0.45s on both sides; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 5,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "allHolds": {
+        "definition": "All Hold; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 13,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 13,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "follows": {
+        "definition": "Follow; onset <=80ms; end <=150ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 20,
+        "generatedCount": 5,
+        "truePositive": 5,
+        "falsePositive": 0,
+        "falseNegative": 15,
+        "precision": 1.0,
+        "recall": 0.25,
+        "f1": 0.4,
+        "matches": [
+            {
+                "referenceIndex": 271,
+                "generatedIndex": 277,
+                "referenceStart": 72.75811975598336,
+                "referenceEnd": 73.1331075489521,
+                "generatedStart": 72.75609977,
+                "generatedEnd": 73.11600907,
+                "onsetErrorMs": -2.0199859833525126,
+                "endErrorMs": -17.098478952092934,
+                "intersectionOverUnion": 0.9492889377811089
+            },
+            {
+                "referenceIndex": 274,
+                "generatedIndex": 279,
+                "referenceStart": 73.49249475598336,
+                "referenceEnd": 73.8518575489521,
+                "generatedStart": 73.48752834,
+                "generatedEnd": 73.85052153999999,
+                "onsetErrorMs": -4.966415983361117,
+                "endErrorMs": -1.3360089521086139,
+                "intersectionOverUnion": 0.9827012910834214
+            },
+            {
+                "referenceIndex": 277,
+                "generatedIndex": 281,
+                "referenceStart": 74.24249475598336,
+                "referenceEnd": 74.6018575489521,
+                "generatedStart": 74.23365079,
+                "generatedEnd": 74.60517007,
+                "onsetErrorMs": -8.84396598335968,
+                "endErrorMs": 3.3125210479028057,
+                "intersectionOverUnion": 0.9672789874289635
+            },
+            {
+                "referenceIndex": 280,
+                "generatedIndex": 283,
+                "referenceStart": 74.97686975598336,
+                "referenceEnd": 75.32061365246773,
+                "generatedStart": 74.96507937,
+                "generatedEnd": 75.31337868,
+                "onsetErrorMs": -11.790385983360352,
+                "endErrorMs": -7.234972467728085,
+                "intersectionOverUnion": 0.9464879777020792
+            },
+            {
+                "referenceIndex": 283,
+                "generatedIndex": 285,
+                "referenceStart": 75.71124475598336,
+                "referenceEnd": 76.07061365246773,
+                "generatedStart": 75.69959184,
+                "generatedEnd": 76.08272108999999,
+                "onsetErrorMs": -11.652915983361823,
+                "endErrorMs": 12.107437532264953,
+                "intersectionOverUnion": 0.9379834520187977
+            }
+        ]
+    }
+}

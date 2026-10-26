@@ -13,7 +13,7 @@ FEATURE_NAMES=('neuralOnset','neuralPeak','neuralBody','neuralLate','neuralTail'
     'harmonicPartials','harmonicBody','harmonicLate','harmonicTail','harmonicDuration','harmonicNovelty',
     'nextGap','previousGap','localGap','nextPitchDelta','previousPitchDelta','insideAttacks',
     'samePitchReattack','pitchRank','relativePitch','sourceAttack')
-ANALYSIS_VERSION='mixed-note-events-1'
+ANALYSIS_VERSION='mixed-note-events-2-candidates8'
 TIMING_VERSION='input-window-time-v2'
 NOTE_SHA='2c3c1d144bfa61ad236e92e169c13535c880469a12a047d4e73451f2c059a0ec'
 
@@ -129,7 +129,10 @@ def measure_events(pcm,rate,notes):
         ix=(nt>=a-.025)&(nt<=a+.10)
         if not ix.any():continue
         scores=onsets[ix].max(axis=0)*np.sqrt(activation[ix].max(axis=0))
-        pitches=[int(i)for i in np.argsort(-scores)[:4]if onsets[ix,i].max()>=.25]
+        # Dense chords can rank a real melodic note below accompaniment or
+        # a lingering octave. Keep eight hypotheses without lowering confidence;
+        # source-confirmed gesture recognition still chooses among them later.
+        pitches=[int(i)for i in np.argsort(-scores)[:8]if onsets[ix,i].max()>=.25]
         if not pitches:continue
         leading.append(dict(time=a,midi=pitches[0]+48,endTime=a))
         for rank,index in enumerate(pitches):

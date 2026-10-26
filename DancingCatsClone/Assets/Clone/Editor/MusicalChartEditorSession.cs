@@ -370,6 +370,21 @@ namespace DancingCats.Clone.Editor
                     case "chart-v9-preview-cancan":
                         Invoke("RadioArchipelagoJobs", "SelectV9CanCanPreview");
                         break;
+                    case "chart-v10-export": Invoke("PcmChartStudyV10", "ExportNewPcm"); break;
+                    case "chart-v10-freeze-checks": Invoke("PcmChartStudyV10", "RunFreezeChecks"); break;
+                    case "chart-v10-baseline-known": Invoke("PcmChartStudyV10", "BaselineKnown"); break;
+                    case "chart-v10-baseline-heldout": Invoke("PcmChartStudyV10", "BaselineHeldout"); break;
+                    case "chart-v10-known": Invoke("PcmChartStudyV10", "CandidateKnown"); break;
+                    case "chart-v10-heldout": Invoke("PcmChartStudyV10", "CandidateHeldout"); break;
+                    case "chart-v10-publication-guards": Invoke("ChartTestPublicationV10", "RunGuardChecks"); break;
+                    case "chart-v10-publish-tests": Invoke("ChartTestPublicationV10", "PublishTests"); break;
+                    case "chart-v10-play-disconnect": Invoke("RadioArchipelagoJobs", "V10DisconnectPlaytest"); break;
+                    case "chart-v10-play-cancan": Invoke("RadioArchipelagoJobs", "V10CanCanPlaytest"); break;
+                    case "chart-v10-play-dance": Invoke("RadioArchipelagoJobs", "V10DancePlaytest"); break;
+                    case "chart-v10-play-moonlight": Invoke("RadioArchipelagoJobs", "V10MoonlightPlaytest"); break;
+                    case "chart-v10-play-elise": Invoke("RadioArchipelagoJobs", "V10ElisePlaytest"); break;
+                    case "chart-v10-play-jingle": Invoke("RadioArchipelagoJobs", "V10JinglePlaytest"); break;
+                    case "chart-v10-preview-cancan": Invoke("RadioArchipelagoJobs", "SelectV10CanCanPreview"); break;
                     default: throw new ArgumentException("Unknown musical authoring job: " + action);
                 }
                 WriteResponse(action, true, "Completed authoring job");

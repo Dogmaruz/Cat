@@ -14,9 +14,12 @@ namespace DancingCats.Clone.Editor
                 var options = new AudioChartGenerator.Options { forwardSpeed = speed };
                 var oldApi = AudioChartGenerator.GenerateFromSamples(pcm, rate, channels, "InstrumentalFixture", options, voice);
                 var mixed = AudioChartGenerator.GenerateWithInstrumentalSamples(pcm, rate, channels, "InstrumentalFixture", options, voice, notes);
-                Require(oldApi.segments.All(s => s.kind != "Follow") && mixed.segments.Count(s => s.kind == "Follow") == 5,
-                    "verified additional measurements reveal the five known calibration cells without changing the six-argument API");
-                Require(mixed.segments.Where(s => s.kind == "Follow").All(s => s.duration < .5 && s.path.Length == 2),
+                var shortRides = mixed.segments.Where(s => s.kind == "Follow" && s.duration < .5).ToArray();
+                Require(oldApi.segments.All(s => s.kind != "Follow") && shortRides.Length == 7,
+                    "verified additional measurements retain the five prior cells and recover two quiet short responses without changing the pure six-argument API");
+                Require(mixed.segments.Count(s => s.kind == "Follow") == 19,
+                    "the full compiler and route composition must retain all nineteen measured calibration gestures");
+                Require(shortRides.All(s => s.path.Length == 2),
                     "short rides retain entry and exit without inventing an internal scored checkpoint");
                 options.includeMovingJumps = false;
                 var noMoving = AudioChartGenerator.GenerateWithInstrumentalSamples(pcm, rate, channels, "InstrumentalFixture", options, voice, notes);
@@ -31,8 +34,8 @@ namespace DancingCats.Clone.Editor
                     "short-support style remains disabled by default rather than silently changing general generation");
                 options.includeExperimentalShortSupports = true;
                 var experimental = AudioChartGenerator.GenerateWithInstrumentalSamples(pcm, rate, channels, "ShortSupportFixture", options, voice, notes);
-                Require(experimental.segments.Count(s => s.kind == "Hold") == 2 && experimental.sourceMapBundle.EndsWith("+short-test", StringComparison.Ordinal),
-                    "the opt-in test records exactly the two calibration supports and its experimental provenance");
+                Require(experimental.segments.Count(s => s.kind == "Hold") == 8 && experimental.sourceMapBundle.EndsWith("+short-test", StringComparison.Ordinal),
+                    "the opt-in test records the eight interval-relative source proposals and experimental provenance; strict accuracy is measured separately");
                 options.includeHolds = false;
                 var noHolds = AudioChartGenerator.GenerateWithInstrumentalSamples(pcm, rate, channels, "ShortSupportFixture", options, voice, notes);
                 Require(noHolds.segments.All(s => s.kind != "Hold"), "the Hold switch also disables experimental support proposals");
@@ -46,7 +49,7 @@ namespace DancingCats.Clone.Editor
                 catch (InvalidDataException) { rejected = true; }
                 Require(rejected, "a correctly sealed cache for different decoded PCM must fail at the actual generation boundary");
             });
-            Debug.Log("INSTRUMENTAL_CHART_INTEGRATION PASS: actual calibration PCM, compatible pure API, five short glides, default-off experimental Holds, independent flags, native geometry and wrong-PCM cache rejection.");
+            Debug.Log("INSTRUMENTAL_CHART_INTEGRATION PASS: actual calibration PCM, compatible pure API, seven short glides, default-off interval-relative Holds, independent flags, native geometry and wrong-PCM cache rejection.");
         }
 
         private static void CheckRecording(string id,

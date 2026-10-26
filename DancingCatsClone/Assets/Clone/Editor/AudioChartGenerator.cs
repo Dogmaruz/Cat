@@ -13,8 +13,8 @@ namespace DancingCats.Clone.Editor
     public static class AudioChartGenerator
     {
         public const string AlwaysRememberId = "AlwaysRememberMeowCat";
-        private const string Version = "pcm-phrase-chart-v9";
-        private const string VocalVersion = "pcm-vocal-phrase-chart-v9";
+        private const string Version = "pcm-phrase-chart-v10";
+        private const string VocalVersion = "pcm-vocal-phrase-chart-v10";
         private const double MinGap = .18, MaxGap = 1.95;
 
         [Serializable]
@@ -266,7 +266,7 @@ namespace DancingCats.Clone.Editor
             if (instrumentalEvidence != null)
                 map.normalizationNotes = map.normalizationNotes.Concat(new[] { "Verified mixed-note evidence: " + instrumentalEvidence.analysisVersion
                     + "; feature SHA-256: " + instrumentalEvidence.featureSha256 + "; native input-window timing; local pinned inference only.",
-                    "Additional short glides require repeated, source-confirmed descending note cells and measured releases. Legacy vocal supports and recurrent glides retain priority. No source chart times, labels or song identities enter inference."
+                    "Additional glides require source-confirmed attacks, measured releases and recurring melodic contour families. Legacy vocal supports and flights retain priority. No source chart times, labels or song identities enter inference."
                 }).ToArray();
             if (instrumentalEvidence != null && options.includeExperimentalShortSupports)
                 map.normalizationNotes = map.normalizationNotes.Concat(new[] { "Experimental short supports: "

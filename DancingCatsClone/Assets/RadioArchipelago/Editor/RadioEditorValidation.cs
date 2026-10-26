@@ -126,6 +126,12 @@ namespace RadioArchipelago.Editor
         public static void RunV9CanCanPlaytest() => StartReview(false, "CanCanPianoGeneratorTestV9");
         public static void RunV9DancePlaytest() => StartReview(false, "IJustWannaDancePopGeneratorTestV9");
         public static void RunV9CloudsPlaytest() => StartReview(false, "MoonlightCloudsPianoGeneratorTestV9");
+        public static void RunV10DisconnectPlaytest() => StartReview(false, "DisconnectPopGeneratorTestV10");
+        public static void RunV10CanCanPlaytest() => StartReview(false, "CanCanPianoGeneratorTestV10");
+        public static void RunV10DancePlaytest() => StartReview(false, "IJustWannaDancePopGeneratorTestV10");
+        public static void RunV10MoonlightPlaytest() => StartReview(false, "MoonlightPopGeneratorTestV10");
+        public static void RunV10ElisePlaytest() => StartReview(false, "FurElisePianoGeneratorTestV10");
+        public static void RunV10JinglePlaytest() => StartReview(false, "JingleBellsGeneratorTestV10");
 
         [MenuItem("Radio Archipelago/Review/Check live menu preview framing")]
         public static void RunMenuPreviewReview() => StartReview(true);

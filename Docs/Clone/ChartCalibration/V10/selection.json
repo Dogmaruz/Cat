@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "9c40389",
+  "selectionPolicy": "Aggregate type/duration counts and source hashes only. No per-event times, paths, audio features or candidate errors opened. All eight v9 recordings are known calibration/regression material.",
+  "selection": [
+    {
+      "id": "DisconnectPop",
+      "role": "known",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/Disconnect__-1922482105454753078.ogg",
+      "sourceFileSha256": "50e457b74a6c5189494d99db4c3b8cac6480c937e43cca03a270d71a39272c5f",
+      "referenceMapSha256": "2fdf744d7ad60b2df044a803cd5ef3877f6615f4b2c2938864864822f9f11b2a"
+    },
+    {
+      "id": "CanCanPiano",
+      "role": "known",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/CanCan__-6816999517090791341.ogg",
+      "sourceFileSha256": "8f53952f9f5002ed5f6b313ab170bb317e1494605d3cad8b183a0e78353ddcd3",
+      "referenceMapSha256": "2e04a04cc56346f6a4c6e5f832df5a55eb1abd52b16d1d1f61aee5120a6ee081"
+    },
+    {
+      "id": "IJustWannaDancePop",
+      "role": "known",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/IJustWannaDance__-1609347653232031427.ogg",
+      "sourceFileSha256": "bea4e85a21807ee88b90b745209a8057dedaf9a0fea82671cb0f8056f87ccc40",
+      "referenceMapSha256": "9283d289245f52a5e0ce3a29c61a46fcd16f84298a96e81ccceaf69fdaa1b376"
+    },
+    {
+      "id": "MoonlightCloudsPiano",
+      "role": "known",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/MoonlightCloudsPiano__-6882153158820711397.ogg",
+      "sourceFileSha256": "9d99efd063bb86889578244439258c1f1692de1f5939e9a8693aa0dfbf9d7ed6",
+      "referenceMapSha256": "25752621169c96f26c49e211e03373fdf27584eeef912950a642f022e60761ef"
+    },
+    {
+      "id": "UnstoppableCat054",
+      "role": "known",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/UnstoppableCat054__-4692272782636974856.wav",
+      "sourceFileSha256": "7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b",
+      "referenceMapSha256": "277e5fd678a41323273dd786f32450291338d4edf4752d9ff83939b52548de90"
+    },
+    {
+      "id": "TwinkleLittleStar",
+      "role": "known",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/TwinkleLittleStar__7681580570051076149.ogg",
+      "sourceFileSha256": "0cd8dc69f01e117562bf8d21afa17225c5594e7e1ba0920444275953fddec44f",
+      "referenceMapSha256": "96657140ead6377636747c6619bd3e060c60bfe41f32276c4436dbf6b15754db"
+    },
+    {
+      "id": "MoonlightPop",
+      "role": "known",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/Moonlight__6113832926828226045.ogg",
+      "sourceFileSha256": "35cb4620f0b6436f8c918538ecc6e3e81ef6180a2fb4ba4fd39931156909b843",
+      "referenceMapSha256": "ae158d469109c32c621cbe915062e3ff5129abe1c1001343f557f8ba0e7b3804"
+    },
+    {
+      "id": "LABUBUSongsPop",
+      "role": "known",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/LABUBUSongsPop__594992986718749422.ogg",
+      "sourceFileSha256": "dadc0644e3f1b2fe9d9f10f19b0df81eff5dcf087cc382d9a44e74a2a6a57190",
+      "referenceMapSha256": "1e9b3f9363637f19b2bcaa45fe361a6ab13ac8c4b9c3ad45d50a6d1d58ef108f"
+    },
+    {
+      "id": "FurElisePiano",
+      "title": "Für Elise",
+      "catalogId": 35,
+      "duration": 56.502857142857145,
+      "audioResource": "OriginalAudio/Music/FurElise__-921397790505427153",
+      "timelineResource": "OriginalData/Maps/FurElisePiano.timeline",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/FurElise__-921397790505427153.ogg",
+      "sourceFileSha256": "6adc81188a4c82e24ee1f04ea875dc95338630de98199b4475cbb7a15d88f573",
+      "referenceMapSha256": "9220f268ee214ddcdde5fffa2758ee845a8fe9889938de93276976e32095097b",
+      "typeCounts": {
+        "Start": 1,
+        "Jump": 131,
+        "Hold": 38,
+        "Theme": 4,
+        "Follow": 1,
+        "BigJump": 1,
+        "FinishJump": 1
+      },
+      "shortHoldCount": 32,
+      "shortHoldDensity": 33.980582524271846,
+      "followCount": 1,
+      "shortFollowCount": 1,
+      "followDensity": 1.0618932038834952,
+      "followDurationBins": {
+        ".5-1": 1
+      },
+      "forwardSpeed": 11.0,
+      "delayTime": 0.44501134753227234,
+      "role": "heldout-short-hold",
+      "criterion": "maximum shortHoldDensity; ordinal ID tie-break"
+    },
+    {
+      "id": "JingleBells",
+      "title": "Jingle Bells",
+      "catalogId": 7,
+      "duration": 64.0,
+      "audioResource": "OriginalAudio/Music/JingleBells__-8351312093436722415",
+      "timelineResource": "OriginalData/Maps/JingleBells.timeline",
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/JingleBells__-8351312093436722415.ogg",
+      "sourceFileSha256": "f83d9bf3ccb1bb49b31736d8bd72477cb344ababff68e0801dce1b4d2e9eaa7c",
+      "referenceMapSha256": "26012df75d3718e3065653d85757d2a42894ec8a6c0bc89723ad30bb1b23c5cb",
+      "typeCounts": {
+        "Start": 1,
+        "Jump": 68,
+        "BigJump": 42,
+        "Theme": 19,
+        "Follow": 8,
+        "FinishJump": 1,
+        "Hold": 7
+      },
+      "shortHoldCount": 0,
+      "shortHoldDensity": 0.0,
+      "followCount": 8,
+      "shortFollowCount": 8,
+      "followDensity": 7.5,
+      "followDurationBins": {
+        ".5-1": 8
+      },
+      "forwardSpeed": 9.5,
+      "delayTime": 0.44501134753227234,
+      "role": "heldout-follow",
+      "criterion": "maximum followDensity, duration-bin diversity then ordinal ID; distinct audio"
+    }
+  ]
+}

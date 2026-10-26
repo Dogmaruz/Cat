@@ -66,4 +66,28 @@ class InstrumentalNotesTests(unittest.TestCase):
         self.assertEqual(features['insideAttacks'],1)
         self.assertEqual(features['relativePitch'],12)
 
+    def test_dense_chord_preserves_confident_melody_beyond_top_four(self):
+        from unittest.mock import patch
+        m=self.module;t=np.arange(200)*.01
+        body=np.zeros((200,88));onset=np.zeros_like(body)
+        for rank in range(8):
+            body[50:80,27+rank]=.8
+            onset[50,27+rank]=.95-.04*rank
+        measured=dict(partials=2,body=.8,late=.5,tail=.2,duration=.3,novelty=.1)
+        with patch.object(m,'harmonic_measurements',return_value=measured),patch.object(m,'spectral_attacks',return_value=[]):
+            events=m.measure_events(np.zeros((2000,1)),1000,dict(times=t,note=body,onset=onset))
+        self.assertEqual(len(events),8,'A confident fifth-to-eighth pitch cannot be dropped before phrase analysis')
+        self.assertEqual(sorted(e['features'][19]for e in events),list(range(8)))
+        self.assertEqual(m.ANALYSIS_VERSION,'mixed-note-events-2-candidates8')
+
+    def test_candidate_expansion_keeps_the_confidence_floor(self):
+        from unittest.mock import patch
+        m=self.module;t=np.arange(200)*.01
+        body=np.zeros((200,88));onset=np.zeros_like(body)
+        body[50:80,27:35]=.8;onset[50,27:31]=.8;onset[50,31:35]=.20
+        measured=dict(partials=2,body=.8,late=.5,tail=.2,duration=.3,novelty=.1)
+        with patch.object(m,'harmonic_measurements',return_value=measured),patch.object(m,'spectral_attacks',return_value=[]):
+            events=m.measure_events(np.zeros((2000,1)),1000,dict(times=t,note=body,onset=onset))
+        self.assertEqual(len(events),4,'Expanding rank capacity must not lower evidence confidence')
+
 if __name__=='__main__':unittest.main()

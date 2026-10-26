@@ -64,6 +64,8 @@ namespace DancingCats.Clone.Editor
             var temporary = labels[0]; labels[0] = labels[1]; labels[1] = temporary;
             Require(Digest(reordered) != KnownHash && Rejects(reordered), "Feature meaning/order must be bound to the digest and schema.");
             RejectChange(e => Set(e, "analysisVersion", "mixed-note-events-2"), "Unknown analysis versions must fail even with a resealed digest.", true);
+            var expanded = Fixture(); Set(expanded, "analysisVersion", "mixed-note-events-2-candidates8"); Seal(expanded); Valid(expanded);
+            Require(Digest(expanded) != KnownHash, "Expanded hypotheses must have explicit versioned provenance while retaining the feature schema.");
             RejectChange(e => Set(e, "timingVersion", "flattened-frame-time"), "Unknown timing provenance must fail even with a resealed digest.", true);
             RejectChange(e => Set(e, "noteModelSha256", new string('3', 64)), "Unknown note models must fail even with a resealed digest.", true);
             RejectChange(e => Set(e, "schemaVersion", 2), "Unknown schemas must fail.", true);

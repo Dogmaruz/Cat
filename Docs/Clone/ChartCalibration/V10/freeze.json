@@ -1,0 +1,494 @@
+{
+  "beforeValidation": true,
+  "frozenAtUtc": "2026-10-26T08:42:22.888606+00:00",
+  "baselineCommit": "9c40389",
+  "scope": "Eight known tuning recordings; two newly aggregate-selected heldout recordings. Both versions explicitly opt in to experimental short supports. Candidate notes expand V1 cap4 to source-verified V2 cap8; same PCM/voice/speed/preroll.",
+  "algorithm": [
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/AudioChartGenerator.cs",
+      "sha256": "0d19027516382d4c6c22a4b8eedfe7701c2c8d0cb1085a64c3080fe8c9f00764",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/ChartRouteComposer.cs",
+      "sha256": "9b695b99d360ff0cad285a0e672e488df7364c2befdf4d234c7c252059329420",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/ChartTestPublicationV10.cs",
+      "sha256": "a05f3c8507e77090b7c04fe664ebbc74ddf87810e74fcdcfbf490a923d937c6e",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/MusicalChartCompiler.cs",
+      "sha256": "015ba58a0580b0f2b680f18a65760428fe2bfc816b4a1f0ba8fd20cdfd33a765",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/MusicalScore.cs",
+      "sha256": "b3097ba3efd64d0fbe7faf7a381310aefece14331f654552893227f3838de956",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/PcmChartStudyV10.cs",
+      "sha256": "9bd7ba90d62fcba1cd74f0ecf245aa6fe1bcdd85bdbad7b06c8a828250f72bdc",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/PcmFlightAnalysis.cs",
+      "sha256": "39d17fe84dbde225bd0e086dc4b658a14a42d60d3e058bdda70422e8e866a769",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/PcmForegroundAnalysis.cs",
+      "sha256": "9a21570d5f0c147cd60eaf8b0c77d28bf610d419d520404d9227f3511cfae422",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/PcmInstrumentalEvidence.cs",
+      "sha256": "426799cc12e4df8f8a042b5c764b21bdbcfabadb42ce7e9f6e2a272d8f2e2c97",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/PcmMelodicFollowAnalysis.cs",
+      "sha256": "b76aa37047a142fd3aa5bd83b418d4ecca2d593ce30042b3911f8b70ca4a45de",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/PcmPhraseAnalysis.cs",
+      "sha256": "f89ef834bc8b19b46482813039e41566e59f1faccac48cc02e313904f9cc4750",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/PcmRapidArticulationAnalysis.cs",
+      "sha256": "82fa0ded18f8cd4d3f5db11b48996d0ffabe6134471a52c768a23df65a9c9569",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/PcmShortSupportAnalysis.cs",
+      "sha256": "1ddb57e6dda5c58866572dffdde8a8a36516ed1a9942437f2b3b66611b94df43",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/PcmShortSupportAnalysisValidation.cs",
+      "sha256": "93bae3e9047ffc7dd0d8a72be0a15b9a47c63c3e5bf6e19769caf9d7cfc59ec9",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/PcmSparsePhraseAnalysis.cs",
+      "sha256": "d00194ec0ee223778f8c9a197c64b07e3835a1633e24c60c31e4a62f7cdf55e2",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/PcmSpectralAnalysis.cs",
+      "sha256": "efce64d9b0ba82d58f75f4f6c7787f1030e827dd35df805a81e4ed511ecb5539",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/PcmVocalAnalysis.cs",
+      "sha256": "9931018b9cbc3816ec59a7c7288f557017e0b16ccfd973d11e70c01c5bbc54d8",
+      "normalizedLf": true
+    },
+    {
+      "path": "Tools/RhythmAnalysis/analyze_instrumental_notes.py",
+      "sha256": "de6375d880213d2ad99f8c9742d2a256c5b1c87f57f81696481dff7314954da8",
+      "normalizedLf": true
+    },
+    {
+      "path": "Tools/RhythmAnalysis/analyze_vocal_holds.py",
+      "sha256": "924702e98bd8b383f0b4a7689490ff5013a19dcb25db08052017bab863960393",
+      "normalizedLf": true
+    },
+    {
+      "path": "Tools/RhythmAnalysis/test_short_support_release.py",
+      "sha256": "94ad48d6f998bad39322e6a13e61fe2225523a1477dc1e778652dbc6208ad841",
+      "normalizedLf": true
+    },
+    {
+      "path": "Tools/RhythmAnalysis/train_short_support_release.py",
+      "sha256": "284da33ca505ae306d3218d9059f096c5c8db9e68d18871d1cb37f95ef5dd866",
+      "normalizedLf": true
+    },
+    {
+      "path": "Tools/RhythmAnalysis/train_short_support_style.py",
+      "sha256": "7e23e357751d3329ae776e4227d20d010f659e74fb3ea64348b716b266c13fe0",
+      "normalizedLf": true
+    }
+  ],
+  "measurements": [
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/AudioEvidence/0cd8dc69f01e117562bf8d21afa17225c5594e7e1ba0920444275953fddec44f.voice.json",
+      "sha256": "988c6dc7915700b22d119622443beecb7c58434c199ee99cfbcbfbc2baa437ea",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/AudioEvidence/35cb4620f0b6436f8c918538ecc6e3e81ef6180a2fb4ba4fd39931156909b843.voice.json",
+      "sha256": "e8aa8118c19d73cb7c5384d2a569463d9945896faec4d69b21c5343a17ae6726",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/AudioEvidence/50e457b74a6c5189494d99db4c3b8cac6480c937e43cca03a270d71a39272c5f.voice.json",
+      "sha256": "66882653a5bd070bf16b700eba9713180a6dfbfb2a6a17cde74bf6aacce8ce64",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/AudioEvidence/6adc81188a4c82e24ee1f04ea875dc95338630de98199b4475cbb7a15d88f573.voice.json",
+      "sha256": "879b3001b3ab7d4437ead095ab8dcce3a7610353e0b0d942de45469b680380ff",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/AudioEvidence/7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b.voice.json",
+      "sha256": "6e47f285afd7417ef3add416728555cd2fa3fb26dbcc1e667460ac134206c6c2",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/AudioEvidence/8f53952f9f5002ed5f6b313ab170bb317e1494605d3cad8b183a0e78353ddcd3.voice.json",
+      "sha256": "3aa5d7f850dceafa156391ac679ceb0d42cc848f050a73c85bc945f9c53d7b0d",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/AudioEvidence/9d99efd063bb86889578244439258c1f1692de1f5939e9a8693aa0dfbf9d7ed6.voice.json",
+      "sha256": "ed7ce3611f11bba83150eecda3fb0394d2e4420d9803f272a63ee8ad44164ae5",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/AudioEvidence/9e66a28124d6e4c5a261ff1bacc7ba9b5b32324c6b950893db6c92a300e9a509.voice.json",
+      "sha256": "4f3321e8db45dc574cb8769f8244b98fda5033d360df9abb1df9ecffc7d5aa6c",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/AudioEvidence/bea4e85a21807ee88b90b745209a8057dedaf9a0fea82671cb0f8056f87ccc40.voice.json",
+      "sha256": "a6ceae475683921d4a74e63f4afdbfd776563f5e6e2b71a9dc2bb1b966b3d5a8",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/AudioEvidence/dadc0644e3f1b2fe9d9f10f19b0df81eff5dcf087cc382d9a44e74a2a6a57190.voice.json",
+      "sha256": "12c891d4856356f24d0e58cf32f7628f8071062be9f3e08b0b8224431b050118",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/AudioEvidence/f83d9bf3ccb1bb49b31736d8bd72477cb344ababff68e0801dce1b4d2e9eaa7c.voice.json",
+      "sha256": "fcff278e93cfe4e4343b277f35ec101caaa7ac6476b0bd445f47254bc8c264d7",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/InstrumentEvidence/0cd8dc69f01e117562bf8d21afa17225c5594e7e1ba0920444275953fddec44f.notes.json",
+      "sha256": "623ade6ebce08bf9212370bc5e03f1e4fa74b0c52499b0316954c02e8fd17d40",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/InstrumentEvidence/35cb4620f0b6436f8c918538ecc6e3e81ef6180a2fb4ba4fd39931156909b843.notes.json",
+      "sha256": "40e38853f9f6e14fe04ed3ee1b56fbc002e26cc3cf6e3c217b829a69f81e6f4a",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/InstrumentEvidence/50e457b74a6c5189494d99db4c3b8cac6480c937e43cca03a270d71a39272c5f.notes.json",
+      "sha256": "3574cbbe0e1fd0ee7608780e95380eb1af97244d03200a90089ee69720d9421f",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/InstrumentEvidence/6adc81188a4c82e24ee1f04ea875dc95338630de98199b4475cbb7a15d88f573.notes.json",
+      "sha256": "897b939cde7b19cd1e5607ab4cd86f5ebad663a9079334ea04856cd238f4e427",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/InstrumentEvidence/7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b.notes.json",
+      "sha256": "4513826e399783e27a9e8ea86f54da947d7164ff539dfa43750c621259f554c3",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/InstrumentEvidence/8f53952f9f5002ed5f6b313ab170bb317e1494605d3cad8b183a0e78353ddcd3.notes.json",
+      "sha256": "31c0c7a44457a4591b8b47f84a599a00e029bce6a1738a52f644ff6f3d53e81a",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/InstrumentEvidence/9d99efd063bb86889578244439258c1f1692de1f5939e9a8693aa0dfbf9d7ed6.notes.json",
+      "sha256": "8b2b5f8c8a5a92282867c43654eb3db2f6717358dfc2606a6264cdb28559c1d3",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/InstrumentEvidence/bea4e85a21807ee88b90b745209a8057dedaf9a0fea82671cb0f8056f87ccc40.notes.json",
+      "sha256": "792d979754a1deb4d08e309ad0cd3de11f38ecb3054825564eaddafc1bf3b72a",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/InstrumentEvidence/dadc0644e3f1b2fe9d9f10f19b0df81eff5dcf087cc382d9a44e74a2a6a57190.notes.json",
+      "sha256": "365d9d6d8aed7db880530ad022dd996fbcfb6883025e80988def9408fad26c90",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/InstrumentEvidence/f83d9bf3ccb1bb49b31736d8bd72477cb344ababff68e0801dce1b4d2e9eaa7c.notes.json",
+      "sha256": "39b3e167fa8d2631c745d421700a7b6c012e5945f39a24ef83c9fc36f932e72d",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/0cd8dc69f01e117562bf8d21afa17225c5594e7e1ba0920444275953fddec44f.notes.json",
+      "sha256": "cd19c18321e8af30800db3524973648acaef574249c60270700fa453e8ade99b",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/0cd8dc69f01e117562bf8d21afa17225c5594e7e1ba0920444275953fddec44f.voice.json",
+      "sha256": "988c6dc7915700b22d119622443beecb7c58434c199ee99cfbcbfbc2baa437ea",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/35cb4620f0b6436f8c918538ecc6e3e81ef6180a2fb4ba4fd39931156909b843.notes.json",
+      "sha256": "e6a263238a0ecbcb6b18591bc932e0d7ff19b19c361eac78bbccfd07d2b91848",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/35cb4620f0b6436f8c918538ecc6e3e81ef6180a2fb4ba4fd39931156909b843.voice.json",
+      "sha256": "e8aa8118c19d73cb7c5384d2a569463d9945896faec4d69b21c5343a17ae6726",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/50e457b74a6c5189494d99db4c3b8cac6480c937e43cca03a270d71a39272c5f.notes.json",
+      "sha256": "4f6fc86d37fe91d3d0051e7952961e275833129ece3489d5667f8a36c1fed0a5",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/50e457b74a6c5189494d99db4c3b8cac6480c937e43cca03a270d71a39272c5f.voice.json",
+      "sha256": "66882653a5bd070bf16b700eba9713180a6dfbfb2a6a17cde74bf6aacce8ce64",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/6adc81188a4c82e24ee1f04ea875dc95338630de98199b4475cbb7a15d88f573.notes.json",
+      "sha256": "fddd7d146e3e8e81e1da1c84ac98e5ecef9fc147a47f64c73a02b6392afce418",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/6adc81188a4c82e24ee1f04ea875dc95338630de98199b4475cbb7a15d88f573.voice.json",
+      "sha256": "879b3001b3ab7d4437ead095ab8dcce3a7610353e0b0d942de45469b680380ff",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b.notes.json",
+      "sha256": "f63bcd9dce04058f4cce3aa00e00c67d4e9e1965b3dcdf340f5ce9b7be0d72e7",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b.voice.json",
+      "sha256": "6e47f285afd7417ef3add416728555cd2fa3fb26dbcc1e667460ac134206c6c2",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/8f53952f9f5002ed5f6b313ab170bb317e1494605d3cad8b183a0e78353ddcd3.notes.json",
+      "sha256": "630ac827b521003d975bc0c437fd17a8047337b93e5f2bde596930011920d1a5",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/8f53952f9f5002ed5f6b313ab170bb317e1494605d3cad8b183a0e78353ddcd3.voice.json",
+      "sha256": "3aa5d7f850dceafa156391ac679ceb0d42cc848f050a73c85bc945f9c53d7b0d",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/9d99efd063bb86889578244439258c1f1692de1f5939e9a8693aa0dfbf9d7ed6.notes.json",
+      "sha256": "b88d6b9571dce86e103bfe67f177f6437da41f115c36d4b7796a912ac2746850",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/9d99efd063bb86889578244439258c1f1692de1f5939e9a8693aa0dfbf9d7ed6.voice.json",
+      "sha256": "ed7ce3611f11bba83150eecda3fb0394d2e4420d9803f272a63ee8ad44164ae5",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/bea4e85a21807ee88b90b745209a8057dedaf9a0fea82671cb0f8056f87ccc40.notes.json",
+      "sha256": "227325ed01c9c395da911299ce41275c9d5f76716308460f27482afc30c6fa9b",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/bea4e85a21807ee88b90b745209a8057dedaf9a0fea82671cb0f8056f87ccc40.voice.json",
+      "sha256": "a6ceae475683921d4a74e63f4afdbfd776563f5e6e2b71a9dc2bb1b966b3d5a8",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/dadc0644e3f1b2fe9d9f10f19b0df81eff5dcf087cc382d9a44e74a2a6a57190.notes.json",
+      "sha256": "6f320d83839edc44b6fe74e8781142405b26a50c852fe22035cfe22dbab12d25",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/dadc0644e3f1b2fe9d9f10f19b0df81eff5dcf087cc382d9a44e74a2a6a57190.voice.json",
+      "sha256": "12c891d4856356f24d0e58cf32f7628f8071062be9f3e08b0b8224431b050118",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/f83d9bf3ccb1bb49b31736d8bd72477cb344ababff68e0801dce1b4d2e9eaa7c.notes.json",
+      "sha256": "9497cf6d069a42bfc69e8eae2ffff95631789721efaecb8a93bddf8c39a698f2",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/before/measurements/f83d9bf3ccb1bb49b31736d8bd72477cb344ababff68e0801dce1b4d2e9eaa7c.voice.json",
+      "sha256": "fcff278e93cfe4e4343b277f35ec101caaa7ac6476b0bd445f47254bc8c264d7",
+      "normalizedLf": false
+    }
+  ],
+  "baselines": [
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/CanCanPiano/baseline.generated.timeline.json",
+      "sha256": "d39c86fec2a036117f1cc427fbb34f5b974c020b151e32abb9b925d90065887b",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/CanCanPiano/baseline.json",
+      "sha256": "89b01e8e676055e0b76b4fabc44dd8391486d29f23edff116705fccb7723788d",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/CanCanPiano/baseline.typed.json",
+      "sha256": "21f4f6192fe99995c3d1a0db5a49a287a2d57b7e62bc95f618fdd77a6d50a2fe",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/DisconnectPop/baseline.generated.timeline.json",
+      "sha256": "c2bb5f957e1bad865f2d1aa5e61eeb9cc0b58f1c6c07b4f423b3ed0b0b6b885c",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/DisconnectPop/baseline.json",
+      "sha256": "e27088799cd9095dc7f7899523fae68e83869d92c92f099ac5d6e2b1d2a6d7c9",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/DisconnectPop/baseline.typed.json",
+      "sha256": "e9e814f947affde2f3745597c4ca784f2861689c18d53df4071d3e281861e5e3",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/FurElisePiano/baseline.generated.timeline.json",
+      "sha256": "464fa83c770cecae324d25a4f8817ae24c52cc4af32abe509821f1ca00f98dc1",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/FurElisePiano/baseline.json",
+      "sha256": "086593982cf81533e0d4da6f83ad75453427f1a140e222baa06a11233b9d458e",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/FurElisePiano/baseline.typed.json",
+      "sha256": "e64ae017e78641ea44226054e232e358a090f7aed39a268a39cbf9b0b8b6a679",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/IJustWannaDancePop/baseline.generated.timeline.json",
+      "sha256": "90b81bf5491cb6f5a56697212dbcbca81004e25eab85c6a4970816cd0b944baa",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/IJustWannaDancePop/baseline.json",
+      "sha256": "6778156921fd64d7ddec32a2bf31da26e8e76ca9cf732fd4c4493691e43118cb",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/IJustWannaDancePop/baseline.typed.json",
+      "sha256": "bb18f5b923d06a335fa7bf60de9bb8179c4e5cbaf831d0df0318dceaba66cb4c",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/JingleBells/baseline.generated.timeline.json",
+      "sha256": "7fca0437983504e2301a679cffc8b33cc39bcc6a128192e241bba323ea67d2f5",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/JingleBells/baseline.json",
+      "sha256": "dcd6760b7ee9323b98d7f5e02b4645fc9ebb6ada7d89c64a8a7ac298387bbd98",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/JingleBells/baseline.typed.json",
+      "sha256": "33f6240d8611ac8a8dd388e17ba839fbf15e77ee6eae0afd02e4893684aafcfe",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/LABUBUSongsPop/baseline.generated.timeline.json",
+      "sha256": "69d5150658a00314efe7c21fe76a3fa5094f3e68f3dde44cdb2d8a8d87bc1877",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/LABUBUSongsPop/baseline.json",
+      "sha256": "fc0ed8fb1a5a6a5762834884913f27e6c38014e21c73f18b34eff4d42459e773",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/LABUBUSongsPop/baseline.typed.json",
+      "sha256": "84940f2b373970154fa632200152e42f54bd7701c60b933d402121900789cf4a",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/MoonlightCloudsPiano/baseline.generated.timeline.json",
+      "sha256": "87a9452c276632b5a53a938a825b5c142d1297fcf0104bf3623985f8031b453b",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/MoonlightCloudsPiano/baseline.json",
+      "sha256": "badb3d44cbb610a6894d6c4b93ab1bc1ae07f8c715b16def814b7694e1b82c85",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/MoonlightCloudsPiano/baseline.typed.json",
+      "sha256": "8efb62b931c64e0f3717515f2090b697461d5efd11fff086dd70f8fff4e2ecbf",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/MoonlightPop/baseline.generated.timeline.json",
+      "sha256": "0d5e977349f79dbf684fa350c4efadc6441b209dc913dc92794c1a98525c140f",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/MoonlightPop/baseline.json",
+      "sha256": "0f8279ebd7dd3e947a203794c50a04e6250846fc5491fb20e44932dc14259678",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/MoonlightPop/baseline.typed.json",
+      "sha256": "b96c4344892b0761a459847483485fdf23b3f1a3a47c201b8386a8f1e462e91d",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/TwinkleLittleStar/baseline.generated.timeline.json",
+      "sha256": "91e89fecc432aa80242488037852e4ea1f8d8d2bd8080db350ceab714f78ba80",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/TwinkleLittleStar/baseline.json",
+      "sha256": "80d4ee8ce7de6755415c05cc75516696c8906a3d0a9a62a292d2390ab4bf3cfa",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/TwinkleLittleStar/baseline.typed.json",
+      "sha256": "c5b950fd0c7c3cc8fe9f860e2bbce73d24ec81440aca79fa157d599344ced112",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/UnstoppableCat054/baseline.generated.timeline.json",
+      "sha256": "848d2c4d1d6f4511759d6515b1719beec9d45c31b9da2fb49c26ffce729a3b7f",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/UnstoppableCat054/baseline.json",
+      "sha256": "9b2e376cfb0cbf8aef7a08e7b339c6cccc800798e5a0c1b1a25e4695fcae54f5",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/benchmark/UnstoppableCat054/baseline.typed.json",
+      "sha256": "da3bc136ffade9598e5b9a24b55b71853ee08ec97de76314891e8014aae17452",
+      "normalizedLf": false
+    }
+  ],
+  "manifests": [
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/selection.json",
+      "sha256": "157970e1ae1e28e66cba60bdf48938fbf81a3bcc7ac7cea57ebc9a29f3ea91ca",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/baseline-source-inputs.json",
+      "sha256": "574fc665a03f2ffc8ec277d71f2bf33d624a2424e3a87f129e596c3fe67f4fc9",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV10/measurement-transition.json",
+      "sha256": "eade67429e6e224255baa3ae1330a091b286f410297e20a27d4675a0133488e8",
+      "normalizedLf": false
+    }
+  ]
+}

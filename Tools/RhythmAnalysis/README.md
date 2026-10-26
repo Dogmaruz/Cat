@@ -192,3 +192,56 @@ enable a policy. Generalization was insufficient, so
 `includeExperimentalShortSupports` remains `false` by default. The four v9 test
 maps explicitly opt in. See the [v9 results and limitations](../../Docs/Clone/ChartCalibration/V9/README.md)
 for the first frozen evaluation, typed interval metrics and complete Editor runs.
+
+## V10 candidate coverage and interval-relative release experiment
+
+The algorithm was frozen before the first heldout comparison. All six published
+test maps passed fresh full real-contact Unity playthroughs; Can Can v10 is left
+selected in the Play Mode menu. The current producer emits `mixed-note-events-2-candidates8`:
+up to eight pitch candidates per attack instead of v1's four, with the same 22
+feature names and native-window timing. Source PCM, voice measurements and pinned
+note model are paired; the resulting candidate events/digests are not identical.
+Archived v1 measurements remain in
+`DancingCatsClone/Library/ChartGenerationV10/before/measurements`, paired by
+`measurement-transition.json`. The v9 example above describes the historical v1
+iteration; rerunning the current producer creates v2, not an unchanged v1 replay.
+
+Use the same Unity PCM export and local dependencies as above. A separate v10
+cache keeps this run's intermediates apart:
+
+```powershell
+$sourceAsset = 'DancingCatsClone/Assets/Resources/OriginalAudio/Music/CanCan__-6816999517090791341.ogg'
+$sourceSha = (Get-FileHash -LiteralPath $sourceAsset -Algorithm SHA256).Hash.ToLowerInvariant()
+$decodedFolder = "DancingCatsClone/Library/VocalAnalysis/$sourceSha"
+python Tools/RhythmAnalysis/analyze_instrumental_notes.py `
+  --input $sourceAsset `
+  --decoded-pcm "$decodedFolder/source.f32" `
+  --decoded-metadata "$decodedFolder/source.json" `
+  --output "DancingCatsClone/Assets/Clone/Editor/InstrumentEvidence/$sourceSha.notes.json" `
+  --cache-dir DancingCatsClone/Library/ChartGenerationV10/InstrumentAnalysis `
+  --model-dir DancingCatsClone/Library/OriginalChartCalibration/v4/stem-model `
+  --deps DancingCatsClone/Library/OriginalChartCalibration/v4/ml-deps
+```
+
+The new trainer uses the eight already studied recordings only. It reads their
+labels offline, verifies paired provenance, and writes proof inside `Library`:
+
+```powershell
+python Tools/RhythmAnalysis/train_short_support_release.py `
+  --deps DancingCatsClone/Library/OriginalChartCalibration/v4/ml-deps `
+  --output DancingCatsClone/Library/ChartGenerationV10/ShortHolds/training-proof `
+  --leave-one-song-out
+python Tools/RhythmAnalysis/test_short_support_release.py `
+  --deps DancingCatsClone/Library/OriginalChartCalibration/v4/ml-deps -v
+```
+
+The release helper measures vocal body/release relative to the selected endpoint;
+its release window ends at exit +75 ms. This is not a claim that the entire
+classifier is causal or bounded to that window: wider instrumental/context
+features and whole-recording RMS normalization still apply. The tests cover this
+helper and strict interval matching, not universal musical classification.
+References remain absent from source measurement and Unity inference. The policy
+stays experimental/default-off: the known-song gain does not establish unseen
+generalization, and the leave-one-song-out result still contains excess false
+proposals. See the [v10 results](../../Docs/Clone/ChartCalibration/V10/README.md)
+for paired typed metrics, first heldout limitations and six complete runtime reports.

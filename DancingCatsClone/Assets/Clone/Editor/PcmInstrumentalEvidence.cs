@@ -14,6 +14,7 @@ namespace DancingCats.Clone.Editor
         public const int FeatureCount = 22;
         private const string ModelHash = "2c3c1d144bfa61ad236e92e169c13535c880469a12a047d4e73451f2c059a0ec";
         private const string AnalysisVersion = "mixed-note-events-1";
+        private const string ExpandedAnalysisVersion = "mixed-note-events-2-candidates8";
         private const string TimingVersion = "input-window-time-v2";
         private static readonly string[] Names = ("neuralOnset neuralPeak neuralBody neuralLate neuralTail neuralDuration "
             + "harmonicPartials harmonicBody harmonicLate harmonicTail harmonicDuration harmonicNovelty "
@@ -83,7 +84,7 @@ namespace DancingCats.Clone.Editor
         private static void ValidateStructure(Evidence e)
         {
             if (e == null || e.schemaVersion != 1 || e.featureQuantization != 100000000 || e.audioUploaded
-                || e.noteModelSha256 != ModelHash || e.analysisVersion != AnalysisVersion || e.timingVersion != TimingVersion
+                || e.noteModelSha256 != ModelHash || (e.analysisVersion != AnalysisVersion && e.analysisVersion != ExpandedAnalysisVersion) || e.timingVersion != TimingVersion
                 || e.sampleRate <= 0 || e.channels < 1 || e.channels > 2 || e.sampleFrames < e.sampleRate
                 || !IsHash(e.sourceFileSha256) || !IsHash(e.sourcePcmSha256) || !IsHash(e.featureSha256))
                 throw new InvalidDataException("Unsupported instrumental note schema, provenance, model or audio metadata.");
