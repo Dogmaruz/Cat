@@ -67,6 +67,31 @@ namespace DancingCats.Clone.Editor
         public static void V11BajoPlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV11BajoPlaytest(); }
         public static void V11BabyPlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV11BabyPlaytest(); }
 
+        public static void StudyPlaytest(string sourceId)
+        {
+            RequireSavedEditor();
+            var manifest = ChartGeneratorStudy.LoadManifest();
+            if (!manifest.publishSourceIds.Contains(sourceId))
+                throw new ArgumentException("This source is not selected for test publication.", nameof(sourceId));
+            RadioEditorValidation.RunNamedPlaytest(sourceId + manifest.testSuffix);
+        }
+
+        public static void StudyReferencePlaytest(string sourceId)
+        {
+            RequireSavedEditor();
+            if (!ChartGeneratorStudy.LoadManifest().sources.Any(source => source.id == sourceId))
+                throw new ArgumentException("This reference is not selected for the study.", nameof(sourceId));
+            RadioEditorValidation.RunNamedPlaytest(sourceId);
+        }
+
+        public static void StudyPreview(string sourceId)
+        {
+            var manifest = ChartGeneratorStudy.LoadManifest();
+            if (!manifest.publishSourceIds.Contains(sourceId))
+                throw new ArgumentException("This source is not selected for test publication.", nameof(sourceId));
+            SelectTestPreview(sourceId + manifest.testSuffix);
+        }
+
         public static void MenuPreviewChecks()
         {
             RequireSavedEditor();

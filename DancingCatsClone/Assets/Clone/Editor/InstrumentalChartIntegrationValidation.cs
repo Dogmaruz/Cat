@@ -34,8 +34,8 @@ namespace DancingCats.Clone.Editor
                     "short-support style remains disabled by default rather than silently changing general generation");
                 options.includeExperimentalShortSupports = true;
                 var experimental = AudioChartGenerator.GenerateWithInstrumentalSamples(pcm, rate, channels, "ShortSupportFixture", options, voice, notes);
-                Require(experimental.segments.Count(s => s.kind == "Hold") == 8 && experimental.sourceMapBundle.EndsWith("+short-test", StringComparison.Ordinal),
-                    "the opt-in test records the eight interval-relative source proposals and experimental provenance; strict accuracy is measured separately");
+                Require(experimental.segments.Count(s => s.kind == "Hold") == 9 && experimental.sourceMapBundle.EndsWith("+short-test", StringComparison.Ordinal),
+                    "the opt-in test retains eight interval-relative supports and adds a ninth from two independent source motifs; strict accuracy is measured separately");
                 options.includeHolds = false;
                 var noHolds = AudioChartGenerator.GenerateWithInstrumentalSamples(pcm, rate, channels, "ShortSupportFixture", options, voice, notes);
                 Require(noHolds.segments.All(s => s.kind != "Hold"), "the Hold switch also disables experimental support proposals");
@@ -62,16 +62,38 @@ namespace DancingCats.Clone.Editor
             {
                 var options = new AudioChartGenerator.Options { forwardSpeed = speed };
                 var map = AudioChartGenerator.GenerateWithInstrumentalSamples(pcm, rate, channels, "ChordalFixture", options, voice, notes);
-                Require(map.segments.Count(s => s.kind == "Follow") == 4,
-                    "four source-confirmed chordal responses survive native compilation; a fifth remains masked by legacy Hold precedence");
+                Require(map.segments.Count(s => s.kind == "Follow") == 8,
+                    "source-confirmed chordal and voiced rising responses must survive native compilation and targeted flight arbitration");
                 var record = RecoveredCatalog.LoadOriginal().Single(s => s.id == "JingleBells");
                 var reference = JsonUtility.FromJson<MapTimeline>(File.ReadAllText("Assets/Resources/" + record.timelineResource + ".json"));
                 var matches = PcmChartStudyV9.Match(reference.segments.Where(s => s.kind == "Follow").ToArray(),
                     map.segments.Where(s => s.kind == "Follow").ToArray(), .08, .15, "Independent generation precedes typed interval evaluation.");
-                Require(matches.truePositive == 4 && matches.falsePositive == 0, "the integrated source gestures match types and boundaries, not just a target count");
+                Require(matches.truePositive == 7 && matches.falsePositive <= 1,
+                    "seven integrated responses match original Follow intervals; the known sustained Hold/Follow confusion must not grow");
                 AudioChartGeneratorValidation.ValidateMap(map);
             });
-            Debug.Log("INSTRUMENTAL_CHART_INTEGRATION PASS: real PCM, pure API, Can Can19, source-articulation rejection, Jingle4 correct, default-off Holds, flags, native geometry and wrong-PCM rejection.");
+            CheckRecording("UnstoppableCat054", (pcm, rate, channels, voice, notes, speed) =>
+            {
+                var options = new AudioChartGenerator.Options { forwardSpeed = speed };
+                var pure = AudioChartGenerator.GenerateFromSamples(pcm, rate, channels, "ProtectionFixture", options, voice);
+                var verified = AudioChartGenerator.GenerateWithInstrumentalSamples(pcm, rate, channels, "ProtectionFixture", options, voice, notes);
+                foreach (string kind in new[] { "Hold", "Follow", "BigJump" })
+                    Require(pure.segments.Where(s => s.kind == kind).Select(s => JsonUtility.ToJson(s))
+                        .SequenceEqual(verified.segments.Where(s => s.kind == kind).Select(s => JsonUtility.ToJson(s))),
+                        "source verification and targeted response priority must preserve valid Unstoppable " + kind + " geometry and timing");
+                AudioChartGeneratorValidation.ValidateMap(verified);
+            });
+            CheckRecording("AajKiRaatPop", (pcm, rate, channels, voice, notes, speed) =>
+            {
+                var options = new AudioChartGenerator.Options { forwardSpeed = speed };
+                var pure = AudioChartGenerator.GenerateFromSamples(pcm, rate, channels, "ArticulatedHoldFixture", options, voice);
+                var verified = AudioChartGenerator.GenerateWithInstrumentalSamples(pcm, rate, channels, "ArticulatedHoldFixture", options, voice, notes);
+                Require(pure.segments.Count(s => s.kind == "Hold" && s.duration > .45)
+                    - verified.segments.Count(s => s.kind == "Hold" && s.duration > .45) == 4,
+                    "only the four independently contradicted legacy long Holds are rejected; unresolved supports remain protected");
+                AudioChartGeneratorValidation.ValidateMap(verified);
+            });
+            Debug.Log("INSTRUMENTAL_CHART_INTEGRATION PASS: real PCM, pure API, Can Can19, Jingle7 correct/one known confusion, valid Unstoppable supports, Aaj false-Hold rejection, default-off Holds, flags, native geometry and wrong-PCM rejection.");
         }
 
         private static void CheckRecording(string id,

@@ -12,7 +12,7 @@ namespace DancingCats.Clone.Editor
     /// <summary>Manifest-driven paired studies. Inference never receives reference charts or study roles.</summary>
     public static partial class ChartGeneratorStudy
     {
-        public const string CurrentManifest = "Assets/Clone/Editor/ChartStudies/v11.json";
+        public const string CurrentManifest = "Assets/Clone/Editor/ChartStudies/v12.json";
         [Serializable] public sealed class Source
         {
             public string id, role, sourceFile, sourceFileSha256, referenceMapSha256;

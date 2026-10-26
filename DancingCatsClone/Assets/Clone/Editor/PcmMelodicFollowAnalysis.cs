@@ -101,6 +101,70 @@ namespace DancingCats.Clone.Editor
             return result.ToArray();
         }
 
+        private sealed class VoicedResponse
+        {
+            public double time, end, interval, duration, confidence;
+            public int delta;
+        }
+
+        /// <summary>Recurring foreground rising bodies, measured before optional flight reservation.</summary>
+        public static MusicalCue[] AnalyzeVoicedResponses(PcmInstrumentalEvidence.Evidence evidence,
+            PcmVocalAnalysis.Evidence voice, MusicalCue[] protectedSupports)
+        {
+            if (evidence?.events == null || voice?.pitchTimes == null || voice.pitchTimes.Length < 2
+                || voice.pitch == null || voice.pitchConfidence == null) return Array.Empty<MusicalCue>();
+            var frameSteps = voice.pitchTimes.Zip(voice.pitchTimes.Skip(1), (a, b) => b - a).OrderBy(step => step).ToArray();
+            double step = frameSteps[frameSteps.Length / 2];
+            var events = evidence.events.Where(n => n != null).ToArray();
+            var candidates = new List<VoicedResponse>();
+            foreach (var note in events)
+            {
+                double time = note.time, duration = note.endTime - time, neural = Get(note, "neuralDuration");
+                if (duration < .5 || duration > 1.2 || neural < .4 || duration / neural < .65 || duration / neural > 1.8
+                    || !Tone(note, .62, .65, .025, 3) || !VoicedBody(voice, note, step, .08)) continue;
+                if (events.Any(n => n.time > time + .12 && n.time < note.endTime - .12
+                    && Tone(n, Math.Max(.55, .75 * Get(note, "neuralOnset")), .45, .025, 2))) continue;
+                var pickup = events.Where(n => time - n.time >= .08 && time - n.time <= .4
+                    && note.midi - n.midi >= 1 && note.midi - n.midi <= 5 && Tone(n, .5, .3, .015, 2)
+                    && n.endTime >= time - .1 && Get(n, "neuralDuration") >= .08 && Get(n, "neuralDuration") <= .6
+                    && VoicedBody(voice, n, step, .03)).OrderByDescending(n => n.time).FirstOrDefault();
+                if (pickup == null) continue;
+                double end = note.endTime;
+                var exits = events.Where(n => n.time >= time + .6 * duration && n.time < end
+                    && Get(n, "sourceAttack") >= .5 && n.midi != note.midi && Tone(n, .5, .15, .01, 2)).Select(n => n.time).ToArray();
+                if (exits.Length > 0) end = exits.Min();
+                if (end - pickup.time < .5 || candidates.Count > 0 && pickup.time - candidates.Last().time < .15) continue;
+                candidates.Add(new VoicedResponse { time = pickup.time, end = end, interval = time - pickup.time,
+                    delta = note.midi - pickup.midi, duration = duration, confidence = Get(note, "neuralOnset") });
+            }
+            var result = new List<MusicalCue>();
+            foreach (var response in candidates.Where(c => candidates.Any(other => other != c
+                && Math.Abs(c.time - other.time) > 1 && c.delta == other.delta
+                && Math.Abs(c.interval - other.interval) < .04 && Math.Abs(c.duration - other.duration) < .18)))
+            {
+                if ((protectedSupports ?? Array.Empty<MusicalCue>()).Concat(result).Any(s => s != null
+                    && (s.kind == "Hold" || s.kind == "Follow" || s.kind == "BigJump")
+                    && response.time < s.endTime + .078 && response.end > s.time - .078)) continue;
+                float direction = result.Count % 2 == 0 ? -1 : 1;
+                result.Add(new MusicalCue { kind = "Follow", time = response.time, endTime = response.end, lane = 0,
+                    points = new[] { new MusicalPoint { time = response.time, lane = 0 },
+                        new MusicalPoint { time = response.end, lane = direction * .8f } },
+                    confidence = response.confidence, phraseId = "mixed-voiced-rising-response-" + result.Count,
+                    reason = "Recurring independently voiced rising pickup into a source-confirmed plateau; measured note-body release or following contrast ends the response. Lateral motion is independent gameplay choreography." });
+            }
+            FitNewPathCorridors(result, protectedSupports ?? Array.Empty<MusicalCue>());
+            return result.ToArray();
+        }
+
+        private static bool VoicedBody(PcmVocalAnalysis.Evidence voice, PcmInstrumentalEvidence.NoteEvent note, double step, double minimum)
+        {
+            int confirmed = 0;
+            for (int i = 0; i < voice.pitchTimes.Length; i++)
+                if (voice.pitchTimes[i] >= note.time + .015 && voice.pitchTimes[i] < Math.Min(note.time + .2, note.endTime)
+                    && voice.pitchConfidence[i] >= .5 && voice.pitch[i] == note.midi) confirmed++;
+            return confirmed * step >= minimum;
+        }
+
         private sealed class NoteGroup
         {
             public double time, strength;

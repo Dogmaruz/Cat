@@ -1,0 +1,49 @@
+{
+    "stage": "baseline",
+    "referenceId": "OdetoJoyPiano",
+    "referenceMapSha256": "b74a163947e29e4ec208c71dfc57527a7479356c81207111286d11bbca30f863",
+    "sourceAudioSha256": "d3cec08a47eaf2931a82d28dca647f3fa1d6d7c3b3b3ed6e8d082ca13d8060bf",
+    "sourcePcmSha256": "88997ef2f46917828d647471464cb61180dc9055a81ab4dd087721dd729dd39a",
+    "voiceFeatureSha256": "edcb2516ff51ca661b9f3e53e28130defba5186777074b74bce7afec4db09411",
+    "generator": "pcm-vocal-phrase-chart-v11+short-test",
+    "generatedTimelineSha256": "55229f92d1f2c1c4f55c2dd656d919808b3265c98c103d844a1aa72b4a55fc6a",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 9.0,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold <=0.45s on both sides; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 33,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 33,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "allHolds": {
+        "definition": "All Hold; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 37,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 37,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "follows": {
+        "definition": "Follow; onset <=80ms; end <=150ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 1,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    }
+}

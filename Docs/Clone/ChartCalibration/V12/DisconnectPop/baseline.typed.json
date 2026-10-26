@@ -1,0 +1,205 @@
+{
+    "stage": "baseline",
+    "referenceId": "DisconnectPop",
+    "referenceMapSha256": "2fdf744d7ad60b2df044a803cd5ef3877f6615f4b2c2938864864822f9f11b2a",
+    "sourceAudioSha256": "50e457b74a6c5189494d99db4c3b8cac6480c937e43cca03a270d71a39272c5f",
+    "sourcePcmSha256": "f9fa7ab603d755ff3d3b069abed2aa71235e2d6e7b783a02769b6567478fde26",
+    "voiceFeatureSha256": "3f5ee15dda955859f1af96ca896e40bd56be0536edd4d81c60bede2e752433ee",
+    "generator": "pcm-vocal-phrase-chart-v11+short-test",
+    "generatedTimelineSha256": "6dfc22232a35f3486d94bde4e5aefd1fee9558029dafbb7ea0bbb92280a97030",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 11.0,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold <=0.45s on both sides; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 41,
+        "generatedCount": 8,
+        "truePositive": 7,
+        "falsePositive": 1,
+        "falseNegative": 34,
+        "precision": 0.875,
+        "recall": 0.17073170731707319,
+        "f1": 0.28571428571428578,
+        "matches": [
+            {
+                "referenceIndex": 29,
+                "generatedIndex": 31,
+                "referenceStart": 8.133106716654517,
+                "referenceEnd": 8.367483125491577,
+                "generatedStart": 8.12807256,
+                "generatedEnd": 8.44426304,
+                "onsetErrorMs": -5.034156654517119,
+                "endErrorMs": 76.77991450842292,
+                "intersectionOverUnion": 0.7412506816684039
+            },
+            {
+                "referenceIndex": 35,
+                "generatedIndex": 37,
+                "referenceStart": 10.008117813955652,
+                "referenceEnd": 10.242494222792712,
+                "generatedStart": 10.00380952,
+                "generatedEnd": 10.23880952,
+                "onsetErrorMs": -4.30829395565091,
+                "endErrorMs": -3.6847027927109368,
+                "intersectionOverUnion": 0.9665123208364823
+            },
+            {
+                "referenceIndex": 42,
+                "generatedIndex": 42,
+                "referenceStart": 11.883106716654517,
+                "referenceEnd": 12.117483125491577,
+                "generatedStart": 11.87537415,
+                "generatedEnd": 12.11037415,
+                "onsetErrorMs": -7.732566654516049,
+                "endErrorMs": -7.108975491576075,
+                "intersectionOverUnion": 0.9386989180555656
+            },
+            {
+                "referenceIndex": 63,
+                "generatedIndex": 69,
+                "referenceStart": 17.502903469584206,
+                "referenceEnd": 17.737279878421263,
+                "generatedStart": 17.50675737,
+                "generatedEnd": 17.74175737,
+                "onsetErrorMs": 3.8539004157946978,
+                "endErrorMs": 4.477491578736448,
+                "intersectionOverUnion": 0.9651192968587578
+            },
+            {
+                "referenceIndex": 76,
+                "generatedIndex": 88,
+                "referenceStart": 21.252903469584206,
+                "referenceEnd": 21.487279878421267,
+                "generatedStart": 21.24825397,
+                "generatedEnd": 21.48325397,
+                "onsetErrorMs": -4.649499584203909,
+                "endErrorMs": -4.0259084212657119,
+                "intersectionOverUnion": 0.9637051562202208
+            },
+            {
+                "referenceIndex": 96,
+                "generatedIndex": 118,
+                "referenceStart": 26.87791456688534,
+                "referenceEnd": 27.112292362885044,
+                "generatedStart": 26.87546485,
+                "generatedEnd": 27.11046485,
+                "onsetErrorMs": -2.4497168853407915,
+                "endErrorMs": -1.8275128850433476,
+                "intersectionOverUnion": 0.9819394726639708
+            },
+            {
+                "referenceIndex": 102,
+                "generatedIndex": 126,
+                "referenceStart": 28.752903469584206,
+                "referenceEnd": 28.98727849125862,
+                "generatedStart": 28.75120181,
+                "generatedEnd": 28.98620181,
+                "onsetErrorMs": -1.7016595842029859,
+                "endErrorMs": -1.0766812586204822,
+                "intersectionOverUnion": 0.9882311932376759
+            }
+        ]
+    },
+    "allHolds": {
+        "definition": "All Hold; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 42,
+        "generatedCount": 8,
+        "truePositive": 7,
+        "falsePositive": 1,
+        "falseNegative": 35,
+        "precision": 0.875,
+        "recall": 0.16666666666666667,
+        "f1": 0.27999999999999999,
+        "matches": [
+            {
+                "referenceIndex": 29,
+                "generatedIndex": 31,
+                "referenceStart": 8.133106716654517,
+                "referenceEnd": 8.367483125491577,
+                "generatedStart": 8.12807256,
+                "generatedEnd": 8.44426304,
+                "onsetErrorMs": -5.034156654517119,
+                "endErrorMs": 76.77991450842292,
+                "intersectionOverUnion": 0.7412506816684039
+            },
+            {
+                "referenceIndex": 35,
+                "generatedIndex": 37,
+                "referenceStart": 10.008117813955652,
+                "referenceEnd": 10.242494222792712,
+                "generatedStart": 10.00380952,
+                "generatedEnd": 10.23880952,
+                "onsetErrorMs": -4.30829395565091,
+                "endErrorMs": -3.6847027927109368,
+                "intersectionOverUnion": 0.9665123208364823
+            },
+            {
+                "referenceIndex": 42,
+                "generatedIndex": 42,
+                "referenceStart": 11.883106716654517,
+                "referenceEnd": 12.117483125491577,
+                "generatedStart": 11.87537415,
+                "generatedEnd": 12.11037415,
+                "onsetErrorMs": -7.732566654516049,
+                "endErrorMs": -7.108975491576075,
+                "intersectionOverUnion": 0.9386989180555656
+            },
+            {
+                "referenceIndex": 63,
+                "generatedIndex": 69,
+                "referenceStart": 17.502903469584206,
+                "referenceEnd": 17.737279878421263,
+                "generatedStart": 17.50675737,
+                "generatedEnd": 17.74175737,
+                "onsetErrorMs": 3.8539004157946978,
+                "endErrorMs": 4.477491578736448,
+                "intersectionOverUnion": 0.9651192968587578
+            },
+            {
+                "referenceIndex": 76,
+                "generatedIndex": 88,
+                "referenceStart": 21.252903469584206,
+                "referenceEnd": 21.487279878421267,
+                "generatedStart": 21.24825397,
+                "generatedEnd": 21.48325397,
+                "onsetErrorMs": -4.649499584203909,
+                "endErrorMs": -4.0259084212657119,
+                "intersectionOverUnion": 0.9637051562202208
+            },
+            {
+                "referenceIndex": 96,
+                "generatedIndex": 118,
+                "referenceStart": 26.87791456688534,
+                "referenceEnd": 27.112292362885044,
+                "generatedStart": 26.87546485,
+                "generatedEnd": 27.11046485,
+                "onsetErrorMs": -2.4497168853407915,
+                "endErrorMs": -1.8275128850433476,
+                "intersectionOverUnion": 0.9819394726639708
+            },
+            {
+                "referenceIndex": 102,
+                "generatedIndex": 126,
+                "referenceStart": 28.752903469584206,
+                "referenceEnd": 28.98727849125862,
+                "generatedStart": 28.75120181,
+                "generatedEnd": 28.98620181,
+                "onsetErrorMs": -1.7016595842029859,
+                "endErrorMs": -1.0766812586204822,
+                "intersectionOverUnion": 0.9882311932376759
+            }
+        ]
+    },
+    "follows": {
+        "definition": "Follow; onset <=80ms; end <=150ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 1,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    }
+}

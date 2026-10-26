@@ -393,6 +393,25 @@ namespace DancingCats.Clone.Editor
                     case "chart-study-publish": Invoke("ChartGeneratorStudy", "PublishTests"); break;
                     case "chart-study-checks": Invoke("ChartGeneratorStudy", "RunChecks"); break;
                     case "chart-study-precision": Invoke("ChartStudyPrecisionDiagnostics", "Run"); break;
+                    case "rhythm-timing-inspect": Invoke("RhythmTimingDiagnostics", "InspectLiveTiming"); break;
+                    case "rhythm-timing-original": Invoke("RhythmTimingDiagnostics", "BeginOriginalJingle"); break;
+                    case "rhythm-timing-v11": Invoke("RhythmTimingDiagnostics", "BeginV11Jingle"); break;
+                    case "rhythm-timing-stop": Invoke("RhythmTimingDiagnostics", "StopRecording"); break;
+                    case "rhythm-timing-512": Invoke("RhythmTimingDiagnostics", "Apply512ForComparison"); break;
+                    case "rhythm-timing-v11-512": Invoke("RhythmTimingDiagnostics", "BeginV11Jingle512"); break;
+                    case "rhythm-timing-restore": Invoke("RhythmTimingDiagnostics", "RestoreBufferConfiguration"); break;
+                    case "rhythm-timing-serialization": Invoke("RhythmTimingDiagnostics", "RunSerializationChecks"); break;
+                    case "rhythm-timing-v11-512-pose": Invoke("RhythmTimingDiagnostics", "BeginV11Jingle512Pose"); break;
+                    case "rhythm-timing-apply-project": Invoke("RhythmTimingDiagnostics", "ApplyProjectBufferSettings"); break;
+                    case "chart-legacy-support-checks": Invoke("PcmLegacySupportValidation", "RunChecks"); break;
+                    case "chart-voiced-response-checks": Invoke("PcmVoicedResponseValidation", "RunChecks"); break;
+                    case "chart-short-motif-checks": Invoke("PcmShortMotifValidation", "RunChecks"); break;
+                    case string studyAction when studyAction.StartsWith("chart-study-play:", StringComparison.Ordinal):
+                        InvokeString("RadioArchipelagoJobs", "StudyPlaytest", studyAction.Substring("chart-study-play:".Length)); break;
+                    case string studyAction when studyAction.StartsWith("chart-study-reference:", StringComparison.Ordinal):
+                        InvokeString("RadioArchipelagoJobs", "StudyReferencePlaytest", studyAction.Substring("chart-study-reference:".Length)); break;
+                    case string studyAction when studyAction.StartsWith("chart-study-preview:", StringComparison.Ordinal):
+                        InvokeString("RadioArchipelagoJobs", "StudyPreview", studyAction.Substring("chart-study-preview:".Length)); break;
                     case "chart-v11-play-cancan": Invoke("RadioArchipelagoJobs", "V11CanCanPlaytest"); break;
                     case "chart-v11-play-elise": Invoke("RadioArchipelagoJobs", "V11ElisePlaytest"); break;
                     case "chart-v11-play-jingle": Invoke("RadioArchipelagoJobs", "V11JinglePlaytest"); break;
@@ -426,6 +445,14 @@ namespace DancingCats.Clone.Editor
             var method = type.GetMethod(methodName, BindingFlags.Public | BindingFlags.Static, null, Type.EmptyTypes, null);
             if (method == null) throw new MissingMethodException(typeName, methodName);
             method.Invoke(null, null);
+        }
+
+        private static void InvokeString(string typeName, string methodName, string value)
+        {
+            var type = typeof(MusicalChartEditorSession).Assembly.GetType("DancingCats.Clone.Editor." + typeName, true);
+            var method = type.GetMethod(methodName, BindingFlags.Public | BindingFlags.Static, null, new[] { typeof(string) }, null);
+            if (method == null) throw new MissingMethodException(typeName, methodName);
+            method.Invoke(null, new object[] { value });
         }
 
         private static void WriteResponse(string action, bool success, string message)

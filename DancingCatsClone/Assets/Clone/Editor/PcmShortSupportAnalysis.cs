@@ -9,10 +9,12 @@ namespace DancingCats.Clone.Editor
     public static class PcmShortSupportAnalysis
     {
         public const string Version = "short-support-experimental-v2-relative-release";
+        public const string RecurrenceVersion = "short-support-experimental-v3-source-motif";
         private sealed class Candidate
         {
             public PcmInstrumentalEvidence.NoteEvent note;
             public double end, score;
+            public bool recurrent;
         }
 
         // The caller verifies both optional evidence files against the actual PCM.
@@ -40,6 +42,7 @@ namespace DancingCats.Clone.Editor
             var hypotheses=source.ToLookup(n=>n.time);
             var attacks=source.Where(n=>Get(n,"sourceAttack")>.5 && Get(n,"neuralOnset")>=.5).ToLookup(n=>n.midi);
             var candidates = new List<Candidate>();
+            var sourcePool = new List<Candidate>();
             foreach (var note in source)
             {
                 foreach (double end in Endpoints(note, source, beatPeriod))
@@ -51,6 +54,7 @@ namespace DancingCats.Clone.Editor
                     // support can split it; a later repeat belongs to its own cue.
                     if (HasIndependentRepeat(note,end,hypotheses,attacks)) continue;
                     double score = StyleScore(Features(note, voice, end, beatPeriod, scale));
+                    sourcePool.Add(new Candidate { note = note, end = end, score = score });
                     if (score < .9) continue;
                     candidates.Add(new Candidate { note = note, end = end, score = score });
                 }
@@ -62,10 +66,88 @@ namespace DancingCats.Clone.Editor
                 if (accepted.Any(prior => Math.Min(prior.end, candidate.end) - Math.Max(prior.note.time, candidate.note.time) > -.078)) continue;
                 accepted.Add(candidate);
             }
+            AddRecurrentSupports(source, sourcePool, accepted, beatPeriod);
             return accepted.OrderBy(c => c.note.time).Select(c => new MusicalCue { kind = "Hold", time = c.note.time,
-                endTime = c.end, confidence = c.score, lane = 0, phraseId = Version,
-                reason = "Experimental short support; voice windows use the selected interval and first 75ms of release; other source/context features remain offline. "
+                endTime = c.end, confidence = c.score, lane = 0, phraseId = c.recurrent ? RecurrenceVersion : Version,
+                reason = c.recurrent ? "Experimental source motif: seven relative-pitch attacks and normalized rhythm agree with two independent frozen seed instances; independent neural and harmonic durations support the selected exit. Known-recording calibration only, not unseen accuracy." : "Experimental short support; voice windows use the selected interval and first 75ms of release; other source/context features remain offline. "
                     + "The style score records calibration-leaf precision, not unseen-song accuracy." }).ToArray();
+        }
+
+        // Source motifs supplement a frozen snapshot of accepted V10 seeds.
+        // Inferred supports never seed another inference. Semitone differences,
+        // median-normalized attack gaps and pulse-relative tolerances describe
+        // the phrase; recording identity and absolute pitch/time are absent.
+        private sealed class Motif
+        {
+            public Candidate candidate;
+            public double scale;
+            public int[] pitches;
+            public double[] rhythm;
+        }
+        private static void AddRecurrentSupports(PcmInstrumentalEvidence.NoteEvent[] source,
+            List<Candidate> pool, List<Candidate> accepted, double beat)
+        {
+            var seeds = accepted.Where(c => c.score >= .95).ToArray();
+            if (seeds.Length < 2) return;
+            var leaders = source.GroupBy(n => n.time).OrderBy(g => g.Key)
+                .Select(g => g.OrderBy(n => Get(n, "pitchRank")).First()).ToArray();
+            var indices = leaders.Select((n, i) => new { n.time, i }).ToDictionary(p => p.time, p => p.i);
+            Motif Describe(Candidate c)
+            {
+                int i = indices[c.note.time];
+                if (i < 3 || i + 3 >= leaders.Length) return null;
+                var gaps = Enumerable.Range(i - 3, 6).Select(j => leaders[j + 1].time - leaders[j].time).ToArray();
+                double scale = Quantile(gaps, .5);
+                if (scale < beat * .1) return null;
+                return new Motif { candidate = c, scale = scale,
+                    pitches = Enumerable.Range(i - 3, 7).Select(j => leaders[j].midi - c.note.midi).ToArray(),
+                    rhythm = gaps.Select(gap => gap / scale).ToArray() };
+            }
+            var examples = seeds.Select(Describe).Where(m => m != null).ToArray();
+            if (examples.Length < 2) return;
+            var inferred = new List<Candidate>();
+            foreach (var candidate in pool)
+            {
+                double start = candidate.note.time, duration = candidate.end - start;
+                double neural = Get(candidate.note, "neuralDuration"), harmonic = Get(candidate.note, "harmonicDuration");
+                // Harmonic resonance cannot supply duration by itself. Both
+                // independent measurements must support this selected exit.
+                if (duration < .18 || duration > .45 || Math.Min(neural, harmonic) < .18 || Math.Abs(neural - harmonic) > beat / 4
+                    || Math.Max(Math.Abs(duration - neural), Math.Abs(duration - harmonic)) > beat / 4) continue;
+                var motif = Describe(candidate); if (motif == null) continue;
+                var matches = new List<Tuple<Candidate, double>>();
+                foreach (var example in examples)
+                {
+                    var seed = example.candidate;
+                    if (Math.Abs(seed.note.time - start) < 3 * beat) continue;
+                    var pitchErrors = motif.pitches.Zip(example.pitches, (a, b) => Math.Abs(a - b)).ToArray();
+                    if (pitchErrors.Average() > 3 || pitchErrors.Count(d => d > 4) > 1) continue;
+                    var rhythmErrors = motif.rhythm.Zip(example.rhythm,
+                        (a, b) => Math.Abs(Math.Log(Math.Max(.01, a) / Math.Max(.01, b)))).ToArray();
+                    if (rhythmErrors.Average() > .4 || rhythmErrors.Max() > 1) continue;
+                    double projected = (seed.end - seed.note.time) * motif.scale / example.scale;
+                    double exitError = Math.Abs(duration - projected);
+                    if (exitError > beat / 12) continue;
+                    if (Math.Abs(neural - Get(seed.note, "neuralDuration")) > beat * .35
+                        || Math.Abs(harmonic - Get(seed.note, "harmonicDuration")) > beat * .35
+                        || Math.Abs(duration - (seed.end - seed.note.time)) > beat * .2
+                        || Get(candidate.note, "neuralOnset") < Math.Max(.3, Get(seed.note, "neuralOnset") * .6)
+                        || Get(candidate.note, "neuralPeak") < Math.Max(.15, Get(seed.note, "neuralPeak") * .5)) continue;
+                    matches.Add(Tuple.Create(seed, pitchErrors.Average() + rhythmErrors.Average() + exitError / beat * 4));
+                }
+                var independent = new List<double>();
+                foreach (var match in matches.OrderBy(m => m.Item2))
+                    if (independent.All(time => Math.Abs(time - match.Item1.note.time) > 3 * beat)) independent.Add(match.Item1.note.time);
+                if (independent.Count < 2) continue;
+                inferred.Add(new Candidate { note = candidate.note, end = candidate.end,
+                    score = 1 / (1 + matches.Min(m => m.Item2)), recurrent = true });
+            }
+            foreach (var candidate in inferred.OrderByDescending(c => c.score)
+                .ThenByDescending(c => Get(c.note, "neuralOnset")).ThenBy(c => c.note.time))
+            {
+                if (accepted.Any(prior => Math.Min(prior.end, candidate.end) - Math.Max(prior.note.time, candidate.note.time) > -.078)) continue;
+                accepted.Add(candidate);
+            }
         }
 
         private static bool HasIndependentRepeat(PcmInstrumentalEvidence.NoteEvent note,double end,

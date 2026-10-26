@@ -1,0 +1,49 @@
+{
+    "stage": "baseline",
+    "referenceId": "BajoElSolPop",
+    "referenceMapSha256": "2e2e0eacbe4a2a2c082d696d035bb3346951ee01daec5a7b39134a8877e5a591",
+    "sourceAudioSha256": "776bea189537a32ea5be122e3d14a93fcbb6baacd8c80f1a3d29cb64c00e8621",
+    "sourcePcmSha256": "2799df2c224467490f2fa77f7518203c88b24e920769a0e0d3e0295058187014",
+    "voiceFeatureSha256": "b8186b945eaac7b279ab0a0e4c3257133aae5b90a3ec8ba44d77417241824d90",
+    "generator": "pcm-vocal-phrase-chart-v11+short-test",
+    "generatedTimelineSha256": "d6011a0a2ec021b6aa9af7abfbbde6c01e73dab595d48ad8ffd46d028e7763d7",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 8.5,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold <=0.45s on both sides; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 23,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 23,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "allHolds": {
+        "definition": "All Hold; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 27,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 27,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "follows": {
+        "definition": "Follow; onset <=80ms; end <=150ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 0,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    }
+}

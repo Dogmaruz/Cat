@@ -13,7 +13,7 @@ using RadioArchipelago;
 
 namespace DancingCats.Clone
 {
-    public sealed class OriginalPlayController : MonoBehaviour
+    public sealed partial class OriginalPlayController : MonoBehaviour
     {
         public OriginalAssets Assets;
         public SongRecord[] Songs { get; private set; }
@@ -354,6 +354,9 @@ namespace DancingCats.Clone
             _clockOffset = gameTime; _dspStart = _audioClock.DspTime;
             _music.timeSamples = Mathf.Clamp((int)Math.Round(Math.Max(0, audioTime) * _music.clip.frequency), 0, _music.clip.samples - 1);
             if (audioTime < _music.clip.length) _music.PlayScheduled(_dspStart + Math.Max(0, -audioTime) / _rate);
+#if UNITY_EDITOR
+            ObserveEditorTiming("schedule", null);
+#endif
         }
 
         private void PlayPreview()
@@ -534,8 +537,15 @@ namespace DancingCats.Clone
 
         private void ScoreHit(OriginalTile tile, bool perfect)
         {
+#if UNITY_EDITOR
+            ObserveEditorTiming("score-contact", tile);
+            _editorTimingTile = tile;
+#endif
             _score.Apply(perfect); Feedback = perfect ? "Perfect" : "Great";
             PlayEffect("lantern2__985"); _themeVisuals.ShowHit(perfect, Streak);
+#if UNITY_EDITOR
+            _editorTimingTile = null;
+#endif
             OriginalTileVisuals.OnHit(tile.gameObject, perfect, tile.element.id == 2 || tile.element.id == 3, Streak);
 #if UNITY_ANDROID || UNITY_IOS
             if (Progression.State.settings.vibration) Handheld.Vibrate();
@@ -647,8 +657,20 @@ namespace DancingCats.Clone
         public void PaySettlement() { if (!string.IsNullOrEmpty(_runId)) Progression?.AutoRewardSettlement(_runId); }
         private void PlayEffect(string resource)
         {
+#if UNITY_EDITOR
+            ObserveEditorTiming("effect-request", _editorTimingTile, resource);
+#endif
             var clip = _resources.Load<AudioClip>("OriginalAudio/Sfx/" + resource);
-            if (clip != null && Progression.State.settings.sound) _effects.PlayOneShot(clip);
+            if (clip != null && Progression.State.settings.sound)
+            {
+#if UNITY_EDITOR
+                ObserveEditorTiming("effect-submit", _editorTimingTile, resource);
+#endif
+                _effects.PlayOneShot(clip);
+#if UNITY_EDITOR
+                ObserveEditorTiming("effect-return", _editorTimingTile, resource);
+#endif
+            }
         }
 
         private void FollowCamera(bool immediate)

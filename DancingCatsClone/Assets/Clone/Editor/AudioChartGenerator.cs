@@ -13,8 +13,8 @@ namespace DancingCats.Clone.Editor
     public static class AudioChartGenerator
     {
         public const string AlwaysRememberId = "AlwaysRememberMeowCat";
-        private const string Version = "pcm-phrase-chart-v11";
-        private const string VocalVersion = "pcm-vocal-phrase-chart-v11";
+        private const string Version = "pcm-phrase-chart-v12";
+        private const string VocalVersion = "pcm-vocal-phrase-chart-v12";
         private const double MinGap = .18, MaxGap = 1.95;
 
         [Serializable]
@@ -151,7 +151,16 @@ namespace DancingCats.Clone.Editor
                 .Where(cue => cue.time >= 0 && cue.endTime <= finishTime - MinGap
                     && !movingPhrases.Any(phrase => cue.time < phrase.endTime + .078 && cue.endTime > phrase.time - .078)).ToArray()
                 : Array.Empty<MusicalCue>();
+            if (instrumentalEvidence != null)
+                vocalHolds = vocalHolds.Where(cue => !PcmLegacySupportAnalysis.RejectsArticulatedHold(instrumentalEvidence, vocalEvidence, cue)).ToArray();
             var legacySupports = movingPhrases.Concat(vocalHolds).ToArray();
+            if (instrumentalEvidence != null && vocalEvidence != null && options.includeMovingJumps)
+            {
+                var voicedResponses = PcmMelodicFollowAnalysis.AnalyzeVoicedResponses(instrumentalEvidence, vocalEvidence, legacySupports)
+                    .Where(cue => cue.time >= 0 && cue.endTime <= finishTime - MinGap).ToArray();
+                movingPhrases = MergeProtectedSupports(movingPhrases, voicedResponses);
+                legacySupports = movingPhrases.Concat(vocalHolds).ToArray();
+            }
             var measuredFlights = vocalEvidence != null && options.includeBigJumps
                 ? PcmFlightAnalysis.Analyze(vocalEvidence, analysis.accents.ToArray(), analysis.period, legacySupports)
                 : Array.Empty<PcmFlightAnalysis.Flight>();

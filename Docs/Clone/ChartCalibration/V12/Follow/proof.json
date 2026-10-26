@@ -1,0 +1,579 @@
+{
+  "metric": "Follow one-to-one maximum-cardinality, start<=80ms end<=150ms IoU>=.5",
+  "knownSongs": [
+    "UnstoppableCat054",
+    "TwinkleLittleStar",
+    "MoonlightPop",
+    "LABUBUSongsPop",
+    "DisconnectPop",
+    "CanCanPiano",
+    "IJustWannaDancePop",
+    "MoonlightCloudsPiano",
+    "FurElisePiano",
+    "JingleBells",
+    "OdetoJoyPiano",
+    "CanoninDPiano",
+    "AajKiRaatPop",
+    "BajoElSolPop",
+    "BabyShark"
+  ],
+  "all15AreKnownTuningOrRegressionMaterial": true,
+  "integratedGeneratorRun": false,
+  "songs": {
+    "UnstoppableCat054": {
+      "referenceFollow": 2,
+      "baselineFollow": 2,
+      "rawFollow": 0,
+      "rawCorrect": 0,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 0,
+      "provisionalMergedCorrect": 2,
+      "provisionalMergedFalse": 0,
+      "longHolds": 13,
+      "longHoldCorrect": 13,
+      "rejectedLongHolds": 0,
+      "correctHoldsLost": 0
+    },
+    "TwinkleLittleStar": {
+      "referenceFollow": 0,
+      "baselineFollow": 0,
+      "rawFollow": 0,
+      "rawCorrect": 0,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 0,
+      "provisionalMergedCorrect": 0,
+      "provisionalMergedFalse": 0,
+      "longHolds": 0,
+      "longHoldCorrect": 0,
+      "rejectedLongHolds": 0,
+      "correctHoldsLost": 0
+    },
+    "MoonlightPop": {
+      "referenceFollow": 0,
+      "baselineFollow": 0,
+      "rawFollow": 0,
+      "rawCorrect": 0,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 0,
+      "provisionalMergedCorrect": 0,
+      "provisionalMergedFalse": 0,
+      "longHolds": 1,
+      "longHoldCorrect": 0,
+      "rejectedLongHolds": 0,
+      "correctHoldsLost": 0
+    },
+    "LABUBUSongsPop": {
+      "referenceFollow": 16,
+      "baselineFollow": 0,
+      "rawFollow": 0,
+      "rawCorrect": 0,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 0,
+      "provisionalMergedCorrect": 0,
+      "provisionalMergedFalse": 0,
+      "longHolds": 0,
+      "longHoldCorrect": 0,
+      "rejectedLongHolds": 0,
+      "correctHoldsLost": 0
+    },
+    "DisconnectPop": {
+      "referenceFollow": 1,
+      "baselineFollow": 0,
+      "rawFollow": 0,
+      "rawCorrect": 0,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 0,
+      "provisionalMergedCorrect": 0,
+      "provisionalMergedFalse": 0,
+      "longHolds": 0,
+      "longHoldCorrect": 0,
+      "rejectedLongHolds": 0,
+      "correctHoldsLost": 0
+    },
+    "CanCanPiano": {
+      "referenceFollow": 20,
+      "baselineFollow": 19,
+      "rawFollow": 19,
+      "rawCorrect": 19,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 0,
+      "provisionalMergedCorrect": 19,
+      "provisionalMergedFalse": 0,
+      "longHolds": 0,
+      "longHoldCorrect": 0,
+      "rejectedLongHolds": 0,
+      "correctHoldsLost": 0
+    },
+    "IJustWannaDancePop": {
+      "referenceFollow": 1,
+      "baselineFollow": 0,
+      "rawFollow": 0,
+      "rawCorrect": 0,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 0,
+      "provisionalMergedCorrect": 0,
+      "provisionalMergedFalse": 0,
+      "longHolds": 0,
+      "longHoldCorrect": 0,
+      "rejectedLongHolds": 0,
+      "correctHoldsLost": 0
+    },
+    "MoonlightCloudsPiano": {
+      "referenceFollow": 11,
+      "baselineFollow": 0,
+      "rawFollow": 0,
+      "rawCorrect": 0,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 0,
+      "provisionalMergedCorrect": 0,
+      "provisionalMergedFalse": 0,
+      "longHolds": 0,
+      "longHoldCorrect": 0,
+      "rejectedLongHolds": 0,
+      "correctHoldsLost": 0
+    },
+    "FurElisePiano": {
+      "referenceFollow": 1,
+      "baselineFollow": 0,
+      "rawFollow": 0,
+      "rawCorrect": 0,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 0,
+      "provisionalMergedCorrect": 0,
+      "provisionalMergedFalse": 0,
+      "longHolds": 0,
+      "longHoldCorrect": 0,
+      "rejectedLongHolds": 0,
+      "correctHoldsLost": 0
+    },
+    "JingleBells": {
+      "referenceFollow": 8,
+      "baselineFollow": 4,
+      "rawFollow": 5,
+      "rawCorrect": 5,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 1,
+      "provisionalMergedCorrect": 5,
+      "provisionalMergedFalse": 0,
+      "longHolds": 3,
+      "longHoldCorrect": 0,
+      "rejectedLongHolds": 1,
+      "correctHoldsLost": 0
+    },
+    "OdetoJoyPiano": {
+      "referenceFollow": 1,
+      "baselineFollow": 0,
+      "rawFollow": 0,
+      "rawCorrect": 0,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 0,
+      "provisionalMergedCorrect": 0,
+      "provisionalMergedFalse": 0,
+      "longHolds": 0,
+      "longHoldCorrect": 0,
+      "rejectedLongHolds": 0,
+      "correctHoldsLost": 0
+    },
+    "CanoninDPiano": {
+      "referenceFollow": 4,
+      "baselineFollow": 0,
+      "rawFollow": 0,
+      "rawCorrect": 0,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 0,
+      "provisionalMergedCorrect": 0,
+      "provisionalMergedFalse": 0,
+      "longHolds": 2,
+      "longHoldCorrect": 0,
+      "rejectedLongHolds": 0,
+      "correctHoldsLost": 0
+    },
+    "AajKiRaatPop": {
+      "referenceFollow": 7,
+      "baselineFollow": 0,
+      "rawFollow": 0,
+      "rawCorrect": 0,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 0,
+      "provisionalMergedCorrect": 0,
+      "provisionalMergedFalse": 0,
+      "longHolds": 10,
+      "longHoldCorrect": 0,
+      "rejectedLongHolds": 4,
+      "correctHoldsLost": 0
+    },
+    "BajoElSolPop": {
+      "referenceFollow": 0,
+      "baselineFollow": 0,
+      "rawFollow": 0,
+      "rawCorrect": 0,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 0,
+      "provisionalMergedCorrect": 0,
+      "provisionalMergedFalse": 0,
+      "longHolds": 0,
+      "longHoldCorrect": 0,
+      "rejectedLongHolds": 0,
+      "correctHoldsLost": 0
+    },
+    "BabyShark": {
+      "referenceFollow": 6,
+      "baselineFollow": 0,
+      "rawFollow": 0,
+      "rawCorrect": 0,
+      "rawFalse": 0,
+      "newAfterRemovingRejectedV11Holds": 0,
+      "provisionalMergedCorrect": 0,
+      "provisionalMergedFalse": 0,
+      "longHolds": 4,
+      "longHoldCorrect": 0,
+      "rejectedLongHolds": 0,
+      "correctHoldsLost": 0
+    }
+  },
+  "ablations": {
+    "selected": {
+      "UnstoppableCat054": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "TwinkleLittleStar": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "MoonlightPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "LABUBUSongsPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "DisconnectPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "CanCanPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "IJustWannaDancePop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "MoonlightCloudsPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "FurElisePiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "JingleBells": {
+        "rejected": 1,
+        "correctLost": 0,
+        "falseRemoved": 1
+      },
+      "OdetoJoyPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "CanoninDPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "AajKiRaatPop": {
+        "rejected": 4,
+        "correctLost": 0,
+        "falseRemoved": 4
+      },
+      "BajoElSolPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "BabyShark": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      }
+    },
+    "withoutVoiceAgreement": {
+      "UnstoppableCat054": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "TwinkleLittleStar": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "MoonlightPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "LABUBUSongsPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "DisconnectPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "CanCanPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "IJustWannaDancePop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "MoonlightCloudsPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "FurElisePiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "JingleBells": {
+        "rejected": 1,
+        "correctLost": 0,
+        "falseRemoved": 1
+      },
+      "OdetoJoyPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "CanoninDPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "AajKiRaatPop": {
+        "rejected": 4,
+        "correctLost": 0,
+        "falseRemoved": 4
+      },
+      "BajoElSolPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "BabyShark": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      }
+    },
+    "withoutDurationAgreement": {
+      "UnstoppableCat054": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "TwinkleLittleStar": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "MoonlightPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "LABUBUSongsPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "DisconnectPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "CanCanPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "IJustWannaDancePop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "MoonlightCloudsPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "FurElisePiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "JingleBells": {
+        "rejected": 1,
+        "correctLost": 0,
+        "falseRemoved": 1
+      },
+      "OdetoJoyPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "CanoninDPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "AajKiRaatPop": {
+        "rejected": 4,
+        "correctLost": 0,
+        "falseRemoved": 4
+      },
+      "BajoElSolPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "BabyShark": {
+        "rejected": 1,
+        "correctLost": 0,
+        "falseRemoved": 1
+      }
+    },
+    "oneInteriorBody": {
+      "UnstoppableCat054": {
+        "rejected": 3,
+        "correctLost": 3,
+        "falseRemoved": 0
+      },
+      "TwinkleLittleStar": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "MoonlightPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "LABUBUSongsPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "DisconnectPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "CanCanPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "IJustWannaDancePop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "MoonlightCloudsPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "FurElisePiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "JingleBells": {
+        "rejected": 1,
+        "correctLost": 0,
+        "falseRemoved": 1
+      },
+      "OdetoJoyPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "CanoninDPiano": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "AajKiRaatPop": {
+        "rejected": 7,
+        "correctLost": 0,
+        "falseRemoved": 7
+      },
+      "BajoElSolPop": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      },
+      "BabyShark": {
+        "rejected": 0,
+        "correctLost": 0,
+        "falseRemoved": 0
+      }
+    }
+  },
+  "inputs": {
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b.notes.json": "4513826e399783e27a9e8ea86f54da947d7164ff539dfa43750c621259f554c3",
+    "Assets\\Clone\\Editor\\AudioEvidence\\7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b.voice.json": "6e47f285afd7417ef3add416728555cd2fa3fb26dbcc1e667460ac134206c6c2",
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\0cd8dc69f01e117562bf8d21afa17225c5594e7e1ba0920444275953fddec44f.notes.json": "623ade6ebce08bf9212370bc5e03f1e4fa74b0c52499b0316954c02e8fd17d40",
+    "Assets\\Clone\\Editor\\AudioEvidence\\0cd8dc69f01e117562bf8d21afa17225c5594e7e1ba0920444275953fddec44f.voice.json": "988c6dc7915700b22d119622443beecb7c58434c199ee99cfbcbfbc2baa437ea",
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\35cb4620f0b6436f8c918538ecc6e3e81ef6180a2fb4ba4fd39931156909b843.notes.json": "40e38853f9f6e14fe04ed3ee1b56fbc002e26cc3cf6e3c217b829a69f81e6f4a",
+    "Assets\\Clone\\Editor\\AudioEvidence\\35cb4620f0b6436f8c918538ecc6e3e81ef6180a2fb4ba4fd39931156909b843.voice.json": "e8aa8118c19d73cb7c5384d2a569463d9945896faec4d69b21c5343a17ae6726",
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\dadc0644e3f1b2fe9d9f10f19b0df81eff5dcf087cc382d9a44e74a2a6a57190.notes.json": "365d9d6d8aed7db880530ad022dd996fbcfb6883025e80988def9408fad26c90",
+    "Assets\\Clone\\Editor\\AudioEvidence\\dadc0644e3f1b2fe9d9f10f19b0df81eff5dcf087cc382d9a44e74a2a6a57190.voice.json": "12c891d4856356f24d0e58cf32f7628f8071062be9f3e08b0b8224431b050118",
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\50e457b74a6c5189494d99db4c3b8cac6480c937e43cca03a270d71a39272c5f.notes.json": "3574cbbe0e1fd0ee7608780e95380eb1af97244d03200a90089ee69720d9421f",
+    "Assets\\Clone\\Editor\\AudioEvidence\\50e457b74a6c5189494d99db4c3b8cac6480c937e43cca03a270d71a39272c5f.voice.json": "66882653a5bd070bf16b700eba9713180a6dfbfb2a6a17cde74bf6aacce8ce64",
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\8f53952f9f5002ed5f6b313ab170bb317e1494605d3cad8b183a0e78353ddcd3.notes.json": "31c0c7a44457a4591b8b47f84a599a00e029bce6a1738a52f644ff6f3d53e81a",
+    "Assets\\Clone\\Editor\\AudioEvidence\\8f53952f9f5002ed5f6b313ab170bb317e1494605d3cad8b183a0e78353ddcd3.voice.json": "3aa5d7f850dceafa156391ac679ceb0d42cc848f050a73c85bc945f9c53d7b0d",
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\bea4e85a21807ee88b90b745209a8057dedaf9a0fea82671cb0f8056f87ccc40.notes.json": "792d979754a1deb4d08e309ad0cd3de11f38ecb3054825564eaddafc1bf3b72a",
+    "Assets\\Clone\\Editor\\AudioEvidence\\bea4e85a21807ee88b90b745209a8057dedaf9a0fea82671cb0f8056f87ccc40.voice.json": "a6ceae475683921d4a74e63f4afdbfd776563f5e6e2b71a9dc2bb1b966b3d5a8",
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\9d99efd063bb86889578244439258c1f1692de1f5939e9a8693aa0dfbf9d7ed6.notes.json": "8b2b5f8c8a5a92282867c43654eb3db2f6717358dfc2606a6264cdb28559c1d3",
+    "Assets\\Clone\\Editor\\AudioEvidence\\9d99efd063bb86889578244439258c1f1692de1f5939e9a8693aa0dfbf9d7ed6.voice.json": "ed7ce3611f11bba83150eecda3fb0394d2e4420d9803f272a63ee8ad44164ae5",
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\6adc81188a4c82e24ee1f04ea875dc95338630de98199b4475cbb7a15d88f573.notes.json": "897b939cde7b19cd1e5607ab4cd86f5ebad663a9079334ea04856cd238f4e427",
+    "Assets\\Clone\\Editor\\AudioEvidence\\6adc81188a4c82e24ee1f04ea875dc95338630de98199b4475cbb7a15d88f573.voice.json": "879b3001b3ab7d4437ead095ab8dcce3a7610353e0b0d942de45469b680380ff",
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\f83d9bf3ccb1bb49b31736d8bd72477cb344ababff68e0801dce1b4d2e9eaa7c.notes.json": "39b3e167fa8d2631c745d421700a7b6c012e5945f39a24ef83c9fc36f932e72d",
+    "Assets\\Clone\\Editor\\AudioEvidence\\f83d9bf3ccb1bb49b31736d8bd72477cb344ababff68e0801dce1b4d2e9eaa7c.voice.json": "fcff278e93cfe4e4343b277f35ec101caaa7ac6476b0bd445f47254bc8c264d7",
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\d3cec08a47eaf2931a82d28dca647f3fa1d6d7c3b3b3ed6e8d082ca13d8060bf.notes.json": "6578dca8217a658fa49fec4906d4e7a61a39b7ccec37d83f3ac45b317db97574",
+    "Assets\\Clone\\Editor\\AudioEvidence\\d3cec08a47eaf2931a82d28dca647f3fa1d6d7c3b3b3ed6e8d082ca13d8060bf.voice.json": "87bcd4554aad9918cc2dfbd19ed8a761febc850ed248e160f93172ad2f6e89ed",
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\cc7f7e824fff861d0e2a850b5031a3acf6ebb24867d61f072226fa5f241e24e2.notes.json": "ab78ee89da8403240eba54f0253d96033c28d8c227aea1f02a776fc1336139ca",
+    "Assets\\Clone\\Editor\\AudioEvidence\\cc7f7e824fff861d0e2a850b5031a3acf6ebb24867d61f072226fa5f241e24e2.voice.json": "dbda7ed44dfa67311434b9a87baf0eb626b488c7c898449b4add812f16ce168a",
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\3abf27154adb7eb988b39c1d51f1088bba81a39e8a870aca52583859b7ec9f21.notes.json": "a4edf5ed46a2a28696f1313e0c65ec19245e9112ba6454b9ade370d2146196ad",
+    "Assets\\Clone\\Editor\\AudioEvidence\\3abf27154adb7eb988b39c1d51f1088bba81a39e8a870aca52583859b7ec9f21.voice.json": "4dd95ea8469a2e3203f0a5b471063b9a8140af532cfe82ebe3813ed128a72c81",
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\776bea189537a32ea5be122e3d14a93fcbb6baacd8c80f1a3d29cb64c00e8621.notes.json": "4f072fb6f881b049061f2fcbf56f1d654909d0d87d72a84807ca04326e66b7c1",
+    "Assets\\Clone\\Editor\\AudioEvidence\\776bea189537a32ea5be122e3d14a93fcbb6baacd8c80f1a3d29cb64c00e8621.voice.json": "3d10642262da226bd4d0fa599c2d19cedf12bb7cdd9d8c6ca688af6f5f376a23",
+    "Assets\\Clone\\Editor\\InstrumentEvidence\\f0bc7c34ecccc141dd87bd3f0388e96e8bacc8b74b6c8e77196a960a246e23ea.notes.json": "47ef1f5c8c0a81028e63fc2e4db98069a7f01b02d1e472ece944e6f71946889a",
+    "Assets\\Clone\\Editor\\AudioEvidence\\f0bc7c34ecccc141dd87bd3f0388e96e8bacc8b74b6c8e77196a960a246e23ea.voice.json": "41b88358552c75e3325d6b43f9fbb4bb967659eb4c04c5eee1228b8b8465324b",
+    "Assets\\Clone\\Editor\\PcmLegacySupportAnalysis.cs": "b60f53003a483930a624f8cd6ef29d1de512b5da915fa3d05fe78930a52c3d13",
+    "Assets\\Clone\\Editor\\PcmLegacySupportValidation.cs": "38a80b005cfc686830998874f32a11ba694fefa44fed14a093ca49225607eadf"
+  },
+  "canNineteenAllCueFieldsUnchanged": true
+}

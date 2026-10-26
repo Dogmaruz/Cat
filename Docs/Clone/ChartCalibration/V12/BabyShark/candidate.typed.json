@@ -1,0 +1,49 @@
+{
+    "stage": "candidate",
+    "referenceId": "BabyShark",
+    "referenceMapSha256": "e3f46c06b0204a66d9fd31e7e17c073565a9893a53f5fed2bfd89f70771170f9",
+    "sourceAudioSha256": "f0bc7c34ecccc141dd87bd3f0388e96e8bacc8b74b6c8e77196a960a246e23ea",
+    "sourcePcmSha256": "de4ced014998149af6540c01d700e2382ba0ed80fcf7b218a3bbff7f831ed7e5",
+    "voiceFeatureSha256": "c945d5c9d1b0420110261407bad4329f7f9710dadaa4cb4fd13c03b8201d6700",
+    "generator": "pcm-vocal-phrase-chart-v12+short-test",
+    "generatedTimelineSha256": "cdf9e3be93d9f947a05e49dbc6050c58c1bfaf3b1bea5a874855e5db8bd1e0a2",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 7.5,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold <=0.45s on both sides; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 0,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "allHolds": {
+        "definition": "All Hold; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 6,
+        "generatedCount": 4,
+        "truePositive": 0,
+        "falsePositive": 4,
+        "falseNegative": 6,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "follows": {
+        "definition": "Follow; onset <=80ms; end <=150ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 6,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 6,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    }
+}

@@ -1,0 +1,1590 @@
+{
+  "status": "All15 known; pinned production-source-linked actual PCM generator/native compiler; Unity I/O stubs only",
+  "strictMetric": "Both durations<=.45; start/end<=80ms; IoU>=.5; maximum-cardinality one-to-one",
+  "sourceTotals": {
+    "reference": 223,
+    "proposed": 48,
+    "tp": 45,
+    "fp": 3,
+    "fn": 178
+  },
+  "baselineNativeTotals": {
+    "reference": 223,
+    "proposed": 47,
+    "tp": 44,
+    "fp": 3,
+    "fn": 179
+  },
+  "candidateNativeTotals": {
+    "reference": 223,
+    "proposed": 48,
+    "tp": 45,
+    "fp": 3,
+    "fn": 178
+  },
+  "source": {
+    "DisconnectPop": {
+      "reference": 41,
+      "proposed": 9,
+      "tp": 8,
+      "fp": 1,
+      "fn": 33,
+      "f1": 0.32,
+      "matches": [
+        {
+          "time": 6.2523356,
+          "end": 6.4873356,
+          "refStart": 6.2581178139556535,
+          "refEnd": 6.492494222792712
+        },
+        {
+          "time": 8.12807256,
+          "end": 8.44426304,
+          "refStart": 8.133106716654517,
+          "refEnd": 8.367483125491576
+        },
+        {
+          "time": 10.00380952,
+          "end": 10.23880952,
+          "refStart": 10.008117813955653,
+          "refEnd": 10.242494222792713
+        },
+        {
+          "time": 11.87537415,
+          "end": 12.11037415,
+          "refStart": 11.883106716654517,
+          "refEnd": 12.117483125491576
+        },
+        {
+          "time": 17.50675737,
+          "end": 17.74175737,
+          "refStart": 17.502903469584204,
+          "refEnd": 17.737279878421262
+        },
+        {
+          "time": 21.24825397,
+          "end": 21.48325397,
+          "refStart": 21.252903469584204,
+          "refEnd": 21.487279878421262
+        },
+        {
+          "time": 26.87546485,
+          "end": 27.11046485,
+          "refStart": 26.87791456688534,
+          "refEnd": 27.112292362885043
+        },
+        {
+          "time": 28.75120181,
+          "end": 28.98620181,
+          "refStart": 28.752903469584204,
+          "refEnd": 28.98727849125862
+        }
+      ]
+    },
+    "CanCanPiano": {
+      "reference": 5,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 5,
+      "f1": 0.0,
+      "matches": []
+    },
+    "IJustWannaDancePop": {
+      "reference": 26,
+      "proposed": 12,
+      "tp": 11,
+      "fp": 1,
+      "fn": 15,
+      "f1": 0.5789473684210527,
+      "matches": [
+        {
+          "time": 6.18575964,
+          "end": 6.37206349,
+          "refStart": 6.1695691434776085,
+          "refEnd": 6.377913574962055
+        },
+        {
+          "time": 6.61151927,
+          "end": 6.82104308,
+          "refStart": 6.6279135469128105,
+          "refEnd": 6.8362359877894905
+        },
+        {
+          "time": 7.08045351,
+          "end": 7.2801814,
+          "refStart": 7.09145177287214,
+          "refEnd": 7.299772867385079
+        },
+        {
+          "time": 8.47909297,
+          "end": 8.68680272,
+          "refStart": 8.476869935498518,
+          "refEnd": 8.685192825163112
+        },
+        {
+          "time": 10.30312925,
+          "end": 10.51265306,
+          "refStart": 10.325827670447966,
+          "refEnd": 10.534149662536734
+        },
+        {
+          "time": 10.78095238,
+          "end": 11.01095238,
+          "refStart": 10.78414963448749,
+          "refEnd": 10.992494065971936
+        },
+        {
+          "time": 11.22104308,
+          "end": 11.45104308,
+          "refStart": 11.247687411658903,
+          "refEnd": 11.45603184314335
+        },
+        {
+          "time": 17.22739229,
+          "end": 17.44580499,
+          "refStart": 17.24768561650725,
+          "refEnd": 17.456030945567523
+        },
+        {
+          "time": 19.07319728,
+          "end": 19.29269841,
+          "refStart": 19.0966433514567,
+          "refEnd": 19.30498868051697
+        },
+        {
+          "time": 19.55029478,
+          "end": 19.741678,
+          "refStart": 19.560203568023795,
+          "refEnd": 19.76852556011256
+        },
+        {
+          "time": 25.52852608,
+          "end": 25.73804989,
+          "refStart": 25.560203568023795,
+          "refEnd": 25.76852556011256
+        }
+      ]
+    },
+    "MoonlightCloudsPiano": {
+      "reference": 4,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 4,
+      "f1": 0.0,
+      "matches": []
+    },
+    "UnstoppableCat054": {
+      "reference": 1,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "f1": 0.0,
+      "matches": []
+    },
+    "TwinkleLittleStar": {
+      "reference": 2,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "f1": 0.0,
+      "matches": []
+    },
+    "MoonlightPop": {
+      "reference": 42,
+      "proposed": 26,
+      "tp": 26,
+      "fp": 0,
+      "fn": 16,
+      "f1": 0.7647058823529411,
+      "matches": [
+        {
+          "time": 0.62693878,
+          "end": 0.84462585,
+          "refStart": 0.627913796239429,
+          "refEnd": 0.9195691512690649
+        },
+        {
+          "time": 1.21904762,
+          "end": 1.49315193,
+          "refStart": 1.2112471295727625,
+          "refEnd": 1.5029025905662112
+        },
+        {
+          "time": 1.79102041,
+          "end": 2.02195012,
+          "refStart": 1.7945804629060955,
+          "refEnd": 2.0862357119719186
+        },
+        {
+          "time": 2.38312925,
+          "end": 2.67312925,
+          "refStart": 2.372698257366816,
+          "refEnd": 2.6643537183602652
+        },
+        {
+          "time": 2.95201814,
+          "end": 3.2092517,
+          "refStart": 2.956031802627775,
+          "refEnd": 3.2476872636212244
+        },
+        {
+          "time": 3.54721088,
+          "end": 3.7879365,
+          "refStart": 3.539364924033483,
+          "refEnd": 3.8310205969545574
+        },
+        {
+          "time": 4.71981859,
+          "end": 4.99519274,
+          "refStart": 4.7060315907001495,
+          "refEnd": 4.997687263621224
+        },
+        {
+          "time": 5.29179138,
+          "end": 5.5356009,
+          "refStart": 5.289364924033483,
+          "refEnd": 5.575827946265538
+        },
+        {
+          "time": 5.88390023,
+          "end": 6.17390023,
+          "refStart": 5.8674827184942036,
+          "refEnd": 6.15916085574362
+        },
+        {
+          "time": 7.61687075,
+          "end": 7.8490703,
+          "refStart": 7.6174827184942036,
+          "refEnd": 7.909161279598871
+        },
+        {
+          "time": 8.18793651,
+          "end": 8.47793651,
+          "refStart": 8.200816051827537,
+          "refEnd": 8.492494612932205
+        },
+        {
+          "time": 10.53714286,
+          "end": 10.82714286,
+          "refStart": 10.528957158327103,
+          "refEnd": 10.820612831248177
+        },
+        {
+          "time": 12.8738322,
+          "end": 13.09678005,
+          "refStart": 12.857074528932571,
+          "refEnd": 13.148730201853645
+        },
+        {
+          "time": 14.03791383,
+          "end": 14.32791383,
+          "refStart": 14.023742043309742,
+          "refEnd": 14.315396868520313
+        },
+        {
+          "time": 14.6184127,
+          "end": 14.86276644,
+          "refStart": 14.607075376643074,
+          "refEnd": 14.898730201853645
+        },
+        {
+          "time": 15.20199546,
+          "end": 15.44145124,
+          "refStart": 15.190408709976408,
+          "refEnd": 15.476870460642708
+        },
+        {
+          "time": 20.15709751,
+          "end": 20.42412698,
+          "refStart": 20.13832198580106,
+          "refEnd": 20.42997681101163
+        },
+        {
+          "time": 20.99882086,
+          "end": 21.26820862,
+          "refStart": 21.01331181327502,
+          "refEnd": 21.30498867895868
+        },
+        {
+          "time": 22.49378685,
+          "end": 22.73759637,
+          "refStart": 22.466440204117035,
+          "refEnd": 22.758117069800694
+        },
+        {
+          "time": 23.35600907,
+          "end": 23.64600907,
+          "refStart": 23.341452072064083,
+          "refEnd": 23.633106897274654
+        },
+        {
+          "time": 24.83356009,
+          "end": 25.0309297,
+          "refStart": 24.799773537450367,
+          "refEnd": 25.091452098555035
+        },
+        {
+          "time": 27.15863946,
+          "end": 27.40244898,
+          "refStart": 27.12791379623943,
+          "refEnd": 27.41956862145
+        },
+        {
+          "time": 29.47210884,
+          "end": 29.69578231,
+          "refStart": 29.456030319134396,
+          "refEnd": 29.747686839765972
+        },
+        {
+          "time": 32.68263039,
+          "end": 32.97263039,
+          "refStart": 32.65916210081842,
+          "refEnd": 32.95081523060799
+        },
+        {
+          "time": 34.13696145,
+          "end": 34.39238095,
+          "refStart": 34.11748526162572,
+          "refEnd": 34.40916212730937
+        },
+        {
+          "time": 35.01079365,
+          "end": 35.28634921,
+          "refStart": 34.98727692829238,
+          "refEnd": 35.278957184818054
+        }
+      ]
+    },
+    "LABUBUSongsPop": {
+      "reference": 4,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 4,
+      "f1": 0.0,
+      "matches": []
+    },
+    "FurElisePiano": {
+      "reference": 32,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 32,
+      "f1": 0.0,
+      "matches": []
+    },
+    "JingleBells": {
+      "reference": 0,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "f1": 0.0,
+      "matches": []
+    },
+    "OdetoJoyPiano": {
+      "reference": 33,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 33,
+      "f1": 0.0,
+      "matches": []
+    },
+    "CanoninDPiano": {
+      "reference": 3,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 3,
+      "f1": 0.0,
+      "matches": []
+    },
+    "AajKiRaatPop": {
+      "reference": 7,
+      "proposed": 1,
+      "tp": 0,
+      "fp": 1,
+      "fn": 7,
+      "f1": 0.0,
+      "matches": []
+    },
+    "BajoElSolPop": {
+      "reference": 23,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 23,
+      "f1": 0.0,
+      "matches": []
+    },
+    "BabyShark": {
+      "reference": 0,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "f1": 0.0,
+      "matches": []
+    }
+  },
+  "baselineNative": {
+    "DisconnectPop": {
+      "reference": 41,
+      "proposed": 8,
+      "tp": 7,
+      "fp": 1,
+      "fn": 34,
+      "f1": 0.2857142857142857,
+      "matches": [
+        {
+          "time": 8.12807256,
+          "end": 8.44426304,
+          "refStart": 8.133106716654517,
+          "refEnd": 8.367483125491576
+        },
+        {
+          "time": 10.00380952,
+          "end": 10.23880952,
+          "refStart": 10.008117813955653,
+          "refEnd": 10.242494222792713
+        },
+        {
+          "time": 11.87537415,
+          "end": 12.11037415,
+          "refStart": 11.883106716654517,
+          "refEnd": 12.117483125491576
+        },
+        {
+          "time": 17.50675737,
+          "end": 17.74175737,
+          "refStart": 17.502903469584204,
+          "refEnd": 17.737279878421262
+        },
+        {
+          "time": 21.24825397,
+          "end": 21.48325397,
+          "refStart": 21.252903469584204,
+          "refEnd": 21.487279878421262
+        },
+        {
+          "time": 26.87546485,
+          "end": 27.11046485,
+          "refStart": 26.87791456688534,
+          "refEnd": 27.112292362885043
+        },
+        {
+          "time": 28.75120181,
+          "end": 28.98620181,
+          "refStart": 28.752903469584204,
+          "refEnd": 28.98727849125862
+        }
+      ]
+    },
+    "CanCanPiano": {
+      "reference": 5,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 5,
+      "f1": 0.0,
+      "matches": []
+    },
+    "IJustWannaDancePop": {
+      "reference": 26,
+      "proposed": 11,
+      "tp": 11,
+      "fp": 0,
+      "fn": 15,
+      "f1": 0.5945945945945946,
+      "matches": [
+        {
+          "time": 6.18575964,
+          "end": 6.37206349,
+          "refStart": 6.1695691434776085,
+          "refEnd": 6.377913574962055
+        },
+        {
+          "time": 6.61151927,
+          "end": 6.82104308,
+          "refStart": 6.6279135469128105,
+          "refEnd": 6.8362359877894905
+        },
+        {
+          "time": 7.08045351,
+          "end": 7.2801814,
+          "refStart": 7.09145177287214,
+          "refEnd": 7.299772867385079
+        },
+        {
+          "time": 8.47909297,
+          "end": 8.68680272,
+          "refStart": 8.476869935498518,
+          "refEnd": 8.685192825163112
+        },
+        {
+          "time": 10.30312925,
+          "end": 10.51265306,
+          "refStart": 10.325827670447966,
+          "refEnd": 10.534149662536734
+        },
+        {
+          "time": 10.78095238,
+          "end": 11.01095238,
+          "refStart": 10.78414963448749,
+          "refEnd": 10.992494065971936
+        },
+        {
+          "time": 11.22104308,
+          "end": 11.45104308,
+          "refStart": 11.247687411658903,
+          "refEnd": 11.45603184314335
+        },
+        {
+          "time": 17.22739229,
+          "end": 17.44580499,
+          "refStart": 17.24768561650725,
+          "refEnd": 17.456030945567523
+        },
+        {
+          "time": 19.07319728,
+          "end": 19.29269841,
+          "refStart": 19.0966433514567,
+          "refEnd": 19.30498868051697
+        },
+        {
+          "time": 19.55029478,
+          "end": 19.741678,
+          "refStart": 19.560203568023795,
+          "refEnd": 19.76852556011256
+        },
+        {
+          "time": 25.52852608,
+          "end": 25.73804989,
+          "refStart": 25.560203568023795,
+          "refEnd": 25.76852556011256
+        }
+      ]
+    },
+    "MoonlightCloudsPiano": {
+      "reference": 4,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 4,
+      "f1": 0.0,
+      "matches": []
+    },
+    "UnstoppableCat054": {
+      "reference": 1,
+      "proposed": 1,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1,
+      "f1": 0.0,
+      "matches": []
+    },
+    "TwinkleLittleStar": {
+      "reference": 2,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "f1": 0.0,
+      "matches": []
+    },
+    "MoonlightPop": {
+      "reference": 42,
+      "proposed": 26,
+      "tp": 26,
+      "fp": 0,
+      "fn": 16,
+      "f1": 0.7647058823529411,
+      "matches": [
+        {
+          "time": 0.62693878,
+          "end": 0.84462585,
+          "refStart": 0.627913796239429,
+          "refEnd": 0.9195691512690649
+        },
+        {
+          "time": 1.21904762,
+          "end": 1.49315193,
+          "refStart": 1.2112471295727625,
+          "refEnd": 1.5029025905662112
+        },
+        {
+          "time": 1.79102041,
+          "end": 2.02195012,
+          "refStart": 1.7945804629060955,
+          "refEnd": 2.0862357119719186
+        },
+        {
+          "time": 2.38312925,
+          "end": 2.67312925,
+          "refStart": 2.372698257366816,
+          "refEnd": 2.6643537183602652
+        },
+        {
+          "time": 2.95201814,
+          "end": 3.2092517,
+          "refStart": 2.956031802627775,
+          "refEnd": 3.2476872636212244
+        },
+        {
+          "time": 3.54721088,
+          "end": 3.7879365,
+          "refStart": 3.539364924033483,
+          "refEnd": 3.8310205969545574
+        },
+        {
+          "time": 4.71981859,
+          "end": 4.99519274,
+          "refStart": 4.7060315907001495,
+          "refEnd": 4.997687263621224
+        },
+        {
+          "time": 5.29179138,
+          "end": 5.5356009,
+          "refStart": 5.289364924033483,
+          "refEnd": 5.575827946265538
+        },
+        {
+          "time": 5.88390023,
+          "end": 6.17390023,
+          "refStart": 5.8674827184942036,
+          "refEnd": 6.15916085574362
+        },
+        {
+          "time": 7.61687075,
+          "end": 7.8490703,
+          "refStart": 7.6174827184942036,
+          "refEnd": 7.909161279598871
+        },
+        {
+          "time": 8.18793651,
+          "end": 8.47793651,
+          "refStart": 8.200816051827537,
+          "refEnd": 8.492494612932205
+        },
+        {
+          "time": 10.53714286,
+          "end": 10.82714286,
+          "refStart": 10.528957158327103,
+          "refEnd": 10.820612831248177
+        },
+        {
+          "time": 12.8738322,
+          "end": 13.09678005,
+          "refStart": 12.857074528932571,
+          "refEnd": 13.148730201853645
+        },
+        {
+          "time": 14.03791383,
+          "end": 14.32791383,
+          "refStart": 14.023742043309742,
+          "refEnd": 14.315396868520313
+        },
+        {
+          "time": 14.6184127,
+          "end": 14.86276644,
+          "refStart": 14.607075376643074,
+          "refEnd": 14.898730201853645
+        },
+        {
+          "time": 15.20199546,
+          "end": 15.44145124,
+          "refStart": 15.190408709976408,
+          "refEnd": 15.476870460642708
+        },
+        {
+          "time": 20.15709751,
+          "end": 20.42412698,
+          "refStart": 20.13832198580106,
+          "refEnd": 20.42997681101163
+        },
+        {
+          "time": 20.99882086,
+          "end": 21.26820862,
+          "refStart": 21.01331181327502,
+          "refEnd": 21.30498867895868
+        },
+        {
+          "time": 22.49378685,
+          "end": 22.73759637,
+          "refStart": 22.466440204117035,
+          "refEnd": 22.758117069800694
+        },
+        {
+          "time": 23.35600907,
+          "end": 23.64600907,
+          "refStart": 23.341452072064083,
+          "refEnd": 23.633106897274654
+        },
+        {
+          "time": 24.83356009,
+          "end": 25.0309297,
+          "refStart": 24.799773537450367,
+          "refEnd": 25.091452098555035
+        },
+        {
+          "time": 27.15863946,
+          "end": 27.40244898,
+          "refStart": 27.12791379623943,
+          "refEnd": 27.41956862145
+        },
+        {
+          "time": 29.47210884,
+          "end": 29.69578231,
+          "refStart": 29.456030319134396,
+          "refEnd": 29.747686839765972
+        },
+        {
+          "time": 32.68263039,
+          "end": 32.97263039,
+          "refStart": 32.65916210081842,
+          "refEnd": 32.95081523060799
+        },
+        {
+          "time": 34.13696145,
+          "end": 34.39238095,
+          "refStart": 34.11748526162572,
+          "refEnd": 34.40916212730937
+        },
+        {
+          "time": 35.01079365,
+          "end": 35.28634921,
+          "refStart": 34.98727692829238,
+          "refEnd": 35.278957184818054
+        }
+      ]
+    },
+    "LABUBUSongsPop": {
+      "reference": 4,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 4,
+      "f1": 0.0,
+      "matches": []
+    },
+    "FurElisePiano": {
+      "reference": 32,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 32,
+      "f1": 0.0,
+      "matches": []
+    },
+    "JingleBells": {
+      "reference": 0,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "f1": 0.0,
+      "matches": []
+    },
+    "OdetoJoyPiano": {
+      "reference": 33,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 33,
+      "f1": 0.0,
+      "matches": []
+    },
+    "CanoninDPiano": {
+      "reference": 3,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 3,
+      "f1": 0.0,
+      "matches": []
+    },
+    "AajKiRaatPop": {
+      "reference": 7,
+      "proposed": 1,
+      "tp": 0,
+      "fp": 1,
+      "fn": 7,
+      "f1": 0.0,
+      "matches": []
+    },
+    "BajoElSolPop": {
+      "reference": 23,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 23,
+      "f1": 0.0,
+      "matches": []
+    },
+    "BabyShark": {
+      "reference": 0,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "f1": 0.0,
+      "matches": []
+    }
+  },
+  "candidateNative": {
+    "DisconnectPop": {
+      "reference": 41,
+      "proposed": 9,
+      "tp": 8,
+      "fp": 1,
+      "fn": 33,
+      "f1": 0.32,
+      "matches": [
+        {
+          "time": 6.2523356,
+          "end": 6.4873356,
+          "refStart": 6.2581178139556535,
+          "refEnd": 6.492494222792712
+        },
+        {
+          "time": 8.12807256,
+          "end": 8.44426304,
+          "refStart": 8.133106716654517,
+          "refEnd": 8.367483125491576
+        },
+        {
+          "time": 10.00380952,
+          "end": 10.23880952,
+          "refStart": 10.008117813955653,
+          "refEnd": 10.242494222792713
+        },
+        {
+          "time": 11.87537415,
+          "end": 12.11037415,
+          "refStart": 11.883106716654517,
+          "refEnd": 12.117483125491576
+        },
+        {
+          "time": 17.50675737,
+          "end": 17.74175737,
+          "refStart": 17.502903469584204,
+          "refEnd": 17.737279878421262
+        },
+        {
+          "time": 21.24825397,
+          "end": 21.48325397,
+          "refStart": 21.252903469584204,
+          "refEnd": 21.487279878421262
+        },
+        {
+          "time": 26.87546485,
+          "end": 27.11046485,
+          "refStart": 26.87791456688534,
+          "refEnd": 27.112292362885043
+        },
+        {
+          "time": 28.75120181,
+          "end": 28.98620181,
+          "refStart": 28.752903469584204,
+          "refEnd": 28.98727849125862
+        }
+      ]
+    },
+    "CanCanPiano": {
+      "reference": 5,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 5,
+      "f1": 0.0,
+      "matches": []
+    },
+    "IJustWannaDancePop": {
+      "reference": 26,
+      "proposed": 11,
+      "tp": 11,
+      "fp": 0,
+      "fn": 15,
+      "f1": 0.5945945945945946,
+      "matches": [
+        {
+          "time": 6.18575964,
+          "end": 6.37206349,
+          "refStart": 6.1695691434776085,
+          "refEnd": 6.377913574962055
+        },
+        {
+          "time": 6.61151927,
+          "end": 6.82104308,
+          "refStart": 6.6279135469128105,
+          "refEnd": 6.8362359877894905
+        },
+        {
+          "time": 7.08045351,
+          "end": 7.2801814,
+          "refStart": 7.09145177287214,
+          "refEnd": 7.299772867385079
+        },
+        {
+          "time": 8.47909297,
+          "end": 8.68680272,
+          "refStart": 8.476869935498518,
+          "refEnd": 8.685192825163112
+        },
+        {
+          "time": 10.30312925,
+          "end": 10.51265306,
+          "refStart": 10.325827670447966,
+          "refEnd": 10.534149662536734
+        },
+        {
+          "time": 10.78095238,
+          "end": 11.01095238,
+          "refStart": 10.78414963448749,
+          "refEnd": 10.992494065971936
+        },
+        {
+          "time": 11.22104308,
+          "end": 11.45104308,
+          "refStart": 11.247687411658903,
+          "refEnd": 11.45603184314335
+        },
+        {
+          "time": 17.22739229,
+          "end": 17.44580499,
+          "refStart": 17.24768561650725,
+          "refEnd": 17.456030945567523
+        },
+        {
+          "time": 19.07319728,
+          "end": 19.29269841,
+          "refStart": 19.0966433514567,
+          "refEnd": 19.30498868051697
+        },
+        {
+          "time": 19.55029478,
+          "end": 19.741678,
+          "refStart": 19.560203568023795,
+          "refEnd": 19.76852556011256
+        },
+        {
+          "time": 25.52852608,
+          "end": 25.73804989,
+          "refStart": 25.560203568023795,
+          "refEnd": 25.76852556011256
+        }
+      ]
+    },
+    "MoonlightCloudsPiano": {
+      "reference": 4,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 4,
+      "f1": 0.0,
+      "matches": []
+    },
+    "UnstoppableCat054": {
+      "reference": 1,
+      "proposed": 1,
+      "tp": 0,
+      "fp": 1,
+      "fn": 1,
+      "f1": 0.0,
+      "matches": []
+    },
+    "TwinkleLittleStar": {
+      "reference": 2,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "f1": 0.0,
+      "matches": []
+    },
+    "MoonlightPop": {
+      "reference": 42,
+      "proposed": 26,
+      "tp": 26,
+      "fp": 0,
+      "fn": 16,
+      "f1": 0.7647058823529411,
+      "matches": [
+        {
+          "time": 0.62693878,
+          "end": 0.84462585,
+          "refStart": 0.627913796239429,
+          "refEnd": 0.9195691512690649
+        },
+        {
+          "time": 1.21904762,
+          "end": 1.49315193,
+          "refStart": 1.2112471295727625,
+          "refEnd": 1.5029025905662112
+        },
+        {
+          "time": 1.79102041,
+          "end": 2.02195012,
+          "refStart": 1.7945804629060955,
+          "refEnd": 2.0862357119719186
+        },
+        {
+          "time": 2.38312925,
+          "end": 2.67312925,
+          "refStart": 2.372698257366816,
+          "refEnd": 2.6643537183602652
+        },
+        {
+          "time": 2.95201814,
+          "end": 3.2092517,
+          "refStart": 2.956031802627775,
+          "refEnd": 3.2476872636212244
+        },
+        {
+          "time": 3.54721088,
+          "end": 3.7879365,
+          "refStart": 3.539364924033483,
+          "refEnd": 3.8310205969545574
+        },
+        {
+          "time": 4.71981859,
+          "end": 4.99519274,
+          "refStart": 4.7060315907001495,
+          "refEnd": 4.997687263621224
+        },
+        {
+          "time": 5.29179138,
+          "end": 5.5356009,
+          "refStart": 5.289364924033483,
+          "refEnd": 5.575827946265538
+        },
+        {
+          "time": 5.88390023,
+          "end": 6.17390023,
+          "refStart": 5.8674827184942036,
+          "refEnd": 6.15916085574362
+        },
+        {
+          "time": 7.61687075,
+          "end": 7.8490703,
+          "refStart": 7.6174827184942036,
+          "refEnd": 7.909161279598871
+        },
+        {
+          "time": 8.18793651,
+          "end": 8.47793651,
+          "refStart": 8.200816051827537,
+          "refEnd": 8.492494612932205
+        },
+        {
+          "time": 10.53714286,
+          "end": 10.82714286,
+          "refStart": 10.528957158327103,
+          "refEnd": 10.820612831248177
+        },
+        {
+          "time": 12.8738322,
+          "end": 13.09678005,
+          "refStart": 12.857074528932571,
+          "refEnd": 13.148730201853645
+        },
+        {
+          "time": 14.03791383,
+          "end": 14.32791383,
+          "refStart": 14.023742043309742,
+          "refEnd": 14.315396868520313
+        },
+        {
+          "time": 14.6184127,
+          "end": 14.86276644,
+          "refStart": 14.607075376643074,
+          "refEnd": 14.898730201853645
+        },
+        {
+          "time": 15.20199546,
+          "end": 15.44145124,
+          "refStart": 15.190408709976408,
+          "refEnd": 15.476870460642708
+        },
+        {
+          "time": 20.15709751,
+          "end": 20.42412698,
+          "refStart": 20.13832198580106,
+          "refEnd": 20.42997681101163
+        },
+        {
+          "time": 20.99882086,
+          "end": 21.26820862,
+          "refStart": 21.01331181327502,
+          "refEnd": 21.30498867895868
+        },
+        {
+          "time": 22.49378685,
+          "end": 22.73759637,
+          "refStart": 22.466440204117035,
+          "refEnd": 22.758117069800694
+        },
+        {
+          "time": 23.35600907,
+          "end": 23.64600907,
+          "refStart": 23.341452072064083,
+          "refEnd": 23.633106897274654
+        },
+        {
+          "time": 24.83356009,
+          "end": 25.0309297,
+          "refStart": 24.799773537450367,
+          "refEnd": 25.091452098555035
+        },
+        {
+          "time": 27.15863946,
+          "end": 27.40244898,
+          "refStart": 27.12791379623943,
+          "refEnd": 27.41956862145
+        },
+        {
+          "time": 29.47210884,
+          "end": 29.69578231,
+          "refStart": 29.456030319134396,
+          "refEnd": 29.747686839765972
+        },
+        {
+          "time": 32.68263039,
+          "end": 32.97263039,
+          "refStart": 32.65916210081842,
+          "refEnd": 32.95081523060799
+        },
+        {
+          "time": 34.13696145,
+          "end": 34.39238095,
+          "refStart": 34.11748526162572,
+          "refEnd": 34.40916212730937
+        },
+        {
+          "time": 35.01079365,
+          "end": 35.28634921,
+          "refStart": 34.98727692829238,
+          "refEnd": 35.278957184818054
+        }
+      ]
+    },
+    "LABUBUSongsPop": {
+      "reference": 4,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 4,
+      "f1": 0.0,
+      "matches": []
+    },
+    "FurElisePiano": {
+      "reference": 32,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 32,
+      "f1": 0.0,
+      "matches": []
+    },
+    "JingleBells": {
+      "reference": 0,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "f1": 0.0,
+      "matches": []
+    },
+    "OdetoJoyPiano": {
+      "reference": 33,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 33,
+      "f1": 0.0,
+      "matches": []
+    },
+    "CanoninDPiano": {
+      "reference": 3,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 3,
+      "f1": 0.0,
+      "matches": []
+    },
+    "AajKiRaatPop": {
+      "reference": 7,
+      "proposed": 1,
+      "tp": 0,
+      "fp": 1,
+      "fn": 7,
+      "f1": 0.0,
+      "matches": []
+    },
+    "BajoElSolPop": {
+      "reference": 23,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 23,
+      "f1": 0.0,
+      "matches": []
+    },
+    "BabyShark": {
+      "reference": 0,
+      "proposed": 0,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "f1": 0.0,
+      "matches": []
+    }
+  },
+  "semanticChanges": {
+    "DisconnectPop": {
+      "added": [
+        [
+          "Hold",
+          6.252336,
+          6.487336
+        ]
+      ],
+      "removed": [
+        [
+          "Jump",
+          6.252336,
+          6.252336
+        ]
+      ],
+      "beforeElements": 218,
+      "afterElements": 218,
+      "samePcmIdentity": true
+    },
+    "CanCanPiano": {
+      "added": [],
+      "removed": [],
+      "beforeElements": 458,
+      "afterElements": 458,
+      "samePcmIdentity": true
+    },
+    "IJustWannaDancePop": {
+      "added": [],
+      "removed": [],
+      "beforeElements": 133,
+      "afterElements": 133,
+      "samePcmIdentity": true
+    },
+    "MoonlightCloudsPiano": {
+      "added": [],
+      "removed": [],
+      "beforeElements": 149,
+      "afterElements": 149,
+      "samePcmIdentity": true
+    },
+    "UnstoppableCat054": {
+      "added": [],
+      "removed": [],
+      "beforeElements": 152,
+      "afterElements": 152,
+      "samePcmIdentity": true
+    },
+    "TwinkleLittleStar": {
+      "added": [],
+      "removed": [],
+      "beforeElements": 293,
+      "afterElements": 293,
+      "samePcmIdentity": true
+    },
+    "MoonlightPop": {
+      "added": [],
+      "removed": [],
+      "beforeElements": 100,
+      "afterElements": 100,
+      "samePcmIdentity": true
+    },
+    "LABUBUSongsPop": {
+      "added": [],
+      "removed": [],
+      "beforeElements": 172,
+      "afterElements": 172,
+      "samePcmIdentity": true
+    },
+    "FurElisePiano": {
+      "added": [],
+      "removed": [],
+      "beforeElements": 164,
+      "afterElements": 164,
+      "samePcmIdentity": true
+    },
+    "JingleBells": {
+      "added": [],
+      "removed": [],
+      "beforeElements": 130,
+      "afterElements": 130,
+      "samePcmIdentity": true
+    },
+    "OdetoJoyPiano": {
+      "added": [],
+      "removed": [],
+      "beforeElements": 170,
+      "afterElements": 170,
+      "samePcmIdentity": true
+    },
+    "CanoninDPiano": {
+      "added": [],
+      "removed": [],
+      "beforeElements": 184,
+      "afterElements": 184,
+      "samePcmIdentity": true
+    },
+    "AajKiRaatPop": {
+      "added": [],
+      "removed": [],
+      "beforeElements": 238,
+      "afterElements": 238,
+      "samePcmIdentity": true
+    },
+    "BajoElSolPop": {
+      "added": [],
+      "removed": [],
+      "beforeElements": 129,
+      "afterElements": 129,
+      "samePcmIdentity": true
+    },
+    "BabyShark": {
+      "added": [],
+      "removed": [],
+      "beforeElements": 147,
+      "afterElements": 147,
+      "samePcmIdentity": true
+    }
+  },
+  "inputs": [
+    {
+      "id": "DisconnectPop",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\50e457b74a6c5189494d99db4c3b8cac6480c937e43cca03a270d71a39272c5f\\source.f32",
+      "pcmSha256": "f9fa7ab603d755ff3d3b069abed2aa71235e2d6e7b783a02769b6567478fde26",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\DisconnectPop\\baseline.generated.timeline.json",
+      "baselineSha256": "6dfc22232a35f3486d94bde4e5aefd1fee9558029dafbb7ea0bbb92280a97030",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\DisconnectPop.full-pcm-generated.json",
+      "candidateSha256": "984daa3095959d0e2c6938a1f28da93964145151b94cbd271edc895470ee94e4"
+    },
+    {
+      "id": "CanCanPiano",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\8f53952f9f5002ed5f6b313ab170bb317e1494605d3cad8b183a0e78353ddcd3\\source.f32",
+      "pcmSha256": "afc040b6717ffc0fbae20f91108eb64bea3a60cd09415a06b9347d94259ed7e2",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\CanCanPiano\\baseline.generated.timeline.json",
+      "baselineSha256": "ce5cefb9a78aeadcff580c7efde2f4b3a1d0ede1c0de373672307694b273017e",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\CanCanPiano.full-pcm-generated.json",
+      "candidateSha256": "6a5a974c55c7af2d70a1a32bc49d5fd1eeecd686d553afbf933a371cb4426ba0"
+    },
+    {
+      "id": "IJustWannaDancePop",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\bea4e85a21807ee88b90b745209a8057dedaf9a0fea82671cb0f8056f87ccc40\\source.f32",
+      "pcmSha256": "4a452b8ca7c71183c7fa169b2612fe35cf122ebf42d20c06a5ed7a0251f13add",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\IJustWannaDancePop\\baseline.generated.timeline.json",
+      "baselineSha256": "c0c2e5f8d7f34f452be230d9ad01844002715a1ec064219aefe615e959b62d68",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\IJustWannaDancePop.full-pcm-generated.json",
+      "candidateSha256": "1a2864885c239aac768f0edcbb47e2364c539d8a1d67998ce0b0fc9e59136d85"
+    },
+    {
+      "id": "MoonlightCloudsPiano",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\9d99efd063bb86889578244439258c1f1692de1f5939e9a8693aa0dfbf9d7ed6\\source.f32",
+      "pcmSha256": "f1b6ae2ad9345d088303fe1ddca84859fe0cece2ee6055bf564a432a717884d2",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\MoonlightCloudsPiano\\baseline.generated.timeline.json",
+      "baselineSha256": "692c3f354344ec4d6fea279ee1afad72fe6241d805afb3f64a11d79da7f4907e",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\MoonlightCloudsPiano.full-pcm-generated.json",
+      "candidateSha256": "fc3dd8f3d3a6305f99d88cb6ee9cafb37b39409947def12cdeb0a19c4e7af5bc"
+    },
+    {
+      "id": "UnstoppableCat054",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b\\source.f32",
+      "pcmSha256": "88ea37d6fc9b91863509c174e1aad914cff14704e6be6d20a57b5ffe21429102",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\UnstoppableCat054\\baseline.generated.timeline.json",
+      "baselineSha256": "535bd60169f848ca517eaf94fd35dc36227f7e3209519830b650c2038691d4e4",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\UnstoppableCat054.full-pcm-generated.json",
+      "candidateSha256": "344ed8e74356820104863944cae9209dad3e5f7af3604003e0ef9f3856eec11a"
+    },
+    {
+      "id": "TwinkleLittleStar",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\0cd8dc69f01e117562bf8d21afa17225c5594e7e1ba0920444275953fddec44f\\source.f32",
+      "pcmSha256": "bdeae16d58c996bf0fdaef4d2e3572a7db57bad7ee5a263c2f06e59805642618",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\TwinkleLittleStar\\baseline.generated.timeline.json",
+      "baselineSha256": "15348654e53ff42c690bf45f4f6899207bea7915757a569ecbf272821925829a",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\TwinkleLittleStar.full-pcm-generated.json",
+      "candidateSha256": "e44545dafbde20458cc79427dddaf7c03d7984b2bcae6cc4e9e1c87e43dc052a"
+    },
+    {
+      "id": "MoonlightPop",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\35cb4620f0b6436f8c918538ecc6e3e81ef6180a2fb4ba4fd39931156909b843\\source.f32",
+      "pcmSha256": "8dda2965be8c2c298300e2eec9c5644bbbec881b8b3f9285e67f6b908a1238b6",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\MoonlightPop\\baseline.generated.timeline.json",
+      "baselineSha256": "ea7d73c67a10f48cbf17482c83184efbb8f1877501f38a1f77498a4e5af3cd13",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\MoonlightPop.full-pcm-generated.json",
+      "candidateSha256": "00a4850355f2406e8826183a2e5855a93084dc4446186e40d2d5370e4f037ce7"
+    },
+    {
+      "id": "LABUBUSongsPop",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\dadc0644e3f1b2fe9d9f10f19b0df81eff5dcf087cc382d9a44e74a2a6a57190\\source.f32",
+      "pcmSha256": "4a7c6b7d9ef3756c89e9c9be29a8b660509d58fab07b385dbbb306e48fffe9dc",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\LABUBUSongsPop\\baseline.generated.timeline.json",
+      "baselineSha256": "b5cd81169ee408b5df6608ec5aef4e7ec062974ac8d5a8d8c8c15155008d5c55",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\LABUBUSongsPop.full-pcm-generated.json",
+      "candidateSha256": "dbe41acfeb0f7c05fc3154cc92cbe3d09ebaa6225967f3e336bfac5fa528be75"
+    },
+    {
+      "id": "FurElisePiano",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\6adc81188a4c82e24ee1f04ea875dc95338630de98199b4475cbb7a15d88f573\\source.f32",
+      "pcmSha256": "d7192165df737a63638207f5448091c6ae36ed74abb0174986faab7a6d1bcdf0",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\FurElisePiano\\baseline.generated.timeline.json",
+      "baselineSha256": "308c96e7a26e90aaec86c2e7063b16caadfbf744b2f083a73cd94cd4706ec16a",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\FurElisePiano.full-pcm-generated.json",
+      "candidateSha256": "9625e12ae79654fd1a452ac026adcd6768f5a3b292b34f22715cbcec7336512b"
+    },
+    {
+      "id": "JingleBells",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\f83d9bf3ccb1bb49b31736d8bd72477cb344ababff68e0801dce1b4d2e9eaa7c\\source.f32",
+      "pcmSha256": "5cc4ea742cd1e06745413b927e42b0a32a84fb781536bf904ff4e8f91094618a",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\JingleBells\\baseline.generated.timeline.json",
+      "baselineSha256": "5639fb28fea3be2e675aa4280c15e4eba6dc77a80eb525ccdb1fe20976c7caf5",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\JingleBells.full-pcm-generated.json",
+      "candidateSha256": "55875988471973954211dcb79ec3ed0bc5cd17f439d46fa44a3aa6f8a4333881"
+    },
+    {
+      "id": "OdetoJoyPiano",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\d3cec08a47eaf2931a82d28dca647f3fa1d6d7c3b3b3ed6e8d082ca13d8060bf\\source.f32",
+      "pcmSha256": "88997ef2f46917828d647471464cb61180dc9055a81ab4dd087721dd729dd39a",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\OdetoJoyPiano\\baseline.generated.timeline.json",
+      "baselineSha256": "55229f92d1f2c1c4f55c2dd656d919808b3265c98c103d844a1aa72b4a55fc6a",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\OdetoJoyPiano.full-pcm-generated.json",
+      "candidateSha256": "fa5c8f8d708f115b9c6054ce18c86d0fa661babecbcab98eb5102e4a680b4682"
+    },
+    {
+      "id": "CanoninDPiano",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\cc7f7e824fff861d0e2a850b5031a3acf6ebb24867d61f072226fa5f241e24e2\\source.f32",
+      "pcmSha256": "1ddea3b4df868be77e7b1751447a227c0b9e49328867ac74dc0bcc58b15cbc93",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\CanoninDPiano\\baseline.generated.timeline.json",
+      "baselineSha256": "811770d170997afc55a377ef29ed5673556b1d7df030c8a95ab88e7dbb9616cc",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\CanoninDPiano.full-pcm-generated.json",
+      "candidateSha256": "dcb30748c6a6dee3ae242fa69e84322de6bd198393fd9386151e3988da91e670"
+    },
+    {
+      "id": "AajKiRaatPop",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\3abf27154adb7eb988b39c1d51f1088bba81a39e8a870aca52583859b7ec9f21\\source.f32",
+      "pcmSha256": "c128d79dd7a72d59d27095803fe294d43cefb7c2290bf992d0165bcd9ad491f4",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\AajKiRaatPop\\baseline.generated.timeline.json",
+      "baselineSha256": "4eb65b0ece28b1412b1decba35d9df86de2e2933f8bf6f4572afbd243bfea77a",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\AajKiRaatPop.full-pcm-generated.json",
+      "candidateSha256": "b5ed22955dd57e2b1111b7bec7a673188c8733cca69d08d2d2414c079b12568f"
+    },
+    {
+      "id": "BajoElSolPop",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\776bea189537a32ea5be122e3d14a93fcbb6baacd8c80f1a3d29cb64c00e8621\\source.f32",
+      "pcmSha256": "2799df2c224467490f2fa77f7518203c88b24e920769a0e0d3e0295058187014",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\BajoElSolPop\\baseline.generated.timeline.json",
+      "baselineSha256": "d6011a0a2ec021b6aa9af7abfbbde6c01e73dab595d48ad8ffd46d028e7763d7",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\BajoElSolPop.full-pcm-generated.json",
+      "candidateSha256": "545cbc4c8bdef67f427992b6ed8deceba7f93d798d5550f2bdc80381d27b92a7"
+    },
+    {
+      "id": "BabyShark",
+      "pcmPath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\VocalAnalysis\\f0bc7c34ecccc141dd87bd3f0388e96e8bacc8b74b6c8e77196a960a246e23ea\\source.f32",
+      "pcmSha256": "de4ced014998149af6540c01d700e2382ba0ed80fcf7b218a3bbff7f831ed7e5",
+      "baselinePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\benchmark\\BabyShark\\baseline.generated.timeline.json",
+      "baselineSha256": "a2ba5b4b924fa79b4f86f288de3dc53c2f975a3f429ec582946e4fa36bf874bb",
+      "candidatePath": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\BabyShark.full-pcm-generated.json",
+      "candidateSha256": "22e508bbc97e49412ed6ef25de0fdb2d83b07ba61eb749114407d79a2b88b465"
+    }
+  ],
+  "linkedSources": [
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\PcmShortMotifValidation-v12-frozen.cs",
+      "sha256": "e79e25cb40c0874c63a753b1177e9e31ad0bcb00a4a9271276729f04ec98a153"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\PcmShortSupportAnalysis-v12-frozen.cs",
+      "sha256": "610100ec5f5147b095b96973bbcd546d62cdcc2e019c3c9c1d1fd943894a356c"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Editor\\PcmShortSupportAnalysisValidation.cs",
+      "sha256": "93bae3e9047ffc7dd0d8a72be0a15b9a47c63c3e5bf6e19769caf9d7cfc59ec9"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Editor\\PcmInstrumentalEvidence.cs",
+      "sha256": "426799cc12e4df8f8a042b5c764b21bdbcfabadb42ce7e9f6e2a272d8f2e2c97"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Editor\\PcmVocalAnalysis.cs",
+      "sha256": "9931018b9cbc3816ec59a7c7288f557017e0b16ccfd973d11e70c01c5bbc54d8"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Editor\\PcmMelodicFollowAnalysis.cs",
+      "sha256": "8e9b0d5de2d48bf4ba1efb7ef024169e93eabf1f206cf70f8bea78c0678c1995"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Editor\\PcmSpectralAnalysis.cs",
+      "sha256": "efce64d9b0ba82d58f75f4f6c7787f1030e827dd35df805a81e4ed511ecb5539"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Editor\\PcmRapidArticulationAnalysis.cs",
+      "sha256": "82fa0ded18f8cd4d3f5db11b48996d0ffabe6134471a52c768a23df65a9c9569"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Editor\\PcmPhraseAnalysis.cs",
+      "sha256": "f89ef834bc8b19b46482813039e41566e59f1faccac48cc02e313904f9cc4750"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Editor\\PcmFlightAnalysis.cs",
+      "sha256": "39d17fe84dbde225bd0e086dc4b658a14a42d60d3e058bdda70422e8e866a769"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Editor\\PcmForegroundAnalysis.cs",
+      "sha256": "9a21570d5f0c147cd60eaf8b0c77d28bf610d419d520404d9227f3511cfae422"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Editor\\PcmSparsePhraseAnalysis.cs",
+      "sha256": "d00194ec0ee223778f8c9a197c64b07e3835a1633e24c60c31e4a62f7cdf55e2"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\AudioChartGenerator-v11.cs",
+      "sha256": "ffda36fe7269c35a8daf5960ed3ca6c77a4203e8e87b3ddd0de85036dc835d9b"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Editor\\AudioChartGeneratorValidation.cs",
+      "sha256": "41e5b1ecd985bba09babf24e98c4a87230030ef5eb0f9d92ad1700de3146ed02"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Editor\\MusicalScore.cs",
+      "sha256": "07a6189bb1099249af30f7fbc4816de8ed651894a382722e135a41b76cf5d55a"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Editor\\MusicalChartCompiler.cs",
+      "sha256": "6fb6b41b011d1b8b971f4571f00aeb86c69c4fa55b04457675ce53931201384c"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Editor\\ChartRouteComposer.cs",
+      "sha256": "9b695b99d360ff0cad285a0e672e488df7364c2befdf4d234c7c252059329420"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\before\\algorithm\\DancingCatsClone\\Assets\\Clone\\Runtime\\RecoveredContent.cs",
+      "sha256": "2e032e3ed184c3c3f4844e40b307526e761a3545108f24cb36af84ff12092602"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\Harness\\Program.cs",
+      "sha256": "9b04e2c7d6102a6f472b717766a08507c54aeafdaf92e0cfce20d128602c8caf"
+    },
+    {
+      "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV12\\Holds\\Harness\\Stubs.cs",
+      "sha256": "edf2b48b2cceb693ecf695dc670ba4ce884436ee8d5ad7f0ce8bfbf31850f63b"
+    }
+  ],
+  "candidateShortPolicySha256": "610100ec5f5147b095b96973bbcd546d62cdcc2e019c3c9c1d1fd943894a356c",
+  "candidateValidationSha256": "e79e25cb40c0874c63a753b1177e9e31ad0bcb00a4a9271276729f04ec98a153",
+  "groupedLooLimitation": "Motif descriptors are source-only and inference has no recording ID/reference coordinates. Thresholds were explored on all15 known recordings. Frozen V10 seed policy was trained on eight of these recordings; neither combined output nor within-recording recurrence establishes independent LOO or unseen-song accuracy."
+}

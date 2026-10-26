@@ -35,6 +35,23 @@ namespace RadioArchipelago
         public bool ManualSimulation { get; set; }
         public bool IsPaused => paused;
 
+#if UNITY_EDITOR
+        [Serializable]
+        public struct EditorTimingPose
+        {
+            public float landingTime, landingStrength, impactCompression, bodyStretch, scaleYRatio, leftFootLift, rightFootLift, bob;
+            public Vector3 visualLocalPosition;
+        }
+        public EditorTimingPose ReadEditorTimingPose() => new EditorTimingPose
+        {
+            landingTime = landingTime, landingStrength = landingStrength,
+            impactCompression = ImpactCompression(), bodyStretch = bodyStretch,
+            scaleYRatio = visual != null ? visual.node.localScale.y / visual.scale.y : 1,
+            leftFootLift = footLeftLift, rightFootLift = footRightLift, bob = bob,
+            visualLocalPosition = visual != null ? visual.node.localPosition : Vector3.zero
+        };
+#endif
+
         public void Configure(Transform visualRoot, Transform antenna, Transform scarf, Transform armL, Transform armR)
         {
             RestoreRestPose();

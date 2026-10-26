@@ -122,6 +122,7 @@ namespace RadioArchipelago.Editor
         public static void RunPlaytest() => StartReview(false);
 
         public static void RunComparisonPlaytest() => StartReview(false, ComparisonId);
+        public static void RunNamedPlaytest(string songId) => StartReview(false, songId);
         public static void RunV9DisconnectPlaytest() => StartReview(false, "DisconnectPopGeneratorTestV9");
         public static void RunV9CanCanPlaytest() => StartReview(false, "CanCanPianoGeneratorTestV9");
         public static void RunV9DancePlaytest() => StartReview(false, "IJustWannaDancePopGeneratorTestV9");
@@ -307,7 +308,15 @@ namespace RadioArchipelago.Editor
                     case 14:
                         if (frames < 12 || Screen.width != 540 || Screen.height != 960) return;
                         var song = game.Songs.Single(record => record.id == ReviewSongId);
-                        Check(game.SelectSong(song.catalogId), "the existing custom song can be selected for the new menu");
+                        // Original reference songs may be locked in the fresh disposable test
+                        // profile. The user's complete profile is restored by FinishReview.
+                        if (!game.Progression.IsSongUnlocked(song.id))
+                        {
+                            game.Progression.State.unlockedSongs.Add(song.id);
+                            game.Progression.Save();
+                            Notes.Add("SETUP unlocked the reference song in the disposable review profile only");
+                        }
+                        Check(game.SelectSong(song.catalogId), "the reviewed song can be selected for the new menu");
                         game.Endless = false; Next(15); break;
                     case 15:
                         if (frames < 3) return;
