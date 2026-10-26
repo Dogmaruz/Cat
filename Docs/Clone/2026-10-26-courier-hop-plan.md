@@ -13,4 +13,21 @@
 - [x] Implement alternating hop/foot poses and stronger phase-shaped volume-preserving body deformation. Keep exact musical/root behavior and existing supported-turn sequence.
 - [x] Run actual Unity compilation, new and existing motion/accessory/rig checks. Render matched candidate pose sheets, inspect all couriers and refine any clipping or unreadable motion.
 - [x] Run full real-contact gameplay in Unity, including short/long flights and supported turns, pause/resume/result/retry. No builds.
-- [ ] Review the scoped code and final visuals, verify protected assets, document measured changes, commit/push and leave a useful Unity preview ready.
+- [x] Review the scoped code and final visuals, verify protected assets, document measured changes, commit/push and leave a useful Unity preview ready.
+
+## Delivery
+
+Animation and evidence commit `45c0052` was pushed to
+`origin/feature/radio-archipelago` on 26 October 2026. Independent final review
+reported no P1/P2 findings. All 18 new behavioral case groups, existing motion,
+accessory and rig checks passed in Unity. Complete real-contact playthroughs
+passed for Jingle Bells (64.000 s) and Always Remember Meow (157.153 s), with
+pause/resume, finish/retry and restored test state. No player builds were made.
+
+Final matched captures contain 117 actual-skin poses and 351 projected-bound
+checks per version; none are clipped. The initial narrower diagnostic capture
+is archived separately. All 624 protected hashes, including charts, music,
+models, gameplay controller, audio settings and four user changes, remain exact.
+The current runtime hash matches the final captured candidate. Our song is
+selected in Unity Play Mode/Menu, clock zero, with a clean scene. See
+`CourierHopReview/README.md` and its actual-render comparisons.
