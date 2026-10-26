@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Publication-only double JSON round-trip comparison repair; original assessment freeze and candidate outputs preserved.",
+  "createdAtUtc": "2026-10-26T10:28:22.346381+00:00",
+  "originalFreezeSha256": "6e0ea0eb8a70959649027b8d48da9d0200157de2b6faa401a99e8f894d971981",
+  "originalFrozenAtUtc": "2026-10-26T09:53:06.689651+00:00",
+  "originalFreezeScope": "Manifest-pinned PCM/measurement/options paired study; heldout candidates begin only after this freeze.",
+  "doubleMaxUlps": 2,
+  "finiteDoubles": true,
+  "sameSignDoubles": true,
+  "absoluteEpsilon": 0,
+  "floatComparison": "exact",
+  "discreteComparison": "exact",
+  "changedSources": [
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/ChartGeneratorStudy.Publication.cs",
+      "beforeSha256": "66f7a73c48edf27a744403e3b85262c24116db3f8c8de44e5c77d5a89e30c334",
+      "afterSha256": "0a2daff4beda40fee013f23c0e8204ef4cebae033124a3b79139d2db08a23edf",
+      "normalizedLf": true
+    },
+    {
+      "path": "DancingCatsClone/Assets/Clone/Editor/ChartGeneratorStudy.Validation.cs",
+      "beforeSha256": "369fc11c1e7f133e46213067063535dc68099f1954566e3939c3f3b844738c1a",
+      "afterSha256": "1d41fef8cbed02b110c06bfb3abfd63e3b44d37e0b2b2715a8ef1100a3d21a78",
+      "normalizedLf": true
+    }
+  ],
+  "guardSource": {
+    "path": "DancingCatsClone/Assets/Clone/Editor/ChartGeneratorStudy.PublicationRepair.cs",
+    "sha256": "58b504b5ba49f222305d6ff3e60795973cdf13605db978654cdbe9611d056b66",
+    "normalizedLf": true
+  },
+  "candidates": [
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/DisconnectPop/candidate.json",
+      "sha256": "afb071e5bb5fa27ee87a08f1abc038a2a9d1b4626ca1321fb51e8cabebf7b3eb",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/DisconnectPop/candidate.typed.json",
+      "sha256": "f6c469ee6c4924eaae98bbc02062e8830ccf378451996c386ae92888e6a2af15",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/DisconnectPop/candidate.generated.timeline.json",
+      "sha256": "6dfc22232a35f3486d94bde4e5aefd1fee9558029dafbb7ea0bbb92280a97030",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/CanCanPiano/candidate.json",
+      "sha256": "07f38ad959a23f556da58b013377fa66c0f7f69636bcbfd715f0675796f79575",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/CanCanPiano/candidate.typed.json",
+      "sha256": "fc4ddf9a7d9a44c69ea2eeacd4f1d4b857c8e8d0b425a7cb387f8b663e14f65e",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/CanCanPiano/candidate.generated.timeline.json",
+      "sha256": "ce5cefb9a78aeadcff580c7efde2f4b3a1d0ede1c0de373672307694b273017e",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/IJustWannaDancePop/candidate.json",
+      "sha256": "ccb1c5d3a3333ad55b94892797e6a62241d2718e7607e6cbdc76acb0c6c8c9be",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/IJustWannaDancePop/candidate.typed.json",
+      "sha256": "ac5a0f9cbf7cd12d7f8bb637a6a6bd05e7e0ac8414cbf6dcae62606c0c2a72f5",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/IJustWannaDancePop/candidate.generated.timeline.json",
+      "sha256": "c0c2e5f8d7f34f452be230d9ad01844002715a1ec064219aefe615e959b62d68",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/MoonlightCloudsPiano/candidate.json",
+      "sha256": "363504569e7bea40c6a3aab3fab8f8a28fbe82ce6cbe3a0710e09eb86866075b",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/MoonlightCloudsPiano/candidate.typed.json",
+      "sha256": "1f4e9f803e0ac9092c9facd0d178df64e84d26a78a0474df233bfb967926b5d6",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/MoonlightCloudsPiano/candidate.generated.timeline.json",
+      "sha256": "692c3f354344ec4d6fea279ee1afad72fe6241d805afb3f64a11d79da7f4907e",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/UnstoppableCat054/candidate.json",
+      "sha256": "3feaae04afc5f2bfd25c7d387637db9419231c7cee57cff144b69e718c47095e",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/UnstoppableCat054/candidate.typed.json",
+      "sha256": "fd11e73aec89abed854cd4a4a0877b59c426ac987a0feb3b6d73a527f085bdc3",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/UnstoppableCat054/candidate.generated.timeline.json",
+      "sha256": "535bd60169f848ca517eaf94fd35dc36227f7e3209519830b650c2038691d4e4",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/TwinkleLittleStar/candidate.json",
+      "sha256": "2be36987992335272085fdd6ccc536ef1066a9badf802b2961f1c0aeb765732a",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/TwinkleLittleStar/candidate.typed.json",
+      "sha256": "67ed204e8b1f4e938152499ee4be8a1382570b552f1735e1af07bd902ec2527e",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/TwinkleLittleStar/candidate.generated.timeline.json",
+      "sha256": "15348654e53ff42c690bf45f4f6899207bea7915757a569ecbf272821925829a",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/MoonlightPop/candidate.json",
+      "sha256": "40a12e62a3de7bd792e43860605cd402a6e95b18d852df8d11ed578a8c7adc35",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/MoonlightPop/candidate.typed.json",
+      "sha256": "e25515da932dfd3cb44b565b29267d4cba174cef69ac36c8a57e3c5e24036382",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/MoonlightPop/candidate.generated.timeline.json",
+      "sha256": "ea7d73c67a10f48cbf17482c83184efbb8f1877501f38a1f77498a4e5af3cd13",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/LABUBUSongsPop/candidate.json",
+      "sha256": "02e2044fd3817f4e7be03d5419ca2e3cf3398c25b431ed1ea2f625c0900c70a3",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/LABUBUSongsPop/candidate.typed.json",
+      "sha256": "7b15dade0da0f7deef0aa63755e748f192e21f75dac6cd4c71150bba7af79c8a",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/LABUBUSongsPop/candidate.generated.timeline.json",
+      "sha256": "b5cd81169ee408b5df6608ec5aef4e7ec062974ac8d5a8d8c8c15155008d5c55",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/FurElisePiano/candidate.json",
+      "sha256": "edb33fafc014fc84200a62e31fe02dedca540baaa55525b51fa9d4ca13875f1e",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/FurElisePiano/candidate.typed.json",
+      "sha256": "c7e2f1eb387ff330c060330a9d4a0c0f508aa208eb3757d20fdd91e00f6e3edd",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/FurElisePiano/candidate.generated.timeline.json",
+      "sha256": "308c96e7a26e90aaec86c2e7063b16caadfbf744b2f083a73cd94cd4706ec16a",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/JingleBells/candidate.json",
+      "sha256": "029d127dc3e70b9a53a2525471431ad18f6992532c964fd338132820649e6fac",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/JingleBells/candidate.typed.json",
+      "sha256": "d9d870bad8e79463501818cfba509dbc245ae70bf99ad7e1093de747f307e3da",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/JingleBells/candidate.generated.timeline.json",
+      "sha256": "5639fb28fea3be2e675aa4280c15e4eba6dc77a80eb525ccdb1fe20976c7caf5",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/OdetoJoyPiano/candidate.json",
+      "sha256": "5cdbbc1e09da4f39ffeca93ee88ad795b386beb393906b871df70a96c988b127",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/OdetoJoyPiano/candidate.typed.json",
+      "sha256": "056f0bd06e6fa419a7db3eca5abf143b5b348de94fd7e90606ba449e68878adc",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/OdetoJoyPiano/candidate.generated.timeline.json",
+      "sha256": "55229f92d1f2c1c4f55c2dd656d919808b3265c98c103d844a1aa72b4a55fc6a",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/CanoninDPiano/candidate.json",
+      "sha256": "7960a34e350dfc4ccb52ff513e814f67e960fcc9a1ece244c4ba93a39a5a4ac1",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/CanoninDPiano/candidate.typed.json",
+      "sha256": "af5fbd5c940b25a6782d7c7f3663933f423a4b1c50c6d563a02fab7fbb9fa7f1",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/CanoninDPiano/candidate.generated.timeline.json",
+      "sha256": "811770d170997afc55a377ef29ed5673556b1d7df030c8a95ab88e7dbb9616cc",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/AajKiRaatPop/candidate.json",
+      "sha256": "17196ee3626b4c7c6930b00949128da1351e7685e1e840430b9e5e018ccf4365",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/AajKiRaatPop/candidate.typed.json",
+      "sha256": "dad1c5f8f6ed162c3885c1027d3eccf625a5ca7a6b8c72b6cbf62c7ebfc3d7e4",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/AajKiRaatPop/candidate.generated.timeline.json",
+      "sha256": "4eb65b0ece28b1412b1decba35d9df86de2e2933f8bf6f4572afbd243bfea77a",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/BajoElSolPop/candidate.json",
+      "sha256": "6ae4c0aa34d5cda54e2649fda3b08ba478661f0fdbeb6189a9e89c752fcdf69b",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/BajoElSolPop/candidate.typed.json",
+      "sha256": "fb3af47f11b92daec26080267172d3725f1099a706f66cc1d031fabe5e355f85",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/BajoElSolPop/candidate.generated.timeline.json",
+      "sha256": "d6011a0a2ec021b6aa9af7abfbbde6c01e73dab595d48ad8ffd46d028e7763d7",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/BabyShark/candidate.json",
+      "sha256": "b9348bacbe2725adb8baf8524b2f871ad0d5b0e75f3d889c3914b5b4d6c7a0f6",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/BabyShark/candidate.typed.json",
+      "sha256": "90d60e38bbafc49738cf867f8a3bb6176dbf60e5ec63b33b020ae8aa59fcd134",
+      "normalizedLf": false
+    },
+    {
+      "path": "DancingCatsClone/Library/ChartGenerationV11/benchmark/BabyShark/candidate.generated.timeline.json",
+      "sha256": "a2ba5b4b924fa79b4f86f288de3dc53c2f975a3f429ec582946e4fa36bf874bb",
+      "normalizedLf": false
+    }
+  ],
+  "revision": 2,
+  "previousProofSha256": "b3bc8f5bc7093e8ffb82d7a8397e5cec1aed4d58eb1b4b5dbd98fd4c87cacd7d",
+  "previousProofPath": "DancingCatsClone/Library/ChartGenerationV11/publication-repair.v1.json",
+  "revisionReason": "Restore generic manifest publication: the exact recorded v11 freeze requires its repair guard; every other freeze requires strict freeze validation. Assessed candidate outputs and the repair guard source remain unchanged."
+}

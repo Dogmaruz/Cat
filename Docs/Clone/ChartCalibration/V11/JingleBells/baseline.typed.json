@@ -1,0 +1,49 @@
+{
+    "stage": "baseline",
+    "referenceId": "JingleBells",
+    "referenceMapSha256": "26012df75d3718e3065653d85757d2a42894ec8a6c0bc89723ad30bb1b23c5cb",
+    "sourceAudioSha256": "f83d9bf3ccb1bb49b31736d8bd72477cb344ababff68e0801dce1b4d2e9eaa7c",
+    "sourcePcmSha256": "5cc4ea742cd1e06745413b927e42b0a32a84fb781536bf904ff4e8f91094618a",
+    "voiceFeatureSha256": "98c393c2bf48b3486a521a1f526e75b0745fe6833a94ee58afb390bf8da29f8c",
+    "generator": "pcm-vocal-phrase-chart-v10+short-test",
+    "generatedTimelineSha256": "588cded2ebf23696819a5a915cf5a5228e9d71116aa735b2171246c9660c3052",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 9.5,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold <=0.45s on both sides; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 0,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "allHolds": {
+        "definition": "All Hold; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 7,
+        "generatedCount": 3,
+        "truePositive": 0,
+        "falsePositive": 3,
+        "falseNegative": 7,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "follows": {
+        "definition": "Follow; onset <=80ms; end <=150ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 8,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 8,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    }
+}

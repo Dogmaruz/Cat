@@ -1,0 +1,49 @@
+{
+    "stage": "candidate",
+    "referenceId": "CanoninDPiano",
+    "referenceMapSha256": "25e31e634c9e86deabd4b3222278ca160970726b94a0db73474c76b72cef28cd",
+    "sourceAudioSha256": "cc7f7e824fff861d0e2a850b5031a3acf6ebb24867d61f072226fa5f241e24e2",
+    "sourcePcmSha256": "1ddea3b4df868be77e7b1751447a227c0b9e49328867ac74dc0bcc58b15cbc93",
+    "voiceFeatureSha256": "f0c28a0b86ba93195bbcb9013d674ca0908b736d1051565f3741a17952af8344",
+    "generator": "pcm-vocal-phrase-chart-v11+short-test",
+    "generatedTimelineSha256": "811770d170997afc55a377ef29ed5673556b1d7df030c8a95ab88e7dbb9616cc",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 8.5,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold <=0.45s on both sides; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 3,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 3,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "allHolds": {
+        "definition": "All Hold; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 8,
+        "generatedCount": 2,
+        "truePositive": 0,
+        "falsePositive": 2,
+        "falseNegative": 8,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "follows": {
+        "definition": "Follow; onset <=80ms; end <=150ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 4,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    }
+}

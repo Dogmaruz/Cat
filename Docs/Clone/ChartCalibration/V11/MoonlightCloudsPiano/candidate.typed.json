@@ -1,0 +1,49 @@
+{
+    "stage": "candidate",
+    "referenceId": "MoonlightCloudsPiano",
+    "referenceMapSha256": "25752621169c96f26c49e211e03373fdf27584eeef912950a642f022e60761ef",
+    "sourceAudioSha256": "9d99efd063bb86889578244439258c1f1692de1f5939e9a8693aa0dfbf9d7ed6",
+    "sourcePcmSha256": "f1b6ae2ad9345d088303fe1ddca84859fe0cece2ee6055bf564a432a717884d2",
+    "voiceFeatureSha256": "18a12b600c59aaa49aef8ab6af1866090c245dc9d357c9452b786112de3eb319",
+    "generator": "pcm-vocal-phrase-chart-v11+short-test",
+    "generatedTimelineSha256": "692c3f354344ec4d6fea279ee1afad72fe6241d805afb3f64a11d79da7f4907e",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 8.0,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold <=0.45s on both sides; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 4,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "allHolds": {
+        "definition": "All Hold; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 16,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 16,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "follows": {
+        "definition": "Follow; onset <=80ms; end <=150ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 11,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 11,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    }
+}

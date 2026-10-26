@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "fd39ed4",
+  "sourceCatalogCount": 58,
+  "sourceCatalogSha256": "27541bd294668d686a8346caf379c7b1236fe70dfd8a03c898764cc0116e95aa",
+  "selectionPolicy": "Aggregate type/duration counts and source hashes only. No new heldout event times, paths, audio features or candidate errors opened. Excludes all ten v10 sources and all previously measured cache source hashes.",
+  "excludedSourceSha256": [
+    "0cd8dc69f01e117562bf8d21afa17225c5594e7e1ba0920444275953fddec44f",
+    "35cb4620f0b6436f8c918538ecc6e3e81ef6180a2fb4ba4fd39931156909b843",
+    "50e457b74a6c5189494d99db4c3b8cac6480c937e43cca03a270d71a39272c5f",
+    "6adc81188a4c82e24ee1f04ea875dc95338630de98199b4475cbb7a15d88f573",
+    "7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b",
+    "8f53952f9f5002ed5f6b313ab170bb317e1494605d3cad8b183a0e78353ddcd3",
+    "9d99efd063bb86889578244439258c1f1692de1f5939e9a8693aa0dfbf9d7ed6",
+    "9e66a28124d6e4c5a261ff1bacc7ba9b5b32324c6b950893db6c92a300e9a509",
+    "bea4e85a21807ee88b90b745209a8057dedaf9a0fea82671cb0f8056f87ccc40",
+    "dadc0644e3f1b2fe9d9f10f19b0df81eff5dcf087cc382d9a44e74a2a6a57190",
+    "f83d9bf3ccb1bb49b31736d8bd72477cb344ababff68e0801dce1b4d2e9eaa7c"
+  ],
+  "selection": [
+    {
+      "id": "OdetoJoyPiano",
+      "title": "Ode to Joy",
+      "artist": "Piano Songs",
+      "duration": 66.50775510204082,
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/OdetoJoyPiano__5939704292795628860.ogg",
+      "sourceFileSha256": "d3cec08a47eaf2931a82d28dca647f3fa1d6d7c3b3b3ed6e8d082ca13d8060bf",
+      "referenceMapSha256": "b74a163947e29e4ec208c71dfc57527a7479356c81207111286d11bbca30f863",
+      "typeCounts": {
+        "BigJump": 10,
+        "FinishJump": 1,
+        "Follow": 1,
+        "Hold": 37,
+        "Jump": 100,
+        "Start": 1,
+        "Theme": 7
+      },
+      "shortHoldCount": 33,
+      "followCount": 1,
+      "followDurationBins": {
+        "<=.5": 1
+      },
+      "role": "calibration",
+      "criterion": "Top remaining Piano Songs shortHold density, positive shortHold count; ordinal ID tie-break."
+    },
+    {
+      "id": "CanoninDPiano",
+      "title": "Canon in D",
+      "artist": "Piano Songs",
+      "duration": 74.00489795918368,
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/CanoninDPiano__5349516000141086754.ogg",
+      "sourceFileSha256": "cc7f7e824fff861d0e2a850b5031a3acf6ebb24867d61f072226fa5f241e24e2",
+      "referenceMapSha256": "25e31e634c9e86deabd4b3222278ca160970726b94a0db73474c76b72cef28cd",
+      "typeCounts": {
+        "BigJump": 12,
+        "FinishJump": 1,
+        "Follow": 4,
+        "Hold": 8,
+        "Jump": 142,
+        "Start": 1,
+        "Theme": 4
+      },
+      "shortHoldCount": 3,
+      "followCount": 4,
+      "followDurationBins": {
+        "1-2": 4
+      },
+      "role": "calibration",
+      "criterion": "Top remaining Piano Songs shortHold density, positive shortHold count; ordinal ID tie-break."
+    },
+    {
+      "id": "AajKiRaatPop",
+      "title": "Aaj Ki Raat",
+      "artist": "Cover Songs",
+      "duration": 82.5208163265306,
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/AajKiRaatPop__957423305459500325.ogg",
+      "sourceFileSha256": "3abf27154adb7eb988b39c1d51f1088bba81a39e8a870aca52583859b7ec9f21",
+      "referenceMapSha256": "19371b6b7d1a1cb6bbdd9d5466fb28d0ab3d497136e66e2d7390cd18792e2ffc",
+      "typeCounts": {
+        "BigJump": 8,
+        "FinishJump": 1,
+        "Follow": 7,
+        "Hold": 37,
+        "Jump": 85,
+        "Start": 1,
+        "Theme": 13
+      },
+      "shortHoldCount": 7,
+      "followCount": 7,
+      "followDurationBins": {
+        ".5-1": 6,
+        "<=.5": 1
+      },
+      "role": "calibration",
+      "criterion": "Top remaining Cover Songs Follow density with multiple Follow; ordinal ID tie-break; varies musical source category."
+    },
+    {
+      "id": "BajoElSolPop",
+      "title": "Bajo El Sol",
+      "artist": "Simon Guida",
+      "duration": 42.031020408163265,
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/BajoElSol__2634843949624076482.ogg",
+      "sourceFileSha256": "776bea189537a32ea5be122e3d14a93fcbb6baacd8c80f1a3d29cb64c00e8621",
+      "referenceMapSha256": "2e2e0eacbe4a2a2c082d696d035bb3346951ee01daec5a7b39134a8877e5a591",
+      "typeCounts": {
+        "FinishJump": 1,
+        "Hold": 27,
+        "Jump": 73,
+        "Start": 1,
+        "Theme": 3
+      },
+      "shortHoldCount": 23,
+      "followCount": 0,
+      "followDurationBins": {},
+      "role": "heldout-short-hold",
+      "criterion": "Maximum remaining shortHold density; ordinal ID tie-break; source-audio distinct."
+    },
+    {
+      "id": "BabyShark",
+      "title": "Baby Shark",
+      "artist": "Meow Songs",
+      "duration": 49.99836734693878,
+      "sourceFile": "Assets/Resources/OriginalAudio/Music/BabyShark__-158773924297520003.ogg",
+      "sourceFileSha256": "f0bc7c34ecccc141dd87bd3f0388e96e8bacc8b74b6c8e77196a960a246e23ea",
+      "referenceMapSha256": "e3f46c06b0204a66d9fd31e7e17c073565a9893a53f5fed2bfd89f70771170f9",
+      "typeCounts": {
+        "BigJump": 26,
+        "FinishJump": 1,
+        "Follow": 6,
+        "Hold": 6,
+        "Jump": 44,
+        "Start": 1,
+        "Theme": 5
+      },
+      "shortHoldCount": 0,
+      "followCount": 6,
+      "followDurationBins": {
+        "1-2": 6
+      },
+      "role": "heldout-follow",
+      "criterion": "Maximum remaining Follow density; ordinal ID tie-break; source-audio distinct."
+    }
+  ]
+}

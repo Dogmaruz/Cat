@@ -385,6 +385,21 @@ namespace DancingCats.Clone.Editor
                     case "chart-v10-play-elise": Invoke("RadioArchipelagoJobs", "V10ElisePlaytest"); break;
                     case "chart-v10-play-jingle": Invoke("RadioArchipelagoJobs", "V10JinglePlaytest"); break;
                     case "chart-v10-preview-cancan": Invoke("RadioArchipelagoJobs", "SelectV10CanCanPreview"); break;
+                    case "chart-study-export": Invoke("ChartGeneratorStudy", "ExportPcm"); break;
+                    case "chart-study-baseline-known": Invoke("ChartGeneratorStudy", "BaselineKnown"); break;
+                    case "chart-study-baseline-heldout": Invoke("ChartGeneratorStudy", "BaselineHeldout"); break;
+                    case "chart-study-known": Invoke("ChartGeneratorStudy", "CandidateKnown"); break;
+                    case "chart-study-heldout": Invoke("ChartGeneratorStudy", "CandidateHeldout"); break;
+                    case "chart-study-publish": Invoke("ChartGeneratorStudy", "PublishTests"); break;
+                    case "chart-study-checks": Invoke("ChartGeneratorStudy", "RunChecks"); break;
+                    case "chart-study-precision": Invoke("ChartStudyPrecisionDiagnostics", "Run"); break;
+                    case "chart-v11-play-cancan": Invoke("RadioArchipelagoJobs", "V11CanCanPlaytest"); break;
+                    case "chart-v11-play-elise": Invoke("RadioArchipelagoJobs", "V11ElisePlaytest"); break;
+                    case "chart-v11-play-jingle": Invoke("RadioArchipelagoJobs", "V11JinglePlaytest"); break;
+                    case "chart-v11-play-ode": Invoke("RadioArchipelagoJobs", "V11OdePlaytest"); break;
+                    case "chart-v11-play-bajo": Invoke("RadioArchipelagoJobs", "V11BajoPlaytest"); break;
+                    case "chart-v11-play-baby": Invoke("RadioArchipelagoJobs", "V11BabyPlaytest"); break;
+                    case "chart-v11-preview-jingle": Invoke("RadioArchipelagoJobs", "SelectV11JinglePreview"); break;
                     default: throw new ArgumentException("Unknown musical authoring job: " + action);
                 }
                 WriteResponse(action, true, "Completed authoring job");

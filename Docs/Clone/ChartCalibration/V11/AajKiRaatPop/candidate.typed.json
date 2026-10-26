@@ -1,0 +1,49 @@
+{
+    "stage": "candidate",
+    "referenceId": "AajKiRaatPop",
+    "referenceMapSha256": "19371b6b7d1a1cb6bbdd9d5466fb28d0ab3d497136e66e2d7390cd18792e2ffc",
+    "sourceAudioSha256": "3abf27154adb7eb988b39c1d51f1088bba81a39e8a870aca52583859b7ec9f21",
+    "sourcePcmSha256": "c128d79dd7a72d59d27095803fe294d43cefb7c2290bf992d0165bcd9ad491f4",
+    "voiceFeatureSha256": "9733fc7843d3752006e52a07a4e78cd795f17fbee1096c5e33255cbe34924693",
+    "generator": "pcm-vocal-phrase-chart-v11+short-test",
+    "generatedTimelineSha256": "4eb65b0ece28b1412b1decba35d9df86de2e2933f8bf6f4572afbd243bfea77a",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 9.800000190734864,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold <=0.45s on both sides; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 7,
+        "generatedCount": 1,
+        "truePositive": 0,
+        "falsePositive": 1,
+        "falseNegative": 7,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "allHolds": {
+        "definition": "All Hold; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 37,
+        "generatedCount": 11,
+        "truePositive": 0,
+        "falsePositive": 11,
+        "falseNegative": 37,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "follows": {
+        "definition": "Follow; onset <=80ms; end <=150ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 7,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 7,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    }
+}

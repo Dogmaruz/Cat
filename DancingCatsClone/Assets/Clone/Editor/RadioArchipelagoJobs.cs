@@ -60,6 +60,12 @@ namespace DancingCats.Clone.Editor
         public static void V10MoonlightPlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV10MoonlightPlaytest(); }
         public static void V10ElisePlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV10ElisePlaytest(); }
         public static void V10JinglePlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV10JinglePlaytest(); }
+        public static void V11CanCanPlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV11CanCanPlaytest(); }
+        public static void V11ElisePlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV11ElisePlaytest(); }
+        public static void V11JinglePlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV11JinglePlaytest(); }
+        public static void V11OdePlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV11OdePlaytest(); }
+        public static void V11BajoPlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV11BajoPlaytest(); }
+        public static void V11BabyPlaytest() { RequireSavedEditor(); RadioEditorValidation.RunV11BabyPlaytest(); }
 
         public static void MenuPreviewChecks()
         {
@@ -177,6 +183,9 @@ namespace DancingCats.Clone.Editor
 
         public static void SelectV10CanCanPreview()
             => SelectTestPreview("CanCanPianoGeneratorTestV10");
+
+        public static void SelectV11JinglePreview()
+            => SelectTestPreview("JingleBellsGeneratorTestV11");
 
         private static void SelectTestPreview(string id)
         {

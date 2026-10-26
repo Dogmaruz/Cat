@@ -1,0 +1,49 @@
+{
+    "stage": "candidate",
+    "referenceId": "FurElisePiano",
+    "referenceMapSha256": "9220f268ee214ddcdde5fffa2758ee845a8fe9889938de93276976e32095097b",
+    "sourceAudioSha256": "6adc81188a4c82e24ee1f04ea875dc95338630de98199b4475cbb7a15d88f573",
+    "sourcePcmSha256": "d7192165df737a63638207f5448091c6ae36ed74abb0174986faab7a6d1bcdf0",
+    "voiceFeatureSha256": "5a7aa28c8fd3a3c0a4de1d803b3f5014452bd925fd76ece118f5d01a666a2fd3",
+    "generator": "pcm-vocal-phrase-chart-v11+short-test",
+    "generatedTimelineSha256": "308c96e7a26e90aaec86c2e7063b16caadfbf744b2f083a73cd94cd4706ec16a",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 11.0,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold <=0.45s on both sides; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 32,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 32,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "allHolds": {
+        "definition": "All Hold; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 38,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 38,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "follows": {
+        "definition": "Follow; onset <=80ms; end <=150ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 1,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    }
+}

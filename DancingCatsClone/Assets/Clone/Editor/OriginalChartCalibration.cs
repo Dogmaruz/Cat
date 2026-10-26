@@ -172,6 +172,7 @@ namespace DancingCats.Clone.Editor
                     {
                         catalogId = 29001, title = "PCM evaluation", artist = "Offline analysis",
                         forwardSpeed = record.forwardSpeed, delayTime = generatedDelayTime,
+                        preferAuthoredScore = false,
                         includeExperimentalShortSupports = experimentalShortSupports
                     }, vocalEvidence, instrument);
                 double duration = (double)clip.samples / clip.frequency;

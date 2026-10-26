@@ -13,8 +13,8 @@ namespace DancingCats.Clone.Editor
     public static class AudioChartGenerator
     {
         public const string AlwaysRememberId = "AlwaysRememberMeowCat";
-        private const string Version = "pcm-phrase-chart-v10";
-        private const string VocalVersion = "pcm-vocal-phrase-chart-v10";
+        private const string Version = "pcm-phrase-chart-v11";
+        private const string VocalVersion = "pcm-vocal-phrase-chart-v11";
         private const double MinGap = .18, MaxGap = 1.95;
 
         [Serializable]
@@ -145,6 +145,8 @@ namespace DancingCats.Clone.Editor
             var cues = new List<MusicalCue>();
             var movingPhrases = options.includeMovingJumps ? spectral.follows.Where(cue => cue.time >= 0 && cue.endTime <= finishTime - MinGap).ToArray()
                 : Array.Empty<MusicalCue>();
+            if (instrumentalEvidence != null)
+                movingPhrases = movingPhrases.Where(cue => !PcmMelodicFollowAnalysis.RejectsLegacyArticulation(instrumentalEvidence, cue)).ToArray();
             var vocalHolds = vocalEvidence != null && options.includeHolds ? PcmVocalAnalysis.Analyze(vocalEvidence, analysis.accents.ToArray(), analysis.period)
                 .Where(cue => cue.time >= 0 && cue.endTime <= finishTime - MinGap
                     && !movingPhrases.Any(phrase => cue.time < phrase.endTime + .078 && cue.endTime > phrase.time - .078)).ToArray()

@@ -116,9 +116,14 @@ namespace DancingCats.Clone.Editor
             Require(Analyze(octaveAlias).Length == 0,
                 "An upper octave alias cannot promote a lower-register accompaniment answer into a leading melodic glide.");
             var trillSource = PatternFixture(new[] { 83, 81, 83, 81, 83, 81, 83, 81, 83, 81, 83 }, 1);
+            foreach (var n in trillSource.events.Where(n => n.midi > 60)) Set(n, "neuralDuration", .15);
             var trills = Analyze(trillSource);
             Require(trills.Length == 1 && Math.Abs(trills[0].endTime - trills[0].time - 1.8) < 1e-7,
                 "A continuous whole-tone trill is one sustained moving phrase ending on its measured return note.");
+            var unarticulatedTrill = JsonUtility.FromJson<PcmInstrumentalEvidence.Evidence>(JsonUtility.ToJson(trillSource));
+            foreach (var n in unarticulatedTrill.events.Where(n => n.midi > 60)) Set(n, "neuralDuration", .4);
+            Require(Analyze(unarticulatedTrill).Length == 0,
+                "Alternating peaks in sustained note activations do not prove independently articulated trill entries.");
             var tremoloSource = PatternFixture(new[] { 80, 76, 80, 76, 80, 76, 80, 76 }, 1);
             foreach (var n in tremoloSource.events.Where(n => n.midi > 60)) Set(n, "neuralDuration", .15);
             var tremolos = Analyze(tremoloSource);
@@ -128,6 +133,64 @@ namespace DancingCats.Clone.Editor
             foreach (var n in sustainedActivation.events.Where(n => n.midi > 60)) Set(n, "neuralDuration", .4);
             Require(Analyze(sustainedActivation).Length == 0,
                 "A sustained neural activation reused across several pulses must not masquerade as an independently articulated tremolo.");
+            var firstOnly = JsonUtility.FromJson<PcmInstrumentalEvidence.Evidence>(JsonUtility.ToJson(tremoloSource));
+            foreach (var n in firstOnly.events.Where(n => n.midi > 60 && n.time > 2.01)) Set(n, "neuralDuration", .4);
+            Require(Analyze(firstOnly).Length == 0,
+                "One short first note cannot validate the articulation of an otherwise sustained tremolo run.");
+            var chordal = ChordalFixture(); var chordalResult = Analyze(chordal);
+            Require(chordalResult.Length == 2 && chordalResult.All(c => Math.Abs(c.endTime - c.time - .65) < 1e-7),
+                "A recurring foreground response with independent sustained chord voices needs its measured complete phrase, even at a constant lead pitch.");
+            var isolatedChord = ChordalFixture(1);
+            Require(Analyze(isolatedChord).Length == 0, "One isolated sustained chord does not establish a response family.");
+            var monophonic = ChordalFixture(6); monophonic.events = monophonic.events.Where(n => n.midi == 76).ToArray();
+            Require(Analyze(monophonic).Length == 0, "A single held pitch alone does not establish a multi-voice response.");
+            var interruptedChord = ChordalFixture();
+            interruptedChord.events = interruptedChord.events.Concat(new[] { Note(2.25, 2.45, 78, .95), Note(5.25, 5.45, 78, .95) })
+                .OrderBy(n => n.time).ThenBy(n => n.midi).ToArray();
+            foreach (var n in interruptedChord.events.Where(n => n.midi == 78)) Set(n, "harmonicPartials", 4);
+            Require(Analyze(interruptedChord).Length == 0,
+                "Fresh independent inner articulations prevent accompaniment resonance from becoming a held chordal response.");
+            var weakChord = ChordalFixture(); foreach (var n in weakChord.events) Set(n, "harmonicBody", .2);
+            Require(Analyze(weakChord).Length == 0, "Uncertain chord bodies cannot establish a sustained response.");
+            var pickedChord = ChordalFixture();
+            var pickupNotes = new[] { Note(1.66, 1.95, 72, .6), Note(1.84, 2.02, 74, .6), Note(4.66, 4.95, 72, .6), Note(4.84, 5.02, 74, .6) };
+            foreach (var n in pickupNotes) { Set(n, "harmonicPartials", 4); Set(n, "neuralDuration", .2); }
+            pickedChord.events = pickedChord.events.Concat(pickupNotes).OrderBy(n => n.time).ThenBy(n => n.midi).ToArray();
+            Require(Analyze(pickedChord).Length == 2 && Math.Abs(Analyze(pickedChord)[0].time - 1.84) < 1e-7,
+                "Only the nearest source-confirmed connected pickup belongs to a sustained response; earlier independent notes retain their own entry.");
+            var contrastedChord = ChordalFixture();
+            var contrastNotes = new[] { Note(2.6, 2.75, 78, .55), Note(5.6, 5.75, 78, .55) };
+            foreach (var n in contrastNotes) { Set(n, "harmonicPartials", 4); Set(n, "harmonicBody", .4); }
+            contrastedChord.events = contrastedChord.events.Concat(contrastNotes).OrderBy(n => n.time).ThenBy(n => n.midi).ToArray();
+            Require(Analyze(contrastedChord).Length == 2 && Math.Abs(Analyze(contrastedChord)[0].endTime - 2.6) < 1e-7,
+                "A subsequent confirmed contrast ends a chordal response before its remaining harmonic resonance.");
+            Require(Analyze(chordal, new[] { new MusicalCue { kind = "Hold", time = 2, endTime = 2.65 } }).Length == 1,
+                "Confirmed native supports keep priority over overlapping chordal responses.");
+            var ambiguousForeground = ChordalFixture();
+            ambiguousForeground.events = ambiguousForeground.events.Concat(new[] { Note(2, 2.65, 80, .84), Note(5, 5.65, 80, .84) })
+                .OrderBy(n => n.time).ThenBy(n => n.midi).ToArray();
+            foreach (var n in ambiguousForeground.events.Where(n => n.midi == 80)) { Set(n, "harmonicPartials", 4); Set(n, "neuralDuration", .65); }
+            Require(Analyze(ambiguousForeground).Length == 0,
+                "A similarly salient upper chord voice leaves the foreground response ambiguous.");
+            var sustainedLegacy = new MusicalCue { kind = "Follow", time = 2, endTime = 3.08 };
+            var regularArticulations = PatternFixture(new[] { 72, 69, 71, 72, 71, 69, 67 }, 1);
+            Require(PcmMelodicFollowAnalysis.RejectsLegacyArticulation(regularArticulations, sustainedLegacy),
+                "A regular independently measured note sequence invalidates the legacy detector's irregular five mixed-attack signature.");
+            var irregularArticulations = PatternFixture(new[] { 72, 69, 71, 72, 71, 69, 67 }, 1);
+            foreach (var n in irregularArticulations.events.Where(n => n.time >= 2.35 && n.time < 2.4)) { n.time += .09; n.endTime += .09; }
+            Require(!PcmMelodicFollowAnalysis.RejectsLegacyArticulation(irregularArticulations, sustainedLegacy),
+                "The legacy veto requires actual regular subdivisions rather than rejecting every dense melodic phrase.");
+            var reusedArticulations = PatternFixture(new[] { 72, 69, 71, 72, 71, 69, 67 }, 1);
+            foreach (var n in reusedArticulations.events.Where(n => n.time > 2.01)) Set(n, "harmonicNovelty", .001);
+            Require(!PcmMelodicFollowAnalysis.RejectsLegacyArticulation(reusedArticulations, sustainedLegacy),
+                "Reused sustained activation at mixed peaks cannot invalidate a legacy phrase as fresh tonal articulation.");
+            var shiftedChord = ChordalFixture(); foreach (var n in shiftedChord.events) { n.time += .314159; n.endTime += .314159; n.midi += 5; }
+            var shiftedChordResult = Analyze(shiftedChord);
+            Require(shiftedChordResult.Length == chordalResult.Length && shiftedChordResult.Zip(chordalResult, (a, b) =>
+                Math.Abs(a.time - b.time - .314159) < 1e-7 && Math.Abs(a.endTime - b.endTime - .314159) < 1e-7).All(x => x),
+                "Sustained multi-voice responses transpose and translate with measured evidence rather than absolute pitches or times.");
+            CheckCompiledRoute(chordalResult);
+            CheckCompiledRoute(Analyze(pickedChord)); CheckCompiledRoute(Analyze(contrastedChord));
             var weakPickup = JsonUtility.FromJson<PcmInstrumentalEvidence.Evidence>(JsonUtility.ToJson(tremoloSource));
             var pickup = Note(1.82, 1.95, 66, .5); Set(pickup, "harmonicBody", .3);
             weakPickup.events = weakPickup.events.Concat(new[] { pickup }).OrderBy(n => n.time).ThenBy(n => n.midi).ToArray();
@@ -184,6 +247,7 @@ namespace DancingCats.Clone.Editor
             }
             Debug.Log("PCM_MELODIC_FOLLOW PASS: recurring source-confirmed upper cells, measured release/articulation ends, weak/percussion/silence rejection, "
                 + "unrepeated/irregular/continuous-run rejection, measured scalar turns/ascents/pedal ornaments/replies/trills, protected supports and airborne flights, "
+                + "independent trill/tremolo articulation, sustained multi-voice responses, legacy subdivision veto, "
                 + "immutable deterministic evidence, pitch/time invariance, endpoint corridors and native paths.");
         }
 
@@ -212,6 +276,13 @@ namespace DancingCats.Clone.Editor
         private static PcmInstrumentalEvidence.Evidence TightFixture()
             => new PcmInstrumentalEvidence.Evidence { events = Enumerable.Range(0, 3).SelectMany(i => new[]
                 { Note(2 + i * .45, 2.2 + i * .45, 80, .8), Note(2.15 + i * .45, 2.3 + i * .45, 78, .8) }).ToArray() };
+        private static PcmInstrumentalEvidence.Evidence ChordalFixture(int copies = 2)
+        {
+            var notes = Enumerable.Range(0, copies).SelectMany(i => new[]
+                { Note(2 + i * 3, 2.65 + i * 3, 76, .85), Note(2 + i * 3, 2.65 + i * 3, 72, .65), Note(2 + i * 3, 2.65 + i * 3, 69, .62) }).ToArray();
+            foreach (var n in notes) { Set(n, "harmonicPartials", 4); Set(n, "neuralDuration", .65); }
+            return new PcmInstrumentalEvidence.Evidence { events = notes };
+        }
         private static PcmInstrumentalEvidence.Evidence PatternFixture(int[] pitches, int copies = 2)
         {
             var notes = new System.Collections.Generic.List<PcmInstrumentalEvidence.NoteEvent>();

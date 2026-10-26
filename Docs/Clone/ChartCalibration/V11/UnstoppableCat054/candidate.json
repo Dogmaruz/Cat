@@ -1,0 +1,627 @@
+{
+    "stage": "candidate",
+    "referenceId": "UnstoppableCat054",
+    "referenceMapSha256": "277e5fd678a41323273dd786f32450291338d4edf4752d9ff83939b52548de90",
+    "sourceAudioSha256": "7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b",
+    "generator": "pcm-vocal-phrase-chart-v11+short-test",
+    "duration": 67.00408163265306,
+    "heldOutStart": 44.669387755102039,
+    "referenceForwardSpeed": 7.0,
+    "referenceDelayTime": 0.44501134753227236,
+    "generatedForwardSpeed": 7.0,
+    "generatedDelayTime": 0.6000000238418579,
+    "sourcePcmSha256": "88ea37d6fc9b91863509c174e1aad914cff14704e6be6d20a57b5ffe21429102",
+    "voiceFeatureSha256": "154c58c5b9baec4df3a03de09c5ed06a528bd110b21d6fd74bfe71d53f75b2bf",
+    "voiceAnalysisVersion": "vocal-phrase-1+stem-high-flux-1",
+    "instrumentFeatureSha256": "7e2b32d6d9b6dc0474661f1ca94243c433d40d1583b658365c22ef0cefb5ffc8",
+    "instrumentAnalysisVersion": "mixed-note-events-2-candidates8",
+    "geometryValid": true,
+    "geometryValidationError": "",
+    "referenceElements": 162,
+    "generatedElements": 152,
+    "referenceEvents": 163,
+    "generatedEvents": 165,
+    "all": {
+        "within40ms": {
+            "referenceCount": 163,
+            "generatedCount": 165,
+            "matched": 122,
+            "precision": 0.7393939393939394,
+            "recall": 0.7484662576687117,
+            "f1": 0.7439024390243902,
+            "meanAbsoluteErrorMs": 17.101780602951846
+        },
+        "within80ms": {
+            "referenceCount": 163,
+            "generatedCount": 165,
+            "matched": 145,
+            "precision": 0.8787878787878788,
+            "recall": 0.8895705521472392,
+            "f1": 0.8841463414634146,
+            "meanAbsoluteErrorMs": 23.571193994839498
+        }
+    },
+    "calibration": {
+        "within40ms": {
+            "referenceCount": 113,
+            "generatedCount": 117,
+            "matched": 84,
+            "precision": 0.717948717948718,
+            "recall": 0.7433628318584071,
+            "f1": 0.7304347826086957,
+            "meanAbsoluteErrorMs": 16.658298239931225
+        },
+        "within80ms": {
+            "referenceCount": 113,
+            "generatedCount": 117,
+            "matched": 102,
+            "precision": 0.8717948717948718,
+            "recall": 0.9026548672566371,
+            "f1": 0.8869565217391304,
+            "meanAbsoluteErrorMs": 24.12809568271777
+        }
+    },
+    "heldOut": {
+        "within40ms": {
+            "referenceCount": 50,
+            "generatedCount": 48,
+            "matched": 38,
+            "precision": 0.7916666666666666,
+            "recall": 0.76,
+            "f1": 0.7755102040816326,
+            "meanAbsoluteErrorMs": 18.08211003699742
+        },
+        "within80ms": {
+            "referenceCount": 50,
+            "generatedCount": 48,
+            "matched": 43,
+            "precision": 0.8958333333333334,
+            "recall": 0.86,
+            "f1": 0.8775510204081632,
+            "meanAbsoluteErrorMs": 22.25017138638406
+        }
+    },
+    "logicalSupports": {
+        "within40ms": {
+            "referenceCount": 138,
+            "generatedCount": 140,
+            "matched": 109,
+            "precision": 0.7785714285714286,
+            "recall": 0.7898550724637681,
+            "f1": 0.7841726618705036,
+            "meanAbsoluteErrorMs": 16.40444486349796
+        },
+        "within80ms": {
+            "referenceCount": 138,
+            "generatedCount": 140,
+            "matched": 122,
+            "precision": 0.8714285714285714,
+            "recall": 0.8840579710144928,
+            "f1": 0.8776978417266187,
+            "meanAbsoluteErrorMs": 21.036878614966044
+        }
+    },
+    "logicalHeldOut": {
+        "within40ms": {
+            "referenceCount": 42,
+            "generatedCount": 40,
+            "matched": 35,
+            "precision": 0.875,
+            "recall": 0.8333333333333334,
+            "f1": 0.8536585365853658,
+            "meanAbsoluteErrorMs": 17.2716086537274
+        },
+        "within80ms": {
+            "referenceCount": 42,
+            "generatedCount": 40,
+            "matched": 36,
+            "precision": 0.9,
+            "recall": 0.8571428571428571,
+            "f1": 0.8780487804878049,
+            "meanAbsoluteErrorMs": 17.91802586401935
+        }
+    },
+    "baselineLogicalSupports": {
+        "within40ms": {
+            "referenceCount": 138,
+            "generatedCount": 140,
+            "matched": 109,
+            "precision": 0.7785714285714286,
+            "recall": 0.7898550724637681,
+            "f1": 0.7841726618705036,
+            "meanAbsoluteErrorMs": 16.40444486349796
+        },
+        "within80ms": {
+            "referenceCount": 138,
+            "generatedCount": 140,
+            "matched": 122,
+            "precision": 0.8714285714285714,
+            "recall": 0.8840579710144928,
+            "f1": 0.8776978417266187,
+            "meanAbsoluteErrorMs": 21.036878614966044
+        }
+    },
+    "baselineLogicalHeldOut": {
+        "within40ms": {
+            "referenceCount": 42,
+            "generatedCount": 40,
+            "matched": 35,
+            "precision": 0.875,
+            "recall": 0.8333333333333334,
+            "f1": 0.8536585365853658,
+            "meanAbsoluteErrorMs": 17.2716086537274
+        },
+        "within80ms": {
+            "referenceCount": 42,
+            "generatedCount": 40,
+            "matched": 36,
+            "precision": 0.9,
+            "recall": 0.8571428571428571,
+            "f1": 0.8780487804878049,
+            "meanAbsoluteErrorMs": 17.91802586401935
+        }
+    },
+    "tileTypes": [
+        {
+            "kind": "Jump",
+            "onset80ms": {
+                "referenceCount": 111,
+                "generatedCount": 117,
+                "matched": 95,
+                "precision": 0.811965811965812,
+                "recall": 0.8558558558558559,
+                "f1": 0.8333333333333334,
+                "meanAbsoluteErrorMs": 21.49503270531238
+            }
+        },
+        {
+            "kind": "BigJump",
+            "onset80ms": {
+                "referenceCount": 7,
+                "generatedCount": 7,
+                "matched": 7,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "meanAbsoluteErrorMs": 25.22775131315326
+            }
+        },
+        {
+            "kind": "Hold",
+            "onset80ms": {
+                "referenceCount": 14,
+                "generatedCount": 14,
+                "matched": 14,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "meanAbsoluteErrorMs": 19.179333405164838
+            }
+        },
+        {
+            "kind": "Follow",
+            "onset80ms": {
+                "referenceCount": 2,
+                "generatedCount": 2,
+                "matched": 2,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "meanAbsoluteErrorMs": 5.975865129743685
+            }
+        },
+        {
+            "kind": "Theme",
+            "onset80ms": {
+                "referenceCount": 4,
+                "generatedCount": 0,
+                "matched": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "meanAbsoluteErrorMs": 0.0
+            }
+        }
+    ],
+    "matchedHeldNotes": 14,
+    "matchedHoldDurationErrorMs": 50.09069264356176,
+    "referenceTypes": [
+        "BigJump: 7",
+        "FinishJump: 1",
+        "Follow: 2",
+        "FollowEnd: 2",
+        "FollowMids: 10",
+        "Hold: 14",
+        "Jump: 111",
+        "MidShotItem: 10",
+        "Start: 1",
+        "Theme: 4"
+    ],
+    "generatedTypes": [
+        "BigJump: 7",
+        "FinishJump: 1",
+        "Follow: 2",
+        "FollowEnd: 2",
+        "FollowMid: 8",
+        "Hold: 14",
+        "Jump: 117",
+        "Start: 1"
+    ],
+    "referenceHeldSeconds": 14.23433062008449,
+    "generatedHeldSeconds": 14.189154730340143,
+    "evaluationScope": "Known/calibration recordings; may guide tuning. Baseline and candidate use identical actual PCM, measured evidence and explicit short-support options.",
+    "sustainedSupports": [
+        {
+            "kind": "Hold",
+            "onset80ms": {
+                "referenceCount": 14,
+                "generatedCount": 14,
+                "matched": 14,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "meanAbsoluteErrorMs": 19.179333405164838
+            },
+            "boundaries150ms": {
+                "referenceCount": 14,
+                "generatedCount": 14,
+                "matched": 14,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "meanAbsoluteErrorMs": 19.179333405164838
+            },
+            "meanMatchedStartErrorMs": 19.179333405164838,
+            "meanMatchedEndErrorMs": 42.329015382482079,
+            "meanMatchedDurationErrorMs": 50.09069264356177,
+            "meanMatchedIoU": 0.9207018200613349,
+            "referenceCoverageIoU": 0.9207018200613349
+        },
+        {
+            "kind": "Follow",
+            "onset80ms": {
+                "referenceCount": 2,
+                "generatedCount": 2,
+                "matched": 2,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "meanAbsoluteErrorMs": 5.975865129743685
+            },
+            "boundaries150ms": {
+                "referenceCount": 2,
+                "generatedCount": 2,
+                "matched": 2,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "meanAbsoluteErrorMs": 5.975865129743685
+            },
+            "meanMatchedStartErrorMs": 5.975865129743685,
+            "meanMatchedEndErrorMs": 22.34630962453643,
+            "meanMatchedDurationErrorMs": 19.794982805524943,
+            "meanMatchedIoU": 0.9791957361404715,
+            "referenceCoverageIoU": 0.9791957361404715
+        }
+    ],
+    "previousV3SustainedSupports": [],
+    "supportDetails": [
+        {
+            "referenceIndex": 22,
+            "generatedIndex": 24,
+            "referenceKind": "Follow",
+            "generatedKind": "Follow",
+            "status": "matched support",
+            "referenceStart": 7.695623461689268,
+            "referenceEnd": 9.054988652467728,
+            "generatedStart": 7.699048,
+            "generatedEnd": 9.036009,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": 3.42453831073275,
+            "endErrorMs": -18.979652467727705,
+            "durationErrorMs": -22.404190778460455,
+            "intersectionOverUnion": 0.9835186372797803
+        },
+        {
+            "referenceIndex": 30,
+            "generatedIndex": 31,
+            "referenceKind": "Hold",
+            "generatedKind": "Hold",
+            "status": "matched support",
+            "referenceStart": 10.054988652467728,
+            "referenceEnd": 10.752902844122476,
+            "generatedStart": 10.073650793650794,
+            "generatedEnd": 10.762086167800453,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": 18.662141183066085,
+            "endErrorMs": 9.183323677977029,
+            "durationErrorMs": -9.478817505091385,
+            "intersectionOverUnion": 0.9606200499121533
+        },
+        {
+            "referenceIndex": 57,
+            "generatedIndex": 58,
+            "referenceKind": "Follow",
+            "generatedKind": "Follow",
+            "status": "matched support",
+            "referenceStart": 18.742495191948757,
+            "referenceEnd": 20.096642966781347,
+            "generatedStart": 18.733968,
+            "generatedEnd": 20.07093,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": -8.52719194875462,
+            "endErrorMs": -25.71296678134516,
+            "durationErrorMs": -17.18577483258943,
+            "intersectionOverUnion": 0.9748728350011628
+        },
+        {
+            "referenceIndex": 65,
+            "generatedIndex": 65,
+            "referenceKind": "Hold",
+            "generatedKind": "Hold",
+            "status": "matched support",
+            "referenceStart": 21.107073439019069,
+            "referenceEnd": 21.80498872058732,
+            "generatedStart": 21.10857142857143,
+            "generatedEnd": 21.806984126984128,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": 1.4979895523623555,
+            "endErrorMs": 1.9954063968050662,
+            "durationErrorMs": 0.4974168444411564,
+            "intersectionOverUnion": 0.9950087975376912
+        },
+        {
+            "referenceIndex": 68,
+            "generatedIndex": 69,
+            "referenceKind": "Hold",
+            "generatedKind": "Hold",
+            "status": "matched support",
+            "referenceStart": 23.190408225570406,
+            "referenceEnd": 23.80498872058732,
+            "generatedStart": 23.19924762,
+            "generatedEnd": 23.76813651,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": 8.839394429596581,
+            "endErrorMs": -36.85221058731969,
+            "durationErrorMs": -45.69160501691527,
+            "intersectionOverUnion": 0.9256539942491039
+        },
+        {
+            "referenceIndex": 74,
+            "generatedIndex": 75,
+            "referenceKind": "Hold",
+            "generatedKind": "Hold",
+            "status": "matched support",
+            "referenceStart": 25.9560310457434,
+            "referenceEnd": 27.456031181982586,
+            "generatedStart": 25.937596371882088,
+            "generatedEnd": 27.53759637188209,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": -18.434673861314367,
+            "endErrorMs": 81.56518989950357,
+            "durationErrorMs": 99.99986376081327,
+            "intersectionOverUnion": 0.9375000851494888
+        },
+        {
+            "referenceIndex": 77,
+            "generatedIndex": 79,
+            "referenceKind": "Hold",
+            "generatedKind": "Hold",
+            "status": "matched support",
+            "referenceStart": 28.7060310457434,
+            "referenceEnd": 29.25811808024134,
+            "generatedStart": 28.7410585,
+            "generatedEnd": 29.27511746,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": 35.02745425659981,
+            "endErrorMs": 16.99937975866206,
+            "durationErrorMs": -18.02807449794286,
+            "intersectionOverUnion": 0.9085783235868935
+        },
+        {
+            "referenceIndex": 89,
+            "generatedIndex": 91,
+            "referenceKind": "Hold",
+            "generatedKind": "Hold",
+            "status": "matched support",
+            "referenceStart": 34.60707343901907,
+            "referenceEnd": 35.65394639543125,
+            "generatedStart": 34.6,
+            "generatedEnd": 35.650000000000009,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": -7.073439019066541,
+            "endErrorMs": -3.946395431242422,
+            "durationErrorMs": 3.127043587825229,
+            "intersectionOverUnion": 0.9895442173358352
+        },
+        {
+            "referenceIndex": 100,
+            "generatedIndex": 101,
+            "referenceKind": "Hold",
+            "generatedKind": "Hold",
+            "status": "matched support",
+            "referenceStart": 40.11228758522442,
+            "referenceEnd": 41.12791272146361,
+            "generatedStart": 40.09541950113379,
+            "generatedEnd": 41.17297052154195,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": -16.868084090631898,
+            "endErrorMs": 45.05780007833948,
+            "durationErrorMs": 61.92588416897027,
+            "intersectionOverUnion": 0.9425309029492498
+        },
+        {
+            "referenceIndex": 112,
+            "generatedIndex": 114,
+            "referenceKind": "Hold",
+            "generatedKind": "Hold",
+            "status": "matched support",
+            "referenceStart": 45.96643971971103,
+            "referenceEnd": 46.841448575258258,
+            "generatedStart": 46.0,
+            "generatedEnd": 46.74,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": 33.56028028896674,
+            "endErrorMs": -101.44857525825302,
+            "durationErrorMs": -135.00885554722175,
+            "intersectionOverUnion": 0.8457057266434331
+        },
+        {
+            "referenceIndex": 116,
+            "generatedIndex": 117,
+            "referenceKind": "Hold",
+            "generatedKind": "Hold",
+            "status": "matched support",
+            "referenceStart": 48.32582779867308,
+            "referenceEnd": 48.84664521472795,
+            "generatedStart": 48.36,
+            "generatedEnd": 48.80852596739231,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": 34.17220132691767,
+            "endErrorMs": -38.11924733563643,
+            "durationErrorMs": -72.29144866254799,
+            "intersectionOverUnion": 0.8611961765600054
+        },
+        {
+            "referenceIndex": 117,
+            "generatedIndex": 118,
+            "referenceKind": "Hold",
+            "generatedKind": "Hold",
+            "status": "matched support",
+            "referenceStart": 49.30498865246773,
+            "referenceEnd": 49.7216582596302,
+            "generatedStart": 49.28453514739229,
+            "generatedEnd": 49.79117650999998,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": -20.453505075437307,
+            "endErrorMs": 69.5182503697751,
+            "durationErrorMs": 89.97175544521241,
+            "intersectionOverUnion": 0.8224152979098925
+        },
+        {
+            "referenceIndex": 121,
+            "generatedIndex": 122,
+            "referenceKind": "Hold",
+            "generatedKind": "Hold",
+            "status": "matched support",
+            "referenceStart": 51.12269843901907,
+            "referenceEnd": 52.169569215604237,
+            "generatedStart": 51.15,
+            "generatedEnd": 52.197913832199549,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": 27.301560980930618,
+            "endErrorMs": 28.34461659531229,
+            "durationErrorMs": 1.0430556143778969,
+            "intersectionOverUnion": 0.9482464835146733
+        },
+        {
+            "referenceIndex": 135,
+            "generatedIndex": 136,
+            "referenceKind": "Hold",
+            "generatedKind": "Hold",
+            "status": "matched support",
+            "referenceStart": 57.32061365246773,
+            "referenceEnd": 58.31020293491227,
+            "generatedStart": 57.32,
+            "generatedEnd": 58.35392290249433,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": -0.6136524677273769,
+            "endErrorMs": 43.719967582063649,
+            "durationErrorMs": 44.333620049786919,
+            "intersectionOverUnion": 0.957120961395829
+        },
+        {
+            "referenceIndex": 140,
+            "generatedIndex": 140,
+            "referenceKind": "Hold",
+            "generatedKind": "Hold",
+            "status": "matched support",
+            "referenceStart": 60.26852886591639,
+            "referenceEnd": 60.92997564162527,
+            "generatedStart": 60.28952380952381,
+            "generatedEnd": 60.997913832199547,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": 20.994943607419715,
+            "endErrorMs": 67.93819057427442,
+            "durationErrorMs": 46.9432469668567,
+            "intersectionOverUnion": 0.8780710622061695
+        },
+        {
+            "referenceIndex": 145,
+            "generatedIndex": 146,
+            "referenceKind": "Hold",
+            "generatedKind": "Hold",
+            "status": "matched support",
+            "referenceStart": 62.80498865246773,
+            "referenceEnd": 63.69040836180959,
+            "generatedStart": 62.83,
+            "generatedEnd": 63.6424907,
+            "onsetMatched": true,
+            "typeMatched": true,
+            "boundariesMatched": true,
+            "startErrorMs": 25.011347532270635,
+            "endErrorMs": -47.9176618095849,
+            "durationErrorMs": -72.92900934186165,
+            "intersectionOverUnion": 0.9176334019082721
+        }
+    ],
+    "falsePositiveSupports": [],
+    "followPaths": [
+        {
+            "referenceIndex": 22,
+            "generatedIndex": 24,
+            "samples": 33,
+            "meanLaneError": 0.1256269252839975,
+            "translationInvariantMeanLaneError": 0.12750367972155977,
+            "directionAgreement": 0.9473684210526315,
+            "referenceExcursion": 1.977031294707491,
+            "generatedExcursion": 1.5857136683653959,
+            "startErrorMs": 3.42453831073275,
+            "endErrorMs": -18.979652467727705,
+            "terminalReleaseResetExcluded": true
+        },
+        {
+            "referenceIndex": 57,
+            "generatedIndex": 58,
+            "samples": 33,
+            "meanLaneError": 0.13118930640072899,
+            "translationInvariantMeanLaneError": 0.12530808246265744,
+            "directionAgreement": 1.0,
+            "referenceExcursion": 2.0,
+            "generatedExcursion": 1.600000023841858,
+            "startErrorMs": -8.52719194875462,
+            "endErrorMs": -25.71296678134516,
+            "terminalReleaseResetExcluded": true
+        }
+    ]
+}

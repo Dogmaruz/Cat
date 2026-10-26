@@ -49,7 +49,29 @@ namespace DancingCats.Clone.Editor
                 catch (InvalidDataException) { rejected = true; }
                 Require(rejected, "a correctly sealed cache for different decoded PCM must fail at the actual generation boundary");
             });
-            Debug.Log("INSTRUMENTAL_CHART_INTEGRATION PASS: actual calibration PCM, compatible pure API, seven short glides, default-off interval-relative Holds, independent flags, native geometry and wrong-PCM cache rejection.");
+            CheckRecording("FurElisePiano", (pcm, rate, channels, voice, notes, speed) =>
+            {
+                var options = new AudioChartGenerator.Options { forwardSpeed = speed };
+                var withoutNotes = AudioChartGenerator.GenerateFromSamples(pcm, rate, channels, "ArticulationFixture", options, voice);
+                var verified = AudioChartGenerator.GenerateWithInstrumentalSamples(pcm, rate, channels, "ArticulationFixture", options, voice, notes);
+                Require(withoutNotes.segments.Count(s => s.kind == "Follow") == 2 && verified.segments.All(s => s.kind != "Follow"),
+                    "independent note articulation rejects both legacy false phrases and sustained-activation trills without changing the pure API");
+                AudioChartGeneratorValidation.ValidateMap(verified);
+            });
+            CheckRecording("JingleBells", (pcm, rate, channels, voice, notes, speed) =>
+            {
+                var options = new AudioChartGenerator.Options { forwardSpeed = speed };
+                var map = AudioChartGenerator.GenerateWithInstrumentalSamples(pcm, rate, channels, "ChordalFixture", options, voice, notes);
+                Require(map.segments.Count(s => s.kind == "Follow") == 4,
+                    "four source-confirmed chordal responses survive native compilation; a fifth remains masked by legacy Hold precedence");
+                var record = RecoveredCatalog.LoadOriginal().Single(s => s.id == "JingleBells");
+                var reference = JsonUtility.FromJson<MapTimeline>(File.ReadAllText("Assets/Resources/" + record.timelineResource + ".json"));
+                var matches = PcmChartStudyV9.Match(reference.segments.Where(s => s.kind == "Follow").ToArray(),
+                    map.segments.Where(s => s.kind == "Follow").ToArray(), .08, .15, "Independent generation precedes typed interval evaluation.");
+                Require(matches.truePositive == 4 && matches.falsePositive == 0, "the integrated source gestures match types and boundaries, not just a target count");
+                AudioChartGeneratorValidation.ValidateMap(map);
+            });
+            Debug.Log("INSTRUMENTAL_CHART_INTEGRATION PASS: real PCM, pure API, Can Can19, source-articulation rejection, Jingle4 correct, default-off Holds, flags, native geometry and wrong-PCM rejection.");
         }
 
         private static void CheckRecording(string id,

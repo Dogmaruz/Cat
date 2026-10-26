@@ -1,0 +1,94 @@
+{
+    "stage": "candidate",
+    "referenceId": "JingleBells",
+    "referenceMapSha256": "26012df75d3718e3065653d85757d2a42894ec8a6c0bc89723ad30bb1b23c5cb",
+    "sourceAudioSha256": "f83d9bf3ccb1bb49b31736d8bd72477cb344ababff68e0801dce1b4d2e9eaa7c",
+    "sourcePcmSha256": "5cc4ea742cd1e06745413b927e42b0a32a84fb781536bf904ff4e8f91094618a",
+    "voiceFeatureSha256": "98c393c2bf48b3486a521a1f526e75b0745fe6833a94ee58afb390bf8da29f8c",
+    "generator": "pcm-vocal-phrase-chart-v11+short-test",
+    "generatedTimelineSha256": "5639fb28fea3be2e675aa4280c15e4eba6dc77a80eb525ccdb1fe20976c7caf5",
+    "generatedDelayTime": 0.6000000238418579,
+    "generatedForwardSpeed": 9.5,
+    "geometryValid": true,
+    "shortHolds": {
+        "definition": "Hold <=0.45s on both sides; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 0,
+        "generatedCount": 0,
+        "truePositive": 0,
+        "falsePositive": 0,
+        "falseNegative": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "allHolds": {
+        "definition": "All Hold; onset/end <=80ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 7,
+        "generatedCount": 3,
+        "truePositive": 0,
+        "falsePositive": 3,
+        "falseNegative": 7,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "matches": []
+    },
+    "follows": {
+        "definition": "Follow; onset <=80ms; end <=150ms; IoU>=0.5; maximum-cardinality one-to-one.",
+        "referenceCount": 8,
+        "generatedCount": 4,
+        "truePositive": 4,
+        "falsePositive": 0,
+        "falseNegative": 4,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666,
+        "matches": [
+            {
+                "referenceIndex": 65,
+                "generatedIndex": 46,
+                "referenceStart": 24.570612046279405,
+                "referenceEnd": 25.21124668340934,
+                "generatedStart": 24.58666667,
+                "generatedEnd": 25.21668934,
+                "onsetErrorMs": 16.05462372059563,
+                "endErrorMs": 5.442656590659567,
+                "intersectionOverUnion": 0.9667264574684898
+            },
+            {
+                "referenceIndex": 104,
+                "generatedIndex": 59,
+                "referenceStart": 32.310202339762138,
+                "referenceEnd": 32.95603138992661,
+                "generatedStart": 32.34594104,
+                "generatedEnd": 32.93170068,
+                "onsetErrorMs": 35.73870023786441,
+                "endErrorMs": -24.330709926609019,
+                "intersectionOverUnion": 0.906988683539126
+            },
+            {
+                "referenceIndex": 117,
+                "generatedIndex": 65,
+                "referenceStart": 34.57061365246773,
+                "referenceEnd": 35.53414996517332,
+                "generatedStart": 34.55800454,
+                "generatedEnd": 35.53324263,
+                "onsetErrorMs": -12.609112467728778,
+                "endErrorMs": -0.9073351733235313,
+                "intersectionOverUnion": 0.9861532438789513
+            },
+            {
+                "referenceIndex": 153,
+                "generatedIndex": 90,
+                "referenceStart": 45.21124828959766,
+                "referenceEnd": 45.85707412738549,
+                "generatedStart": 45.22285714,
+                "generatedEnd": 45.8614059,
+                "onsetErrorMs": 11.608850402339499,
+                "endErrorMs": 4.331772614513341,
+                "intersectionOverUnion": 0.975481909675735
+            }
+        ]
+    }
+}

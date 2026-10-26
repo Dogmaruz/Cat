@@ -1,0 +1,508 @@
+{
+  "status": "No instrumental model adopted; production short-Hold code unchanged",
+  "knownCalibrationCount": 13,
+  "newHeldoutMeasurementsOrEventsOpened": false,
+  "experimentalDefaultEnabled": false,
+  "trainingInputs": [
+    {
+      "id": "UnstoppableCat054",
+      "sourceFileSha256": "7fdf15c8df324f3dff96d1992248081611f0751a2ad454013f719d15bcf91d6b",
+      "referenceMapSha256": "277e5fd678a41323273dd786f32450291338d4edf4752d9ff83939b52548de90",
+      "beatPeriod": 0.519999999999996,
+      "sourcePcmSha256": "88ea37d6fc9b91863509c174e1aad914cff14704e6be6d20a57b5ffe21429102",
+      "instrumentFeatureSha256": "7e2b32d6d9b6dc0474661f1ca94243c433d40d1583b658365c22ef0cefb5ffc8",
+      "voiceFeatureSha256": "154c58c5b9baec4df3a03de09c5ed06a528bd110b21d6fd74bfe71d53f75b2bf",
+      "instrumentFileSha256": "4513826e399783e27a9e8ea86f54da947d7164ff539dfa43750c621259f554c3",
+      "voiceFileSha256": "6e47f285afd7417ef3add416728555cd2fa3fb26dbcc1e667460ac134206c6c2"
+    },
+    {
+      "id": "TwinkleLittleStar",
+      "sourceFileSha256": "0cd8dc69f01e117562bf8d21afa17225c5594e7e1ba0920444275953fddec44f",
+      "referenceMapSha256": "96657140ead6377636747c6619bd3e060c60bfe41f32276c4436dbf6b15754db",
+      "beatPeriod": 0.490000000000002,
+      "sourcePcmSha256": "bdeae16d58c996bf0fdaef4d2e3572a7db57bad7ee5a263c2f06e59805642618",
+      "instrumentFeatureSha256": "f724ebda32e4b1fad48a0ef4a66c7a778a5048423fe9f4a0f9e06405f93b53a8",
+      "voiceFeatureSha256": "45e7bd67bf4c6bd770fde3d57e44012fd0bd546955c43e9d977268c865bd8fd3",
+      "instrumentFileSha256": "623ade6ebce08bf9212370bc5e03f1e4fa74b0c52499b0316954c02e8fd17d40",
+      "voiceFileSha256": "988c6dc7915700b22d119622443beecb7c58434c199ee99cfbcbfbc2baa437ea"
+    },
+    {
+      "id": "MoonlightPop",
+      "sourceFileSha256": "35cb4620f0b6436f8c918538ecc6e3e81ef6180a2fb4ba4fd39931156909b843",
+      "referenceMapSha256": "ae158d469109c32c621cbe915062e3ff5129abe1c1001343f557f8ba0e7b3804",
+      "beatPeriod": 0.5800000000000001,
+      "sourcePcmSha256": "8dda2965be8c2c298300e2eec9c5644bbbec881b8b3f9285e67f6b908a1238b6",
+      "instrumentFeatureSha256": "6a9b48e06a4748127d66f79e9e79cb5b2ed6229295ab9fabdd862f2f86d018a1",
+      "voiceFeatureSha256": "9e2dc68c37f4f6a3892418ab692ca93db1dc720543915b09291126a69cf2fc45",
+      "instrumentFileSha256": "40e38853f9f6e14fe04ed3ee1b56fbc002e26cc3cf6e3c217b829a69f81e6f4a",
+      "voiceFileSha256": "e8aa8118c19d73cb7c5384d2a569463d9945896faec4d69b21c5343a17ae6726"
+    },
+    {
+      "id": "LABUBUSongsPop",
+      "sourceFileSha256": "dadc0644e3f1b2fe9d9f10f19b0df81eff5dcf087cc382d9a44e74a2a6a57190",
+      "referenceMapSha256": "1e9b3f9363637f19b2bcaa45fe361a6ab13ac8c4b9c3ad45d50a6d1d58ef108f",
+      "beatPeriod": 0.6099999999999994,
+      "sourcePcmSha256": "4a7c6b7d9ef3756c89e9c9be29a8b660509d58fab07b385dbbb306e48fffe9dc",
+      "instrumentFeatureSha256": "c808e1bd6997f353467ee1b5533f0d25f3a2abda2d15e2b391f65541cf21aaa1",
+      "voiceFeatureSha256": "dd341172aa5f54e8528187597f5953deb58670521501ed275cf18e63072c65fa",
+      "instrumentFileSha256": "365d9d6d8aed7db880530ad022dd996fbcfb6883025e80988def9408fad26c90",
+      "voiceFileSha256": "12c891d4856356f24d0e58cf32f7628f8071062be9f3e08b0b8224431b050118"
+    },
+    {
+      "id": "DisconnectPop",
+      "sourceFileSha256": "50e457b74a6c5189494d99db4c3b8cac6480c937e43cca03a270d71a39272c5f",
+      "referenceMapSha256": "2fdf744d7ad60b2df044a803cd5ef3877f6615f4b2c2938864864822f9f11b2a",
+      "beatPeriod": 0.46999999999999886,
+      "sourcePcmSha256": "f9fa7ab603d755ff3d3b069abed2aa71235e2d6e7b783a02769b6567478fde26",
+      "instrumentFeatureSha256": "6b5f2b98aa93ddefe2d26c4be0956e549b38ff7dc0b7d97ccd895b655ad78719",
+      "voiceFeatureSha256": "3f5ee15dda955859f1af96ca896e40bd56be0536edd4d81c60bede2e752433ee",
+      "instrumentFileSha256": "3574cbbe0e1fd0ee7608780e95380eb1af97244d03200a90089ee69720d9421f",
+      "voiceFileSha256": "66882653a5bd070bf16b700eba9713180a6dfbfb2a6a17cde74bf6aacce8ce64"
+    },
+    {
+      "id": "CanCanPiano",
+      "sourceFileSha256": "8f53952f9f5002ed5f6b313ab170bb317e1494605d3cad8b183a0e78353ddcd3",
+      "referenceMapSha256": "2e04a04cc56346f6a4c6e5f832df5a55eb1abd52b16d1d1f61aee5120a6ee081",
+      "beatPeriod": 0.3699999999999975,
+      "sourcePcmSha256": "afc040b6717ffc0fbae20f91108eb64bea3a60cd09415a06b9347d94259ed7e2",
+      "instrumentFeatureSha256": "d5dd4a9ed454669e700ac8b3a04d6f2849bc60cf7b59135d3a5ebbe38f6c920c",
+      "voiceFeatureSha256": "ec5a62eb9c16e3ba9ae7eb5fce974c177905a9fa557cda1f237165b7d0aeef0b",
+      "instrumentFileSha256": "31c0c7a44457a4591b8b47f84a599a00e029bce6a1738a52f644ff6f3d53e81a",
+      "voiceFileSha256": "3aa5d7f850dceafa156391ac679ceb0d42cc848f050a73c85bc945f9c53d7b0d"
+    },
+    {
+      "id": "IJustWannaDancePop",
+      "sourceFileSha256": "bea4e85a21807ee88b90b745209a8057dedaf9a0fea82671cb0f8056f87ccc40",
+      "referenceMapSha256": "9283d289245f52a5e0ce3a29c61a46fcd16f84298a96e81ccceaf69fdaa1b376",
+      "beatPeriod": 0.4600000000000009,
+      "sourcePcmSha256": "4a452b8ca7c71183c7fa169b2612fe35cf122ebf42d20c06a5ed7a0251f13add",
+      "instrumentFeatureSha256": "433c9e86f6e031468e301432d05a2e20a74e37c0b00d6923b27d75c626fcd8e9",
+      "voiceFeatureSha256": "a18a95fdf6fa64bef9dd34c047cb0caefae9e3805c823eac8b5016153981587d",
+      "instrumentFileSha256": "792d979754a1deb4d08e309ad0cd3de11f38ecb3054825564eaddafc1bf3b72a",
+      "voiceFileSha256": "a6ceae475683921d4a74e63f4afdbfd776563f5e6e2b71a9dc2bb1b966b3d5a8"
+    },
+    {
+      "id": "MoonlightCloudsPiano",
+      "sourceFileSha256": "9d99efd063bb86889578244439258c1f1692de1f5939e9a8693aa0dfbf9d7ed6",
+      "referenceMapSha256": "25752621169c96f26c49e211e03373fdf27584eeef912950a642f022e60761ef",
+      "beatPeriod": 0.6799999999999997,
+      "sourcePcmSha256": "f1b6ae2ad9345d088303fe1ddca84859fe0cece2ee6055bf564a432a717884d2",
+      "instrumentFeatureSha256": "e84a63f210a20e44add7c25facc8a719f3c50522dd958faeb7a2e9a5adace66c",
+      "voiceFeatureSha256": "18a12b600c59aaa49aef8ab6af1866090c245dc9d357c9452b786112de3eb319",
+      "instrumentFileSha256": "8b2b5f8c8a5a92282867c43654eb3db2f6717358dfc2606a6264cdb28559c1d3",
+      "voiceFileSha256": "ed7ce3611f11bba83150eecda3fb0394d2e4420d9803f272a63ee8ad44164ae5"
+    },
+    {
+      "id": "FurElisePiano",
+      "sourceFileSha256": "6adc81188a4c82e24ee1f04ea875dc95338630de98199b4475cbb7a15d88f573",
+      "referenceMapSha256": "9220f268ee214ddcdde5fffa2758ee845a8fe9889938de93276976e32095097b",
+      "beatPeriod": 0.5099999999999998,
+      "sourcePcmSha256": "d7192165df737a63638207f5448091c6ae36ed74abb0174986faab7a6d1bcdf0",
+      "instrumentFeatureSha256": "26775c7b63045c6198b790860d9a6971573dcd3f30dacf14b6486e694fb9cb58",
+      "voiceFeatureSha256": "5a7aa28c8fd3a3c0a4de1d803b3f5014452bd925fd76ece118f5d01a666a2fd3",
+      "instrumentFileSha256": "897b939cde7b19cd1e5607ab4cd86f5ebad663a9079334ea04856cd238f4e427",
+      "voiceFileSha256": "879b3001b3ab7d4437ead095ab8dcce3a7610353e0b0d942de45469b680380ff"
+    },
+    {
+      "id": "JingleBells",
+      "sourceFileSha256": "f83d9bf3ccb1bb49b31736d8bd72477cb344ababff68e0801dce1b4d2e9eaa7c",
+      "referenceMapSha256": "26012df75d3718e3065653d85757d2a42894ec8a6c0bc89723ad30bb1b23c5cb",
+      "beatPeriod": 0.9699999999999989,
+      "sourcePcmSha256": "5cc4ea742cd1e06745413b927e42b0a32a84fb781536bf904ff4e8f91094618a",
+      "instrumentFeatureSha256": "339e5b8cb99d2b1fb56a385f42eeb1dc1c5e2ec0797c4a703cc20f16abb03ce6",
+      "voiceFeatureSha256": "98c393c2bf48b3486a521a1f526e75b0745fe6833a94ee58afb390bf8da29f8c",
+      "instrumentFileSha256": "39b3e167fa8d2631c745d421700a7b6c012e5945f39a24ef83c9fc36f932e72d",
+      "voiceFileSha256": "fcff278e93cfe4e4343b277f35ec101caaa7ac6476b0bd445f47254bc8c264d7"
+    },
+    {
+      "id": "OdetoJoyPiano",
+      "sourceFileSha256": "d3cec08a47eaf2931a82d28dca647f3fa1d6d7c3b3b3ed6e8d082ca13d8060bf",
+      "referenceMapSha256": "b74a163947e29e4ec208c71dfc57527a7479356c81207111286d11bbca30f863",
+      "beatPeriod": 0.4500000000000028,
+      "sourcePcmSha256": "88997ef2f46917828d647471464cb61180dc9055a81ab4dd087721dd729dd39a",
+      "instrumentFeatureSha256": "35f947443dda8acbfa86e0dc48801393a7480e3be7e43698ab4342d2e9dcbfad",
+      "voiceFeatureSha256": "edcb2516ff51ca661b9f3e53e28130defba5186777074b74bce7afec4db09411",
+      "instrumentFileSha256": "6578dca8217a658fa49fec4906d4e7a61a39b7ccec37d83f3ac45b317db97574",
+      "voiceFileSha256": "87bcd4554aad9918cc2dfbd19ed8a761febc850ed248e160f93172ad2f6e89ed"
+    },
+    {
+      "id": "CanoninDPiano",
+      "sourceFileSha256": "cc7f7e824fff861d0e2a850b5031a3acf6ebb24867d61f072226fa5f241e24e2",
+      "referenceMapSha256": "25e31e634c9e86deabd4b3222278ca160970726b94a0db73474c76b72cef28cd",
+      "beatPeriod": 0.41999999999999993,
+      "sourcePcmSha256": "1ddea3b4df868be77e7b1751447a227c0b9e49328867ac74dc0bcc58b15cbc93",
+      "instrumentFeatureSha256": "0b0fe23c217fe5f4b2b05f89124e3a4d06966f82453cbd6f144686371799b59c",
+      "voiceFeatureSha256": "f0c28a0b86ba93195bbcb9013d674ca0908b736d1051565f3741a17952af8344",
+      "instrumentFileSha256": "ab78ee89da8403240eba54f0253d96033c28d8c227aea1f02a776fc1336139ca",
+      "voiceFileSha256": "dbda7ed44dfa67311434b9a87baf0eb626b488c7c898449b4add812f16ce168a"
+    },
+    {
+      "id": "AajKiRaatPop",
+      "sourceFileSha256": "3abf27154adb7eb988b39c1d51f1088bba81a39e8a870aca52583859b7ec9f21",
+      "referenceMapSha256": "19371b6b7d1a1cb6bbdd9d5466fb28d0ab3d497136e66e2d7390cd18792e2ffc",
+      "beatPeriod": 0.5099999999999998,
+      "sourcePcmSha256": "c128d79dd7a72d59d27095803fe294d43cefb7c2290bf992d0165bcd9ad491f4",
+      "instrumentFeatureSha256": "4d16d0306c5ca3de765cdcad295ec6767ecbdca4835786aeba95137dbc48d91e",
+      "voiceFeatureSha256": "9733fc7843d3752006e52a07a4e78cd795f17fbee1096c5e33255cbe34924693",
+      "instrumentFileSha256": "a4edf5ed46a2a28696f1313e0c65ec19245e9112ba6454b9ade370d2146196ad",
+      "voiceFileSha256": "4dd95ea8469a2e3203f0a5b471063b9a8140af532cfe82ebe3813ed128a72c81"
+    }
+  ],
+  "coverage": {
+    "UnstoppableCat054": {
+      "reference": 1,
+      "candidateRows": 6391,
+      "coveredCandidates": 1,
+      "coveredAfterReattack": 1
+    },
+    "TwinkleLittleStar": {
+      "reference": 2,
+      "candidateRows": 4605,
+      "coveredCandidates": 2,
+      "coveredAfterReattack": 2
+    },
+    "MoonlightPop": {
+      "reference": 42,
+      "candidateRows": 2429,
+      "coveredCandidates": 41,
+      "coveredAfterReattack": 41
+    },
+    "LABUBUSongsPop": {
+      "reference": 4,
+      "candidateRows": 3598,
+      "coveredCandidates": 4,
+      "coveredAfterReattack": 4
+    },
+    "DisconnectPop": {
+      "reference": 41,
+      "candidateRows": 3673,
+      "coveredCandidates": 31,
+      "coveredAfterReattack": 30
+    },
+    "CanCanPiano": {
+      "reference": 5,
+      "candidateRows": 15066,
+      "coveredCandidates": 4,
+      "coveredAfterReattack": 4
+    },
+    "IJustWannaDancePop": {
+      "reference": 26,
+      "candidateRows": 2218,
+      "coveredCandidates": 26,
+      "coveredAfterReattack": 26
+    },
+    "MoonlightCloudsPiano": {
+      "reference": 4,
+      "candidateRows": 1750,
+      "coveredCandidates": 3,
+      "coveredAfterReattack": 3
+    },
+    "FurElisePiano": {
+      "reference": 32,
+      "candidateRows": 5142,
+      "coveredCandidates": 31,
+      "coveredAfterReattack": 31
+    },
+    "JingleBells": {
+      "reference": 0,
+      "candidateRows": 4619,
+      "coveredCandidates": 0,
+      "coveredAfterReattack": 0
+    },
+    "OdetoJoyPiano": {
+      "reference": 33,
+      "candidateRows": 3518,
+      "coveredCandidates": 33,
+      "coveredAfterReattack": 33
+    },
+    "CanoninDPiano": {
+      "reference": 3,
+      "candidateRows": 4885,
+      "coveredCandidates": 3,
+      "coveredAfterReattack": 3
+    },
+    "AajKiRaatPop": {
+      "reference": 7,
+      "candidateRows": 6157,
+      "coveredCandidates": 7,
+      "coveredAfterReattack": 7
+    }
+  },
+  "models": {
+    "known13-supplement-proof.json:sourceOnly": {
+      "sourceCalibration": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 200
+      },
+      "mergedCalibration": {
+        "tp": 44,
+        "fp": 3,
+        "fn": 156
+      },
+      "sourceOnlyLeaveOneSongOut": {
+        "tp": 2,
+        "fp": 5,
+        "fn": 198
+      }
+    },
+    "known13-supplement-proof.json:sourceRelative": {
+      "sourceCalibration": {
+        "tp": 9,
+        "fp": 2,
+        "fn": 191
+      },
+      "mergedCalibration": {
+        "tp": 53,
+        "fp": 5,
+        "fn": 147
+      },
+      "sourceOnlyLeaveOneSongOut": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 200
+      }
+    },
+    "known13-context-proof.json:sourceContext": {
+      "sourceCalibration": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 200
+      },
+      "mergedCalibration": {
+        "tp": 44,
+        "fp": 3,
+        "fn": 156
+      },
+      "sourceOnlyLeaveOneSongOut": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 200
+      }
+    },
+    "known13-context-proof.json:fullContext": {
+      "sourceCalibration": {
+        "tp": 36,
+        "fp": 5,
+        "fn": 164
+      },
+      "mergedCalibration": {
+        "tp": 56,
+        "fp": 6,
+        "fn": 144
+      },
+      "sourceOnlyLeaveOneSongOut": {
+        "tp": 12,
+        "fp": 21,
+        "fn": 188
+      }
+    },
+    "known13-balanced-proof.json:sourceOnly": {
+      "sourceCalibration": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 200
+      },
+      "mergedCalibration": {
+        "tp": 44,
+        "fp": 3,
+        "fn": 156
+      },
+      "sourceOnlyLeaveOneSongOut": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 200
+      }
+    },
+    "known13-balanced-proof.json:sourceRelative": {
+      "sourceCalibration": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 200
+      },
+      "mergedCalibration": {
+        "tp": 44,
+        "fp": 3,
+        "fn": 156
+      },
+      "sourceOnlyLeaveOneSongOut": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 200
+      }
+    },
+    "known13-balanced-proof.json:fullContext": {
+      "sourceCalibration": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 200
+      },
+      "mergedCalibration": {
+        "tp": 44,
+        "fp": 3,
+        "fn": 156
+      },
+      "sourceOnlyLeaveOneSongOut": {
+        "tp": 0,
+        "fp": 10,
+        "fn": 200
+      }
+    },
+    "known13-interval-neural-proof.json:replaceFixedWindows": {
+      "sourceCalibration": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 200
+      },
+      "mergedCalibration": {
+        "tp": 44,
+        "fp": 3,
+        "fn": 156
+      },
+      "sourceOnlyLeaveOneSongOut": {
+        "tp": 3,
+        "fp": 8,
+        "fn": 197
+      }
+    },
+    "known13-interval-neural-proof.json:appendIntervalWindows": {
+      "sourceCalibration": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 197
+      },
+      "mergedCalibration": {
+        "tp": 47,
+        "fp": 3,
+        "fn": 153
+      },
+      "sourceOnlyLeaveOneSongOut": {
+        "tp": 3,
+        "fp": 8,
+        "fn": 197
+      }
+    }
+  },
+  "researchSourceSha256": {
+    "calibration_dataset_v11.py": "6842cffe91804bf25d5ff224e21cac1326c133b8f052574966e9495d93b86665",
+    "diagnose_v11.py": "56926d343a26a3e470e831521e4a8c63e408b66f9b9f158a72fd7f0299f66390",
+    "fast_tree_v11.py": "5a3694e045d517218a743620dfa3f0bb2a6d6368deca5e0470eed3a30ece4d0f",
+    "interval_neural_v11.py": "51d78f69037e2bc26e1c9790b55b4d618206754f7b9f39c7f8086505c3b1bb46",
+    "pilot_interval_neural_v11.py": "8fffc40e6b996ceb284e704ebb63d4f19dbd6937a934d197c58a1f447ed21ad3",
+    "probe_all_source_context_v11.py": "54f0383891d9eba3c7170c0418928cb2bbbc31ecc7818dde8ddea088f0f00f7a",
+    "probe_context_v11.py": "f8f6102483b7610f2d5d21dd0a90ab250a6ac4f3977f3dcf32922a23128f4476",
+    "probe_group_balancing_v11.py": "35954f8858c37a2d14020a2ad15956de478e1729d4fc720c539eb664a0a8fb05",
+    "probe_models_v11.py": "1f67a3200034842a00fb18e1b9afa752cdfa049c7e9ab7d351a120d15d5cdba3",
+    "test_interval_neural_v11.py": "eea5797316270dba99bba43f75ff8441bc18e0f844d4bda5dfda39ad86920e76",
+    "train_supplement_v11.py": "23acc76e9451b0cf36cb9b6ca609efc6e01c2a747f59a249d354c93b8d469c50"
+  },
+  "selectedIntervalPilot": {
+    "adopted": false,
+    "calibrationTrue": 3,
+    "calibrationExtra": 0,
+    "calibrationTrueByRecording": {
+      "OdetoJoyPiano": 2,
+      "DisconnectPop": 1
+    },
+    "leaveOneRecordingOutTrue": 3,
+    "leaveOneRecordingOutExtra": 8,
+    "pianoLeaveOneRecordingOutTrue": 0,
+    "rawNNCacheInputs": [
+      {
+        "id": "UnstoppableCat054",
+        "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV10\\ExpandedInstrumentCache\\88ea37d6fc9b91863509c174e1aad914cff14704e6be6d20a57b5ffe21429102\\mixed-notes-separate-channels-v1.npz",
+        "sha256": "abb84d850ae640d77044f16d101eb77bab8409c9cc0bb1f4d9b19438e9ef7201",
+        "sourcePcmSha256": "88ea37d6fc9b91863509c174e1aad914cff14704e6be6d20a57b5ffe21429102"
+      },
+      {
+        "id": "TwinkleLittleStar",
+        "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV10\\ExpandedInstrumentCache\\bdeae16d58c996bf0fdaef4d2e3572a7db57bad7ee5a263c2f06e59805642618\\mixed-notes-separate-channels-v1.npz",
+        "sha256": "034b0b7f1a576deb19cbb5b73086d0c7a721ec70556f9a59e25c6686f3714710",
+        "sourcePcmSha256": "bdeae16d58c996bf0fdaef4d2e3572a7db57bad7ee5a263c2f06e59805642618"
+      },
+      {
+        "id": "MoonlightPop",
+        "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV10\\ExpandedInstrumentCache\\8dda2965be8c2c298300e2eec9c5644bbbec881b8b3f9285e67f6b908a1238b6\\mixed-notes-separate-channels-v1.npz",
+        "sha256": "2f262445bd82d55f4cefb2b5a71573a26f582d9a1c5cdf98c8e344e092390e1b",
+        "sourcePcmSha256": "8dda2965be8c2c298300e2eec9c5644bbbec881b8b3f9285e67f6b908a1238b6"
+      },
+      {
+        "id": "LABUBUSongsPop",
+        "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV10\\ExpandedInstrumentCache\\4a7c6b7d9ef3756c89e9c9be29a8b660509d58fab07b385dbbb306e48fffe9dc\\mixed-notes-separate-channels-v1.npz",
+        "sha256": "aa244a02686252db1efc2e71787823f573c1dd6ac8b1e60b2aaf423bf5de3b41",
+        "sourcePcmSha256": "4a7c6b7d9ef3756c89e9c9be29a8b660509d58fab07b385dbbb306e48fffe9dc"
+      },
+      {
+        "id": "DisconnectPop",
+        "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV10\\ExpandedInstrumentCache\\f9fa7ab603d755ff3d3b069abed2aa71235e2d6e7b783a02769b6567478fde26\\mixed-notes-separate-channels-v1.npz",
+        "sha256": "3bc68b5c5666883d8567a8f5b6e635038d3e28efbcfef0bc255fe45138645033",
+        "sourcePcmSha256": "f9fa7ab603d755ff3d3b069abed2aa71235e2d6e7b783a02769b6567478fde26"
+      },
+      {
+        "id": "CanCanPiano",
+        "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV10\\ExpandedInstrumentCache\\afc040b6717ffc0fbae20f91108eb64bea3a60cd09415a06b9347d94259ed7e2\\mixed-notes-separate-channels-v1.npz",
+        "sha256": "ddda8504488ca1aa102cbc528eb585d8f35aefee49ef0d8a7aec3b5f7d3572aa",
+        "sourcePcmSha256": "afc040b6717ffc0fbae20f91108eb64bea3a60cd09415a06b9347d94259ed7e2"
+      },
+      {
+        "id": "IJustWannaDancePop",
+        "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV10\\ExpandedInstrumentCache\\4a452b8ca7c71183c7fa169b2612fe35cf122ebf42d20c06a5ed7a0251f13add\\mixed-notes-separate-channels-v1.npz",
+        "sha256": "79ec118f0bef1f404c9c918ae4fcaf90f0d096194b96d325833afd4d274fbcfc",
+        "sourcePcmSha256": "4a452b8ca7c71183c7fa169b2612fe35cf122ebf42d20c06a5ed7a0251f13add"
+      },
+      {
+        "id": "MoonlightCloudsPiano",
+        "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV10\\ExpandedInstrumentCache\\f1b6ae2ad9345d088303fe1ddca84859fe0cece2ee6055bf564a432a717884d2\\mixed-notes-separate-channels-v1.npz",
+        "sha256": "721746cb52c17e46595effdae3b86a8fcdc473c1eff0f8ebc250a0515ace3382",
+        "sourcePcmSha256": "f1b6ae2ad9345d088303fe1ddca84859fe0cece2ee6055bf564a432a717884d2"
+      },
+      {
+        "id": "FurElisePiano",
+        "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV10\\ExpandedInstrumentCache\\d7192165df737a63638207f5448091c6ae36ed74abb0174986faab7a6d1bcdf0\\mixed-notes-separate-channels-v1.npz",
+        "sha256": "bbf4bf148e54814ee8b7be454e85a3a02fe91406b8bda69a3cb9299ca90e7baa",
+        "sourcePcmSha256": "d7192165df737a63638207f5448091c6ae36ed74abb0174986faab7a6d1bcdf0"
+      },
+      {
+        "id": "JingleBells",
+        "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV10\\ExpandedInstrumentCache\\5cc4ea742cd1e06745413b927e42b0a32a84fb781536bf904ff4e8f91094618a\\mixed-notes-separate-channels-v1.npz",
+        "sha256": "a074bff7f41785d799ceb7a4754b7cdf6759bee219ad1c5d9a8a365ef15dc3b4",
+        "sourcePcmSha256": "5cc4ea742cd1e06745413b927e42b0a32a84fb781536bf904ff4e8f91094618a"
+      },
+      {
+        "id": "OdetoJoyPiano",
+        "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV11\\CacheInstrumentEvidence\\88997ef2f46917828d647471464cb61180dc9055a81ab4dd087721dd729dd39a\\mixed-notes-separate-channels-v1.npz",
+        "sha256": "76340629282f7fe110367006648d8f583adb4d366b57e8f11eef1f4c31d66375",
+        "sourcePcmSha256": "88997ef2f46917828d647471464cb61180dc9055a81ab4dd087721dd729dd39a"
+      },
+      {
+        "id": "CanoninDPiano",
+        "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV11\\CacheInstrumentEvidence\\1ddea3b4df868be77e7b1751447a227c0b9e49328867ac74dc0bcc58b15cbc93\\mixed-notes-separate-channels-v1.npz",
+        "sha256": "ac55ddf9df2a3a42428943b2b68856e9244fd56fa0d847aef593f8f5ebe66afe",
+        "sourcePcmSha256": "1ddea3b4df868be77e7b1751447a227c0b9e49328867ac74dc0bcc58b15cbc93"
+      },
+      {
+        "id": "AajKiRaatPop",
+        "path": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\ChartGenerationV11\\CacheInstrumentEvidence\\c128d79dd7a72d59d27095803fe294d43cefb7c2290bf992d0165bcd9ad491f4\\mixed-notes-separate-channels-v1.npz",
+        "sha256": "af33921c926d3e97dc8357cc8476c95e63a50678de7ebb3541dbaaa087023aea",
+        "sourcePcmSha256": "c128d79dd7a72d59d27095803fe294d43cefb7c2290bf992d0165bcd9ad491f4"
+      }
+    ]
+  },
+  "fixedRecipe": {
+    "maxDepth": 8,
+    "minLeaf": 16,
+    "acceptanceRawLeafPrecision": 0.9,
+    "positiveGroupSupport": "at least two positive candidate rows from at least two training recordings",
+    "defaultEnabled": false
+  },
+  "verification": {
+    "existingPythonTestsPassed": 22,
+    "intervalNeuralResearchTestsPassed": 5,
+    "originalVsOptimizedCartExactGroupedFixtures": 3,
+    "exactDurationBoundaryViolations": 0
+  },
+  "unchangedProductionSourceSha256": {
+    "PcmShortSupportAnalysis.cs": "1ddb57e6dda5c58866572dffdde8a8a36516ed1a9942437f2b3b66611b94df43",
+    "PcmShortSupportAnalysisValidation.cs": "93bae3e9047ffc7dd0d8a72be0a15b9a47c63c3e5bf6e19769caf9d7cfc59ec9"
+  }
+}

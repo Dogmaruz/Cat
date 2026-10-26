@@ -89,6 +89,13 @@ namespace DancingCats.Clone.Editor
                     && cue.time < s.endTime + .078 && cue.endTime > s.time - .078)) continue;
                 result.Add(cue);
             }
+            foreach (var cue in ChordalResponses(evidence).OrderBy(c => c.time))
+            {
+                if ((protectedSupports ?? Array.Empty<MusicalCue>()).Concat(result).Any(s => s != null
+                    && (s.kind == "Hold" || s.kind == "Follow" || s.kind == "BigJump")
+                    && cue.time < s.endTime + .078 && cue.endTime > s.time - .078)) continue;
+                result.Add(cue);
+            }
             result = result.OrderBy(c => c.time).ToList();
             FitNewPathCorridors(result, protectedSupports ?? Array.Empty<MusicalCue>());
             return result.ToArray();
@@ -227,7 +234,7 @@ namespace DancingCats.Clone.Editor
                 if (end - i < 9) continue;
                 int count = (end - i) % 2 == 0 ? end - i - 1 : end - i;
                 var run = trillNotes.Skip(i).Take(count).Select(n => new NoteGroup { time = n.time, notes = new[] { n } }).ToArray();
-                if (Regular(run, .1, .3, .18, out double period)) contours.Add(new Contour
+                if (Regular(run, .1, .3, .18, out double period) && IndependentlyArticulated(run)) contours.Add(new Contour
                     { family = "continuous-neighbor-trill", signature = "", period = period, times = run.Select(n => n.time).ToArray() });
                 i = end - 1;
             }
@@ -257,7 +264,7 @@ namespace DancingCats.Clone.Editor
                 int count = (end - i) % 2 == 0 ? end - i - 1 : end - i;
                 var run = articulated.Skip(i).Take(count).Select(n => new NoteGroup { time = n.time, notes = new[] { n } }).ToArray();
                 if (Regular(run, .1, .3, .18, out double period) && Get(first, "neuralDuration") > 0
-                    && Get(first, "neuralDuration") <= 1.5 * period)
+                    && Get(first, "neuralDuration") <= 1.5 * period && IndependentlyArticulated(run))
                 {
                     var times = run.Select(n => n.time).ToList();
                     var pickup = evidence.events.Where(n => n != null && Math.Abs(n.time - (first.time - period)) < .04
@@ -302,6 +309,94 @@ namespace DancingCats.Clone.Editor
             return index < 2 ? direction * .8f : (float)(direction * .8 * (1 - 2.0 * (index - 1) / (count - 3)));
         }
         private static string FamilyKey(string family) => family == "ascent-pedal" ? "scalar-ascent" : family;
+
+        private static bool IndependentlyArticulated(NoteGroup[] run)
+        {
+            // Repeated mixed peaks can reuse a note activation until its next
+            // same-pitch return. Require a majority of actual note releases to
+            // resolve before that return, across the run rather than just at entry.
+            int confirmed = 0;
+            for (int i = 0; i + 1 < run.Length; i++)
+            {
+                double gap = run[i + 1].time - run[i].time;
+                if (run[i].notes.Any(n => Get(n, "neuralDuration") > 0 && Get(n, "neuralDuration") <= 1.5 * gap + 1e-7)) confirmed++;
+            }
+            return confirmed >= Math.Ceiling(.6 * (run.Length - 1));
+        }
+
+        /// <summary>Veto a legacy irregular mixed-attack signature when independent tonal onsets reveal its omitted regular subdivisions.</summary>
+        public static bool RejectsLegacyArticulation(PcmInstrumentalEvidence.Evidence evidence, MusicalCue cue)
+        {
+            if (evidence?.events == null || cue == null || cue.kind != "Follow") return false;
+            var groups = Groups(evidence.events.Where(n => n != null && n.time >= cue.time - .08
+                && n.time <= cue.endTime + .04 && Tone(n, .68, .45, .025, 2)).ToArray(), false);
+            if (groups.Length < 6 || groups.Last().time - groups.First().time < .75 * (cue.endTime - cue.time)) return false;
+            // This only challenges the legacy detector's five irregular attack
+            // premise. A separate melodic recognizer may still justify a Follow.
+            return Regular(groups, .12, .30, .18, out _);
+        }
+
+        private sealed class ChordalResponse
+        {
+            public PcmInstrumentalEvidence.NoteEvent lead;
+            public double start, end, duration;
+            public int[] signature;
+        }
+
+        private static IEnumerable<MusicalCue> ChordalResponses(PcmInstrumentalEvidence.Evidence evidence)
+        {
+            var events = evidence.events; var candidates = new List<ChordalResponse>();
+            foreach (var group in events.Where(n => n != null).GroupBy(n => n.time).OrderBy(g => g.Key))
+            foreach (var note in group)
+            {
+                double time = note.time, duration = note.endTime - time, neuralDuration = Get(note, "neuralDuration");
+                if (duration < .55 || duration > 1.2 || neuralDuration < .4 || duration / neuralDuration < .65
+                    || duration / neuralDuration > 1.8 || !Tone(note, .62, .65, .025, 3)) continue;
+                var voices = group.Where(n => n.endTime - time >= .75 * duration && Tone(n, .3, .6, .02, 3)).ToArray();
+                var signature = voices.Select(n => (n.midi - note.midi + 120) % 12).Distinct().OrderBy(p => p).ToArray();
+                if (voices.Length < 2 || signature.Length < 2
+                    || voices.Any(n => Get(n, "neuralOnset") > Get(note, "neuralOnset")
+                        || n.midi > note.midi && Get(n, "neuralOnset") >= .95 * Get(note, "neuralOnset"))) continue;
+                // Resonant accompaniment can remain harmonic while an independent
+                // melody continues. Such a phrase needs an articulated contour;
+                // it must not acquire this sustained multi-voice interpretation.
+                if (events.Any(n => n != null && n.time > time + .12 && n.time < note.endTime - .12
+                    && Tone(n, Math.Max(.55, .75 * Get(note, "neuralOnset")), .45, .025, 2))) continue;
+                double start = time, end = note.endTime;
+                var pickup = events.Where(n => n != null && time - n.time >= .08 && time - n.time <= .4
+                    && Math.Abs(note.midi - n.midi) <= 7 && Tone(n, .5, .6, .025, 3) && n.endTime >= time - .1
+                    && Get(n, "neuralDuration") >= .08 && Get(n, "neuralDuration") <= .6)
+                    .OrderByDescending(n => n.time).FirstOrDefault();
+                if (pickup != null) start = pickup.time;
+                var exits = events.Where(n => n != null && n.time >= time + .6 * duration && n.time < end
+                    && Get(n, "sourceAttack") >= .5 && n.midi != note.midi && Tone(n, .5, .15, .01, 2)).Select(n => n.time).ToArray();
+                if (exits.Length > 0) end = exits.Min();
+                var response = new ChordalResponse { lead = note, start = start, end = end, duration = duration, signature = signature };
+                if (candidates.Count > 0 && start - candidates.Last().start < .15)
+                {
+                    var previous = candidates.Last();
+                    if (Get(note, "neuralOnset") <= Get(previous.lead, "neuralOnset") && duration <= previous.duration) continue;
+                    candidates.RemoveAt(candidates.Count - 1);
+                }
+                candidates.Add(response);
+            }
+            var result = new List<MusicalCue>();
+            foreach (var response in candidates.Where(c => candidates.Any(other => other != c && Math.Abs(c.start - other.start) > 1
+                && Math.Abs(c.duration - other.duration) < .18 && c.signature.Intersect(other.signature).Count() >= 2)))
+            {
+                double start = response.start, end = response.end;
+                if (end - start < .5 || result.Any(c => start < c.endTime + .078 && end > c.time - .078)) continue;
+                float direction = result.Count % 2 == 0 ? -1 : 1;
+                var points = new List<MusicalPoint> { new MusicalPoint { time = start, lane = 0 } };
+                if (response.lead.time - start >= .0624 && end - response.lead.time >= .0624)
+                    points.Add(new MusicalPoint { time = response.lead.time, lane = (float)(direction * .8 * (response.lead.time - start) / (end - start)) });
+                points.Add(new MusicalPoint { time = end, lane = direction * .8f });
+                result.Add(new MusicalCue { kind = "Follow", time = start, endTime = end, lane = 0, points = points.ToArray(),
+                    confidence = Get(response.lead, "neuralOnset"), phraseId = "mixed-chordal-response-" + result.Count,
+                    reason = "Recurring foreground response with independent sustained chord voices; measured connected pickup and harmonic release or subsequent contrast delimit the phrase. Lateral movement is gameplay choreography." });
+            }
+            return result;
+        }
 
         private static NoteGroup[] Groups(PcmInstrumentalEvidence.NoteEvent[] notes, bool tonal)
         {
