@@ -20,19 +20,36 @@ namespace RadioArchipelago.UI
         private Vector3 restPosition;
         private Quaternion restRotation;
         private bool initialized;
+        private bool rebuildPending;
         private RectTransform background, contactShadow;
         private Transform leftFoot, rightFoot;
         private Vector3 leftSole, rightSole;
+        private bool portraitLayout;
+        private float previewYaw = -24;
 
         public RenderTexture Texture => texture;
         public Camera PreviewCamera => previewCamera;
+        public float PreviewYaw => previewYaw;
 
         public void Initialize(CourierSelection courierSelection, RectTransform backgroundRect, RectTransform shadowRect)
+            => InitializeView(courierSelection, backgroundRect, shadowRect, false);
+
+        public void InitializePortrait(CourierSelection courierSelection)
+            => InitializeView(courierSelection, null, null, true);
+
+        public void RotatePreview(float degrees)
+        {
+            previewYaw = Mathf.Repeat(previewYaw + degrees + 180, 360) - 180;
+            restRotation = Quaternion.Euler(0, previewYaw, 0);
+        }
+
+        private void InitializeView(CourierSelection courierSelection, RectTransform backgroundRect, RectTransform shadowRect, bool portrait)
         {
             if (initialized) throw new InvalidOperationException("The courier preview is already initialized.");
             initialized = true;
             selection = courierSelection ?? throw new ArgumentNullException(nameof(courierSelection));
-            background = backgroundRect != null ? backgroundRect : throw new ArgumentNullException(nameof(backgroundRect));
+            portraitLayout = portrait;
+            background = portrait ? null : backgroundRect != null ? backgroundRect : throw new ArgumentNullException(nameof(backgroundRect));
             contactShadow = shadowRect;
             image = GetComponent<UnityEngine.UI.RawImage>();
             if (image == null) throw new InvalidOperationException("Courier preview requires its own RawImage.");
@@ -40,7 +57,7 @@ namespace RadioArchipelago.UI
             // A Canvas changes scale after layout. Its scale must not reach a world-space camera.
             SceneManager.MoveGameObjectToScene(rig, gameObject.scene);
             // World-space preview objects are isolated from gameplay by both position and layer.
-            rig.transform.position = new Vector3(1000, 1000, 1000);
+            rig.transform.position = new Vector3(portrait ? 1200 : 1000, 1000, 1000);
             var cameraObject = new GameObject("CourierPreviewCamera", typeof(Camera));
             cameraObject.transform.SetParent(rig.transform, false);
             previewCamera = cameraObject.GetComponent<Camera>();
@@ -59,23 +76,35 @@ namespace RadioArchipelago.UI
             texture.Create();
             previewCamera.targetTexture = texture;
             image.texture = texture;
-            image.raycastTarget = false;
-            image.rectTransform.anchorMin = image.rectTransform.anchorMax = Vector2.zero;
-            image.rectTransform.pivot = new Vector2(.5f, FootViewportY);
+            image.raycastTarget = portrait;
+            if (portrait)
+            {
+                var orbit = GetComponent<CourierPreviewOrbitGesture>();
+                if (orbit == null) orbit = gameObject.AddComponent<CourierPreviewOrbitGesture>();
+                orbit.Initialize(this);
+            }
+            if (!portrait)
+            {
+                image.rectTransform.anchorMin = image.rectTransform.anchorMax = Vector2.zero;
+                image.rectTransform.pivot = new Vector2(.5f, FootViewportY);
+            }
             UpdatePresentationRect();
-            selection.Changed += Rebuild;
-            Rebuild();
+            selection.Changed += SelectionChanged;
+            SelectionChanged();
             previewCamera.enabled = isActiveAndEnabled;
+            rig.SetActive(isActiveAndEnabled);
         }
 
         private void Rebuild()
         {
+            rebuildPending = false;
             if (actor != null) { actor.SetActive(false); Destroy(actor); }
             var definition = selection.SelectedDefinition;
             if (definition == null || definition.prefab == null) return;
             actor = Instantiate(definition.prefab, rig.transform, false);
+            selection.ApplyTo(actor);
             actor.name = "Preview_" + definition.id;
-            actor.transform.localRotation = Quaternion.Euler(0,-24,0);
+            actor.transform.localRotation = Quaternion.Euler(0,previewYaw,0);
             foreach (var node in actor.GetComponentsInChildren<Transform>(true)) node.gameObject.layer = 12;
             foreach (var source in actor.GetComponentsInChildren<AudioSource>(true)) source.enabled = false;
             foreach (var collider in actor.GetComponentsInChildren<Collider>(true)) collider.enabled = false;
@@ -105,9 +134,23 @@ namespace RadioArchipelago.UI
             }
             restPosition = actor.transform.localPosition;
             restRotation = actor.transform.localRotation;
+            if (portraitLayout)
+            {
+                Bounds full = CourierVisualBounds.Measure(renderers);
+                previewCamera.orthographicSize = Mathf.Max(1.45f, Mathf.Max(full.size.y, full.size.x) * .57f);
+                var cameraPosition = previewCamera.transform.localPosition;
+                cameraPosition.y = full.center.y - rig.transform.position.y;
+                previewCamera.transform.localPosition = cameraPosition;
+            }
             if (lighting != null) { lighting.SetActive(false); Destroy(lighting); }
             lighting = new GameObject("Courier lighting"); lighting.transform.SetParent(rig.transform, false);
             lighting.AddComponent<CourierLightingRig>().Initialize(selection.Lighting, actor, Vector3.forward, 1 << 12);
+        }
+
+        private void SelectionChanged()
+        {
+            if (!isActiveAndEnabled) { rebuildPending = true; return; }
+            Rebuild();
         }
 
         private void Update()
@@ -153,6 +196,7 @@ namespace RadioArchipelago.UI
         private void OnEnable()
         {
             if(rig != null) rig.SetActive(true);
+            if(initialized && rebuildPending) Rebuild();
             if(previewCamera != null) previewCamera.enabled=true;
         }
         private void OnDisable()
@@ -162,7 +206,7 @@ namespace RadioArchipelago.UI
         }
         private void OnDestroy()
         {
-            if(selection != null) selection.Changed -= Rebuild;
+            if(selection != null) selection.Changed -= SelectionChanged;
             if(previewCamera != null) previewCamera.targetTexture=null;
             if(texture != null) { texture.Release(); Destroy(texture); }
             if(rig != null) Destroy(rig);

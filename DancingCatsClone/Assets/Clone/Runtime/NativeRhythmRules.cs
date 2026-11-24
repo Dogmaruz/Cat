@@ -5,10 +5,34 @@ namespace DancingCats.Clone
     /// <summary>Scalar rules recovered from the original 0.5.8 ARM64 build and authored prefab values.</summary>
     public static class NativeRhythmRules
     {
+        /// <summary>Retains the original 60 Hz drag response at every rendering frame rate.</summary>
+        public static float SteerLateral(float current, float target, float deltaTime)
+        {
+            float gain = 1f - Mathf.Pow(.75f, Mathf.Max(0, deltaTime) * 60f);
+            return Mathf.Clamp(current + (target - current) * gain, -1.5f, 1.5f);
+        }
         public const float GroundOffset = .25f;
         public const float DragWorldRange = 6.6f;
         public const float HorizontalLimit = 1.5f;
         public const float HorizontalLerp = .25f;
+        // Authored phone calibration: crossing both lane limits takes a quarter
+        // screen of finger travel. Desktop retains the recovered 6.6 gain.
+        public const float TouchFullSpanScreenFraction = .24f;
+
+        public static float DragTargetX(float pointerX, float screenWidth, bool touch, ref float pointerOrigin, ref float dragOrigin)
+        {
+            float gain = touch ? 2f * HorizontalLimit / TouchFullSpanScreenFraction : DragWorldRange;
+            float target = dragOrigin + (pointerX - pointerOrigin) * gain / Mathf.Max(1, screenWidth);
+            if (!touch) return target;
+            float clamped = Mathf.Clamp(target, -HorizontalLimit, HorizontalLimit);
+            if (target != clamped)
+            {
+                // Discard finger travel beyond the edge. Otherwise reversing
+                // must unwind an invisible overshoot before the hero responds.
+                pointerOrigin = pointerX; dragOrigin = clamped;
+            }
+            return clamped;
+        }
         private const float StartTangent = .770636796951294f;
         private const float EndTangent = 1.4819953441619873f;
 

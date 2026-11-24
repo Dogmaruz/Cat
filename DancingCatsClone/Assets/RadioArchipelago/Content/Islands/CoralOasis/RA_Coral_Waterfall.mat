@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RA_Coral_Waterfall
+  m_Shader: {fileID: 4800000, guid: 9fea394137d38454f8d8e33ffe760f1e, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _RippleNormal:
+        m_Texture: {fileID: 2800000, guid: e104ddcaecacca444bc6a8d0136a5246, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _CurrentSpeed: 4.8
+    - _DstBlend: 10
+    - _Fall: 1
+    - _FlowSpeed: 1.3
+    - _FoamLayer: 0
+    - _FoamStrength: 0.92
+    - _SrcBlend: 5
+    - _UseLakeSurface: 1
+    - _VertexFoam: 0
+    - _WaterPreviewTime: -1
+    - _ZWrite: 0
+    m_Colors:
+    - _BaseColor: {r: 0.1, g: 0.52, b: 0.57, a: 1}
+    - _FoamColor: {r: 0.86, g: 0.97, b: 0.94, a: 1}
+    - _LakeColor: {r: 0.08, g: 0.48, b: 0.51, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

@@ -8,6 +8,9 @@ namespace RadioArchipelago
     {
         public string id;
         public string displayName;
+        public string assetId;
+        public string defaultBackpackId;
+        public string defaultScarfId;
         public GameObject prefab;
         public Sprite icon;
     }

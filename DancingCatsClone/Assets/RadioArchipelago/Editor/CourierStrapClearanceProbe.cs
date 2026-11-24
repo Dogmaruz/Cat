@@ -1,0 +1,378 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
+
+namespace RadioArchipelago.Editor
+{
+    /// <summary>Read-only geometry evidence for shoulder, ear, metal and seam clearance. It does not certify artistic quality.</summary>
+    public static class CourierStrapClearanceProbe
+    {
+        [Serializable] public sealed class Cloud
+        {
+            public int vertices;
+            public Vector3 minimum, maximum;
+        }
+        [Serializable] public sealed class MetalGroup
+        {
+            public string part;
+            public int vertices;
+            public float minimumMovingWeight, maximumMovingWeight, weightRange;
+            public Vector3 sourceMinimum, sourceMaximum, posedMinimum, posedMaximum;
+        }
+        [Serializable] public sealed class Pair
+        {
+            public string hero, backpack;
+            public Vector3 leftShoulder, rightShoulder;
+            public Cloud leftArm, rightArm, outerHead, posedStraps;
+            public float suggestedFrontZ, armFrontMargin = .035f, outerHeadThresholdX;
+            public float nearestArmDistance, nearestOuterHeadDistance, minimumStrapYInOuterHeadBand;
+            public int lateralBurialCandidates, armNearCandidates, outerHeadNearCandidates;
+            public float maximumLateralBurial;
+            public int sourceSeamMatches;
+            public float maximumSourceSeamGap, maximumPosedSeamGap, maximumSeamGapGrowth;
+            public int rearCutSeamMatches, tinyFragmentSeamMatches;
+            public float maximumRearCutSourceGap, maximumRearCutPosedGap, maximumRearCutGapGrowth;
+            public SeamEvidence[] largestSeamGaps;
+            public MetalGroup[] metalGroups;
+            public string[] notes;
+        }
+        [Serializable] public sealed class SeamEvidence
+        {
+            public string harnessPart, casePart;
+            public int harnessVertex, caseVertex;
+            public int harnessComponentVertices, caseComponentVertices;
+            public bool rearCutCandidate, tinyOriginalFragment;
+            public Vector3 harnessMeshPoint, caseMeshPoint;
+            public Vector3 sourceHarnessPoint, sourceCasePoint, posedHarnessPoint, posedCasePoint;
+            public float harnessMovingWeight, caseMovingWeight, sourceGap, posedGap, gapGrowth;
+        }
+        [Serializable] public sealed class ArmTargets
+        {
+            public Vector3 leftShoulder, rightShoulder;
+            public Cloud leftArm, rightArm, outerHead;
+            public float maximumArmZ;
+        }
+        [Serializable] public sealed class Report
+        {
+            public string unityVersion, capturedUtc;
+            public Pair[] pairs;
+            public string limitation = "Outer-head regions are selected by actual head bone influence and lateral extent, not a semantic ear label. Lateral ray burial and point-cloud proximity are candidates for visual inspection, not a signed collision test.";
+        }
+        sealed class Body
+        {
+            public Vector3[] vertices, leftArm, rightArm, outerHead;
+            public int[] triangles;
+        }
+        sealed class Part
+        {
+            public string name;
+            public Mesh mesh;
+            public SkinnedMeshRenderer skin;
+            public Vector3[] source, posed;
+            public Vector3[] sourceEquipment;
+            public float[] movingWeight;
+            public int[] componentSizes;
+            public bool isCase;
+        }
+        sealed class NearestGrid
+        {
+            readonly float size;
+            readonly Dictionary<Vector3Int, List<int>> cells = new Dictionary<Vector3Int, List<int>>();
+            readonly Vector3[] points;
+            public NearestGrid(Vector3[] values, float cellSize)
+            {
+                points = values; size = cellSize;
+                for (int i = 0; i < points.Length; i++)
+                {
+                    var key = Key(points[i]); if (!cells.TryGetValue(key, out var list)) cells[key] = list = new List<int>();
+                    list.Add(i);
+                }
+            }
+            Vector3Int Key(Vector3 p) => new Vector3Int(Mathf.FloorToInt(p.x / size), Mathf.FloorToInt(p.y / size), Mathf.FloorToInt(p.z / size));
+            public float Find(Vector3 point, float radius, out int closest)
+            {
+                closest = -1; float squared = radius * radius; var center = Key(point); int range = Mathf.CeilToInt(radius / size);
+                for (int x = -range; x <= range; x++) for (int y = -range; y <= range; y++) for (int z = -range; z <= range; z++)
+                    if (cells.TryGetValue(center + new Vector3Int(x, y, z), out var list))
+                        foreach (int i in list) { float d = (points[i] - point).sqrMagnitude; if (d < squared) { squared = d; closest = i; } }
+                return closest < 0 ? radius : Mathf.Sqrt(squared);
+            }
+        }
+
+        public static void Run() => Capture(false);
+        public static void RunAllOwners() => Capture(true);
+        /// <summary>Reads the actual current body pose; callers can reuse this once per hero.</summary>
+        public static ArmTargets ReadArmTargets(GameObject actor)
+        {
+            var wardrobe = actor.GetComponent<CourierWardrobeRig>(); var frame = wardrobe.bodyRig.visualPivot;
+            var left = frame.InverseTransformPoint(wardrobe.bodyRig.leftArm.position);
+            var right = frame.InverseTransformPoint(wardrobe.bodyRig.rightArm.position);
+            var body = ReadBody(actor, frame, wardrobe.profile.bodyWidth * .5f * 1.02f, (left.y + right.y) * .5f);
+            var a = Bounds(body.leftArm); var b = Bounds(body.rightArm);
+            return new ArmTargets { leftShoulder = left, rightShoulder = right, leftArm = a, rightArm = b, outerHead = Bounds(body.outerHead),
+                maximumArmZ = Mathf.Max(body.leftArm.Select(p => p.z).DefaultIfEmpty(left.z).Max(), body.rightArm.Select(p => p.z).DefaultIfEmpty(right.z).Max()) };
+        }
+        static void Capture(bool allOwners)
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Probe the supplied strap poses in Edit Mode.");
+            var catalog = AssetDatabase.LoadAssetAtPath<CourierCatalog>("Assets/RadioArchipelago/Content/CourierCatalog.asset");
+            var scene = EditorSceneManager.NewPreviewScene(); var records = new List<Pair>();
+            var textureCache = new Dictionary<string, Texture2D>();
+            try
+            {
+                foreach (var hero in catalog.entries.Where(h => allOwners || h.assetId == "Rumi"))
+                {
+                    var actor = UnityEngine.Object.Instantiate(hero.prefab); SceneManager.MoveGameObjectToScene(actor, scene);
+                    try
+                    {
+                        var wardrobe = actor.GetComponent<CourierWardrobeRig>(); var motion = actor.GetComponent<CourierMotion>();
+                        motion.ManualSimulation = true; motion.ResetMotion();
+                        var frame = wardrobe.bodyRig.visualPivot;
+                        var left = frame.InverseTransformPoint(wardrobe.bodyRig.leftArm.position);
+                        var right = frame.InverseTransformPoint(wardrobe.bodyRig.rightArm.position);
+                        float outerThreshold = wardrobe.profile.bodyWidth * .5f * 1.02f;
+                        var body = ReadBody(actor, frame, outerThreshold, (left.y + right.y) * .5f);
+                        var collisionMesh = new Mesh { indexFormat = IndexFormat.UInt32, vertices = body.vertices, triangles = body.triangles };
+                        collisionMesh.RecalculateBounds();
+                        var collisionObject = new GameObject("Disposable body clearance surface"); collisionObject.transform.SetParent(frame, false);
+                        var collider = collisionObject.AddComponent<MeshCollider>(); collider.sharedMesh = collisionMesh; Physics.SyncTransforms();
+                        try
+                        {
+                            foreach (var equipment in catalog.equipment.Where(e => e.kind == CourierEquipmentKind.Backpack && e.id.StartsWith("backpack_" + hero.assetId, StringComparison.Ordinal)))
+                            {
+                                wardrobe.Apply(equipment, null, null); motion.ResetMotion();
+                                var gear = wardrobe.Equipped(CourierEquipmentKind.Backpack);
+                                var parts = ReadParts(gear, frame);
+                                var straps = parts.Where(p => !p.isCase).SelectMany(p => p.posed).ToArray();
+                                var record = new Pair
+                                {
+                                    hero = hero.assetId, backpack = equipment.id, leftShoulder = left, rightShoulder = right,
+                                    leftArm = Bounds(body.leftArm), rightArm = Bounds(body.rightArm), outerHead = Bounds(body.outerHead), posedStraps = Bounds(straps),
+                                    outerHeadThresholdX = outerThreshold, suggestedFrontZ = Mathf.Max(body.leftArm.Select(p => p.z).DefaultIfEmpty(left.z).Max(),
+                                        body.rightArm.Select(p => p.z).DefaultIfEmpty(right.z).Max()) + .035f,
+                                    nearestArmDistance = .15f, nearestOuterHeadDistance = .15f, minimumStrapYInOuterHeadBand = -1
+                                };
+                                var arms = new NearestGrid(body.leftArm.Concat(body.rightArm).ToArray(), .05f);
+                                var ears = new NearestGrid(body.outerHead, .05f);
+                                float outerMinimumY = body.outerHead.Length > 0 ? body.outerHead.Min(p => p.y) : float.PositiveInfinity;
+                                foreach (var point in straps)
+                                {
+                                    float armDistance = arms.Find(point, .15f, out _), earDistance = ears.Find(point, .15f, out _);
+                                    record.nearestArmDistance = Mathf.Min(record.nearestArmDistance, armDistance);
+                                    record.nearestOuterHeadDistance = Mathf.Min(record.nearestOuterHeadDistance, earDistance);
+                                    if (armDistance < .025f) record.armNearCandidates++;
+                                    if (earDistance < .025f) record.outerHeadNearCandidates++;
+                                    if (point.y >= outerMinimumY && (record.minimumStrapYInOuterHeadBand < 0 || point.y < record.minimumStrapYInOuterHeadBand))
+                                        record.minimumStrapYInOuterHeadBand = point.y;
+                                    float side = Mathf.Sign(point.x); if (side == 0) continue;
+                                    var ray = new Ray(frame.TransformPoint(new Vector3(side * 3, point.y, point.z)), frame.TransformDirection(new Vector3(-side, 0, 0)));
+                                    if (collider.Raycast(ray, out RaycastHit hit, 6 * frame.lossyScale.magnitude))
+                                    {
+                                        float outerX = frame.InverseTransformPoint(hit.point).x;
+                                        float burial = side * (outerX - point.x);
+                                        if (burial > .008f) { record.lateralBurialCandidates++; record.maximumLateralBurial = Mathf.Max(record.maximumLateralBurial, burial); }
+                                    }
+                                }
+                                CheckSeams(parts, record, wardrobe.profile.FindFit(equipment.id).harnessAnchorZ);
+                                record.metalGroups = parts.SelectMany(p => MetalGroups(p, textureCache)).Where(g => g.vertices >= 8).ToArray();
+                                record.notes = new[]
+                                {
+                                    "Front target is actual complete arm-weighted mesh maxZ plus .035, not arm-root Z.",
+                                    "Outer-head cloud includes head-weighted vertices beyond body half-width*1.02 and above shoulder+.30; inspect the cloud before calling it an ear.",
+                                    "Metal groups with a nonzero moving-weight range can deform even when the foremost buckle plateau remains rigid.",
+                                    "Raw near-coincident source matches can include original isolated tiny triangles. Functional rear-cut matches are reported separately; raw gap growth alone is not evidence of a broken rear attachment."
+                                };
+                                records.Add(record);
+                            }
+                        }
+                        finally { UnityEngine.Object.DestroyImmediate(collisionObject); UnityEngine.Object.DestroyImmediate(collisionMesh); }
+                    }
+                    finally { UnityEngine.Object.DestroyImmediate(actor); }
+                }
+            }
+            finally
+            {
+                foreach (var image in textureCache.Values) UnityEngine.Object.DestroyImmediate(image);
+                EditorSceneManager.ClosePreviewScene(scene);
+            }
+            string output = Path.GetFullPath("../Docs/Design/RadioArchipelago/StrapReach20261105/" + (allOwners ? "clearance-owners.json" : "clearance-rumi.json"));
+            Directory.CreateDirectory(Path.GetDirectoryName(output));
+            File.WriteAllText(output, JsonUtility.ToJson(new Report { unityVersion = Application.unityVersion, capturedUtc = DateTime.UtcNow.ToString("O"), pairs = records.ToArray() }, true));
+            Debug.Log("COURIER_STRAP_CLEARANCE_PROBE COMPLETE: " + records.Count + " original strap poses; actual arm/head clouds, seam movement and metal weights recorded.");
+        }
+
+        static Body ReadBody(GameObject actor, Transform frame, float outerThreshold, float shoulderHeight)
+        {
+            var points = new List<Vector3>(); var triangles = new List<int>();
+            var left = new List<Vector3>(); var right = new List<Vector3>(); var outer = new List<Vector3>();
+            foreach (var skin in actor.GetComponentsInChildren<SkinnedMeshRenderer>(true))
+            {
+                if (skin.GetComponentInParent<CourierEquipmentRig>() != null || skin.sharedMesh == null) continue;
+                var mesh = new Mesh { indexFormat = skin.sharedMesh.indexFormat };
+                try
+                {
+                    skin.BakeMesh(mesh, true); var baked = mesh.vertices; var counts = skin.sharedMesh.GetBonesPerVertex(); var weights = skin.sharedMesh.GetAllBoneWeights();
+                    var matrix = frame.worldToLocalMatrix * skin.transform.localToWorldMatrix; int start = points.Count, cursor = 0;
+                    for (int i = 0; i < baked.Length; i++)
+                    {
+                        var p = matrix.MultiplyPoint3x4(baked[i]); points.Add(p); float armLeft = 0, armRight = 0, head = 0;
+                        for (int j = 0; j < counts[i]; j++)
+                        {
+                            var w = weights[cursor++]; string name = skin.bones[w.boneIndex].name;
+                            if (name == "arm.L") armLeft += w.weight;
+                            if (name == "arm.R") armRight += w.weight;
+                            if (name == "head") head += w.weight;
+                        }
+                        if (armLeft > .35f) left.Add(p); if (armRight > .35f) right.Add(p);
+                        if (head > .45f && Mathf.Abs(p.x) > outerThreshold && p.y > shoulderHeight + .30f) outer.Add(p);
+                    }
+                    foreach (int index in mesh.triangles) triangles.Add(start + index);
+                }
+                finally { UnityEngine.Object.DestroyImmediate(mesh); }
+            }
+            return new Body { vertices = points.ToArray(), triangles = triangles.ToArray(), leftArm = left.ToArray(), rightArm = right.ToArray(), outerHead = outer.ToArray() };
+        }
+
+        static Part[] ReadParts(GameObject gear, Transform frame)
+        {
+            var rig = gear.GetComponent<CourierEquipmentRig>(); var parts = new List<Part>();
+            foreach (var filter in gear.GetComponentsInChildren<MeshFilter>(true))
+            {
+                bool isCase = filter.name == "Case";
+                if (filter.sharedMesh == null || (!isCase && !rig.harness.Any(t => t == filter.transform || filter.transform.IsChildOf(t)))) continue;
+                var matrix = frame.worldToLocalMatrix * filter.transform.localToWorldMatrix;
+                var toEquipment = gear.transform.worldToLocalMatrix * filter.transform.localToWorldMatrix;
+                var original = filter.sharedMesh.vertices;
+                var source = original.Select(matrix.MultiplyPoint3x4).ToArray();
+                var skin = filter.GetComponent<SkinnedMeshRenderer>(); var posed = source; var moving = new float[source.Length];
+                if (skin != null && skin.sharedMesh != null)
+                {
+                    var scratch = new Mesh { indexFormat = skin.sharedMesh.indexFormat };
+                    try { skin.BakeMesh(scratch, true); posed = scratch.vertices.Select(matrix.MultiplyPoint3x4).ToArray(); }
+                    finally { UnityEngine.Object.DestroyImmediate(scratch); }
+                    var weights = skin.sharedMesh.boneWeights;
+                    for (int i = 0; i < weights.Length; i++)
+                    {
+                        var w = weights[i]; moving[i] = (w.boneIndex0 == 0 ? 0 : w.weight0) + (w.boneIndex1 == 0 ? 0 : w.weight1) +
+                            (w.boneIndex2 == 0 ? 0 : w.weight2) + (w.boneIndex3 == 0 ? 0 : w.weight3);
+                    }
+                }
+                parts.Add(new Part { name = filter.name, mesh = filter.sharedMesh, skin = skin, source = source, posed = posed,
+                    sourceEquipment = original.Select(toEquipment.MultiplyPoint3x4).ToArray(), componentSizes = ComponentSizes(filter.sharedMesh), movingWeight = moving, isCase = isCase });
+            }
+            return parts.ToArray();
+        }
+
+        static void CheckSeams(Part[] parts, Pair output, float anchorZ)
+        {
+            var box = parts.FirstOrDefault(p => p.isCase); if (box == null) return;
+            var grid = new NearestGrid(box.source, .006f);
+            var matches = new List<SeamEvidence>(); var caseLocal = box.mesh.vertices;
+            foreach (var part in parts.Where(p => !p.isCase))
+            {
+                var local = part.mesh.vertices;
+                for (int i = 0; i < part.source.Length; i++)
+                {
+                float before = grid.Find(part.source[i], .006f, out int other); if (other < 0) continue;
+                float after = Vector3.Distance(part.posed[i], box.posed[other]); output.sourceSeamMatches++;
+                output.maximumSourceSeamGap = Mathf.Max(output.maximumSourceSeamGap, before);
+                output.maximumPosedSeamGap = Mathf.Max(output.maximumPosedSeamGap, after);
+                output.maximumSeamGapGrowth = Mathf.Max(output.maximumSeamGapGrowth, after - before);
+                bool tiny = part.componentSizes[i] <= 8 || box.componentSizes[other] <= 8;
+                bool rear = !tiny && Mathf.Abs(part.sourceEquipment[i].z - anchorZ) < .003f &&
+                    part.movingWeight[i] < .001f && box.movingWeight[other] < .001f;
+                if (tiny) output.tinyFragmentSeamMatches++;
+                if (rear)
+                {
+                    output.rearCutSeamMatches++;
+                    output.maximumRearCutSourceGap = Mathf.Max(output.maximumRearCutSourceGap, before);
+                    output.maximumRearCutPosedGap = Mathf.Max(output.maximumRearCutPosedGap, after);
+                    output.maximumRearCutGapGrowth = Mathf.Max(output.maximumRearCutGapGrowth, after - before);
+                }
+                matches.Add(new SeamEvidence { harnessPart = part.name, casePart = box.name, harnessVertex = i, caseVertex = other,
+                    harnessComponentVertices = part.componentSizes[i], caseComponentVertices = box.componentSizes[other], rearCutCandidate = rear, tinyOriginalFragment = tiny,
+                    harnessMeshPoint = local[i], caseMeshPoint = caseLocal[other], sourceHarnessPoint = part.source[i],
+                    sourceCasePoint = box.source[other], posedHarnessPoint = part.posed[i], posedCasePoint = box.posed[other],
+                    harnessMovingWeight = part.movingWeight[i], caseMovingWeight = box.movingWeight[other], sourceGap = before,
+                    posedGap = after, gapGrowth = after - before });
+                }
+            }
+            output.largestSeamGaps = matches.OrderByDescending(s => s.gapGrowth).Take(20).ToArray();
+        }
+
+        static int[] ComponentSizes(Mesh mesh)
+        {
+            var points = mesh.vertices; var triangles = mesh.triangles; int[] parent = Enumerable.Range(0, points.Length).ToArray();
+            int Find(int a) { while (parent[a] != a) { parent[a] = parent[parent[a]]; a = parent[a]; } return a; }
+            void Union(int a, int b) { parent[Find(a)] = Find(b); }
+            for (int i = 0; i < triangles.Length; i += 3) { Union(triangles[i], triangles[i + 1]); Union(triangles[i + 1], triangles[i + 2]); }
+            var duplicates = new Dictionary<Vector3Int, int>();
+            for (int i = 0; i < points.Length; i++)
+            {
+                var p = points[i]; var key = new Vector3Int(Mathf.RoundToInt(p.x * 100000), Mathf.RoundToInt(p.y * 100000), Mathf.RoundToInt(p.z * 100000));
+                if (duplicates.TryGetValue(key, out int other)) Union(i, other); else duplicates[key] = i;
+            }
+            var counts = new Dictionary<int, int>();
+            for (int i = 0; i < parent.Length; i++) { int key = Find(i); counts[key] = counts.TryGetValue(key, out int count) ? count + 1 : 1; }
+            return Enumerable.Range(0, parent.Length).Select(i => counts[Find(i)]).ToArray();
+        }
+
+        static IEnumerable<MetalGroup> MetalGroups(Part part, Dictionary<string, Texture2D> cache)
+        {
+            if (part.skin == null || part.skin.sharedMaterials.Length == 0 || part.mesh.uv.Length != part.source.Length) yield break;
+            var material = part.skin.sharedMaterials[0];
+            foreach (var ids in MetalVertexGroups(part.mesh, material, cache))
+            {
+                var source = Bounds(ids.Select(i => part.source[i]).ToArray()); var posed = Bounds(ids.Select(i => part.posed[i]).ToArray());
+                float min = ids.Min(i => part.movingWeight[i]), max = ids.Max(i => part.movingWeight[i]);
+                yield return new MetalGroup { part = part.name, vertices = ids.Length, minimumMovingWeight = min, maximumMovingWeight = max,
+                    weightRange = max - min, sourceMinimum = source.minimum, sourceMaximum = source.maximum, posedMinimum = posed.minimum, posedMaximum = posed.maximum };
+            }
+        }
+
+        /// <summary>Reads connected metallic-atlas groups without modifying the mesh, material or importer.</summary>
+        public static int[][] FindMetalVertexGroups(Mesh source, Material material)
+        {
+            var cache = new Dictionary<string, Texture2D>();
+            try { return MetalVertexGroups(source, material, cache); }
+            finally { foreach (var atlas in cache.Values) UnityEngine.Object.DestroyImmediate(atlas); }
+        }
+        static int[][] MetalVertexGroups(Mesh mesh, Material material, Dictionary<string, Texture2D> cache)
+        {
+            var texture = material != null ? material.GetTexture("_MetallicGlossMap") : null;
+            string path = texture != null ? AssetDatabase.GetAssetPath(texture) : null;
+            if (string.IsNullOrEmpty(path) || !File.Exists(path) || mesh.uv.Length != mesh.vertexCount) return Array.Empty<int[]>();
+            if (!cache.TryGetValue(path, out var atlas))
+            {
+                atlas = new Texture2D(2, 2, TextureFormat.RGBA32, false, true);
+                ImageConversion.LoadImage(atlas, File.ReadAllBytes(path), false); cache[path] = atlas;
+            }
+            var uv = mesh.uv; var points = mesh.vertices; var metal = uv.Select(p => atlas.GetPixelBilinear(p.x, p.y).r > .55f).ToArray();
+            int[] parent = Enumerable.Range(0, metal.Length).ToArray();
+            int Find(int a) { while (parent[a] != a) { parent[a] = parent[parent[a]]; a = parent[a]; } return a; }
+            void Union(int a, int b) { if (metal[a] && metal[b]) parent[Find(a)] = Find(b); }
+            var triangles = mesh.triangles;
+            for (int i = 0; i < triangles.Length; i += 3) { Union(triangles[i], triangles[i + 1]); Union(triangles[i + 1], triangles[i + 2]); Union(triangles[i + 2], triangles[i]); }
+            // Merge duplicate UV-seam vertices by their unchanged source position.
+            var duplicate = new Dictionary<Vector3Int, int>();
+            for (int i = 0; i < metal.Length; i++) if (metal[i])
+            {
+                var p = points[i]; var key = new Vector3Int(Mathf.RoundToInt(p.x * 100000), Mathf.RoundToInt(p.y * 100000), Mathf.RoundToInt(p.z * 100000));
+                if (duplicate.TryGetValue(key, out int other)) Union(i, other); else duplicate[key] = i;
+            }
+            return Enumerable.Range(0, metal.Length).Where(i => metal[i]).GroupBy(Find).Select(g => g.ToArray()).Where(g => g.Length >= 8).ToArray();
+        }
+        static Cloud Bounds(Vector3[] points)
+        {
+            if (points.Length == 0) return new Cloud();
+            return new Cloud { vertices = points.Length, minimum = new Vector3(points.Min(p => p.x), points.Min(p => p.y), points.Min(p => p.z)),
+                maximum = new Vector3(points.Max(p => p.x), points.Max(p => p.y), points.Max(p => p.z)) };
+        }
+    }
+}

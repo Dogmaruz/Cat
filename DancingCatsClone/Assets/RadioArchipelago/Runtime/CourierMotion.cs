@@ -10,6 +10,7 @@ namespace RadioArchipelago
     [DisallowMultipleComponent]
     public sealed class CourierMotion : MonoBehaviour
     {
+        private const float AirTurnDuration = .65f;
         // Preserve the first-generation prefab bindings until imported replacements are authored.
         [SerializeField] private Transform visualPivot;
         [SerializeField] private Transform antennaPivot;
@@ -25,19 +26,24 @@ namespace RadioArchipelago
         private float elapsed, phase, facing, facingTarget, flightDuration = .45f, flightProgress;
         private float landingTime = 10, landingStrength, holdDuration = 2.6f;
         private float bodyPitch, bodyRoll, bodyStretch, armLeftLift, armRightLift, footLeftLift, footRightLift;
-        private float spinAngle, headTilt, bob;
+        private float spinAngle, headTilt, bob, finishStartSpin;
         private float hopSide = -1, hopYaw, hopOffset;
         private float turnRate, turnAcceleration, rotorAngle, rotorWorldSpeed, rotorBlend, rotorReturnSpeed;
         private Vector3 previousPosition, movementVelocity, movementAcceleration;
         private bool movementCaptured;
         private int blinkIndex = -1;
         private float blinkRest;
-        private enum Pose { Idle, Jump, Hold, Celebrate }
+        private enum Pose { Idle, Jump, Hold, Celebrate, FinishHover, FinishDeparture }
 
         public bool ManualSimulation { get; set; }
         public bool IsPaused => paused;
+        public bool IsFinishHover => pose == Pose.FinishHover;
+        public bool IsFinishDeparture => pose == Pose.FinishDeparture;
 
 #if UNITY_EDITOR
+        public Transform EditorVisualPivot => rig != null ? rig.visualPivot : visualPivot;
+        public Quaternion EditorVisualRestRotation => visual != null ? visual.rotation :
+            EditorVisualPivot != null ? EditorVisualPivot.localRotation : Quaternion.identity;
         [Serializable]
         public struct EditorTimingPose
         {
@@ -83,6 +89,7 @@ namespace RadioArchipelago
             footLeft = Part.Create(rig?.leftFoot, pivot); footRight = Part.Create(rig?.rightFoot, pivot);
             antennaSwivel = Part.Create(rig?.antennaYawPivot, pivot);
             var weighted = rig != null ? WeightedBones(pivot) : null;
+            if (rig != null) AddRigidCentroids(rig.antennaChain, weighted);
             antennas = MakeParts(ActiveNodes(rig != null ? rig.antennaChain : Single(antennaPivot), weighted), pivot, weighted);
             crests = MakeParts(ActiveNodes(rig?.crestChain, weighted), pivot, weighted);
             scarves = MakeParts(ActiveNodes(rig != null ? rig.scarfChain : Single(scarfPivot), weighted), pivot, weighted);
@@ -98,7 +105,7 @@ namespace RadioArchipelago
             if (!CaptureRestPose()) return;
             elapsed = phase = facing = facingTarget = flightProgress = 0;
             bodyPitch = bodyRoll = bodyStretch = armLeftLift = armRightLift = footLeftLift = footRightLift = 0;
-            spinAngle = headTilt = bob = 0;
+            spinAngle = headTilt = bob = finishStartSpin = 0;
             hopSide = -1; hopYaw = hopOffset = 0; nextHopLeft = true;
             turnRate = turnAcceleration = rotorAngle = rotorWorldSpeed = rotorBlend = rotorReturnSpeed = 0;
             previousPosition = transform.position; movementVelocity = movementAcceleration = Vector3.zero; movementCaptured = true;
@@ -141,6 +148,21 @@ namespace RadioArchipelago
             nextRideLeft = !nextRideLeft;
         }
         public void PlayEnd() { pose = Pose.Celebrate; elapsed = 0; externallyTimedFlight = false; }
+        /// <summary>Looping reward-passage pose; the island alone owns clearance above its meadow.</summary>
+        public void PlayFinishHover()
+        {
+            // Settle the previous flight's heading by its shortest arc, then
+            // collect looking forward along the meadow with a quiet hover.
+            finishStartSpin = Mathf.DeltaAngle(0, facing + spinAngle + hopYaw);
+            facing = facingTarget = hopYaw = hopOffset = 0;
+            spinAngle = finishStartSpin;
+            pose = Pose.FinishHover; elapsed = 0; externallyTimedFlight = false;
+        }
+        public void PlayFinishDeparture()
+        {
+            facing = facingTarget = spinAngle = hopYaw = hopOffset = 0;
+            pose = Pose.FinishDeparture; elapsed = 0; externallyTimedFlight = false;
+        }
         public void SetFacing(float horizonDegrees) { if (Finite(horizonDegrees)) facingTarget = Mathf.Clamp(horizonDegrees, -70, 70); }
         public void SetPaused(bool value)
         {
@@ -186,7 +208,8 @@ namespace RadioArchipelago
             elapsed += dt; phase += dt; landingTime += dt;
             if (pose == Pose.Jump && !externallyTimedFlight) flightProgress = elapsed / flightDuration;
             float smooth = 1 - Mathf.Exp(-19 * dt);
-            facing = Mathf.Lerp(facing, facingTarget, 1 - Mathf.Exp(-12 * dt));
+            if (pose == Pose.FinishHover || pose == Pose.FinishDeparture) facing = facingTarget = 0;
+            else facing = Mathf.Lerp(facing, facingTarget, 1 - Mathf.Exp(-12 * dt));
             float pitch = 0, roll = Mathf.Sin(phase * 2.1f) * 1.3f, stretch = 0;
             float liftL = 2, liftR = 2, footL = 0, footR = 0, turn = 0, nod = 0;
             float height = Mathf.Sin(phase * 3.2f) * .012f, wind = 0, rotorDemand = 0, rotorDirection = -1;
@@ -210,6 +233,11 @@ namespace RadioArchipelago
                 case Pose.Jump:
                     float p = Mathf.Clamp01(flightProgress), airborne = Mathf.Sin(p * Mathf.PI);
                     float longFlight = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.6f, 1.2f, flightDuration));
+                    // A measured long air arc owns exactly one complete turn,
+                    // with the same eased clock as a supported-tile turn. Keep
+                    // the takeoff's alternating foot gesture and direction.
+                    if (flightDuration >= AirTurnDuration)
+                        turn = hopSide * 360 * Mathf.SmoothStep(0, 1, p);
                     // Readable shape changes across the complete measured arc:
                     // release the planted pose, stretch upward, gather at the
                     // apex, extend for the next foot, then prepare for contact.
@@ -264,6 +292,25 @@ namespace RadioArchipelago
                     footL = Mathf.Max(0, Mathf.Sin(elapsed * 7)) * .06f; footR = Mathf.Max(0, -Mathf.Sin(elapsed * 7)) * .06f;
                     nod = Mathf.Sin(elapsed * 5) * 5;
                     break;
+                case Pose.FinishHover:
+                    turn = finishStartSpin * (1 - Mathf.SmoothStep(0, 1, Mathf.Clamp01(elapsed / .35f)));
+                    height = .04f + Mathf.Sin(elapsed * 4.2f) * .025f;
+                    roll = Mathf.Sin(elapsed * 2.8f) * 3;
+                    pitch = -3; stretch = Mathf.Sin(elapsed * 7) * .035f;
+                    liftL = 26 + Mathf.Sin(elapsed * 4.2f) * 6;
+                    liftR = 26 - Mathf.Sin(elapsed * 4.2f) * 6;
+                    footL = .025f + Mathf.Max(0, Mathf.Sin(elapsed * 4.2f)) * .015f;
+                    footR = .025f + Mathf.Max(0, -Mathf.Sin(elapsed * 4.2f)) * .015f;
+                    nod = -3; wind = 12; rotorDemand = 1;
+                    break;
+                case Pose.FinishDeparture:
+                    pitch = -16 * Mathf.SmoothStep(0, 1, Mathf.Clamp01(elapsed / .4f));
+                    roll = Mathf.Sin(elapsed * 5) * 1.5f;
+                    stretch = .12f * Gaussian(elapsed, .17f, .15f);
+                    liftL = liftR = 35 + Mathf.Sin(elapsed * 16) * 8;
+                    footL = footR = .12f;
+                    nod = -4; wind = 20; rotorDemand = 1;
+                    break;
             }
             bodyPitch = Mathf.Lerp(bodyPitch, pitch, smooth); bodyRoll = Mathf.Lerp(bodyRoll, roll, smooth);
             // Flight progress is already an eased, authoritative visual clock.
@@ -275,7 +322,7 @@ namespace RadioArchipelago
             armLeftLift = Mathf.Lerp(armLeftLift, liftL, armBlend); armRightLift = Mathf.Lerp(armRightLift, liftR, armBlend);
             footLeftLift = Mathf.Lerp(footLeftLift, footL, smooth); footRightLift = Mathf.Lerp(footRightLift, footR, smooth);
             headTilt = Mathf.Lerp(headTilt, nod, smooth); bob = Mathf.Lerp(bob, height, smooth);
-            if (pose == Pose.Hold) spinAngle = turn;
+            if (pose == Pose.Hold || pose == Pose.FinishHover || pose == Pose.FinishDeparture || pose == Pose.Jump && flightDuration >= AirTurnDuration) spinAngle = turn;
             else spinAngle = Mathf.Lerp(Mathf.DeltaAngle(0, spinAngle), 0, 1 - Mathf.Exp(-13 * dt));
             float yawDelta = Mathf.DeltaAngle(previousYaw, facing + spinAngle + hopYaw);
             float previousRate = turnRate;
@@ -294,6 +341,8 @@ namespace RadioArchipelago
             float hingeLag = Mathf.Clamp(-turnRate * .04f - turnAcceleration * .003f, -32, 32);
             float clothLag = Mathf.Clamp(-turnRate * .11f - turnAcceleration * .009f, -52, 52);
             StepChain(antennas, dt, bodyPitch * -.75f - impact * 100 + verticalLag * .45f, sway + hingeLag, 8.2f, .40f,
+                targetLimit: Mathf.Min(32, rig != null ? rig.antennaBendLimit : 40),
+                bendLimit: rig != null ? rig.antennaBendLimit : 40,
                 trailingForce: trailingForce * .85f);
             StepChain(crests, dt, bodyPitch * -.7f - impact * 65, -sway * .8f, 12, .55f,
                 trailingForce: trailingForce * .35f);
@@ -322,8 +371,8 @@ namespace RadioArchipelago
         private void ApplyPose()
         {
             ApplyFramePose();
-            armLeft?.Rotate(-Mathf.Sin(phase * 3) * 3, 0, -armLeftLift);
-            armRight?.Rotate(Mathf.Sin(phase * 3) * 3, 0, armRightLift);
+            armLeft?.Rotate(-Mathf.Sin(phase * 3) * 3, 0, armLeftLift * armLeft.ShoulderSide);
+            armRight?.Rotate(Mathf.Sin(phase * 3) * 3, 0, armRightLift * armRight.ShoulderSide);
             if (footLeft != null) { footLeft.Rotate(-footLeftLift * 130, 0, -bodyRoll * .4f); footLeft.Lift(footLeftLift); }
             if (footRight != null) { footRight.Rotate(-footRightLift * 130, 0, -bodyRoll * .4f); footRight.Lift(footRightLift); }
             ApplyChains(antennas); ApplyChains(crests); ApplyChains(scarves);
@@ -345,7 +394,7 @@ namespace RadioArchipelago
             float width = 1 / Mathf.Sqrt(1 + stretch);
             visual.node.localScale = Vector3.Scale(visual.scale, new Vector3(width, 1 + stretch, width));
             head?.Rotate(headTilt, 0, -bodyRoll * .15f);
-            antennaSwivel?.Rotate(0, rotorAngle, 0);
+            antennaSwivel?.RotateAroundFrameAxis(rotorAngle, rig != null ? rig.antennaSpinAxis : Vector3.up);
         }
         private float ImpactCompression()
         {
@@ -460,6 +509,24 @@ namespace RadioArchipelago
             foreach (var bone in new System.Collections.Generic.List<Transform>(result.Keys)) result[bone] /= sums[bone];
             return result;
         }
+        private static void AddRigidCentroids(Transform[] nodes, System.Collections.Generic.Dictionary<Transform, Vector3> weighted)
+        {
+            if (nodes == null || weighted == null) return;
+            foreach (var node in nodes)
+            {
+                if (node == null || weighted.ContainsKey(node)) continue;
+                Vector3 center = Vector3.zero; float total = 0;
+                foreach (var renderer in node.GetComponentsInChildren<MeshRenderer>(false))
+                {
+                    if (!renderer.enabled) continue;
+                    var size = renderer.bounds.size;
+                    float volume = Mathf.Max(.00001f, size.x * size.y * size.z);
+                    center += renderer.bounds.center * volume; total += volume;
+                }
+                if (total > 0) weighted.Add(node, center / total);
+            }
+        }
+
         private static Transform[] ActiveNodes(Transform[] nodes, System.Collections.Generic.Dictionary<Transform, Vector3> weighted)
         {
             if (nodes == null || weighted == null || weighted.Count == 0) return nodes;
@@ -471,6 +538,9 @@ namespace RadioArchipelago
             {
                 if (node == null) continue;
                 bool active = weighted.ContainsKey(node);
+                // Modular equipment can carry rigid meshes rather than skin weights.
+                // Those authored joints still move visible geometry and must retain their spring share.
+                if (!active && node.GetComponentInChildren<MeshRenderer>(true) != null) active = true;
                 if (!active)
                     foreach (var descendant in nodes)
                         if (descendant != null && weighted.ContainsKey(descendant) && descendant.IsChildOf(node))
@@ -532,6 +602,7 @@ namespace RadioArchipelago
             public readonly Transform node;
             public readonly Vector3 position, scale;
             public readonly Quaternion rotation;
+            public readonly float ShoulderSide;
             private readonly Vector3 rightAxis, upAxis, forwardAxis, parentUp;
             private Vector3 inertialRight, inertialUp, inertialForward;
             private Quaternion inertialFrameRotation;
@@ -544,17 +615,29 @@ namespace RadioArchipelago
             public Part(Transform target, Transform frame)
             {
                 node = target; position = target.localPosition; rotation = target.localRotation; scale = target.localScale;
+                ShoulderSide = frame.InverseTransformPoint(target.position).x < 0 ? -1 : 1;
                 // FBX bone axes vary: use the visual frame expressed in this bone's rest space.
                 rightAxis = target.InverseTransformDirection(frame.right).normalized;
                 upAxis = target.InverseTransformDirection(frame.up).normalized;
                 forwardAxis = target.InverseTransformDirection(frame.forward).normalized;
-                parentUp = target.parent != null ? target.parent.InverseTransformDirection(frame.up).normalized : frame.up;
+                // Lift is expressed in visual-local metres. Imported FBX bone parents can
+                // have a 100x unit conversion: a normalized direction would turn a 2 cm
+                // foot lift into 2 m and pull its weighted hip surface out of the body.
+                // Preserve the full visual-to-parent vector scale; rotation axes above stay unit vectors.
+                parentUp = target.parent != null
+                    ? target.parent.InverseTransformVector(frame.TransformVector(Vector3.up))
+                    : frame.TransformVector(Vector3.up);
             }
             public static Part Create(Transform target, Transform frame) => target != null ? new Part(target, frame) : null;
             public void Rotate(float pitch, float yaw, float roll)
             {
                 node.localRotation = rotation * Quaternion.AngleAxis(pitch, rightAxis)
                     * Quaternion.AngleAxis(yaw, upAxis) * Quaternion.AngleAxis(roll, forwardAxis);
+            }
+            public void RotateAroundFrameAxis(float degrees, Vector3 axis)
+            {
+                Vector3 localAxis = rightAxis * axis.x + upAxis * axis.y + forwardAxis * axis.z;
+                node.localRotation = rotation * Quaternion.AngleAxis(degrees, localAxis.sqrMagnitude > .001f ? localAxis.normalized : upAxis);
             }
             public void SetChainFrame(Transform anchor, Vector3 worldLever)
             {

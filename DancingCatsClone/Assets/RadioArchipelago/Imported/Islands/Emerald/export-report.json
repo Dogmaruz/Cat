@@ -1,0 +1,146 @@
+{
+  "pass_export": true,
+  "source_blend_sha256": "2e176284a43d91c3dfb6bceee6ff8ef0cab81686962bf79e3fa9d535e41bbf6d",
+  "source_triangles": 23596444,
+  "exported_triangles": 4270108,
+  "exported_vertices": 4160698,
+  "mesh_batches": 301,
+  "material_buckets": {
+    "Terrain": 21210,
+    "Rocks": 504866,
+    "Road": 17668,
+    "Bridge": 412,
+    "Architecture": 377668,
+    "Wood": 725192,
+    "Metal": 90900,
+    "Water": 8892,
+    "Foliage": 2523300
+  },
+  "optimization": {
+    "leaves_seen": 186996,
+    "leaves_retained": 63695,
+    "bough_hulls": 2832
+  },
+  "leaf_keep": 0.34,
+  "branch_ratio": 0.16,
+  "spatial_cell_meters": 24.0,
+  "max_batch_vertices": 58000,
+  "fbx_bytes": 144346828,
+  "fbx_sha256": "018c2a75eb6ac8110cc6e817f6a5690ebe1a635a7700276dd29d957cb56b37c5",
+  "route_length": 514.9264139860549,
+  "route_points": 644,
+  "anchors": [
+    {
+      "name": "RA_Origin",
+      "blender": [
+        0,
+        0,
+        0
+      ],
+      "expected_unity": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "RA_X10",
+      "blender": [
+        10,
+        0,
+        0
+      ],
+      "expected_unity": [
+        10,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "RA_North10",
+      "blender": [
+        0,
+        10,
+        0
+      ],
+      "expected_unity": [
+        0,
+        0,
+        -10
+      ]
+    }
+  ],
+  "fbx_export_settings": {
+    "filepath": "C:\\Users\\Derek\\Games_develop\\Cat\\ArtSource\\RadioArchipelago\\Islands\\V4\\UnityExport\\Output\\emerald_island.pending.fbx",
+    "use_selection": true,
+    "axis_forward": "-Z",
+    "axis_up": "Y",
+    "global_scale": 1,
+    "apply_unit_scale": true,
+    "apply_scale_options": "FBX_SCALE_UNITS",
+    "bake_space_transform": true,
+    "use_mesh_modifiers": false,
+    "mesh_smooth_type": "OFF",
+    "use_triangles": true,
+    "add_leaf_bones": false,
+    "bake_anim": false,
+    "path_mode": "STRIP",
+    "use_custom_props": true,
+    "colors_type": "LINEAR"
+  },
+  "roundtrip_verified": false,
+  "unity_import_verified": false,
+  "render_equivalence_claimed": false,
+  "elapsed_seconds": 70.52,
+  "roundtrip": {
+    "mesh_batches": 301,
+    "triangles": 4163070,
+    "colored_meshes": 301,
+    "anchors": [
+      {
+        "name": "RA_Origin",
+        "blender_roundtrip_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "error_meters": 0.0
+      },
+      {
+        "name": "RA_X10",
+        "blender_roundtrip_position": [
+          10.0,
+          0.0,
+          0.0
+        ],
+        "error_meters": 0.0
+      },
+      {
+        "name": "RA_North10",
+        "blender_roundtrip_position": [
+          0.0,
+          10.0,
+          -7.549789984295785e-07
+        ],
+        "error_meters": 7.549789984295785e-07
+      }
+    ],
+    "bank_uv_max": 1.0,
+    "road_uv0_max": 514.9263916015625,
+    "vertex_color_min": 0.004400849808007479,
+    "vertex_color_max": 0.9717994332313538,
+    "material_buckets": {
+      "Architecture": 377668,
+      "Bridge": 412,
+      "Foliage": 2523300,
+      "Metal": 90900,
+      "Road": 17668,
+      "Rocks": 504864,
+      "Terrain": 21210,
+      "Water": 8892,
+      "Wood": 618156
+    },
+    "theoretical_triangles": 4270108,
+    "coordinate_note": "Blender FBX reimport recovers Blender source axes; Unity anchor validation is separate."
+  }
+}

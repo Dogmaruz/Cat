@@ -22,6 +22,9 @@ namespace RadioArchipelago
             {
                 foreach (var renderer in renderers)
                 {
+                    if (!renderer.enabled || !renderer.gameObject.activeInHierarchy) continue;
+                    // The modular case, hats and rotors must never determine the body's presentation scale.
+                    if (bodyOnly && renderer.GetComponentInParent<CourierEquipmentRig>() != null) continue;
                     if (renderer is SkinnedMeshRenderer skin && skin.sharedMesh != null)
                     {
                         if (scratch == null) { scratch = new Mesh { name = "Courier bounds sample" }; vertices = new List<Vector3>(); }

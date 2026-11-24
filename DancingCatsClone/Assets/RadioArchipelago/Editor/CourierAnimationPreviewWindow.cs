@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,38 +9,28 @@ namespace RadioArchipelago.Editor
     public sealed class CourierAnimationPreviewWindow : EditorWindow
     {
         private const string CatalogPath = "Assets/RadioArchipelago/Content/CourierCatalog.asset";
-        private static readonly string[] States =
-        {
-            "Ожидание — переступание и приветствие", "Короткий прыжок", "Долгий перелёт",
-            "Приземление и пружина", "Скольжение и поворот", "Радость", "Моргание"
-        };
+        private static readonly string[] States = CourierShowcaseTimeline.Clips.Select(c => c.label).ToArray();
         private static readonly string[] Views = { "Спереди", "Справа", "Сзади", "Слева", "¾" };
         private static readonly float[] ViewAngles = { 0, 90, 180, 270, 24 };
-        private static readonly float[] Durations = { 7.2f, 1.15f, 3.15f, 1.1f, 3.1f, 3.4f, .65f };
-        private static readonly string[] Descriptions =
-        {
-            "Переступает с ноги на ногу, дышит, моргает и иногда машет рукой. Полный цикл — 7,2 с.",
-            "Короткая дуга: отталкивание, полёт и мягкое сжатие после касания плитки.",
-            "Длинная дуга: заметные зеркальные махи лапами от плеч, свободный шарф и инерция антенны.",
-            "Мягкое сжатие корпуса и упругий возврат; вторичные детали продолжают движение.",
-            "Баланс на длинной плитке и полный плавный оборот вокруг своей оси.",
-            "Праздничные подскоки и короткие махи лапами после финиша.",
-            "Крупно показывает моргание и восстановление открытых глаз."
-        };
+        private static readonly float[] Durations = CourierShowcaseTimeline.Clips.Select(c => c.duration).ToArray();
+        private static readonly string[] Descriptions = CourierShowcaseTimeline.Clips.Select(c => c.description).ToArray();
 
         [SerializeField] private int courierIndex, stateIndex;
         [SerializeField] private bool playing = true, loop = true;
         [SerializeField] private float speed = 1, yaw = 24, elevation = 7, zoom = 1;
+        [SerializeField] private bool fullEquipmentFrame;
+        [SerializeField] private bool showScarf;
         private CourierCatalog catalog;
         private string[] courierNames = Array.Empty<string>();
         private PreviewRenderUtility preview;
         private CourierPreviewSkinBake skinBake;
         private GameObject stage, actor;
         private CourierMotion motion;
-        private Bounds modelBounds;
+        private CourierShowcaseTimeline timeline;
+        private Bounds modelBounds, equipmentBounds;
         private double lastUpdate;
         private float stateTime;
-        private bool landed, dragging;
+        private bool dragging;
         private string problem;
         private GUIStyle titleStyle, noteStyle;
         private int dragControl;
@@ -128,6 +119,10 @@ namespace RadioArchipelago.Editor
                 preview.AddSingleGO(stage);
                 actor = Instantiate(definition.prefab, stage.transform, false);
                 actor.name = "Preview_" + definition.id;
+                var wardrobe = actor.GetComponent<CourierWardrobeRig>();
+                if (wardrobe != null)
+                    wardrobe.Apply(catalog.FindEquipment(definition.defaultBackpackId, CourierEquipmentKind.Backpack), null,
+                        showScarf ? catalog.FindEquipment(definition.defaultScarfId, CourierEquipmentKind.Scarf) : null);
                 foreach (var node in actor.GetComponentsInChildren<Transform>(true)) node.gameObject.hideFlags = HideFlags.HideAndDontSave;
                 foreach (var source in actor.GetComponentsInChildren<AudioSource>(true)) source.enabled = false;
                 foreach (var animator in actor.GetComponentsInChildren<Animator>(true)) animator.enabled = false;
@@ -139,8 +134,12 @@ namespace RadioArchipelago.Editor
                 motion.ManualSimulation = true; motion.ResetMotion();
                 var renderers = actor.GetComponentsInChildren<Renderer>(true);
                 if (renderers.Length == 0) throw new InvalidOperationException("У персонажа нет видимой модели.");
-                modelBounds = CourierVisualBounds.Measure(renderers);
+                equipmentBounds = CourierVisualBounds.Measure(renderers);
+                var bodySkins = actor.GetComponentsInChildren<SkinnedMeshRenderer>(true)
+                    .Where(r => r.GetComponentInParent<CourierEquipmentRig>() == null).Cast<Renderer>().ToArray();
+                modelBounds = CourierVisualBounds.Measure(bodySkins.Length > 0 ? bodySkins : renderers);
                 skinBake = new CourierPreviewSkinBake(actor);
+                timeline = new CourierShowcaseTimeline(stage.transform, actor, motion);
                 problem = null;
                 RestartState();
             }
@@ -151,7 +150,7 @@ namespace RadioArchipelago.Editor
         private void DisposePreview()
         {
             skinBake?.Dispose(); skinBake = null;
-            motion = null; actor = null; stage = null;
+            motion = null; timeline = null; actor = null; stage = null;
             if (preview != null) { preview.Cleanup(); preview = null; }
             if (dragging && GUIUtility.hotControl == dragControl) GUIUtility.hotControl = 0;
             dragging = false;
@@ -159,22 +158,10 @@ namespace RadioArchipelago.Editor
 
         private void RestartState()
         {
-            stateTime = 0; landed = false;
-            if (motion == null) return;
-            SetStagePose(0);
-            motion.ResetMotion(); motion.ManualSimulation = true;
-            switch (stateIndex)
-            {
-                case 1: motion.PlayJump(.45f); motion.SetFlightProgress(0); break;
-                case 2: motion.PlayJump(2.4f); motion.SetFlightProgress(0); break;
-                case 3: motion.PlayIdle(); motion.PlayLanding(1); break;
-                case 4: motion.PlayHold(false, 2.6f, true); break;
-                case 5: motion.PlayEnd(); break;
-                default: motion.PlayIdle(); break;
-            }
-            if (stateIndex == 6) StepMotion(1.35f);
+            stateTime = 0;
+            if (motion == null || timeline == null) return;
+            timeline.Reset(stateIndex);
             motion.SetPaused(!playing);
-            SetStagePose(stateTime);
             lastUpdate = EditorApplication.timeSinceStartup;
         }
 
@@ -198,42 +185,10 @@ namespace RadioArchipelago.Editor
 
         private void Advance(float seconds)
         {
-            if (motion == null) return;
+            if (motion == null || timeline == null) return;
             motion.SetPaused(false);
-            while (seconds > .000001f)
-            {
-                float dt = Mathf.Min(seconds, 1f / 120), next = stateTime + dt;
-                float flight = stateIndex == 1 ? .45f : stateIndex == 2 ? 2.4f : 0;
-                if (flight > 0 && !landed)
-                {
-                    motion.SetFlightProgress(Mathf.Clamp01(next / flight));
-                    if (next >= flight) { motion.PlayLanding(1); motion.PlayIdle(); landed = true; }
-                }
-                SetStagePose(next);
-                motion.SimulateSprings(dt); stateTime = next; seconds -= dt;
-            }
+            timeline.Advance(seconds); stateTime = timeline.Time;
             motion.SetPaused(!playing);
-            SetStagePose(stateTime);
-        }
-
-        private void StepMotion(float seconds)
-        {
-            while (seconds > .000001f)
-            {
-                float dt = Mathf.Min(seconds, 1f / 120); motion.SimulateSprings(dt); seconds -= dt;
-            }
-        }
-
-        private void SetStagePose(float time)
-        {
-            if (stage == null) return;
-            float flight = stateIndex == 1 ? .45f : stateIndex == 2 ? 2.4f : 0;
-            float p = flight > 0 ? Mathf.Clamp01(time / flight) : 0;
-            // Only this disposable Editor stage displays a sample arc. The prefab root stays untouched.
-            float height = flight > 0 ? 4 * p * (1 - p) * (stateIndex == 1 ? .5f : .9f) : 0;
-            float lateral = flight > 0 && p < 1 ? Mathf.Sin(p * Mathf.PI * 2) * .22f : 0;
-            stage.transform.position = new Vector3(lateral, height, 0);
-            motion?.SetFacing(lateral * 100);
         }
 
         private void Seek(float value)
@@ -294,10 +249,13 @@ namespace RadioArchipelago.Editor
                     for (int i = 0; i < Views.Length; i++)
                         if (GUILayout.Button(Views[i], EditorStyles.miniButton)) { yaw = ViewAngles[i]; elevation = i == 4 ? 7 : 0; zoom = 1; Repaint(); }
                 }
+                fullEquipmentFrame = EditorGUILayout.ToggleLeft("Показывать рюкзак и антенну целиком", fullEquipmentFrame);
+                bool nextScarf = EditorGUILayout.ToggleLeft("Показать шарф персонажа", showScarf);
+                if (nextScarf != showScarf) { showScarf = nextScarf; Rebuild(); }
             }
             Rect area = GUILayoutUtility.GetRect(100, 100, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
             DrawPreview(area);
-            EditorGUILayout.LabelField("Потяни мышью для поворота · колесо — масштаб. Музыка и игровая сцена не меняются.", noteStyle);
+            EditorGUILayout.LabelField("Потяни мышью для поворота · колесо — масштаб. В крупном виде верх антенны может выходить из кадра. Музыка и игровая сцена не меняются.", noteStyle);
         }
 
         private void DrawPreview(Rect area)
@@ -307,14 +265,26 @@ namespace RadioArchipelago.Editor
             if (Event.current.type != EventType.Repaint) return;
             EditorGUI.DrawRect(area, new Color(.965f, .949f, .906f, 1));
             if (preview == null || actor == null) return;
-            float headroom = stateIndex == 1 || stateIndex == 2 ? 1f : .15f;
-            var center = modelBounds.center + Vector3.up * headroom * .45f;
+            float headroom = stateIndex == 1 || stateIndex == 2 ? .7f : .15f;
+            var bounds = fullEquipmentFrame ? equipmentBounds : modelBounds;
+            var center = bounds.center + Vector3.up * headroom * .45f;
             float aspect = area.width / area.height;
             preview.camera.aspect = aspect;
-            preview.camera.orthographicSize = Mathf.Max(modelBounds.size.y * .66f + headroom * .5f,
-                Mathf.Max(modelBounds.size.x, modelBounds.size.z) * .7f / aspect) * zoom;
-            preview.camera.transform.position = center + Quaternion.Euler(-elevation, yaw, 0) * Vector3.forward * 8;
-            preview.camera.transform.LookAt(center);
+            if (stateIndex == 12)
+            {
+                preview.camera.orthographic = false; preview.camera.fieldOfView = 60;
+                preview.camera.farClipPlane = 180;
+                preview.camera.transform.position = new Vector3(0, 5, -10);
+                preview.camera.transform.LookAt(new Vector3(0, 2.9f, 0));
+            }
+            else
+            {
+                preview.camera.orthographic = true;
+                preview.camera.orthographicSize = Mathf.Max(bounds.size.y * .78f + headroom * .5f,
+                    Mathf.Max(bounds.size.x, bounds.size.z) * .86f / aspect) * zoom;
+                preview.camera.transform.position = center + Quaternion.Euler(-elevation, yaw, 0) * Vector3.forward * 8;
+                preview.camera.transform.LookAt(center);
+            }
             bool opened = false;
             bool failed = false;
             Texture rendered = null;

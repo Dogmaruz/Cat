@@ -16,13 +16,217 @@ MonoBehaviour:
   entries:
   - id: signal
     displayName: "\u0422\u0438\u043A\u043E"
-    prefab: {fileID: 7627187815518483572, guid: f1fbce8eaa4b520498ff4b5e98b26943, type: 3}
-    icon: {fileID: 21300000, guid: 38f373a2fa35e7c4abaffe5a49043190, type: 3}
+    assetId: Tiko
+    defaultBackpackId: backpack_Tiko
+    defaultScarfId: scarf_TikoCoral
+    prefab: {fileID: 5422466351348760137, guid: 3b4a54c2ddb228c449490ffffd6800b7, type: 3}
+    icon: {fileID: 21300000, guid: e194c7b6261e09346bb9c5266410edcb, type: 3}
   - id: sail
     displayName: "\u041B\u044E\u043C\u0435\u043D"
-    prefab: {fileID: 4616196981068093460, guid: e262966bb2cd2f54bb3e26682d673fd4, type: 3}
-    icon: {fileID: 21300000, guid: fc447b6310527c447b0967a183ad1295, type: 3}
+    assetId: Lumen
+    defaultBackpackId: backpack_Lumen
+    defaultScarfId: 
+    prefab: {fileID: 4117566990691777726, guid: 4c80f4f6fcf99cd4c94a44aaff7327dd, type: 3}
+    icon: {fileID: 21300000, guid: 6f854071aad0c064fa9c0d9611b10a03, type: 3}
   - id: orbit
     displayName: "\u041D\u043E\u0440\u0438"
-    prefab: {fileID: 7594067713679691351, guid: 6e574a820f59aec4caaa4c1ff2db687b, type: 3}
-    icon: {fileID: 21300000, guid: 346e98cb57e83d7499a119f2e0024102, type: 3}
+    assetId: Nori
+    defaultBackpackId: backpack_Nori
+    defaultScarfId: scarf_NoriBlue
+    prefab: {fileID: 8236029108988379476, guid: d4fc87ba283485149903d2d8d4edba62, type: 3}
+    icon: {fileID: 21300000, guid: 9eb8d8091e912b84c916581b4ac8e808, type: 3}
+  - id: fira
+    displayName: "\u0424\u0438\u0440\u0430"
+    assetId: Fira
+    defaultBackpackId: backpack_Fira
+    defaultScarfId: 
+    prefab: {fileID: 4787235870324700098, guid: fef4cd827798546458e0a9135f8383e2, type: 3}
+    icon: {fileID: 21300000, guid: 26ffd77f07dc67546bb5e6872930d397, type: 3}
+  - id: miro
+    displayName: "\u041C\u0438\u0440\u043E"
+    assetId: Miro
+    defaultBackpackId: backpack_Miro
+    defaultScarfId: 
+    prefab: {fileID: 7931778260147592062, guid: 8498673035cd1054eb83d2f5eadb39e3, type: 3}
+    icon: {fileID: 21300000, guid: a6b9ae3c3d7b4b34bb293872190e014f, type: 3}
+  - id: rumi
+    displayName: "\u0420\u0443\u043C\u0438"
+    assetId: Rumi
+    defaultBackpackId: backpack_Rumi
+    defaultScarfId: 
+    prefab: {fileID: 2564010267833979911, guid: 98c5295fecd355840bfef957dee456bb, type: 3}
+    icon: {fileID: 21300000, guid: 09da0512d79cddc46910984e6db91ef9, type: 3}
+  - id: boro
+    displayName: "\u0411\u043E\u0440\u043E"
+    assetId: Boro
+    defaultBackpackId: backpack_Boro
+    defaultScarfId: 
+    prefab: {fileID: 4971414794513633358, guid: 0ee2ac7d85a56194ca3fdae0c0169cc7, type: 3}
+    icon: {fileID: 21300000, guid: d9fdd837de805ac409c850b835705b98, type: 3}
+  - id: soli
+    displayName: "\u0421\u043E\u043B\u0438"
+    assetId: Soli
+    defaultBackpackId: backpack_Soli
+    defaultScarfId: 
+    prefab: {fileID: 7746582723883485248, guid: efe5b607fdd209041b29229a02695a1c, type: 3}
+    icon: {fileID: 21300000, guid: ce6a3bfb29735824cbe253aadc147407, type: 3}
+  - id: vela
+    displayName: "\u0412\u0435\u043B\u0430"
+    assetId: Vela
+    defaultBackpackId: backpack_Vela
+    defaultScarfId: 
+    prefab: {fileID: 1770293842529171969, guid: d287ca0468096ca42aaf87a62a6a9f97, type: 3}
+    icon: {fileID: 21300000, guid: 78f25e9540ef27d4c8df89584be9abb4, type: 3}
+  - id: piko
+    displayName: "\u041F\u0438\u043A\u043E"
+    assetId: Piko
+    defaultBackpackId: backpack_Piko
+    defaultScarfId: 
+    prefab: {fileID: 1221579148872826527, guid: 9ac90c7ea0f229547b2c9bd9f65ca852, type: 3}
+    icon: {fileID: 21300000, guid: 09d460d750b151244bfaee556c5f0f8c, type: 3}
+  equipment:
+  - id: backpack_Boro
+    displayName: "\u0411\u043E\u0440\u043E \xB7 \u041A\u043B\u0430\u0441\u0441\u0438\u043A\u0430"
+    kind: 0
+    prefab: {fileID: 995913954132205178, guid: fd6da3218c5de6949ac0d97c430bdb0d, type: 3}
+    icon: {fileID: 21300000, guid: eb7d500843892c24f98e3bf622e8a27d, type: 3}
+  - id: backpack_Boro_Pulse
+    displayName: "\u0411\u043E\u0440\u043E \xB7 \u042D\u043A\u0441\u043F\u0435\u0434\u0438\u0446\u0438\u044F"
+    kind: 0
+    prefab: {fileID: 4007965723865543646, guid: 1b907691b29445e45adb8487ca82e66f, type: 3}
+    icon: {fileID: 21300000, guid: deb2f0c02c6817147acbeb533f277b98, type: 3}
+  - id: backpack_Fira
+    displayName: "\u0424\u0438\u0440\u0430 \xB7 \u041A\u043B\u0430\u0441\u0441\u0438\u043A\u0430"
+    kind: 0
+    prefab: {fileID: 1789000799246114052, guid: bc10421f7a3a4b9469eb7fb688b16dc2, type: 3}
+    icon: {fileID: 21300000, guid: d148abf3045bb854f966d6b8cae05097, type: 3}
+  - id: backpack_Fira_Beacon
+    displayName: "\u0424\u0438\u0440\u0430 \xB7 \u042D\u043A\u0441\u043F\u0435\u0434\u0438\u0446\u0438\u044F"
+    kind: 0
+    prefab: {fileID: 5066283126179201657, guid: a4dc8f1b8ca35a7488067638aa2a9814, type: 3}
+    icon: {fileID: 21300000, guid: 58ddb91bc38b52b4488c36c468e10e8a, type: 3}
+  - id: backpack_Lumen
+    displayName: "\u041B\u044E\u043C\u0435\u043D \xB7 \u041A\u043B\u0430\u0441\u0441\u0438\u043A\u0430"
+    kind: 0
+    prefab: {fileID: 4542737239663162992, guid: 522d16b5b6418a04c9fc7551ff11aadd, type: 3}
+    icon: {fileID: 21300000, guid: a102209d9d96942428a50c4d48ca91c7, type: 3}
+  - id: backpack_Lumen_Glider
+    displayName: "\u041B\u044E\u043C\u0435\u043D \xB7 \u042D\u043A\u0441\u043F\u0435\u0434\u0438\u0446\u0438\u044F"
+    kind: 0
+    prefab: {fileID: 2067089076904790616, guid: acd64b754d807e74cbbdff1f7068bf96, type: 3}
+    icon: {fileID: 21300000, guid: e2fcd3d46bc222d4db82f47f36ca2894, type: 3}
+  - id: backpack_Miro
+    displayName: "\u041C\u0438\u0440\u043E \xB7 \u041A\u043B\u0430\u0441\u0441\u0438\u043A\u0430"
+    kind: 0
+    prefab: {fileID: 4021060961064974474, guid: bbeb2bf6955529b4a852ccce83bdbd73, type: 3}
+    icon: {fileID: 21300000, guid: 3cf616bf34fc5224bb2c31a355bffc2e, type: 3}
+  - id: backpack_Miro_Garden
+    displayName: "\u041C\u0438\u0440\u043E \xB7 \u042D\u043A\u0441\u043F\u0435\u0434\u0438\u0446\u0438\u044F"
+    kind: 0
+    prefab: {fileID: 354379021754133624, guid: 673d0d64e7ff4254c991c0d8ea086608, type: 3}
+    icon: {fileID: 21300000, guid: 1408069c985f1384394e9f333508e054, type: 3}
+  - id: backpack_Nori
+    displayName: "\u041D\u043E\u0440\u0438 \xB7 \u041A\u043B\u0430\u0441\u0441\u0438\u043A\u0430"
+    kind: 0
+    prefab: {fileID: 3795811509554076009, guid: 5bb613b6b6ed9e047a6196155ea6fe2e, type: 3}
+    icon: {fileID: 21300000, guid: 107e614506a677c48826f45f285072f1, type: 3}
+  - id: backpack_Nori_Nocturne
+    displayName: "\u041D\u043E\u0440\u0438 \xB7 \u042D\u043A\u0441\u043F\u0435\u0434\u0438\u0446\u0438\u044F"
+    kind: 0
+    prefab: {fileID: 2142016418939673600, guid: 94ffc14cba40cc949875a516c9a80799, type: 3}
+    icon: {fileID: 21300000, guid: 2944dd8dbe30dcc4fa1819f584c3d33d, type: 3}
+  - id: backpack_Piko
+    displayName: "\u041F\u0438\u043A\u043E \xB7 \u041A\u043B\u0430\u0441\u0441\u0438\u043A\u0430"
+    kind: 0
+    prefab: {fileID: 2167025834431220199, guid: 9f84497b2d9159948aa116a55808f4e6, type: 3}
+    icon: {fileID: 21300000, guid: f42a8f64eb8d2f840b56139ab11591ee, type: 3}
+  - id: backpack_Piko_Voyager
+    displayName: "\u041F\u0438\u043A\u043E \xB7 \u042D\u043A\u0441\u043F\u0435\u0434\u0438\u0446\u0438\u044F"
+    kind: 0
+    prefab: {fileID: 5871636029947328035, guid: 0d89870c82a7d6e4abc196d950dc7bd7, type: 3}
+    icon: {fileID: 21300000, guid: bf95d08c58944184c8c57aee980de2eb, type: 3}
+  - id: backpack_Rumi
+    displayName: "\u0420\u0443\u043C\u0438 \xB7 \u041A\u043B\u0430\u0441\u0441\u0438\u043A\u0430"
+    kind: 0
+    prefab: {fileID: 4026046913191226264, guid: de39504e58dcab941a58216d4a8e6b8f, type: 3}
+    icon: {fileID: 21300000, guid: 1038fa6544019b4498460e3539a0876e, type: 3}
+  - id: backpack_Rumi_Orbit
+    displayName: "\u0420\u0443\u043C\u0438 \xB7 \u042D\u043A\u0441\u043F\u0435\u0434\u0438\u0446\u0438\u044F"
+    kind: 0
+    prefab: {fileID: 7039241293655229004, guid: e2a9bd2c2f6924a48b68c1645ce2698f, type: 3}
+    icon: {fileID: 21300000, guid: f519308e0939f7d468e08425492e8a5b, type: 3}
+  - id: backpack_Soli
+    displayName: "\u0421\u043E\u043B\u0438 \xB7 \u041A\u043B\u0430\u0441\u0441\u0438\u043A\u0430"
+    kind: 0
+    prefab: {fileID: 4485041527781007611, guid: 2c27e00dcbccda846a58431660a4ab09, type: 3}
+    icon: {fileID: 21300000, guid: 2487ad2c067106244a90f29189c31a6d, type: 3}
+  - id: backpack_Soli_Helio
+    displayName: "\u0421\u043E\u043B\u0438 \xB7 \u042D\u043A\u0441\u043F\u0435\u0434\u0438\u0446\u0438\u044F"
+    kind: 0
+    prefab: {fileID: 2924240466873030064, guid: d512fc900038f3b439f26b827fa7f8f7, type: 3}
+    icon: {fileID: 21300000, guid: 97a1218e5288f9b42a45612518c60f3a, type: 3}
+  - id: backpack_Tiko
+    displayName: "\u0422\u0438\u043A\u043E \xB7 \u041A\u043B\u0430\u0441\u0441\u0438\u043A\u0430"
+    kind: 0
+    prefab: {fileID: 6663399792649976386, guid: 6d58c4ee5add0fe47a41f8f31e1ea9ee, type: 3}
+    icon: {fileID: 21300000, guid: 0abd11ffc1cad87479b27f4f0566783b, type: 3}
+  - id: backpack_Tiko_Resonator
+    displayName: "\u0422\u0438\u043A\u043E \xB7 \u042D\u043A\u0441\u043F\u0435\u0434\u0438\u0446\u0438\u044F"
+    kind: 0
+    prefab: {fileID: 8471317432641085734, guid: 754cb4fd01e226746bf25592532d92b4, type: 3}
+    icon: {fileID: 21300000, guid: 897277c775f3f0048bffb27954d8b9fa, type: 3}
+  - id: backpack_Vela
+    displayName: "\u0412\u0435\u043B\u0430 \xB7 \u041A\u043B\u0430\u0441\u0441\u0438\u043A\u0430"
+    kind: 0
+    prefab: {fileID: 6895934005457404408, guid: 62f0b3f841a60224789207e1ceefcd6d, type: 3}
+    icon: {fileID: 21300000, guid: 87f4cf4d39cfe0248b0cdaf49b73278b, type: 3}
+  - id: backpack_Vela_Cloud
+    displayName: "\u0412\u0435\u043B\u0430 \xB7 \u042D\u043A\u0441\u043F\u0435\u0434\u0438\u0446\u0438\u044F"
+    kind: 0
+    prefab: {fileID: 4947751900309907515, guid: 6899ccf2b18e18446a8d9373d648a719, type: 3}
+    icon: {fileID: 21300000, guid: dd5ec6919e5e924479a01ee1d02e7864, type: 3}
+  - id: hat_AmberBeret
+    displayName: "\u042F\u043D\u0442\u0430\u0440\u043D\u044B\u0439 \u0431\u0435\u0440\u0435\u0442"
+    kind: 1
+    prefab: {fileID: 8409202460368949887, guid: 6d5b1a622c8c3b648bccbf55e5b6c3fb, type: 3}
+    icon: {fileID: 21300000, guid: e5116cf3899be994eb694d257c7a3784, type: 3}
+  - id: hat_AviatorCap
+    displayName: "\u0428\u043B\u0435\u043C \u0430\u0432\u0438\u0430\u0442\u043E\u0440\u0430"
+    kind: 1
+    prefab: {fileID: 888911365493777672, guid: a5e4a420c53f3474fa28dc76f622141c, type: 3}
+    icon: {fileID: 21300000, guid: 1b712044c87a9a747abece4df4ac2854, type: 3}
+  - id: hat_ExplorerHat
+    displayName: "\u041F\u0430\u043D\u0430\u043C\u0430 \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u0442\u0435\u043B\u044F"
+    kind: 1
+    prefab: {fileID: 430590604761682309, guid: 11ad8490fb6558549b38a0f3e2f4f75a, type: 3}
+    icon: {fileID: 21300000, guid: 4988c813594668643883880b8e18bbdb, type: 3}
+  - id: hat_NavigatorCap
+    displayName: "\u041A\u0435\u043F\u043A\u0430 \u043D\u0430\u0432\u0438\u0433\u0430\u0442\u043E\u0440\u0430"
+    kind: 1
+    prefab: {fileID: 5225384293409941249, guid: f8e2a5f48b67c1f4bb4fe3c7d9ff00cf, type: 3}
+    icon: {fileID: 21300000, guid: 23ed9ace46d6c8c45a55469c7bb0923c, type: 3}
+  - id: hat_ObservatoryCap
+    displayName: "\u0428\u0430\u043F\u043E\u0447\u043A\u0430 \u043E\u0431\u0441\u0435\u0440\u0432\u0430\u0442\u043E\u0440\u0438\u0438"
+    kind: 1
+    prefab: {fileID: 8537594757031183341, guid: 2a472a365e22a104bb360e2c7e2fb3a4, type: 3}
+    icon: {fileID: 21300000, guid: f07191ef2b2b0dd49b8787e0706b1742, type: 3}
+  - id: hat_SailorBeret
+    displayName: "\u041C\u043E\u0440\u0441\u043A\u043E\u0439 \u0431\u0435\u0440\u0435\u0442"
+    kind: 1
+    prefab: {fileID: 3731738809865073057, guid: 60b17a85ab722124297992b59288dd24, type: 3}
+    icon: {fileID: 21300000, guid: 91021e515702642489a436e5ab8d8590, type: 3}
+  - id: hat_SignalBeanie
+    displayName: "\u0428\u0430\u043F\u043A\u0430 \u0440\u0430\u0434\u0438\u0441\u0442\u0430"
+    kind: 1
+    prefab: {fileID: 1981428502101398080, guid: 540d7d9fddbb18847880b21eda38bbd7, type: 3}
+    icon: {fileID: 21300000, guid: fc8539d6efa9647409c1c473aa6a8240, type: 3}
+  - id: scarf_NoriBlue
+    displayName: "\u0413\u043E\u043B\u0443\u0431\u043E\u0439 \u0448\u0430\u0440\u0444"
+    kind: 2
+    prefab: {fileID: 6968482983267924357, guid: 99a7772d0883ae642a700873baa1fd34, type: 3}
+    icon: {fileID: 21300000, guid: de3af9e6fffd5bf40954b5be7fbd0525, type: 3}
+  - id: scarf_TikoCoral
+    displayName: "\u041A\u043E\u0440\u0430\u043B\u043B\u043E\u0432\u044B\u0439 \u0448\u0430\u0440\u0444"
+    kind: 2
+    prefab: {fileID: 855142286409501207, guid: aea38154714d49540aa3a4f6ee986823, type: 3}
+    icon: {fileID: 21300000, guid: 454d9ef287f6c164e94de4bab37fc495, type: 3}

@@ -1,0 +1,111 @@
+{
+  "schema": "radio_archipelago_unity_clean_export/1",
+  "pass_geometry": true,
+  "pass_vertex_colors": true,
+  "pass_uvs": true,
+  "pass_blender_anchors": true,
+  "pass_all_corner_normals": false,
+  "remainingZeroCornerNormals": 2,
+  "remaining_zero_corner_normal_examples": [
+    {
+      "mesh": "RA_Architecture_-03_+01_01",
+      "bucket": "Architecture",
+      "loop": 274104,
+      "blender_position": [
+        -59.41380310058594,
+        34.89067077636719,
+        3.821845769882202
+      ],
+      "face_area": 4.815898591914447e-06
+    },
+    {
+      "mesh": "RA_Metal_+02_+00_01",
+      "bucket": "Metal",
+      "loop": 43302,
+      "blender_position": [
+        52.88835144042969,
+        11.217338562011719,
+        13.218782424926758
+      ],
+      "face_area": 6.002343297950574e-07
+    }
+  ],
+  "normal_limitation": "Two non-road decorative mesh corners remain zero. Retained for the playable pilot at root request; no claim that every corner normal is valid.",
+  "triangles": 4159332,
+  "mesh_batches": 301,
+  "colored_meshes": 301,
+  "material_buckets": {
+    "Architecture": 375427,
+    "Bridge": 412,
+    "Foliage": 2523300,
+    "Metal": 89549,
+    "Road": 17668,
+    "Rocks": 504718,
+    "Terrain": 21210,
+    "Water": 8892,
+    "Wood": 618156
+  },
+  "raw_duplicate_triangles": 0,
+  "raw_degenerate_index_triangles": 0,
+  "max_nonzero_corner_normal_unit_error": 2.980232238769531e-07,
+  "bank_uv_max": 1.0,
+  "road_uv0_max": 514.9263916015625,
+  "vertex_color_min": 0.004400849808007479,
+  "vertex_color_max": 0.9717994332313538,
+  "anchors": [
+    {
+      "name": "RA_Origin",
+      "blender_roundtrip": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "error_meters": 0.0,
+      "expected_aligned_unity": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "RA_X10",
+      "blender_roundtrip": [
+        10.0,
+        0.0,
+        0.0
+      ],
+      "error_meters": 0.0,
+      "expected_aligned_unity": [
+        10,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "RA_North10",
+      "blender_roundtrip": [
+        0.0,
+        10.0,
+        1.509957996859157e-06
+      ],
+      "error_meters": 1.509957996859157e-06,
+      "expected_aligned_unity": [
+        0,
+        0,
+        -10
+      ]
+    }
+  ],
+  "clean_fbx_file": "emerald_island_clean.fbx",
+  "clean_fbx_sha256": "c58945b4dfc3dc6f846c670ab65a7831442ebb98c35203b676403daa95376727",
+  "clean_fbx_bytes": 165630380,
+  "source_blend_unchanged": true,
+  "source_blend_sha256": "2e176284a43d91c3dfb6bceee6ff8ef0cab81686962bf79e3fa9d535e41bbf6d",
+  "original_fbx_unchanged": true,
+  "unity_axis_note": "Unity importer additionally mirrors X. Root aligns the prefab using an X reflection and proves all three anchors in the Editor. This audit proves Blender roundtrip only.",
+  "unity_runtime_test_performed": false,
+  "render_equivalence_claimed": false,
+  "reproduce_audit": "blender --background --factory-startup --python export_emerald.py -- --audit-clean",
+  "frozen_input_policy": "This audit reads the FBX and writes only clean-export-report.json; do not rerun export/clean against frozen inputs during runtime QA.",
+  "elapsed_seconds": 16.47
+}

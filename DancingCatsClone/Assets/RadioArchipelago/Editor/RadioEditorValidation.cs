@@ -21,7 +21,7 @@ namespace RadioArchipelago.Editor
     public static class RadioEditorValidation
     {
         private const string Key = "RadioArchipelago.EditorReview";
-        private const string ScenePath = "Assets/Clone/Scenes/DancingCats.unity";
+        private const string ScenePath = "Assets/Editor/SceneTemplates/Base/DancingCats.unity";
         private const string CourierKey = "RadioArchipelago.v1.courier";
         private const string GuideKey = "DancingCatsClone.v1.howToPlaySeen";
         private const string SongId = "AlwaysRememberMeowCat";

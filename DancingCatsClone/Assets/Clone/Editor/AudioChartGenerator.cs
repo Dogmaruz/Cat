@@ -26,6 +26,10 @@ namespace DancingCats.Clone.Editor
             public bool includeHolds = true, includeMovingJumps = true, includeBigJumps = true,
                 includeForegroundAccents = true, includeRouteChoreography = true, preferAuthoredScore = true;
             public bool includeExperimentalShortSupports = false;
+            public bool includePlayablePhraseGrouping = false;
+            public bool includeMeasuredGapRecovery = false;
+            public float playableWorldDistanceScale = 1.18f, playableLateralScale = 1.8f, playableMinimumSeparation = 1.40f;
+            public float playableHoldMinimumSeparation = 1.50f;
         }
         private sealed class Analysis
         {
@@ -240,6 +244,8 @@ namespace DancingCats.Clone.Editor
             }
             cues = PcmSparsePhraseAnalysis.Complete(cues.ToArray(), vocalEvidence,
                 options.includeHolds ? spectral.sustained : Array.Empty<MusicalNote>(), finishTime, MaxGap).ToList();
+            if (options.includeMeasuredGapRecovery && instrumentalEvidence != null)
+                cues = PcmMeasuredGapRecovery.Apply(cues.ToArray(), instrumentalEvidence, MaxGap).ToList();
             // Automatic long notes score their measured attack and release only. Pulse-grid
             // checkpoints remain available to explicitly authored scores through Generate.
             var map = MusicalChartCompiler.Compile(new MusicalScore { id = id, audioDuration = duration, sampleRate = sampleRate,
@@ -247,6 +253,7 @@ namespace DancingCats.Clone.Editor
             map.tempoSections[0].startSample = (int)Math.Round(analysis.phase * sampleRate);
             string version = (vocalEvidence == null ? Version : VocalVersion)
                 + (options.includeExperimentalShortSupports && instrumentalEvidence != null ? "+short-test" : "");
+            if (options.includeMeasuredGapRecovery) version += "+" + PcmMeasuredGapRecovery.Version;
             map.sourceMapBundle = version; map.sourceMapBundleSha256 = digest;
             map.audio.rawSha256 = digest; map.audio.channels = channels; map.audio.bitsPerSample = 32; map.audio.rawBytes = (long)interleaved.Length * sizeof(float);
             map.timing.warning = "Mixed-audio attacks and conservative sustained-note estimates do not isolate a singer. Recurrent continuous phrases can form glides; their lateral paths use explicit settle/scoop/sweep choreography. Long rests are preserved.";
@@ -262,6 +269,13 @@ namespace DancingCats.Clone.Editor
                     ? "Foreground selection uses source-verified separated-vocal spectral attacks and corrected-window neural onset confidence. Only a reliable foreground body can suppress accompaniment-only ordinary tiles; weak transcription, actual vocal rests and unavailable foreground evidence retain physical attacks. Strong rapid vocal articulation or source-confirmed harmonic instrumental runs during a vocal rest can restore native 125ms notes. Hold/Follow intervals and BigJump outgoing landings remain protected."
                     : "Foreground selection disabled: ordinary physical attack cues are retained."
             }).ToArray();
+            if (options.includeMeasuredGapRecovery)
+                map.normalizationNotes = map.normalizationNotes.Concat(new[] {
+                    "Opt-in measured gap recovery: " + PcmMeasuredGapRecovery.Version
+                    + "; independently source-verified tonal note attacks can split oversized ordinary gaps between existing cues. "
+                    + "Existing support bodies, BigJump flights and final fading tails stay protected; exact measured onsets only, no beat-grid filler. "
+                    + "Missing optional independent note evidence leaves those gaps unresolved."
+                }).ToArray();
             if (vocalEvidence != null)
             {
                 map.timing.warning = "Locally separated vocal evidence drives holds, foreground articulations and conservative flights; physical mixed-audio attacks remain inputs for support analysis. Spatial choreography is a game-design policy. This does not reproduce every designer-authored gesture.";
@@ -283,6 +297,15 @@ namespace DancingCats.Clone.Editor
                 map.normalizationNotes = map.normalizationNotes.Concat(new[] { "Experimental short supports: "
                     + PcmShortSupportAnalysis.Version + "; calibration-trained conservative rules; opt-in only. "
                     + "Musical-pulse endpoints stay within 120ms of measured note releases. Calibration leaf precision is not unseen-song accuracy." }).ToArray();
+            if (options.includePlayablePhraseGrouping)
+            {
+                if (!options.includeHolds) throw new InvalidDataException("Playable ornament grouping requires native Hold supports to be enabled.");
+                map = PcmPlayablePhraseGrouping.Apply(map, new PcmPlayablePhraseGrouping.Settings
+                {
+                    worldDistanceScale = options.playableWorldDistanceScale, lateralScale = options.playableLateralScale,
+                    minimumSeparation = options.playableMinimumSeparation, minimumHoldSeparation = options.playableHoldMinimumSeparation
+                }, vocalEvidence).Map;
+            }
             if (options.includeRouteChoreography)
             {
                 if (options.includeMovingJumps) ChartRouteComposer.Apply(map);

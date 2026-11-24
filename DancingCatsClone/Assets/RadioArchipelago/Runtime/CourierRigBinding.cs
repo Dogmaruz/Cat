@@ -12,6 +12,8 @@ namespace RadioArchipelago
         public Transform leftArm, rightArm;
         public Transform leftFoot, rightFoot;
         public Transform antennaYawPivot;
+        public Vector3 antennaSpinAxis = Vector3.up;
+        public float antennaBendLimit = 40;
         public Transform[] antennaChain = Array.Empty<Transform>();
         public Transform[] crestChain = Array.Empty<Transform>();
         public Transform[] scarfChain = Array.Empty<Transform>();

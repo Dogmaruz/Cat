@@ -145,14 +145,18 @@ namespace DancingCats.Clone
             Presenter = presenter ?? throw new ArgumentNullException(nameof(presenter));
         }
 
-        public bool SelectSong(int catalogId)
+        public bool SelectSong(int catalogId) => SelectSongCore(catalogId, true);
+
+        public bool SelectSongForPreview(int catalogId) => SelectSongCore(catalogId, false);
+
+        private bool SelectSongCore(int catalogId, bool rememberSelection)
         {
             var song = Songs.FirstOrDefault(s => s.catalogId == catalogId);
             if (song == null) return false;
             if (!Progression.IsSongUnlocked(song.id)) return false;
             PaySettlement();
             ChallengeRun = false;
-            Progression.State.selectedSong = song.id; Progression.Save();
+            if (rememberSelection) { Progression.State.selectedSong = song.id; Progression.Save(); }
             Prepare(song, ClonePhase.Menu, true);
             return true;
         }
@@ -164,6 +168,7 @@ namespace DancingCats.Clone
             Vector3 retainedCamera = _camera != null ? _camera.transform.position : Vector3.zero;
             _music.Stop();
             Selected = song; Map = _catalog.LoadMap(song.id);
+            ApplyIslandChart();
             if (resetScore) { _runId = _runSessions.Begin().Id; _lap = 0; _settled = _revived = false; CollectedCoins = 0; _nextSong = null; _nextSongEvaluated = false; }
             _rate = 1 + (song.catalog?.speedAdd != null && song.catalog.speedAdd.Length > 0 ? song.catalog.speedAdd[Mathf.Min(_lap, song.catalog.speedAdd.Length - 1)] : 0);
             _localFinishZ = Map.elements.First(e => e.kind == "FinishJump").pos.z;
@@ -178,6 +183,7 @@ namespace DancingCats.Clone
             _lastLanding = Support = null;
             InstallEnvironment();
             BuildTrack();
+            BindIslandCourier();
             Actor.position = new Vector3(resetScore ? 0 : retainedX, .25f, firstTile.pos.z);
             if (!resetScore)
             {
@@ -233,26 +239,30 @@ namespace DancingCats.Clone
                 _endPlatform.name = "Original end platform";
                 _endPlatform.gameObject.SetActive(true);
             }
+            if (IslandActive) islandStage.PrepareEnvironment(_railway, _camera);
         }
 
         public void RefreshRole()
         {
             if (Actor == null || _couriers == null) return;
+            if (islandStage != null) islandStage.RestoreCourierParent(Actor);
             foreach (Transform child in Actor) { child.gameObject.SetActive(false); Destroy(child.gameObject); }
             var definition = _couriers.SelectedDefinition;
             if (definition.prefab == null) throw new InvalidOperationException("The selected courier has no model: " + definition.id);
             var instance = Instantiate(definition.prefab, Actor, false);
+            _couriers.ApplyTo(instance);
             instance.name = definition.id;
             instance.transform.localPosition = new Vector3(0, -.25f, 0);
             instance.transform.localRotation = Quaternion.identity;
-            instance.transform.localScale = Vector3.one * .47f;
+            instance.transform.localScale = Vector3.one * (IslandActive ? islandStage.Definition.CourierScale : .47f);
             _motion = instance.GetComponent<CourierMotion>();
             if (_motion == null) throw new InvalidOperationException("The courier has no presentation rig: " + definition.id);
             _motion.ResetMotion();
             var lighting = new GameObject("Courier lighting"); lighting.transform.SetParent(Actor, false);
-            var front = _camera != null ? _camera.transform.position - Actor.position : Vector3.back;
+            var front = IslandActive ? Vector3.back : _camera != null ? _camera.transform.position - Actor.position : Vector3.back;
             lighting.AddComponent<CourierLightingRig>().Initialize(_couriers.Lighting, instance, front, ~0);
             _boundRole = definition.id;
+            BindIslandCourier();
             NotifyChanged();
         }
 
@@ -331,6 +341,7 @@ namespace DancingCats.Clone
             }
             if (_themeVisuals == null) _themeVisuals = gameObject.AddComponent<OriginalThemeVisuals>();
             _themeVisuals.Bind(_railway.gameObject, _tiles, Assets.themeMaterials, _theme, _themeCatalog);
+            if (IslandActive) { islandStage.BindTrack(_tiles); islandStage.BindFinishCoins(_coins); }
         }
 
         public void BeginRun()
@@ -399,8 +410,8 @@ namespace DancingCats.Clone
                 double previousTime = GameTime;
                 double targetTime = _clockOffset + Math.Max(0, _audioClock.DspTime - _dspStart) * _rate;
                 var previousPosition = Actor.position;
-                float targetX = Mathf.Clamp(previousPosition.x + (_destinationX - previousPosition.x) * .25f, -1.5f, 1.5f);
-                _motion.SetFacing(Mathf.Clamp((targetX - previousPosition.x) * 160, -25, 25));
+                float targetX = NativeRhythmRules.SteerLateral(previousPosition.x, _destinationX, Time.unscaledDeltaTime);
+                _motion.SetFacing(Mathf.Clamp((targetX - previousPosition.x) * IslandLateralScale * 160, -25, 25));
                 int steps = Mathf.Clamp(Mathf.CeilToInt(Mathf.Abs((float)targetTime * Map.forwardSpeed - previousPosition.z) / .12f), 1, 1024);
                 // Preserve the native once-per-frame lateral damping while sampling the real arc
                 // densely enough that authored thin checkpoint/finish colliders survive a render hitch.
@@ -421,13 +432,13 @@ namespace DancingCats.Clone
                 Actor.position = position;
                 Physics.SyncTransforms();
                 foreach (var tile in _tiles)
-                    if (!tile.consumed && Mathf.Abs(tile.transform.position.z - z) < 2 && tile.ContainsSphere(position, .25f)) TouchTile(tile);
+                    if (!tile.consumed && Mathf.Abs(tile.transform.position.z - z) < 2 && ContainsTileContact(tile, position, .25f)) TouchTile(tile);
                 foreach (var tile in _tiles)
                     if (!tile.consumed && tile.element.id == 5 && z > tile.initialZ + 1)
                     { tile.MarkConsumed(); _score.BreakStreak(); NotifyChanged(); }
                 foreach (var hold in _tiles)
                     if (hold.consumed && (hold.element.id == 2 || hold.element.id == 3)) OriginalTileVisuals.AdvanceHold(hold.gameObject, z);
-                if (Support != null && Support.element.id != 10 && !Support.ContainsSphere(Actor.position, .25f))
+                if (Support != null && Support.element.id != 10 && !ContainsTileContact(Support, Actor.position, .25f))
                 {
                     if (Time.unscaledTime < _invincibleUntil) GroundDuringInvincibility();
                     else { Die(); FollowCamera(false); return; }
@@ -478,13 +489,15 @@ namespace DancingCats.Clone
         private void ReadPointer()
         {
             if (Presenter != null && Presenter.IsBlockingInput) { _dragging = false; return; }
-            bool held = false; float pointer = 0;
-            if (Touchscreen.current?.primaryTouch.press.isPressed == true) { held = true; pointer = Touchscreen.current.primaryTouch.position.ReadValue().x; }
+            bool held = false, touching = false; float pointer = 0;
+            if (Touchscreen.current?.primaryTouch.press.isPressed == true) { held = touching = true; pointer = Touchscreen.current.primaryTouch.position.ReadValue().x; }
             else if (Mouse.current?.leftButton.isPressed == true) { held = true; pointer = Mouse.current.position.ReadValue().x; }
             if (held)
             {
                 if (!_dragging) { _pointerOrigin = pointer; _dragOrigin = Actor.position.x; }
-                _destinationX = _dragOrigin + (pointer - _pointerOrigin) * 6.6f / Mathf.Max(1, Screen.width);
+                _destinationX = NativeRhythmRules.DragTargetX(pointer, Screen.width, touching, ref _pointerOrigin, ref _dragOrigin);
+                if (!touching && IslandLateralScale > 1)
+                    _destinationX = ClampIslandPointerTarget(_destinationX, pointer, ref _pointerOrigin, ref _dragOrigin);
             }
             _dragging = held;
             if (Keyboard.current != null)
@@ -497,13 +510,18 @@ namespace DancingCats.Clone
         public void TouchTile(OriginalTile tile)
         {
             if (Phase != ClonePhase.Playing || tile.consumed || tile.element == null) return;
+            // Physics trigger callbacks must obey the same narrowed chart-space
+            // width as the continuous contact/support checks on widened islands.
+            if (IslandLateralScale > 1 && !ContainsTileContact(tile, Actor.position, .25f)) return;
             if (tile.element.id == 7) return;
             if (tile.element.id == 10)
             {
                 if (_jumping && !Descending) return;
                 tile.MarkConsumed(); Support = tile; _jumping = false; _invincibleGrounded = false; _endRun = true;
                 _motion.PlayLanding(1.1f);
-                _motion.PlayEnd(); _themeVisuals.Finish(); return;
+                if (IslandActive && islandStage.GroundFinishPath != null) _motion.PlayFinishHover();
+                else _motion.PlayEnd();
+                _themeVisuals.Finish(); return;
             }
             if (tile.element.id == 8)
             {
@@ -514,7 +532,7 @@ namespace DancingCats.Clone
             }
             if (tile.element.id == 5 || tile.checkpoint)
             {
-                ScoreHit(tile, tile.element.id == 5 || NativeRhythmRules.IsPerfect(Actor.position.x - tile.CenterX, true, false));
+                ScoreHit(tile, tile.element.id == 5 || NativeRhythmRules.IsPerfect(LandingError(tile), true, false));
                 tile.MarkConsumed(); return;
             }
             if (_jumping && !Descending) return;
@@ -523,7 +541,7 @@ namespace DancingCats.Clone
             _motion.PlayLanding(Mathf.Lerp(.65f, 1.25f, Mathf.InverseLerp(.3f, 1.3f, arrivingFlight)));
             tile.MarkConsumed(); _lastLanding = tile;
             bool slider = tile.element.id == 2 || tile.element.id == 3 || tile.element.id == 4;
-            ScoreHit(tile, tile.element.id == 4 || NativeRhythmRules.IsPerfect(Actor.position.x - tile.CenterX, slider, tile.element.id == 6));
+            ScoreHit(tile, tile.element.id == 4 || NativeRhythmRules.IsPerfect(LandingError(tile), slider, tile.element.id == 6));
             if (slider)
             {
                 _jumping = false; _invincibleGrounded = false; Support = tile;
@@ -675,6 +693,7 @@ namespace DancingCats.Clone
 
         private void FollowCamera(bool immediate)
         {
+            if (IslandActive) { islandStage.UpdatePresentation(Actor.position, immediate); return; }
             if (_railway != null) _railway.position = Vector3.forward * Actor.position.z;
             if (_camera == null) return;
             float x = immediate ? Actor.position.x : Mathf.Lerp(_camera.transform.position.x, Actor.position.x, 1 - Mathf.Exp(-4.60517f * Time.unscaledDeltaTime / 5));

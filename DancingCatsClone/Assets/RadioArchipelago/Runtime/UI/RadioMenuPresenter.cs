@@ -28,6 +28,9 @@ namespace RadioArchipelago.UI
 
         private OriginalPlayController game;
         private ISongCatalog songs;
+        private IGameResources resources;
+        private SongRecord[] visibleSongs = Array.Empty<SongRecord>();
+        private RadioIslandMenuWorld islandWorld;
         private OriginalProgression profile;
         private RadioArtAssets art;
         private CourierCatalog couriers;
@@ -40,8 +43,14 @@ namespace RadioArchipelago.UI
         private readonly Dictionary<string, TMP_Text> navLabels = new Dictionary<string, TMP_Text>();
         private readonly Dictionary<string, Graphic> navMarks = new Dictionary<string, Graphic>();
         private readonly List<UnityEngine.UI.Image> courierCards = new List<UnityEngine.UI.Image>();
-        private readonly List<UnityEngine.UI.Image> workshopCards = new List<UnityEngine.UI.Image>();
-        private readonly List<TMP_Text> workshopStates = new List<TMP_Text>();
+        private readonly List<UnityEngine.UI.Image> courierPortraits = new List<UnityEngine.UI.Image>();
+        private readonly int[] courierSlots = new int[3];
+        private readonly List<WorkshopItem> workshopItems = new List<WorkshopItem>();
+        private readonly List<UnityEngine.UI.Image> workshopTabs = new List<UnityEngine.UI.Image>();
+        private RectTransform workshopContent;
+        private ScrollRect workshopScroll;
+        private TMP_Text workshopCaption;
+        private int workshopCategory;
         private readonly List<SongRowView> songRows = new List<SongRowView>();
         private readonly List<TMP_Text> stationStates = new List<TMP_Text>();
         private readonly List<UnityEngine.UI.Image> stationMarks = new List<UnityEngine.UI.Image>();
@@ -75,13 +84,23 @@ namespace RadioArchipelago.UI
             public int index = -1;
         }
 
+        private sealed class WorkshopItem
+        {
+            public int heroIndex = -1;
+            public CourierEquipmentDefinition equipment;
+            public UnityEngine.UI.Image surface;
+            public TMP_Text state;
+        }
+
         public Canvas UICanvas => canvas;
         public bool IsBlockingInput => !initialized || modal != null || game != null && game.Phase != ClonePhase.Playing && game.Phase != ClonePhase.Ready;
         public string CurrentView => modal ?? view;
+        public IReadOnlyList<SongRecord> VisibleSongs => visibleSongs;
+        public int WorkshopCategory => workshopCategory;
 
         [Inject]
         public void Construct(OriginalPlayController controller, ISongCatalog songCatalog, OriginalProgression progression,
-            RadioArtAssets presentationArt, CourierCatalog courierCatalog, CourierSelection selection)
+            RadioArtAssets presentationArt, CourierCatalog courierCatalog, CourierSelection selection, IGameResources resourceProvider)
         {
             game = controller ?? throw new ArgumentNullException(nameof(controller));
             songs = songCatalog ?? throw new ArgumentNullException(nameof(songCatalog));
@@ -89,6 +108,7 @@ namespace RadioArchipelago.UI
             art = presentationArt ?? throw new ArgumentNullException(nameof(presentationArt));
             couriers = courierCatalog ?? throw new ArgumentNullException(nameof(courierCatalog));
             courierSelection = selection ?? throw new ArgumentNullException(nameof(selection));
+            resources = resourceProvider ?? throw new ArgumentNullException(nameof(resourceProvider));
         }
 
         public void Initialize()
@@ -98,6 +118,18 @@ namespace RadioArchipelago.UI
             initializing = true;
             try
             {
+                visibleSongs = RadioIslandMenuPolicy.VisibleSongs(songs.Songs);
+                var content = resources.Load<RadioIslandMenuCatalog>(RadioIslandMenuCatalog.ResourcePath);
+                if(content==null) throw new InvalidOperationException("The public island menu content has not been authored.");
+                islandWorld = new RadioIslandMenuWorld(game, content);
+                string initialId = game.Selected?.id;
+                if(RadioIslandMenuPolicy.IndexOf(initialId)<0 && RadioIslandMenuPolicy.IndexOf(game.IslandStage?.Definition?.SongId)>=0)
+                    initialId=game.IslandStage.Definition.SongId;
+                var initial=RadioIslandMenuPolicy.ResolveSelection(visibleSongs,initialId);
+                bool rebuild=game.Selected?.id!=initial.id || game.IslandStage?.Definition!=content.ForSong(initial.id).Definition;
+                islandWorld.BindDefinition(initial.id);
+                if(rebuild && !game.SelectSongForPreview(initial.catalogId)) throw new InvalidOperationException("The public island entry is unavailable.");
+                islandWorld.ApplyLighting(initial.id);
                 CreateFont();
                 BuildCanvas();
                 BuildHome();
@@ -188,17 +220,18 @@ namespace RadioArchipelago.UI
             Button("SongLibraryButton",home.transform,"Все треки",14,Ink,new Vector2(.32f,.287f),new Vector2(.68f,.313f),new Color(1,1,1,0),() => Navigate("Songs"));
             Panel("DockDivider",home.transform,new Vector2(.065f,.278f),new Vector2(.935f,.279f),LineColor);
 
-            for (int i=0;i<couriers.entries.Length;i++)
+            for (int i=0;i<3;i++)
             {
-                int index=i;
+                int slot=i;
                 float left=.13f+i*.25f;
-                var card = Button("CourierButton_"+i,home.transform,"",16,Ink,new Vector2(left,.169f),new Vector2(left+.23f,.272f),Color.clear,() => SelectCourier(index));
-                var highlight=Panel("Selection",card.transform,new Vector2(.15f,0),new Vector2(.85f,.035f),i==courierSelection.SelectedIndex?Mint:Color.clear,true);
+                var card = Button("CourierButton_"+i,home.transform,"",16,Ink,new Vector2(left,.169f),new Vector2(left+.23f,.272f),Color.clear,() => SelectCourier(courierSlots[slot]));
+                var highlight=Panel("Selection",card.transform,new Vector2(.15f,0),new Vector2(.85f,.035f),Color.clear,true);
                 courierCards.Add(highlight);
                 var icon=Panel("Portrait",card.transform,new Vector2(.06f,.07f),new Vector2(.94f,.97f),Color.white);
-                icon.sprite = couriers.entries[i].icon; icon.preserveAspect=true;
-                if(icon.sprite==null) icon.color=Color.clear;
+                icon.preserveAspect=true; courierPortraits.Add(icon);
             }
+            IconButton("PreviousCourierButton",home.transform,new Vector2(.025f,.19f),new Vector2(.12f,.25f),RadioGlyph.Symbol.Previous,art.previousIcon,() => CycleCourier(-1));
+            IconButton("NextCourierButton",home.transform,new Vector2(.88f,.19f),new Vector2(.975f,.25f),RadioGlyph.Symbol.Next,art.nextIcon,() => CycleCourier(1));
             courierName=Label("SelectedCourierName",home.transform,"",12,Muted,new Vector2(.15f,.151f),new Vector2(.85f,.170f));
             var play=Button("PlayButton",home.transform,"ИГРАТЬ",31,Color.white,new Vector2(.07f,.078f),new Vector2(.93f,.146f),Coral,StartSelectedSong);
             LabelInButton(play).fontStyle=FontStyles.Bold;
@@ -241,16 +274,17 @@ namespace RadioArchipelago.UI
         {
             var screen=CreateScreen("Atlas","Атлас сигналов","Каждая мелодия зажигает новый маяк.");
             atlasSummary=Label("AtlasSummary",screen.transform,"",21,Ink,new Vector2(.07f,.77f),new Vector2(.93f,.845f),TextAlignmentOptions.MidlineLeft,FontStyles.Bold);
-            string[] names={"Тихая гавань","Ветряные сады","Облачная почта","Лунная станция","Дальний эфир"};
-            string[] descriptions={"Первый сигнал над океаном","Маршруты становятся смелее","Мелодии соединяют острова","Ночной эфир ждёт слушателей","Слышно даже за горизонтом"};
-            for(int i=0;i<names.Length;i++)
+            // Preserve the original three-card spacing; fit later islands above the footer.
+            float stationStep=Mathf.Min(.19f,.62f/visibleSongs.Length);
+            float stationHeight=stationStep-.025f;
+            for(int i=0;i<visibleSongs.Length;i++)
             {
-                float top=.75f-i*.128f;
-                var card=Panel("Station_"+i,screen.transform,new Vector2(.07f,top-.112f),new Vector2(.93f,top),Paper,true);
+                int island=i; float top=.75f-i*stationStep;
+                var card=Button("Station_"+i,screen.transform,"",18,Ink,new Vector2(.07f,top-stationHeight),new Vector2(.93f,top),Paper,() => SelectSong(visibleSongs[island].catalogId));
                 stationMarks.Add(Panel("Beacon",card.transform,new Vector2(.04f,.28f),new Vector2(.14f,.72f),Mint,true));
                 Icon("Signal",card.transform,new Vector2(.055f,.36f),new Vector2(.125f,.64f),RadioGlyph.Symbol.Signal,Ink,art.radioIcon);
-                Label("Name",card.transform,names[i],20,Ink,new Vector2(.19f,.51f),new Vector2(.95f,.89f),TextAlignmentOptions.MidlineLeft,FontStyles.Bold);
-                Label("Description",card.transform,descriptions[i],13,Muted,new Vector2(.19f,.23f),new Vector2(.95f,.52f),TextAlignmentOptions.MidlineLeft);
+                Label("Name",card.transform,RadioIslandMenuPolicy.IslandName(i),20,Ink,new Vector2(.19f,.51f),new Vector2(.95f,.89f),TextAlignmentOptions.MidlineLeft,FontStyles.Bold);
+                Label("Description",card.transform,visibleSongs[i].title,13,Muted,new Vector2(.19f,.23f),new Vector2(.95f,.52f),TextAlignmentOptions.MidlineLeft);
                 stationStates.Add(Label("Progress",card.transform,"",12,Muted,new Vector2(.19f,.02f),new Vector2(.95f,.25f),TextAlignmentOptions.MidlineLeft));
             }
             Button("AtlasPlayButton",screen.transform,"Поймать следующий сигнал",18,Color.white,new Vector2(.07f,.035f),new Vector2(.93f,.095f),Coral,() => Navigate("Play"));
@@ -258,22 +292,101 @@ namespace RadioArchipelago.UI
 
         private void BuildWorkshop()
         {
-            var screen=CreateScreen("Workshop","Мастерская","Выбери своего курьера. Каждый умеет слушать.");
-            string[] descriptions={"Тёплый шарф, ясный сигнал.\nДля первого полёта и любимых мелодий.","Ловит ритм на солнечных частотах.\nЛюбит быстрые и звонкие маршруты.","Спокойный голос ночного эфира.\nНесёт музыку сквозь облака."};
-            for(int i=0;i<couriers.entries.Length;i++)
+            var screen=CreateScreen("Workshop","Мастерская","Собери свой образ и отправляйся в эфир.");
+            var stage=Panel("OutfitStage",screen.transform,new Vector2(.06f,.535f),new Vector2(.94f,.855f),Paper,true);
+            var portrait=Rect("OutfitPreview",stage.transform,new Vector2(.02f,.02f),new Vector2(.98f,.98f));
+            portrait.gameObject.AddComponent<UnityEngine.UI.RawImage>().raycastTarget=true;
+            var aspect=portrait.gameObject.AddComponent<AspectRatioFitter>();
+            aspect.aspectMode=AspectRatioFitter.AspectMode.FitInParent; aspect.aspectRatio=1;
+            var preview=portrait.gameObject.AddComponent<CourierMenuPreview>();
+            preview.InitializePortrait(courierSelection);
+            workshopCaption=Label("OutfitHeroName",screen.transform,"",18,Ink,new Vector2(.07f,.505f),new Vector2(.93f,.537f),TextAlignmentOptions.Center,FontStyles.Bold);
+            string[] categories={"Герои","Рюкзаки","Шапки","Шарфы"};
+            for(int i=0;i<categories.Length;i++)
             {
-                int index=i; float top=.82f-i*.235f;
-                var button=Button("WorkshopCourierButton_"+i,screen.transform,"",18,Ink,new Vector2(.07f,top-.21f),new Vector2(.93f,top),Paper,() => SelectCourier(index));
-                workshopCards.Add(button.GetComponent<UnityEngine.UI.Image>());
-                var portrait=Panel("Portrait",button.transform,new Vector2(.015f,.03f),new Vector2(.36f,.98f),Color.white);
-                portrait.sprite=couriers.entries[i].icon; portrait.preserveAspect=true;
-                if(portrait.sprite==null) portrait.color=Color.clear;
-                Label("Name",button.transform,couriers.entries[i].displayName,24,Ink,new Vector2(.39f,.68f),new Vector2(.94f,.91f),TextAlignmentOptions.MidlineLeft,FontStyles.Bold);
-                Label("Description",button.transform,descriptions[Mathf.Min(i,descriptions.Length-1)],14,Muted,new Vector2(.39f,.30f),new Vector2(.94f,.66f),TextAlignmentOptions.MidlineLeft);
-                workshopStates.Add(Label("SelectionState",button.transform,"",14,Ink,new Vector2(.39f,.09f),new Vector2(.94f,.30f),TextAlignmentOptions.MidlineLeft,FontStyles.Bold));
+                int category=i; float x=.055f+i*.225f;
+                var tab=Button("OutfitCategory_"+i,screen.transform,categories[i],15,Ink,new Vector2(x,.455f),new Vector2(x+.215f,.498f),Paper,() => ShowWorkshopCategory(category));
+                workshopTabs.Add(tab.GetComponent<UnityEngine.UI.Image>());
             }
-            Label("CosmeticNote",screen.transform,"Курьеры отличаются внешностью.\nТочность зависит от твоего ритма.",15,Muted,new Vector2(.09f,.035f),new Vector2(.91f,.11f));
+            var root=Rect("OutfitScroll",screen.transform,new Vector2(.06f,.065f),new Vector2(.94f,.44f));
+            workshopScroll=root.gameObject.AddComponent<ScrollRect>();
+            workshopScroll.horizontal=false; workshopScroll.vertical=true;
+            workshopScroll.movementType=ScrollRect.MovementType.Clamped; workshopScroll.scrollSensitivity=35;
+            var viewport=Rect("Viewport",root,Vector2.zero,Vector2.one);
+            viewport.gameObject.AddComponent<UnityEngine.UI.Image>().color=Color.white;
+            viewport.gameObject.AddComponent<Mask>().showMaskGraphic=false;
+            workshopContent=Rect("Content",viewport,new Vector2(0,1),Vector2.one);
+            workshopContent.pivot=new Vector2(.5f,1);
+            var layout=workshopContent.gameObject.AddComponent<VerticalLayoutGroup>();
+            layout.spacing=8; layout.childControlWidth=true; layout.childControlHeight=true;
+            layout.childForceExpandWidth=true; layout.childForceExpandHeight=false;
+            var fitter=workshopContent.gameObject.AddComponent<ContentSizeFitter>();
+            fitter.horizontalFit=ContentSizeFitter.FitMode.Unconstrained; fitter.verticalFit=ContentSizeFitter.FitMode.PreferredSize;
+            workshopScroll.viewport=viewport; workshopScroll.content=workshopContent;
+            Label("CosmeticNote",screen.transform,"Нажми на предмет, чтобы надеть. Образ сохраняется для каждого героя.",12,Muted,new Vector2(.075f,.01f),new Vector2(.925f,.057f));
+            ShowWorkshopCategory(0);
         }
+
+        public void ShowWorkshopCategory(int category)
+        {
+            if(category<0 || category>3) throw new ArgumentOutOfRangeException(nameof(category));
+            workshopCategory=category;
+            if(workshopContent==null) return;
+            foreach(Transform child in workshopContent) {child.gameObject.SetActive(false);Destroy(child.gameObject);}
+            workshopItems.Clear();
+            if(category==0)
+            {
+                for(int i=0;i<couriers.entries.Length;i++) AddWorkshopItem(i,null);
+            }
+            else
+            {
+                AddWorkshopItem(-1,null);
+                var kind=(CourierEquipmentKind)(category-1);
+                foreach(var entry in couriers.equipment) if(entry!=null && entry.kind==kind) AddWorkshopItem(-1,entry);
+            }
+            foreach(var item in workshopTabs) item.color=Paper;
+            if(workshopTabs.Count>category) workshopTabs[category].color=new Color(.75f,.91f,.85f);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(workshopContent);
+            workshopScroll.StopMovement(); workshopScroll.verticalNormalizedPosition=1;
+            RefreshWorkshopSelection();
+        }
+
+        private void AddWorkshopItem(int heroIndex, CourierEquipmentDefinition equipment)
+        {
+            var row=new WorkshopItem {heroIndex=heroIndex,equipment=equipment};
+            string key=heroIndex>=0?"Hero_"+heroIndex:equipment!=null?equipment.id:"None";
+            var button=Button("WorkshopItem_"+key,workshopContent,"",18,Ink,Vector2.zero,Vector2.one,Paper,() =>
+            {
+                if(row.heroIndex>=0) SelectCourier(row.heroIndex);
+                else courierSelection.Equip((CourierEquipmentKind)(workshopCategory-1),row.equipment?.id);
+            });
+            var element=button.gameObject.AddComponent<LayoutElement>();
+            element.preferredHeight=96; element.minHeight=96; element.flexibleHeight=0;
+            row.surface=button.GetComponent<UnityEngine.UI.Image>();
+            Sprite sprite=heroIndex>=0?couriers.entries[heroIndex].icon:equipment?.icon;
+            var icon=Panel("Portrait",button.transform,new Vector2(.015f,.045f),new Vector2(.22f,.955f),sprite!=null?Color.white:Color.clear);
+            icon.sprite=sprite; icon.preserveAspect=true; icon.raycastTarget=false;
+            string name=heroIndex>=0?couriers.entries[heroIndex].displayName:equipment!=null?equipment.displayName:"Без предмета";
+            var nameLabel=Label("Name",button.transform,name,20,Ink,new Vector2(.245f,.41f),new Vector2(.95f,.91f),TextAlignmentOptions.MidlineLeft,FontStyles.Bold);
+            nameLabel.enableAutoSizing=true; nameLabel.fontSizeMin=13; nameLabel.fontSizeMax=20;
+            row.state=Label("SelectionState",button.transform,"",13,Muted,new Vector2(.245f,.08f),new Vector2(.95f,.43f),TextAlignmentOptions.MidlineLeft);
+            workshopItems.Add(row);
+        }
+
+        private void RefreshWorkshopSelection()
+        {
+            if(workshopCaption!=null) workshopCaption.text=courierSelection.SelectedDefinition.displayName;
+            var chosen=workshopCategory>0?courierSelection.SelectedEquipment((CourierEquipmentKind)(workshopCategory-1)):null;
+            foreach(var row in workshopItems)
+            {
+                bool selected=row.heroIndex>=0?row.heroIndex==courierSelection.SelectedIndex:row.equipment==chosen;
+                row.surface.color=selected?new Color(.83f,.94f,.87f):Paper;
+                row.state.text=selected?row.heroIndex>=0?"В ЭФИРЕ":"НАДЕТО":row.heroIndex>=0?"Выбрать героя":"Примерить";
+                row.state.color=selected?new Color(.13f,.44f,.32f):Muted;
+            }
+        }
+
+        private void CycleCourier(int direction) => SelectCourier((courierSelection.SelectedIndex+direction+couriers.entries.Length)%couriers.entries.Length);
 
         private void BuildSongs()
         {
@@ -291,7 +404,7 @@ namespace RadioArchipelago.UI
             viewport.gameObject.AddComponent<Mask>().showMaskGraphic=false;
             songContent=Rect("Content",viewport,new Vector2(0,1),new Vector2(1,1));
             songContent.pivot=new Vector2(.5f,1);
-            songContent.sizeDelta=new Vector2(0,songs.Songs.Length*SongRowHeight);
+            songContent.sizeDelta=new Vector2(0,visibleSongs.Length*SongRowHeight);
             songScroll.viewport=viewport; songScroll.content=songContent;
             for(int i=0;i<SongRowPoolSize;i++)
             {
@@ -364,7 +477,7 @@ namespace RadioArchipelago.UI
             reviveLabel=LabelInButton(reviveButton);
             Button("RetryButton",card.transform,"Ещё раз",20,Ink,new Vector2(.07f,.13f),new Vector2(.48f,.23f),Paper,Retry);
             Button("HomeButton",card.transform,"В меню",20,Ink,new Vector2(.52f,.13f),new Vector2(.93f,.23f),Paper,GoHome);
-            nextButton=Button("NextTrackButton",card.transform,"Следующая мелодия",17,Ink,new Vector2(.07f,.02f),new Vector2(.93f,.12f),Color.clear,() => {game.NextSong();ClosePopup();});
+            nextButton=Button("NextTrackButton",card.transform,"Следующий остров",17,Ink,new Vector2(.07f,.02f),new Vector2(.93f,.12f),Color.clear,() => SelectNextSong());
         }
 
         public void StartSelectedSong()
@@ -378,21 +491,27 @@ namespace RadioArchipelago.UI
 
         public bool SelectSong(int catalogId)
         {
+            if(!initialized || game.Phase!=ClonePhase.Menu && game.Phase!=ClonePhase.Ready && game.Phase!=ClonePhase.Results) return false;
+            SongRecord song=null;
+            for(int i=0;i<visibleSongs.Length;i++) if(visibleSongs[i].catalogId==catalogId) {song=visibleSongs[i];break;}
+            if(song==null || !profile.IsSongUnlocked(song.id)) return false;
+            islandWorld.BindDefinition(song.id);
             if(!game.SelectSong(catalogId)) return false;
+            islandWorld.ApplyLighting(song.id);
             view="Play"; ClosePopup(); Refresh();
             return true;
         }
 
         private void CycleSong(int direction)
         {
-            var entries=songs.Songs;
-            int current=0;
-            for(int i=0;i<entries.Length;i++) if(entries[i].id==game.Selected.id) {current=i;break;}
-            for(int step=1;step<entries.Length;step++)
-            {
-                int index=(current+direction*step+entries.Length*2)%entries.Length;
-                if(profile.IsSongUnlocked(entries[index].id)) {SelectSong(entries[index].catalogId);return;}
-            }
+            var next=RadioIslandMenuPolicy.Next(visibleSongs,game.Selected?.id,direction,profile.IsSongUnlocked);
+            if(next!=null) SelectSong(next.catalogId);
+        }
+
+        public bool SelectNextSong()
+        {
+            var next=RadioIslandMenuPolicy.Next(visibleSongs,game.Selected?.id,1,profile.IsSongUnlocked);
+            return next!=null && SelectSong(next.catalogId);
         }
 
         public void Navigate(string target)
@@ -492,58 +611,59 @@ namespace RadioArchipelago.UI
 
         private void RefreshCouriers()
         {
-            if(courierName!=null) courierName.text=courierSelection.SelectedDefinition.displayName;
-            for(int i=0;i<courierCards.Count;i++) courierCards[i].color=i==courierSelection.SelectedIndex?Mint:Color.clear;
-            for(int i=0;i<workshopCards.Count;i++)
+            if(courierName!=null) courierName.text=courierSelection.SelectedDefinition.displayName+" · "+(courierSelection.SelectedIndex+1)+" / "+couriers.entries.Length;
+            for(int i=0;i<courierCards.Count;i++)
             {
-                bool selected=i==courierSelection.SelectedIndex;
-                workshopCards[i].color=selected?new Color(.87f,.96f,.90f):Paper;
-                workshopStates[i].text=selected?"В ЭФИРЕ":"Выбрать курьера";
-                workshopStates[i].color=selected?new Color(.16f,.48f,.40f):Ink;
+                int index=(courierSelection.SelectedIndex+i-1+couriers.entries.Length)%couriers.entries.Length;
+                courierSlots[i]=index;
+                courierCards[i].color=index==courierSelection.SelectedIndex?Mint:Color.clear;
+                courierPortraits[i].sprite=couriers.entries[index].icon;
+                courierPortraits[i].color=courierPortraits[i].sprite!=null?Color.white:Color.clear;
             }
+            RefreshWorkshopSelection();
         }
 
         private void RefreshAtlas()
         {
             int completed=0;
-            for(int i=0;i<profile.State.songs.Count;i++) if(profile.State.songs[i].completions>0) completed++;
-            int[] thresholds={0,1,3,6,10};
-            atlasSummary.text="Зажжено мелодий: "+completed+" / "+songs.Songs.Length;
+            for(int i=0;i<visibleSongs.Length;i++) if(profile.SongProgress(visibleSongs[i].id)?.completions>0) completed++;
+            atlasSummary.text="Зажжено мелодий: "+completed+" / "+visibleSongs.Length;
             for(int i=0;i<stationStates.Count;i++)
             {
-                bool unlocked=completed>=thresholds[i];
+                bool unlocked=profile.IsSongUnlocked(visibleSongs[i].id);
                 stationMarks[i].color=unlocked?Mint:new Color(.83f,.83f,.79f);
-                stationStates[i].text=unlocked?"Сигнал принят":"До открытия: "+Mathf.Max(0,thresholds[i]-completed)+" новых мелодий";
+                bool cleared=profile.SongProgress(visibleSongs[i].id)?.completions>0;
+                stationStates[i].text=cleared?"Сигнал принят":unlocked?"Готов к полёту":"Сигнал пока закрыт";
             }
         }
 
         private void RefreshSongRows(bool force)
         {
             if(songContent==null) return;
-            catalogBalance.text=songs.Songs.Length+" треков · Ноты: "+profile.Gold+" · Кристаллы: "+profile.Diamonds;
-            int first=Mathf.Clamp(Mathf.FloorToInt(songContent.anchoredPosition.y/SongRowHeight)-1,0,Mathf.Max(0,songs.Songs.Length-1));
+            catalogBalance.text=visibleSongs.Length+" трека · Искры: "+profile.Gold+" · Кристаллы: "+profile.Diamonds;
+            int first=Mathf.Clamp(Mathf.FloorToInt(songContent.anchoredPosition.y/SongRowHeight)-1,0,Mathf.Max(0,visibleSongs.Length-1));
             for(int i=0;i<songRows.Count;i++)
             {
                 var row=songRows[i]; int index=first+i;
-                bool active=index<songs.Songs.Length;
+                bool active=index<visibleSongs.Length;
                 row.root.gameObject.SetActive(active);
                 if(!active || !force && row.index==index) continue;
                 row.index=index; row.root.anchoredPosition=new Vector2(0,-index*SongRowHeight);
-                var song=songs.Songs[index]; bool unlocked=profile.IsSongUnlocked(song.id);
+                var song=visibleSongs[index]; bool unlocked=profile.IsSongUnlocked(song.id);
                 row.title.text=song.title;
                 row.detail.text=song.artist+" · "+Duration(song.audioLengthSeconds);
                 row.accent.color=unlocked?Mint:LineColor;
                 if(unlocked) row.action.text=game.Selected.id==song.id?"В ЭФИРЕ":"ВЫБРАТЬ";
                 else if(song.catalog!=null && (song.catalog.musicUnlockType==2 || song.catalog.musicUnlockType==3 || song.catalog.musicUnlockType==4)) row.action.text="ОТКРЫТЬ\nЛОКАЛЬНО";
-                else if(song.catalog!=null && song.catalog.gold>0) row.action.text="ОТКРЫТЬ\n"+song.catalog.gold+(song.catalog.musicUnlockType==5?" крист.":" нот");
+                else if(song.catalog!=null && song.catalog.gold>0) row.action.text="ОТКРЫТЬ\n"+song.catalog.gold+(song.catalog.musicUnlockType==5?" крист.":" искр");
                 else row.action.text="ЗАКРЫТО";
             }
         }
 
         private void ActivateSongRow(SongRowView row)
         {
-            if(row.index<0 || row.index>=songs.Songs.Length) return;
-            var song=songs.Songs[row.index];
+            if(row.index<0 || row.index>=visibleSongs.Length) return;
+            var song=visibleSongs[row.index];
             if(!profile.IsSongUnlocked(song.id))
             {
                 bool localUnlock=song.catalog!=null && (song.catalog.musicUnlockType==2 || song.catalog.musicUnlockType==3 || song.catalog.musicUnlockType==4);
@@ -580,12 +700,12 @@ namespace RadioArchipelago.UI
             overlayDetail.text=game.Selected.title;
             overlayScore.text=game.Score.ToString("N0");
             overlayReward.text=paused?"Продолжим с того же места":dead?(game.CanRevive?"Один возврат за полёт · бесплатно":"Можно повторить полёт с начала"):
-                "Маяки: "+game.RunStars+(game.Endless?"/9":"/3")+" · Собрано нот: "+game.CollectedCoins;
+                "Маяки: "+game.RunStars+(game.Endless?"/9":"/3")+" · Собрано искр: "+game.CollectedCoins;
             resumeButton.gameObject.SetActive(paused);
             reviveButton.gameObject.SetActive(dead && game.CanRevive);
             reviveButton.interactable=dead && game.CanRevive;
             lastReviveSeconds=-1;
-            nextButton.gameObject.SetActive(!paused && !dead && game.CanNext);
+            nextButton.gameObject.SetActive(!paused && !dead && RadioIslandMenuPolicy.Next(visibleSongs,game.Selected?.id,1,profile.IsSongUnlocked)!=null);
         }
 
         private void Update()
@@ -684,6 +804,7 @@ namespace RadioArchipelago.UI
 
         private void ReleasePresentation()
         {
+            islandWorld?.Dispose(); islandWorld=null;
             if(game!=null) game.Changed-=Refresh;
             if(courierSelection!=null) courierSelection.Changed-=RefreshCouriers;
             if(canvas!=null)
@@ -695,7 +816,8 @@ namespace RadioArchipelago.UI
             safeArea=null;
             lastPhase=(ClonePhase)(-1);lastScore=lastStreak=lastProgressPercent=-1;lastSongId=null;
             screens.Clear(); navLabels.Clear(); navMarks.Clear(); courierCards.Clear();
-            workshopCards.Clear(); workshopStates.Clear(); songRows.Clear(); stationStates.Clear(); stationMarks.Clear();
+            courierPortraits.Clear(); workshopItems.Clear(); workshopTabs.Clear(); workshopContent=null; workshopScroll=null;
+            songRows.Clear(); stationStates.Clear(); stationMarks.Clear();
             if(font!=null)
             {
                 var textures=font.atlasTextures;

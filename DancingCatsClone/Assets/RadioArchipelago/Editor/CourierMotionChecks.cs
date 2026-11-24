@@ -9,6 +9,8 @@ namespace RadioArchipelago.Editor
     {
         public static void Run()
         {
+            CourierAirTurnChecks.Run();
+            CourierFinishHoverChecks.Run();
             CheckEverySupportTurn();
             CheckContinuousBounce();
             var root = new GameObject("Courier motion test");

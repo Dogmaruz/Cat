@@ -11,19 +11,19 @@ namespace DancingCats.Clone.Editor
     public static class CloneSceneBuilder
     {
         [Serializable] private sealed class ThemeBindings { public string[] materials; }
-        public const string ScenePath = "Assets/Clone/Scenes/DancingCats.unity";
+        public const string ScenePath = "Assets/Editor/SceneTemplates/Base/DancingCats.unity";
 
         [MenuItem("Clone/Build independent original-content scene")]
         public static void Run()
         {
             RecoveredAssetImporter.Repair();
-            Directory.CreateDirectory("Assets/Clone/Scenes");
+            Directory.CreateDirectory(Path.GetDirectoryName(ScenePath));
             Directory.CreateDirectory("Assets/Clone/Generated");
             Directory.CreateDirectory("Assets/Resources");
             AssetDatabase.Refresh();
             for (int theme = 0; theme < 8; theme++)
             {
-                var original = EditorSceneManager.OpenScene("Assets/Recovered/Scenes/level" + theme + ".unity", OpenSceneMode.Single);
+                var original = EditorSceneManager.OpenScene("Assets/Editor/SceneTemplates/Recovered/level" + theme + ".unity", OpenSceneMode.Single);
                 var railway = original.GetRootGameObjects().FirstOrDefault(g => g.name.StartsWith("Railway", StringComparison.Ordinal));
                 if (railway != null)
                 {
@@ -38,7 +38,7 @@ namespace DancingCats.Clone.Editor
             }
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             // Retain the original Volume rather than bringing template lighting into the restored environments.
-            var original5 = EditorSceneManager.OpenScene("Assets/Recovered/Scenes/level5.unity", OpenSceneMode.Additive);
+            var original5 = EditorSceneManager.OpenScene("Assets/Editor/SceneTemplates/Recovered/level5.unity", OpenSceneMode.Additive);
             foreach (var root in original5.GetRootGameObjects().Where(g => g.name.StartsWith("GlobalVolume", StringComparison.Ordinal)))
             {
                 var copy = UnityEngine.Object.Instantiate(root);

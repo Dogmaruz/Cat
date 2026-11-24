@@ -1,0 +1,9 @@
+# Large authoring and Unity import assets. Unity meta files stay in regular Git.
+DancingCatsClone/Assets/RadioArchipelago/Imported/Islands/**/*.fbx filter=lfs diff=lfs merge=lfs -text
+DancingCatsClone/Assets/RadioArchipelago/Imported/Modular/**/*.fbx filter=lfs diff=lfs merge=lfs -text
+DancingCatsClone/Assets/RadioArchipelago/Imported/Modular/**/*.png filter=lfs diff=lfs merge=lfs -text
+ArtSource/RadioArchipelago/**/*.blend filter=lfs diff=lfs merge=lfs -text
+ArtSource/RadioArchipelago/Islands/**/*.fbx filter=lfs diff=lfs merge=lfs -text
+ArtSource/RadioArchipelago/Islands/**/*.glb filter=lfs diff=lfs merge=lfs -text
+ArtSource/RadioArchipelago/ProcessedModular/**/*.fbx filter=lfs diff=lfs merge=lfs -text
+ArtSource/RadioArchipelago/ProcessedModular/**/*.png filter=lfs diff=lfs merge=lfs -text

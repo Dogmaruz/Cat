@@ -85,7 +85,18 @@ namespace DancingCats.Clone
                 Require(tile.transform, "Down").gameObject.SetActive(false);
             }
             else if (state.IsFollowMid)
-                Require(tile.transform, "Sphere").gameObject.SetActive(true);
+            {
+                var marker = Require(tile.transform, "Sphere");
+                marker.gameObject.SetActive(true);
+                // Resetting the tile stopped this pre-hit marker's looping
+                // play-on-awake Glow too. It is already active on a fresh
+                // instance, so SetActive(true) alone never restarts it.
+                foreach (var particle in marker.GetComponentsInChildren<ParticleSystem>(true))
+                {
+                    var main = particle.main;
+                    if (main.loop && main.playOnAwake) particle.Play(false);
+                }
+            }
 
             if (!state.IsHold && !state.IsFollowMid)
             {
