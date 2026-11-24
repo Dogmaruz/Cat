@@ -1,0 +1,3527 @@
+{
+  "schema": "radio_archipelago_current_road_terrain_checks/1",
+  "pass": true,
+  "completed_worlds": 10,
+  "expected_worlds": 10,
+  "road_width": 6.0,
+  "shoulder_each_side": 1.0,
+  "protected_corridor_width": 8.0,
+  "scope": "Actual terrain, geology, house-pad grading and native river meshes/cameras; production separately validates full plant/building scenes.",
+  "prior_8m_road_reports_are_historical": true,
+  "render_performed": false,
+  "unity_gameplay_tested": false,
+  "worlds": [
+    {
+      "schema": "radio_archipelago_v3_geometry_checks/1",
+      "pass": true,
+      "validation_kind": "evaluated_blender_geometry_and_supplied_render_evidence",
+      "unity_playtest_performed": false,
+      "parameters": {
+        "road_z": 0.0,
+        "road_width": 6.0,
+        "shoulder": 1.0,
+        "ceiling_height": 5,
+        "sample_step": 0.6,
+        "edge_inset": 0.05,
+        "height_tolerance": 0.025,
+        "terrain_below_offset": 0.08,
+        "surface_probe_lanes": 9
+      },
+      "limits": [
+        "Road raycasts sample center and both edges; gaps smaller than probe spacing can be missed.",
+        "Collider response, gameplay tile placement, chart timing and character animation were not simulated.",
+        "Render metadata must be captured by the rendering script; this validator does not itself render.",
+        "Geometry hashes exclude materials, lights and cameras and compare only supplied snapshots.",
+        "Collection/geometry-node instances must be realized into tagged meshes before this audit."
+      ],
+      "checks": [
+        {
+          "name": "route_loop_closed",
+          "pass": true,
+          "explicit_closing_point": false,
+          "authored_closed_flag": true,
+          "final_edge_length": 0.7995649691928511,
+          "route_point_count": 644,
+          "loop_length": 514.9264139860549
+        },
+        {
+          "name": "route_flat_at_road_z",
+          "pass": true,
+          "max_abs_z_error": 0.0,
+          "tolerance": 0.025
+        },
+        {
+          "name": "route_has_no_self_crossings",
+          "pass": true,
+          "crossing_count": 0,
+          "segment_pairs": []
+        },
+        {
+          "name": "render_instances_realized",
+          "pass": true,
+          "instance_count": 0,
+          "examples": []
+        },
+        {
+          "name": "all_render_geometry_has_role",
+          "pass": true,
+          "invalid_count": 0,
+          "examples": []
+        },
+        {
+          "name": "road_geometry_exists",
+          "pass": true,
+          "vertex_count": 9048,
+          "triangle_count": 18080
+        },
+        {
+          "name": "road_coverage_center_left_right",
+          "pass": true,
+          "sample_count": 1288,
+          "ray_count": 3864,
+          "missing_count": 0,
+          "max_sample_spacing": 0.6,
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "examples": []
+        },
+        {
+          "name": "road_height_and_normal",
+          "pass": true,
+          "min_hit_z": -9.5367431640625e-07,
+          "max_hit_z": 1.430511474609375e-06,
+          "max_abs_height_error": 1.430511474609375e-06,
+          "invalid_count": 0,
+          "tolerance": 0.025,
+          "examples": []
+        },
+        {
+          "name": "road_height_profile_continuity",
+          "pass": true,
+          "max_measured_grade": 4.771888133500494e-06,
+          "allowed_grade": 0.02,
+          "seam_included": true
+        },
+        {
+          "name": "terrain_below_road",
+          "pass": true,
+          "object_count": 443,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 1288,
+          "lanes_per_sample": 9,
+          "ray_count": 11592,
+          "hit_count": 11592,
+          "missing_count": 0,
+          "maximum_hit_z": -0.12999534606933594,
+          "maximum_allowed_z": -0.08,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "water_below_road",
+          "pass": true,
+          "object_count": 3,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 1288,
+          "lanes_per_sample": 9,
+          "ray_count": 11592,
+          "hit_count": 152,
+          "missing_count": 11440,
+          "maximum_hit_z": -0.5888978838920593,
+          "maximum_allowed_z": -0.025,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "swept_corridor_clearance",
+          "pass": true,
+          "protected_width": 8.0,
+          "required_ceiling_height": 5,
+          "no_overhead": true,
+          "tested_z_min": 0.025,
+          "tested_z_max": null,
+          "obstacle_collision_count": 0,
+          "candidate_object_count": 0,
+          "tested_triangle_count": 0,
+          "examples": []
+        },
+        {
+          "name": "five_orthographic_camera_views",
+          "pass": true,
+          "render_evidence_required": false,
+          "required_views": [
+            "top",
+            "front",
+            "back",
+            "left",
+            "right"
+          ],
+          "recorded_count": 6,
+          "missing_views": [],
+          "error_count": 0,
+          "examples": [],
+          "cameras": [
+            {
+              "view_id": "front",
+              "name": "Camera_front",
+              "type": "ORTHO",
+              "position": [
+                6.149833679199219,
+                -607.1204833984375,
+                -19.41082763671875
+              ],
+              "forward": [
+                0.0,
+                0.9999999403953552,
+                3.5762786865234375e-07
+              ],
+              "up": [
+                0.0,
+                -3.5762786865234375e-07,
+                0.9999999403953552
+              ],
+              "ortho_scale": 193.2812957763672,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2435.80810546875
+            },
+            {
+              "view_id": "right",
+              "name": "Camera_right",
+              "type": "ORTHO",
+              "position": [
+                615.1018676757812,
+                1.8315620422363281,
+                -19.41082763671875
+              ],
+              "forward": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 193.2812957763672,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2435.80810546875
+            },
+            {
+              "view_id": "left",
+              "name": "Camera_left",
+              "type": "ORTHO",
+              "position": [
+                -602.8021850585938,
+                1.8315620422363281,
+                -19.41082763671875
+              ],
+              "forward": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 193.2812957763672,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2435.80810546875
+            },
+            {
+              "view_id": "back",
+              "name": "Camera_back",
+              "type": "ORTHO",
+              "position": [
+                6.149833679199219,
+                610.7835693359375,
+                -19.41082763671875
+              ],
+              "forward": [
+                1.4210854715202004e-14,
+                -0.9999999403953552,
+                2.8499662296056294e-15
+              ],
+              "up": [
+                1.5099580252808664e-07,
+                0.0,
+                0.9999999403953552
+              ],
+              "ortho_scale": 193.2812957763672,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2435.80810546875
+            },
+            {
+              "view_id": "top",
+              "name": "Camera_top",
+              "type": "ORTHO",
+              "position": [
+                6.149833679199219,
+                1.8315620422363281,
+                589.5411987304688
+              ],
+              "forward": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "up": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "ortho_scale": 193.2812957763672,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2435.80810546875
+            },
+            {
+              "view_id": "isometric",
+              "name": "Camera_isometric",
+              "type": "ORTHO",
+              "position": [
+                286.3685302734375,
+                -278.3871154785156,
+                442.95001220703125
+              ],
+              "forward": [
+                -0.4601655602455139,
+                0.46016550064086914,
+                -0.7592729926109314
+              ],
+              "up": [
+                -0.5368872284889221,
+                0.536886990070343,
+                0.6507723331451416
+              ],
+              "ortho_scale": 253.84962463378906,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2435.80810546875
+            }
+          ]
+        },
+        {
+          "name": "same_geometry_across_renders",
+          "pass": true,
+          "render_evidence_required": false,
+          "before_and_after_present": false,
+          "snapshot_count": 1,
+          "distinct_hash_count": 1,
+          "hashes": [
+            "263c9bc23b2e417176a4cfc47f315bc066e3c41e53c1a1b09158c9da42d06e15"
+          ],
+          "live_geometry": {
+            "sha256": "263c9bc23b2e417176a4cfc47f315bc066e3c41e53c1a1b09158c9da42d06e15",
+            "mesh_count": 488,
+            "vertex_count": 191522,
+            "triangle_count": 380836,
+            "hash_method": "evaluated_local_f32_world_matrix_f64_triangle_i32"
+          }
+        },
+        {
+          "name": "all_actual_terrain_and_river_meshes_closed_outward_nondegenerate",
+          "pass": true,
+          "mesh_count": 488,
+          "vertices": 191522,
+          "faces": 237100,
+          "failures": []
+        },
+        {
+          "name": "centerline_exactly_matches_prior_canonical_route",
+          "pass": true,
+          "point_count": 644
+        },
+        {
+          "name": "native_river_water_top_above_actual_terrain",
+          "pass": true,
+          "top_vertices_probed": 2671,
+          "missing_hits": 0,
+          "minimum_water_bed_clearance": 0.320456862449646,
+          "maximum_water_bed_clearance": 1.2340490818023682
+        }
+      ],
+      "id": "01_emerald_ravine",
+      "road_width": 6.0,
+      "shoulder": 1.0,
+      "protected_corridor_width": 8.0,
+      "river_plan_present": true,
+      "house_pad_count": 3,
+      "seconds": 5.877,
+      "source_sha256": {
+        "build_worlds.py": "e8ebc259ee4e0bd58e6b144356b51a7e3379369afd70ef4a973fd6757d9399f8",
+        "terrain_road.py": "798f64c4ded490a1b96b947174436795730e781f5f2863e94698bafd84806468",
+        "geology_detail.py": "46faa84f8d408fd54e43ce6e65d436bc700b8d1f0cb469a929ac088b4bbc87d8",
+        "river_detail.py": "0343eeed58e66150885bbae8d64ad5a106d7aff681cfb46112b0d0060dbdb1f8",
+        "validate_scene.py": "fc3f312bcab1e3145e993ad66162536e3d5ea6e8084382b9fea8aa7478ced842",
+        "building-layouts.json": "a551b7dc2a67fa4cf54e86b6e8e568280e5174f91e47cbd907c0787c42f1617f"
+      },
+      "render_performed": false,
+      "plants_or_buildings_instantiated": false
+    },
+    {
+      "schema": "radio_archipelago_v3_geometry_checks/1",
+      "pass": true,
+      "validation_kind": "evaluated_blender_geometry_and_supplied_render_evidence",
+      "unity_playtest_performed": false,
+      "parameters": {
+        "road_z": 0.0,
+        "road_width": 6.0,
+        "shoulder": 1.0,
+        "ceiling_height": 5,
+        "sample_step": 0.6,
+        "edge_inset": 0.05,
+        "height_tolerance": 0.025,
+        "terrain_below_offset": 0.08,
+        "surface_probe_lanes": 9
+      },
+      "limits": [
+        "Road raycasts sample center and both edges; gaps smaller than probe spacing can be missed.",
+        "Collider response, gameplay tile placement, chart timing and character animation were not simulated.",
+        "Render metadata must be captured by the rendering script; this validator does not itself render.",
+        "Geometry hashes exclude materials, lights and cameras and compare only supplied snapshots.",
+        "Collection/geometry-node instances must be realized into tagged meshes before this audit."
+      ],
+      "checks": [
+        {
+          "name": "route_loop_closed",
+          "pass": true,
+          "explicit_closing_point": false,
+          "authored_closed_flag": true,
+          "final_edge_length": 0.7995369756359858,
+          "route_point_count": 575,
+          "loop_length": 459.7023426938951
+        },
+        {
+          "name": "route_flat_at_road_z",
+          "pass": true,
+          "max_abs_z_error": 0.0,
+          "tolerance": 0.025
+        },
+        {
+          "name": "route_has_no_self_crossings",
+          "pass": true,
+          "crossing_count": 0,
+          "segment_pairs": []
+        },
+        {
+          "name": "render_instances_realized",
+          "pass": true,
+          "instance_count": 0,
+          "examples": []
+        },
+        {
+          "name": "all_render_geometry_has_role",
+          "pass": true,
+          "invalid_count": 0,
+          "examples": []
+        },
+        {
+          "name": "road_geometry_exists",
+          "pass": true,
+          "vertex_count": 8050,
+          "triangle_count": 16100
+        },
+        {
+          "name": "road_coverage_center_left_right",
+          "pass": true,
+          "sample_count": 1150,
+          "ray_count": 3450,
+          "missing_count": 0,
+          "max_sample_spacing": 0.6,
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "examples": []
+        },
+        {
+          "name": "road_height_and_normal",
+          "pass": true,
+          "min_hit_z": -1.430511474609375e-06,
+          "max_hit_z": 1.430511474609375e-06,
+          "max_abs_height_error": 1.430511474609375e-06,
+          "invalid_count": 0,
+          "tolerance": 0.025,
+          "examples": []
+        },
+        {
+          "name": "road_height_profile_continuity",
+          "pass": true,
+          "max_measured_grade": 4.7712789217354e-06,
+          "allowed_grade": 0.02,
+          "seam_included": true
+        },
+        {
+          "name": "terrain_below_road",
+          "pass": true,
+          "object_count": 439,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 1150,
+          "lanes_per_sample": 9,
+          "ray_count": 10350,
+          "hit_count": 10350,
+          "missing_count": 0,
+          "maximum_hit_z": -0.12999725341796875,
+          "maximum_allowed_z": -0.08,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "water_below_road",
+          "pass": true,
+          "object_count": 1,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 1150,
+          "lanes_per_sample": 9,
+          "ray_count": 10350,
+          "hit_count": 0,
+          "missing_count": 10350,
+          "maximum_hit_z": null,
+          "maximum_allowed_z": -0.025,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "swept_corridor_clearance",
+          "pass": true,
+          "protected_width": 8.0,
+          "required_ceiling_height": 5,
+          "no_overhead": true,
+          "tested_z_min": 0.025,
+          "tested_z_max": null,
+          "obstacle_collision_count": 0,
+          "candidate_object_count": 0,
+          "tested_triangle_count": 0,
+          "examples": []
+        },
+        {
+          "name": "five_orthographic_camera_views",
+          "pass": true,
+          "render_evidence_required": false,
+          "required_views": [
+            "top",
+            "front",
+            "back",
+            "left",
+            "right"
+          ],
+          "recorded_count": 6,
+          "missing_views": [],
+          "error_count": 0,
+          "examples": [],
+          "cameras": [
+            {
+              "view_id": "front",
+              "name": "Camera_front",
+              "type": "ORTHO",
+              "position": [
+                -4.6884002685546875,
+                -644.0221557617188,
+                -21.61258316040039
+              ],
+              "forward": [
+                0.0,
+                0.9999999403953552,
+                3.5762786865234375e-07
+              ],
+              "up": [
+                0.0,
+                -3.5762786865234375e-07,
+                0.9999999403953552
+              ],
+              "ortho_scale": 205.12242126464844,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2585.034912109375
+            },
+            {
+              "view_id": "right",
+              "name": "Camera_right",
+              "type": "ORTHO",
+              "position": [
+                641.5703125,
+                2.2365493774414062,
+                -21.61258316040039
+              ],
+              "forward": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 205.12242126464844,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2585.034912109375
+            },
+            {
+              "view_id": "left",
+              "name": "Camera_left",
+              "type": "ORTHO",
+              "position": [
+                -650.9471435546875,
+                2.2365493774414062,
+                -21.61258316040039
+              ],
+              "forward": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 205.12242126464844,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2585.034912109375
+            },
+            {
+              "view_id": "back",
+              "name": "Camera_back",
+              "type": "ORTHO",
+              "position": [
+                -4.6884002685546875,
+                648.4953002929688,
+                -21.61258316040039
+              ],
+              "forward": [
+                1.4210854715202004e-14,
+                -0.9999999403953552,
+                2.8499662296056294e-15
+              ],
+              "up": [
+                1.5099580252808664e-07,
+                0.0,
+                0.9999999403953552
+              ],
+              "ortho_scale": 205.12242126464844,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2585.034912109375
+            },
+            {
+              "view_id": "top",
+              "name": "Camera_top",
+              "type": "ORTHO",
+              "position": [
+                -4.6884002685546875,
+                2.2365493774414062,
+                624.6461181640625
+              ],
+              "forward": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "up": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "ortho_scale": 205.12242126464844,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2585.034912109375
+            },
+            {
+              "view_id": "isometric",
+              "name": "Camera_isometric",
+              "type": "ORTHO",
+              "position": [
+                292.697509765625,
+                -295.1493835449219,
+                469.07421875
+              ],
+              "forward": [
+                -0.4601655602455139,
+                0.46016550064086914,
+                -0.7592729926109314
+              ],
+              "up": [
+                -0.5368872284889221,
+                0.536886990070343,
+                0.6507723331451416
+              ],
+              "ortho_scale": 269.81268310546875,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2585.034912109375
+            }
+          ]
+        },
+        {
+          "name": "same_geometry_across_renders",
+          "pass": true,
+          "render_evidence_required": false,
+          "before_and_after_present": false,
+          "snapshot_count": 1,
+          "distinct_hash_count": 1,
+          "hashes": [
+            "691133c33b63546f6afd85b90ee3bb163787335a87383502212f500188fa98f9"
+          ],
+          "live_geometry": {
+            "sha256": "691133c33b63546f6afd85b90ee3bb163787335a87383502212f500188fa98f9",
+            "mesh_count": 441,
+            "vertex_count": 178718,
+            "triangle_count": 355676,
+            "hash_method": "evaluated_local_f32_world_matrix_f64_triangle_i32"
+          }
+        },
+        {
+          "name": "all_actual_terrain_and_river_meshes_closed_outward_nondegenerate",
+          "pass": true,
+          "mesh_count": 441,
+          "vertices": 178718,
+          "faces": 222525,
+          "failures": []
+        },
+        {
+          "name": "centerline_exactly_matches_prior_canonical_route",
+          "pass": true,
+          "point_count": 575
+        }
+      ],
+      "id": "02_coral_oasis",
+      "road_width": 6.0,
+      "shoulder": 1.0,
+      "protected_corridor_width": 8.0,
+      "river_plan_present": false,
+      "house_pad_count": 3,
+      "seconds": 4.3,
+      "source_sha256": {
+        "build_worlds.py": "e8ebc259ee4e0bd58e6b144356b51a7e3379369afd70ef4a973fd6757d9399f8",
+        "terrain_road.py": "798f64c4ded490a1b96b947174436795730e781f5f2863e94698bafd84806468",
+        "geology_detail.py": "46faa84f8d408fd54e43ce6e65d436bc700b8d1f0cb469a929ac088b4bbc87d8",
+        "river_detail.py": "0343eeed58e66150885bbae8d64ad5a106d7aff681cfb46112b0d0060dbdb1f8",
+        "validate_scene.py": "fc3f312bcab1e3145e993ad66162536e3d5ea6e8084382b9fea8aa7478ced842",
+        "building-layouts.json": "a551b7dc2a67fa4cf54e86b6e8e568280e5174f91e47cbd907c0787c42f1617f"
+      },
+      "render_performed": false,
+      "plants_or_buildings_instantiated": false
+    },
+    {
+      "schema": "radio_archipelago_v3_geometry_checks/1",
+      "pass": true,
+      "validation_kind": "evaluated_blender_geometry_and_supplied_render_evidence",
+      "unity_playtest_performed": false,
+      "parameters": {
+        "road_z": 0.0,
+        "road_width": 6.0,
+        "shoulder": 1.0,
+        "ceiling_height": 5,
+        "sample_step": 0.6,
+        "edge_inset": 0.05,
+        "height_tolerance": 0.025,
+        "terrain_below_offset": 0.08,
+        "surface_probe_lanes": 9
+      },
+      "limits": [
+        "Road raycasts sample center and both edges; gaps smaller than probe spacing can be missed.",
+        "Collider response, gameplay tile placement, chart timing and character animation were not simulated.",
+        "Render metadata must be captured by the rendering script; this validator does not itself render.",
+        "Geometry hashes exclude materials, lights and cameras and compare only supplied snapshots.",
+        "Collection/geometry-node instances must be realized into tagged meshes before this audit."
+      ],
+      "checks": [
+        {
+          "name": "route_loop_closed",
+          "pass": true,
+          "explicit_closing_point": false,
+          "authored_closed_flag": true,
+          "final_edge_length": 0.7990345863729732,
+          "route_point_count": 689,
+          "loop_length": 550.5980852105553
+        },
+        {
+          "name": "route_flat_at_road_z",
+          "pass": true,
+          "max_abs_z_error": 0.0,
+          "tolerance": 0.025
+        },
+        {
+          "name": "route_has_no_self_crossings",
+          "pass": true,
+          "crossing_count": 0,
+          "segment_pairs": []
+        },
+        {
+          "name": "render_instances_realized",
+          "pass": true,
+          "instance_count": 0,
+          "examples": []
+        },
+        {
+          "name": "all_render_geometry_has_role",
+          "pass": true,
+          "invalid_count": 0,
+          "examples": []
+        },
+        {
+          "name": "road_geometry_exists",
+          "pass": true,
+          "vertex_count": 9646,
+          "triangle_count": 19292
+        },
+        {
+          "name": "road_coverage_center_left_right",
+          "pass": true,
+          "sample_count": 1378,
+          "ray_count": 4134,
+          "missing_count": 0,
+          "max_sample_spacing": 0.6,
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "examples": []
+        },
+        {
+          "name": "road_height_and_normal",
+          "pass": true,
+          "min_hit_z": -9.5367431640625e-07,
+          "max_hit_z": 9.5367431640625e-07,
+          "max_abs_height_error": 9.5367431640625e-07,
+          "invalid_count": 0,
+          "tolerance": 0.025,
+          "examples": []
+        },
+        {
+          "name": "road_height_profile_continuity",
+          "pass": true,
+          "max_measured_grade": 4.773591008785774e-06,
+          "allowed_grade": 0.02,
+          "seam_included": true
+        },
+        {
+          "name": "terrain_below_road",
+          "pass": true,
+          "object_count": 418,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 1378,
+          "lanes_per_sample": 9,
+          "ray_count": 12402,
+          "hit_count": 12402,
+          "missing_count": 0,
+          "maximum_hit_z": -0.12999725341796875,
+          "maximum_allowed_z": -0.08,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "water_below_road",
+          "pass": true,
+          "object_count": 0,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 1378,
+          "lanes_per_sample": 9,
+          "ray_count": 0,
+          "hit_count": 0,
+          "missing_count": 0,
+          "maximum_hit_z": null,
+          "maximum_allowed_z": -0.025,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "swept_corridor_clearance",
+          "pass": true,
+          "protected_width": 8.0,
+          "required_ceiling_height": 5,
+          "no_overhead": true,
+          "tested_z_min": 0.025,
+          "tested_z_max": null,
+          "obstacle_collision_count": 0,
+          "candidate_object_count": 0,
+          "tested_triangle_count": 0,
+          "examples": []
+        },
+        {
+          "name": "five_orthographic_camera_views",
+          "pass": true,
+          "render_evidence_required": false,
+          "required_views": [
+            "top",
+            "front",
+            "back",
+            "left",
+            "right"
+          ],
+          "recorded_count": 6,
+          "missing_views": [],
+          "error_count": 0,
+          "examples": [],
+          "cameras": [
+            {
+              "view_id": "front",
+              "name": "Camera_front",
+              "type": "ORTHO",
+              "position": [
+                3.3897781372070312,
+                -538.7847900390625,
+                -21.162649154663086
+              ],
+              "forward": [
+                0.0,
+                0.9999999403953552,
+                3.5762786865234375e-07
+              ],
+              "up": [
+                0.0,
+                -3.5762786865234375e-07,
+                0.9999999403953552
+              ],
+              "ortho_scale": 171.36004638671875,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2159.5478515625
+            },
+            {
+              "view_id": "right",
+              "name": "Camera_right",
+              "type": "ORTHO",
+              "position": [
+                543.2767333984375,
+                1.102203369140625,
+                -21.162649154663086
+              ],
+              "forward": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 171.36004638671875,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2159.5478515625
+            },
+            {
+              "view_id": "left",
+              "name": "Camera_left",
+              "type": "ORTHO",
+              "position": [
+                -536.4971923828125,
+                1.102203369140625,
+                -21.162649154663086
+              ],
+              "forward": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 171.36004638671875,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2159.5478515625
+            },
+            {
+              "view_id": "back",
+              "name": "Camera_back",
+              "type": "ORTHO",
+              "position": [
+                3.3897781372070312,
+                540.9891357421875,
+                -21.162649154663086
+              ],
+              "forward": [
+                1.4210854715202004e-14,
+                -0.9999999403953552,
+                2.8499662296056294e-15
+              ],
+              "up": [
+                1.5099580252808664e-07,
+                0.0,
+                0.9999999403953552
+              ],
+              "ortho_scale": 171.36004638671875,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2159.5478515625
+            },
+            {
+              "view_id": "top",
+              "name": "Camera_top",
+              "type": "ORTHO",
+              "position": [
+                3.3897781372070312,
+                1.102203369140625,
+                518.7243041992188
+              ],
+              "forward": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "up": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "ortho_scale": 171.36004638671875,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2159.5478515625
+            },
+            {
+              "view_id": "isometric",
+              "name": "Camera_isometric",
+              "type": "ORTHO",
+              "position": [
+                251.82708740234375,
+                -247.33511352539062,
+                388.7589416503906
+              ],
+              "forward": [
+                -0.4601655602455139,
+                0.46016550064086914,
+                -0.7592729926109314
+              ],
+              "up": [
+                -0.5368872284889221,
+                0.536886990070343,
+                0.6507723331451416
+              ],
+              "ortho_scale": 236.49609375,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2159.5478515625
+            }
+          ]
+        },
+        {
+          "name": "same_geometry_across_renders",
+          "pass": true,
+          "render_evidence_required": false,
+          "before_and_after_present": false,
+          "snapshot_count": 1,
+          "distinct_hash_count": 1,
+          "hashes": [
+            "cd36b651377c45d14ab1a52600b50180c294cf467228e17122c82ba2a18009ee"
+          ],
+          "live_geometry": {
+            "sha256": "cd36b651377c45d14ab1a52600b50180c294cf467228e17122c82ba2a18009ee",
+            "mesh_count": 419,
+            "vertex_count": 174667,
+            "triangle_count": 347662,
+            "hash_method": "evaluated_local_f32_world_matrix_f64_triangle_i32"
+          }
+        },
+        {
+          "name": "all_actual_terrain_and_river_meshes_closed_outward_nondegenerate",
+          "pass": true,
+          "mesh_count": 419,
+          "vertices": 174667,
+          "faces": 218563,
+          "failures": []
+        },
+        {
+          "name": "centerline_exactly_matches_prior_canonical_route",
+          "pass": true,
+          "point_count": 689
+        }
+      ],
+      "id": "03_amethyst_grotto",
+      "road_width": 6.0,
+      "shoulder": 1.0,
+      "protected_corridor_width": 8.0,
+      "river_plan_present": false,
+      "house_pad_count": 3,
+      "seconds": 4.542,
+      "source_sha256": {
+        "build_worlds.py": "e8ebc259ee4e0bd58e6b144356b51a7e3379369afd70ef4a973fd6757d9399f8",
+        "terrain_road.py": "798f64c4ded490a1b96b947174436795730e781f5f2863e94698bafd84806468",
+        "geology_detail.py": "46faa84f8d408fd54e43ce6e65d436bc700b8d1f0cb469a929ac088b4bbc87d8",
+        "river_detail.py": "0343eeed58e66150885bbae8d64ad5a106d7aff681cfb46112b0d0060dbdb1f8",
+        "validate_scene.py": "fc3f312bcab1e3145e993ad66162536e3d5ea6e8084382b9fea8aa7478ced842",
+        "building-layouts.json": "a551b7dc2a67fa4cf54e86b6e8e568280e5174f91e47cbd907c0787c42f1617f"
+      },
+      "render_performed": false,
+      "plants_or_buildings_instantiated": false
+    },
+    {
+      "schema": "radio_archipelago_v3_geometry_checks/1",
+      "pass": true,
+      "validation_kind": "evaluated_blender_geometry_and_supplied_render_evidence",
+      "unity_playtest_performed": false,
+      "parameters": {
+        "road_z": 0.0,
+        "road_width": 6.0,
+        "shoulder": 1.0,
+        "ceiling_height": 5,
+        "sample_step": 0.6,
+        "edge_inset": 0.05,
+        "height_tolerance": 0.025,
+        "terrain_below_offset": 0.08,
+        "surface_probe_lanes": 9
+      },
+      "limits": [
+        "Road raycasts sample center and both edges; gaps smaller than probe spacing can be missed.",
+        "Collider response, gameplay tile placement, chart timing and character animation were not simulated.",
+        "Render metadata must be captured by the rendering script; this validator does not itself render.",
+        "Geometry hashes exclude materials, lights and cameras and compare only supplied snapshots.",
+        "Collection/geometry-node instances must be realized into tagged meshes before this audit."
+      ],
+      "checks": [
+        {
+          "name": "route_loop_closed",
+          "pass": true,
+          "explicit_closing_point": false,
+          "authored_closed_flag": true,
+          "final_edge_length": 0.7983712610486121,
+          "route_point_count": 475,
+          "loop_length": 379.20006098637487
+        },
+        {
+          "name": "route_flat_at_road_z",
+          "pass": true,
+          "max_abs_z_error": 0.0,
+          "tolerance": 0.025
+        },
+        {
+          "name": "route_has_no_self_crossings",
+          "pass": true,
+          "crossing_count": 0,
+          "segment_pairs": []
+        },
+        {
+          "name": "render_instances_realized",
+          "pass": true,
+          "instance_count": 0,
+          "examples": []
+        },
+        {
+          "name": "all_render_geometry_has_role",
+          "pass": true,
+          "invalid_count": 0,
+          "examples": []
+        },
+        {
+          "name": "road_geometry_exists",
+          "pass": true,
+          "vertex_count": 6650,
+          "triangle_count": 13300
+        },
+        {
+          "name": "road_coverage_center_left_right",
+          "pass": true,
+          "sample_count": 950,
+          "ray_count": 2850,
+          "missing_count": 0,
+          "max_sample_spacing": 0.6,
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "examples": []
+        },
+        {
+          "name": "road_height_and_normal",
+          "pass": true,
+          "min_hit_z": -9.5367431640625e-07,
+          "max_hit_z": 1.430511474609375e-06,
+          "max_abs_height_error": 1.430511474609375e-06,
+          "invalid_count": 0,
+          "tolerance": 0.025,
+          "examples": []
+        },
+        {
+          "name": "road_height_profile_continuity",
+          "pass": true,
+          "max_measured_grade": 4.778273262344091e-06,
+          "allowed_grade": 0.02,
+          "seam_included": true
+        },
+        {
+          "name": "terrain_below_road",
+          "pass": true,
+          "object_count": 439,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 950,
+          "lanes_per_sample": 9,
+          "ray_count": 8550,
+          "hit_count": 8550,
+          "missing_count": 0,
+          "maximum_hit_z": -0.12999820709228516,
+          "maximum_allowed_z": -0.08,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "water_below_road",
+          "pass": true,
+          "object_count": 1,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 950,
+          "lanes_per_sample": 9,
+          "ray_count": 8550,
+          "hit_count": 0,
+          "missing_count": 8550,
+          "maximum_hit_z": null,
+          "maximum_allowed_z": -0.025,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "swept_corridor_clearance",
+          "pass": true,
+          "protected_width": 8.0,
+          "required_ceiling_height": 5,
+          "no_overhead": true,
+          "tested_z_min": 0.025,
+          "tested_z_max": null,
+          "obstacle_collision_count": 0,
+          "candidate_object_count": 0,
+          "tested_triangle_count": 0,
+          "examples": []
+        },
+        {
+          "name": "five_orthographic_camera_views",
+          "pass": true,
+          "render_evidence_required": false,
+          "required_views": [
+            "top",
+            "front",
+            "back",
+            "left",
+            "right"
+          ],
+          "recorded_count": 6,
+          "missing_views": [],
+          "error_count": 0,
+          "examples": [],
+          "cameras": [
+            {
+              "view_id": "front",
+              "name": "Camera_front",
+              "type": "ORTHO",
+              "position": [
+                -7.114601135253906,
+                -600.8240356445312,
+                -21.897003173828125
+              ],
+              "forward": [
+                0.0,
+                0.9999999403953552,
+                3.5762786865234375e-07
+              ],
+              "up": [
+                0.0,
+                -3.5762786865234375e-07,
+                0.9999999403953552
+              ],
+              "ortho_scale": 190.24021911621094,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2397.483154296875
+            },
+            {
+              "view_id": "right",
+              "name": "Camera_right",
+              "type": "ORTHO",
+              "position": [
+                592.2561645507812,
+                -1.4532737731933594,
+                -21.897003173828125
+              ],
+              "forward": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 190.24021911621094,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2397.483154296875
+            },
+            {
+              "view_id": "left",
+              "name": "Camera_left",
+              "type": "ORTHO",
+              "position": [
+                -606.4854125976562,
+                -1.4532737731933594,
+                -21.897003173828125
+              ],
+              "forward": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 190.24021911621094,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2397.483154296875
+            },
+            {
+              "view_id": "back",
+              "name": "Camera_back",
+              "type": "ORTHO",
+              "position": [
+                -7.114601135253906,
+                597.9175415039062,
+                -21.897003173828125
+              ],
+              "forward": [
+                1.4210854715202004e-14,
+                -0.9999999403953552,
+                2.8499662296056294e-15
+              ],
+              "up": [
+                1.5099580252808664e-07,
+                0.0,
+                0.9999999403953552
+              ],
+              "ortho_scale": 190.24021911621094,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2397.483154296875
+            },
+            {
+              "view_id": "top",
+              "name": "Camera_top",
+              "type": "ORTHO",
+              "position": [
+                -7.114601135253906,
+                -1.4532737731933594,
+                577.4737548828125
+              ],
+              "forward": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "up": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "ortho_scale": 190.24021911621094,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2397.483154296875
+            },
+            {
+              "view_id": "isometric",
+              "name": "Camera_isometric",
+              "type": "ORTHO",
+              "position": [
+                268.69512939453125,
+                -277.26300048828125,
+                433.1890563964844
+              ],
+              "forward": [
+                -0.4601655602455139,
+                0.46016550064086914,
+                -0.7592729926109314
+              ],
+              "up": [
+                -0.5368872284889221,
+                0.536886990070343,
+                0.6507723331451416
+              ],
+              "ortho_scale": 249.2891387939453,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2397.483154296875
+            }
+          ]
+        },
+        {
+          "name": "same_geometry_across_renders",
+          "pass": true,
+          "render_evidence_required": false,
+          "before_and_after_present": false,
+          "snapshot_count": 1,
+          "distinct_hash_count": 1,
+          "hashes": [
+            "3efeaa371dacf3fb7272b38836cae085a88844e039e1ca4e7f2ba3661d7ebc52"
+          ],
+          "live_geometry": {
+            "sha256": "3efeaa371dacf3fb7272b38836cae085a88844e039e1ca4e7f2ba3661d7ebc52",
+            "mesh_count": 441,
+            "vertex_count": 171803,
+            "triangle_count": 341846,
+            "hash_method": "evaluated_local_f32_world_matrix_f64_triangle_i32"
+          }
+        },
+        {
+          "name": "all_actual_terrain_and_river_meshes_closed_outward_nondegenerate",
+          "pass": true,
+          "mesh_count": 441,
+          "vertices": 171803,
+          "faces": 213599,
+          "failures": []
+        },
+        {
+          "name": "centerline_exactly_matches_prior_canonical_route",
+          "pass": true,
+          "point_count": 475
+        }
+      ],
+      "id": "04_autumn_windmills",
+      "road_width": 6.0,
+      "shoulder": 1.0,
+      "protected_corridor_width": 8.0,
+      "river_plan_present": false,
+      "house_pad_count": 3,
+      "seconds": 4.45,
+      "source_sha256": {
+        "build_worlds.py": "e8ebc259ee4e0bd58e6b144356b51a7e3379369afd70ef4a973fd6757d9399f8",
+        "terrain_road.py": "798f64c4ded490a1b96b947174436795730e781f5f2863e94698bafd84806468",
+        "geology_detail.py": "46faa84f8d408fd54e43ce6e65d436bc700b8d1f0cb469a929ac088b4bbc87d8",
+        "river_detail.py": "0343eeed58e66150885bbae8d64ad5a106d7aff681cfb46112b0d0060dbdb1f8",
+        "validate_scene.py": "fc3f312bcab1e3145e993ad66162536e3d5ea6e8084382b9fea8aa7478ced842",
+        "building-layouts.json": "a551b7dc2a67fa4cf54e86b6e8e568280e5174f91e47cbd907c0787c42f1617f"
+      },
+      "render_performed": false,
+      "plants_or_buildings_instantiated": false
+    },
+    {
+      "schema": "radio_archipelago_v3_geometry_checks/1",
+      "pass": true,
+      "validation_kind": "evaluated_blender_geometry_and_supplied_render_evidence",
+      "unity_playtest_performed": false,
+      "parameters": {
+        "road_z": 0.0,
+        "road_width": 6.0,
+        "shoulder": 1.0,
+        "ceiling_height": 5,
+        "sample_step": 0.6,
+        "edge_inset": 0.05,
+        "height_tolerance": 0.025,
+        "terrain_below_offset": 0.08,
+        "surface_probe_lanes": 9
+      },
+      "limits": [
+        "Road raycasts sample center and both edges; gaps smaller than probe spacing can be missed.",
+        "Collider response, gameplay tile placement, chart timing and character animation were not simulated.",
+        "Render metadata must be captured by the rendering script; this validator does not itself render.",
+        "Geometry hashes exclude materials, lights and cameras and compare only supplied snapshots.",
+        "Collection/geometry-node instances must be realized into tagged meshes before this audit."
+      ],
+      "checks": [
+        {
+          "name": "route_loop_closed",
+          "pass": true,
+          "explicit_closing_point": false,
+          "authored_closed_flag": true,
+          "final_edge_length": 0.7996699859104115,
+          "route_point_count": 593,
+          "loop_length": 474.20313970520164
+        },
+        {
+          "name": "route_flat_at_road_z",
+          "pass": true,
+          "max_abs_z_error": 0.0,
+          "tolerance": 0.025
+        },
+        {
+          "name": "route_has_no_self_crossings",
+          "pass": true,
+          "crossing_count": 0,
+          "segment_pairs": []
+        },
+        {
+          "name": "render_instances_realized",
+          "pass": true,
+          "instance_count": 0,
+          "examples": []
+        },
+        {
+          "name": "all_render_geometry_has_role",
+          "pass": true,
+          "invalid_count": 0,
+          "examples": []
+        },
+        {
+          "name": "road_geometry_exists",
+          "pass": true,
+          "vertex_count": 8302,
+          "triangle_count": 16604
+        },
+        {
+          "name": "road_coverage_center_left_right",
+          "pass": true,
+          "sample_count": 1186,
+          "ray_count": 3558,
+          "missing_count": 0,
+          "max_sample_spacing": 0.6,
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "examples": []
+        },
+        {
+          "name": "road_height_and_normal",
+          "pass": true,
+          "min_hit_z": -9.5367431640625e-07,
+          "max_hit_z": 9.5367431640625e-07,
+          "max_abs_height_error": 9.5367431640625e-07,
+          "invalid_count": 0,
+          "tolerance": 0.025,
+          "examples": []
+        },
+        {
+          "name": "road_height_profile_continuity",
+          "pass": true,
+          "max_measured_grade": 4.770389954744884e-06,
+          "allowed_grade": 0.02,
+          "seam_included": true
+        },
+        {
+          "name": "terrain_below_road",
+          "pass": true,
+          "object_count": 418,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 1186,
+          "lanes_per_sample": 9,
+          "ray_count": 10674,
+          "hit_count": 10674,
+          "missing_count": 0,
+          "maximum_hit_z": -0.12999820709228516,
+          "maximum_allowed_z": -0.08,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "water_below_road",
+          "pass": true,
+          "object_count": 1,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 1186,
+          "lanes_per_sample": 9,
+          "ray_count": 10674,
+          "hit_count": 0,
+          "missing_count": 10674,
+          "maximum_hit_z": null,
+          "maximum_allowed_z": -0.025,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "swept_corridor_clearance",
+          "pass": true,
+          "protected_width": 8.0,
+          "required_ceiling_height": 5,
+          "no_overhead": true,
+          "tested_z_min": 0.025,
+          "tested_z_max": null,
+          "obstacle_collision_count": 0,
+          "candidate_object_count": 0,
+          "tested_triangle_count": 0,
+          "examples": []
+        },
+        {
+          "name": "five_orthographic_camera_views",
+          "pass": true,
+          "render_evidence_required": false,
+          "required_views": [
+            "top",
+            "front",
+            "back",
+            "left",
+            "right"
+          ],
+          "recorded_count": 6,
+          "missing_views": [],
+          "error_count": 0,
+          "examples": [],
+          "cameras": [
+            {
+              "view_id": "front",
+              "name": "Camera_front",
+              "type": "ORTHO",
+              "position": [
+                0.2816505432128906,
+                -538.91455078125,
+                -21.98290252685547
+              ],
+              "forward": [
+                0.0,
+                0.9999999403953552,
+                3.5762786865234375e-07
+              ],
+              "up": [
+                0.0,
+                -3.5762786865234375e-07,
+                0.9999999403953552
+              ],
+              "ortho_scale": 171.97531127929688,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2167.3017578125
+            },
+            {
+              "view_id": "right",
+              "name": "Camera_right",
+              "type": "ORTHO",
+              "position": [
+                542.1071166992188,
+                2.9109115600585938,
+                -21.98290252685547
+              ],
+              "forward": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 171.97531127929688,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2167.3017578125
+            },
+            {
+              "view_id": "left",
+              "name": "Camera_left",
+              "type": "ORTHO",
+              "position": [
+                -541.5437622070312,
+                2.9109115600585938,
+                -21.98290252685547
+              ],
+              "forward": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 171.97531127929688,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2167.3017578125
+            },
+            {
+              "view_id": "back",
+              "name": "Camera_back",
+              "type": "ORTHO",
+              "position": [
+                0.2816505432128906,
+                544.736328125,
+                -21.98290252685547
+              ],
+              "forward": [
+                1.4210854715202004e-14,
+                -0.9999999403953552,
+                2.8499662296056294e-15
+              ],
+              "up": [
+                1.5099580252808664e-07,
+                0.0,
+                0.9999999403953552
+              ],
+              "ortho_scale": 171.97531127929688,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2167.3017578125
+            },
+            {
+              "view_id": "top",
+              "name": "Camera_top",
+              "type": "ORTHO",
+              "position": [
+                0.2816505432128906,
+                2.9109115600585938,
+                519.842529296875
+              ],
+              "forward": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "up": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "ortho_scale": 171.97531127929688,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2167.3017578125
+            },
+            {
+              "view_id": "isometric",
+              "name": "Camera_isometric",
+              "type": "ORTHO",
+              "position": [
+                249.61099243164062,
+                -246.41842651367188,
+                389.4105224609375
+              ],
+              "forward": [
+                -0.4601655602455139,
+                0.46016550064086914,
+                -0.7592729926109314
+              ],
+              "up": [
+                -0.5368872284889221,
+                0.536886990070343,
+                0.6507723331451416
+              ],
+              "ortho_scale": 237.81886291503906,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2167.3017578125
+            }
+          ]
+        },
+        {
+          "name": "same_geometry_across_renders",
+          "pass": true,
+          "render_evidence_required": false,
+          "before_and_after_present": false,
+          "snapshot_count": 1,
+          "distinct_hash_count": 1,
+          "hashes": [
+            "3e026d1aa53bc5ccb16bb93fbcc428e1e6305c2e74ea8673ac62c0f861350176"
+          ],
+          "live_geometry": {
+            "sha256": "3e026d1aa53bc5ccb16bb93fbcc428e1e6305c2e74ea8673ac62c0f861350176",
+            "mesh_count": 420,
+            "vertex_count": 172679,
+            "triangle_count": 343682,
+            "hash_method": "evaluated_local_f32_world_matrix_f64_triangle_i32"
+          }
+        },
+        {
+          "name": "all_actual_terrain_and_river_meshes_closed_outward_nondegenerate",
+          "pass": true,
+          "mesh_count": 420,
+          "vertices": 172679,
+          "faces": 215109,
+          "failures": []
+        },
+        {
+          "name": "centerline_exactly_matches_prior_canonical_route",
+          "pass": true,
+          "point_count": 593
+        }
+      ],
+      "id": "05_frost_moon",
+      "road_width": 6.0,
+      "shoulder": 1.0,
+      "protected_corridor_width": 8.0,
+      "river_plan_present": false,
+      "house_pad_count": 4,
+      "seconds": 4.829,
+      "source_sha256": {
+        "build_worlds.py": "e8ebc259ee4e0bd58e6b144356b51a7e3379369afd70ef4a973fd6757d9399f8",
+        "terrain_road.py": "798f64c4ded490a1b96b947174436795730e781f5f2863e94698bafd84806468",
+        "geology_detail.py": "46faa84f8d408fd54e43ce6e65d436bc700b8d1f0cb469a929ac088b4bbc87d8",
+        "river_detail.py": "0343eeed58e66150885bbae8d64ad5a106d7aff681cfb46112b0d0060dbdb1f8",
+        "validate_scene.py": "fc3f312bcab1e3145e993ad66162536e3d5ea6e8084382b9fea8aa7478ced842",
+        "building-layouts.json": "a551b7dc2a67fa4cf54e86b6e8e568280e5174f91e47cbd907c0787c42f1617f"
+      },
+      "render_performed": false,
+      "plants_or_buildings_instantiated": false
+    },
+    {
+      "schema": "radio_archipelago_v3_geometry_checks/1",
+      "pass": true,
+      "validation_kind": "evaluated_blender_geometry_and_supplied_render_evidence",
+      "unity_playtest_performed": false,
+      "parameters": {
+        "road_z": 0.0,
+        "road_width": 6.0,
+        "shoulder": 1.0,
+        "ceiling_height": 5,
+        "sample_step": 0.6,
+        "edge_inset": 0.05,
+        "height_tolerance": 0.025,
+        "terrain_below_offset": 0.08,
+        "surface_probe_lanes": 9
+      },
+      "limits": [
+        "Road raycasts sample center and both edges; gaps smaller than probe spacing can be missed.",
+        "Collider response, gameplay tile placement, chart timing and character animation were not simulated.",
+        "Render metadata must be captured by the rendering script; this validator does not itself render.",
+        "Geometry hashes exclude materials, lights and cameras and compare only supplied snapshots.",
+        "Collection/geometry-node instances must be realized into tagged meshes before this audit."
+      ],
+      "checks": [
+        {
+          "name": "route_loop_closed",
+          "pass": true,
+          "explicit_closing_point": false,
+          "authored_closed_flag": true,
+          "final_edge_length": 0.7988958939076175,
+          "route_point_count": 472,
+          "loop_length": 377.134618674234
+        },
+        {
+          "name": "route_flat_at_road_z",
+          "pass": true,
+          "max_abs_z_error": 0.0,
+          "tolerance": 0.025
+        },
+        {
+          "name": "route_has_no_self_crossings",
+          "pass": true,
+          "crossing_count": 0,
+          "segment_pairs": []
+        },
+        {
+          "name": "render_instances_realized",
+          "pass": true,
+          "instance_count": 0,
+          "examples": []
+        },
+        {
+          "name": "all_render_geometry_has_role",
+          "pass": true,
+          "invalid_count": 0,
+          "examples": []
+        },
+        {
+          "name": "road_geometry_exists",
+          "pass": true,
+          "vertex_count": 6608,
+          "triangle_count": 13216
+        },
+        {
+          "name": "road_coverage_center_left_right",
+          "pass": true,
+          "sample_count": 944,
+          "ray_count": 2832,
+          "missing_count": 0,
+          "max_sample_spacing": 0.6,
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "examples": []
+        },
+        {
+          "name": "road_height_and_normal",
+          "pass": true,
+          "min_hit_z": -9.5367431640625e-07,
+          "max_hit_z": 1.430511474609375e-06,
+          "max_abs_height_error": 1.430511474609375e-06,
+          "invalid_count": 0,
+          "tolerance": 0.025,
+          "examples": []
+        },
+        {
+          "name": "road_height_profile_continuity",
+          "pass": true,
+          "max_measured_grade": 4.774359089139643e-06,
+          "allowed_grade": 0.02,
+          "seam_included": true
+        },
+        {
+          "name": "terrain_below_road",
+          "pass": true,
+          "object_count": 375,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 944,
+          "lanes_per_sample": 9,
+          "ray_count": 8496,
+          "hit_count": 8496,
+          "missing_count": 0,
+          "maximum_hit_z": -0.12999820709228516,
+          "maximum_allowed_z": -0.08,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "water_below_road",
+          "pass": true,
+          "object_count": 3,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 944,
+          "lanes_per_sample": 9,
+          "ray_count": 8496,
+          "hit_count": 0,
+          "missing_count": 8496,
+          "maximum_hit_z": null,
+          "maximum_allowed_z": -0.025,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "swept_corridor_clearance",
+          "pass": true,
+          "protected_width": 8.0,
+          "required_ceiling_height": 5,
+          "no_overhead": true,
+          "tested_z_min": 0.025,
+          "tested_z_max": null,
+          "obstacle_collision_count": 0,
+          "candidate_object_count": 0,
+          "tested_triangle_count": 0,
+          "examples": []
+        },
+        {
+          "name": "five_orthographic_camera_views",
+          "pass": true,
+          "render_evidence_required": false,
+          "required_views": [
+            "top",
+            "front",
+            "back",
+            "left",
+            "right"
+          ],
+          "recorded_count": 6,
+          "missing_views": [],
+          "error_count": 0,
+          "examples": [],
+          "cameras": [
+            {
+              "view_id": "front",
+              "name": "Camera_front",
+              "type": "ORTHO",
+              "position": [
+                -3.603900909423828,
+                -552.338134765625,
+                -21.762868881225586
+              ],
+              "forward": [
+                0.0,
+                0.9999999403953552,
+                3.5762786865234375e-07
+              ],
+              "up": [
+                0.0,
+                -3.5762786865234375e-07,
+                0.9999999403953552
+              ],
+              "ortho_scale": 175.5918731689453,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2212.87890625
+            },
+            {
+              "view_id": "right",
+              "name": "Camera_right",
+              "type": "ORTHO",
+              "position": [
+                549.6158447265625,
+                0.8816184997558594,
+                -21.762868881225586
+              ],
+              "forward": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 175.5918731689453,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2212.87890625
+            },
+            {
+              "view_id": "left",
+              "name": "Camera_left",
+              "type": "ORTHO",
+              "position": [
+                -556.8236083984375,
+                0.8816184997558594,
+                -21.762868881225586
+              ],
+              "forward": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 175.5918731689453,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2212.87890625
+            },
+            {
+              "view_id": "back",
+              "name": "Camera_back",
+              "type": "ORTHO",
+              "position": [
+                -3.603900909423828,
+                554.101318359375,
+                -21.762868881225586
+              ],
+              "forward": [
+                1.4210854715202004e-14,
+                -0.9999999403953552,
+                2.8499662296056294e-15
+              ],
+              "up": [
+                1.5099580252808664e-07,
+                0.0,
+                0.9999999403953552
+              ],
+              "ortho_scale": 175.5918731689453,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2212.87890625
+            },
+            {
+              "view_id": "top",
+              "name": "Camera_top",
+              "type": "ORTHO",
+              "position": [
+                -3.603900909423828,
+                0.8816184997558594,
+                531.4568481445312
+              ],
+              "forward": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "up": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "ortho_scale": 175.5918731689453,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2212.87890625
+            },
+            {
+              "view_id": "isometric",
+              "name": "Camera_isometric",
+              "type": "ORTHO",
+              "position": [
+                250.9687042236328,
+                -253.69097900390625,
+                398.28192138671875
+              ],
+              "forward": [
+                -0.4601655602455139,
+                0.46016550064086914,
+                -0.7592729926109314
+              ],
+              "up": [
+                -0.5368872284889221,
+                0.536886990070343,
+                0.6507723331451416
+              ],
+              "ortho_scale": 242.81813049316406,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2212.87890625
+            }
+          ]
+        },
+        {
+          "name": "same_geometry_across_renders",
+          "pass": true,
+          "render_evidence_required": false,
+          "before_and_after_present": false,
+          "snapshot_count": 1,
+          "distinct_hash_count": 1,
+          "hashes": [
+            "bce68d0b8548060b18991900378c8358aff8eb81317c94ef98506c58e02c7d5d"
+          ],
+          "live_geometry": {
+            "sha256": "bce68d0b8548060b18991900378c8358aff8eb81317c94ef98506c58e02c7d5d",
+            "mesh_count": 379,
+            "vertex_count": 154716,
+            "triangle_count": 307920,
+            "hash_method": "evaluated_local_f32_world_matrix_f64_triangle_i32"
+          }
+        },
+        {
+          "name": "all_actual_terrain_and_river_meshes_closed_outward_nondegenerate",
+          "pass": true,
+          "mesh_count": 379,
+          "vertices": 154716,
+          "faces": 193754,
+          "failures": []
+        },
+        {
+          "name": "centerline_exactly_matches_prior_canonical_route",
+          "pass": true,
+          "point_count": 472
+        }
+      ],
+      "id": "06_tropical_cascade",
+      "road_width": 6.0,
+      "shoulder": 1.0,
+      "protected_corridor_width": 8.0,
+      "river_plan_present": false,
+      "house_pad_count": 4,
+      "seconds": 3.544,
+      "source_sha256": {
+        "build_worlds.py": "e8ebc259ee4e0bd58e6b144356b51a7e3379369afd70ef4a973fd6757d9399f8",
+        "terrain_road.py": "798f64c4ded490a1b96b947174436795730e781f5f2863e94698bafd84806468",
+        "geology_detail.py": "46faa84f8d408fd54e43ce6e65d436bc700b8d1f0cb469a929ac088b4bbc87d8",
+        "river_detail.py": "0343eeed58e66150885bbae8d64ad5a106d7aff681cfb46112b0d0060dbdb1f8",
+        "validate_scene.py": "fc3f312bcab1e3145e993ad66162536e3d5ea6e8084382b9fea8aa7478ced842",
+        "building-layouts.json": "a551b7dc2a67fa4cf54e86b6e8e568280e5174f91e47cbd907c0787c42f1617f"
+      },
+      "render_performed": false,
+      "plants_or_buildings_instantiated": false
+    },
+    {
+      "schema": "radio_archipelago_v3_geometry_checks/1",
+      "pass": true,
+      "validation_kind": "evaluated_blender_geometry_and_supplied_render_evidence",
+      "unity_playtest_performed": false,
+      "parameters": {
+        "road_z": 0.0,
+        "road_width": 6.0,
+        "shoulder": 1.0,
+        "ceiling_height": 5,
+        "sample_step": 0.6,
+        "edge_inset": 0.05,
+        "height_tolerance": 0.025,
+        "terrain_below_offset": 0.08,
+        "surface_probe_lanes": 9
+      },
+      "limits": [
+        "Road raycasts sample center and both edges; gaps smaller than probe spacing can be missed.",
+        "Collider response, gameplay tile placement, chart timing and character animation were not simulated.",
+        "Render metadata must be captured by the rendering script; this validator does not itself render.",
+        "Geometry hashes exclude materials, lights and cameras and compare only supplied snapshots.",
+        "Collection/geometry-node instances must be realized into tagged meshes before this audit."
+      ],
+      "checks": [
+        {
+          "name": "route_loop_closed",
+          "pass": true,
+          "explicit_closing_point": false,
+          "authored_closed_flag": true,
+          "final_edge_length": 0.7987736472185913,
+          "route_point_count": 567,
+          "loop_length": 452.90784665607697
+        },
+        {
+          "name": "route_flat_at_road_z",
+          "pass": true,
+          "max_abs_z_error": 0.0,
+          "tolerance": 0.025
+        },
+        {
+          "name": "route_has_no_self_crossings",
+          "pass": true,
+          "crossing_count": 0,
+          "segment_pairs": []
+        },
+        {
+          "name": "render_instances_realized",
+          "pass": true,
+          "instance_count": 0,
+          "examples": []
+        },
+        {
+          "name": "all_render_geometry_has_role",
+          "pass": true,
+          "invalid_count": 0,
+          "examples": []
+        },
+        {
+          "name": "road_geometry_exists",
+          "pass": true,
+          "vertex_count": 7938,
+          "triangle_count": 15876
+        },
+        {
+          "name": "road_coverage_center_left_right",
+          "pass": true,
+          "sample_count": 1134,
+          "ray_count": 3402,
+          "missing_count": 0,
+          "max_sample_spacing": 0.6,
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "examples": []
+        },
+        {
+          "name": "road_height_and_normal",
+          "pass": true,
+          "min_hit_z": -1.430511474609375e-06,
+          "max_hit_z": 9.5367431640625e-07,
+          "max_abs_height_error": 1.430511474609375e-06,
+          "invalid_count": 0,
+          "tolerance": 0.025,
+          "examples": []
+        },
+        {
+          "name": "road_height_profile_continuity",
+          "pass": true,
+          "max_measured_grade": 4.775813639533579e-06,
+          "allowed_grade": 0.02,
+          "seam_included": true
+        },
+        {
+          "name": "terrain_below_road",
+          "pass": true,
+          "object_count": 420,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 1134,
+          "lanes_per_sample": 9,
+          "ray_count": 10206,
+          "hit_count": 10206,
+          "missing_count": 0,
+          "maximum_hit_z": -0.12999534606933594,
+          "maximum_allowed_z": -0.08,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "water_below_road",
+          "pass": true,
+          "object_count": 1,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 1134,
+          "lanes_per_sample": 9,
+          "ray_count": 10206,
+          "hit_count": 0,
+          "missing_count": 10206,
+          "maximum_hit_z": null,
+          "maximum_allowed_z": -0.025,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "swept_corridor_clearance",
+          "pass": true,
+          "protected_width": 8.0,
+          "required_ceiling_height": 5,
+          "no_overhead": true,
+          "tested_z_min": 0.025,
+          "tested_z_max": null,
+          "obstacle_collision_count": 0,
+          "candidate_object_count": 0,
+          "tested_triangle_count": 0,
+          "examples": []
+        },
+        {
+          "name": "five_orthographic_camera_views",
+          "pass": true,
+          "render_evidence_required": false,
+          "required_views": [
+            "top",
+            "front",
+            "back",
+            "left",
+            "right"
+          ],
+          "recorded_count": 6,
+          "missing_views": [],
+          "error_count": 0,
+          "examples": [],
+          "cameras": [
+            {
+              "view_id": "front",
+              "name": "Camera_front",
+              "type": "ORTHO",
+              "position": [
+                -7.635921478271484,
+                -601.371337890625,
+                -17.85077667236328
+              ],
+              "forward": [
+                0.0,
+                0.9999999403953552,
+                3.5762786865234375e-07
+              ],
+              "up": [
+                0.0,
+                -3.5762786865234375e-07,
+                0.9999999403953552
+              ],
+              "ortho_scale": 193.1974639892578,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2434.751708984375
+            },
+            {
+              "view_id": "right",
+              "name": "Camera_right",
+              "type": "ORTHO",
+              "position": [
+                601.052001953125,
+                7.316577911376953,
+                -17.85077667236328
+              ],
+              "forward": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 193.1974639892578,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2434.751708984375
+            },
+            {
+              "view_id": "left",
+              "name": "Camera_left",
+              "type": "ORTHO",
+              "position": [
+                -616.3238525390625,
+                7.316577911376953,
+                -17.85077667236328
+              ],
+              "forward": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 193.1974639892578,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2434.751708984375
+            },
+            {
+              "view_id": "back",
+              "name": "Camera_back",
+              "type": "ORTHO",
+              "position": [
+                -7.635921478271484,
+                616.0045166015625,
+                -17.85077667236328
+              ],
+              "forward": [
+                1.4210854715202004e-14,
+                -0.9999999403953552,
+                2.8499662296056294e-15
+              ],
+              "up": [
+                1.5099580252808664e-07,
+                0.0,
+                0.9999999403953552
+              ],
+              "ortho_scale": 193.1974639892578,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2434.751708984375
+            },
+            {
+              "view_id": "top",
+              "name": "Camera_top",
+              "type": "ORTHO",
+              "position": [
+                -7.635921478271484,
+                7.316577911376953,
+                590.837158203125
+              ],
+              "forward": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "up": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "ortho_scale": 193.1974639892578,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2434.751708984375
+            },
+            {
+              "view_id": "isometric",
+              "name": "Camera_isometric",
+              "type": "ORTHO",
+              "position": [
+                272.4612121582031,
+                -272.7805480957031,
+                444.3095397949219
+              ],
+              "forward": [
+                -0.4601655602455139,
+                0.46016550064086914,
+                -0.7592729926109314
+              ],
+              "up": [
+                -0.5368872284889221,
+                0.536886990070343,
+                0.6507723331451416
+              ],
+              "ortho_scale": 245.23074340820312,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2434.751708984375
+            }
+          ]
+        },
+        {
+          "name": "same_geometry_across_renders",
+          "pass": true,
+          "render_evidence_required": false,
+          "before_and_after_present": false,
+          "snapshot_count": 1,
+          "distinct_hash_count": 1,
+          "hashes": [
+            "a502db92a26860983ea968149f6a1657ad606dc9a09aee92eb0c8c6e455280ac"
+          ],
+          "live_geometry": {
+            "sha256": "a502db92a26860983ea968149f6a1657ad606dc9a09aee92eb0c8c6e455280ac",
+            "mesh_count": 422,
+            "vertex_count": 170939,
+            "triangle_count": 340194,
+            "hash_method": "evaluated_local_f32_world_matrix_f64_triangle_i32"
+          }
+        },
+        {
+          "name": "all_actual_terrain_and_river_meshes_closed_outward_nondegenerate",
+          "pass": true,
+          "mesh_count": 422,
+          "vertices": 170939,
+          "faces": 213885,
+          "failures": []
+        },
+        {
+          "name": "centerline_exactly_matches_prior_canonical_route",
+          "pass": true,
+          "point_count": 567
+        }
+      ],
+      "id": "07_storm_coast",
+      "road_width": 6.0,
+      "shoulder": 1.0,
+      "protected_corridor_width": 8.0,
+      "river_plan_present": false,
+      "house_pad_count": 4,
+      "seconds": 3.601,
+      "source_sha256": {
+        "build_worlds.py": "e8ebc259ee4e0bd58e6b144356b51a7e3379369afd70ef4a973fd6757d9399f8",
+        "terrain_road.py": "798f64c4ded490a1b96b947174436795730e781f5f2863e94698bafd84806468",
+        "geology_detail.py": "46faa84f8d408fd54e43ce6e65d436bc700b8d1f0cb469a929ac088b4bbc87d8",
+        "river_detail.py": "0343eeed58e66150885bbae8d64ad5a106d7aff681cfb46112b0d0060dbdb1f8",
+        "validate_scene.py": "fc3f312bcab1e3145e993ad66162536e3d5ea6e8084382b9fea8aa7478ced842",
+        "building-layouts.json": "a551b7dc2a67fa4cf54e86b6e8e568280e5174f91e47cbd907c0787c42f1617f"
+      },
+      "render_performed": false,
+      "plants_or_buildings_instantiated": false
+    },
+    {
+      "schema": "radio_archipelago_v3_geometry_checks/1",
+      "pass": true,
+      "validation_kind": "evaluated_blender_geometry_and_supplied_render_evidence",
+      "unity_playtest_performed": false,
+      "parameters": {
+        "road_z": 0.0,
+        "road_width": 6.0,
+        "shoulder": 1.0,
+        "ceiling_height": 5,
+        "sample_step": 0.6,
+        "edge_inset": 0.05,
+        "height_tolerance": 0.025,
+        "terrain_below_offset": 0.08,
+        "surface_probe_lanes": 9
+      },
+      "limits": [
+        "Road raycasts sample center and both edges; gaps smaller than probe spacing can be missed.",
+        "Collider response, gameplay tile placement, chart timing and character animation were not simulated.",
+        "Render metadata must be captured by the rendering script; this validator does not itself render.",
+        "Geometry hashes exclude materials, lights and cameras and compare only supplied snapshots.",
+        "Collection/geometry-node instances must be realized into tagged meshes before this audit."
+      ],
+      "checks": [
+        {
+          "name": "route_loop_closed",
+          "pass": true,
+          "explicit_closing_point": false,
+          "authored_closed_flag": true,
+          "final_edge_length": 0.7994390971315305,
+          "route_point_count": 413,
+          "loop_length": 330.15094334320986
+        },
+        {
+          "name": "route_flat_at_road_z",
+          "pass": true,
+          "max_abs_z_error": 0.0,
+          "tolerance": 0.025
+        },
+        {
+          "name": "route_has_no_self_crossings",
+          "pass": true,
+          "crossing_count": 0,
+          "segment_pairs": []
+        },
+        {
+          "name": "render_instances_realized",
+          "pass": true,
+          "instance_count": 0,
+          "examples": []
+        },
+        {
+          "name": "all_render_geometry_has_role",
+          "pass": true,
+          "invalid_count": 0,
+          "examples": []
+        },
+        {
+          "name": "road_geometry_exists",
+          "pass": true,
+          "vertex_count": 5782,
+          "triangle_count": 11564
+        },
+        {
+          "name": "road_coverage_center_left_right",
+          "pass": true,
+          "sample_count": 826,
+          "ray_count": 2478,
+          "missing_count": 0,
+          "max_sample_spacing": 0.6,
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "examples": []
+        },
+        {
+          "name": "road_height_and_normal",
+          "pass": true,
+          "min_hit_z": -9.5367431640625e-07,
+          "max_hit_z": 9.5367431640625e-07,
+          "max_abs_height_error": 9.5367431640625e-07,
+          "invalid_count": 0,
+          "tolerance": 0.025,
+          "examples": []
+        },
+        {
+          "name": "road_height_profile_continuity",
+          "pass": true,
+          "max_measured_grade": 4.771761246894535e-06,
+          "allowed_grade": 0.02,
+          "seam_included": true
+        },
+        {
+          "name": "terrain_below_road",
+          "pass": true,
+          "object_count": 376,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 826,
+          "lanes_per_sample": 9,
+          "ray_count": 7434,
+          "hit_count": 7434,
+          "missing_count": 0,
+          "maximum_hit_z": -0.12999725341796875,
+          "maximum_allowed_z": -0.08,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "water_below_road",
+          "pass": true,
+          "object_count": 0,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 826,
+          "lanes_per_sample": 9,
+          "ray_count": 0,
+          "hit_count": 0,
+          "missing_count": 0,
+          "maximum_hit_z": null,
+          "maximum_allowed_z": -0.025,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "swept_corridor_clearance",
+          "pass": true,
+          "protected_width": 8.0,
+          "required_ceiling_height": 5,
+          "no_overhead": true,
+          "tested_z_min": 0.025,
+          "tested_z_max": null,
+          "obstacle_collision_count": 0,
+          "candidate_object_count": 0,
+          "tested_triangle_count": 0,
+          "examples": []
+        },
+        {
+          "name": "five_orthographic_camera_views",
+          "pass": true,
+          "render_evidence_required": false,
+          "required_views": [
+            "top",
+            "front",
+            "back",
+            "left",
+            "right"
+          ],
+          "recorded_count": 6,
+          "missing_views": [],
+          "error_count": 0,
+          "examples": [],
+          "cameras": [
+            {
+              "view_id": "front",
+              "name": "Camera_front",
+              "type": "ORTHO",
+              "position": [
+                -2.1823081970214844,
+                -551.2263793945312,
+                -21.49996566772461
+              ],
+              "forward": [
+                0.0,
+                0.9999999403953552,
+                3.5762786865234375e-07
+              ],
+              "up": [
+                0.0,
+                -3.5762786865234375e-07,
+                0.9999999403953552
+              ],
+              "ortho_scale": 175.0835418701172,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2206.47265625
+            },
+            {
+              "view_id": "right",
+              "name": "Camera_right",
+              "type": "ORTHO",
+              "position": [
+                549.4358520507812,
+                0.3918037414550781,
+                -21.49996566772461
+              ],
+              "forward": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 175.0835418701172,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2206.47265625
+            },
+            {
+              "view_id": "left",
+              "name": "Camera_left",
+              "type": "ORTHO",
+              "position": [
+                -553.8004760742188,
+                0.3918037414550781,
+                -21.49996566772461
+              ],
+              "forward": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 175.0835418701172,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2206.47265625
+            },
+            {
+              "view_id": "back",
+              "name": "Camera_back",
+              "type": "ORTHO",
+              "position": [
+                -2.1823081970214844,
+                552.0099487304688,
+                -21.49996566772461
+              ],
+              "forward": [
+                1.4210854715202004e-14,
+                -0.9999999403953552,
+                2.8499662296056294e-15
+              ],
+              "up": [
+                1.5099580252808664e-07,
+                0.0,
+                0.9999999403953552
+              ],
+              "ortho_scale": 175.0835418701172,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2206.47265625
+            },
+            {
+              "view_id": "top",
+              "name": "Camera_top",
+              "type": "ORTHO",
+              "position": [
+                -2.1823081970214844,
+                0.3918037414550781,
+                530.1182250976562
+              ],
+              "forward": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "up": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "ortho_scale": 175.0835418701172,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2206.47265625
+            },
+            {
+              "view_id": "isometric",
+              "name": "Camera_isometric",
+              "type": "ORTHO",
+              "position": [
+                251.65330505371094,
+                -253.44381713867188,
+                397.32879638671875
+              ],
+              "forward": [
+                -0.4601655602455139,
+                0.46016550064086914,
+                -0.7592729926109314
+              ],
+              "up": [
+                -0.5368872284889221,
+                0.536886990070343,
+                0.6507723331451416
+              ],
+              "ortho_scale": 242.7532501220703,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2206.47265625
+            }
+          ]
+        },
+        {
+          "name": "same_geometry_across_renders",
+          "pass": true,
+          "render_evidence_required": false,
+          "before_and_after_present": false,
+          "snapshot_count": 1,
+          "distinct_hash_count": 1,
+          "hashes": [
+            "b4e40f9dca58d2c1c28f6707f551190e56bb90a646dd22b4f7e8dde2ee6a3704"
+          ],
+          "live_geometry": {
+            "sha256": "b4e40f9dca58d2c1c28f6707f551190e56bb90a646dd22b4f7e8dde2ee6a3704",
+            "mesh_count": 377,
+            "vertex_count": 157368,
+            "triangle_count": 313232,
+            "hash_method": "evaluated_local_f32_world_matrix_f64_triangle_i32"
+          }
+        },
+        {
+          "name": "all_actual_terrain_and_river_meshes_closed_outward_nondegenerate",
+          "pass": true,
+          "mesh_count": 377,
+          "vertices": 157368,
+          "faces": 196541,
+          "failures": []
+        },
+        {
+          "name": "centerline_exactly_matches_prior_canonical_route",
+          "pass": true,
+          "point_count": 413
+        }
+      ],
+      "id": "08_sunflower_terraces",
+      "road_width": 6.0,
+      "shoulder": 1.0,
+      "protected_corridor_width": 8.0,
+      "river_plan_present": false,
+      "house_pad_count": 3,
+      "seconds": 3.517,
+      "source_sha256": {
+        "build_worlds.py": "e8ebc259ee4e0bd58e6b144356b51a7e3379369afd70ef4a973fd6757d9399f8",
+        "terrain_road.py": "798f64c4ded490a1b96b947174436795730e781f5f2863e94698bafd84806468",
+        "geology_detail.py": "46faa84f8d408fd54e43ce6e65d436bc700b8d1f0cb469a929ac088b4bbc87d8",
+        "river_detail.py": "0343eeed58e66150885bbae8d64ad5a106d7aff681cfb46112b0d0060dbdb1f8",
+        "validate_scene.py": "fc3f312bcab1e3145e993ad66162536e3d5ea6e8084382b9fea8aa7478ced842",
+        "building-layouts.json": "a551b7dc2a67fa4cf54e86b6e8e568280e5174f91e47cbd907c0787c42f1617f"
+      },
+      "render_performed": false,
+      "plants_or_buildings_instantiated": false
+    },
+    {
+      "schema": "radio_archipelago_v3_geometry_checks/1",
+      "pass": true,
+      "validation_kind": "evaluated_blender_geometry_and_supplied_render_evidence",
+      "unity_playtest_performed": false,
+      "parameters": {
+        "road_z": 0.0,
+        "road_width": 6.0,
+        "shoulder": 1.0,
+        "ceiling_height": 5,
+        "sample_step": 0.6,
+        "edge_inset": 0.05,
+        "height_tolerance": 0.025,
+        "terrain_below_offset": 0.08,
+        "surface_probe_lanes": 9
+      },
+      "limits": [
+        "Road raycasts sample center and both edges; gaps smaller than probe spacing can be missed.",
+        "Collider response, gameplay tile placement, chart timing and character animation were not simulated.",
+        "Render metadata must be captured by the rendering script; this validator does not itself render.",
+        "Geometry hashes exclude materials, lights and cameras and compare only supplied snapshots.",
+        "Collection/geometry-node instances must be realized into tagged meshes before this audit."
+      ],
+      "checks": [
+        {
+          "name": "route_loop_closed",
+          "pass": true,
+          "explicit_closing_point": false,
+          "authored_closed_flag": true,
+          "final_edge_length": 0.799240021538795,
+          "route_point_count": 682,
+          "loop_length": 545.059925363699
+        },
+        {
+          "name": "route_flat_at_road_z",
+          "pass": true,
+          "max_abs_z_error": 0.0,
+          "tolerance": 0.025
+        },
+        {
+          "name": "route_has_no_self_crossings",
+          "pass": true,
+          "crossing_count": 0,
+          "segment_pairs": []
+        },
+        {
+          "name": "render_instances_realized",
+          "pass": true,
+          "instance_count": 0,
+          "examples": []
+        },
+        {
+          "name": "all_render_geometry_has_role",
+          "pass": true,
+          "invalid_count": 0,
+          "examples": []
+        },
+        {
+          "name": "road_geometry_exists",
+          "pass": true,
+          "vertex_count": 9548,
+          "triangle_count": 19096
+        },
+        {
+          "name": "road_coverage_center_left_right",
+          "pass": true,
+          "sample_count": 1364,
+          "ray_count": 4092,
+          "missing_count": 0,
+          "max_sample_spacing": 0.6,
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "examples": []
+        },
+        {
+          "name": "road_height_and_normal",
+          "pass": true,
+          "min_hit_z": -9.5367431640625e-07,
+          "max_hit_z": 1.430511474609375e-06,
+          "max_abs_height_error": 1.430511474609375e-06,
+          "invalid_count": 0,
+          "tolerance": 0.025,
+          "examples": []
+        },
+        {
+          "name": "road_height_profile_continuity",
+          "pass": true,
+          "max_measured_grade": 4.7731518236489405e-06,
+          "allowed_grade": 0.02,
+          "seam_included": true
+        },
+        {
+          "name": "terrain_below_road",
+          "pass": true,
+          "object_count": 417,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 1364,
+          "lanes_per_sample": 9,
+          "ray_count": 12276,
+          "hit_count": 12276,
+          "missing_count": 0,
+          "maximum_hit_z": -0.12999534606933594,
+          "maximum_allowed_z": -0.08,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "water_below_road",
+          "pass": true,
+          "object_count": 1,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 1364,
+          "lanes_per_sample": 9,
+          "ray_count": 12276,
+          "hit_count": 0,
+          "missing_count": 12276,
+          "maximum_hit_z": null,
+          "maximum_allowed_z": -0.025,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "swept_corridor_clearance",
+          "pass": true,
+          "protected_width": 8.0,
+          "required_ceiling_height": 5,
+          "no_overhead": true,
+          "tested_z_min": 0.025,
+          "tested_z_max": null,
+          "obstacle_collision_count": 0,
+          "candidate_object_count": 0,
+          "tested_triangle_count": 0,
+          "examples": []
+        },
+        {
+          "name": "five_orthographic_camera_views",
+          "pass": true,
+          "render_evidence_required": false,
+          "required_views": [
+            "top",
+            "front",
+            "back",
+            "left",
+            "right"
+          ],
+          "recorded_count": 6,
+          "missing_views": [],
+          "error_count": 0,
+          "examples": [],
+          "cameras": [
+            {
+              "view_id": "front",
+              "name": "Camera_front",
+              "type": "ORTHO",
+              "position": [
+                5.732391357421875,
+                -622.085693359375,
+                -19.144676208496094
+              ],
+              "forward": [
+                0.0,
+                0.9999999403953552,
+                3.5762786865234375e-07
+              ],
+              "up": [
+                0.0,
+                -3.5762786865234375e-07,
+                0.9999999403953552
+              ],
+              "ortho_scale": 197.8754425048828,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2493.705322265625
+            },
+            {
+              "view_id": "right",
+              "name": "Camera_right",
+              "type": "ORTHO",
+              "position": [
+                629.15869140625,
+                1.340667724609375,
+                -19.144676208496094
+              ],
+              "forward": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 197.8754425048828,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2493.705322265625
+            },
+            {
+              "view_id": "left",
+              "name": "Camera_left",
+              "type": "ORTHO",
+              "position": [
+                -617.6939697265625,
+                1.340667724609375,
+                -19.144676208496094
+              ],
+              "forward": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 197.8754425048828,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2493.705322265625
+            },
+            {
+              "view_id": "back",
+              "name": "Camera_back",
+              "type": "ORTHO",
+              "position": [
+                5.732391357421875,
+                624.7669677734375,
+                -19.144676208496094
+              ],
+              "forward": [
+                1.4210854715202004e-14,
+                -0.9999999403953552,
+                2.8499662296056294e-15
+              ],
+              "up": [
+                1.5099580252808664e-07,
+                0.0,
+                0.9999999403953552
+              ],
+              "ortho_scale": 197.8754425048828,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2493.705322265625
+            },
+            {
+              "view_id": "top",
+              "name": "Camera_top",
+              "type": "ORTHO",
+              "position": [
+                5.732391357421875,
+                1.340667724609375,
+                604.2816772460938
+              ],
+              "forward": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "up": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "ortho_scale": 197.8754425048828,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2493.705322265625
+            },
+            {
+              "view_id": "isometric",
+              "name": "Camera_isometric",
+              "type": "ORTHO",
+              "position": [
+                292.61163330078125,
+                -285.53857421875,
+                454.2060852050781
+              ],
+              "forward": [
+                -0.4601655602455139,
+                0.46016550064086914,
+                -0.7592729926109314
+              ],
+              "up": [
+                -0.5368872284889221,
+                0.536886990070343,
+                0.6507723331451416
+              ],
+              "ortho_scale": 252.83114624023438,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2493.705322265625
+            }
+          ]
+        },
+        {
+          "name": "same_geometry_across_renders",
+          "pass": true,
+          "render_evidence_required": false,
+          "before_and_after_present": false,
+          "snapshot_count": 1,
+          "distinct_hash_count": 1,
+          "hashes": [
+            "8010342db33fc3a96abfebdf3111c33c56aea96f637b40dd1ac57aa34356ac0d"
+          ],
+          "live_geometry": {
+            "sha256": "8010342db33fc3a96abfebdf3111c33c56aea96f637b40dd1ac57aa34356ac0d",
+            "mesh_count": 419,
+            "vertex_count": 173885,
+            "triangle_count": 346098,
+            "hash_method": "evaluated_local_f32_world_matrix_f64_triangle_i32"
+          }
+        },
+        {
+          "name": "all_actual_terrain_and_river_meshes_closed_outward_nondegenerate",
+          "pass": true,
+          "mesh_count": 419,
+          "vertices": 173885,
+          "faces": 216668,
+          "failures": []
+        },
+        {
+          "name": "centerline_exactly_matches_prior_canonical_route",
+          "pass": true,
+          "point_count": 682
+        }
+      ],
+      "id": "09_volcanic_garden",
+      "road_width": 6.0,
+      "shoulder": 1.0,
+      "protected_corridor_width": 8.0,
+      "river_plan_present": false,
+      "house_pad_count": 3,
+      "seconds": 4.344,
+      "source_sha256": {
+        "build_worlds.py": "e8ebc259ee4e0bd58e6b144356b51a7e3379369afd70ef4a973fd6757d9399f8",
+        "terrain_road.py": "798f64c4ded490a1b96b947174436795730e781f5f2863e94698bafd84806468",
+        "geology_detail.py": "46faa84f8d408fd54e43ce6e65d436bc700b8d1f0cb469a929ac088b4bbc87d8",
+        "river_detail.py": "0343eeed58e66150885bbae8d64ad5a106d7aff681cfb46112b0d0060dbdb1f8",
+        "validate_scene.py": "fc3f312bcab1e3145e993ad66162536e3d5ea6e8084382b9fea8aa7478ced842",
+        "building-layouts.json": "a551b7dc2a67fa4cf54e86b6e8e568280e5174f91e47cbd907c0787c42f1617f"
+      },
+      "render_performed": false,
+      "plants_or_buildings_instantiated": false
+    },
+    {
+      "schema": "radio_archipelago_v3_geometry_checks/1",
+      "pass": true,
+      "validation_kind": "evaluated_blender_geometry_and_supplied_render_evidence",
+      "unity_playtest_performed": false,
+      "parameters": {
+        "road_z": 0.0,
+        "road_width": 6.0,
+        "shoulder": 1.0,
+        "ceiling_height": 5,
+        "sample_step": 0.6,
+        "edge_inset": 0.05,
+        "height_tolerance": 0.025,
+        "terrain_below_offset": 0.08,
+        "surface_probe_lanes": 9
+      },
+      "limits": [
+        "Road raycasts sample center and both edges; gaps smaller than probe spacing can be missed.",
+        "Collider response, gameplay tile placement, chart timing and character animation were not simulated.",
+        "Render metadata must be captured by the rendering script; this validator does not itself render.",
+        "Geometry hashes exclude materials, lights and cameras and compare only supplied snapshots.",
+        "Collection/geometry-node instances must be realized into tagged meshes before this audit."
+      ],
+      "checks": [
+        {
+          "name": "route_loop_closed",
+          "pass": true,
+          "explicit_closing_point": false,
+          "authored_closed_flag": true,
+          "final_edge_length": 0.7996009073999405,
+          "route_point_count": 675,
+          "loop_length": 539.731120866312
+        },
+        {
+          "name": "route_flat_at_road_z",
+          "pass": true,
+          "max_abs_z_error": 0.0,
+          "tolerance": 0.025
+        },
+        {
+          "name": "route_has_no_self_crossings",
+          "pass": true,
+          "crossing_count": 0,
+          "segment_pairs": []
+        },
+        {
+          "name": "render_instances_realized",
+          "pass": true,
+          "instance_count": 0,
+          "examples": []
+        },
+        {
+          "name": "all_render_geometry_has_role",
+          "pass": true,
+          "invalid_count": 0,
+          "examples": []
+        },
+        {
+          "name": "road_geometry_exists",
+          "pass": true,
+          "vertex_count": 9450,
+          "triangle_count": 18900
+        },
+        {
+          "name": "road_coverage_center_left_right",
+          "pass": true,
+          "sample_count": 1350,
+          "ray_count": 4050,
+          "missing_count": 0,
+          "max_sample_spacing": 0.6,
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "examples": []
+        },
+        {
+          "name": "road_height_and_normal",
+          "pass": true,
+          "min_hit_z": -9.5367431640625e-07,
+          "max_hit_z": 1.430511474609375e-06,
+          "max_abs_height_error": 1.430511474609375e-06,
+          "invalid_count": 0,
+          "tolerance": 0.025,
+          "examples": []
+        },
+        {
+          "name": "road_height_profile_continuity",
+          "pass": true,
+          "max_measured_grade": 5.9633426730928435e-06,
+          "allowed_grade": 0.02,
+          "seam_included": true
+        },
+        {
+          "name": "terrain_below_road",
+          "pass": true,
+          "object_count": 397,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 1350,
+          "lanes_per_sample": 9,
+          "ray_count": 12150,
+          "hit_count": 12150,
+          "missing_count": 0,
+          "maximum_hit_z": -0.12999725341796875,
+          "maximum_allowed_z": -0.08,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "water_below_road",
+          "pass": true,
+          "object_count": 1,
+          "scope": "sampled_actual_road_footprint",
+          "tested_width": 5.9,
+          "edge_inset": 0.05,
+          "sample_count": 1350,
+          "lanes_per_sample": 9,
+          "ray_count": 12150,
+          "hit_count": 0,
+          "missing_count": 12150,
+          "maximum_hit_z": null,
+          "maximum_allowed_z": -0.025,
+          "numerical_tolerance": 1e-05,
+          "violation_count": 0,
+          "examples": []
+        },
+        {
+          "name": "swept_corridor_clearance",
+          "pass": true,
+          "protected_width": 8.0,
+          "required_ceiling_height": 5,
+          "no_overhead": true,
+          "tested_z_min": 0.025,
+          "tested_z_max": null,
+          "obstacle_collision_count": 0,
+          "candidate_object_count": 0,
+          "tested_triangle_count": 0,
+          "examples": []
+        },
+        {
+          "name": "five_orthographic_camera_views",
+          "pass": true,
+          "render_evidence_required": false,
+          "required_views": [
+            "top",
+            "front",
+            "back",
+            "left",
+            "right"
+          ],
+          "recorded_count": 6,
+          "missing_views": [],
+          "error_count": 0,
+          "examples": [],
+          "cameras": [
+            {
+              "view_id": "front",
+              "name": "Camera_front",
+              "type": "ORTHO",
+              "position": [
+                2.1204376220703125,
+                -561.2759399414062,
+                -21.039297103881836
+              ],
+              "forward": [
+                0.0,
+                0.9999999403953552,
+                3.5762786865234375e-07
+              ],
+              "up": [
+                0.0,
+                -3.5762786865234375e-07,
+                0.9999999403953552
+              ],
+              "ortho_scale": 178.95802307128906,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2255.300537109375
+            },
+            {
+              "view_id": "right",
+              "name": "Camera_right",
+              "type": "ORTHO",
+              "position": [
+                565.945556640625,
+                2.5491714477539062,
+                -21.039297103881836
+              ],
+              "forward": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 178.95802307128906,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2255.300537109375
+            },
+            {
+              "view_id": "left",
+              "name": "Camera_left",
+              "type": "ORTHO",
+              "position": [
+                -561.7047119140625,
+                2.5491714477539062,
+                -21.039297103881836
+              ],
+              "forward": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "up": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ortho_scale": 178.95802307128906,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2255.300537109375
+            },
+            {
+              "view_id": "back",
+              "name": "Camera_back",
+              "type": "ORTHO",
+              "position": [
+                2.1204376220703125,
+                566.3743286132812,
+                -21.039297103881836
+              ],
+              "forward": [
+                1.4210854715202004e-14,
+                -0.9999999403953552,
+                2.8499662296056294e-15
+              ],
+              "up": [
+                1.5099580252808664e-07,
+                0.0,
+                0.9999999403953552
+              ],
+              "ortho_scale": 178.95802307128906,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2255.300537109375
+            },
+            {
+              "view_id": "top",
+              "name": "Camera_top",
+              "type": "ORTHO",
+              "position": [
+                2.1204376220703125,
+                2.5491714477539062,
+                542.7858276367188
+              ],
+              "forward": [
+                0.0,
+                0.0,
+                -1.0
+              ],
+              "up": [
+                0.0,
+                1.0,
+                0.0
+              ],
+              "ortho_scale": 178.95802307128906,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2255.300537109375
+            },
+            {
+              "view_id": "isometric",
+              "name": "Camera_isometric",
+              "type": "ORTHO",
+              "position": [
+                261.57330322265625,
+                -256.9036865234375,
+                407.0578918457031
+              ],
+              "forward": [
+                -0.4601655602455139,
+                0.46016550064086914,
+                -0.7592729926109314
+              ],
+              "up": [
+                -0.5368872284889221,
+                0.536886990070343,
+                0.6507723331451416
+              ],
+              "ortho_scale": 241.76806640625,
+              "clip_start": 0.10000000149011612,
+              "clip_end": 2255.300537109375
+            }
+          ]
+        },
+        {
+          "name": "same_geometry_across_renders",
+          "pass": true,
+          "render_evidence_required": false,
+          "before_and_after_present": false,
+          "snapshot_count": 1,
+          "distinct_hash_count": 1,
+          "hashes": [
+            "54a4ca7853f45255d887a4fc0acf2cfdd80509e783dc08fadac3152185bcfe47"
+          ],
+          "live_geometry": {
+            "sha256": "54a4ca7853f45255d887a4fc0acf2cfdd80509e783dc08fadac3152185bcfe47",
+            "mesh_count": 399,
+            "vertex_count": 161593,
+            "triangle_count": 321594,
+            "hash_method": "evaluated_local_f32_world_matrix_f64_triangle_i32"
+          }
+        },
+        {
+          "name": "all_actual_terrain_and_river_meshes_closed_outward_nondegenerate",
+          "pass": true,
+          "mesh_count": 399,
+          "vertices": 161593,
+          "faces": 200085,
+          "failures": []
+        },
+        {
+          "name": "centerline_exactly_matches_prior_canonical_route",
+          "pass": true,
+          "point_count": 675
+        }
+      ],
+      "id": "10_cloud_observatory",
+      "road_width": 6.0,
+      "shoulder": 1.0,
+      "protected_corridor_width": 8.0,
+      "river_plan_present": false,
+      "house_pad_count": 4,
+      "seconds": 4.262,
+      "source_sha256": {
+        "build_worlds.py": "e8ebc259ee4e0bd58e6b144356b51a7e3379369afd70ef4a973fd6757d9399f8",
+        "terrain_road.py": "798f64c4ded490a1b96b947174436795730e781f5f2863e94698bafd84806468",
+        "geology_detail.py": "46faa84f8d408fd54e43ce6e65d436bc700b8d1f0cb469a929ac088b4bbc87d8",
+        "river_detail.py": "0343eeed58e66150885bbae8d64ad5a106d7aff681cfb46112b0d0060dbdb1f8",
+        "validate_scene.py": "fc3f312bcab1e3145e993ad66162536e3d5ea6e8084382b9fea8aa7478ced842",
+        "building-layouts.json": "a551b7dc2a67fa4cf54e86b6e8e568280e5174f91e47cbd907c0787c42f1617f"
+      },
+      "render_performed": false,
+      "plants_or_buildings_instantiated": false
+    }
+  ],
+  "optimization_regressions": [
+    {
+      "name": "disk_broadphase_keeps_actual_on_route_obstacle",
+      "pass": true,
+      "collision_count": 1
+    },
+    {
+      "name": "crossing_polygon_detected_with_all_vertices_outside_corridor",
+      "pass": true,
+      "minimum_vertex_centerline_distance": 41.568542494923804,
+      "collision_count": 1
+    },
+    {
+      "name": "disk_broadphase_safely_rejects_corner_aabb_overlap",
+      "pass": true,
+      "aabb_candidate_segments": 6,
+      "objects_after_disk_filter": 0
+    },
+    {
+      "name": "optimized_snapshot_hash_tracks_world_matrix_and_restores",
+      "pass": true,
+      "baseline": "54f2874d36059bf5b23110e4b80487f69d361271337ad3dcb3fb3e5669e286a3",
+      "translated_parent": "296fdf5bda63bfdb995df5cc42fbc3f3295f43ea1cdee0dbc190628a59966961",
+      "restored": "54f2874d36059bf5b23110e4b80487f69d361271337ad3dcb3fb3e5669e286a3",
+      "camera_only_change": "54f2874d36059bf5b23110e4b80487f69d361271337ad3dcb3fb3e5669e286a3",
+      "method": "evaluated_local_f32_world_matrix_f64_triangle_i32"
+    }
+  ],
+  "source_sha256": {
+    "build_worlds.py": "e8ebc259ee4e0bd58e6b144356b51a7e3379369afd70ef4a973fd6757d9399f8",
+    "terrain_road.py": "798f64c4ded490a1b96b947174436795730e781f5f2863e94698bafd84806468",
+    "geology_detail.py": "46faa84f8d408fd54e43ce6e65d436bc700b8d1f0cb469a929ac088b4bbc87d8",
+    "river_detail.py": "0343eeed58e66150885bbae8d64ad5a106d7aff681cfb46112b0d0060dbdb1f8",
+    "validate_scene.py": "fc3f312bcab1e3145e993ad66162536e3d5ea6e8084382b9fea8aa7478ced842",
+    "building-layouts.json": "a551b7dc2a67fa4cf54e86b6e8e568280e5174f91e47cbd907c0787c42f1617f"
+  },
+  "source_files_unchanged_during_audit": true,
+  "seconds": 44.262,
+  "geometry_checks_passed": 161,
+  "geometry_checks_total": 161,
+  "optimization_regressions_passed": 4,
+  "optimization_regressions_total": 4,
+  "meshes_checked": 4205,
+  "historical_reports": "Historical-road8-shoulder2; previous 8m+2m checks are superseded for final geometry dimensions"
+}

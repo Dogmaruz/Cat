@@ -1,0 +1,809 @@
+{
+  "schema": "radio-archipelago-glb-roundtrip-1",
+  "created_utc": "2026-10-26T22:54:50.963388+00:00",
+  "blender_version": "5.2.1 LTS",
+  "isolated_factory_startup": true,
+  "threads": 2,
+  "renders_performed": false,
+  "axis_conversion": "Official glTF importer converts glTF Y-up into Blender Z-up; comparison is in manifest Blender world coordinates.",
+  "tolerances": {
+    "bounds_meters": 0.03,
+    "deck_plane_meters": 0.0001,
+    "weld_meters": 1e-05
+  },
+  "scope": [
+    "01_emerald_ravine",
+    "02_coral_oasis"
+  ],
+  "limitations": [
+    "Base-color availability is checked; procedural shader baking is not guaranteed.",
+    "Unity runtime behavior, performance, and optimization are not tested."
+  ],
+  "worlds": [
+    {
+      "id": "01_emerald_ravine",
+      "input_glb": "C:\\Users\\Derek\\Games_develop\\Cat\\ArtSource\\RadioArchipelago\\Islands\\V3\\Output\\01_emerald_ravine\\island.glb",
+      "input_sha256": "62fa98e270fa5ddea10f0ed821b4c2b54c559a7dfd3335d2b6fbf7d7c670967e",
+      "byte_size": 17633552,
+      "import_result": [
+        "FINISHED"
+      ],
+      "mesh_count": 831,
+      "vertices_after_import_merge": 631692,
+      "triangles": 918626,
+      "nonfinite_vertex_count": 0,
+      "bounds": {
+        "imported_min": [
+          -79.13188934326172,
+          -72.61595153808594,
+          -73.0
+        ],
+        "imported_max": [
+          92.16000366210938,
+          75.5999984741211,
+          25.194698333740234
+        ],
+        "manifest_min": [
+          -79.13188934326172,
+          -72.61595153808594,
+          -73.0
+        ],
+        "manifest_max": [
+          92.16000366210938,
+          75.5999984741211,
+          25.194698333740234
+        ],
+        "axis_absolute_differences": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_difference_meters": 0.0
+      },
+      "road": {
+        "object_names": [
+          "RA3_01_emerald_ravine_SINGLE_CLOSED_FLUSH_ROAD"
+        ],
+        "deck_vertices_after_position_weld": 4508,
+        "deck_faces": 7728,
+        "maximum_plane_error_meters": 0,
+        "connected_components": 1,
+        "boundary_loops": 2,
+        "all_boundary_vertex_degrees_two": true,
+        "nonmanifold_deck_edges": 0,
+        "euler_characteristic": 0,
+        "route_coverage_hits": 1288,
+        "route_coverage_tests": 1288,
+        "route_coverage_max_plane_error_meters": 5.960464477539063e-08,
+        "nominal_width_meters": 8,
+        "nominal_road_z": 0
+      },
+      "materials": {
+        "imported_material_count": 35,
+        "distinct_imported_base_colors": 28,
+        "nonwhite_imported_material_count": 35,
+        "glb_material_count": 35,
+        "glb_distinct_base_color_factors": 29,
+        "embedded_image_count": 0,
+        "imported_base_colors": [
+          {
+            "name": "RA3_accent_afc4aa_GLB_color",
+            "rgba_linear": [
+              0.42869049310684204,
+              0.5520114302635193,
+              0.4019777774810791,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_bridge_timber_metric_paving_v2_75543d_GLB_color",
+            "rgba_linear": [
+              0.177888423204422,
+              0.08865558356046677,
+              0.04666508734226227,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_earth_shoulder_9aa67a_GLB_color",
+            "rgba_linear": [
+              0.32314321398735046,
+              0.38132601976394653,
+              0.1946178376674652,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_land_4f7645_GLB_color",
+            "rgba_linear": [
+              0.07818742096424103,
+              0.18116424977779388,
+              0.05951123684644699,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_road_metric_paving_v2_bcb6a3_GLB_color",
+            "rgba_linear": [
+              0.5028864741325378,
+              0.4677838087081909,
+              0.366252601146698,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_road_worn_metric_paving_v2_bcb6a3_GLB_color",
+            "rgba_linear": [
+              0.5028864741325378,
+              0.4677838087081909,
+              0.366252601146698,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_rock_58616a_GLB_color",
+            "rgba_linear": [
+              0.09758734703063965,
+              0.11953842639923096,
+              0.1441284716129303,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_rock_strata_58616a_GLB_color",
+            "rgba_linear": [
+              0.09758734703063965,
+              0.11953842639923096,
+              0.1441284716129303,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_water_2f8499_GLB_color",
+            "rgba_linear": [
+              0.028426039963960648,
+              0.23074005544185638,
+              0.31854677200317383,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_metal_b27e4e_GLB_color",
+            "rgba_linear": [
+              0.44520118832588196,
+              0.20863686501979828,
+              0.07618538290262222,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_recess_202932_GLB_color",
+            "rgba_linear": [
+              0.014443843625485897,
+              0.022173885256052017,
+              0.03189603239297867,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_roof_224c3a_GLB_color",
+            "rgba_linear": [
+              0.01599629409611225,
+              0.07227185368537903,
+              0.0423114113509655,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_stone_566570_GLB_color",
+            "rgba_linear": [
+              0.09305896610021591,
+              0.13013647496700287,
+              0.16202937066555023,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_trim_363e34_GLB_color",
+            "rgba_linear": [
+              0.03688944876194,
+              0.04817182570695877,
+              0.03433980792760849,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_wall_65786c_GLB_color",
+            "rgba_linear": [
+              0.13013647496700287,
+              0.18782077729701996,
+              0.14995978772640228,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_wood_55392a_GLB_color",
+            "rgba_linear": [
+              0.09084171056747437,
+              0.040915198624134064,
+              0.023153366521000862,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Bark_GLB_color",
+            "rgba_linear": [
+              0.03007410280406475,
+              0.006571404170244932,
+              0.002399380784481764,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Bark_light_GLB_color",
+            "rgba_linear": [
+              0.0496833361685276,
+              0.009639215655624866,
+              0.0031191951129585505,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Deep_moss_GLB_color",
+            "rgba_linear": [
+              0.01360754482448101,
+              0.04314631223678589,
+              0.014070223085582256,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Fern_lit_GLB_color",
+            "rgba_linear": [
+              0.06051266938447952,
+              0.23096540570259094,
+              0.06300940364599228,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Foliage.001_GLB_color",
+            "rgba_linear": [
+              0.023291224613785744,
+              0.08018041402101517,
+              0.0241582952439785,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Foliage.002_GLB_color",
+            "rgba_linear": [
+              0.035499610006809235,
+              0.1286194771528244,
+              0.03688788786530495,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Foliage.003_GLB_color",
+            "rgba_linear": [
+              0.052349578589200974,
+              0.19723618030548096,
+              0.054478805512189865,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Foliage_GLB_color",
+            "rgba_linear": [
+              0.013966416008770466,
+              0.04448553919792175,
+              0.014443804509937763,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Landmark_forest_moss_mound.001_GLB_color",
+            "rgba_linear": [
+              0.07507931441068649,
+              0.09163909405469894,
+              0.11014780402183533,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Landmark_forest_moss_mound.002_GLB_color",
+            "rgba_linear": [
+              0.133085697889328,
+              0.16363467276096344,
+              0.19793404638767242,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Landmark_forest_moss_mound_GLB_color",
+            "rgba_linear": [
+              0.042422596365213394,
+              0.05130148306488991,
+              0.06117478758096695,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Moss_lit_GLB_color",
+            "rgba_linear": [
+              0.030714377760887146,
+              0.10946428775787354,
+              0.03189650923013687,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Prop_leaf_GLB_color",
+            "rgba_linear": [
+              0.030714377760887146,
+              0.10946428775787354,
+              0.03189650923013687,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Prop_leaf_light_GLB_color",
+            "rgba_linear": [
+              0.050796058028936386,
+              0.19086404144763947,
+              0.052859846502542496,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Rock_slate.001_GLB_color",
+            "rgba_linear": [
+              0.06669881939888,
+              0.08127044886350632,
+              0.09754166752099991,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Rock_slate.002_GLB_color",
+            "rgba_linear": [
+              0.09758848696947098,
+              0.11953699588775635,
+              0.14413121342658997,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Rock_slate.003_GLB_color",
+            "rgba_linear": [
+              0.133085697889328,
+              0.16363467276096344,
+              0.19793404638767242,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Rock_slate_GLB_color",
+            "rgba_linear": [
+              0.042422596365213394,
+              0.05130148306488991,
+              0.06117478758096695,
+              1.0
+            ]
+          },
+          {
+            "name": "Technology foundations_GLB_color",
+            "rgba_linear": [
+              0.09758734703063965,
+              0.11953842639923096,
+              0.1441284716129303,
+              1.0
+            ]
+          }
+        ]
+      },
+      "checks": {
+        "import_finished": true,
+        "all_mesh_coordinates_finite": true,
+        "bounds_agree_within_0_03m": true,
+        "primary_road_found": true,
+        "deck_flat_z0": true,
+        "deck_single_connected_component": true,
+        "deck_closed_annulus": true,
+        "closed_route_coverage": true,
+        "base_material_colors_present": true,
+        "production_glb_unchanged": true
+      },
+      "pass": true
+    },
+    {
+      "id": "02_coral_oasis",
+      "input_glb": "C:\\Users\\Derek\\Games_develop\\Cat\\ArtSource\\RadioArchipelago\\Islands\\V3\\Output\\02_coral_oasis\\island.glb",
+      "input_sha256": "456763a53b37c9ec884bba4f2266dcb98d606ca5b21a576af7e2eee169d7fa10",
+      "byte_size": 8025816,
+      "import_result": [
+        "FINISHED"
+      ],
+      "mesh_count": 392,
+      "vertices_after_import_merge": 276694,
+      "triangles": 311092,
+      "nonfinite_vertex_count": 0,
+      "bounds": {
+        "imported_min": [
+          -93.11064910888672,
+          -80.50772094726562,
+          -66.0
+        ],
+        "imported_max": [
+          83.00135040283203,
+          82.9800033569336,
+          27.403522491455078
+        ],
+        "manifest_min": [
+          -93.11064910888672,
+          -80.50772094726562,
+          -66.0
+        ],
+        "manifest_max": [
+          83.00135040283203,
+          82.9800033569336,
+          27.403522491455078
+        ],
+        "axis_absolute_differences": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "maximum_difference_meters": 0.0
+      },
+      "road": {
+        "object_names": [
+          "RA3_02_coral_oasis_SINGLE_CLOSED_FLUSH_ROAD"
+        ],
+        "deck_vertices_after_position_weld": 4025,
+        "deck_faces": 6900,
+        "maximum_plane_error_meters": 0,
+        "connected_components": 1,
+        "boundary_loops": 2,
+        "all_boundary_vertex_degrees_two": true,
+        "nonmanifold_deck_edges": 0,
+        "euler_characteristic": 0,
+        "route_coverage_hits": 1150,
+        "route_coverage_tests": 1150,
+        "route_coverage_max_plane_error_meters": 5.960464477539063e-08,
+        "nominal_width_meters": 8,
+        "nominal_road_z": 0
+      },
+      "materials": {
+        "imported_material_count": 33,
+        "distinct_imported_base_colors": 28,
+        "nonwhite_imported_material_count": 33,
+        "glb_material_count": 33,
+        "glb_distinct_base_color_factors": 28,
+        "embedded_image_count": 0,
+        "imported_base_colors": [
+          {
+            "name": "RA3_accent_3f918c_GLB_color",
+            "rgba_linear": [
+              0.04970656707882881,
+              0.28314873576164246,
+              0.2622506618499756,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_earth_shoulder_9aa67a_GLB_color",
+            "rgba_linear": [
+              0.32314321398735046,
+              0.38132601976394653,
+              0.1946178376674652,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_land_d39a70_GLB_color",
+            "rgba_linear": [
+              0.6514056324958801,
+              0.32314321398735046,
+              0.16202937066555023,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_road_metric_paving_v2_e3b69a_GLB_color",
+            "rgba_linear": [
+              0.7681511640548706,
+              0.4677838087081909,
+              0.32314321398735046,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_road_worn_metric_paving_v2_e3b69a_GLB_color",
+            "rgba_linear": [
+              0.7681511640548706,
+              0.4677838087081909,
+              0.32314321398735046,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_rock_b5654f_GLB_color",
+            "rgba_linear": [
+              0.46207699179649353,
+              0.13013647496700287,
+              0.07818742096424103,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_rock_strata_b5654f_GLB_color",
+            "rgba_linear": [
+              0.46207699179649353,
+              0.13013647496700287,
+              0.07818742096424103,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_Ground_water_39b4b7_GLB_color",
+            "rgba_linear": [
+              0.040915198624134064,
+              0.4564110338687897,
+              0.47353148460388184,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_metal_c79b57_GLB_color",
+            "rgba_linear": [
+              0.5711248517036438,
+              0.3277781009674072,
+              0.09530746936798096,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_recess_202932_GLB_color",
+            "rgba_linear": [
+              0.014443843625485897,
+              0.022173885256052017,
+              0.03189603239297867,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_roof_a64c43_GLB_color",
+            "rgba_linear": [
+              0.38132601976394653,
+              0.07227185368537903,
+              0.05612849071621895,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_stone_b7785a_GLB_color",
+            "rgba_linear": [
+              0.47353148460388184,
+              0.18782077729701996,
+              0.10224173218011856,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_trim_e4a084_GLB_color",
+            "rgba_linear": [
+              0.7758222222328186,
+              0.35153260827064514,
+              0.23074005544185638,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_wall_ce7464_GLB_color",
+            "rgba_linear": [
+              0.6172065734863281,
+              0.17464740574359894,
+              0.12743768095970154,
+              1.0
+            ]
+          },
+          {
+            "name": "RA3_wood_67433b_GLB_color",
+            "rgba_linear": [
+              0.13563333451747894,
+              0.05612849071621895,
+              0.04373503103852272,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Bark_GLB_color",
+            "rgba_linear": [
+              0.03007410280406475,
+              0.006571404170244932,
+              0.002399380784481764,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Bark_light_GLB_color",
+            "rgba_linear": [
+              0.0496833361685276,
+              0.009639215655624866,
+              0.0031191951129585505,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Foliage.001_GLB_color",
+            "rgba_linear": [
+              0.030738243833184242,
+              0.13860170543193817,
+              0.10917031764984131,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Foliage.002_GLB_color",
+            "rgba_linear": [
+              0.047504741698503494,
+              0.22576524317264557,
+              0.17671619355678558,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Foliage.003_GLB_color",
+            "rgba_linear": [
+              0.070816770195961,
+              0.3501730263233185,
+              0.2728349566459656,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Foliage_GLB_color",
+            "rgba_linear": [
+              0.018051210790872574,
+              0.07507931441068649,
+              0.05971839278936386,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Landmark_desert_fins.001_GLB_color",
+            "rgba_linear": [
+              0.3480552136898041,
+              0.0996202677488327,
+              0.06041084602475166,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Landmark_desert_fins.002_GLB_color",
+            "rgba_linear": [
+              0.644199013710022,
+              0.1784093976020813,
+              0.10615146905183792,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Landmark_desert_fins_GLB_color",
+            "rgba_linear": [
+              0.18600919842720032,
+              0.05556413531303406,
+              0.03451463207602501,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Prop_foam_GLB_color",
+            "rgba_linear": [
+              0.36724644899368286,
+              0.7874122262001038,
+              0.7484140992164612,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Prop_water_GLB_color",
+            "rgba_linear": [
+              0.04091540351510048,
+              0.4564076066017151,
+              0.47353580594062805,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Rock_sandstone.001_GLB_color",
+            "rgba_linear": [
+              0.30601784586906433,
+              0.08828974515199661,
+              0.053781479597091675,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Rock_sandstone.002_GLB_color",
+            "rgba_linear": [
+              0.46207132935523987,
+              0.13013754785060883,
+              0.07818540185689926,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Rock_sandstone.003_GLB_color",
+            "rgba_linear": [
+              0.644199013710022,
+              0.1784093976020813,
+              0.10615146905183792,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Rock_sandstone_GLB_color",
+            "rgba_linear": [
+              0.18600919842720032,
+              0.05556413531303406,
+              0.03451463207602501,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Sandstone_dark_band_GLB_color",
+            "rgba_linear": [
+              0.14641252160072327,
+              0.04458925873041153,
+              0.02799077145755291,
+              1.0
+            ]
+          },
+          {
+            "name": "RA_Sandstone_light_band_GLB_color",
+            "rgba_linear": [
+              1.0,
+              0.31172677874565125,
+              0.1828187257051468,
+              1.0
+            ]
+          },
+          {
+            "name": "Technology foundations_GLB_color",
+            "rgba_linear": [
+              0.46207699179649353,
+              0.13013647496700287,
+              0.07818742096424103,
+              1.0
+            ]
+          }
+        ]
+      },
+      "checks": {
+        "import_finished": true,
+        "all_mesh_coordinates_finite": true,
+        "bounds_agree_within_0_03m": true,
+        "primary_road_found": true,
+        "deck_flat_z0": true,
+        "deck_single_connected_component": true,
+        "deck_closed_annulus": true,
+        "closed_route_coverage": true,
+        "base_material_colors_present": true,
+        "production_glb_unchanged": true
+      },
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "method_note": "Deck coverage uses exact imported triangles with zero BVH inflation; welded positions are used only for topological annulus analysis.",
+  "material_export_revision": "Re-tested after constant base-color export fallback; original procedural .blend materials preserved by parent exporter."
+}

@@ -1,0 +1,96 @@
+{
+  "id": "Miro_Garden",
+  "kind": "Backpack",
+  "frame": "Blender Z-up / face -Y; FBX -Z-forward Y-up",
+  "fixedMeshName": "Case",
+  "movableMeshName": "TopRotor",
+  "topPivotName": "TopPivot",
+  "caseBoundsMin": [
+    -0.4999999701976776,
+    -0.22223834693431854,
+    0.0
+  ],
+  "caseBoundsMax": [
+    0.4999999701976776,
+    0.22223836183547974,
+    0.83
+  ],
+  "fixedBoundsMin": [
+    -0.4749999940395355,
+    -0.22137075662612915,
+    0.019999999552965164
+  ],
+  "fixedBoundsMax": [
+    0.4749999940395355,
+    0.22223836183547974,
+    0.8120859861373901
+  ],
+  "contactPlaneY": -0.22137075156441832,
+  "rawToPreparedScale": 0.514704491882426,
+  "referenceBodyWidth": 1.0,
+  "referenceBodyDepth": 0.5,
+  "topPivot": [
+    0.022331569343805313,
+    -0.07822121679782867,
+    0.8080860376358032
+  ],
+  "topPivotUnity": [
+    0.022331569343805313,
+    0.8080860376358032,
+    0.07822121679782867
+  ],
+  "spinAxisUnity": [
+    0,
+    1,
+    0
+  ],
+  "source": {
+    "vertices": 11302,
+    "polygons": 11335,
+    "triangles": 22652
+  },
+  "outputTriangles": {
+    "Case": 3228,
+    "TopRotor": 1014
+  },
+  "repairs": {
+    "localizedSpindleCutEdges": 43,
+    "rotorCaps": {
+      "sealedBoundaryEdges": 20,
+      "newCapFaces": 2
+    },
+    "caseCaps": {
+      "sealedBoundaryEdges": 147,
+      "newCapFaces": 3
+    },
+    "leftHarnessCaps": {
+      "sealedBoundaryEdges": 38,
+      "newCapFaces": 1
+    },
+    "rightHarnessCaps": {
+      "sealedBoundaryEdges": 64,
+      "newCapFaces": 2
+    },
+    "horizontalBearing": null,
+    "originalStrapsRestored20261104": {
+      "geometryUnmodified": true,
+      "beforeSource": "ArtSource\\RadioArchipelago\\Tools\\Modular20261104\\HarnessRepair\\Before\\Miro_Garden",
+      "correctedPhysicalCaseHeight": 0.83,
+      "contactPlaneFromMeasuredPadding": -0.2093707515644183
+    },
+    "straplessCase20261105": {
+      "caseFacesBefore": 8664,
+      "caseFacesAfter": 2150,
+      "bodyContactPlaneY": -0.22137075156441832,
+      "trimPlaneY": 0.18,
+      "newCleanCapTriangles": 2,
+      "plainPadUv": [
+        0.2134057581424713,
+        0.2243434190750122
+      ]
+    }
+  },
+  "sourceArchiveSha256": "b5cdaad7f253205e383aeb05665ff396e3489b33e8c55b68601bc58c6a5c7376",
+  "clearanceToCaseBody": 0.056983351707458496,
+  "validatedRevolutionSamples": 72
+}

@@ -1,0 +1,163 @@
+{
+  "id": "Miro_Garden",
+  "kind": "Backpack",
+  "frame": "Blender Z-up / face -Y; FBX -Z-forward Y-up",
+  "fixedMeshName": "Case",
+  "movableMeshName": "TopRotor",
+  "topPivotName": "TopPivot",
+  "caseBoundsMin": [
+    -0.4999999701976776,
+    -0.22223834693431854,
+    0.0
+  ],
+  "caseBoundsMax": [
+    0.4999999701976776,
+    0.22223836183547974,
+    0.83
+  ],
+  "fixedBoundsMin": [
+    -0.48187270760536194,
+    -0.22137075662612915,
+    0.010661198757588863
+  ],
+  "fixedBoundsMax": [
+    0.49000000953674316,
+    0.14198216795921326,
+    0.7394458651542664
+  ],
+  "contactPlaneY": -0.22137075156441832,
+  "rawToPreparedScale": 0.514704491882426,
+  "referenceBodyWidth": 1.0,
+  "referenceBodyDepth": 0.5,
+  "topPivot": [
+    0.022331569343805313,
+    -0.07822121679782867,
+    0.8080860376358032
+  ],
+  "topPivotUnity": [
+    0.022331569343805313,
+    0.8080860376358032,
+    0.07822121679782867
+  ],
+  "spinAxisUnity": [
+    0,
+    1,
+    0
+  ],
+  "source": {
+    "vertices": 11302,
+    "polygons": 11335,
+    "triangles": 22652
+  },
+  "outputTriangles": {
+    "Case": 1926,
+    "TopRotor": 1014
+  },
+  "repairs": {
+    "localizedSpindleCutEdges": 43,
+    "rotorCaps": {
+      "sealedBoundaryEdges": 20,
+      "newCapFaces": 2
+    },
+    "caseCaps": {
+      "sealedBoundaryEdges": 147,
+      "newCapFaces": 3
+    },
+    "leftHarnessCaps": {
+      "sealedBoundaryEdges": 38,
+      "newCapFaces": 1
+    },
+    "rightHarnessCaps": {
+      "sealedBoundaryEdges": 64,
+      "newCapFaces": 2
+    },
+    "horizontalBearing": null,
+    "originalStrapsRestored20261104": {
+      "geometryUnmodified": true,
+      "beforeSource": "ArtSource\\RadioArchipelago\\Tools\\Modular20261104\\HarnessRepair\\Before\\Miro_Garden",
+      "correctedPhysicalCaseHeight": 0.83,
+      "contactPlaneFromMeasuredPadding": -0.2093707515644183
+    },
+    "straplessCase20261105": {
+      "method": "localized mount socket reconstruction; original radio front and original fixed/moving mechanism retained",
+      "padTrimPlaneY": -0.19137075156441832,
+      "rootVolumes": [
+        {
+          "min": [
+            -1.5,
+            -2,
+            -1
+          ],
+          "max": [
+            -0.21,
+            0.01062924843558169,
+            0.1909
+          ]
+        },
+        {
+          "min": [
+            -1.5,
+            -2,
+            0.14939999999999998
+          ],
+          "max": [
+            -0.405,
+            -0.04937075156441831,
+            0.6971999999999999
+          ]
+        },
+        {
+          "min": [
+            0.21,
+            -2,
+            -1
+          ],
+          "max": [
+            1.5,
+            0.01062924843558169,
+            0.1909
+          ]
+        },
+        {
+          "min": [
+            0.405,
+            -2,
+            0.14939999999999998
+          ],
+          "max": [
+            1.5,
+            -0.04937075156441831,
+            0.6971999999999999
+          ]
+        },
+        {
+          "min": [
+            -1.5,
+            -2,
+            0.68
+          ],
+          "max": [
+            -0.2,
+            0.1,
+            1.6
+          ]
+        },
+        {
+          "min": [
+            0.2,
+            -2,
+            0.68
+          ],
+          "max": [
+            1.5,
+            0.1,
+            1.6
+          ]
+        }
+      ]
+    }
+  },
+  "sourceArchiveSha256": "b5cdaad7f253205e383aeb05665ff396e3489b33e8c55b68601bc58c6a5c7376",
+  "clearanceToCaseBody": 0.056983351707458496,
+  "validatedRevolutionSamples": 72
+}

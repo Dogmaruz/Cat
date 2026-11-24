@@ -1,0 +1,90 @@
+{
+  "id": "Tiko_Resonator",
+  "kind": "Backpack",
+  "frame": "Blender Z-up / face -Y; FBX -Z-forward Y-up",
+  "fixedMeshName": "Case",
+  "movableMeshName": "TopRotor",
+  "topPivotName": "TopPivot",
+  "caseBoundsMin": [
+    -0.5,
+    -0.31224527955055237,
+    9.780381515156478e-05
+  ],
+  "caseBoundsMax": [
+    0.5,
+    0.3122922480106354,
+    0.7601160407066345
+  ],
+  "fixedBoundsMin": [
+    -0.4699999988079071,
+    -0.008828992024064064,
+    9.780381515156478e-05
+  ],
+  "fixedBoundsMax": [
+    0.4699999988079071,
+    0.3122922480106354,
+    0.8254602551460266
+  ],
+  "contactPlaneY": -0.00882899225073831,
+  "rawToPreparedScale": 0.466360463282307,
+  "referenceBodyWidth": 1.0,
+  "referenceBodyDepth": 0.5,
+  "topPivot": [
+    0.005886510945856571,
+    0.2105163037776947,
+    0.8254579901695251
+  ],
+  "topPivotUnity": [
+    0.005886510945856571,
+    0.8254579901695251,
+    -0.2105163037776947
+  ],
+  "spinAxisUnity": [
+    0,
+    1,
+    0
+  ],
+  "source": {
+    "vertices": 47566,
+    "polygons": 47396,
+    "triangles": 94736
+  },
+  "outputTriangles": {
+    "Case": 13858,
+    "TopRotor": 6000
+  },
+  "repairs": {
+    "localizedSpindleCutEdges": 24,
+    "rotorCaps": {
+      "sealedBoundaryEdges": 24,
+      "newCapFaces": 1
+    },
+    "caseCaps": {
+      "sealedBoundaryEdges": 274,
+      "newCapFaces": 4
+    },
+    "leftHarnessCaps": {
+      "sealedBoundaryEdges": 76,
+      "newCapFaces": 2
+    },
+    "rightHarnessCaps": {
+      "sealedBoundaryEdges": 83,
+      "newCapFaces": 2
+    },
+    "horizontalBearing": null,
+    "straplessCase20261105": {
+      "caseFacesBefore": 17992,
+      "caseFacesAfter": 13680,
+      "bodyContactPlaneY": -0.00882899225073831,
+      "trimPlaneY": 0.1,
+      "newCleanCapTriangles": 12,
+      "plainPadUv": [
+        0.6582831740379333,
+        0.6635501384735107
+      ]
+    }
+  },
+  "sourceArchiveSha256": "14c5757ff0856e37ff0aee32db1e8b03f0a4365495f5708c37fdf38f33b35fd6",
+  "clearanceToCaseBody": 0.06534111499786377,
+  "validatedRevolutionSamples": 72
+}

@@ -1,0 +1,130 @@
+{
+  "schema": "radio_archipelago_native_cobblestones/1",
+  "pass_geometry": true,
+  "pass_roundtrip": true,
+  "source_route_geometry_hash": "64e96bc6e95036c7ba06ced1a4139c586b4cf4fbec3cc927dc8c6d3644698040",
+  "source_route_points": 644,
+  "road_width": 6,
+  "route_length": 514.9264126903334,
+  "closed_lap": true,
+  "rows": 13,
+  "stations": 1030,
+  "stone_count": 13390,
+  "nominal_stone_size": [
+    0.48,
+    0.42
+  ],
+  "stone_sides": [
+    8,
+    9,
+    10
+  ],
+  "bevel_rings": 4,
+  "station_spacing": 0.4999285560100325,
+  "max_closed_lap_neighbor_gap": 0.528881016031221,
+  "edge_stones_shrunk": 865,
+  "top_heights": [
+    0.06600089127055994,
+    0.1359983809656809
+  ],
+  "spatial_cell_meters": 24.0,
+  "before": {
+    "meshes": 27,
+    "vertices": 508232,
+    "triangles": 962904,
+    "colored_meshes": 27,
+    "duplicate_triangles": 0,
+    "zero_corner_normals": 0,
+    "max_normal_unit_error": 1.7881393432617188e-07,
+    "min_triangle_area": 0.0012262732489034534,
+    "min_z": -0.023613417521119118,
+    "max_z": 0.13599838316440582,
+    "linear_color_min": 0.10082467645406723,
+    "linear_color_max": 0.2867833077907562
+  },
+  "after": {
+    "meshes": 27,
+    "vertices": 508232,
+    "triangles": 962904,
+    "colored_meshes": 27,
+    "duplicate_triangles": 0,
+    "zero_corner_normals": 0,
+    "max_normal_unit_error": 1.7881393432617188e-07,
+    "min_triangle_area": 0.0012262732489034534,
+    "min_z": -0.0236142981125278,
+    "max_z": 0.136002659657521,
+    "linear_color_min": 0.10082467645406723,
+    "linear_color_max": 0.2867833077907562
+  },
+  "material_name": "RA_Emerald_Road",
+  "vertex_color_space": "linear",
+  "disable_metric_brick_shader": true,
+  "geometry_type": "Separate closed rounded volumetric stones, not a texture or per-view image",
+  "anchors": [
+    {
+      "name": "RA_Origin",
+      "blender": [
+        0,
+        0,
+        0
+      ],
+      "expected_aligned_unity": [
+        0,
+        0,
+        0
+      ],
+      "roundtrip_blender": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "error": 0.0
+    },
+    {
+      "name": "RA_X10",
+      "blender": [
+        10,
+        0,
+        0
+      ],
+      "expected_aligned_unity": [
+        10,
+        0,
+        0
+      ],
+      "roundtrip_blender": [
+        10.0,
+        0.0,
+        0.0
+      ],
+      "error": 0.0
+    },
+    {
+      "name": "RA_North10",
+      "blender": [
+        0,
+        10,
+        0
+      ],
+      "expected_aligned_unity": [
+        0,
+        0,
+        -10
+      ],
+      "roundtrip_blender": [
+        0.0,
+        10.0,
+        -7.549789984295785e-07
+      ],
+      "error": 7.549789984295785e-07
+    }
+  ],
+  "coordinate_mapping": "Blender(x,y,z) -> aligned Unity(x,z,-y)",
+  "unity_import_note": "Use the same alignment as the existing island, including its proven Unity X reflection; validate anchors. Do not double-apply the parent correction.",
+  "fbx_file": "emerald_cobbles.fbx",
+  "fbx_sha256": "12285b9103827ee3d0672211cc5730c2335394c1cbd75b5533ca0562349c1901",
+  "fbx_bytes": 20641516,
+  "frozen_inputs_unchanged": true,
+  "unity_runtime_test_performed": false,
+  "elapsed_seconds": 12.89
+}

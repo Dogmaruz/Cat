@@ -1,0 +1,96 @@
+{
+  "id": "Miro",
+  "kind": "Backpack",
+  "frame": "Blender Z-up / face -Y; FBX -Z-forward Y-up",
+  "fixedMeshName": "Case",
+  "movableMeshName": "TopRotor",
+  "topPivotName": "TopPivot",
+  "caseBoundsMin": [
+    -0.5,
+    -0.33704590797424316,
+    0.0
+  ],
+  "caseBoundsMax": [
+    0.5,
+    0.337022989988327,
+    0.83
+  ],
+  "fixedBoundsMin": [
+    -0.49939966201782227,
+    0.027000000700354576,
+    0.0
+  ],
+  "fixedBoundsMax": [
+    0.4990643262863159,
+    0.337022989988327,
+    1.0384929180145264
+  ],
+  "contactPlaneY": 0.027,
+  "rawToPreparedScale": 0.6832187794987323,
+  "referenceBodyWidth": 1.0,
+  "referenceBodyDepth": 0.5,
+  "topPivot": [
+    -0.0024677501060068607,
+    0.19648444652557373,
+    1.0384925603866577
+  ],
+  "topPivotUnity": [
+    -0.0024677501060068607,
+    1.0384925603866577,
+    -0.19648444652557373
+  ],
+  "spinAxisUnity": [
+    0,
+    1,
+    0
+  ],
+  "source": {
+    "vertices": 11084,
+    "polygons": 11130,
+    "triangles": 22245
+  },
+  "outputTriangles": {
+    "Case": 7928,
+    "TopRotor": 1938
+  },
+  "repairs": {
+    "localizedSpindleCutEdges": 63,
+    "rotorCaps": {
+      "sealedBoundaryEdges": 32,
+      "newCapFaces": 3
+    },
+    "caseCaps": {
+      "sealedBoundaryEdges": 159,
+      "newCapFaces": 2
+    },
+    "leftHarnessCaps": {
+      "sealedBoundaryEdges": 77,
+      "newCapFaces": 1
+    },
+    "rightHarnessCaps": {
+      "sealedBoundaryEdges": 68,
+      "newCapFaces": 1
+    },
+    "horizontalBearing": null,
+    "originalStrapsRestored20261104": {
+      "geometryUnmodified": true,
+      "beforeSource": "ArtSource\\RadioArchipelago\\Tools\\Modular20261104\\HarnessRepair\\Before\\Miro",
+      "correctedPhysicalCaseHeight": 0.83,
+      "contactPlaneFromMeasuredPadding": 0.039
+    },
+    "straplessCase20261105": {
+      "caseFacesBefore": 17994,
+      "caseFacesAfter": 7654,
+      "bodyContactPlaneY": 0.027,
+      "trimPlaneY": 0.1,
+      "newCleanCapTriangles": 15,
+      "plainPadUv": [
+        0.1471816599369049,
+        0.6158363223075867
+      ]
+    }
+  },
+  "sourceArchiveSha256": "9111e5911927a96615af5bea9e89c29e7f2538b5b22c6e32948b2ea7e4a5a2cc",
+  "clearanceToCaseBody": 0.08201122283935547,
+  "validatedRevolutionSamples": 72
+}

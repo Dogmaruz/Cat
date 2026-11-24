@@ -1,0 +1,469 @@
+{
+  "schema": "radio_archipelago_relief_pilot/1",
+  "frozen_inputs": {
+    "C:\\Users\\Derek\\Games_develop\\Cat\\ArtSource\\RadioArchipelago\\Islands\\V4\\Output\\01_emerald_ravine\\island.blend": "2e176284a43d91c3dfb6bceee6ff8ef0cab81686962bf79e3fa9d535e41bbf6d",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\Emerald\\emerald_island.fbx": "c58945b4dfc3dc6f846c670ab65a7831442ebb98c35203b676403daa95376727",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\Emerald\\emerald_cobbles.fbx": "7154de0b03a16928c5bc90ad9e7c1d0dd2c9c3997090001e2062d43bf6933f0d",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\Emerald\\emerald_route.json": "2df85bc34509c0fb49a547efc5c44aff8c4ebf22e5860a9dfdaf5c02452834e3"
+  },
+  "frozen_inputs_unchanged": true,
+  "output_files": [
+    "emerald_relief_island.fbx",
+    "emerald_relief_cobbles.fbx",
+    "ground_elevation.json"
+  ],
+  "coordinate_mapping": "Blender(x,y,z) -> aligned Unity(x,z,-y); retain original prefab X reflection",
+  "east_hill": {
+    "center": [
+      64,
+      22
+    ],
+    "height": 8,
+    "inner_radius": 20,
+    "outer_radius": 56
+  },
+  "west_hill": {
+    "center": [
+      -45,
+      -18
+    ],
+    "height": 2.8,
+    "inner_radius": 8,
+    "outer_radius": 38
+  },
+  "bridge": {
+    "start": 81.5,
+    "end": 99.5,
+    "crown_s": 90.5,
+    "crown_height": 2,
+    "width": 6.34,
+    "barrel_thickness": 0.72
+  },
+  "stairs": {
+    "start": 238,
+    "end": 272,
+    "treads": 60,
+    "width": 5.9
+  },
+  "road_xz_unchanged": true,
+  "route_length": 514.9264126903334,
+  "profile_keys": 1071,
+  "profile_endpoint_height_equal": true,
+  "rigid_objects_shifted_at_base": 4903,
+  "tree_and_building_stretching": false,
+  "source_optimization": {
+    "leaves_seen": 186996,
+    "leaves_retained": 63695,
+    "bough_hulls": 2832
+  },
+  "skipped_source_triangles": {
+    "Bridge": 412,
+    "Road": 1176
+  },
+  "cleaning": {
+    "tiny_faces_removed": 8259
+  },
+  "island_triangles": 4189689,
+  "cobble_triangles": 771643,
+  "cobble_stair_triangles_removed": 53097,
+  "material_buckets": {
+    "Terrain": 21210,
+    "Rocks": 504746,
+    "Foliage": 2523300,
+    "Wood": 726272,
+    "Architecture": 375926,
+    "Metal": 90127,
+    "Road": 16492,
+    "Bridge": 0,
+    "Water": 8892,
+    "BridgeDeck": 736,
+    "StepTreads": 1440
+  },
+  "ground_materials": [
+    "RA_Emerald_Terrain",
+    "RA_Emerald_Road",
+    "RA_Emerald_BridgeDeck",
+    "RA_Emerald_StepTreads"
+  ],
+  "max_height": 8.0,
+  "min_height": 0.0,
+  "elapsed_seconds": 98.62302999998792,
+  "total_triangles": 4961332,
+  "review_refinement": {
+    "road_shoulders_flattened": true,
+    "stair_underbed_cut": 0.24,
+    "affected_terrain_vertices": 2235,
+    "max_vertical_correction": 0.8231002093229938,
+    "cobble_anchor_names_normalized": true
+  },
+  "solid_structures_rebuilt": true,
+  "normal_repairs": [
+    {
+      "mesh": "RA_Wood_+00_+00_01",
+      "bad_corners": 6612,
+      "flat_faces": 2204,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+00_+01_01",
+      "bad_corners": 5790,
+      "flat_faces": 1934,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+00_+02_01",
+      "bad_corners": 10590,
+      "flat_faces": 3530,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+00_-01_01",
+      "bad_corners": 282,
+      "flat_faces": 94,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+00_-02_01",
+      "bad_corners": 14484,
+      "flat_faces": 4828,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+00_-03_01",
+      "bad_corners": 858,
+      "flat_faces": 286,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+01_+00_01",
+      "bad_corners": 12540,
+      "flat_faces": 4180,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+01_+01_01",
+      "bad_corners": 3072,
+      "flat_faces": 1024,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+01_+02_01",
+      "bad_corners": 17604,
+      "flat_faces": 5868,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+01_+03_01",
+      "bad_corners": 144,
+      "flat_faces": 48,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+01_-01_01",
+      "bad_corners": 11906,
+      "flat_faces": 3970,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+01_-02_01",
+      "bad_corners": 12006,
+      "flat_faces": 4002,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+01_-03_01",
+      "bad_corners": 522,
+      "flat_faces": 174,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+02_+00_01",
+      "bad_corners": 1152,
+      "flat_faces": 384,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+02_+01_01",
+      "bad_corners": 6882,
+      "flat_faces": 2294,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+02_+02_01",
+      "bad_corners": 3228,
+      "flat_faces": 1076,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+02_-01_01",
+      "bad_corners": 6858,
+      "flat_faces": 2286,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+02_-02_01",
+      "bad_corners": 3984,
+      "flat_faces": 1328,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+02_-03_01",
+      "bad_corners": 1842,
+      "flat_faces": 614,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+03_+00_01",
+      "bad_corners": 678,
+      "flat_faces": 226,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+03_+01_01",
+      "bad_corners": 1854,
+      "flat_faces": 618,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+03_-01_01",
+      "bad_corners": 600,
+      "flat_faces": 200,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_+03_-02_01",
+      "bad_corners": 300,
+      "flat_faces": 100,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-01_+00_01",
+      "bad_corners": 4596,
+      "flat_faces": 1532,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-01_+01_01",
+      "bad_corners": 13320,
+      "flat_faces": 4458,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-01_+02_01",
+      "bad_corners": 3912,
+      "flat_faces": 1304,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-01_-01_01",
+      "bad_corners": 5718,
+      "flat_faces": 1906,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-01_-02_01",
+      "bad_corners": 7188,
+      "flat_faces": 2398,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-01_-03_01",
+      "bad_corners": 3896,
+      "flat_faces": 1300,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-02_+00_01",
+      "bad_corners": 12096,
+      "flat_faces": 4032,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-02_+01_01",
+      "bad_corners": 3492,
+      "flat_faces": 1164,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-02_+02_01",
+      "bad_corners": 13002,
+      "flat_faces": 4334,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-02_-01_01",
+      "bad_corners": 6246,
+      "flat_faces": 2082,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-02_-02_01",
+      "bad_corners": 8094,
+      "flat_faces": 2698,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-02_-03_01",
+      "bad_corners": 4116,
+      "flat_faces": 1372,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-03_+00_01",
+      "bad_corners": 4386,
+      "flat_faces": 1462,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-03_+01_01",
+      "bad_corners": 3618,
+      "flat_faces": 1206,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-03_+02_01",
+      "bad_corners": 11370,
+      "flat_faces": 3790,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-03_-01_01",
+      "bad_corners": 8496,
+      "flat_faces": 2832,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-03_-02_01",
+      "bad_corners": 7902,
+      "flat_faces": 2634,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-03_-03_01",
+      "bad_corners": 168,
+      "flat_faces": 56,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-04_+00_01",
+      "bad_corners": 42,
+      "flat_faces": 14,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-04_-01_01",
+      "bad_corners": 918,
+      "flat_faces": 306,
+      "removed_faces": 0
+    },
+    {
+      "mesh": "RA_Wood_-04_-02_01",
+      "bad_corners": 72,
+      "flat_faces": 24,
+      "removed_faces": 0
+    }
+  ],
+  "serialized_normal_face_repairs": [
+    {
+      "mesh": "RA_Architecture_+02_+00_01",
+      "faces": 4
+    },
+    {
+      "mesh": "RA_Architecture_-02_-01_01",
+      "faces": 4
+    },
+    {
+      "mesh": "RA_Architecture_-03_-01_01",
+      "faces": 3
+    },
+    {
+      "mesh": "RA_Metal_+02_+00_01",
+      "faces": 1
+    },
+    {
+      "mesh": "RA_Metal_-02_-01_01",
+      "faces": 1
+    },
+    {
+      "mesh": "RA_Metal_-03_-01_01",
+      "faces": 1
+    },
+    {
+      "mesh": "RA_Rocks_-01_-02_01",
+      "faces": 2
+    }
+  ],
+  "final_spatial_batching": {
+    "meshes": 307,
+    "cell_meters": 24,
+    "max_vertices": 58000,
+    "removed_decorative_sliver_faces": {
+      "Architecture": 543,
+      "Metal": 811,
+      "Rocks": 36
+    },
+    "vertex_colors_preserved": true,
+    "uv0_and_uv1_preserved": true,
+    "source_spatial_batches_retained": true,
+    "joined_structural_batches": 8
+  },
+  "verified_final_geometry": {
+    "pass_roundtrip": true,
+    "pass_all_corner_normals": true,
+    "total_triangles": 4961332,
+    "files": {
+      "emerald_relief_island.fbx": {
+        "meshes": 307,
+        "triangles": 4189689,
+        "colored_meshes": 307,
+        "zero_corner_normals": 0,
+        "max_unit_normal_error": 2.384185791015625E-07,
+        "anchors": [
+          {
+            "name": "RA_Origin",
+            "error": 0.0
+          },
+          {
+            "name": "RA_X10",
+            "error": 0.0
+          },
+          {
+            "name": "RA_North10",
+            "error": 3.139164618914947E-06
+          }
+        ],
+        "sha256": "af8e3a9d935e1fdcbf9d2ad2d7b5792607fba7b1ade3a67553e59cb4dde52b68",
+        "bytes": 160480524
+      },
+      "emerald_relief_cobbles.fbx": {
+        "meshes": 28,
+        "triangles": 771643,
+        "colored_meshes": 28,
+        "zero_corner_normals": 0,
+        "max_unit_normal_error": 1.7881393432617188E-07,
+        "anchors": [
+          {
+            "name": "RA_Origin",
+            "error": 0.0
+          },
+          {
+            "name": "RA_X10",
+            "error": 0.0
+          },
+          {
+            "name": "RA_North10",
+            "error": 1.509957996859157E-06
+          }
+        ],
+        "sha256": "9ae95b7e5b90c46df20eebe46896e1953a1727404252e2dedcb21579b8987991",
+        "bytes": 18800124
+      }
+    },
+    "profile_keys": 1071,
+    "profile_seam_continuous": true,
+    "original_xz_route_byte_identical": true,
+    "frozen_inputs_unchanged": true
+  },
+  "final_native_file": "emerald_relief_final.blend",
+  "proofs_show_final_serialized_geometry": true
+}

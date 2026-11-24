@@ -1,0 +1,90 @@
+{
+  "id": "Boro_Pulse",
+  "kind": "Backpack",
+  "frame": "Blender Z-up / face -Y; FBX -Z-forward Y-up",
+  "fixedMeshName": "Case",
+  "movableMeshName": "TopRotor",
+  "topPivotName": "TopPivot",
+  "caseBoundsMin": [
+    -0.5,
+    -0.3785015940666199,
+    0.0
+  ],
+  "caseBoundsMax": [
+    0.5,
+    0.3785015940666199,
+    1.022972822189331
+  ],
+  "fixedBoundsMin": [
+    -0.47810569405555725,
+    -0.139077290892601,
+    0.0
+  ],
+  "fixedBoundsMax": [
+    0.4784539043903351,
+    0.3785015940666199,
+    1.2305254936218262
+  ],
+  "contactPlaneY": -0.13907729215396822,
+  "rawToPreparedScale": 0.6913064786660301,
+  "referenceBodyWidth": 1.0,
+  "referenceBodyDepth": 0.5,
+  "topPivot": [
+    0.030609089881181717,
+    0.1228388249874115,
+    1.2305254936218262
+  ],
+  "topPivotUnity": [
+    0.030609089881181717,
+    1.2305254936218262,
+    -0.1228388249874115
+  ],
+  "spinAxisUnity": [
+    0,
+    1,
+    0
+  ],
+  "source": {
+    "vertices": 11423,
+    "polygons": 11486,
+    "triangles": 22942
+  },
+  "outputTriangles": {
+    "Case": 6370,
+    "TopRotor": 2950
+  },
+  "repairs": {
+    "localizedSpindleCutEdges": 47,
+    "rotorCaps": {
+      "sealedBoundaryEdges": 57,
+      "newCapFaces": 2
+    },
+    "caseCaps": {
+      "sealedBoundaryEdges": 139,
+      "newCapFaces": 6
+    },
+    "leftHarnessCaps": {
+      "sealedBoundaryEdges": 69,
+      "newCapFaces": 3
+    },
+    "rightHarnessCaps": {
+      "sealedBoundaryEdges": 66,
+      "newCapFaces": 3
+    },
+    "horizontalBearing": null,
+    "straplessCase20261105": {
+      "caseFacesBefore": 6911,
+      "caseFacesAfter": 3584,
+      "bodyContactPlaneY": -0.13907729215396822,
+      "trimPlaneY": 0.1,
+      "newCleanCapTriangles": 2,
+      "plainPadUv": [
+        0.4437960386276245,
+        0.4134685695171356
+      ]
+    }
+  },
+  "sourceArchiveSha256": "be28d088c9e89bdc2c07ed604e37432bea90a0fc4e85488b88b93e62ffadcbcd",
+  "clearanceToCaseBody": 0.20755267143249512,
+  "validatedRevolutionSamples": 72
+}

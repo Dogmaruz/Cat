@@ -1,0 +1,1985 @@
+{
+  "input_model_sha256": "d0b36ff88c24eb86fa8387205bc5eab5537ee286a6a8c2c7453534597a4ed819",
+  "output_model_sha256": "c5656b305295a74bffc93d0428b111a95e6768e0ef42b9cd956ec612ac88fc3a",
+  "all_mesh_positions_and_uv_associations_unchanged": true,
+  "checked_meshes": 278,
+  "shader_sha256": "e5595cb7296dfb46056edf00727f290127ba817871a78869e7737291d9ea3337",
+  "shader_vertex_parameters": {
+    "flowSpeed": 0.65,
+    "foamLayer": 0,
+    "fallValues": [
+      0,
+      1
+    ],
+    "times": [
+      0,
+      0.13,
+      0.37,
+      1,
+      1.7,
+      2.8,
+      5.25,
+      9.8,
+      13.7,
+      21
+    ],
+    "uSamples": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1
+    ]
+  },
+  "authored": [
+    {
+      "id": "lower",
+      "shared_source_normal": [
+        0.9486827850341797,
+        0.3162294328212738,
+        0.0
+      ],
+      "shared_unity_y": 0.0,
+      "body_color_blend_metres": 2.0,
+      "normal_blend_metres": 0.8
+    },
+    {
+      "id": "R3_canyon",
+      "shared_source_normal": [
+        0.6176904439926147,
+        -0.7864212989807129,
+        0.0
+      ],
+      "shared_unity_y": 0.0,
+      "body_color_blend_metres": 2.0,
+      "normal_blend_metres": 0.8
+    },
+    {
+      "id": "raised_side",
+      "shared_source_normal": [
+        1.0,
+        -0.0,
+        0.0
+      ],
+      "shared_unity_y": 0.0,
+      "body_color_blend_metres": 2.0,
+      "normal_blend_metres": 0.8
+    }
+  ],
+  "seam_checks": [
+    {
+      "id": "lower",
+      "comparisons": [
+        {
+          "u": 0,
+          "normal_dot": 1.0000000372491897,
+          "normal_unity_y_stream": -5.670549398928415e-07,
+          "normal_unity_y_fall": 6.548391411342891e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.844384073399806e-06
+        },
+        {
+          "u": 0.25,
+          "normal_dot": 1.000000037252944,
+          "normal_unity_y_stream": 1.0476975376150222e-07,
+          "normal_unity_y_fall": 3.9301812648773193e-07,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.814697265625e-06
+        },
+        {
+          "u": 0.5,
+          "normal_dot": 1.0000000596051384,
+          "normal_unity_y_stream": -1.8003026980295544e-07,
+          "normal_unity_y_fall": -2.741813887041644e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.816559456248789e-06
+        },
+        {
+          "u": 0.75,
+          "normal_dot": 1.0000000447028004,
+          "normal_unity_y_stream": -4.371138828673793e-08,
+          "normal_unity_y_fall": 1.563225123391021e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.962700400017419e-06
+        },
+        {
+          "u": 1,
+          "normal_dot": 1.0000000298022347,
+          "normal_unity_y_stream": -4.371138828673793e-08,
+          "normal_unity_y_fall": 2.007465809583664e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.816559456248789e-06
+        }
+      ],
+      "layers": [
+        {
+          "node": "Amber_VoluminousFallingWater_0_0",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.0000000596051384,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "Amber_VoluminousFallingWater_0_1",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.0000000372481808,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "Amber_VoluminousFallingWater_0_2",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.000000089408574,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        }
+      ],
+      "max_displaced_gap": 3.962700400017419e-06
+    },
+    {
+      "id": "R3_canyon",
+      "comparisons": [
+        {
+          "u": 0,
+          "normal_dot": 0.9999999106533323,
+          "normal_unity_y_stream": 3.4198160392406862e-06,
+          "normal_unity_y_fall": 1.7632350136409514e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 9.5367431640625e-07
+        },
+        {
+          "u": 0.25,
+          "normal_dot": 1.0000000900968762,
+          "normal_unity_y_stream": 2.5063753128051758e-05,
+          "normal_unity_y_fall": 2.7526170015335083e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 9.5367431640625e-07
+        },
+        {
+          "u": 0.5,
+          "normal_dot": 0.9999999701272684,
+          "normal_unity_y_stream": 3.53194736817386e-05,
+          "normal_unity_y_fall": -1.9934959709644318e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 0.75,
+          "normal_dot": 0.9999999997843624,
+          "normal_unity_y_stream": 2.638622754602693e-05,
+          "normal_unity_y_fall": -8.172356501745526e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 2.86102294921875e-06
+        },
+        {
+          "u": 1,
+          "normal_dot": 1.0000000597693615,
+          "normal_unity_y_stream": 1.2513744877651334e-05,
+          "normal_unity_y_fall": 1.3162849427317269e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 9.5367431640625e-07
+        }
+      ],
+      "layers": [
+        {
+          "node": "Amber_VoluminousFallingWater_1_0",
+          "has_custom_normals": true,
+          "centre_normal_dot": 0.9999999701272684,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "Amber_VoluminousFallingWater_1_1",
+          "has_custom_normals": true,
+          "centre_normal_dot": 0.9999999402498001,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "Amber_VoluminousFallingWater_1_2",
+          "has_custom_normals": true,
+          "centre_normal_dot": 0.9999999703657322,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        }
+      ],
+      "max_displaced_gap": 2.86102294921875e-06
+    },
+    {
+      "id": "raised_side",
+      "comparisons": [
+        {
+          "u": 0,
+          "normal_dot": 1.0000000008173937,
+          "normal_unity_y_stream": 3.519282108754851e-05,
+          "normal_unity_y_fall": 2.3539632820757106e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 0.25,
+          "normal_dot": 1.000000000438239,
+          "normal_unity_y_stream": 3.480166560621001e-05,
+          "normal_unity_y_fall": 1.2524425983428955e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 0.5,
+          "normal_dot": 0.9999999997568578,
+          "normal_unity_y_stream": 3.477186328382231e-05,
+          "normal_unity_y_fall": -6.916002348589245e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 0.75,
+          "normal_dot": 1.0000000004450234,
+          "normal_unity_y_stream": 3.5721808671951294e-05,
+          "normal_unity_y_fall": 1.2524425983428955e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 1,
+          "normal_dot": 1.0000000007327556,
+          "normal_unity_y_stream": 3.436952829360962e-05,
+          "normal_unity_y_fall": 2.3546162992715836e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 0.0
+        }
+      ],
+      "layers": [
+        {
+          "node": "RA_Amber_SideCascade_RaisedFall_Layer0",
+          "has_custom_normals": true,
+          "centre_normal_dot": 0.9999999997568578,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "RA_Amber_SideCascade_RaisedFall_Layer1",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.0000000000034595,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "RA_Amber_SideCascade_RaisedFall_Layer2",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.0000000005765548,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        }
+      ],
+      "max_displaced_gap": 1.9073486328125e-06
+    }
+  ],
+  "geometry_uv_signatures": {
+    "RA_Amber_Architecture_-01_+00_01": {
+      "sha256": "1611300d872b2f4c673027390578b0eacb0c6f581b5f82be503b9f05d4a5254f",
+      "vertices": 54000,
+      "corners": 306495,
+      "triangles": 102165
+    },
+    "RA_Amber_Architecture_+00_+02_01": {
+      "sha256": "09fcd472ce60a5d5ffcceedcdbacccb88ea86a9a49aef9f4f855b899c704c894",
+      "vertices": 54000,
+      "corners": 306339,
+      "triangles": 102113
+    },
+    "RA_Amber_Architecture_-01_+03_01": {
+      "sha256": "d20d18f6d26bec59d079f9d2afc5d91019e9dcf783d9a131f456a441fc9aeb46",
+      "vertices": 54000,
+      "corners": 306324,
+      "triangles": 102108
+    },
+    "RA_Rooftop_Amber_01_WindmillSails": {
+      "sha256": "8d6aea2c5191bd39e76ee633aea444bc6e6eda39335c3f7014b1f8dc153862f1",
+      "vertices": 616,
+      "corners": 2964,
+      "triangles": 988
+    },
+    "RA_Rooftop_Amber_02_WindmillSails": {
+      "sha256": "958100528dfa86f95825febc92dad11685363dc32352256c135f2620af48b83d",
+      "vertices": 616,
+      "corners": 2964,
+      "triangles": 988
+    },
+    "RA_Rooftop_Amber_03_WindmillSails": {
+      "sha256": "a4fb494f6e56c605321cd965466272eb256c6a14c05c81f675b62b644ea48717",
+      "vertices": 616,
+      "corners": 2964,
+      "triangles": 988
+    },
+    "Amber_DownstreamCreek_0": {
+      "sha256": "06a823e5e5ab3ba07ec6620f1fcf2c935a7dc16bc775b333915453b6be74e52d",
+      "vertices": 819,
+      "corners": 4464,
+      "triangles": 1488
+    },
+    "Amber_VoluminousFallingWater_0_0": {
+      "sha256": "a71bd20fefd0f9e3eee61ccefcce242a06bdf825d6767b69d2c0d844633f6db5",
+      "vertices": 1125,
+      "corners": 6336,
+      "triangles": 2112
+    },
+    "Amber_VoluminousFallingWater_0_1": {
+      "sha256": "0672abb01809cefe633c3a5c49fca3f449754b2bcd1220d8e75920259857df8c",
+      "vertices": 1125,
+      "corners": 6336,
+      "triangles": 2112
+    },
+    "Amber_VoluminousFallingWater_0_2": {
+      "sha256": "62d285ecbc5d309c8444a37ee64dd427d9fa6e39453e26daaab5b12a34ebd91e",
+      "vertices": 1125,
+      "corners": 6336,
+      "triangles": 2112
+    },
+    "Amber_DownstreamCreek_1": {
+      "sha256": "d30ab23d0f3de962a67e298292d104e1526952d9e26298bd5af70bf763b9f9be",
+      "vertices": 1300,
+      "corners": 7128,
+      "triangles": 2376
+    },
+    "Amber_VoluminousFallingWater_1_0": {
+      "sha256": "6886226e20f4aa3849a3442fe2c027165cd2d83425a09cc1f7c15b4af966d2a2",
+      "vertices": 1300,
+      "corners": 7344,
+      "triangles": 2448
+    },
+    "Amber_VoluminousFallingWater_1_1": {
+      "sha256": "7303e307887ff69830b9a16fddff03e64bc6989345362a17df6cc05a9da611ee",
+      "vertices": 1300,
+      "corners": 7344,
+      "triangles": 2448
+    },
+    "Amber_VoluminousFallingWater_1_2": {
+      "sha256": "66fbae1507a89c8977cc50c3e5af269237e82e8dd83cb0757839b30fa0740aa1",
+      "vertices": 1300,
+      "corners": 7344,
+      "triangles": 2448
+    },
+    "RA_Amber_SideCascade_RaisedSpringPool": {
+      "sha256": "98134a2f87bd5b0ad44982c7ded472424af609c5b239bf4653ffb732a6ef6c91",
+      "vertices": 961,
+      "corners": 5472,
+      "triangles": 1824
+    },
+    "RA_Amber_SideCascade_RaisedStreamAndRoll": {
+      "sha256": "78cc408c45156a1567de8c87fccafc5d8414659f66b82e7eec3edc61f7cb13ab",
+      "vertices": 833,
+      "corners": 4608,
+      "triangles": 1536
+    },
+    "RA_Amber_SideCascade_RaisedFall_Layer0": {
+      "sha256": "ec35270e213a8784cfeb05bb8732fdd3c68168890af866b3320e1944ce5dbd38",
+      "vertices": 1025,
+      "corners": 5760,
+      "triangles": 1920
+    },
+    "RA_Amber_SideCascade_RaisedFall_Layer1": {
+      "sha256": "9cd4de4344aaab823d78af0db13911eba9ff3f876a32466a7b04801557b580f9",
+      "vertices": 1025,
+      "corners": 5760,
+      "triangles": 1920
+    },
+    "RA_Amber_SideCascade_RaisedFall_Layer2": {
+      "sha256": "915c7230c7bc8004e7c1802a77c16e541636e361b07fd612d6c10bb2f010fb46",
+      "vertices": 1025,
+      "corners": 5760,
+      "triangles": 1920
+    },
+    "RA_Amber_SideCascade_ReceivingBasin": {
+      "sha256": "38b3862bd80b90e855633b44167778aad40596b0875ac61bf412ec007911c5d3",
+      "vertices": 961,
+      "corners": 5472,
+      "triangles": 1824
+    },
+    "RA_Amber_Foliage_-01_-01_01": {
+      "sha256": "8512878a5caf5c9992b5d30b150c82645f60a953efa3d5b8cef109d054440dd8",
+      "vertices": 53998,
+      "corners": 251820,
+      "triangles": 83940
+    },
+    "RA_Amber_Foliage_+00_+00_01": {
+      "sha256": "c481bf0276814303f77d6ad9d10c74448a2722cac7f21f227d71ad09a8a9ca1b",
+      "vertices": 53999,
+      "corners": 228840,
+      "triangles": 76280
+    },
+    "RA_Amber_Wood_+00_+02_01": {
+      "sha256": "7c5af714455174d405f025bf5ddb81bc877ed178fd2e57964d72d96270e02421",
+      "vertices": 53999,
+      "corners": 316302,
+      "triangles": 105434
+    },
+    "RA_Amber_Rocks_+00_+03_01": {
+      "sha256": "eb2a104f9264501588d806aa06614edacc22e6231b714cee3879c2380ef42c45",
+      "vertices": 53999,
+      "corners": 237972,
+      "triangles": 79324
+    },
+    "RA_Amber_Wood_-01_+03_01": {
+      "sha256": "faddfa964cfea7df5ec688dd41c7ae5bc647682f3dacabb6f91a1e30706def88",
+      "vertices": 53998,
+      "corners": 316305,
+      "triangles": 105435
+    },
+    "RA_Amber_Foliage_-03_+00_01": {
+      "sha256": "eb456a611d444cc3e356520b159b90fce81772f12303e1186cffe15254cdf0c5",
+      "vertices": 53998,
+      "corners": 241581,
+      "triangles": 80527
+    },
+    "RA_Amber_Wood_-01_+00_01": {
+      "sha256": "c00f59153910ae9687615e04ace2b778a8405d39fcaceca459823daa54fa3c2e",
+      "vertices": 53999,
+      "corners": 316296,
+      "triangles": 105432
+    },
+    "RA_Amber_Foliage_+01_+03_01": {
+      "sha256": "e2bb2ccf876920b9ad7d16a0dcb0da84051a77b826fae2e5ab565505e9ad006f",
+      "vertices": 53998,
+      "corners": 223770,
+      "triangles": 74590
+    },
+    "RA_Amber_Rocks_+00_+02_01": {
+      "sha256": "99d437e3cc89378ca65646e8e3e209167985cf8b017bd2e370a94b00e9c9598a",
+      "vertices": 53997,
+      "corners": 252402,
+      "triangles": 84134
+    },
+    "RA_Amber_Cliffs_+01_+00_01": {
+      "sha256": "189dd98e85dd6d3871bcb62f65073ee6e45c4276479088b06346d0ae33a93586",
+      "vertices": 2430,
+      "corners": 2844,
+      "triangles": 948
+    },
+    "RA_Amber_Cliffs_+00_+00_01": {
+      "sha256": "f60639afb9889bad73cfda20631520999410d55d3b1b7ac6df6d4d7e87f7d5d2",
+      "vertices": 3397,
+      "corners": 5811,
+      "triangles": 1937
+    },
+    "RA_Amber_Cliffs_-01_+00_01": {
+      "sha256": "eb9b04726d132845a9557a137737d364e54c6475f344b23fd09de32143da5228",
+      "vertices": 723,
+      "corners": 3585,
+      "triangles": 1195
+    },
+    "RA_Amber_Cliffs_-02_+00_01": {
+      "sha256": "4901230d7d62065899e63e8a1f85b7b0b6bda818080d46663759a8645f835ecf",
+      "vertices": 1279,
+      "corners": 6744,
+      "triangles": 2248
+    },
+    "RA_Amber_Cliffs_-03_+00_01": {
+      "sha256": "dcb3bbca6fe1e1c7a2e820b2081b6caea5ea557d6da2957469dc654ca77e798b",
+      "vertices": 1013,
+      "corners": 5019,
+      "triangles": 1673
+    },
+    "RA_Amber_Cliffs_-03_-01_01": {
+      "sha256": "678c2f2db9fe58495ee4a4f323dd8d0305c51b739fe28cf2f9b7461e23ee5b30",
+      "vertices": 582,
+      "corners": 2916,
+      "triangles": 972
+    },
+    "RA_Amber_Cliffs_-02_-01_01": {
+      "sha256": "bdbabe861c76bb71af64c9d7808f5f75ae99265bc20ad31d20dbb6c0eed2cf5b",
+      "vertices": 836,
+      "corners": 4389,
+      "triangles": 1463
+    },
+    "RA_Amber_Cliffs_-01_-01_01": {
+      "sha256": "7d64ac075cf4a56da7f437a0491ec6fd3a71643bfb8a2f6e0cf1fc01c1975283",
+      "vertices": 481,
+      "corners": 2310,
+      "triangles": 770
+    },
+    "RA_Amber_Cliffs_+00_-01_01": {
+      "sha256": "90d4e8d519fc2503c0c4685f0569e542781ff6f03ab44b41ec5db2c3af700a5b",
+      "vertices": 3386,
+      "corners": 15744,
+      "triangles": 5248
+    },
+    "RA_Amber_Cliffs_+00_+03_01": {
+      "sha256": "8256dbb2f8b2860cf47747b3e6aa9590f96b18f56962e5f3726a02cc304aedf9",
+      "vertices": 2788,
+      "corners": 4563,
+      "triangles": 1521
+    },
+    "RA_Amber_Cliffs_-01_+03_01": {
+      "sha256": "c75173b21d2c168467cfa38d36bb116d02aa281f752a69b996fb0ab0965aee9c",
+      "vertices": 2649,
+      "corners": 6837,
+      "triangles": 2279
+    },
+    "RA_Amber_Cliffs_-01_+04_01": {
+      "sha256": "54fccc429383d1ada9fe2bb53bf54d09aa051b886dac6a6e4f2b7d1823219c2b",
+      "vertices": 306,
+      "corners": 1563,
+      "triangles": 521
+    },
+    "RA_Amber_Cliffs_-02_+03_01": {
+      "sha256": "245d1be69efd10d36a56715e1ef98a837980ea53a9797f040b88896797d30cb8",
+      "vertices": 437,
+      "corners": 2325,
+      "triangles": 775
+    },
+    "RA_Amber_Cliffs_-02_+02_01": {
+      "sha256": "6505c25e2dfa7336eaa7006cf4012f90ad287ac967d2cbc589c4775eb5168999",
+      "vertices": 3440,
+      "corners": 19962,
+      "triangles": 6654
+    },
+    "RA_Amber_Cliffs_-01_+02_01": {
+      "sha256": "ccda82a150650c2b5993cb47fd0cc418d03a5cf25fadb6f8b25284a28350cdac",
+      "vertices": 2331,
+      "corners": 6150,
+      "triangles": 2050
+    },
+    "RA_Amber_Cliffs_+00_+02_01": {
+      "sha256": "07bbc5b1aeb694431d71f40773b616174f9af0740ead3474f273397dcc260b35",
+      "vertices": 3094,
+      "corners": 6852,
+      "triangles": 2284
+    },
+    "RA_Amber_Cliffs_-02_+01_01": {
+      "sha256": "91179d7dff8e17aad9679ff6ceefb9695bca0e7230088ed287e22c9be6eb7172",
+      "vertices": 52,
+      "corners": 186,
+      "triangles": 62
+    },
+    "RA_Amber_Cliffs_-03_+01_01": {
+      "sha256": "2e3a0bd7d4d670e1f3d05f37ee175dee20a4bebbcd9b1b859fb624a91d3fdb57",
+      "vertices": 2411,
+      "corners": 13464,
+      "triangles": 4488
+    },
+    "RA_Amber_Cliffs_-04_+01_01": {
+      "sha256": "e062fc32c0a289919b8c7edc986c290b68226baf19f7be4677381346f6e420c6",
+      "vertices": 1022,
+      "corners": 5478,
+      "triangles": 1826
+    },
+    "RA_Amber_Cliffs_-04_+00_01": {
+      "sha256": "6b9c9859482846381bfc1bf8da89d435c666e0eeb21d18d617ecca65d672559d",
+      "vertices": 727,
+      "corners": 3936,
+      "triangles": 1312
+    },
+    "RA_Amber_Cliffs_-04_-01_01": {
+      "sha256": "0e78c2a570f75f2fc594bd0cec074d1aa4af21c714ac7cc95ee577f701f1db23",
+      "vertices": 311,
+      "corners": 1614,
+      "triangles": 538
+    },
+    "RA_Amber_Cliffs_-03_+02_01": {
+      "sha256": "69c3cca9f63f8d7425dab84dc72b4d78765a0bbb9b81d7af363d14212c68f302",
+      "vertices": 3468,
+      "corners": 20097,
+      "triangles": 6699
+    },
+    "RA_Amber_Cliffs_-04_+02_01": {
+      "sha256": "968a87f44f746be67301f789c2960a4d96c8370613ba9b3efc9d749070d08028",
+      "vertices": 2433,
+      "corners": 13911,
+      "triangles": 4637
+    },
+    "RA_Amber_Cliffs_-04_+03_01": {
+      "sha256": "0dd8bb90489a39c02923b4582f06e44b3c85579200fd109ed389b5050969cb85",
+      "vertices": 587,
+      "corners": 3144,
+      "triangles": 1048
+    },
+    "RA_Amber_Cliffs_+03_+03_01": {
+      "sha256": "8f02051184a316a2ddae7339ec9a0cf04c3f717853ebfc76887e3e2ed4ea502e",
+      "vertices": 241,
+      "corners": 1188,
+      "triangles": 396
+    },
+    "RA_Amber_Cliffs_+02_+03_01": {
+      "sha256": "11288ba93c62966eb8975534ad07995d3f4359b3097d1df433f20047f2daa345",
+      "vertices": 2988,
+      "corners": 12918,
+      "triangles": 4306
+    },
+    "RA_Amber_Cliffs_+02_+02_01": {
+      "sha256": "877bd1c863ccac5a7e48136b5ee6bf8b7e8f266dbfdb6ec12df652ebaa918a11",
+      "vertices": 5215,
+      "corners": 10536,
+      "triangles": 3512
+    },
+    "RA_Amber_Cliffs_+03_+02_01": {
+      "sha256": "828654fd94d7059b71d4b9c1d7c85ec05a469ff0e8f1a4bd3e7972fc144d426f",
+      "vertices": 64,
+      "corners": 273,
+      "triangles": 91
+    },
+    "RA_Amber_Cliffs_+00_-02_01": {
+      "sha256": "c4ce6503005aa830c97fc4a91756bc2a06f8a7ef9a891cfbdc539dcaa893ea08",
+      "vertices": 1113,
+      "corners": 6114,
+      "triangles": 2038
+    },
+    "RA_Amber_Cliffs_+02_+00_01": {
+      "sha256": "ab23bbcfab31167555a6bdac5a41ad2ce138d67bf77634ef4d3e14c8e9dbdd07",
+      "vertices": 2379,
+      "corners": 2379,
+      "triangles": 793
+    },
+    "RA_Amber_Cliffs_+02_+01_01": {
+      "sha256": "70a160b34f4be7832c03861040ef6ef26a79be8e352a7912849d475c98838594",
+      "vertices": 28128,
+      "corners": 28791,
+      "triangles": 9597
+    },
+    "RA_Amber_Cliffs_+01_+02_01": {
+      "sha256": "a47568fedd43455cf3c09320a481566b7af5b4cebd175e8fef849c4e155ffea7",
+      "vertices": 11742,
+      "corners": 13863,
+      "triangles": 4621
+    },
+    "RA_Amber_Cliffs_+00_+01_01": {
+      "sha256": "b7778d710e499d72a856c0721edc883fad50680abe1488e1b7e26d775061d264",
+      "vertices": 4163,
+      "corners": 6156,
+      "triangles": 2052
+    },
+    "RA_Amber_Cliffs_-01_+01_01": {
+      "sha256": "f4455587c0a934f345ae9a6b348037be79ee91ee36149a7dcee1819985c2386a",
+      "vertices": 309,
+      "corners": 309,
+      "triangles": 103
+    },
+    "RA_Amber_Cliffs_+01_-01_01": {
+      "sha256": "9c0edf0b4df33ab8813605b5516508a1da540d389897f32f4556af3d29b54190",
+      "vertices": 1380,
+      "corners": 1380,
+      "triangles": 460
+    },
+    "RA_Amber_Cliffs_+02_-01_01": {
+      "sha256": "2cfbee00ad9e0a5e8ec3b0a714f71c42e9de770b231e84e68a254a34dfe77733",
+      "vertices": 285,
+      "corners": 285,
+      "triangles": 95
+    },
+    "RA_Amber_Cliffs_+01_+01_01": {
+      "sha256": "c8ece3b4de812d3fa0118b3d72653cdb81f4c79ca3260fcc07bf67be84f2b4ca",
+      "vertices": 11574,
+      "corners": 13182,
+      "triangles": 4394
+    },
+    "RA_Amber_Cliffs_+01_+03_01": {
+      "sha256": "7aa2c07aaaaa3cfb5d9f6613acd80fa92e475282fdde7e1a0175a60937ce36cc",
+      "vertices": 2478,
+      "corners": 2478,
+      "triangles": 826
+    },
+    "RA_Amber_Cliffs_+01_+04_01": {
+      "sha256": "0ddfedddf79f6e8198d4580aa55fb21b208e3d884e23dfe25872d32d47bae6d8",
+      "vertices": 1095,
+      "corners": 1095,
+      "triangles": 365
+    },
+    "RA_Amber_Cliffs_+00_+04_01": {
+      "sha256": "3cdee973e3869d718120f23ae8b699ae09536149e6ed56b3b140e5c1527e0648",
+      "vertices": 1512,
+      "corners": 1512,
+      "triangles": 504
+    },
+    "RA_Amber_Terrain_-04_+02_01": {
+      "sha256": "38463ddd641d6346b2187945f95ab8a2889398bc8f72170e7f398a900c459fec",
+      "vertices": 1926,
+      "corners": 10977,
+      "triangles": 3659
+    },
+    "RA_Amber_Terrain_-04_+00_01": {
+      "sha256": "c0ef039d4b7501bdfca1f1ce1b6972fc60150eb35e9542e71b4a1561d2776cc2",
+      "vertices": 1949,
+      "corners": 11163,
+      "triangles": 3721
+    },
+    "RA_Amber_Terrain_-04_-01_01": {
+      "sha256": "26a76a02f3b632c8529c35204f74de0a1c3f21ef57393614c054139bc647c4bd",
+      "vertices": 605,
+      "corners": 3273,
+      "triangles": 1091
+    },
+    "RA_Amber_Terrain_-04_+03_01": {
+      "sha256": "f378c20c76c1ff9599b071e32184d0ff3d610cfb231a087999bb611ca1a35f9a",
+      "vertices": 291,
+      "corners": 1401,
+      "triangles": 467
+    },
+    "RA_Amber_Terrain_-04_+01_01": {
+      "sha256": "4f73d4067c83e114503c1ff0e9098a059cafd9fc90853a04c36a31c2ee464c23",
+      "vertices": 93,
+      "corners": 348,
+      "triangles": 116
+    },
+    "RA_Amber_Terrain_-03_+00_01": {
+      "sha256": "e6166c8aca6ca16b4b14ecb1c9ea076c22abe1e5162e36ac6c6a5c606e7ab703",
+      "vertices": 2955,
+      "corners": 16977,
+      "triangles": 5659
+    },
+    "RA_Amber_Terrain_-03_+01_01": {
+      "sha256": "39a0cbe8448b8610d4585fb2400b743a2eef2a73aebf50916dad4699f77aa640",
+      "vertices": 216,
+      "corners": 861,
+      "triangles": 287
+    },
+    "RA_Amber_Terrain_-03_+02_01": {
+      "sha256": "c6b1877ba2a72bb7fe8efa5d18799a7e8adc0e59d9e0f8badb4272549f14cca8",
+      "vertices": 358,
+      "corners": 1545,
+      "triangles": 515
+    },
+    "RA_Amber_Terrain_-03_-01_01": {
+      "sha256": "8571a46a5f31151ba3915b08788101d96dc491f3f79d890e82b04857074006bb",
+      "vertices": 1516,
+      "corners": 8580,
+      "triangles": 2860
+    },
+    "RA_Amber_Terrain_-02_-01_01": {
+      "sha256": "fd4c9a3f831713754e9001a3e4329b57a72164ce810cce3669e5af39e371ddee",
+      "vertices": 1627,
+      "corners": 9087,
+      "triangles": 3029
+    },
+    "RA_Amber_Terrain_-02_+00_01": {
+      "sha256": "3300506f5898a962342e72b1455a5fcffd3b0ef2bb73ff5b0c33d3b5890e35d0",
+      "vertices": 2692,
+      "corners": 15288,
+      "triangles": 5096
+    },
+    "RA_Amber_Terrain_-02_+01_01": {
+      "sha256": "de0a86023c0fc241c848a3ab70a4ab9c8dccf27134cdc51ceb816ef8a24a6308",
+      "vertices": 32,
+      "corners": 120,
+      "triangles": 40
+    },
+    "RA_Amber_Terrain_-02_+02_01": {
+      "sha256": "cadd16669216053cc37927c31a2a6cd29b7e9c328db0312375f4e51c896ea142",
+      "vertices": 639,
+      "corners": 3048,
+      "triangles": 1016
+    },
+    "RA_Amber_Terrain_-02_+03_01": {
+      "sha256": "a7a4dbd55e8cf0ab3c641aece447f16c9a99fdd3b4bfa7d06f42c535b3fe6f45",
+      "vertices": 672,
+      "corners": 3552,
+      "triangles": 1184
+    },
+    "RA_Amber_Terrain_-01_+00_01": {
+      "sha256": "614af36aebcd20d732143d1875d1d6c52c08f075bf5046e70c6782530137758a",
+      "vertices": 2584,
+      "corners": 14736,
+      "triangles": 4912
+    },
+    "RA_Amber_Terrain_-01_+02_01": {
+      "sha256": "21732b8821f43f3ea3815f069189f6ee16985aa7fc0f9cbd368536fc17f7d682",
+      "vertices": 2219,
+      "corners": 12552,
+      "triangles": 4184
+    },
+    "RA_Amber_Terrain_-01_-01_01": {
+      "sha256": "0a366012265ff055f791c4112f2ea80480d5dbee127d901c4b21617772701f30",
+      "vertices": 1865,
+      "corners": 10521,
+      "triangles": 3507
+    },
+    "RA_Amber_Terrain_-01_+03_01": {
+      "sha256": "838d924d43e27f63241c74bf3f69a66914ebb1af3278906474a3dbea5a7e157c",
+      "vertices": 3016,
+      "corners": 17157,
+      "triangles": 5719
+    },
+    "RA_Amber_Terrain_-01_+04_01": {
+      "sha256": "02218d3eebccb201531116a01aeb630995b1ee12eabc60296c7212c82e9bd3de",
+      "vertices": 248,
+      "corners": 1266,
+      "triangles": 422
+    },
+    "RA_Amber_Terrain_-01_+01_01": {
+      "sha256": "fb5ac64c3eb41a21148387e9353458012ac3fc0ed15f7b23821cf369f58f3553",
+      "vertices": 77,
+      "corners": 345,
+      "triangles": 115
+    },
+    "RA_Amber_Terrain_+00_+01_01": {
+      "sha256": "c81e3b96eaf4dea9fbf0b09a331bee83b2f94a880f4eb239345158a18fd109da",
+      "vertices": 2437,
+      "corners": 13953,
+      "triangles": 4651
+    },
+    "RA_Amber_Terrain_+00_+02_01": {
+      "sha256": "ca3d86b5776ac352b9ec0b9acc338c40638da619fe639cd44e29045774e7ddeb",
+      "vertices": 2987,
+      "corners": 17127,
+      "triangles": 5709
+    },
+    "RA_Amber_Terrain_+00_-01_01": {
+      "sha256": "721a4c084d67de64c0b8a6799d2369895efc24abf65632ac681c13f4dcecec14",
+      "vertices": 2368,
+      "corners": 13302,
+      "triangles": 4434
+    },
+    "RA_Amber_Terrain_+00_+03_01": {
+      "sha256": "776438632be97a783ef9b5770079f7f04982952fafc06c70cf5afdd2d53397cb",
+      "vertices": 2992,
+      "corners": 17157,
+      "triangles": 5719
+    },
+    "RA_Amber_Terrain_+00_+00_01": {
+      "sha256": "0925c73c56b6356af4637a2bae2a5757e2f8a7bd8af2768eacea48b48ade4e91",
+      "vertices": 2955,
+      "corners": 16920,
+      "triangles": 5640
+    },
+    "RA_Amber_Terrain_+00_-02_01": {
+      "sha256": "5c728e30c16a95c7d4ecc6fcae8bec3ad4960069968b714ce6da836308e5d460",
+      "vertices": 347,
+      "corners": 1788,
+      "triangles": 596
+    },
+    "RA_Amber_Terrain_+00_+04_01": {
+      "sha256": "67d0e2512f6dac27adc169d9bde2927b6d724d54a8b8a17373a1ddde18cd3bcc",
+      "vertices": 663,
+      "corners": 3684,
+      "triangles": 1228
+    },
+    "RA_Amber_Terrain_+01_+01_01": {
+      "sha256": "e5825d8863e602ba802b6ecfbfc45db03d9475aafa1d6c701d7cd2df0e5b878a",
+      "vertices": 2488,
+      "corners": 14184,
+      "triangles": 4728
+    },
+    "RA_Amber_Terrain_+01_+02_01": {
+      "sha256": "1fa917630926b66b5880467373b108c51230329f80ef31029475c148622412ff",
+      "vertices": 1865,
+      "corners": 10368,
+      "triangles": 3456
+    },
+    "RA_Amber_Terrain_+01_-01_01": {
+      "sha256": "595a3518b5c239ffe4b9e223b3b00588e576300cc8cc66e3e296cafd7b80f5e3",
+      "vertices": 593,
+      "corners": 3096,
+      "triangles": 1032
+    },
+    "RA_Amber_Terrain_+01_+00_01": {
+      "sha256": "9467dce1cb4f46b7bc67d2f60e42dddbb5e2fde8accb905cf1a82e0be3967530",
+      "vertices": 3032,
+      "corners": 17220,
+      "triangles": 5740
+    },
+    "RA_Amber_Terrain_+01_+03_01": {
+      "sha256": "0fb50c30b1ee55d922553eeb49c328a02801af14823d5b129aeab5254da0600d",
+      "vertices": 2853,
+      "corners": 16281,
+      "triangles": 5427
+    },
+    "RA_Amber_Terrain_+01_+04_01": {
+      "sha256": "8cfc2fa6f276e93993cca4b859b996fbefb9dee13c7a3ecb092f0847d2cc9c42",
+      "vertices": 618,
+      "corners": 3477,
+      "triangles": 1159
+    },
+    "RA_Amber_Terrain_+02_+01_01": {
+      "sha256": "f6edc7e5edd5cb8ae89fa9ab060041ae90f58108af811e0e7d9888b4f9c95cd7",
+      "vertices": 2440,
+      "corners": 13974,
+      "triangles": 4658
+    },
+    "RA_Amber_Terrain_+02_-01_01": {
+      "sha256": "c97b0130181121329c11b06e054cf00bf4f2b0af57963f013d1f6fed1528232a",
+      "vertices": 96,
+      "corners": 432,
+      "triangles": 144
+    },
+    "RA_Amber_Terrain_+02_+02_01": {
+      "sha256": "cfa67610ce0988409b3393912e67ea8d88b64bb7d92aed717fec512cfa79b4b1",
+      "vertices": 1014,
+      "corners": 5274,
+      "triangles": 1758
+    },
+    "RA_Amber_Terrain_+02_+03_01": {
+      "sha256": "d7361ee15808e8635edff66c20e7ca89fc47e7e271496957ee56ace03f10c6d3",
+      "vertices": 1827,
+      "corners": 10086,
+      "triangles": 3362
+    },
+    "RA_Amber_Terrain_+02_+00_01": {
+      "sha256": "88b1768eec915d421dda6af4dd812a2bf94b2d9dfdb1e820baf193df2305a4b3",
+      "vertices": 1651,
+      "corners": 9285,
+      "triangles": 3095
+    },
+    "RA_Amber_Terrain_+03_+03_01": {
+      "sha256": "20e64320ab824204ddaf31b332d830428d84df5373336f80b3e3fd81b3cf98f9",
+      "vertices": 58,
+      "corners": 207,
+      "triangles": 69
+    },
+    "RA_Amber_Terrain_+03_+02_01": {
+      "sha256": "54e1669b03aa20d000918db136a3826a81bce2834a0162cf15d55f9fc5ccc3e3",
+      "vertices": 8,
+      "corners": 18,
+      "triangles": 6
+    },
+    "RA_Amber_Rocks_-01_+00_01": {
+      "sha256": "b28733e4977e85061521c435510e542f97937046cfe8b97f2348dde041a94a49",
+      "vertices": 14522,
+      "corners": 79008,
+      "triangles": 26336
+    },
+    "RA_Amber_Architecture_-01_+00_02": {
+      "sha256": "9f494e2f64570b7fe832038a451d30137028bfc3af32128ca43bc6a58ceb7cb4",
+      "vertices": 12269,
+      "corners": 65427,
+      "triangles": 21809
+    },
+    "RA_Amber_Wood_-01_+00_02": {
+      "sha256": "5f28770b72b329e72eb815b9ab845212a791c45ff295f1351d80b032b8c6420c",
+      "vertices": 1054,
+      "corners": 4356,
+      "triangles": 1452
+    },
+    "RA_Amber_Metal_-01_+00_01": {
+      "sha256": "444f0c0c41de77e322888ded09ae3a96eee5180c0256e9b02d358d17f8374589",
+      "vertices": 15266,
+      "corners": 89817,
+      "triangles": 29939
+    },
+    "RA_Amber_Rocks_+00_+02_02": {
+      "sha256": "f49e4df45111397f1caf05bc82c8a670d49f19d1ce4ff917cec2093090412bad",
+      "vertices": 21939,
+      "corners": 96252,
+      "triangles": 32084
+    },
+    "RA_Amber_Architecture_+00_+02_02": {
+      "sha256": "5f85642b45fca3860557ec436c6e35bffbcd1d53a34190813fb05cc98e557b1b",
+      "vertices": 12269,
+      "corners": 65331,
+      "triangles": 21777
+    },
+    "RA_Amber_Wood_+00_+02_02": {
+      "sha256": "66a2b0ce46cf35088a8e2a37fd08701ad53e6e2c3c08c2e9a25b54bceba15ec9",
+      "vertices": 6718,
+      "corners": 31506,
+      "triangles": 10502
+    },
+    "RA_Amber_Metal_+00_+02_01": {
+      "sha256": "564e133444353f2f466c6fcd24d2929d710216d6a5a298171f09b507edd75a6f",
+      "vertices": 15266,
+      "corners": 89571,
+      "triangles": 29857
+    },
+    "RA_Amber_Rocks_-01_+03_01": {
+      "sha256": "4d87d1d1275fc5cd9829ecab1340884e0a43b31e9ba9c9f2fa6a30353675b30e",
+      "vertices": 17180,
+      "corners": 90600,
+      "triangles": 30200
+    },
+    "RA_Amber_Architecture_-01_+03_02": {
+      "sha256": "fa435b1e656828a7de0430a90adfbd00c360aeeb6fc36a5510fe603caddd6e39",
+      "vertices": 12269,
+      "corners": 65352,
+      "triangles": 21784
+    },
+    "RA_Amber_Wood_-01_+03_02": {
+      "sha256": "9326d812dce06baaaa9ed4fa56aa6f13679491a26c8dcf927e644675c989297f",
+      "vertices": 2409,
+      "corners": 10665,
+      "triangles": 3555
+    },
+    "RA_Amber_Metal_-01_+03_01": {
+      "sha256": "2c2d5a6656c608f494ed58cd8c8c10863d40489a9193ead1e54c0bc59d987769",
+      "vertices": 15266,
+      "corners": 89532,
+      "triangles": 29844
+    },
+    "RA_Amber_Rocks_+02_+01_01": {
+      "sha256": "f88de08cc2c20aa1551a8b920f36b948a08a18141376fa499a3a3a12126e5348",
+      "vertices": 11159,
+      "corners": 49899,
+      "triangles": 16633
+    },
+    "RA_Amber_Architecture_+02_+01_01": {
+      "sha256": "e4a107899f499c825243134caeeccbfbda75ab39286d9b01711240966d05b2d4",
+      "vertices": 2528,
+      "corners": 14712,
+      "triangles": 4904
+    },
+    "RA_Amber_Metal_+02_+01_01": {
+      "sha256": "abe53fbec4da8fa313ecccc8b73adff28f923891fb02552d617c6bc34b68a67c",
+      "vertices": 5042,
+      "corners": 29703,
+      "triangles": 9901
+    },
+    "RA_Amber_Wood_+02_+01_01": {
+      "sha256": "ff1ebe55f92b4009c9d94220ab82ddaf94b23b9bb26af62c279dbb0f88db2ca1",
+      "vertices": 6178,
+      "corners": 31233,
+      "triangles": 10411
+    },
+    "RA_Amber_Rocks_+01_+03_01": {
+      "sha256": "a226e41984e908e7dd769b7ba95ae43f9d779e22dde731037ba25e3c27007aa7",
+      "vertices": 2624,
+      "corners": 12336,
+      "triangles": 4112
+    },
+    "RA_Amber_Rocks_+02_+03_01": {
+      "sha256": "d2a553d4e743e8f332f760726bfd02e4fe87d143564c62602a9d9ffa40edbdbc",
+      "vertices": 1485,
+      "corners": 6666,
+      "triangles": 2222
+    },
+    "RA_Amber_Architecture_+01_+03_01": {
+      "sha256": "35f9594c52d187a49d9c5c05014b3d84bbde63ed14597b43c2be5dfd50e4aa61",
+      "vertices": 2160,
+      "corners": 12150,
+      "triangles": 4050
+    },
+    "RA_Amber_Architecture_+02_+03_01": {
+      "sha256": "e9fda5e3f33c83aafe77f3d3926b026fc96fab59fe596cca15a033d0f9aec74e",
+      "vertices": 492,
+      "corners": 2568,
+      "triangles": 856
+    },
+    "RA_Amber_Metal_+01_+03_01": {
+      "sha256": "2fa7aab37580cec8f1aef4285090234f69e17d86ec661e1a5cbb9d0e16481ccd",
+      "vertices": 3784,
+      "corners": 21861,
+      "triangles": 7287
+    },
+    "RA_Amber_Metal_+02_+03_01": {
+      "sha256": "b532a66ff5931ad61077461b48cca6876dbb28203a2d27b514ba4738fe17e87d",
+      "vertices": 1338,
+      "corners": 7776,
+      "triangles": 2592
+    },
+    "RA_Amber_Wood_+01_+03_01": {
+      "sha256": "1ac45315081cccd3b121261e50283e58282d2ce7f2d04d9858463d3a0e042390",
+      "vertices": 10418,
+      "corners": 49299,
+      "triangles": 16433
+    },
+    "RA_Amber_Rocks_-04_+02_01": {
+      "sha256": "d4e7e33973bbf7e01a9e712f15facca9acda8b0aef6f48c497878fb90a7c6267",
+      "vertices": 4296,
+      "corners": 20484,
+      "triangles": 6828
+    },
+    "RA_Amber_Architecture_-04_+02_01": {
+      "sha256": "6096c4248ed1e8d4f2eac401d59235317c62d648201d4e2164e64e618bd561b3",
+      "vertices": 2528,
+      "corners": 14712,
+      "triangles": 4904
+    },
+    "RA_Amber_Metal_-04_+02_01": {
+      "sha256": "25e7c52d0913d6ad5cf83dafb3c7a1ac2df3835992ce5c0ad6bb23e362e52f65",
+      "vertices": 5042,
+      "corners": 29625,
+      "triangles": 9875
+    },
+    "RA_Amber_Wood_-04_+02_01": {
+      "sha256": "820b70fda5729a8b022d4f39ef625792f47809dfab0ecd83b77140f909e53191",
+      "vertices": 2550,
+      "corners": 14112,
+      "triangles": 4704
+    },
+    "RA_Amber_Fabric_+02_+01_01": {
+      "sha256": "cfc9bd359f37dd476de0ac226276115406b0be99cc79a43899744a7cce5e1701",
+      "vertices": 4,
+      "corners": 6,
+      "triangles": 2
+    },
+    "RA_Amber_Fabric_+02_+03_01": {
+      "sha256": "cc2b1cf1d468f0bc1142d4b76e5f6903ecf1a49dfcc71c880c7d3da7b0a9cff6",
+      "vertices": 4,
+      "corners": 6,
+      "triangles": 2
+    },
+    "RA_Amber_Fabric_-04_+02_01": {
+      "sha256": "d8b217d712747eb2c1f7bb179df40ac2c91d478618b2e49bcc8c8580814cf256",
+      "vertices": 4,
+      "corners": 6,
+      "triangles": 2
+    },
+    "RA_Amber_Grass_+00_-01_01": {
+      "sha256": "de8f8aed5df8a9bb60c9dcc8b064034c480f6cc27ecf3a202dd7612c24409157",
+      "vertices": 5786,
+      "corners": 10410,
+      "triangles": 3470
+    },
+    "RA_Amber_Foliage_+00_-01_01": {
+      "sha256": "57d7a1d91aef20afc890676986d29f8161250ba31f7f4b691c2a0ceee8c67f4e",
+      "vertices": 10912,
+      "corners": 39927,
+      "triangles": 13309
+    },
+    "RA_Amber_Grass_-01_+03_01": {
+      "sha256": "af6be8c14376087436fcd7d73c97fe1eb42fcf04fc10e5c27fd4cadb228aaf2c",
+      "vertices": 17056,
+      "corners": 30672,
+      "triangles": 10224
+    },
+    "RA_Amber_Grass_+00_+03_01": {
+      "sha256": "741ed164e57ac021af5e33e5fab7f5d0b60c45833d2af65c9fb62332d98465cc",
+      "vertices": 10909,
+      "corners": 21987,
+      "triangles": 7329
+    },
+    "RA_Amber_Foliage_+00_+03_01": {
+      "sha256": "ad2d42e096597ff7387208914131e2146f700b8d90b8ab1503e042c86ee0bed3",
+      "vertices": 41846,
+      "corners": 170667,
+      "triangles": 56889
+    },
+    "RA_Amber_Grass_-03_+00_01": {
+      "sha256": "93d203c2cf67e5ca5609b1e19dfe854fc0def78f9c9cefd1828b3c580be7781e",
+      "vertices": 10119,
+      "corners": 18177,
+      "triangles": 6059
+    },
+    "RA_Amber_Grass_+02_+01_01": {
+      "sha256": "40dd58a6d4804a5773028152e1b6e4877ad285629a090eaa31ba3f28723ecab0",
+      "vertices": 5731,
+      "corners": 10305,
+      "triangles": 3435
+    },
+    "RA_Amber_Foliage_+02_+01_01": {
+      "sha256": "b14df22c049e7d817457f31dfd1b18f42c88365e6b3883099a203484a176a7f0",
+      "vertices": 26478,
+      "corners": 113988,
+      "triangles": 37996
+    },
+    "RA_Amber_Grass_+01_+03_01": {
+      "sha256": "58cb7b07a1ea5620f3b28968e761ff90d4ceb43f8ceeac3b65813c697871cd5e",
+      "vertices": 16471,
+      "corners": 29613,
+      "triangles": 9871
+    },
+    "RA_Amber_Grass_+00_+01_01": {
+      "sha256": "ea9aafaf51b5c9690b64a6eacfeac15becabdd034a5e90990727d40f88c95938",
+      "vertices": 2656,
+      "corners": 5016,
+      "triangles": 1672
+    },
+    "RA_Amber_Foliage_+00_+01_01": {
+      "sha256": "8bf23431f3d385e7ad32186cf5ee00c9373a4c3d5d0660d9b4c9944c805b3f6d",
+      "vertices": 20646,
+      "corners": 86463,
+      "triangles": 28821
+    },
+    "RA_Amber_Grass_-01_+02_01": {
+      "sha256": "b30198478012a490208a3b48dd8e3a4672aa41be0d2d362d42a320811a5796bf",
+      "vertices": 3682,
+      "corners": 6624,
+      "triangles": 2208
+    },
+    "RA_Amber_Foliage_-01_+02_01": {
+      "sha256": "cef57e9b5e1c013b2f466f2ee08881733693121592fd945c08e0336da4591d52",
+      "vertices": 26928,
+      "corners": 119571,
+      "triangles": 39857
+    },
+    "RA_Amber_Grass_+01_+02_01": {
+      "sha256": "e8fff2ae2ef4d6217a0139413bccac653a95039c1173d63a8c98935fd69e0f28",
+      "vertices": 7708,
+      "corners": 13926,
+      "triangles": 4642
+    },
+    "RA_Amber_Grass_-01_-01_01": {
+      "sha256": "dfe16830ff22499352c65a13340691ae22ca25bf037f510c0818b253ef458558",
+      "vertices": 6652,
+      "corners": 11970,
+      "triangles": 3990
+    },
+    "RA_Amber_Foliage_+01_+02_01": {
+      "sha256": "1ca00483b8ca8ac3a90b015acfcfe8600d9bdb6b0b74d9fe2fd708e122a0054d",
+      "vertices": 20103,
+      "corners": 77601,
+      "triangles": 25867
+    },
+    "RA_Amber_Grass_+01_+04_01": {
+      "sha256": "3dc63fafbabf52b9174465f0c5a551fed669350deec8e3bcb66db5a9a0616513",
+      "vertices": 585,
+      "corners": 1047,
+      "triangles": 349
+    },
+    "RA_Amber_Foliage_+01_+04_01": {
+      "sha256": "45995d8edae132c2495308f4feea655a9c98e11cf1be68b5de926fd9864c07ec",
+      "vertices": 2971,
+      "corners": 11694,
+      "triangles": 3898
+    },
+    "RA_Amber_Foliage_+01_+03_02": {
+      "sha256": "9a46c532061d53646db553637c8ca4b067313e66ea77601c87fc39e2aea3f471",
+      "vertices": 1918,
+      "corners": 9195,
+      "triangles": 3065
+    },
+    "RA_Amber_Grass_-01_+00_01": {
+      "sha256": "765a2afcb140484139318ef4c81f992f2b2c7b32e89bcd50770a4cd1eb4ba33b",
+      "vertices": 7247,
+      "corners": 13035,
+      "triangles": 4345
+    },
+    "RA_Amber_Foliage_-01_+00_01": {
+      "sha256": "d8f32cf3399a7bebe225d79661649b863590b9c971dc67390bb912fa535b5c24",
+      "vertices": 22910,
+      "corners": 95583,
+      "triangles": 31861
+    },
+    "RA_Amber_Grass_+01_+01_01": {
+      "sha256": "41ec1a83c2ab8153bdc708b1cf5ea662365236df4372bf0595b089bb35e0cecc",
+      "vertices": 8099,
+      "corners": 16251,
+      "triangles": 5417
+    },
+    "RA_Amber_Grass_+01_+00_01": {
+      "sha256": "eae0a181b25a7e8ded30fcdb71df3b1d21a42a348ac5a9531e7d1117666c6239",
+      "vertices": 10870,
+      "corners": 20994,
+      "triangles": 6998
+    },
+    "RA_Amber_Foliage_+01_+00_01": {
+      "sha256": "b04418c9e67c7c2c2b190035d9b012968ff638e85a7f65b4ced7fa6080e096dd",
+      "vertices": 23718,
+      "corners": 89721,
+      "triangles": 29907
+    },
+    "RA_Amber_Foliage_-03_+00_02": {
+      "sha256": "7311839692fe04584ce48ecb926bbf3ca17f30bc6bbdec2772e888e5ee613808",
+      "vertices": 16160,
+      "corners": 77559,
+      "triangles": 25853
+    },
+    "RA_Amber_Grass_+02_+00_01": {
+      "sha256": "19ef37d78a963d08113c0bf5e0bb836e0e4e3b6ff9b62418b3d4e48a3bebe944",
+      "vertices": 5435,
+      "corners": 9777,
+      "triangles": 3259
+    },
+    "RA_Amber_Foliage_-01_+03_01": {
+      "sha256": "7dcc91cf6f44cdf5e725400d0bab45460dcf675f84587f9dad870a9bacf440de",
+      "vertices": 34122,
+      "corners": 125793,
+      "triangles": 41931
+    },
+    "RA_Amber_Grass_-03_-01_01": {
+      "sha256": "67b236076e01313512d2b09b6223b700bb74b12e948d53824bad0db69946ddb2",
+      "vertices": 5938,
+      "corners": 10680,
+      "triangles": 3560
+    },
+    "RA_Amber_Grass_+00_+02_01": {
+      "sha256": "ca25ce0114845a83628524d544ca7c7888fcc9ed3365f9756a53a2ea6d66965b",
+      "vertices": 2000,
+      "corners": 4215,
+      "triangles": 1405
+    },
+    "RA_Amber_Foliage_+00_+02_01": {
+      "sha256": "addc999f1203b546d92242d597c710c654c05a547e49a32173c76cce2375d5f6",
+      "vertices": 23161,
+      "corners": 102792,
+      "triangles": 34264
+    },
+    "RA_Amber_Grass_-02_+00_01": {
+      "sha256": "efcf0388f3f67d4844cd0744100cd120d58c54a33fe0ba43481403202f430cf4",
+      "vertices": 8556,
+      "corners": 15390,
+      "triangles": 5130
+    },
+    "RA_Amber_Foliage_-02_+00_01": {
+      "sha256": "5acf649a7bbe6a533358df009fc3789f0a0258fbce0297be048c81f619a6da90",
+      "vertices": 42397,
+      "corners": 184119,
+      "triangles": 61373
+    },
+    "RA_Amber_Grass_+00_+00_01": {
+      "sha256": "d529a64ff3226cd0e23c2f17b4491efbe2ce09998e09f01e4fda6c99408bf4f9",
+      "vertices": 8746,
+      "corners": 15732,
+      "triangles": 5244
+    },
+    "RA_Amber_Foliage_+00_+00_02": {
+      "sha256": "1e1464ce259dc65dee5f6c68b4b1b981fcaf51948a7f3a0ef6e13e85edea64b7",
+      "vertices": 34980,
+      "corners": 171069,
+      "triangles": 57023
+    },
+    "RA_Amber_Grass_+02_+02_01": {
+      "sha256": "e1f98dd83c3bcf1952084aac0fb1e3c6fbfa87d0a7ff4ce8d9ccbbc4151b5c92",
+      "vertices": 330,
+      "corners": 594,
+      "triangles": 198
+    },
+    "RA_Amber_Foliage_+02_+02_01": {
+      "sha256": "bd984da1cf0aeb9d4f61fc2c99445c6ca47ba3608c4bcf5f1f44ef29ea33c382",
+      "vertices": 7681,
+      "corners": 34827,
+      "triangles": 11609
+    },
+    "RA_Amber_Grass_+02_+03_01": {
+      "sha256": "a8f39d8fd6418310496d66bad0556e056f256609f6d6ae948e723b45ed37fff8",
+      "vertices": 1055,
+      "corners": 1899,
+      "triangles": 633
+    },
+    "RA_Amber_Foliage_+02_+03_01": {
+      "sha256": "40c1677a38dac3faa47cceb7b7c533c243ec7ea696e1530408788c6ea26a067d",
+      "vertices": 10644,
+      "corners": 45864,
+      "triangles": 15288
+    },
+    "RA_Amber_Grass_-04_+00_01": {
+      "sha256": "59520ea3d14eff413dd3a2067d2c0fab3cec358f34c701715fb2b028dd749046",
+      "vertices": 10160,
+      "corners": 18276,
+      "triangles": 6092
+    },
+    "RA_Amber_Grass_-04_-01_01": {
+      "sha256": "c3332fe7ce60bfc63809ecc46aeb982553ecdc3f852ac3ba68a30da9a60bdcd0",
+      "vertices": 418,
+      "corners": 750,
+      "triangles": 250
+    },
+    "RA_Amber_Foliage_-04_-01_01": {
+      "sha256": "60b694f23a076d420585807f6d96de2a68be51dd0cad2b58a3b9c4ac64a0c62d",
+      "vertices": 11189,
+      "corners": 51273,
+      "triangles": 17091
+    },
+    "RA_Amber_Foliage_-04_+00_01": {
+      "sha256": "157176480b21b1f2cae6030e9cc874f8ec59ff5bc1b84bf1c2470964ab1f086c",
+      "vertices": 23534,
+      "corners": 91908,
+      "triangles": 30636
+    },
+    "RA_Amber_Grass_-02_-01_01": {
+      "sha256": "c6196ef33e077ae8ba94ee776966af5e156beeee78ad042bfbc06cd33547534c",
+      "vertices": 6657,
+      "corners": 11973,
+      "triangles": 3991
+    },
+    "RA_Amber_Grass_-04_+02_01": {
+      "sha256": "7adb5b297b2e2e8dee5cb3b28b70422cfc329c321e35146630a71021e7d3d763",
+      "vertices": 770,
+      "corners": 1386,
+      "triangles": 462
+    },
+    "RA_Amber_Foliage_-04_+02_01": {
+      "sha256": "6f6f1569052aca074f136da2f16c386a1393d622d201f75d13d95fae19b6e46c",
+      "vertices": 5586,
+      "corners": 23328,
+      "triangles": 7776
+    },
+    "RA_Amber_Foliage_+01_+01_01": {
+      "sha256": "71428f5ef32f2fbcb53b2472e8af27a5c02d502f6b129df229089269976e3bff",
+      "vertices": 29111,
+      "corners": 122484,
+      "triangles": 40828
+    },
+    "RA_Amber_Foliage_-03_-01_01": {
+      "sha256": "929c6b07b77aa1faa583dcbbded53d786701c5e924138e0dd594d756540c6b25",
+      "vertices": 22725,
+      "corners": 95928,
+      "triangles": 31976
+    },
+    "RA_Amber_Foliage_-02_-01_01": {
+      "sha256": "e9d267e001292a7290c1e95527bd303a8e1c0a9b4d79ecbc11e7c33db63a89f1",
+      "vertices": 18350,
+      "corners": 73311,
+      "triangles": 24437
+    },
+    "RA_Amber_Foliage_-01_-01_02": {
+      "sha256": "03548cde741fefb2d89e37bceb7e6fe8d408cd30a923639ff3063166e478269e",
+      "vertices": 14354,
+      "corners": 69762,
+      "triangles": 23254
+    },
+    "RA_Amber_Grass_+00_+04_01": {
+      "sha256": "0807b657176377d60f535c518adf61584d8d18b806799dcfa706bbc76363fc81",
+      "vertices": 3582,
+      "corners": 6432,
+      "triangles": 2144
+    },
+    "RA_Amber_Foliage_+00_+04_01": {
+      "sha256": "2868de5c8973dae891ef001a4afde639202c30fc0d9742735875afa4a39347b3",
+      "vertices": 11389,
+      "corners": 47691,
+      "triangles": 15897
+    },
+    "RA_Amber_Grass_-02_+03_01": {
+      "sha256": "f995dd7f8e76f929779e5051604befcf96a7915cc5906f8b90472b72998a0167",
+      "vertices": 2453,
+      "corners": 4407,
+      "triangles": 1469
+    },
+    "RA_Amber_Foliage_-02_+03_01": {
+      "sha256": "5421dccdd47e0d9d8a2155f0e90d901e9570f6c2395d7f437369ac78cc309d51",
+      "vertices": 7360,
+      "corners": 30600,
+      "triangles": 10200
+    },
+    "RA_Amber_Foliage_-02_+02_01": {
+      "sha256": "08fd583aa1a25e4d7306f63371dfe4cadf6405ccfda0c389075141ecdeaa410b",
+      "vertices": 8083,
+      "corners": 20871,
+      "triangles": 6957
+    },
+    "RA_Amber_Grass_-02_+02_01": {
+      "sha256": "e82b9f60c5c6e015d594cea87d1c7b5be282fbd70cd73f1e37f300fd7780a847",
+      "vertices": 5137,
+      "corners": 9243,
+      "triangles": 3081
+    },
+    "RA_Amber_Foliage_-03_+02_01": {
+      "sha256": "56d84a5a0a323710c94a8ab9b34936f7c6ec30f914513dc9d8133f4a57feaef6",
+      "vertices": 4007,
+      "corners": 6528,
+      "triangles": 2176
+    },
+    "RA_Amber_Grass_-03_+02_01": {
+      "sha256": "3f0ff24fbc4ddbefc08fe0ae3475de9ce7308cf54e6f974e02c655960edea652",
+      "vertices": 2495,
+      "corners": 4491,
+      "triangles": 1497
+    },
+    "RA_Amber_Foliage_-03_+01_01": {
+      "sha256": "93c682de5c801a2bea07654814a5b6594643ba53555ff19a5bfdf7e0fba8cc65",
+      "vertices": 3025,
+      "corners": 4881,
+      "triangles": 1627
+    },
+    "RA_Amber_Grass_-03_+01_01": {
+      "sha256": "ca8793f6f8f24beec3effdaeaf0400c1db7a2a4a2c43dad16a384feca5e18696",
+      "vertices": 1914,
+      "corners": 3432,
+      "triangles": 1144
+    },
+    "RA_Amber_Foliage_-04_+01_01": {
+      "sha256": "14ccd3103ec5d5a11a0cf6aab9c3c30273f3cf087c6a7d97e02013c9ec9096d8",
+      "vertices": 939,
+      "corners": 1551,
+      "triangles": 517
+    },
+    "RA_Amber_Grass_-04_+01_01": {
+      "sha256": "127c7fd94d7ea08c672a3acd4d9c7f8a76a09bb8f8e7d1221dcf6b5d17577e7d",
+      "vertices": 515,
+      "corners": 915,
+      "triangles": 305
+    },
+    "RA_Amber_Water_+01_+00_01": {
+      "sha256": "fdcd4852b74727589584d521fbba349281756ff376ac1631a83833ed0240fe27",
+      "vertices": 2939,
+      "corners": 16962,
+      "triangles": 5654
+    },
+    "RA_Amber_Water_+01_+01_01": {
+      "sha256": "7b9fd3137a5fb8d4f0040aa958661b89a6b43e1904d5feef46f2f48c0f560b59",
+      "vertices": 760,
+      "corners": 4062,
+      "triangles": 1354
+    },
+    "RA_Amber_Water_+02_+00_01": {
+      "sha256": "e7374735d1b8a5a36a10cd3a0393533be2ca7489034784f9301b66d031807cb0",
+      "vertices": 231,
+      "corners": 1116,
+      "triangles": 372
+    },
+    "RA_Amber_Water_+02_+01_01": {
+      "sha256": "44c2f348d0f94c9d4d90ecec4b7dddf51de5da139a7fe630a438ed2db932beed",
+      "vertices": 75,
+      "corners": 324,
+      "triangles": 108
+    },
+    "RA_Amber_Water_+00_+03_01": {
+      "sha256": "647044e096a2199bc3007f0d6e82d53a251b81d2b4c55711f6a74264a11f79f4",
+      "vertices": 3502,
+      "corners": 20376,
+      "triangles": 6792
+    },
+    "RA_Amber_Water_+00_+02_01": {
+      "sha256": "bb21bf3b5282bccf1e65b7b4797ef037909e9dc9a84fb786a51d07b005add426",
+      "vertices": 411,
+      "corners": 2088,
+      "triangles": 696
+    },
+    "RA_Amber_Grass_+01_-01_01": {
+      "sha256": "6c20bb154e1cb1306924c16605396be5d7b535bdc14244f3a325890671ee8ad3",
+      "vertices": 3352,
+      "corners": 6018,
+      "triangles": 2006
+    },
+    "RA_Amber_Foliage_+01_-01_01": {
+      "sha256": "9dce20a298047c2cc8109de176722d22fce3a90fd7ab126ee803a7c5e82c93f0",
+      "vertices": 4311,
+      "corners": 14988,
+      "triangles": 4996
+    },
+    "RA_Amber_Foliage_+02_+00_01": {
+      "sha256": "d7fa1064529d452ca97afa6293f047db953c036f1548067a9ef69c660169479a",
+      "vertices": 10705,
+      "corners": 41262,
+      "triangles": 13754
+    },
+    "RA_Amber_Grass_-01_+04_01": {
+      "sha256": "26ab4d00655b98f118b8fdf2b78a2439853c45d39008601550bc036a2f45b6ca",
+      "vertices": 1063,
+      "corners": 1899,
+      "triangles": 633
+    },
+    "RA_Amber_Foliage_-01_+04_01": {
+      "sha256": "c14c69a4550f8c6c4db24a4b059fed2bb377953205b054a0a00b2e1cfc9728f1",
+      "vertices": 1079,
+      "corners": 3735,
+      "triangles": 1245
+    },
+    "RA_Amber_Rocks_+00_+01_01": {
+      "sha256": "8ef91cc895062698c7d15ea11722b4e4a3ebf98c617708d9f6e8e4bc75a5bd6d",
+      "vertices": 32235,
+      "corners": 141762,
+      "triangles": 47254
+    },
+    "RA_Amber_Vines_+00_+00_01": {
+      "sha256": "d8dff64dcf67d610c224fbc83d87a294a9707ff41904a8ea67f95d75e750d377",
+      "vertices": 252,
+      "corners": 1488,
+      "triangles": 496
+    },
+    "RA_Amber_Vines_-02_+00_01": {
+      "sha256": "ff0fbb3bcc86d0e4b09ebd3380eb7c8e546e50ed5843ef66ce362b63cfd59e02",
+      "vertices": 252,
+      "corners": 1488,
+      "triangles": 496
+    },
+    "RA_Amber_Vines_-01_-01_01": {
+      "sha256": "17161083318f9ff4ea2797dcf918316d5c679d98740f4096ba3db6184716e53b",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Vines_+00_+01_01": {
+      "sha256": "09787f42ac93ec3ed93466fa7ced357840cf489cedcfcf5c08f1c474c28b9669",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Vines_+02_+00_01": {
+      "sha256": "fd9ac877a4f2140385eeaffbaed3a137522454b813dc46f9e3c5094598cd248f",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Vines_-01_+03_01": {
+      "sha256": "15afb07dc46bf803db50e92761eb8cdd6b1be1645de39799f32ea90446d719a7",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Vines_+01_+01_01": {
+      "sha256": "69aa3ffbae7a07518cb371cf291fbd5a76c3294b4c0323d190af7f427e0ead7e",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Vines_+01_+03_01": {
+      "sha256": "3104b5c4fe880008872a7f610680c1c7299fa9056fedb2d31f029a28a344f6ab",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Vines_-01_+02_01": {
+      "sha256": "459c65f725e59b1ef89e03b560a519d3b011120657d7fd7afc492c6280711a72",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Vines_+00_+02_01": {
+      "sha256": "b718250ad8d9694aad0aa6266c66430b33c6e9d283621a999f6d3803cbd54e4b",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Vines_-01_+04_01": {
+      "sha256": "2a366c1fe85f5f2765ff9ee9ac79d689bcb687ae361b2c73531e7148c69b48d1",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Vines_-03_-01_01": {
+      "sha256": "2fbf60f5685ac7a13b25f38b8cd9aa5e2af38608b0c4b52f19eed2d66b4af2ec",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Vines_-04_+00_01": {
+      "sha256": "07cfa045093a345e1c9c2b92ce4be035393005ac95a65515b4743acda80a3dc7",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Vines_-04_+02_01": {
+      "sha256": "f195266904264eda9d11e1427eaae761e07d2e90011a685d7e2b6b855d541f47",
+      "vertices": 155,
+      "corners": 873,
+      "triangles": 291
+    },
+    "RA_Amber_Vines_-03_+02_01": {
+      "sha256": "e8d1d5b97c9ddb5ff68730cbe7b8702f7bc3b53da684519b9d93be38b91d0196",
+      "vertices": 488,
+      "corners": 2847,
+      "triangles": 949
+    },
+    "RA_Amber_Vines_-04_+03_01": {
+      "sha256": "053cba7d7045432c29c45905cbbaa504ab61c0d9be6df321f8ac1730080c48a7",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Vines_+02_+03_01": {
+      "sha256": "4964fc878a09757cc9056bbbb20d2fa7deda564810905c7a081cbab7a5c549f4",
+      "vertices": 252,
+      "corners": 1488,
+      "triangles": 496
+    },
+    "RA_Amber_Vines_+02_+02_01": {
+      "sha256": "3a64d743ac3229d7792b761c2b420beea8e13bac3432892e37c018fded5bf2fd",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Vines_+00_-01_01": {
+      "sha256": "b0a8da561aababcc2409f150057111361b537ab00f197e6385751e08352381a3",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Vines_+00_-02_01": {
+      "sha256": "0df4e967c2f46f3f7bf8f0676d320db49709af1a9e65ddc2e793444bcbce4233",
+      "vertices": 252,
+      "corners": 1488,
+      "triangles": 496
+    },
+    "RA_Amber_Vines_+02_+01_01": {
+      "sha256": "13c521c5db2709d80b286dcc7ef48abf196ac16ac0c2fb06f0e05bad3500c56b",
+      "vertices": 378,
+      "corners": 2232,
+      "triangles": 744
+    },
+    "RA_Amber_Vines_-02_+02_01": {
+      "sha256": "8d668d89c24de1e073dad2ea15d1499a119dc563a15b4ad2ed9f90011e56ba6b",
+      "vertices": 378,
+      "corners": 2232,
+      "triangles": 744
+    },
+    "RA_Amber_Vines_-03_+01_01": {
+      "sha256": "6cbbf50416851251c10830316c1fcddbb04ee1835e01e0af12e3b31a5afd98a3",
+      "vertices": 252,
+      "corners": 1488,
+      "triangles": 496
+    },
+    "RA_Amber_Vines_-04_+01_01": {
+      "sha256": "d92d202b9c8d6a895f65269c6758e6dfad6e16c5cf91e1c1464d50ff58767a1f",
+      "vertices": 126,
+      "corners": 744,
+      "triangles": 248
+    },
+    "RA_Amber_Rocks_+02_+02_01": {
+      "sha256": "23cfec7b909ea7b522e132753ec2367ace1d2b3dbc736c2e1cfaaa45062db789",
+      "vertices": 3152,
+      "corners": 14352,
+      "triangles": 4784
+    },
+    "RA_Amber_Rocks_+01_+02_01": {
+      "sha256": "768954f10968bab38460c187187b64312dad7e8e471cab3c8ad786f39c41f901",
+      "vertices": 36626,
+      "corners": 162459,
+      "triangles": 54153
+    },
+    "RA_Amber_Rocks_+01_+01_01": {
+      "sha256": "efd474ee9792f18ca69f8cbd2d9ade5c8bfc7757c42c15210912035b122a4723",
+      "vertices": 48396,
+      "corners": 214890,
+      "triangles": 71630
+    },
+    "RA_Amber_Rocks_+01_+00_01": {
+      "sha256": "2dbffcd56415b2ff32e21885f32637bfff593d8ec362181658c46178841a0da4",
+      "vertices": 46580,
+      "corners": 206892,
+      "triangles": 68964
+    },
+    "RA_Amber_Rocks_-01_-01_01": {
+      "sha256": "18b5d59607bd09aae6be2ddb3ba604c82c1ca9a82b5e61545e1a2fb76cca0b9d",
+      "vertices": 2045,
+      "corners": 9039,
+      "triangles": 3013
+    },
+    "RA_Amber_Rocks_-02_+00_01": {
+      "sha256": "0aaf06cb6ecb8ebdda4a84b448d61b3d8d7aa064f418bd7d91359f15ee4bbfd4",
+      "vertices": 6418,
+      "corners": 28464,
+      "triangles": 9488
+    },
+    "RA_Amber_Rocks_+00_+03_02": {
+      "sha256": "2d711ea732bb90b07674b4a66969862bc6f007a0b72c659b40ed96ab2e5d0eea",
+      "vertices": 28824,
+      "corners": 127233,
+      "triangles": 42411
+    },
+    "RA_Amber_Rocks_-03_+00_01": {
+      "sha256": "c4f129faec05b5c5362a07402cf8590bfde20e205d1810a2651e73b4efe90893",
+      "vertices": 5646,
+      "corners": 24972,
+      "triangles": 8324
+    },
+    "RA_Amber_Rocks_+00_+00_01": {
+      "sha256": "0eb65596ecfb24d8970cb6979c532d95f8aa625d79f057f24bd2faea15dab375",
+      "vertices": 11780,
+      "corners": 52104,
+      "triangles": 17368
+    },
+    "RA_Amber_Rocks_-01_+02_01": {
+      "sha256": "114deffefaecc9199bcb99fee3bd5aab5515c5b51e96171022fcb9c7eeaa8544",
+      "vertices": 6247,
+      "corners": 27498,
+      "triangles": 9166
+    },
+    "RA_Amber_Rocks_+00_-01_01": {
+      "sha256": "f931b5b4589b94dfaa6d9252b2fdcb4da18bb2b0d97828590795e4d3d2edfa7a",
+      "vertices": 1789,
+      "corners": 7998,
+      "triangles": 2666
+    },
+    "RA_Amber_Rocks_-03_-01_01": {
+      "sha256": "cefe4bd5c9fb8ec4bac4ca33c6aa986bbd88b9bfe598a525a241d3a18b19d653",
+      "vertices": 3108,
+      "corners": 13620,
+      "triangles": 4540
+    },
+    "RA_Amber_Rocks_-04_+00_01": {
+      "sha256": "8825eeb5a3c6934320c2a5d7ad77be90a77bbfb841afa5d0b4746612d9f79b9b",
+      "vertices": 1767,
+      "corners": 7572,
+      "triangles": 2524
+    },
+    "RA_Amber_Rocks_-04_-01_01": {
+      "sha256": "c4f71e735fb529f4580a0924f1a39e0b3b95e9a760fe91a00e87ee65a9f35547",
+      "vertices": 1368,
+      "corners": 5910,
+      "triangles": 1970
+    },
+    "RA_Amber_Rocks_-02_-01_01": {
+      "sha256": "aa959bf2e48fb02d69429bf309f54301af2a79528a44c8d67916cb2419b69f11",
+      "vertices": 2750,
+      "corners": 12105,
+      "triangles": 4035
+    },
+    "RA_Amber_Wood_+00_+03_01": {
+      "sha256": "1ad3ce98f999fe239f69cb8863f3d3af385087c124d547576c3689c2529409ce",
+      "vertices": 17031,
+      "corners": 81255,
+      "triangles": 27085
+    },
+    "RA_Amber_Wood_-02_-01_01": {
+      "sha256": "c9bcf8288ef8600dc11520cab4a2b9c4eb0286c65c7bebec3ca8b2d486478716",
+      "vertices": 2966,
+      "corners": 14208,
+      "triangles": 4736
+    },
+    "RA_Amber_Wood_+00_+01_01": {
+      "sha256": "f0de54768b64195ed214ede4b11873d9731faa0a6ad709c9aeadcc4602c02f60",
+      "vertices": 3466,
+      "corners": 16455,
+      "triangles": 5485
+    },
+    "RA_Amber_Wood_-03_+00_01": {
+      "sha256": "d63237c2e19948a3314c27e3dc81fa9227b7d39001d56642ebb07ddd76aa8cb0",
+      "vertices": 12396,
+      "corners": 56904,
+      "triangles": 18968
+    },
+    "RA_Amber_Wood_-02_+00_01": {
+      "sha256": "b369d21f55a9b98a0a1ab90a366e820f1c8f90b995500ac0f36c1a0ce60ae5d7",
+      "vertices": 7236,
+      "corners": 34608,
+      "triangles": 11536
+    },
+    "RA_Amber_Wood_-04_+00_01": {
+      "sha256": "68cf8878c55f79667d41011b988c812afa7063b53074fa0a9616a437686cb5e4",
+      "vertices": 3329,
+      "corners": 15537,
+      "triangles": 5179
+    },
+    "RA_Amber_Wood_-01_-01_01": {
+      "sha256": "efceb8781a2cbf479a55c416d54d3324104ef1fbda7c6dfe13fe910828ee7430",
+      "vertices": 11624,
+      "corners": 50784,
+      "triangles": 16928
+    },
+    "RA_Amber_Wood_-04_-01_01": {
+      "sha256": "d2778e9afd9b2a84a25285d459de3a1739529ae9795a214014f12472138c29eb",
+      "vertices": 2181,
+      "corners": 9840,
+      "triangles": 3280
+    },
+    "RA_Amber_Wood_+00_+00_01": {
+      "sha256": "dff60ac97e964bdc3c144de1924591430239ee887980cce32c07810bbeca0948",
+      "vertices": 15141,
+      "corners": 69867,
+      "triangles": 23289
+    },
+    "RA_Amber_Wood_+01_+00_01": {
+      "sha256": "4d7c6c7e76cbc8f11305170dc3304044f6cec7698695a2644ce1df9e3f496b68",
+      "vertices": 10940,
+      "corners": 52326,
+      "triangles": 17442
+    },
+    "RA_Amber_Wood_+01_+01_01": {
+      "sha256": "ba54832fff3f2203ad604fe83bd668a93519073934b1aaeeceb3a7f0afbffa4a",
+      "vertices": 4674,
+      "corners": 22368,
+      "triangles": 7456
+    },
+    "RA_Amber_Wood_+02_+03_01": {
+      "sha256": "6903183f493d9829b53062761c0220d8f768afe90b015082890e5a8f21b843e3",
+      "vertices": 1708,
+      "corners": 8160,
+      "triangles": 2720
+    },
+    "RA_Amber_Wood_-01_+02_01": {
+      "sha256": "aabe4db3934aeebc7064d14d0d983eb4a1a1440605254d5fcc0545baa47893e6",
+      "vertices": 4705,
+      "corners": 22326,
+      "triangles": 7442
+    },
+    "RA_Amber_Wood_-03_-01_01": {
+      "sha256": "c91d07117b859a4a5fc41c20e978bf06ddd4e00e27f52af446d2a16f9bc42169",
+      "vertices": 3886,
+      "corners": 18375,
+      "triangles": 6125
+    },
+    "RA_Amber_Wood_+02_+02_01": {
+      "sha256": "7e720f7053ecb0a50d8fd41036bf70302f79c3978871d9ed20bcd9af6b199068",
+      "vertices": 1459,
+      "corners": 6795,
+      "triangles": 2265
+    },
+    "RA_Amber_Rocks_+02_+00_01": {
+      "sha256": "8c488b1b4a9bd0b3e1b2a272abffdc804e547233ef556b79afb794f3b98da9b7",
+      "vertices": 13226,
+      "corners": 57951,
+      "triangles": 19317
+    },
+    "RA_Amber_Wood_+00_-01_01": {
+      "sha256": "60776f3667ad2bd6b041be01225aa7a975925d4993cd27d3f65913ce925a4d8d",
+      "vertices": 1584,
+      "corners": 7596,
+      "triangles": 2532
+    },
+    "RA_Amber_Wood_+01_-01_01": {
+      "sha256": "38466bda0ad3f197987f75576627352eb23dfc7f603b3aec751ffca7b45d7663",
+      "vertices": 528,
+      "corners": 2532,
+      "triangles": 844
+    },
+    "RA_Amber_Wood_+02_+00_01": {
+      "sha256": "a5c00f6ae7a36cf5d4e46876f6d22765888d2e0a3a36fe7567a07bb07b449919",
+      "vertices": 1642,
+      "corners": 7767,
+      "triangles": 2589
+    },
+    "RA_Amber_Wood_+01_+02_01": {
+      "sha256": "00baeb9788a6ab26f1ca675fa279701138c7fcb090a2e45b79769c23d61a6e63",
+      "vertices": 3040,
+      "corners": 14466,
+      "triangles": 4822
+    },
+    "RA_Amber_Wood_+01_+04_01": {
+      "sha256": "515d8a4ce7acc90fe5e8be323e584c62190a21c6ee9ed139b9cf1fcee100c50f",
+      "vertices": 528,
+      "corners": 2532,
+      "triangles": 844
+    },
+    "RA_Amber_Wood_+00_+04_01": {
+      "sha256": "fbdb107a5f3a6f9a13de1d0331bdf53dda10b7c0f45cc8d325a2f62beac4450b",
+      "vertices": 1910,
+      "corners": 9144,
+      "triangles": 3048
+    },
+    "RA_Amber_Wood_-01_+04_01": {
+      "sha256": "d675a5650fec9d509c875472f709abc8438bf829d13b802b5e770f6ae4922bda",
+      "vertices": 107,
+      "corners": 411,
+      "triangles": 137
+    },
+    "RA_Amber_Wood_-02_+03_01": {
+      "sha256": "5b88bdc94e45151cf776d07db13ca7cad7ea6c493dc9efb38bbeb84501107d1f",
+      "vertices": 1274,
+      "corners": 5973,
+      "triangles": 1991
+    },
+    "RA_Amber_Wood_-02_+02_01": {
+      "sha256": "d2e4014287946a4a0ae7d3ea43a1364c58f47bf205f8d73e9ef7db1404e7f6e4",
+      "vertices": 528,
+      "corners": 2532,
+      "triangles": 844
+    },
+    "RA_Amber_Wood_+02_-01_01": {
+      "sha256": "1839906ec5aaa1756500bf9cbdf373d18ac1a3aa73e87c308ab795cc2023e65c",
+      "vertices": 835,
+      "corners": 3909,
+      "triangles": 1303
+    },
+    "RA_Amber_Foliage_+02_-01_01": {
+      "sha256": "7ce56fd4f3792764b612387c9e303313cb57fb5fca7bfd4b3fa7e4ecb8d6769c",
+      "vertices": 4045,
+      "corners": 19143,
+      "triangles": 6381
+    }
+  },
+  "protected_sidecars": {
+    "amber_winds_route.json": "bc9dbb07fb6b87c0c14b8655684569fe4396fcc0a233c0e1262ebb1fa856936f",
+    "play_elevation.json": "79e41bd70b9600d592e0df83a1c4d10dccd726714b6405ab329e0b9669ef11d6",
+    "ground_elevation.json": "79e41bd70b9600d592e0df83a1c4d10dccd726714b6405ab329e0b9669ef11d6",
+    "cloud_steps.json": "8805ba0102a7d4159b0e4b640474a385c909d197f4dda5ec4502dc9c5a529ddf",
+    "RooftopMotion.json": "7cedcc17033ce19f1fdcd70dc2ec9fd7e8f83f9a6b7a19504cbb90c40232e976"
+  }
+}

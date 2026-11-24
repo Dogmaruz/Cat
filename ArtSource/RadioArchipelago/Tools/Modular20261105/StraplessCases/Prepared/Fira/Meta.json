@@ -1,0 +1,90 @@
+{
+  "id": "Fira",
+  "kind": "Backpack",
+  "frame": "Blender Z-up / face -Y; FBX -Z-forward Y-up",
+  "fixedMeshName": "Case",
+  "movableMeshName": "TopRotor",
+  "topPivotName": "TopPivot",
+  "caseBoundsMin": [
+    -0.4999999701976776,
+    -0.18995223939418793,
+    0.0
+  ],
+  "caseBoundsMax": [
+    0.4999999701976776,
+    0.18995223939418793,
+    0.9698185920715332
+  ],
+  "fixedBoundsMin": [
+    -0.4699999988079071,
+    -0.18424497544765472,
+    0.002881322056055069
+  ],
+  "fixedBoundsMax": [
+    0.4699999988079071,
+    0.18995223939418793,
+    1.0128549337387085
+  ],
+  "contactPlaneY": -0.18424498061694375,
+  "rawToPreparedScale": 0.7082901642995028,
+  "referenceBodyWidth": 1.0,
+  "referenceBodyDepth": 0.5,
+  "topPivot": [
+    -0.00435272790491581,
+    -0.013832568190991879,
+    1.0128549337387085
+  ],
+  "topPivotUnity": [
+    -0.00435272790491581,
+    1.0128549337387085,
+    0.013832568190991879
+  ],
+  "spinAxisUnity": [
+    0,
+    1,
+    0
+  ],
+  "source": {
+    "vertices": 12540,
+    "polygons": 12607,
+    "triangles": 25178
+  },
+  "outputTriangles": {
+    "Case": 5057,
+    "TopRotor": 2716
+  },
+  "repairs": {
+    "localizedSpindleCutEdges": 38,
+    "rotorCaps": {
+      "sealedBoundaryEdges": 38,
+      "newCapFaces": 4
+    },
+    "caseCaps": {
+      "sealedBoundaryEdges": 154,
+      "newCapFaces": 4
+    },
+    "leftHarnessCaps": {
+      "sealedBoundaryEdges": 70,
+      "newCapFaces": 2
+    },
+    "rightHarnessCaps": {
+      "sealedBoundaryEdges": 71,
+      "newCapFaces": 2
+    },
+    "horizontalBearing": null,
+    "straplessCase20261105": {
+      "caseFacesBefore": 5711,
+      "caseFacesAfter": 2917,
+      "bodyContactPlaneY": -0.18424498061694375,
+      "trimPlaneY": 0.1,
+      "newCleanCapTriangles": 1,
+      "plainPadUv": [
+        0.4930424392223358,
+        0.4625018239021301
+      ]
+    }
+  },
+  "sourceArchiveSha256": "9add11d2605a3dd58d5394a11279219fd26b2650094c36418ae27e4d3f5a44dc",
+  "clearanceToCaseBody": 0.04303634166717529,
+  "validatedRevolutionSamples": 72
+}

@@ -1,0 +1,90 @@
+{
+  "id": "Soli",
+  "kind": "Backpack",
+  "frame": "Blender Z-up / face -Y; FBX -Z-forward Y-up",
+  "fixedMeshName": "Case",
+  "movableMeshName": "TopRotor",
+  "topPivotName": "TopPivot",
+  "caseBoundsMin": [
+    -0.499946653842926,
+    -0.21371255815029144,
+    0.00016807120118755847
+  ],
+  "caseBoundsMax": [
+    0.5000181198120117,
+    0.2135961949825287,
+    0.9553608298301697
+  ],
+  "fixedBoundsMin": [
+    -0.49315375089645386,
+    -0.20638906955718994,
+    0.003771762363612652
+  ],
+  "fixedBoundsMax": [
+    0.49301639199256897,
+    0.2135961949825287,
+    1.117228627204895
+  ],
+  "contactPlaneY": -0.20638907157458355,
+  "rawToPreparedScale": 0.7704769630491777,
+  "referenceBodyWidth": 1.0,
+  "referenceBodyDepth": 0.5,
+  "topPivot": [
+    0.02610878087580204,
+    -0.004705579951405525,
+    1.1171915531158447
+  ],
+  "topPivotUnity": [
+    0.02610878087580204,
+    1.1171915531158447,
+    0.004705579951405525
+  ],
+  "spinAxisUnity": [
+    0,
+    1,
+    0
+  ],
+  "source": {
+    "vertices": 48582,
+    "polygons": 48530,
+    "triangles": 96997
+  },
+  "outputTriangles": {
+    "Case": 8409,
+    "TopRotor": 6000
+  },
+  "repairs": {
+    "localizedSpindleCutEdges": 108,
+    "rotorCaps": {
+      "sealedBoundaryEdges": 77,
+      "newCapFaces": 1
+    },
+    "caseCaps": {
+      "sealedBoundaryEdges": 326,
+      "newCapFaces": 4
+    },
+    "leftHarnessCaps": {
+      "sealedBoundaryEdges": 104,
+      "newCapFaces": 2
+    },
+    "rightHarnessCaps": {
+      "sealedBoundaryEdges": 118,
+      "newCapFaces": 2
+    },
+    "horizontalBearing": null,
+    "straplessCase20261105": {
+      "caseFacesBefore": 17992,
+      "caseFacesAfter": 8284,
+      "bodyContactPlaneY": -0.20638907157458355,
+      "trimPlaneY": 0.1,
+      "newCleanCapTriangles": 4,
+      "plainPadUv": [
+        0.2126399129629135,
+        0.6382404565811157
+      ]
+    }
+  },
+  "sourceArchiveSha256": "724bf35fece7ec5d0e5e8141f7634b283a14a8e06aecc39aa15fe93bcb20e4f4",
+  "clearanceToCaseBody": 0.16182416677474976,
+  "validatedRevolutionSamples": 72
+}

@@ -1,0 +1,161 @@
+{
+  "schema": "radio_archipelago_organic_cobblestones/2",
+  "pass_geometry": true,
+  "pass_roundtrip": true,
+  "algorithm": "Periodic variable-radius Poisson sampling, weighted power Voronoi clipping, restrained centroid relaxation, local cell splitting and compact joint insets",
+  "stone_count": 14098,
+  "poisson_sites": 13416,
+  "geometry_families": {
+    "round": 2225,
+    "squat": 2244,
+    "long_oblong": 2914,
+    "worn_triangle": 2233,
+    "irregular": 2239,
+    "wide_flat": 2243
+  },
+  "orientation_bins_15_degrees": {
+    "6": 1090,
+    "4": 1083,
+    "9": 1078,
+    "1": 1248,
+    "5": 1113,
+    "2": 1103,
+    "8": 1116,
+    "10": 1245,
+    "0": 1437,
+    "3": 1046,
+    "11": 1455,
+    "7": 1084
+  },
+  "length_quantiles": [
+    0.13830800482662395,
+    0.39016114188812684,
+    0.5439113342278444,
+    0.724734154562908,
+    0.8931306337574327
+  ],
+  "width_quantiles": [
+    0.11856975532714246,
+    0.2749737703008415,
+    0.4015968128445937,
+    0.6030070758386287,
+    0.8746301984012168
+  ],
+  "area_quantiles": [
+    0.014436732757538293,
+    0.07836627018765459,
+    0.15812812261191883,
+    0.29822740648849555,
+    0.47580328307112196
+  ],
+  "joint_inset_range": [
+    0.015,
+    0.03
+  ],
+  "bevel_rings": 3,
+  "source_route_points": 644,
+  "closed_periodic_lap": true,
+  "road_width": 6,
+  "route_length": 514.9264126903334,
+  "mortar_bed_height": 0.002,
+  "before": {
+    "meshes": 28,
+    "vertices": 441210,
+    "triangles": 824740,
+    "colored_meshes": 28,
+    "duplicate_triangles": 0,
+    "zero_corner_normals": 0,
+    "max_normal_unit_error": 1.7881393432617188e-07,
+    "min_triangle_area": 2.23447732423665e-05,
+    "min_z": -0.023047063499689102,
+    "max_z": 0.1359889805316925,
+    "linear_color_min": 0.06838485598564148,
+    "linear_color_max": 0.2913004159927368
+  },
+  "after": {
+    "meshes": 28,
+    "vertices": 441210,
+    "triangles": 824740,
+    "colored_meshes": 28,
+    "duplicate_triangles": 0,
+    "zero_corner_normals": 0,
+    "max_normal_unit_error": 1.7881393432617188e-07,
+    "min_triangle_area": 2.23447732423665e-05,
+    "min_z": -0.023042787072526303,
+    "max_z": 0.1359931056698671,
+    "linear_color_min": 0.06838485598564148,
+    "linear_color_max": 0.2913004159927368
+  },
+  "anchors": [
+    {
+      "name": "RA_Origin",
+      "blender": [
+        0,
+        0,
+        0
+      ],
+      "expected_aligned_unity": [
+        0,
+        0,
+        0
+      ],
+      "roundtrip_blender": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "error": 0.0
+    },
+    {
+      "name": "RA_X10",
+      "blender": [
+        10,
+        0,
+        0
+      ],
+      "expected_aligned_unity": [
+        10,
+        0,
+        0
+      ],
+      "roundtrip_blender": [
+        10.0,
+        0.0,
+        0.0
+      ],
+      "error": 0.0
+    },
+    {
+      "name": "RA_North10",
+      "blender": [
+        0,
+        10,
+        0
+      ],
+      "expected_aligned_unity": [
+        0,
+        0,
+        -10
+      ],
+      "roundtrip_blender": [
+        0.0,
+        10.0,
+        -7.549789984295785e-07
+      ],
+      "error": 7.549789984295785e-07
+    }
+  ],
+  "material_name": "RA_Emerald_Road",
+  "vertex_color_space": "linear",
+  "disable_metric_brick_shader": true,
+  "fbx_file": "emerald_cobbles_v2.fbx",
+  "fbx_sha256": "7154de0b03a16928c5bc90ad9e7c1d0dd2c9c3997090001e2062d43bf6933f0d",
+  "fbx_bytes": 18025356,
+  "unity_runtime_test_performed": false,
+  "preview_files": [
+    "emerald_cobbles_v2_top.png",
+    "emerald_cobbles_v2_angle.png"
+  ],
+  "frozen_inputs_unchanged": true,
+  "elapsed_seconds": 37.92
+}

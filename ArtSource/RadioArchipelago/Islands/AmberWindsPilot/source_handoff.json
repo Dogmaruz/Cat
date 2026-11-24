@@ -1,0 +1,516 @@
+{
+  "status": "source_contract_verified",
+  "route_length": 774.9949559387511,
+  "route_minimum_radius": 21.972487771941534,
+  "exact_final_straight_start": 662,
+  "flat_finish_start": 640,
+  "files": {
+    "amber_winds_island.fbx": {
+      "bytes": 115722172,
+      "sha256": "c5656b305295a74bffc93d0428b111a95e6768e0ef42b9cd956ec612ac88fc3a"
+    },
+    "amber_winds_route.json": {
+      "bytes": 123898,
+      "sha256": "bc9dbb07fb6b87c0c14b8655684569fe4396fcc0a233c0e1262ebb1fa856936f"
+    },
+    "cloud_steps.json": {
+      "bytes": 233,
+      "sha256": "8805ba0102a7d4159b0e4b640474a385c909d197f4dda5ec4502dc9c5a529ddf"
+    },
+    "ground_elevation.json": {
+      "bytes": 109783,
+      "sha256": "79e41bd70b9600d592e0df83a1c4d10dccd726714b6405ab329e0b9669ef11d6"
+    },
+    "play_elevation.json": {
+      "bytes": 109783,
+      "sha256": "79e41bd70b9600d592e0df83a1c4d10dccd726714b6405ab329e0b9669ef11d6"
+    },
+    "RooftopMotion.json": {
+      "bytes": 1884,
+      "sha256": "7cedcc17033ce19f1fdcd70dc2ec9fd7e8f83f9a6b7a19504cbb90c40232e976"
+    }
+  },
+  "source_profiles": "Blender(x,y,z) -> aligned Unity(x,z,-y)",
+  "cloud_windows": [
+    {
+      "x": 451.0,
+      "y": 478.5
+    },
+    {
+      "x": 490.5,
+      "y": 516.0
+    },
+    {
+      "x": 528.25,
+      "y": 554.75
+    },
+    {
+      "x": 566.5,
+      "y": 589.5
+    }
+  ],
+  "rotating_mills": 3,
+  "min_full_sweep_route_clearance": 12.131863318542042,
+  "source_structure_vertex_minimum_distance": 10.524773597717285,
+  "canyon_intruding_shell_faces": 0,
+  "upper_creek_fall_seam": {
+    "id": "R3_canyon",
+    "stream_node": "Amber_DownstreamCreek_1",
+    "fall_node": "Amber_VoluminousFallingWater_1_0",
+    "stream_downstream_uv_metres": 53.113525390625,
+    "curtain_top_uv_metres": 53.113525390625,
+    "uv_v_delta_metres": 0.0,
+    "u0_position_error": 0.0,
+    "u1_position_error": 0.0,
+    "width_error": 0.0,
+    "longitudinal_error": 4.0531158447265625e-06,
+    "height_error": 0.0,
+    "v_increases_downward": true,
+    "layer_v_origin_deltas": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "layer_u_orientation_aligned": [
+      true,
+      true,
+      true
+    ]
+  },
+  "water_seams": [
+    {
+      "id": "lower",
+      "stream_node": "Amber_DownstreamCreek_0",
+      "fall_node": "Amber_VoluminousFallingWater_0_0",
+      "stream_downstream_uv_metres": 36.018428802490234,
+      "curtain_top_uv_metres": 36.018428802490234,
+      "uv_v_delta_metres": 0.0,
+      "u0_position_error": 0.0,
+      "u1_position_error": 0.0,
+      "width_error": 0.0,
+      "longitudinal_error": 7.271766662597656e-06,
+      "height_error": 0.0,
+      "v_increases_downward": true,
+      "layer_v_origin_deltas": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "layer_u_orientation_aligned": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "R3_canyon",
+      "stream_node": "Amber_DownstreamCreek_1",
+      "fall_node": "Amber_VoluminousFallingWater_1_0",
+      "stream_downstream_uv_metres": 53.113525390625,
+      "curtain_top_uv_metres": 53.113525390625,
+      "uv_v_delta_metres": 0.0,
+      "u0_position_error": 0.0,
+      "u1_position_error": 0.0,
+      "width_error": 0.0,
+      "longitudinal_error": 4.0531158447265625e-06,
+      "height_error": 0.0,
+      "v_increases_downward": true,
+      "layer_v_origin_deltas": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "layer_u_orientation_aligned": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "raised_side",
+      "stream_node": "RA_Amber_SideCascade_RaisedStreamAndRoll",
+      "fall_node": "RA_Amber_SideCascade_RaisedFall_Layer0",
+      "stream_downstream_uv_metres": 10.356194496154785,
+      "curtain_top_uv_metres": 10.356194496154785,
+      "uv_v_delta_metres": 0.0,
+      "u0_position_error": 0.0,
+      "u1_position_error": 0.0,
+      "width_error": 0.0,
+      "longitudinal_error": 0.0,
+      "height_error": 0.0,
+      "v_increases_downward": true,
+      "layer_v_origin_deltas": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "layer_u_orientation_aligned": [
+        true,
+        true,
+        true
+      ]
+    }
+  ],
+  "water_seam_shading": [
+    {
+      "id": "lower",
+      "comparisons": [
+        {
+          "u": 0,
+          "normal_dot": 1.0000000372491897,
+          "normal_unity_y_stream": -5.670549398928415e-07,
+          "normal_unity_y_fall": 6.548391411342891e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.844384073399806e-06
+        },
+        {
+          "u": 0.25,
+          "normal_dot": 1.000000037252944,
+          "normal_unity_y_stream": 1.0476975376150222e-07,
+          "normal_unity_y_fall": 3.9301812648773193e-07,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.814697265625e-06
+        },
+        {
+          "u": 0.5,
+          "normal_dot": 1.0000000596051384,
+          "normal_unity_y_stream": -1.8003026980295544e-07,
+          "normal_unity_y_fall": -2.741813887041644e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.816559456248789e-06
+        },
+        {
+          "u": 0.75,
+          "normal_dot": 1.0000000447028004,
+          "normal_unity_y_stream": -4.371138828673793e-08,
+          "normal_unity_y_fall": 1.563225123391021e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.962700400017419e-06
+        },
+        {
+          "u": 1,
+          "normal_dot": 1.0000000298022347,
+          "normal_unity_y_stream": -4.371138828673793e-08,
+          "normal_unity_y_fall": 2.007465809583664e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.816559456248789e-06
+        }
+      ],
+      "layers": [
+        {
+          "node": "Amber_VoluminousFallingWater_0_0",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.0000000596051384,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "Amber_VoluminousFallingWater_0_1",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.0000000372481808,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "Amber_VoluminousFallingWater_0_2",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.000000089408574,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        }
+      ],
+      "max_displaced_gap": 3.962700400017419e-06
+    },
+    {
+      "id": "R3_canyon",
+      "comparisons": [
+        {
+          "u": 0,
+          "normal_dot": 0.9999999106533323,
+          "normal_unity_y_stream": 3.4198160392406862e-06,
+          "normal_unity_y_fall": 1.7632350136409514e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 9.5367431640625e-07
+        },
+        {
+          "u": 0.25,
+          "normal_dot": 1.0000000900968762,
+          "normal_unity_y_stream": 2.5063753128051758e-05,
+          "normal_unity_y_fall": 2.7526170015335083e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 9.5367431640625e-07
+        },
+        {
+          "u": 0.5,
+          "normal_dot": 0.9999999701272684,
+          "normal_unity_y_stream": 3.53194736817386e-05,
+          "normal_unity_y_fall": -1.9934959709644318e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 0.75,
+          "normal_dot": 0.9999999997843624,
+          "normal_unity_y_stream": 2.638622754602693e-05,
+          "normal_unity_y_fall": -8.172356501745526e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 2.86102294921875e-06
+        },
+        {
+          "u": 1,
+          "normal_dot": 1.0000000597693615,
+          "normal_unity_y_stream": 1.2513744877651334e-05,
+          "normal_unity_y_fall": 1.3162849427317269e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 9.5367431640625e-07
+        }
+      ],
+      "layers": [
+        {
+          "node": "Amber_VoluminousFallingWater_1_0",
+          "has_custom_normals": true,
+          "centre_normal_dot": 0.9999999701272684,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "Amber_VoluminousFallingWater_1_1",
+          "has_custom_normals": true,
+          "centre_normal_dot": 0.9999999402498001,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "Amber_VoluminousFallingWater_1_2",
+          "has_custom_normals": true,
+          "centre_normal_dot": 0.9999999703657322,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        }
+      ],
+      "max_displaced_gap": 2.86102294921875e-06
+    },
+    {
+      "id": "raised_side",
+      "comparisons": [
+        {
+          "u": 0,
+          "normal_dot": 1.0000000008173937,
+          "normal_unity_y_stream": 3.519282108754851e-05,
+          "normal_unity_y_fall": 2.3539632820757106e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 0.25,
+          "normal_dot": 1.000000000438239,
+          "normal_unity_y_stream": 3.480166560621001e-05,
+          "normal_unity_y_fall": 1.2524425983428955e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 0.5,
+          "normal_dot": 0.9999999997568578,
+          "normal_unity_y_stream": 3.477186328382231e-05,
+          "normal_unity_y_fall": -6.916002348589245e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 0.75,
+          "normal_dot": 1.0000000004450234,
+          "normal_unity_y_stream": 3.5721808671951294e-05,
+          "normal_unity_y_fall": 1.2524425983428955e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 1,
+          "normal_dot": 1.0000000007327556,
+          "normal_unity_y_stream": 3.436952829360962e-05,
+          "normal_unity_y_fall": 2.3546162992715836e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 0.0
+        }
+      ],
+      "layers": [
+        {
+          "node": "RA_Amber_SideCascade_RaisedFall_Layer0",
+          "has_custom_normals": true,
+          "centre_normal_dot": 0.9999999997568578,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "RA_Amber_SideCascade_RaisedFall_Layer1",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.0000000000034595,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "RA_Amber_SideCascade_RaisedFall_Layer2",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.0000000005765548,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        }
+      ],
+      "max_displaced_gap": 1.9073486328125e-06
+    }
+  ],
+  "fbx_custom_normal_max_displaced_gap": 1.5260651593976268e-05,
+  "side_cascade": {
+    "id": "raised_side_cascade",
+    "explicit_water_node_prefix": "RA_Amber_SideCascade_",
+    "source": {
+      "top": [
+        47,
+        96,
+        28
+      ],
+      "curtainTop": [
+        48.5,
+        96.0,
+        26.5
+      ],
+      "mid": [
+        49,
+        96,
+        20
+      ],
+      "base": [
+        49.05,
+        96,
+        12
+      ],
+      "width": 4.2,
+      "drop": 16,
+      "flowUv": "U across0..1,V continuous downstream metres through roll into curtain",
+      "rollRadius": 1.5
+    },
+    "unity": {
+      "top": [
+        47,
+        28,
+        -96
+      ],
+      "mid": [
+        49,
+        20,
+        -96
+      ],
+      "base": [
+        49.05,
+        12,
+        -96
+      ]
+    },
+    "native_camera_stations": [
+      155,
+      170,
+      185
+    ],
+    "basin_stones": 48,
+    "removed_local_decor_objects": 23,
+    "minimum_all_feature_vertex_route_distance": 13.735362413377782,
+    "bounds_source": [
+      [
+        21.54261589050293,
+        84.19737243652344,
+        10.799914360046387
+      ],
+      [
+        52.833831787109375,
+        114.38372039794922,
+        35.20000076293945
+      ]
+    ],
+    "preserve_route": true
+  },
+  "preserved_gameplay_contracts": {
+    "amber_winds_route.json": "bc9dbb07fb6b87c0c14b8655684569fe4396fcc0a233c0e1262ebb1fa856936f",
+    "play_elevation.json": "79e41bd70b9600d592e0df83a1c4d10dccd726714b6405ab329e0b9669ef11d6",
+    "ground_elevation.json": "79e41bd70b9600d592e0df83a1c4d10dccd726714b6405ab329e0b9669ef11d6",
+    "cloud_steps.json": "8805ba0102a7d4159b0e4b640474a385c909d197f4dda5ec4502dc9c5a529ddf",
+    "RooftopMotion.json": "7cedcc17033ce19f1fdcd70dc2ec9fd7e8f83f9a6b7a19504cbb90c40232e976"
+  },
+  "autumn_tree_count": 74,
+  "autumn_foreground_dressing": {
+    "low_patches": 1189,
+    "low_blades": 27408,
+    "shrubs": 73,
+    "approach_canopies": 14,
+    "max_low_cover_height": 0.56
+  },
+  "shoreline_stones": 197,
+  "stone_shape_variants": 7,
+  "source_portrait_camera": {
+    "back": 9.5,
+    "height": 8,
+    "lookAhead": 3.8,
+    "focusHeight": 3.6,
+    "verticalFov": 82,
+    "stations": [
+      155,
+      170,
+      185,
+      210
+    ]
+  },
+  "proofs": {
+    "gameplay-155.png": "9bf7b36b6f403b6a04a3e03120a918dcad54231cd7a788c89ef21fea501f6e5a",
+    "gameplay-170.png": "f42eadc2445e8de10184ee64253f5160fc2798d40a924589dd58bc071d8b3cb6",
+    "gameplay-185.png": "1a312be058a071dea5c243fc458cc167036fc03e36422ca7d9b9f6b44d8fbada",
+    "gameplay-210.png": "ce4288c4336320457f73003f24470475cdda2d39b70ef3b4dc65349fcea0bb84"
+  },
+  "historical_source_composition_proofs": {
+    "gameplay-172.png": "442d621cf24e9e5d1c5d72a877e55e49fac08aba438b2f814b28452f6f27a290",
+    "gameplay-200.png": "2d477c55a534ae9bdea8cc175a213923761d1e3214d39fde5280a76532d38fc1",
+    "gameplay-244.png": "7410157e2db60760bcd6c4a56ef381838aa19f738a07ddfa2328e40b1a89fd9f",
+    "gameplay-272.png": "f7943b075d9e73973b9d09c6584822ec299c702263b262d94cb880b455944237",
+    "gameplay-58.png": "cc7438302f05c5b2fd4629df06c1cbee4e15c49c0438e6ab475ceb7d8e11e882",
+    "overview.png": "e87d59eea978ccb57830ded9304fd61ae28cc51c243aa9ba5b66179c8b3c9e6b",
+    "shore.png": "fbb5808a9b2e74df8cff1ce26ed4dcc3228989c14dc1ec60c8051a58455a93e8",
+    "top.png": "d8fa38778c4fbe93f1780301d24a9e6aaa4d2575f7bc942313ac2f8620eb2ad0",
+    "windmill.png": "ea3c2cdd33eda43e78237116ece29f189718cc5807a74e59a060fd61c59eb0bc"
+  },
+  "proof_note": "155/170/185/210 show final geometry before shading-only correction; all positions/UVs are unchanged. Revised normals/colors require native recapture. Other views preserve earlier composition studies.",
+  "preserved_original_fbxs": {
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\EmeraldAbyss\\emerald_abyss_island.fbx": "82b58962e8f81b165e3192a32bbe1af81852ca3b2804870824ae0f4b6df32bdd",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\CoralOasis\\coral_oasis_island.fbx": "6fb98555cb33402282d55f41eeb7e064c4d812d72083a999d85d7c478c9da7b2",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\MoonResonance\\moon_resonance_island.fbx": "c2407e489e3ec0e85322e66897e8379f3828b143d09111781df8944fc38912be"
+  },
+  "native_status": "Await Unity import, native swept geometry checks, and actual Play Mode review; source images are not runtime proof."
+}

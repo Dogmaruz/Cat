@@ -1,0 +1,921 @@
+{
+  "schema": "radio_archipelago_v3_building_center_plan/1",
+  "pass": true,
+  "road_width": 8,
+  "shoulder_each_side": 2,
+  "protected_corridor_width": 12,
+  "distance_method": "exact nearest point on each segment of actual resampled road and shoreline",
+  "unity_tested": false,
+  "mesh_extent_validation_performed": false,
+  "limits": "Centers preserve specified constraints. Final transformed building/terrace meshes must still pass swept-corridor validation. Z/foundation height must be derived from actual terrain height_at.",
+  "worlds": [
+    {
+      "id": "01_emerald_ravine",
+      "title": "Изумрудное ущелье",
+      "feasible": true,
+      "requested_kinds": [
+        "forest_house",
+        "forest_house",
+        "forest_workshop"
+      ],
+      "attempts": [
+        {
+          "grid_step": 4,
+          "normal_candidates": 88,
+          "compact_candidates": 299,
+          "score": 35.326385698363076,
+          "search_exhausted": true,
+          "visited_nodes": 39237,
+          "feasible_unlabelled_layouts": 36465,
+          "search_seconds": 0.156
+        }
+      ],
+      "buildings": [
+        {
+          "kind": "forest_house",
+          "center_xy": [
+            56,
+            13
+          ],
+          "road_centerline_distance": 23.006231,
+          "shore_distance": 33.396735,
+          "protected_corridor_center_margin": 17.006231,
+          "nearest_route_xy": [
+            77.24558539578253,
+            4.173234919696044
+          ],
+          "yaw_toward_actual_route": 1.1770308358090882,
+          "nearest_other_building_center": 105.905618
+        },
+        {
+          "kind": "forest_house",
+          "center_xy": [
+            -56,
+            29
+          ],
+          "road_centerline_distance": 21.415778,
+          "shore_distance": 18.149772,
+          "protected_corridor_center_margin": 15.415778,
+          "nearest_route_xy": [
+            -35.04800623439763,
+            33.43277773561017
+          ],
+          "yaw_toward_actual_route": 1.7792901069351605,
+          "nearest_other_building_center": 36.878178
+        },
+        {
+          "kind": "forest_workshop",
+          "center_xy": [
+            -48,
+            -7
+          ],
+          "road_centerline_distance": 20.120164,
+          "shore_distance": 14.590241,
+          "protected_corridor_center_margin": 14.120164,
+          "nearest_route_xy": [
+            -41.87779003469093,
+            -26.166103992771014
+          ],
+          "yaw_toward_actual_route": 0.3091849231459039,
+          "nearest_other_building_center": 36.878178
+        }
+      ],
+      "normal_constraints": {
+        "road_distance_gt": 20,
+        "shore_distance_gt": 13,
+        "normal_center_distance_gt": 24
+      },
+      "compact_constraints": {
+        "road_distance_gt": 14,
+        "shore_distance_gt": 8,
+        "normal_center_distance_gt": 23
+      }
+    },
+    {
+      "id": "02_coral_oasis",
+      "title": "Коралловый оазис",
+      "feasible": true,
+      "requested_kinds": [
+        "adobe_house",
+        "adobe_house",
+        "adobe_tower"
+      ],
+      "attempts": [
+        {
+          "grid_step": 4,
+          "normal_candidates": 159,
+          "compact_candidates": 423,
+          "score": -1.6362571393021867,
+          "search_exhausted": true,
+          "visited_nodes": 312261,
+          "feasible_unlabelled_layouts": 302309,
+          "search_seconds": 1.406
+        }
+      ],
+      "buildings": [
+        {
+          "kind": "adobe_house",
+          "center_xy": [
+            9,
+            35
+          ],
+          "road_centerline_distance": 28.800555,
+          "shore_distance": 40.860718,
+          "protected_corridor_center_margin": 22.800555,
+          "nearest_route_xy": [
+            31.81503799342472,
+            17.423140244159587
+          ],
+          "yaw_toward_actual_route": 0.914362293814615,
+          "nearest_other_building_center": 78.790862
+        },
+        {
+          "kind": "adobe_house",
+          "center_xy": [
+            41,
+            -37
+          ],
+          "road_centerline_distance": 23.828931,
+          "shore_distance": 16.385911,
+          "protected_corridor_center_margin": 17.828931,
+          "nearest_route_xy": [
+            20.66759214676014,
+            -24.573772424239056
+          ],
+          "yaw_toward_actual_route": -2.1193767832585317,
+          "nearest_other_building_center": 78.790862
+        },
+        {
+          "kind": "adobe_tower",
+          "center_xy": [
+            -51,
+            -37
+          ],
+          "road_centerline_distance": 21.937222,
+          "shore_distance": 16.165862,
+          "protected_corridor_center_margin": 15.937222,
+          "nearest_route_xy": [
+            -33.051424751807005,
+            -24.386897887024528
+          ],
+          "yaw_toward_actual_route": 2.183355880272669,
+          "nearest_other_building_center": 92.0
+        }
+      ],
+      "normal_constraints": {
+        "road_distance_gt": 20,
+        "shore_distance_gt": 13,
+        "normal_center_distance_gt": 24
+      },
+      "compact_constraints": {
+        "road_distance_gt": 14,
+        "shore_distance_gt": 8,
+        "normal_center_distance_gt": 23
+      }
+    },
+    {
+      "id": "03_amethyst_grotto",
+      "title": "Аметистовый грот",
+      "feasible": true,
+      "requested_kinds": [
+        "crystal_workshop",
+        "crystal_house",
+        "crystal_house"
+      ],
+      "attempts": [
+        {
+          "grid_step": 4,
+          "normal_candidates": 42,
+          "compact_candidates": 185,
+          "score": null,
+          "search_exhausted": true,
+          "visited_nodes": 475,
+          "feasible_unlabelled_layouts": 0,
+          "search_seconds": 0.0
+        },
+        {
+          "grid_step": 2,
+          "normal_candidates": 172,
+          "compact_candidates": 729,
+          "score": 71.70275445991325,
+          "search_exhausted": true,
+          "visited_nodes": 9614,
+          "feasible_unlabelled_layouts": 2166,
+          "search_seconds": 0.016
+        }
+      ],
+      "buildings": [
+        {
+          "kind": "crystal_workshop",
+          "center_xy": [
+            -1,
+            -44
+          ],
+          "road_centerline_distance": 23.059472,
+          "shore_distance": 21.90385,
+          "protected_corridor_center_margin": 17.059472,
+          "nearest_route_xy": [
+            16.517554042717656,
+            -29.00418236374491
+          ],
+          "yaw_toward_actual_route": 2.2787894748046704,
+          "nearest_other_building_center": 60.166436
+        },
+        {
+          "kind": "crystal_house",
+          "center_xy": [
+            -17,
+            14
+          ],
+          "road_centerline_distance": 20.241739,
+          "shore_distance": 49.089855,
+          "protected_corridor_center_margin": 14.241739,
+          "nearest_route_xy": [
+            -33.007615672420044,
+            1.611124238905493
+          ],
+          "yaw_toward_actual_route": -0.9121511179354245,
+          "nearest_other_building_center": 24.083189
+        },
+        {
+          "kind": "crystal_house",
+          "center_xy": [
+            7,
+            16
+          ],
+          "road_centerline_distance": 20.008217,
+          "shore_distance": 55.943169,
+          "protected_corridor_center_margin": 14.008217,
+          "nearest_route_xy": [
+            24.865746251191954,
+            6.992012178735106
+          ],
+          "yaw_toward_actual_route": 1.1037908596869346,
+          "nearest_other_building_center": 24.083189
+        }
+      ],
+      "normal_constraints": {
+        "road_distance_gt": 20,
+        "shore_distance_gt": 13,
+        "normal_center_distance_gt": 24
+      },
+      "compact_constraints": {
+        "road_distance_gt": 14,
+        "shore_distance_gt": 8,
+        "normal_center_distance_gt": 23
+      }
+    },
+    {
+      "id": "04_autumn_windmills",
+      "title": "Осенние ветряные холмы",
+      "feasible": true,
+      "requested_kinds": [
+        "autumn_house",
+        "autumn_workshop",
+        "autumn_windmill"
+      ],
+      "attempts": [
+        {
+          "grid_step": 4,
+          "normal_candidates": 207,
+          "compact_candidates": 430,
+          "score": 0.48690243520192933,
+          "search_exhausted": true,
+          "visited_nodes": 571909,
+          "feasible_unlabelled_layouts": 556076,
+          "search_seconds": 2.625
+        }
+      ],
+      "buildings": [
+        {
+          "kind": "autumn_house",
+          "center_xy": [
+            49,
+            20
+          ],
+          "road_centerline_distance": 35.120437,
+          "shore_distance": 22.748374,
+          "protected_corridor_center_margin": 29.120437,
+          "nearest_route_xy": [
+            30.61715084849802,
+            -9.925173014108012
+          ],
+          "yaw_toward_actual_route": -0.5508634269666933,
+          "nearest_other_building_center": 57.271284
+        },
+        {
+          "kind": "autumn_workshop",
+          "center_xy": [
+            -7,
+            48
+          ],
+          "road_centerline_distance": 22.31529,
+          "shore_distance": 16.081801,
+          "protected_corridor_center_margin": 16.31529,
+          "nearest_route_xy": [
+            -23.275277732499738,
+            32.73279648975064
+          ],
+          "yaw_toward_actual_route": -0.8173465447252783,
+          "nearest_other_building_center": 62.609903
+        },
+        {
+          "kind": "autumn_windmill",
+          "center_xy": [
+            61,
+            -36
+          ],
+          "road_centerline_distance": 20.710597,
+          "shore_distance": 13.582829,
+          "protected_corridor_center_margin": 14.710597,
+          "nearest_route_xy": [
+            40.765840589724434,
+            -31.583258580646433
+          ],
+          "yaw_toward_actual_route": -1.7857068186062193,
+          "nearest_other_building_center": 57.271284
+        }
+      ],
+      "normal_constraints": {
+        "road_distance_gt": 20,
+        "shore_distance_gt": 13,
+        "normal_center_distance_gt": 24
+      },
+      "compact_constraints": {
+        "road_distance_gt": 14,
+        "shore_distance_gt": 8,
+        "normal_center_distance_gt": 23
+      }
+    },
+    {
+      "id": "05_frost_moon",
+      "title": "Лунный ледник",
+      "feasible": true,
+      "requested_kinds": [
+        "ice_house",
+        "ice_house",
+        "ice_workshop",
+        "ice_relay"
+      ],
+      "attempts": [
+        {
+          "grid_step": 4,
+          "normal_candidates": 108,
+          "compact_candidates": 230,
+          "score": 35.75086691968533,
+          "search_exhausted": true,
+          "visited_nodes": 38844,
+          "feasible_unlabelled_layouts": 35499,
+          "search_seconds": 0.953
+        }
+      ],
+      "buildings": [
+        {
+          "kind": "ice_house",
+          "center_xy": [
+            -25,
+            -37
+          ],
+          "road_centerline_distance": 24.30936,
+          "shore_distance": 35.020114,
+          "protected_corridor_center_margin": 18.30936,
+          "nearest_route_xy": [
+            -23.83418699829739,
+            -12.718610441630508
+          ],
+          "yaw_toward_actual_route": 3.093616880999042,
+          "nearest_other_building_center": 46.8188
+        },
+        {
+          "kind": "ice_house",
+          "center_xy": [
+            -17,
+            35
+          ],
+          "road_centerline_distance": 20.53269,
+          "shore_distance": 18.734262,
+          "protected_corridor_center_margin": 14.53269,
+          "nearest_route_xy": [
+            3.029617536079939,
+            39.51727625590798
+          ],
+          "yaw_toward_actual_route": 1.7926150125629965,
+          "nearest_other_building_center": 29.12044
+        },
+        {
+          "kind": "ice_workshop",
+          "center_xy": [
+            -9,
+            7
+          ],
+          "road_centerline_distance": 22.355855,
+          "shore_distance": 44.65812,
+          "protected_corridor_center_margin": 16.355855,
+          "nearest_route_xy": [
+            -16.40156209225684,
+            -14.09504965024363
+          ],
+          "yaw_toward_actual_route": -0.3374472175454181,
+          "nearest_other_building_center": 29.12044
+        },
+        {
+          "kind": "ice_relay",
+          "center_xy": [
+            23,
+            -13
+          ],
+          "road_centerline_distance": 14.800208,
+          "shore_distance": 47.811773,
+          "protected_corridor_center_margin": 8.800208,
+          "nearest_route_xy": [
+            29.359709572205695,
+            -26.364141028717334
+          ],
+          "yaw_toward_actual_route": 0.444165002843325,
+          "nearest_other_building_center": 37.735925
+        }
+      ],
+      "normal_constraints": {
+        "road_distance_gt": 20,
+        "shore_distance_gt": 13,
+        "normal_center_distance_gt": 24
+      },
+      "compact_constraints": {
+        "road_distance_gt": 14,
+        "shore_distance_gt": 8,
+        "normal_center_distance_gt": 23
+      }
+    },
+    {
+      "id": "06_tropical_cascade",
+      "title": "Тропические каскады",
+      "feasible": true,
+      "requested_kinds": [
+        "tropical_house",
+        "tropical_house",
+        "tropical_workshop",
+        "tropical_windmill"
+      ],
+      "attempts": [
+        {
+          "grid_step": 4,
+          "normal_candidates": 127,
+          "compact_candidates": 329,
+          "score": 64.91201522161015,
+          "search_exhausted": false,
+          "visited_nodes": 216064,
+          "feasible_unlabelled_layouts": 201946,
+          "search_seconds": 4.016
+        }
+      ],
+      "buildings": [
+        {
+          "kind": "tropical_house",
+          "center_xy": [
+            -47,
+            -6
+          ],
+          "road_centerline_distance": 20.071411,
+          "shore_distance": 30.213926,
+          "protected_corridor_center_margin": 14.071411,
+          "nearest_route_xy": [
+            -65.54273567453323,
+            -13.683000501112446
+          ],
+          "yaw_toward_actual_route": -1.1779891720823885,
+          "nearest_other_building_center": 73.430239
+        },
+        {
+          "kind": "tropical_house",
+          "center_xy": [
+            41,
+            2
+          ],
+          "road_centerline_distance": 22.287854,
+          "shore_distance": 16.146472,
+          "protected_corridor_center_margin": 16.287854,
+          "nearest_route_xy": [
+            28.63068956145684,
+            -16.540457841298153
+          ],
+          "yaw_toward_actual_route": -0.5883387861495798,
+          "nearest_other_building_center": 26.832816
+        },
+        {
+          "kind": "tropical_workshop",
+          "center_xy": [
+            29,
+            26
+          ],
+          "road_centerline_distance": 40.002136,
+          "shore_distance": 14.826313,
+          "protected_corridor_center_margin": 34.002136,
+          "nearest_route_xy": [
+            20.450250249159446,
+            -13.077776810361856
+          ],
+          "yaw_toward_actual_route": -0.21539399139253881,
+          "nearest_other_building_center": 26.832816
+        },
+        {
+          "kind": "tropical_windmill",
+          "center_xy": [
+            17,
+            -42
+          ],
+          "road_centerline_distance": 20.110597,
+          "shore_distance": 30.545154,
+          "protected_corridor_center_margin": 14.110597,
+          "nearest_route_xy": [
+            27.025923979204702,
+            -59.43321389726543
+          ],
+          "yaw_toward_actual_route": 0.521912992583321,
+          "nearest_other_building_center": 50.119856
+        }
+      ],
+      "normal_constraints": {
+        "road_distance_gt": 20,
+        "shore_distance_gt": 13,
+        "normal_center_distance_gt": 24
+      },
+      "compact_constraints": {
+        "road_distance_gt": 14,
+        "shore_distance_gt": 8,
+        "normal_center_distance_gt": 23
+      }
+    },
+    {
+      "id": "07_storm_coast",
+      "title": "Грозовой берег",
+      "feasible": true,
+      "requested_kinds": [
+        "storm_house",
+        "storm_house",
+        "storm_workshop",
+        "storm_windmill"
+      ],
+      "attempts": [
+        {
+          "grid_step": 4,
+          "normal_candidates": 81,
+          "compact_candidates": 268,
+          "score": 45.777805061951696,
+          "search_exhausted": true,
+          "visited_nodes": 109610,
+          "feasible_unlabelled_layouts": 87206,
+          "search_seconds": 1.813
+        }
+      ],
+      "buildings": [
+        {
+          "kind": "storm_house",
+          "center_xy": [
+            -11,
+            30
+          ],
+          "road_centerline_distance": 20.297593,
+          "shore_distance": 44.538107,
+          "protected_corridor_center_margin": 14.297593,
+          "nearest_route_xy": [
+            -16.898524466456468,
+            10.578370086627963
+          ],
+          "yaw_toward_actual_route": -0.29485609505130816,
+          "nearest_other_building_center": 39.395431
+        },
+        {
+          "kind": "storm_house",
+          "center_xy": [
+            9,
+            -38
+          ],
+          "road_centerline_distance": 24.60557,
+          "shore_distance": 13.041202,
+          "protected_corridor_center_margin": 18.60557,
+          "nearest_route_xy": [
+            18.21586196362996,
+            -15.1854879319952
+          ],
+          "yaw_toward_actual_route": 2.7576880169320566,
+          "nearest_other_building_center": 44.72136
+        },
+        {
+          "kind": "storm_workshop",
+          "center_xy": [
+            25,
+            14
+          ],
+          "road_centerline_distance": 21.296063,
+          "shore_distance": 39.944644,
+          "protected_corridor_center_margin": 15.296063,
+          "nearest_route_xy": [
+            35.469763967308644,
+            32.5447115288392
+          ],
+          "yaw_toward_actual_route": 2.6276330953248785,
+          "nearest_other_building_center": 39.395431
+        },
+        {
+          "kind": "storm_windmill",
+          "center_xy": [
+            53,
+            -30
+          ],
+          "road_centerline_distance": 20.684806,
+          "shore_distance": 13.541525,
+          "protected_corridor_center_margin": 14.684806,
+          "nearest_route_xy": [
+            41.12383690266636,
+            -13.064299723683247
+          ],
+          "yaw_toward_actual_route": -2.530028125818412,
+          "nearest_other_building_center": 44.72136
+        }
+      ],
+      "normal_constraints": {
+        "road_distance_gt": 20,
+        "shore_distance_gt": 13,
+        "normal_center_distance_gt": 24
+      },
+      "compact_constraints": {
+        "road_distance_gt": 14,
+        "shore_distance_gt": 8,
+        "normal_center_distance_gt": 23
+      }
+    },
+    {
+      "id": "08_sunflower_terraces",
+      "title": "Солнечные поля",
+      "feasible": true,
+      "requested_kinds": [
+        "farm_house",
+        "farm_workshop",
+        "farm_windmill"
+      ],
+      "attempts": [
+        {
+          "grid_step": 4,
+          "normal_candidates": 105,
+          "compact_candidates": 334,
+          "score": -3.688292344495263,
+          "search_exhausted": true,
+          "visited_nodes": 32661,
+          "feasible_unlabelled_layouts": 29486,
+          "search_seconds": 0.141
+        }
+      ],
+      "buildings": [
+        {
+          "kind": "farm_house",
+          "center_xy": [
+            49,
+            -4
+          ],
+          "road_centerline_distance": 24.54372,
+          "shore_distance": 20.037323,
+          "protected_corridor_center_margin": 18.54372,
+          "nearest_route_xy": [
+            35.32555652693393,
+            16.38145666902539
+          ],
+          "yaw_toward_actual_route": -2.5506472684294916,
+          "nearest_other_building_center": 68.818602
+        },
+        {
+          "kind": "farm_workshop",
+          "center_xy": [
+            -7,
+            -44
+          ],
+          "road_centerline_distance": 22.51008,
+          "shore_distance": 18.467886,
+          "protected_corridor_center_margin": 16.51008,
+          "nearest_route_xy": [
+            -24.483427439388183,
+            -29.82137244493463
+          ],
+          "yaw_toward_actual_route": -2.2521937796769325,
+          "nearest_other_building_center": 58.240879
+        },
+        {
+          "kind": "farm_windmill",
+          "center_xy": [
+            -23,
+            12
+          ],
+          "road_centerline_distance": 20.84916,
+          "shore_distance": 44.95462,
+          "protected_corridor_center_margin": 14.84916,
+          "nearest_route_xy": [
+            -7.807099447207728,
+            -2.2780682794328793
+          ],
+          "yaw_toward_actual_route": 0.816430010569201,
+          "nearest_other_building_center": 58.240879
+        }
+      ],
+      "normal_constraints": {
+        "road_distance_gt": 20,
+        "shore_distance_gt": 13,
+        "normal_center_distance_gt": 24
+      },
+      "compact_constraints": {
+        "road_distance_gt": 14,
+        "shore_distance_gt": 8,
+        "normal_center_distance_gt": 23
+      }
+    },
+    {
+      "id": "09_volcanic_garden",
+      "title": "Вулканический сад",
+      "feasible": true,
+      "requested_kinds": [
+        "volcanic_house",
+        "volcanic_workshop",
+        "volcanic_relay"
+      ],
+      "attempts": [
+        {
+          "grid_step": 4,
+          "normal_candidates": 74,
+          "compact_candidates": 293,
+          "score": -1.456668246569777,
+          "search_exhausted": true,
+          "visited_nodes": 2043,
+          "feasible_unlabelled_layouts": 1968,
+          "search_seconds": 0.093
+        }
+      ],
+      "buildings": [
+        {
+          "kind": "volcanic_house",
+          "center_xy": [
+            26,
+            44
+          ],
+          "road_centerline_distance": 25.371955,
+          "shore_distance": 26.88242,
+          "protected_corridor_center_margin": 19.371955,
+          "nearest_route_xy": [
+            3.7315001684173534,
+            31.840640955571107
+          ],
+          "yaw_toward_actual_route": -1.0710030930673644,
+          "nearest_other_building_center": 32.984845
+        },
+        {
+          "kind": "volcanic_workshop",
+          "center_xy": [
+            34,
+            12
+          ],
+          "road_centerline_distance": 22.305958,
+          "shore_distance": 50.705303,
+          "protected_corridor_center_margin": 16.305958,
+          "nearest_route_xy": [
+            54.65565920376824,
+            3.579815253304898
+          ],
+          "yaw_toward_actual_route": 1.1837165004227639,
+          "nearest_other_building_center": 32.984845
+        },
+        {
+          "kind": "volcanic_relay",
+          "center_xy": [
+            -58,
+            28
+          ],
+          "road_centerline_distance": 18.964197,
+          "shore_distance": 14.610669,
+          "protected_corridor_center_margin": 12.964197,
+          "nearest_route_xy": [
+            -39.46990799024977,
+            23.96558918214824
+          ],
+          "yaw_toward_actual_route": 1.3564197828495135,
+          "nearest_other_building_center": 85.510233
+        }
+      ],
+      "normal_constraints": {
+        "road_distance_gt": 20,
+        "shore_distance_gt": 13,
+        "normal_center_distance_gt": 24
+      },
+      "compact_constraints": {
+        "road_distance_gt": 14,
+        "shore_distance_gt": 8,
+        "normal_center_distance_gt": 23
+      }
+    },
+    {
+      "id": "10_cloud_observatory",
+      "title": "Облачная обсерватория",
+      "feasible": true,
+      "requested_kinds": [
+        "cloud_house",
+        "cloud_workshop",
+        "cloud_observatory",
+        "cloud_relay"
+      ],
+      "attempts": [
+        {
+          "grid_step": 4,
+          "normal_candidates": 26,
+          "compact_candidates": 200,
+          "score": null,
+          "search_exhausted": true,
+          "visited_nodes": 116,
+          "feasible_unlabelled_layouts": 0,
+          "search_seconds": 0.0
+        },
+        {
+          "grid_step": 2,
+          "normal_candidates": 102,
+          "compact_candidates": 799,
+          "score": 105.95416195980818,
+          "search_exhausted": true,
+          "visited_nodes": 10977,
+          "feasible_unlabelled_layouts": 8944,
+          "search_seconds": 0.953
+        }
+      ],
+      "buildings": [
+        {
+          "kind": "cloud_house",
+          "center_xy": [
+            -2,
+            45
+          ],
+          "road_centerline_distance": 20.015486,
+          "shore_distance": 30.491146,
+          "protected_corridor_center_margin": 14.015486,
+          "nearest_route_xy": [
+            0.29052569138333345,
+            25.11600730267798
+          ],
+          "yaw_toward_actual_route": 0.11468893890196666,
+          "nearest_other_building_center": 52.497619
+        },
+        {
+          "kind": "cloud_workshop",
+          "center_xy": [
+            -6,
+            -11
+          ],
+          "road_centerline_distance": 20.23162,
+          "shore_distance": 60.826085,
+          "protected_corridor_center_margin": 14.23162,
+          "nearest_route_xy": [
+            -24.072819966973416,
+            -20.093493879336435
+          ],
+          "yaw_toward_actual_route": -1.1046250720098807,
+          "nearest_other_building_center": 49.193496
+        },
+        {
+          "kind": "cloud_observatory",
+          "center_xy": [
+            38,
+            11
+          ],
+          "road_centerline_distance": 20.639498,
+          "shore_distance": 14.642776,
+          "protected_corridor_center_margin": 14.639498,
+          "nearest_route_xy": [
+            28.025046262672024,
+            29.06901119721156
+          ],
+          "yaw_toward_actual_route": -2.6371787706964507,
+          "nearest_other_building_center": 48.0
+        },
+        {
+          "kind": "cloud_relay",
+          "center_xy": [
+            38,
+            -37
+          ],
+          "road_centerline_distance": 14.515235,
+          "shore_distance": 33.086451,
+          "protected_corridor_center_margin": 8.515235,
+          "nearest_route_xy": [
+            51.67039349007318,
+            -41.87979507914019
+          ],
+          "yaw_toward_actual_route": 1.2279338268142723,
+          "nearest_other_building_center": 48.0
+        }
+      ],
+      "normal_constraints": {
+        "road_distance_gt": 20,
+        "shore_distance_gt": 13,
+        "normal_center_distance_gt": 24
+      },
+      "compact_constraints": {
+        "road_distance_gt": 14,
+        "shore_distance_gt": 8,
+        "normal_center_distance_gt": 23
+      }
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "schema": "radio_archipelago_v3_building_center_plan/1",
+  "pass": true,
+  "road_width": 8,
+  "shoulder_each_side": 2,
+  "protected_corridor_width": 12,
+  "distance_method": "exact nearest point on each segment of actual resampled road and shoreline",
+  "unity_tested": false,
+  "mesh_extent_validation_performed": false,
+  "limits": "Centers preserve specified constraints. Final transformed building/terrace meshes must still pass swept-corridor validation. Z/foundation height must be derived from actual terrain height_at.",
+  "worlds": [
+    {
+      "id": "10_cloud_observatory",
+      "title": "Облачная обсерватория",
+      "feasible": true,
+      "requested_kinds": [
+        "cloud_house",
+        "cloud_workshop",
+        "cloud_observatory",
+        "cloud_relay"
+      ],
+      "attempts": [
+        {
+          "grid_step": 4,
+          "normal_candidates": 26,
+          "compact_candidates": 200,
+          "score": null,
+          "search_exhausted": true,
+          "visited_nodes": 116,
+          "feasible_unlabelled_layouts": 0,
+          "search_seconds": 0.0
+        },
+        {
+          "grid_step": 2,
+          "normal_candidates": 102,
+          "compact_candidates": 799,
+          "score": 105.95416195980818,
+          "search_exhausted": true,
+          "visited_nodes": 10977,
+          "feasible_unlabelled_layouts": 8944,
+          "search_seconds": 0.891
+        }
+      ],
+      "buildings": [
+        {
+          "kind": "cloud_house",
+          "center_xy": [
+            -2,
+            45
+          ],
+          "road_centerline_distance": 20.015486,
+          "shore_distance": 30.491146,
+          "protected_corridor_center_margin": 14.015486,
+          "nearest_route_xy": [
+            0.29052569138333345,
+            25.11600730267798
+          ],
+          "yaw_toward_actual_route": 0.11468893890196666,
+          "nearest_other_building_center": 52.497619
+        },
+        {
+          "kind": "cloud_workshop",
+          "center_xy": [
+            -6,
+            -11
+          ],
+          "road_centerline_distance": 20.23162,
+          "shore_distance": 60.826085,
+          "protected_corridor_center_margin": 14.23162,
+          "nearest_route_xy": [
+            -24.072819966973416,
+            -20.093493879336435
+          ],
+          "yaw_toward_actual_route": -1.1046250720098807,
+          "nearest_other_building_center": 49.193496
+        },
+        {
+          "kind": "cloud_observatory",
+          "center_xy": [
+            38,
+            11
+          ],
+          "road_centerline_distance": 20.639498,
+          "shore_distance": 14.642776,
+          "protected_corridor_center_margin": 14.639498,
+          "nearest_route_xy": [
+            28.025046262672024,
+            29.06901119721156
+          ],
+          "yaw_toward_actual_route": -2.6371787706964507,
+          "nearest_other_building_center": 48.0
+        },
+        {
+          "kind": "cloud_relay",
+          "center_xy": [
+            38,
+            -37
+          ],
+          "road_centerline_distance": 14.515235,
+          "shore_distance": 33.086451,
+          "protected_corridor_center_margin": 8.515235,
+          "nearest_route_xy": [
+            51.67039349007318,
+            -41.87979507914019
+          ],
+          "yaw_toward_actual_route": 1.2279338268142723,
+          "nearest_other_building_center": 48.0
+        }
+      ],
+      "normal_constraints": {
+        "road_distance_gt": 20,
+        "shore_distance_gt": 13,
+        "normal_center_distance_gt": 24
+      },
+      "compact_constraints": {
+        "road_distance_gt": 14,
+        "shore_distance_gt": 8,
+        "normal_center_distance_gt": 23
+      }
+    }
+  ]
+}

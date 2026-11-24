@@ -1,0 +1,440 @@
+{
+  "id": "03_moon_resonance",
+  "frozen_inputs": {
+    "C:\\Users\\Derek\\Games_develop\\Cat\\ArtSource\\RadioArchipelago\\Islands\\CoralOasisPilot\\build_coral_oasis.py": "c2f5e9ad36fd6108342e3119741ccf5e5b8f44389947101a19ddb88e12d4b2fc",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\ArtSource\\RadioArchipelago\\Islands\\V4\\architecture.py": "0b0ee1ed0f5b7b57d9344db674a39157452813e3f459a31e0d0ee348592393e4",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\ArtSource\\RadioArchipelago\\Islands\\V4\\scenery.py": "a89a79029965802e3ef2c46241d94ec8d65a3f6bcdf294f53928dd49d4e3f23c",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\ArtSource\\RadioArchipelago\\Islands\\V4\\nature_detail.py": "5f182350211c6fde834f35858d82b92940cf02d5c55974981c908067112682d2",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\EmeraldAbyss\\emerald_abyss_island.fbx": "787658b95388a6da6b8171496a92704f968bfd83ae9cace2a119875bf1fcf204",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\CoralOasis\\coral_oasis_island.fbx": "4cc6a188004f508ae440e79a69bf80e3e1488ed45768f82b30871be2b2a713fc"
+  },
+  "frozen_inputs_unchanged": true,
+  "route_exports_unchanged": true,
+  "route_export_hashes": {
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\MoonResonance\\moon_resonance_route.json": "8c85929ce2dd2ff58cc9c8059eac18bed08d927bb603fc2c932ee3c0741c0df7",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\MoonResonance\\play_elevation.json": "267e65237de54432521b296d647175303f43026db569c90d89d7939ec37ee554",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\MoonResonance\\ground_elevation.json": "267e65237de54432521b296d647175303f43026db569c90d89d7939ec37ee554"
+  },
+  "route_length": 749.9959818305036,
+  "source_play_height_range": [
+    4,
+    20
+  ],
+  "terrain_under_raw_profile": 2.65,
+  "protected_air_corridor_half_width": 8.2,
+  "architecture": [
+    {
+      "kind": "cloud_house",
+      "position": [
+        -16,
+        27,
+        1.4688720703125
+      ],
+      "scale": 1.65,
+      "distance_to_route": 27.0,
+      "objects": 199,
+      "base_actual_kind": "cloud_house"
+    },
+    {
+      "kind": "cloud_house",
+      "position": [
+        80,
+        35,
+        2.669921875
+      ],
+      "scale": 1.65,
+      "distance_to_route": 22.425921375889605,
+      "objects": 199,
+      "base_actual_kind": "cloud_house"
+    },
+    {
+      "kind": "cloud_observatory",
+      "position": [
+        -24,
+        165,
+        16.844482421875
+      ],
+      "scale": 2.0,
+      "distance_to_route": 22.46344546202752,
+      "objects": 243,
+      "base_actual_kind": "cloud_workshop"
+    }
+  ],
+  "resonators": [
+    {
+      "center": [
+        -26,
+        107,
+        7.51025390625
+      ],
+      "height": 23,
+      "radius": 2.8,
+      "route_clearance": 40.861472063237
+    },
+    {
+      "center": [
+        -20,
+        116,
+        8.5472412109375
+      ],
+      "height": 17,
+      "radius": 2.0,
+      "route_clearance": 46.69419434317599
+    },
+    {
+      "center": [
+        -34,
+        99,
+        7.270751953125
+      ],
+      "height": 12,
+      "radius": 1.6,
+      "route_clearance": 36.156212495852
+    },
+    {
+      "center": [
+        128,
+        75,
+        5.44793701171875
+      ],
+      "height": 16,
+      "radius": 1.7,
+      "route_clearance": 29.29304016757969
+    },
+    {
+      "center": [
+        -108,
+        26,
+        0.8902587890625
+      ],
+      "height": 10,
+      "radius": 1.25,
+      "route_clearance": 24.75
+    }
+  ],
+  "trees": 48,
+  "rock_clusters": 108,
+  "flower_clusters": 370,
+  "hopping_islets": [
+    {
+      "name": "Pearl hopping islet",
+      "station": 465,
+      "source_center": [
+        -80.6609115600586,
+        95.96392059326172,
+        7.292236328125
+      ],
+      "route_floor": 9.942352592592593,
+      "aligned_unity_route_center": [
+        -80.6609115600586,
+        9.942352592592593,
+        -95.96392059326172
+      ],
+      "radii": [
+        7.2,
+        6.4
+      ],
+      "rock_depth": 25,
+      "garden_groups": 9
+    },
+    {
+      "name": "Lavender bell islet",
+      "station": 489,
+      "source_center": [
+        -102.34414672851562,
+        85.86650848388672,
+        6.11083984375
+      ],
+      "route_floor": 8.760979539437038,
+      "aligned_unity_route_center": [
+        -102.34414672851562,
+        8.760979539437038,
+        -85.86650848388672
+      ],
+      "radii": [
+        10.2,
+        8.2
+      ],
+      "rock_depth": 34,
+      "garden_groups": 9
+    },
+    {
+      "name": "Silver hopping islet",
+      "station": 516,
+      "source_center": [
+        -127.40705871582031,
+        75.87492370605469,
+        4.49462890625
+      ],
+      "route_floor": 7.1445722946370385,
+      "aligned_unity_route_center": [
+        -127.40705871582031,
+        7.1445722946370385,
+        -75.87492370605469
+      ],
+      "radii": [
+        6.5,
+        8.0
+      ],
+      "rock_depth": 27,
+      "garden_groups": 9
+    }
+  ],
+  "waterfalls": 2,
+  "shoreline_stones": 50,
+  "mist_banks": 20,
+  "decor_support": {
+    "checked_groups": 232,
+    "removed_groups": 0,
+    "removed_objects": 0,
+    "relocated_groups": 221,
+    "max_vertical_correction": 0.18000000000000016,
+    "removed": [],
+    "actual_top_method": "BVH over actual triangulated Terrain caps, never nominal footprint/height"
+  },
+  "runtime_density": {
+    "leaf_components_before": 86765,
+    "leaf_components_retained": 32377,
+    "leaf_triangles_removed": 699800,
+    "branch_objects_reduced": 48
+  },
+  "source_geometry_audit": {
+    "terrain_triangles": 94513,
+    "water_triangles": 8939,
+    "upward_errors": 0,
+    "above_flight_terrain": 0,
+    "material_names": [
+      "RA_Moon_Terrain",
+      "RA_Moon_Cliffs",
+      "RA_Moon_Rocks",
+      "RA_Moon_Foliage",
+      "RA_Moon_Grass",
+      "RA_Moon_Wood",
+      "RA_Moon_Architecture",
+      "RA_Moon_Metal",
+      "RA_Moon_Water",
+      "RA_Moon_Waterfall",
+      "RA_Moon_Foam",
+      "RA_Moon_Vines",
+      "RA_Moon_Crystal",
+      "RA_Moon_Mist"
+    ]
+  },
+  "landmasses": [
+    {
+      "name": "Moon lagoon",
+      "center": [
+        41,
+        60
+      ],
+      "radii": [
+        70,
+        50
+      ],
+      "depth": 66
+    },
+    {
+      "name": "First flower landing",
+      "center": [
+        -6,
+        6
+      ],
+      "radii": [
+        57,
+        28
+      ],
+      "depth": 50
+    },
+    {
+      "name": "Silver cascade east",
+      "center": [
+        109,
+        62
+      ],
+      "radii": [
+        25,
+        38
+      ],
+      "depth": 58
+    },
+    {
+      "name": "Resonator saddle",
+      "center": [
+        25,
+        129
+      ],
+      "radii": [
+        25,
+        30
+      ],
+      "depth": 59
+    },
+    {
+      "name": "Ring observatory ridge",
+      "center": [
+        -23,
+        181
+      ],
+      "radii": [
+        57,
+        30
+      ],
+      "depth": 76
+    },
+    {
+      "name": "West silver grove",
+      "center": [
+        -70,
+        141
+      ],
+      "radii": [
+        25,
+        29
+      ],
+      "depth": 59
+    },
+    {
+      "name": "Western radio crag",
+      "center": [
+        -131,
+        36
+      ],
+      "radii": [
+        40,
+        25
+      ],
+      "depth": 66
+    },
+    {
+      "name": "Reward lavender meadow",
+      "center": [
+        -77,
+        1
+      ],
+      "radii": [
+        52,
+        24
+      ],
+      "depth": 53
+    },
+    {
+      "name": "Central amethyst crag",
+      "center": [
+        -24,
+        104
+      ],
+      "radii": [
+        18,
+        24
+      ],
+      "depth": 64
+    },
+    {
+      "name": "Remote silver spire",
+      "center": [
+        -135,
+        173
+      ],
+      "radii": [
+        13,
+        17
+      ],
+      "depth": 60
+    },
+    {
+      "name": "Remote eastern crag",
+      "center": [
+        98,
+        154
+      ],
+      "radii": [
+        17,
+        20
+      ],
+      "depth": 66
+    },
+    {
+      "name": "Low hanging moonlet",
+      "center": [
+        56,
+        -42
+      ],
+      "radii": [
+        15,
+        12
+      ],
+      "depth": 44
+    },
+    {
+      "name": "High distant needle",
+      "center": [
+        -28,
+        243
+      ],
+      "radii": [
+        12,
+        14
+      ],
+      "depth": 70
+    },
+    {
+      "name": "Pearl hopping islet",
+      "center": [
+        -80.6609115600586,
+        95.96392059326172
+      ],
+      "radii": [
+        7.2,
+        6.4
+      ],
+      "depth": 25
+    },
+    {
+      "name": "Lavender bell islet",
+      "center": [
+        -102.34414672851562,
+        85.86650848388672
+      ],
+      "radii": [
+        10.2,
+        8.2
+      ],
+      "depth": 34
+    },
+    {
+      "name": "Silver hopping islet",
+      "center": [
+        -127.40705871582031,
+        75.87492370605469
+      ],
+      "radii": [
+        6.5,
+        8.0
+      ],
+      "depth": 27
+    }
+  ],
+  "export": {
+    "mesh_batches": 272,
+    "triangles": 1829744,
+    "material_triangles": {
+      "Cliffs": 99072,
+      "Terrain": 94513,
+      "Rocks": 269114,
+      "Architecture": 130996,
+      "Wood": 124080,
+      "Metal": 155034,
+      "Crystal": 440,
+      "Foliage": 668592,
+      "Grass": 228275,
+      "Water": 8939,
+      "Waterfall": 576,
+      "Foam": 4656,
+      "Vines": 11904,
+      "Mist": 36480
+    },
+    "bytes": 63181964,
+    "sha256": "07adcf7d27946f561c7d878acd98dae817776a30efee9509ae714a1e477bec0c"
+  },
+  "elapsed_seconds": 59.08238609996624
+}

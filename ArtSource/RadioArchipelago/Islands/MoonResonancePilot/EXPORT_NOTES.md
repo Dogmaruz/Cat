@@ -1,0 +1,21 @@
+# Moon Resonance geometry contract
+
+The third island is independent art. The first and second island FBX files, their generators, and the reusable V4 helper modules are frozen SHA-256 inputs recorded in `moon_resonance_report.json`.
+
+Run `build_moon_resonance.py` in a **fresh Blender 5.2 background process with factory startup**. Never run it in an interactive Blender scene. `--route-only` writes the route/profile contract; `--render-only` opens the exported preview for native proof renders. `verify_export.py` imports the FBX in another fresh process and audits the actual artifact.
+
+- Source metres are Blender Z-up. Aligned Unity coordinates are `(x,z,-y)`. The FBX contains `RA_Origin`, `RA_X10`, and `RA_North10`; use those to align it.
+- Route: 749.99598 m, 1365 samples, closed broad S loop, 26.53 m minimum radius, 37.20 m minimum nonlocal spacing when arc separation exceeds 40 m. Start faces +X; first 35 m straight. Final 638–750 m straight, final 610–750 m flat. Height 4–20 m, maximum grade 0.24998.
+- Static environment contains **no road and no playable tiles**. Preview tiles prefixed `PROOF_ONLY` are added only after FBX export to show actual ordinary radius 0.65 m. Unity authors the gameplay path and finish.
+- Vertex colors are linear FLOAT CORNER `Color`, exported with FBX `colors_type='LINEAR'`. Materials use the `RA_Moon_` prefix and categories Terrain, Cliffs, Rocks, Foliage, Grass, Wood, Architecture, Metal, Water, Waterfall, Foam, Vines, Crystal, Mist.
+- Terrain caps form one constrained triangulated union of the original irregular crag rims. There are no duplicate coplanar caps or grid-shaped cliff-edge holes. Main lagoon and upper spring each share one continuous clipped water surface with their physical outlet.
+- Full source solids have their normals oriented **before** spatial batching. Terrain and Water are explicitly forced upward. Batched open fragments only update shading normals; they never run face-normal recalculation.
+- Opaque Terrain/Cliffs/Rocks use backface culling. Foliage/Grass and waterfalls need two sides. No scenery meshes need gameplay collision, especially leaves.
+- Actual triangulated Terrain BVH determines tree/building/rock roots. Missing support deletes a whole decoration group. Flower and lavender stems query the BVH individually. `decor-support-checks.json` records corrections/removals. The source audit checks all terrain vertices across the 8.2 m flight half-corridor against at least 2.2 m separation; nominal clearance is 2.65 m. `flight-envelope-audit.json` also checks every actual exported scenery vertex in that width.
+- Trees retain complete closed volumetric leaf components; only inner branch tessellation and leaf population are reduced. No alpha foliage cards are used.
+- Mist consists of 20 separated irregular three-dimensional puffs of varied sizes, with no connected elongated strips. Source alpha is about 0.23 and all cloud vertices stay below -40 m. Use a cheap translucent pearl/lavender material; no terrain collision. These scenic low clouds are independent of the Unity runtime hopping cloud steps.
+- Crystal is opaque faceted pale amethyst with restrained emission. No bloom or dynamic ambient lights are required.
+
+The `.blend`, FBX, numerical audits and seven source proof cameras all come from the same scene. Two additional fresh-FBX front/reverse render angles explicitly cull opaque backfaces. Native proof images are in `Proof/`. Reports supply final measured triangle/batch counts and hashes.
+
+The islet revision keeps all three route/profile exports byte-for-byte unchanged. It adds three genuine detached rock islets under route stations 465, 489 and 516 m, with irregular caps, 25/34/27 m deep stone undersides and small lavender gardens. The neighbouring west landmasses are cropped back so all four boundary gaps remain open (7.60, 6.56, 10.07 and 5.79 m). `hopping-islets.json` supplies source and aligned Unity placement; `islet-air-gap-audit.json` verifies actual route visits and gives cloud-step air intervals. The upper receiver now rests on a solid pearl-plaster observatory with a copper dome and two lower annexes. Warmer violet-heather ground, silver scree and deeper lavender/periwinkle flowers replace the pale uniform meadow appearance.

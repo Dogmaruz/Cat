@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Радиоархипелаг — острова</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f1e8;color:#192d48;font:16px/1.5 system-ui,sans-serif}
+main{max-width:1480px;margin:auto;padding:28px}header{display:flex;align-items:end;gap:24px;justify-content:space-between;flex-wrap:wrap}
+h1{font-size:30px;margin:0}p{margin:8px 0 20px;color:#526479}label{font-size:14px;font-weight:600}select,button,a.action{font:inherit;border:1px solid #d4d7d2;border-radius:12px;background:#fffdf7;color:#192d48;padding:10px 16px}
+select{max-width:100%;margin-top:7px}nav{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}button{cursor:pointer}button[aria-pressed=true]{background:#233e56;color:white;border-color:#233e56}
+.frame{background:#eae7df;border-radius:20px;overflow:hidden;min-height:280px;display:flex;align-items:center;justify-content:center}img{display:block;width:100%;height:70vh;min-height:280px;object-fit:contain}
+footer{display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin:18px 0}.action{text-decoration:none;display:inline-block}small{color:#526479}a{color:#1d6d67}.note{max-width:900px;font-size:14px}
+@media(max-width:600px){main{padding:16px}h1{font-size:23px}img{height:52vh}button{padding:8px 12px}}
+</style>
+<main><header><div><h1>Радиоархипелаг / острова</h1><p id="description"></p></div><label>Остров<br><select id="island" aria-label="Выбрать остров"></select></label></header>
+<nav id="views" aria-label="Ракурс"></nav><div class="frame"><img id="preview" alt=""></div>
+<footer><strong id="caption"></strong><a id="download" class="action" download>Скачать отдельный PNG</a></footer>
+<p class="note">Пять отдельных изображений на остров. «Схема пути» — отдельный технический ориентир: одна плавная петля, повторные проходы идут по той же дороге. Пример: 2½ круга за 75 секунд. Это художественные референсы; точную геометрию и ширину пути закрепим в 3D. Часть верхних ракурсов имеет перспективу.</p>
+<small><a href="README.md">Описание и передача в 3D</a> · <a href="RadioArchipelago_Islands_References_v1.zip">Все 50 PNG и схемы, ZIP</a></small>
+</main><script>
+const islands=[{"id": "01_radio_harbor", "title": "Гавань эфира", "description": "Радиодомик, два кипариса и круговая дорожка среди золотистых цветов."}, {"id": "02_signal_lighthouse", "title": "Маяк дальнего сигнала", "description": "Маяк с мятным фонарём, домиком смотрителя и скальной аркой."}, {"id": "03_bell_gardens", "title": "Сады колокольных арок", "description": "Три светлые арки, бронзовый колокол и сад пряных трав."}, {"id": "04_wind_workshop", "title": "Ветряная мастерская", "description": "Мастерская с тканевыми парусами и медным баком."}, {"id": "05_star_observatory", "title": "Звёздная обсерватория", "description": "Обсерватория с мятным куполом и бронзовой армиллярной сферой."}, {"id": "06_crystal_lagoon", "title": "Хрустальная лагуна", "description": "Мятная лагуна, кристаллы, мост и два водопада."}, {"id": "07_sailboat_port", "title": "Порт парусных писем", "description": "Небольшой воздушный порт с парусными навесами и ангаром."}, {"id": "08_sun_greenhouse", "title": "Тёплая оранжерея", "description": "Стеклянная оранжерея с медными рёбрами и солнечными растениями."}, {"id": "09_echo_canyon", "title": "Каньон резонанса", "description": "Расщелина, широкий каменный мост и бронзовые резонаторы."}, {"id": "10_broadcast_citadel", "title": "Башня большого эфира", "description": "Большая радиобашня с кольцом сигнала и плавными террасами."}],views={front:'Спереди',right:'Справа',left:'Слева',back:'Сзади',top:'Сверху',route:'Схема пути'};
+const select=document.getElementById('island'),nav=document.getElementById('views'),preview=document.getElementById('preview');let view='front';
+islands.forEach((item,i)=>{const option=document.createElement('option');option.value=i;option.textContent=String(i+1).padStart(2,'0')+' — '+item.title;select.append(option)});
+Object.entries(views).forEach(([key,label])=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.view=key;b.addEventListener('click',()=>{view=key;render()});nav.append(b)});
+function render(){const item=islands[Number(select.value)];const src=view==='route'?'RouteGuides_v1/'+item.id+'/route-guide.png':'ReferencePack_v1/'+item.id+'/'+view+'.png';preview.src=src;preview.alt=item.title+' — '+views[view];document.getElementById('description').textContent=item.description;document.getElementById('caption').textContent=preview.alt;const a=document.getElementById('download');a.href=src;a.download=item.id+'_'+view+'.png';nav.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===view)))}
+select.addEventListener('change',render);render();
+</script></html>

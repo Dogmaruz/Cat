@@ -1,0 +1,2260 @@
+{
+  "schema": "radio_archipelago_v4_package_audit/1",
+  "pass": true,
+  "expected_world_count": 10,
+  "passed_world_count": 10,
+  "expected_png_count": 60,
+  "png_count": 60,
+  "archive_ready": true,
+  "unity_gameplay_tested_by_packager": false,
+  "errors": [],
+  "worlds": [
+    {
+      "id": "01_emerald_ravine",
+      "title": "Изумрудное ущелье",
+      "pass": true,
+      "errors": [],
+      "images": {
+        "front": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4950275,
+          "sha256": "8957c991f9d327f530fad5b6387e2897446cdc69c6d3aa027010583536bdfd70"
+        },
+        "right": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4763031,
+          "sha256": "9f997c11360c62f768add51989ba49340a605a1db57cea7f38ec779a5d92631b"
+        },
+        "left": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4867489,
+          "sha256": "011d90a7ea18bce6b0b6961211c3e14d2243ef1955dad5bf1e2edc006564a891"
+        },
+        "back": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4838497,
+          "sha256": "ab445414a8f3ae60da70ef248de4cea4b53bcc02c5697210c7b359b2d37dc478"
+        },
+        "top": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 6971075,
+          "sha256": "fa9a9671b6f68ccceeb54c90a0cc8519819ecc19ccd22d46949567ca9d95b0cc"
+        },
+        "isometric": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5602567,
+          "sha256": "509b50d6581fb8858d6387962d5a23d46d598678894dfa5057e2b340e0c96390"
+        }
+      },
+      "files": {
+        "island.blend": {
+          "bytes": 48831153,
+          "sha256": "2e176284a43d91c3dfb6bceee6ff8ef0cab81686962bf79e3fa9d535e41bbf6d"
+        },
+        "island.glb": {
+          "bytes": 219741216,
+          "meshes": 3185,
+          "nodes": 5362,
+          "materials": 64,
+          "distinct_nonwhite_base_colors": 50,
+          "sha256": "68867c97e84fef1091a10101e0dd2a87ed52212d38033b6873976423e98d647d"
+        },
+        "manifest.json": {
+          "bytes": 332913,
+          "sha256": "e1063aad22b1b82b93f36b005bcae2cf092abdbbd7c9711d871e61d4a73f0803"
+        },
+        "validation.json": {
+          "bytes": 14155,
+          "sha256": "1ef1033aea4dbf13d2f80411dbd0dc2b85c7d3aa36e29a07b8f2d20ea1a21e01"
+        }
+      },
+      "geometry_sha256": "64e96bc6e95036c7ba06ced1a4139c586b4cf4fbec3cc927dc8c6d3644698040",
+      "camera_proofs": [
+        {
+          "view": "front",
+          "type": "ORTHO",
+          "position": [
+            6.149833679199219,
+            -607.1204833984375,
+            -16.325984954833984
+          ],
+          "forward": [
+            -0.0,
+            1.0,
+            1.6292068494294654e-07
+          ],
+          "up": [
+            0.0,
+            -1.6292068494294654e-07,
+            1.0
+          ],
+          "ortho_scale": 193.28128051757812,
+          "direction_error_degrees": 9.35262170110869e-06,
+          "up_error_degrees": 9.35262170110869e-06,
+          "per_view_geometry_sha256": "64e96bc6e95036c7ba06ced1a4139c586b4cf4fbec3cc927dc8c6d3644698040"
+        },
+        {
+          "view": "right",
+          "type": "ORTHO",
+          "position": [
+            615.1018676757812,
+            1.8315887451171875,
+            -16.325902938842773
+          ],
+          "forward": [
+            -1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 193.28128051757812,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "64e96bc6e95036c7ba06ced1a4139c586b4cf4fbec3cc927dc8c6d3644698040"
+        },
+        {
+          "view": "left",
+          "type": "ORTHO",
+          "position": [
+            -602.8021850585938,
+            1.8315887451171875,
+            -16.325904846191406
+          ],
+          "forward": [
+            1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            -4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 193.28128051757812,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "64e96bc6e95036c7ba06ced1a4139c586b4cf4fbec3cc927dc8c6d3644698040"
+        },
+        {
+          "view": "back",
+          "type": "ORTHO",
+          "position": [
+            6.149833679199219,
+            610.7835693359375,
+            -16.325916290283203
+          ],
+          "forward": [
+            1.1399865765455465e-14,
+            -1.0,
+            7.549790126404332e-08
+          ],
+          "up": [
+            1.5099580252808664e-07,
+            7.549790126404332e-08,
+            1.0
+          ],
+          "ortho_scale": 193.28128051757812,
+          "direction_error_degrees": 4.353408482428142e-06,
+          "up_error_degrees": 9.659346157805877e-06,
+          "per_view_geometry_sha256": "64e96bc6e95036c7ba06ced1a4139c586b4cf4fbec3cc927dc8c6d3644698040"
+        },
+        {
+          "view": "top",
+          "type": "ORTHO",
+          "position": [
+            6.149833679199219,
+            1.8315620422363281,
+            592.6261596679688
+          ],
+          "forward": [
+            -0.0,
+            -0.0,
+            -1.0
+          ],
+          "up": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "ortho_scale": 193.28128051757812,
+          "direction_error_degrees": 0.0,
+          "up_error_degrees": 0.0,
+          "per_view_geometry_sha256": "64e96bc6e95036c7ba06ced1a4139c586b4cf4fbec3cc927dc8c6d3644698040"
+        },
+        {
+          "view": "isometric",
+          "type": "ORTHO",
+          "position": [
+            285.86700439453125,
+            -277.8609313964844,
+            446.6578369140625
+          ],
+          "forward": [
+            -0.46016553044319153,
+            0.46016553044319153,
+            -0.7592729330062866
+          ],
+          "up": [
+            -0.5368871092796326,
+            0.536886990070343,
+            0.6507723331451416
+          ],
+          "ortho_scale": 253.84962463378906,
+          "direction_error_degrees": null,
+          "up_error_degrees": null,
+          "per_view_geometry_sha256": "64e96bc6e95036c7ba06ced1a4139c586b4cf4fbec3cc927dc8c6d3644698040"
+        }
+      ],
+      "palette": {
+        "land": "#4D6F36",
+        "rock": "#687476",
+        "road": "#C4B89B",
+        "water": "#3C9CA9",
+        "leaf": "#376D32",
+        "leaf_light": "#85AC48",
+        "style": "forest"
+      },
+      "validation_check_count": 14,
+      "render_hash_snapshot_count": 9,
+      "unity_playtest_performed": false
+    },
+    {
+      "id": "02_coral_oasis",
+      "title": "Коралловый оазис",
+      "pass": true,
+      "errors": [],
+      "images": {
+        "front": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4826406,
+          "sha256": "3eea033e9da49a75628ca3bf7e73394d29d65ffedc41ce10ae66f75ad4fc6466"
+        },
+        "right": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4725291,
+          "sha256": "4ac63c1a27746d94432dc89cf1ce9a39ba338b0277f59838fdea1a5ce03c978d"
+        },
+        "left": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4836633,
+          "sha256": "6359e73c9a3fe6116901e66286eb51f127e33113520be796c86586cb42313571"
+        },
+        "back": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4758488,
+          "sha256": "bbd2be01b89ac54cdf1d810bb6a83868fab62f461ff7bde3fca8767fea836a98"
+        },
+        "top": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 6071145,
+          "sha256": "b30345f310245416e9854797bc80c929765aabf40d70d3e68b6e2f1e0b972dfc"
+        },
+        "isometric": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5053999,
+          "sha256": "c3018d6bf4eeb5cbf2abddd9dca02f6cf8a4c4ce404b4923d8b423e62986181d"
+        }
+      },
+      "files": {
+        "island.blend": {
+          "bytes": 15597052,
+          "sha256": "c806890f9fd5dd26d3bbc56b1ce1da645bc6187c364c322c9ffd272039920ffc"
+        },
+        "island.glb": {
+          "bytes": 74894492,
+          "meshes": 1898,
+          "nodes": 2154,
+          "materials": 51,
+          "distinct_nonwhite_base_colors": 47,
+          "sha256": "beb20eeb73abc67b0fe1878b15ff2ecd946593f7212ff9c56f28b6a8880c9f2e"
+        },
+        "manifest.json": {
+          "bytes": 61388,
+          "sha256": "ee10201df7f8d1e891a26f7b3999ceb37e5662418631102fa510c0ba22d91d21"
+        },
+        "validation.json": {
+          "bytes": 14129,
+          "sha256": "d0d5039541407091fc2cf6575a06d61907c53b6c8813e53b4bd91e58a2228079"
+        }
+      },
+      "geometry_sha256": "0e8a6a6dcd4f5112acaf52ef5a217b44553f0917f6a2f038253aec1b2864a50a",
+      "camera_proofs": [
+        {
+          "view": "front",
+          "type": "ORTHO",
+          "position": [
+            -4.6884002685546875,
+            -644.0221557617188,
+            -17.493715286254883
+          ],
+          "forward": [
+            -0.0,
+            1.0,
+            1.6292068494294654e-07
+          ],
+          "up": [
+            0.0,
+            -1.6292068494294654e-07,
+            1.0
+          ],
+          "ortho_scale": 205.12242126464844,
+          "direction_error_degrees": 9.35262170110869e-06,
+          "up_error_degrees": 9.35262170110869e-06,
+          "per_view_geometry_sha256": "0e8a6a6dcd4f5112acaf52ef5a217b44553f0917f6a2f038253aec1b2864a50a"
+        },
+        {
+          "view": "right",
+          "type": "ORTHO",
+          "position": [
+            641.5703125,
+            2.2365798950195312,
+            -17.493642807006836
+          ],
+          "forward": [
+            -1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 205.12242126464844,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "0e8a6a6dcd4f5112acaf52ef5a217b44553f0917f6a2f038253aec1b2864a50a"
+        },
+        {
+          "view": "left",
+          "type": "ORTHO",
+          "position": [
+            -650.9471435546875,
+            2.2365760803222656,
+            -17.49363899230957
+          ],
+          "forward": [
+            1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            -4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 205.12242126464844,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "0e8a6a6dcd4f5112acaf52ef5a217b44553f0917f6a2f038253aec1b2864a50a"
+        },
+        {
+          "view": "back",
+          "type": "ORTHO",
+          "position": [
+            -4.6884002685546875,
+            648.4953002929688,
+            -17.49366569519043
+          ],
+          "forward": [
+            1.1399865765455465e-14,
+            -1.0,
+            7.549790126404332e-08
+          ],
+          "up": [
+            1.5099580252808664e-07,
+            7.549790126404332e-08,
+            1.0
+          ],
+          "ortho_scale": 205.12242126464844,
+          "direction_error_degrees": 4.353408482428142e-06,
+          "up_error_degrees": 9.659346157805877e-06,
+          "per_view_geometry_sha256": "0e8a6a6dcd4f5112acaf52ef5a217b44553f0917f6a2f038253aec1b2864a50a"
+        },
+        {
+          "view": "top",
+          "type": "ORTHO",
+          "position": [
+            -4.6884002685546875,
+            2.2365493774414062,
+            628.76513671875
+          ],
+          "forward": [
+            -0.0,
+            -0.0,
+            -1.0
+          ],
+          "up": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "ortho_scale": 205.12242126464844,
+          "direction_error_degrees": 0.0,
+          "up_error_degrees": 0.0,
+          "per_view_geometry_sha256": "0e8a6a6dcd4f5112acaf52ef5a217b44553f0917f6a2f038253aec1b2864a50a"
+        },
+        {
+          "view": "isometric",
+          "type": "ORTHO",
+          "position": [
+            291.77880859375,
+            -295.5973205566406,
+            473.4784851074219
+          ],
+          "forward": [
+            -0.46016553044319153,
+            0.46016553044319153,
+            -0.7592729330062866
+          ],
+          "up": [
+            -0.5368871092796326,
+            0.536886990070343,
+            0.6507723331451416
+          ],
+          "ortho_scale": 269.81268310546875,
+          "direction_error_degrees": null,
+          "up_error_degrees": null,
+          "per_view_geometry_sha256": "0e8a6a6dcd4f5112acaf52ef5a217b44553f0917f6a2f038253aec1b2864a50a"
+        }
+      ],
+      "palette": {
+        "land": "#D39A70",
+        "rock": "#B5654F",
+        "road": "#E3B69A",
+        "water": "#39B4B7",
+        "leaf": "#39796C",
+        "style": "adobe"
+      },
+      "validation_check_count": 14,
+      "render_hash_snapshot_count": 9,
+      "unity_playtest_performed": false
+    },
+    {
+      "id": "03_amethyst_grotto",
+      "title": "Аметистовый грот",
+      "pass": true,
+      "errors": [],
+      "images": {
+        "front": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4673423,
+          "sha256": "ace9ce28dd65bcbc824024f66a6ad6f13db7cc3f2839ef8b1186724ab5ba4bcc"
+        },
+        "right": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4574057,
+          "sha256": "e7348d90bb71abf0b6ad29a20ef0aa11bac45ebcf4bf096c9e0f8dfea50bdec7"
+        },
+        "left": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4743450,
+          "sha256": "09f64b35e5346b08a4c778b74fcf255c7ea94d4a715c8ea2f1c8dd1af3dd173c"
+        },
+        "back": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4623252,
+          "sha256": "f1a1bcf3caaa475a7c7d375583f583b921c0194416d271f325800e850f19fbb3"
+        },
+        "top": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 6082809,
+          "sha256": "7f3e37ca8fb9415f1f6e032a541b7ea60b0841697a8438b10ae554005a819ec0"
+        },
+        "isometric": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5071622,
+          "sha256": "380a715e8bc7ca6261f617223892960498ea342186cadd7eed253415a966f2de"
+        }
+      },
+      "files": {
+        "island.blend": {
+          "bytes": 18512626,
+          "sha256": "3ffb00cd8d9c55d915047dc2e8d6b5dfbd27a11b2055f74c08ed5cbe9ae2f36a"
+        },
+        "island.glb": {
+          "bytes": 119070744,
+          "meshes": 2660,
+          "nodes": 2846,
+          "materials": 52,
+          "distinct_nonwhite_base_colors": 47,
+          "sha256": "a870917a2fd80f207d8ae5045ef75a5da4de87b805ea0c21181711ad9e46da41"
+        },
+        "manifest.json": {
+          "bytes": 71814,
+          "sha256": "f561ee61b8056ce0218cc36d71059a85c41fd5a6523baebd591c5c5f744ba37d"
+        },
+        "validation.json": {
+          "bytes": 14114,
+          "sha256": "03496c83fa1515f70d53a6688892f07b25f0d301a33bf761a35ff11a7588a19e"
+        }
+      },
+      "geometry_sha256": "e1c168e8636fd0c4f1459ca6c77688b7b2680fdc85803fd69589282cecb421db",
+      "camera_proofs": [
+        {
+          "view": "front",
+          "type": "ORTHO",
+          "position": [
+            3.3897781372070312,
+            -538.7847900390625,
+            -17.61629295349121
+          ],
+          "forward": [
+            -0.0,
+            1.0,
+            1.6292068494294654e-07
+          ],
+          "up": [
+            0.0,
+            -1.6292068494294654e-07,
+            1.0
+          ],
+          "ortho_scale": 171.36004638671875,
+          "direction_error_degrees": 9.35262170110869e-06,
+          "up_error_degrees": 9.35262170110869e-06,
+          "per_view_geometry_sha256": "e1c168e8636fd0c4f1459ca6c77688b7b2680fdc85803fd69589282cecb421db"
+        },
+        {
+          "view": "right",
+          "type": "ORTHO",
+          "position": [
+            543.2767333984375,
+            1.1022300720214844,
+            -17.616226196289062
+          ],
+          "forward": [
+            -1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 171.36004638671875,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "e1c168e8636fd0c4f1459ca6c77688b7b2680fdc85803fd69589282cecb421db"
+        },
+        {
+          "view": "left",
+          "type": "ORTHO",
+          "position": [
+            -536.4971923828125,
+            1.1022300720214844,
+            -17.616228103637695
+          ],
+          "forward": [
+            1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            -4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 171.36004638671875,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "e1c168e8636fd0c4f1459ca6c77688b7b2680fdc85803fd69589282cecb421db"
+        },
+        {
+          "view": "back",
+          "type": "ORTHO",
+          "position": [
+            3.3897781372070312,
+            540.9891357421875,
+            -17.616239547729492
+          ],
+          "forward": [
+            1.1399865765455465e-14,
+            -1.0,
+            7.549790126404332e-08
+          ],
+          "up": [
+            1.5099580252808664e-07,
+            7.549790126404332e-08,
+            1.0
+          ],
+          "ortho_scale": 171.36004638671875,
+          "direction_error_degrees": 4.353408482428142e-06,
+          "up_error_degrees": 9.659346157805877e-06,
+          "per_view_geometry_sha256": "e1c168e8636fd0c4f1459ca6c77688b7b2680fdc85803fd69589282cecb421db"
+        },
+        {
+          "view": "top",
+          "type": "ORTHO",
+          "position": [
+            3.3897781372070312,
+            1.102203369140625,
+            522.270751953125
+          ],
+          "forward": [
+            -0.0,
+            -0.0,
+            -1.0
+          ],
+          "up": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "ortho_scale": 171.36004638671875,
+          "direction_error_degrees": 0.0,
+          "up_error_degrees": 0.0,
+          "per_view_geometry_sha256": "e1c168e8636fd0c4f1459ca6c77688b7b2680fdc85803fd69589282cecb421db"
+        },
+        {
+          "view": "isometric",
+          "type": "ORTHO",
+          "position": [
+            250.06430053710938,
+            -246.25843811035156,
+            394.0262756347656
+          ],
+          "forward": [
+            -0.46016553044319153,
+            0.46016553044319153,
+            -0.7592729330062866
+          ],
+          "up": [
+            -0.5368871092796326,
+            0.536886990070343,
+            0.6507723331451416
+          ],
+          "ortho_scale": 236.49609375,
+          "direction_error_degrees": null,
+          "up_error_degrees": null,
+          "per_view_geometry_sha256": "e1c168e8636fd0c4f1459ca6c77688b7b2680fdc85803fd69589282cecb421db"
+        }
+      ],
+      "palette": {
+        "land": "#61507D",
+        "rock": "#40365D",
+        "road": "#A18AB5",
+        "water": "#46AABB",
+        "leaf": "#736591",
+        "accent": "#AC70EA",
+        "style": "crystal"
+      },
+      "validation_check_count": 14,
+      "render_hash_snapshot_count": 9,
+      "unity_playtest_performed": false
+    },
+    {
+      "id": "04_autumn_windmills",
+      "title": "Осенние ветряные холмы",
+      "pass": true,
+      "errors": [],
+      "images": {
+        "front": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4939110,
+          "sha256": "8482510857739e2cb7487a7358bf20e9d614a83174fca4a6c9e6bb7af772693d"
+        },
+        "right": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4795656,
+          "sha256": "cc5d16a85e7c4db9f4db455ab41e43b4a5c39caa420ef4c76917158d72220769"
+        },
+        "left": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4961084,
+          "sha256": "3b1145e68c5ac5110075107a7050dc5fda819271a39ab9ef3d368d34bdbcdae5"
+        },
+        "back": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4874331,
+          "sha256": "38f55945399e43928a998f87e05a50df873cd6f7d2264bad23886c95ad00eab8"
+        },
+        "top": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 7221101,
+          "sha256": "0e837707216f43e9ccfac49a6c7600b908484e6d3d51c1968b6f076af81bc297"
+        },
+        "isometric": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5717897,
+          "sha256": "a30b56d5d30f2319c05ba58761cc4ffcc1dc4d218620965daebc5b123a625581"
+        }
+      },
+      "files": {
+        "island.blend": {
+          "bytes": 21757319,
+          "sha256": "f592285061a37ebd9f9951981eac4f628f14b618c2648cb7532faa92f45166ac"
+        },
+        "island.glb": {
+          "bytes": 120612316,
+          "meshes": 2441,
+          "nodes": 4147,
+          "materials": 61,
+          "distinct_nonwhite_base_colors": 42,
+          "sha256": "ed3c83111adcc076ae594e8039ceecef8516c6f99bd8f33d94eb75fbdb130096"
+        },
+        "manifest.json": {
+          "bytes": 249214,
+          "sha256": "f152254e5ed4f6f098bb5dd806af97ecd8252cee3bc44bd92d88f1278f1fa79e"
+        },
+        "validation.json": {
+          "bytes": 14129,
+          "sha256": "ee84b8c0993754fbc40dbc7011f75b0ed16a2157ff0cd629ad6413fdd9693782"
+        }
+      },
+      "geometry_sha256": "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+      "camera_proofs": [
+        {
+          "view": "front",
+          "type": "ORTHO",
+          "position": [
+            -7.114601135253906,
+            -600.8240356445312,
+            -14.315195083618164
+          ],
+          "forward": [
+            -0.0,
+            1.0,
+            1.6292068494294654e-07
+          ],
+          "up": [
+            0.0,
+            -1.6292068494294654e-07,
+            1.0
+          ],
+          "ortho_scale": 190.24021911621094,
+          "direction_error_degrees": 9.35262170110869e-06,
+          "up_error_degrees": 9.35262170110869e-06,
+          "per_view_geometry_sha256": "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e"
+        },
+        {
+          "view": "right",
+          "type": "ORTHO",
+          "position": [
+            592.2561645507812,
+            -1.4532470703125,
+            -14.31512451171875
+          ],
+          "forward": [
+            -1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 190.24021911621094,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e"
+        },
+        {
+          "view": "left",
+          "type": "ORTHO",
+          "position": [
+            -606.4854125976562,
+            -1.4532470703125,
+            -14.315132141113281
+          ],
+          "forward": [
+            1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            -4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 190.24021911621094,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e"
+        },
+        {
+          "view": "back",
+          "type": "ORTHO",
+          "position": [
+            -7.114604949951172,
+            597.9175415039062,
+            -14.315141677856445
+          ],
+          "forward": [
+            1.1399865765455465e-14,
+            -1.0,
+            7.549790126404332e-08
+          ],
+          "up": [
+            1.5099580252808664e-07,
+            7.549790126404332e-08,
+            1.0
+          ],
+          "ortho_scale": 190.24021911621094,
+          "direction_error_degrees": 4.353408482428142e-06,
+          "up_error_degrees": 9.659346157805877e-06,
+          "per_view_geometry_sha256": "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e"
+        },
+        {
+          "view": "top",
+          "type": "ORTHO",
+          "position": [
+            -7.114601135253906,
+            -1.4532737731933594,
+            585.0556640625
+          ],
+          "forward": [
+            -0.0,
+            -0.0,
+            -1.0
+          ],
+          "up": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "ortho_scale": 190.24021911621094,
+          "direction_error_degrees": 0.0,
+          "up_error_degrees": 0.0,
+          "per_view_geometry_sha256": "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e"
+        },
+        {
+          "view": "isometric",
+          "type": "ORTHO",
+          "position": [
+            268.7190856933594,
+            -275.88067626953125,
+            441.59423828125
+          ],
+          "forward": [
+            -0.46016553044319153,
+            0.46016553044319153,
+            -0.7592729330062866
+          ],
+          "up": [
+            -0.5368871092796326,
+            0.536886990070343,
+            0.6507723331451416
+          ],
+          "ortho_scale": 249.2891387939453,
+          "direction_error_degrees": null,
+          "up_error_degrees": null,
+          "per_view_geometry_sha256": "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e"
+        }
+      ],
+      "palette": {
+        "land": "#AC8245",
+        "rock": "#875A42",
+        "road": "#CDA36F",
+        "water": "#6196A9",
+        "leaf": "#BF682E",
+        "leaf_light": "#E3A445",
+        "style": "autumn"
+      },
+      "validation_check_count": 14,
+      "render_hash_snapshot_count": 9,
+      "unity_playtest_performed": false
+    },
+    {
+      "id": "05_frost_moon",
+      "title": "Лунный ледник",
+      "pass": true,
+      "errors": [],
+      "images": {
+        "front": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5053613,
+          "sha256": "f4914579aad325456f3f99658016c9674511b9511d380f8e834567a8f2667a29"
+        },
+        "right": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5085515,
+          "sha256": "260fcdd6f93ad90323b647cc4fc72ec22a2bbc4e5ad413b8809b05e3e7a719ee"
+        },
+        "left": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5045881,
+          "sha256": "9c39f1c96debc21fba434ced84a1b5d7a820b391d3ef56082181f0c19af40250"
+        },
+        "back": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5056349,
+          "sha256": "34a24613dd1f98ff692c9bb2ef21235a252f16407d9ebeef12b4715dfb208891"
+        },
+        "top": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5893671,
+          "sha256": "9c0faa45fb8cecbdab437dc7432ad903e6c6e7e29dd1f4e0d7798b499ea70c0f"
+        },
+        "isometric": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4972178,
+          "sha256": "d2ba13fbfbca63f5c91a40f731130f6b4a40c6f956fb290aaf1cc0ff0483be37"
+        }
+      },
+      "files": {
+        "island.blend": {
+          "bytes": 37811117,
+          "sha256": "c0c649fb00a79143f3e8a650c6de8161f501d64ca9eac16a454ee875842837d9"
+        },
+        "island.glb": {
+          "bytes": 155114500,
+          "meshes": 2682,
+          "nodes": 2938,
+          "materials": 50,
+          "distinct_nonwhite_base_colors": 47,
+          "sha256": "e2b6048416bc03fd3acbdf55791e39478e4bc92ed1ddd5c8ecf638d9663cf609"
+        },
+        "manifest.json": {
+          "bytes": 63329,
+          "sha256": "793c3b4c2ff2798bc0279c370d3d71f5e91b7af842c8b0c1976b9442ba16e682"
+        },
+        "validation.json": {
+          "bytes": 14120,
+          "sha256": "a5e819021c920403703e3c8f129118da6540bdbe6ce7c26e60824d2c3210843d"
+        }
+      },
+      "geometry_sha256": "8d3dea14c4eb6f6d8bee4a8301716ba0a1ecc8c4d0b37959387151667a3dcefa",
+      "camera_proofs": [
+        {
+          "view": "front",
+          "type": "ORTHO",
+          "position": [
+            0.2816505432128906,
+            -538.91455078125,
+            -16.879940032958984
+          ],
+          "forward": [
+            -0.0,
+            1.0,
+            1.6292068494294654e-07
+          ],
+          "up": [
+            0.0,
+            -1.6292068494294654e-07,
+            1.0
+          ],
+          "ortho_scale": 171.97531127929688,
+          "direction_error_degrees": 9.35262170110869e-06,
+          "up_error_degrees": 9.35262170110869e-06,
+          "per_view_geometry_sha256": "8d3dea14c4eb6f6d8bee4a8301716ba0a1ecc8c4d0b37959387151667a3dcefa"
+        },
+        {
+          "view": "right",
+          "type": "ORTHO",
+          "position": [
+            542.1071166992188,
+            2.9109344482421875,
+            -16.879873275756836
+          ],
+          "forward": [
+            -1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 171.97531127929688,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "8d3dea14c4eb6f6d8bee4a8301716ba0a1ecc8c4d0b37959387151667a3dcefa"
+        },
+        {
+          "view": "left",
+          "type": "ORTHO",
+          "position": [
+            -541.5437622070312,
+            2.9109344482421875,
+            -16.879873275756836
+          ],
+          "forward": [
+            1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            -4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 171.97531127929688,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "8d3dea14c4eb6f6d8bee4a8301716ba0a1ecc8c4d0b37959387151667a3dcefa"
+        },
+        {
+          "view": "back",
+          "type": "ORTHO",
+          "position": [
+            0.281646728515625,
+            544.736328125,
+            -16.87989044189453
+          ],
+          "forward": [
+            1.1399865765455465e-14,
+            -1.0,
+            7.549790126404332e-08
+          ],
+          "up": [
+            1.5099580252808664e-07,
+            7.549790126404332e-08,
+            1.0
+          ],
+          "ortho_scale": 171.97531127929688,
+          "direction_error_degrees": 4.353408482428142e-06,
+          "up_error_degrees": 9.659346157805877e-06,
+          "per_view_geometry_sha256": "8d3dea14c4eb6f6d8bee4a8301716ba0a1ecc8c4d0b37959387151667a3dcefa"
+        },
+        {
+          "view": "top",
+          "type": "ORTHO",
+          "position": [
+            0.2816505432128906,
+            2.9109115600585938,
+            524.9456176757812
+          ],
+          "forward": [
+            -0.0,
+            -0.0,
+            -1.0
+          ],
+          "up": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "ortho_scale": 171.97531127929688,
+          "direction_error_degrees": 0.0,
+          "up_error_degrees": 0.0,
+          "per_view_geometry_sha256": "8d3dea14c4eb6f6d8bee4a8301716ba0a1ecc8c4d0b37959387151667a3dcefa"
+        },
+        {
+          "view": "isometric",
+          "type": "ORTHO",
+          "position": [
+            248.39569091796875,
+            -246.07073974609375,
+            395.4608459472656
+          ],
+          "forward": [
+            -0.46016553044319153,
+            0.46016553044319153,
+            -0.7592729330062866
+          ],
+          "up": [
+            -0.5368871092796326,
+            0.536886990070343,
+            0.6507723331451416
+          ],
+          "ortho_scale": 237.81886291503906,
+          "direction_error_degrees": null,
+          "up_error_degrees": null,
+          "per_view_geometry_sha256": "8d3dea14c4eb6f6d8bee4a8301716ba0a1ecc8c4d0b37959387151667a3dcefa"
+        }
+      ],
+      "palette": {
+        "land": "#D9E8EC",
+        "rock": "#6AABCF",
+        "road": "#819BAC",
+        "water": "#3E86A3",
+        "leaf": "#89B9BB",
+        "style": "ice"
+      },
+      "validation_check_count": 14,
+      "render_hash_snapshot_count": 9,
+      "unity_playtest_performed": false
+    },
+    {
+      "id": "06_tropical_cascade",
+      "title": "Тропические каскады",
+      "pass": true,
+      "errors": [],
+      "images": {
+        "front": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4988271,
+          "sha256": "6f2778639343e5563f7b05702a2b2f1a1d7b931c0d17a6037978f76906633db9"
+        },
+        "right": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4860381,
+          "sha256": "a76f679ead9160fc2429fe48202da5805f388914a2704a87da2731411d23b9d1"
+        },
+        "left": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5080075,
+          "sha256": "c317bcf21a25e1d6be7d7f7486d39bf250889a6dea2c7138fab0abed0d872972"
+        },
+        "back": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4870051,
+          "sha256": "5a6dab6bd42b1783c7f6ed8cc93a2dd6ba58a3c1aa1561ef68f82e8651c95430"
+        },
+        "top": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 7066487,
+          "sha256": "3c3d74c07c7d01b3ee42f4cba0c628cc3d878e4fab2b5cbd6f3cb4f8a36bff86"
+        },
+        "isometric": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5421870,
+          "sha256": "d2396f28288518972cbd6dc0f2175f5ce2fb09041189ec3317804b249adb459d"
+        }
+      },
+      "files": {
+        "island.blend": {
+          "bytes": 16270360,
+          "sha256": "f1c5feb9ecc454735f3c902cdb444c53a9f3cc43f01dbd2099badc13f11adf85"
+        },
+        "island.glb": {
+          "bytes": 103446784,
+          "meshes": 3114,
+          "nodes": 4812,
+          "materials": 65,
+          "distinct_nonwhite_base_colors": 48,
+          "sha256": "dd852a3e02452a44ff0044ee68f1c9c59258db7879f7975839c4f0a554cfe0c7"
+        },
+        "manifest.json": {
+          "bytes": 271437,
+          "sha256": "2b11f65bccb766a57fab254d755414d94b51d92b8f6af23e1126718512264844"
+        },
+        "validation.json": {
+          "bytes": 14101,
+          "sha256": "e041505b42b3118444c3b53e4a0788643ed0eda9d5d69617f4eae4d32cffd5e2"
+        }
+      },
+      "geometry_sha256": "25dd8fcb2f6159d4cef17ed6f5fd5b1c9b9d9608c4e99ea797c5c46bb31cc31c",
+      "camera_proofs": [
+        {
+          "view": "front",
+          "type": "ORTHO",
+          "position": [
+            -3.603900909423828,
+            -552.338134765625,
+            -14.855683326721191
+          ],
+          "forward": [
+            -0.0,
+            1.0,
+            1.6292068494294654e-07
+          ],
+          "up": [
+            0.0,
+            -1.6292068494294654e-07,
+            1.0
+          ],
+          "ortho_scale": 175.5918731689453,
+          "direction_error_degrees": 9.35262170110869e-06,
+          "up_error_degrees": 9.35262170110869e-06,
+          "per_view_geometry_sha256": "25dd8fcb2f6159d4cef17ed6f5fd5b1c9b9d9608c4e99ea797c5c46bb31cc31c"
+        },
+        {
+          "view": "right",
+          "type": "ORTHO",
+          "position": [
+            549.6158447265625,
+            0.8816452026367188,
+            -14.85561466217041
+          ],
+          "forward": [
+            -1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 175.5918731689453,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "25dd8fcb2f6159d4cef17ed6f5fd5b1c9b9d9608c4e99ea797c5c46bb31cc31c"
+        },
+        {
+          "view": "left",
+          "type": "ORTHO",
+          "position": [
+            -556.8236083984375,
+            0.8816452026367188,
+            -14.855616569519043
+          ],
+          "forward": [
+            1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            -4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 175.5918731689453,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "25dd8fcb2f6159d4cef17ed6f5fd5b1c9b9d9608c4e99ea797c5c46bb31cc31c"
+        },
+        {
+          "view": "back",
+          "type": "ORTHO",
+          "position": [
+            -3.6039047241210938,
+            554.101318359375,
+            -14.855629920959473
+          ],
+          "forward": [
+            1.1399865765455465e-14,
+            -1.0,
+            7.549790126404332e-08
+          ],
+          "up": [
+            1.5099580252808664e-07,
+            7.549790126404332e-08,
+            1.0
+          ],
+          "ortho_scale": 175.5918731689453,
+          "direction_error_degrees": 4.353408482428142e-06,
+          "up_error_degrees": 9.659346157805877e-06,
+          "per_view_geometry_sha256": "25dd8fcb2f6159d4cef17ed6f5fd5b1c9b9d9608c4e99ea797c5c46bb31cc31c"
+        },
+        {
+          "view": "top",
+          "type": "ORTHO",
+          "position": [
+            -3.603900909423828,
+            0.8816184997558594,
+            538.3641357421875
+          ],
+          "forward": [
+            -0.0,
+            -0.0,
+            -1.0
+          ],
+          "up": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "ortho_scale": 175.5918731689453,
+          "direction_error_degrees": 0.0,
+          "up_error_degrees": 0.0,
+          "per_view_geometry_sha256": "25dd8fcb2f6159d4cef17ed6f5fd5b1c9b9d9608c4e99ea797c5c46bb31cc31c"
+        },
+        {
+          "view": "isometric",
+          "type": "ORTHO",
+          "position": [
+            250.89956665039062,
+            -252.2257080078125,
+            406.119140625
+          ],
+          "forward": [
+            -0.46016553044319153,
+            0.46016553044319153,
+            -0.7592729330062866
+          ],
+          "up": [
+            -0.5368871092796326,
+            0.536886990070343,
+            0.6507723331451416
+          ],
+          "ortho_scale": 242.81813049316406,
+          "direction_error_degrees": null,
+          "up_error_degrees": null,
+          "per_view_geometry_sha256": "25dd8fcb2f6159d4cef17ed6f5fd5b1c9b9d9608c4e99ea797c5c46bb31cc31c"
+        }
+      ],
+      "palette": {
+        "land": "#58844D",
+        "rock": "#505F58",
+        "road": "#778178",
+        "water": "#2DAFB0",
+        "leaf": "#33824F",
+        "leaf_light": "#78A54D",
+        "style": "tropical"
+      },
+      "validation_check_count": 14,
+      "render_hash_snapshot_count": 9,
+      "unity_playtest_performed": false
+    },
+    {
+      "id": "07_storm_coast",
+      "title": "Грозовой берег",
+      "pass": true,
+      "errors": [],
+      "images": {
+        "front": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4672304,
+          "sha256": "bc9966e6115a285f4071a66bfcdd195c839718b46fcd11727a8d1f6bc6ac2c92"
+        },
+        "right": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4484217,
+          "sha256": "c016034a1da4fdabab7f5fe25941c5e7d8ffb1d3bb5433a4362999929a035d81"
+        },
+        "left": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4655703,
+          "sha256": "0d58fed981dd8533930f02bf521fe8c5f065a4391922f41b291d9b0b9657f59b"
+        },
+        "back": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4616433,
+          "sha256": "cd1c248a6430b157ffc2dec7a950e386c8e0724fe17fbbb88995ee1f4865ef10"
+        },
+        "top": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5814863,
+          "sha256": "a2a325bf88eeb484539b7df45843190c3c33c815455ce6632e74c28c0206c588"
+        },
+        "isometric": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5059003,
+          "sha256": "30fcb22cac77a4c4849ea996fb5d964c522865a6a34792f09c10dad8ff4ffd85"
+        }
+      },
+      "files": {
+        "island.blend": {
+          "bytes": 37574321,
+          "sha256": "41b32c1670739f6a9c9d9c966aad3ac8bac30e04a51b8a07dbba791dfd5e3c60"
+        },
+        "island.glb": {
+          "bytes": 156046036,
+          "meshes": 3109,
+          "nodes": 3415,
+          "materials": 53,
+          "distinct_nonwhite_base_colors": 49,
+          "sha256": "0fca1d9daf525c8fc78420a9e306b7b1da2ae0c2548c1c388f61c4b92ad50777"
+        },
+        "manifest.json": {
+          "bytes": 61067,
+          "sha256": "46e11d127759459213178932b03fcff960dc1bf9640a6fdc0799897ca9758e24"
+        },
+        "validation.json": {
+          "bytes": 14121,
+          "sha256": "45617e147f67d4b312e33588cfba5afff8098d7a1fa6eca3bceb0a500495a509"
+        }
+      },
+      "geometry_sha256": "816bda7a4fb3800be965a82d7a6e94bfed9fee9d73c29443f45554d6fe42a571",
+      "camera_proofs": [
+        {
+          "view": "front",
+          "type": "ORTHO",
+          "position": [
+            -7.635921478271484,
+            -601.371337890625,
+            -15.375104904174805
+          ],
+          "forward": [
+            -0.0,
+            1.0,
+            1.6292068494294654e-07
+          ],
+          "up": [
+            0.0,
+            -1.6292068494294654e-07,
+            1.0
+          ],
+          "ortho_scale": 193.1974639892578,
+          "direction_error_degrees": 9.35262170110869e-06,
+          "up_error_degrees": 9.35262170110869e-06,
+          "per_view_geometry_sha256": "816bda7a4fb3800be965a82d7a6e94bfed9fee9d73c29443f45554d6fe42a571"
+        },
+        {
+          "view": "right",
+          "type": "ORTHO",
+          "position": [
+            601.052001953125,
+            7.3166046142578125,
+            -15.37503433227539
+          ],
+          "forward": [
+            -1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 193.1974639892578,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "816bda7a4fb3800be965a82d7a6e94bfed9fee9d73c29443f45554d6fe42a571"
+        },
+        {
+          "view": "left",
+          "type": "ORTHO",
+          "position": [
+            -616.3238525390625,
+            7.3166046142578125,
+            -15.375038146972656
+          ],
+          "forward": [
+            1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            -4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 193.1974639892578,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "816bda7a4fb3800be965a82d7a6e94bfed9fee9d73c29443f45554d6fe42a571"
+        },
+        {
+          "view": "back",
+          "type": "ORTHO",
+          "position": [
+            -7.63592529296875,
+            616.0045166015625,
+            -15.375051498413086
+          ],
+          "forward": [
+            1.1399865765455465e-14,
+            -1.0,
+            7.549790126404332e-08
+          ],
+          "up": [
+            1.5099580252808664e-07,
+            7.549790126404332e-08,
+            1.0
+          ],
+          "ortho_scale": 193.1974639892578,
+          "direction_error_degrees": 4.353408482428142e-06,
+          "up_error_degrees": 9.659346157805877e-06,
+          "per_view_geometry_sha256": "816bda7a4fb3800be965a82d7a6e94bfed9fee9d73c29443f45554d6fe42a571"
+        },
+        {
+          "view": "top",
+          "type": "ORTHO",
+          "position": [
+            -7.635921478271484,
+            7.316577911376953,
+            593.3129272460938
+          ],
+          "forward": [
+            -0.0,
+            -0.0,
+            -1.0
+          ],
+          "up": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "ortho_scale": 193.1974639892578,
+          "direction_error_degrees": 0.0,
+          "up_error_degrees": 0.0,
+          "per_view_geometry_sha256": "816bda7a4fb3800be965a82d7a6e94bfed9fee9d73c29443f45554d6fe42a571"
+        },
+        {
+          "view": "isometric",
+          "type": "ORTHO",
+          "position": [
+            272.4151306152344,
+            -271.8037109375,
+            447.4052734375
+          ],
+          "forward": [
+            -0.46016553044319153,
+            0.46016553044319153,
+            -0.7592729330062866
+          ],
+          "up": [
+            -0.5368871092796326,
+            0.536886990070343,
+            0.6507723331451416
+          ],
+          "ortho_scale": 245.23074340820312,
+          "direction_error_degrees": null,
+          "up_error_degrees": null,
+          "per_view_geometry_sha256": "816bda7a4fb3800be965a82d7a6e94bfed9fee9d73c29443f45554d6fe42a571"
+        }
+      ],
+      "palette": {
+        "land": "#6B7362",
+        "rock": "#343E48",
+        "road": "#697078",
+        "water": "#346E82",
+        "leaf": "#435F53",
+        "style": "storm"
+      },
+      "validation_check_count": 14,
+      "render_hash_snapshot_count": 9,
+      "unity_playtest_performed": false
+    },
+    {
+      "id": "08_sunflower_terraces",
+      "title": "Солнечные поля",
+      "pass": true,
+      "errors": [],
+      "images": {
+        "front": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5099682,
+          "sha256": "3052716089e779ba157eaa6febfe9165338c5dff10b16e669136d6dc552ab060"
+        },
+        "right": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5038674,
+          "sha256": "3fcec9f257a3a1734e407da41d27588d0c54aa4ab9274d0226028e087bc40a3b"
+        },
+        "left": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5126770,
+          "sha256": "2e9eb5121bba4940bce964e98ac93033d7a460269fc9e1729574487f6b2945e5"
+        },
+        "back": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5059721,
+          "sha256": "e17a59832914526c1484e6b3fe39113073d1cfe9969ace82f1401f1b50570699"
+        },
+        "top": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 6758531,
+          "sha256": "4062543567bd560de0a70391b300018e58e8bf34cba526540d90cbbf6579830b"
+        },
+        "isometric": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5353971,
+          "sha256": "eca0b27d2ad7f48d39a1c5ed846302299c39b5c3e352b402a525f2037f76b094"
+        }
+      },
+      "files": {
+        "island.blend": {
+          "bytes": 21376980,
+          "sha256": "268b3fe31f79d990cc5c4a8b0fd18dc776c9e8445d5309c98d01dd117a34abfb"
+        },
+        "island.glb": {
+          "bytes": 108257432,
+          "meshes": 2271,
+          "nodes": 3505,
+          "materials": 64,
+          "distinct_nonwhite_base_colors": 47,
+          "sha256": "82301c0d332e3fc3cb107b91927bb38ed12631457635778ed2ccb9dd016fd3b9"
+        },
+        "manifest.json": {
+          "bytes": 198116,
+          "sha256": "ab7d6d06aeade4a01018ad71600c0eefcb08f65b76b294d925e9c1901cf20c8e"
+        },
+        "validation.json": {
+          "bytes": 14102,
+          "sha256": "5058a3e7ac6e7a0dd0f07f86b1a4de43232a7a2346c874f76e0d94e205796ea8"
+        }
+      },
+      "geometry_sha256": "f24df158f978cab6c6ae373ab7b126c9b331fe2ab6047bf3e6c121dcc773e7b9",
+      "camera_proofs": [
+        {
+          "view": "front",
+          "type": "ORTHO",
+          "position": [
+            -2.1823081970214844,
+            -551.2263793945312,
+            -16.237918853759766
+          ],
+          "forward": [
+            -0.0,
+            1.0,
+            1.6292068494294654e-07
+          ],
+          "up": [
+            0.0,
+            -1.6292068494294654e-07,
+            1.0
+          ],
+          "ortho_scale": 175.0835418701172,
+          "direction_error_degrees": 9.35262170110869e-06,
+          "up_error_degrees": 9.35262170110869e-06,
+          "per_view_geometry_sha256": "f24df158f978cab6c6ae373ab7b126c9b331fe2ab6047bf3e6c121dcc773e7b9"
+        },
+        {
+          "view": "right",
+          "type": "ORTHO",
+          "position": [
+            549.4358520507812,
+            0.3918304443359375,
+            -16.23785400390625
+          ],
+          "forward": [
+            -1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 175.0835418701172,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "f24df158f978cab6c6ae373ab7b126c9b331fe2ab6047bf3e6c121dcc773e7b9"
+        },
+        {
+          "view": "left",
+          "type": "ORTHO",
+          "position": [
+            -553.8004760742188,
+            0.3918266296386719,
+            -16.237850189208984
+          ],
+          "forward": [
+            1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            -4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 175.0835418701172,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "f24df158f978cab6c6ae373ab7b126c9b331fe2ab6047bf3e6c121dcc773e7b9"
+        },
+        {
+          "view": "back",
+          "type": "ORTHO",
+          "position": [
+            -2.1823081970214844,
+            552.0099487304688,
+            -16.237873077392578
+          ],
+          "forward": [
+            1.1399865765455465e-14,
+            -1.0,
+            7.549790126404332e-08
+          ],
+          "up": [
+            1.5099580252808664e-07,
+            7.549790126404332e-08,
+            1.0
+          ],
+          "ortho_scale": 175.0835418701172,
+          "direction_error_degrees": 4.353408482428142e-06,
+          "up_error_degrees": 9.659346157805877e-06,
+          "per_view_geometry_sha256": "f24df158f978cab6c6ae373ab7b126c9b331fe2ab6047bf3e6c121dcc773e7b9"
+        },
+        {
+          "view": "top",
+          "type": "ORTHO",
+          "position": [
+            -2.1823081970214844,
+            0.3918037414550781,
+            535.3803100585938
+          ],
+          "forward": [
+            -0.0,
+            -0.0,
+            -1.0
+          ],
+          "up": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "ortho_scale": 175.0835418701172,
+          "direction_error_degrees": 0.0,
+          "up_error_degrees": 0.0,
+          "per_view_geometry_sha256": "f24df158f978cab6c6ae373ab7b126c9b331fe2ab6047bf3e6c121dcc773e7b9"
+        },
+        {
+          "view": "isometric",
+          "type": "ORTHO",
+          "position": [
+            252.4001922607422,
+            -253.301025390625,
+            402.2248229980469
+          ],
+          "forward": [
+            -0.46016553044319153,
+            0.46016553044319153,
+            -0.7592729330062866
+          ],
+          "up": [
+            -0.5368871092796326,
+            0.536886990070343,
+            0.6507723331451416
+          ],
+          "ortho_scale": 242.7532501220703,
+          "direction_error_degrees": null,
+          "up_error_degrees": null,
+          "per_view_geometry_sha256": "f24df158f978cab6c6ae373ab7b126c9b331fe2ab6047bf3e6c121dcc773e7b9"
+        }
+      ],
+      "palette": {
+        "land": "#B5A249",
+        "rock": "#AD8B5C",
+        "road": "#D0B082",
+        "water": "#4BA5A8",
+        "leaf": "#5D8C42",
+        "accent": "#E5BC41",
+        "style": "farm"
+      },
+      "validation_check_count": 14,
+      "render_hash_snapshot_count": 9,
+      "unity_playtest_performed": false
+    },
+    {
+      "id": "09_volcanic_garden",
+      "title": "Вулканический сад",
+      "pass": true,
+      "errors": [],
+      "images": {
+        "front": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4483049,
+          "sha256": "5e68d0caeaf2571eaf10845815efad56f15a9083e70b3ffcad7f4f9c5f26db22"
+        },
+        "right": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4367118,
+          "sha256": "5d08412197c15c00bf5233f5ffdeda5da3d18acc9616a68ac8001807ed0a095e"
+        },
+        "left": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4468936,
+          "sha256": "df3ecdd2f2a78d8547fb61c0bae6615efe169a7eab39640d7c3a2d52468c8079"
+        },
+        "back": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4438572,
+          "sha256": "ad20fa7cea81cb920c37eeedd7bbcf72a6ddc2cb6b9b5845416fcf9cc12e15b9"
+        },
+        "top": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5913149,
+          "sha256": "d06759994346a3065ad4eef54f35f2d62e5fc79cab720013cab309bf8545a9d9"
+        },
+        "isometric": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5088193,
+          "sha256": "c33434a1d739cea01f670fc2a8cc6deedbfa0e22df22d76bdf7326217f149cbf"
+        }
+      },
+      "files": {
+        "island.blend": {
+          "bytes": 20557962,
+          "sha256": "7c9aa608e65e2b7debc782d691bc3a8d3d58311022533701c3021518fa1daaae"
+        },
+        "island.glb": {
+          "bytes": 112549524,
+          "meshes": 2208,
+          "nodes": 2464,
+          "materials": 55,
+          "distinct_nonwhite_base_colors": 49,
+          "sha256": "3cb08d16436bac3e108a75f69b3208d29b82f12725e9d8af6aefe3e4a70ca4f9"
+        },
+        "manifest.json": {
+          "bytes": 71147,
+          "sha256": "b3cee28ffed456a8222576c2ddcde74f35ae90c958a55d94ddb8e4d594a246fc"
+        },
+        "validation.json": {
+          "bytes": 14125,
+          "sha256": "ffa0cf026a18b081ed26f52497449550f9f118f19a957ee086ca9bbcaddc1dc5"
+        }
+      },
+      "geometry_sha256": "26e7a4c519283992737bffca16bbf41a4c48659da9a9545ab3c933f44030e5cf",
+      "camera_proofs": [
+        {
+          "view": "front",
+          "type": "ORTHO",
+          "position": [
+            5.732391357421875,
+            -622.085693359375,
+            -17.143556594848633
+          ],
+          "forward": [
+            -0.0,
+            1.0,
+            1.6292068494294654e-07
+          ],
+          "up": [
+            0.0,
+            -1.6292068494294654e-07,
+            1.0
+          ],
+          "ortho_scale": 197.8754425048828,
+          "direction_error_degrees": 9.35262170110869e-06,
+          "up_error_degrees": 9.35262170110869e-06,
+          "per_view_geometry_sha256": "26e7a4c519283992737bffca16bbf41a4c48659da9a9545ab3c933f44030e5cf"
+        },
+        {
+          "view": "right",
+          "type": "ORTHO",
+          "position": [
+            629.15869140625,
+            1.3406906127929688,
+            -17.143476486206055
+          ],
+          "forward": [
+            -1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 197.8754425048828,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "26e7a4c519283992737bffca16bbf41a4c48659da9a9545ab3c933f44030e5cf"
+        },
+        {
+          "view": "left",
+          "type": "ORTHO",
+          "position": [
+            -617.6939697265625,
+            1.3406982421875,
+            -17.143482208251953
+          ],
+          "forward": [
+            1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            -4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 197.8754425048828,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "26e7a4c519283992737bffca16bbf41a4c48659da9a9545ab3c933f44030e5cf"
+        },
+        {
+          "view": "back",
+          "type": "ORTHO",
+          "position": [
+            5.732387542724609,
+            624.7669677734375,
+            -17.143491744995117
+          ],
+          "forward": [
+            1.1399865765455465e-14,
+            -1.0,
+            7.549790126404332e-08
+          ],
+          "up": [
+            1.5099580252808664e-07,
+            7.549790126404332e-08,
+            1.0
+          ],
+          "ortho_scale": 197.8754425048828,
+          "direction_error_degrees": 4.353408482428142e-06,
+          "up_error_degrees": 9.659346157805877e-06,
+          "per_view_geometry_sha256": "26e7a4c519283992737bffca16bbf41a4c48659da9a9545ab3c933f44030e5cf"
+        },
+        {
+          "view": "top",
+          "type": "ORTHO",
+          "position": [
+            5.732391357421875,
+            1.340667724609375,
+            606.2828979492188
+          ],
+          "forward": [
+            -0.0,
+            -0.0,
+            -1.0
+          ],
+          "up": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "ortho_scale": 197.8754425048828,
+          "direction_error_degrees": 0.0,
+          "up_error_degrees": 0.0,
+          "per_view_geometry_sha256": "26e7a4c519283992737bffca16bbf41a4c48659da9a9545ab3c933f44030e5cf"
+        },
+        {
+          "view": "isometric",
+          "type": "ORTHO",
+          "position": [
+            292.95855712890625,
+            -284.68560791015625,
+            456.5140075683594
+          ],
+          "forward": [
+            -0.46016553044319153,
+            0.46016553044319153,
+            -0.7592729330062866
+          ],
+          "up": [
+            -0.5368871092796326,
+            0.536886990070343,
+            0.6507723331451416
+          ],
+          "ortho_scale": 252.83114624023438,
+          "direction_error_degrees": null,
+          "up_error_degrees": null,
+          "per_view_geometry_sha256": "26e7a4c519283992737bffca16bbf41a4c48659da9a9545ab3c933f44030e5cf"
+        }
+      ],
+      "palette": {
+        "land": "#6F5149",
+        "rock": "#35323D",
+        "road": "#8F8582",
+        "water": "#BE613B",
+        "leaf": "#AB493D",
+        "accent": "#CF623D",
+        "style": "volcanic"
+      },
+      "validation_check_count": 14,
+      "render_hash_snapshot_count": 9,
+      "unity_playtest_performed": false
+    },
+    {
+      "id": "10_cloud_observatory",
+      "title": "Облачная обсерватория",
+      "pass": true,
+      "errors": [],
+      "images": {
+        "front": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4711198,
+          "sha256": "242876ce0345c1f2e6be1cacc9022b33762472960604052a6926b5081eb2720a"
+        },
+        "right": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4730588,
+          "sha256": "623ebd530b55b4a5e845946c70c2a3e23a09366a4a13e01659c220ed6241f075"
+        },
+        "left": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4797599,
+          "sha256": "be29cb8cbf41739c8b157bb7adb4fdc50dc05e50adc4c5382163bb0543568e82"
+        },
+        "back": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 4683293,
+          "sha256": "b51c0d92dbc07deb157e6a2b15a7a9b8c3383053fb6609f99b7b6bd4ff31abef"
+        },
+        "top": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 6301873,
+          "sha256": "d863ebf8ff1793eb03c6b7ea4b8d283fc47da756fdb0ea874ac7a8a3f970ec3f"
+        },
+        "isometric": {
+          "width": 2048,
+          "height": 2048,
+          "mode": "RGBA",
+          "bytes": 5261790,
+          "sha256": "ee2bbad4bf4f5020029304b4f0173a6ffae3253bb3d9d599a501fc0f21b1361f"
+        }
+      },
+      "files": {
+        "island.blend": {
+          "bytes": 23804047,
+          "sha256": "fd8057978c9280b1864f4549f392de1828871ab20642e2f05075966f216d3fe3"
+        },
+        "island.glb": {
+          "bytes": 121013192,
+          "meshes": 1773,
+          "nodes": 3026,
+          "materials": 67,
+          "distinct_nonwhite_base_colors": 53,
+          "sha256": "589e438b15a234cd5ac018f2469d0a86a1b36e25e37cb45582c239857b6dcbb6"
+        },
+        "manifest.json": {
+          "bytes": 230501,
+          "sha256": "e99b1533ba44fc9c5efaa13783528a91a4ffca19e8c14573e97bf27484241df1"
+        },
+        "validation.json": {
+          "bytes": 14107,
+          "sha256": "d427a1f3dfd24c9f449d265808a86eedbfb6bb51fc2e0757d34c33a2881b12be"
+        }
+      },
+      "geometry_sha256": "c195da20adf5f03ef7a45bd1ae68b91894e7315c48e545121411ceced739cc5c",
+      "camera_proofs": [
+        {
+          "view": "front",
+          "type": "ORTHO",
+          "position": [
+            3.3455810546875,
+            -604.3561401367188,
+            -17.10101318359375
+          ],
+          "forward": [
+            -0.0,
+            1.0,
+            1.6292068494294654e-07
+          ],
+          "up": [
+            0.0,
+            -1.6292068494294654e-07,
+            1.0
+          ],
+          "ortho_scale": 192.6398162841797,
+          "direction_error_degrees": 9.35262170110869e-06,
+          "up_error_degrees": 9.35262170110869e-06,
+          "per_view_geometry_sha256": "c195da20adf5f03ef7a45bd1ae68b91894e7315c48e545121411ceced739cc5c"
+        },
+        {
+          "view": "right",
+          "type": "ORTHO",
+          "position": [
+            610.2765502929688,
+            2.5748443603515625,
+            -17.10094451904297
+          ],
+          "forward": [
+            -1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 192.6398162841797,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "c195da20adf5f03ef7a45bd1ae68b91894e7315c48e545121411ceced739cc5c"
+        },
+        {
+          "view": "left",
+          "type": "ORTHO",
+          "position": [
+            -603.5853881835938,
+            2.5748443603515625,
+            -17.100940704345703
+          ],
+          "forward": [
+            1.0,
+            -4.371138828673793e-08,
+            4.371138828673793e-08
+          ],
+          "up": [
+            -4.371138828673793e-08,
+            1.910685676922942e-15,
+            1.0
+          ],
+          "ortho_scale": 192.6398162841797,
+          "direction_error_degrees": 3.4150945850063763e-06,
+          "up_error_degrees": 2.4148365394514667e-06,
+          "per_view_geometry_sha256": "c195da20adf5f03ef7a45bd1ae68b91894e7315c48e545121411ceced739cc5c"
+        },
+        {
+          "view": "back",
+          "type": "ORTHO",
+          "position": [
+            3.3455810546875,
+            609.5057983398438,
+            -17.100967407226562
+          ],
+          "forward": [
+            1.1399865765455465e-14,
+            -1.0,
+            7.549790126404332e-08
+          ],
+          "up": [
+            1.5099580252808664e-07,
+            7.549790126404332e-08,
+            1.0
+          ],
+          "ortho_scale": 192.6398162841797,
+          "direction_error_degrees": 4.353408482428142e-06,
+          "up_error_degrees": 9.659346157805877e-06,
+          "per_view_geometry_sha256": "c195da20adf5f03ef7a45bd1ae68b91894e7315c48e545121411ceced739cc5c"
+        },
+        {
+          "view": "top",
+          "type": "ORTHO",
+          "position": [
+            3.3455810546875,
+            2.574817657470703,
+            589.830078125
+          ],
+          "forward": [
+            -0.0,
+            -0.0,
+            -1.0
+          ],
+          "up": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "ortho_scale": 192.6398162841797,
+          "direction_error_degrees": 0.0,
+          "up_error_degrees": 0.0,
+          "per_view_geometry_sha256": "c195da20adf5f03ef7a45bd1ae68b91894e7315c48e545121411ceced739cc5c"
+        },
+        {
+          "view": "isometric",
+          "type": "ORTHO",
+          "position": [
+            281.0940856933594,
+            -277.7247619628906,
+            444.0461120605469
+          ],
+          "forward": [
+            -0.46016553044319153,
+            0.46016553044319153,
+            -0.7592729330062866
+          ],
+          "up": [
+            -0.5368871092796326,
+            0.536886990070343,
+            0.6507723331451416
+          ],
+          "ortho_scale": 241.76806640625,
+          "direction_error_degrees": null,
+          "up_error_degrees": null,
+          "per_view_geometry_sha256": "c195da20adf5f03ef7a45bd1ae68b91894e7315c48e545121411ceced739cc5c"
+        }
+      ],
+      "palette": {
+        "land": "#DCB8BC",
+        "rock": "#AB94B7",
+        "road": "#AEAED1",
+        "water": "#B2C3E2",
+        "leaf": "#AC80B1",
+        "accent": "#D3B475",
+        "style": "cloud"
+      },
+      "validation_check_count": 14,
+      "render_hash_snapshot_count": 9,
+      "unity_playtest_performed": false
+    }
+  ]
+}

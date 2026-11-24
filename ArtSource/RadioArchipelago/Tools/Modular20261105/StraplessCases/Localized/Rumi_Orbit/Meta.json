@@ -1,0 +1,157 @@
+{
+  "id": "Rumi_Orbit",
+  "kind": "Backpack",
+  "frame": "Blender Z-up / face -Y; FBX -Z-forward Y-up",
+  "fixedMeshName": "Case",
+  "movableMeshName": "TopRotor",
+  "topPivotName": "TopPivot",
+  "caseBoundsMin": [
+    -0.5000000596046448,
+    -0.35493549704551697,
+    3.5728955936065177e-06
+  ],
+  "caseBoundsMax": [
+    0.5001547336578369,
+    0.35493549704551697,
+    0.9958580136299133
+  ],
+  "fixedBoundsMin": [
+    -0.49000000953674316,
+    -0.18270885944366455,
+    3.5728955936065177e-06
+  ],
+  "fixedBoundsMax": [
+    0.5001547336578369,
+    0.35493549704551697,
+    1.1323093175888062
+  ],
+  "contactPlaneY": -0.18270886567952443,
+  "rawToPreparedScale": 0.6821139201367381,
+  "referenceBodyWidth": 1.0,
+  "referenceBodyDepth": 0.5,
+  "topPivot": [
+    0.03478280082345009,
+    0.0701616108417511,
+    1.132309079170227
+  ],
+  "topPivotUnity": [
+    0.03478280082345009,
+    1.132309079170227,
+    -0.0701616108417511
+  ],
+  "spinAxisUnity": [
+    0,
+    1,
+    0
+  ],
+  "source": {
+    "vertices": 49002,
+    "polygons": 49071,
+    "triangles": 98129
+  },
+  "outputTriangles": {
+    "Case": 17039,
+    "TopRotor": 5996
+  },
+  "repairs": {
+    "localizedSpindleCutEdges": 28,
+    "rotorCaps": {
+      "sealedBoundaryEdges": 53,
+      "newCapFaces": 3
+    },
+    "caseCaps": {
+      "sealedBoundaryEdges": 173,
+      "newCapFaces": 4
+    },
+    "leftHarnessCaps": {
+      "sealedBoundaryEdges": 84,
+      "newCapFaces": 2
+    },
+    "rightHarnessCaps": {
+      "sealedBoundaryEdges": 86,
+      "newCapFaces": 2
+    },
+    "horizontalBearing": null,
+    "straplessCase20261105": {
+      "method": "localized mount socket reconstruction; original radio front and original fixed/moving mechanism retained",
+      "padTrimPlaneY": -0.15270886567952444,
+      "rootVolumes": [
+        {
+          "min": [
+            -1.5,
+            -2,
+            0.7767692506313324
+          ],
+          "max": [
+            -0.21,
+            0.04929113432047558,
+            1.9958580136299133
+          ]
+        },
+        {
+          "min": [
+            -1.5,
+            -2,
+            -1
+          ],
+          "max": [
+            -0.21,
+            0.04929113432047558,
+            0.22904734313488007
+          ]
+        },
+        {
+          "min": [
+            -1.5,
+            -2,
+            0.1792544424533844
+          ],
+          "max": [
+            -0.405,
+            -0.01070886567952442,
+            0.8365207314491272
+          ]
+        },
+        {
+          "min": [
+            0.21,
+            -2,
+            0.7767692506313324
+          ],
+          "max": [
+            1.5,
+            0.04929113432047558,
+            1.9958580136299133
+          ]
+        },
+        {
+          "min": [
+            0.21,
+            -2,
+            -1
+          ],
+          "max": [
+            1.5,
+            0.04929113432047558,
+            0.22904734313488007
+          ]
+        },
+        {
+          "min": [
+            0.405,
+            -2,
+            0.1792544424533844
+          ],
+          "max": [
+            1.5,
+            -0.01070886567952442,
+            0.8365207314491272
+          ]
+        }
+      ]
+    }
+  },
+  "sourceArchiveSha256": "ad080efecf369e9a618837106b53fa3c503819fca955551df2955f07ecc9b3ae",
+  "clearanceToCaseBody": 0.13644951581954956,
+  "validatedRevolutionSamples": 72
+}

@@ -1,0 +1,347 @@
+{
+  "schema": "radio_archipelago_v3_geometry_checks/1",
+  "pass": true,
+  "validation_kind": "evaluated_blender_geometry_and_supplied_render_evidence",
+  "unity_playtest_performed": false,
+  "parameters": {
+    "road_z": 0.0,
+    "road_width": 8,
+    "shoulder": 2,
+    "ceiling_height": 5.0,
+    "sample_step": 0.6,
+    "edge_inset": 0.05,
+    "height_tolerance": 0.025,
+    "terrain_below_offset": 0.08,
+    "surface_probe_lanes": 9
+  },
+  "limits": [
+    "Road raycasts sample center and both edges; gaps smaller than probe spacing can be missed.",
+    "Collider response, gameplay tile placement, chart timing and character animation were not simulated.",
+    "Render metadata must be captured by the rendering script; this validator does not itself render.",
+    "Geometry hashes exclude materials, lights and cameras and compare only supplied snapshots.",
+    "Collection/geometry-node instances must be realized into tagged meshes before this audit."
+  ],
+  "checks": [
+    {
+      "name": "route_loop_closed",
+      "pass": true,
+      "explicit_closing_point": false,
+      "authored_closed_flag": true,
+      "final_edge_length": 0.7996699859104115,
+      "route_point_count": 593,
+      "loop_length": 474.20313970520164
+    },
+    {
+      "name": "route_flat_at_road_z",
+      "pass": true,
+      "max_abs_z_error": 0.0,
+      "tolerance": 0.025
+    },
+    {
+      "name": "route_has_no_self_crossings",
+      "pass": true,
+      "crossing_count": 0,
+      "segment_pairs": []
+    },
+    {
+      "name": "render_instances_realized",
+      "pass": true,
+      "instance_count": 0,
+      "examples": []
+    },
+    {
+      "name": "all_render_geometry_has_role",
+      "pass": true,
+      "invalid_count": 0,
+      "examples": []
+    },
+    {
+      "name": "road_geometry_exists",
+      "pass": true,
+      "vertex_count": 8302,
+      "triangle_count": 16604
+    },
+    {
+      "name": "road_coverage_center_left_right",
+      "pass": true,
+      "sample_count": 1186,
+      "ray_count": 3558,
+      "missing_count": 0,
+      "max_sample_spacing": 0.6,
+      "tested_width": 7.9,
+      "edge_inset": 0.05,
+      "examples": []
+    },
+    {
+      "name": "road_height_and_normal",
+      "pass": true,
+      "min_hit_z": -9.5367431640625e-07,
+      "max_hit_z": 9.5367431640625e-07,
+      "max_abs_height_error": 9.5367431640625e-07,
+      "invalid_count": 0,
+      "tolerance": 0.025,
+      "examples": []
+    },
+    {
+      "name": "road_height_profile_continuity",
+      "pass": true,
+      "max_measured_grade": 4.770339926614928e-06,
+      "allowed_grade": 0.02,
+      "seam_included": true
+    },
+    {
+      "name": "terrain_below_road",
+      "pass": true,
+      "object_count": 437,
+      "scope": "sampled_actual_road_footprint",
+      "tested_width": 7.9,
+      "edge_inset": 0.05,
+      "sample_count": 1186,
+      "lanes_per_sample": 9,
+      "ray_count": 10674,
+      "hit_count": 10674,
+      "missing_count": 0,
+      "maximum_hit_z": -0.12999725341796875,
+      "maximum_allowed_z": -0.08,
+      "numerical_tolerance": 1e-05,
+      "violation_count": 0,
+      "examples": []
+    },
+    {
+      "name": "water_below_road",
+      "pass": true,
+      "object_count": 1,
+      "scope": "sampled_actual_road_footprint",
+      "tested_width": 7.9,
+      "edge_inset": 0.05,
+      "sample_count": 1186,
+      "lanes_per_sample": 9,
+      "ray_count": 10674,
+      "hit_count": 0,
+      "missing_count": 10674,
+      "maximum_hit_z": null,
+      "maximum_allowed_z": -0.025,
+      "numerical_tolerance": 1e-05,
+      "violation_count": 0,
+      "examples": []
+    },
+    {
+      "name": "swept_corridor_clearance",
+      "pass": true,
+      "protected_width": 12.0,
+      "required_ceiling_height": 5.0,
+      "no_overhead": true,
+      "tested_z_min": 0.025,
+      "tested_z_max": null,
+      "obstacle_collision_count": 0,
+      "candidate_object_count": 0,
+      "tested_triangle_count": 0,
+      "examples": []
+    },
+    {
+      "name": "five_orthographic_camera_views",
+      "pass": true,
+      "render_evidence_required": false,
+      "required_views": [
+        "top",
+        "front",
+        "back",
+        "left",
+        "right"
+      ],
+      "recorded_count": 6,
+      "missing_views": [],
+      "error_count": 0,
+      "examples": [],
+      "cameras": [
+        {
+          "view_id": "front",
+          "name": "Camera_front",
+          "type": "ORTHO",
+          "position": [
+            0.31383514404296875,
+            -538.91455078125,
+            -21.3416748046875
+          ],
+          "forward": [
+            0.0,
+            0.9999999403953552,
+            3.5762786865234375e-07
+          ],
+          "up": [
+            0.0,
+            -3.5762786865234375e-07,
+            0.9999999403953552
+          ],
+          "ortho_scale": 171.97531127929688,
+          "clip_start": 0.10000000149011612,
+          "clip_end": 2167.3017578125
+        },
+        {
+          "view_id": "right",
+          "name": "Camera_right",
+          "type": "ORTHO",
+          "position": [
+            542.1392822265625,
+            2.9109115600585938,
+            -21.3416748046875
+          ],
+          "forward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "up": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "ortho_scale": 171.97531127929688,
+          "clip_start": 0.10000000149011612,
+          "clip_end": 2167.3017578125
+        },
+        {
+          "view_id": "left",
+          "name": "Camera_left",
+          "type": "ORTHO",
+          "position": [
+            -541.5115966796875,
+            2.9109115600585938,
+            -21.3416748046875
+          ],
+          "forward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "up": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "ortho_scale": 171.97531127929688,
+          "clip_start": 0.10000000149011612,
+          "clip_end": 2167.3017578125
+        },
+        {
+          "view_id": "back",
+          "name": "Camera_back",
+          "type": "ORTHO",
+          "position": [
+            0.31383514404296875,
+            544.736328125,
+            -21.3416748046875
+          ],
+          "forward": [
+            1.4210854715202004e-14,
+            -0.9999999403953552,
+            2.8499662296056294e-15
+          ],
+          "up": [
+            1.5099580252808664e-07,
+            0.0,
+            0.9999999403953552
+          ],
+          "ortho_scale": 171.97531127929688,
+          "clip_start": 0.10000000149011612,
+          "clip_end": 2167.3017578125
+        },
+        {
+          "view_id": "top",
+          "name": "Camera_top",
+          "type": "ORTHO",
+          "position": [
+            0.31383514404296875,
+            2.9109115600585938,
+            520.4837646484375
+          ],
+          "forward": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "up": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "ortho_scale": 171.97531127929688,
+          "clip_start": 0.10000000149011612,
+          "clip_end": 2167.3017578125
+        },
+        {
+          "view_id": "isometric",
+          "name": "Camera_isometric",
+          "type": "ORTHO",
+          "position": [
+            249.6431884765625,
+            -246.41842651367188,
+            390.0517578125
+          ],
+          "forward": [
+            -0.4601655602455139,
+            0.46016550064086914,
+            -0.7592729926109314
+          ],
+          "up": [
+            -0.5368872284889221,
+            0.536886990070343,
+            0.6507723331451416
+          ],
+          "ortho_scale": 237.81886291503906,
+          "clip_start": 0.10000000149011612,
+          "clip_end": 2167.3017578125
+        }
+      ]
+    },
+    {
+      "name": "same_geometry_across_renders",
+      "pass": true,
+      "render_evidence_required": false,
+      "before_and_after_present": false,
+      "snapshot_count": 1,
+      "distinct_hash_count": 1,
+      "hashes": [
+        "7481c01e8da7ee8f96742616d25256dd3c62ab322e7fbd570b7708787b8ae67e"
+      ],
+      "live_geometry": {
+        "sha256": "7481c01e8da7ee8f96742616d25256dd3c62ab322e7fbd570b7708787b8ae67e",
+        "mesh_count": 439,
+        "vertex_count": 182005,
+        "triangle_count": 362258,
+        "hash_method": "evaluated_local_f32_world_matrix_f64_triangle_i32"
+      }
+    },
+    {
+      "name": "all_meshes_closed_outward_nondegenerate",
+      "pass": true,
+      "mesh_count": 439,
+      "vertices": 182005,
+      "faces": 225978,
+      "failures": [],
+      "summed_signed_volume": 569270.0002234282
+    },
+    {
+      "name": "route_exactly_matches_v3_canonical_points",
+      "pass": true,
+      "point_count": 593,
+      "source": "C:\\Users\\Derek\\Games_develop\\Cat\\ArtSource\\RadioArchipelago\\Islands\\V3\\Output\\05_frost_moon\\manifest.json"
+    }
+  ],
+  "id": "05_frost_moon",
+  "seconds": 3.637,
+  "localized_ridge_count": 3,
+  "geology_anchor_count": 47,
+  "geology_bounds": {
+    "min": [
+      -74.95230102539062,
+      -73.55421447753906,
+      -54.18510818481445
+    ],
+    "max": [
+      75.57997131347656,
+      79.43992614746094,
+      11.501757621765137
+    ]
+  }
+}

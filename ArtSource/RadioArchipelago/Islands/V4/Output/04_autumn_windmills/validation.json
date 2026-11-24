@@ -1,0 +1,492 @@
+{
+  "schema": "radio_archipelago_v3_geometry_checks/1",
+  "pass": true,
+  "validation_kind": "evaluated_blender_geometry_and_supplied_render_evidence",
+  "unity_playtest_performed": false,
+  "parameters": {
+    "road_z": 0.0,
+    "road_width": 6.0,
+    "shoulder": 1.0,
+    "ceiling_height": 5,
+    "sample_step": 0.6,
+    "edge_inset": 0.05,
+    "height_tolerance": 0.025,
+    "terrain_below_offset": 0.08,
+    "surface_probe_lanes": 9
+  },
+  "limits": [
+    "Road raycasts sample center and both edges; gaps smaller than probe spacing can be missed.",
+    "Collider response, gameplay tile placement, chart timing and character animation were not simulated.",
+    "Render metadata must be captured by the rendering script; this validator does not itself render.",
+    "Geometry hashes exclude materials, lights and cameras and compare only supplied snapshots.",
+    "Collection/geometry-node instances must be realized into tagged meshes before this audit."
+  ],
+  "checks": [
+    {
+      "name": "route_loop_closed",
+      "pass": true,
+      "explicit_closing_point": false,
+      "authored_closed_flag": true,
+      "final_edge_length": 0.7983712610486121,
+      "route_point_count": 475,
+      "loop_length": 379.20006098637487
+    },
+    {
+      "name": "route_flat_at_road_z",
+      "pass": true,
+      "max_abs_z_error": 0.0,
+      "tolerance": 0.025
+    },
+    {
+      "name": "route_has_no_self_crossings",
+      "pass": true,
+      "crossing_count": 0,
+      "segment_pairs": []
+    },
+    {
+      "name": "render_instances_realized",
+      "pass": true,
+      "instance_count": 0,
+      "examples": []
+    },
+    {
+      "name": "all_render_geometry_has_role",
+      "pass": true,
+      "invalid_count": 0,
+      "examples": []
+    },
+    {
+      "name": "road_geometry_exists",
+      "pass": true,
+      "vertex_count": 6650,
+      "triangle_count": 13300
+    },
+    {
+      "name": "road_coverage_center_left_right",
+      "pass": true,
+      "sample_count": 950,
+      "ray_count": 2850,
+      "missing_count": 0,
+      "max_sample_spacing": 0.6,
+      "tested_width": 5.9,
+      "edge_inset": 0.05,
+      "examples": []
+    },
+    {
+      "name": "road_height_and_normal",
+      "pass": true,
+      "min_hit_z": -9.5367431640625e-07,
+      "max_hit_z": 1.430511474609375e-06,
+      "max_abs_height_error": 1.430511474609375e-06,
+      "invalid_count": 0,
+      "tolerance": 0.025,
+      "examples": []
+    },
+    {
+      "name": "road_height_profile_continuity",
+      "pass": true,
+      "max_measured_grade": 4.778273262344091e-06,
+      "allowed_grade": 0.02,
+      "seam_included": true
+    },
+    {
+      "name": "terrain_below_road",
+      "pass": true,
+      "object_count": 439,
+      "scope": "sampled_actual_road_footprint",
+      "tested_width": 5.9,
+      "edge_inset": 0.05,
+      "sample_count": 950,
+      "lanes_per_sample": 9,
+      "ray_count": 8550,
+      "hit_count": 8550,
+      "missing_count": 0,
+      "maximum_hit_z": -0.12999820709228516,
+      "maximum_allowed_z": -0.08,
+      "numerical_tolerance": 1e-05,
+      "violation_count": 0,
+      "examples": []
+    },
+    {
+      "name": "water_below_road",
+      "pass": true,
+      "object_count": 35,
+      "scope": "sampled_actual_road_footprint",
+      "tested_width": 5.9,
+      "edge_inset": 0.05,
+      "sample_count": 950,
+      "lanes_per_sample": 9,
+      "ray_count": 8550,
+      "hit_count": 0,
+      "missing_count": 8550,
+      "maximum_hit_z": null,
+      "maximum_allowed_z": -0.025,
+      "numerical_tolerance": 1e-05,
+      "violation_count": 0,
+      "examples": []
+    },
+    {
+      "name": "swept_corridor_clearance",
+      "pass": true,
+      "protected_width": 8.0,
+      "required_ceiling_height": 5,
+      "no_overhead": true,
+      "tested_z_min": 0.025,
+      "tested_z_max": null,
+      "obstacle_collision_count": 0,
+      "candidate_object_count": 1,
+      "tested_triangle_count": 20160,
+      "examples": []
+    },
+    {
+      "name": "five_orthographic_camera_views",
+      "pass": true,
+      "render_evidence_required": true,
+      "required_views": [
+        "top",
+        "front",
+        "back",
+        "left",
+        "right"
+      ],
+      "recorded_count": 6,
+      "missing_views": [],
+      "error_count": 0,
+      "examples": [],
+      "cameras": [
+        {
+          "view_id": "front",
+          "name": "Camera_front",
+          "type": "ORTHO",
+          "position": [
+            -7.114601135253906,
+            -600.8240356445312,
+            -14.315195083618164
+          ],
+          "forward": [
+            0.0,
+            0.9999999403953552,
+            3.5762786865234375e-07
+          ],
+          "up": [
+            0.0,
+            -3.5762786865234375e-07,
+            0.9999999403953552
+          ],
+          "ortho_scale": 190.24021911621094,
+          "clip_start": 0.10000000149011612,
+          "clip_end": 2397.483154296875,
+          "geometry_sha256": "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+          "material_sha256": "250cfdf11ab9de50843362024d8705a4fa87a470ddaa8af237700e5b684924ae",
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -7.114601135253906
+            ],
+            [
+              0.0,
+              -1.6292068494294654e-07,
+              -1.0,
+              -600.8240356445312
+            ],
+            [
+              0.0,
+              1.0,
+              -1.6292068494294654e-07,
+              -14.315195083618164
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "view_id": "right",
+          "name": "Camera_right",
+          "type": "ORTHO",
+          "position": [
+            592.2561645507812,
+            -1.4532470703125,
+            -14.31512451171875
+          ],
+          "forward": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "up": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "ortho_scale": 190.24021911621094,
+          "clip_start": 0.10000000149011612,
+          "clip_end": 2397.483154296875,
+          "geometry_sha256": "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+          "material_sha256": "250cfdf11ab9de50843362024d8705a4fa87a470ddaa8af237700e5b684924ae",
+          "matrix_world": [
+            [
+              -4.371138828673793e-08,
+              4.371138828673793e-08,
+              1.0,
+              592.2561645507812
+            ],
+            [
+              1.0,
+              1.910685676922942e-15,
+              4.371138828673793e-08,
+              -1.4532470703125
+            ],
+            [
+              0.0,
+              1.0,
+              -4.371138828673793e-08,
+              -14.31512451171875
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "view_id": "left",
+          "name": "Camera_left",
+          "type": "ORTHO",
+          "position": [
+            -606.4854125976562,
+            -1.4532470703125,
+            -14.315132141113281
+          ],
+          "forward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "up": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "ortho_scale": 190.24021911621094,
+          "clip_start": 0.10000000149011612,
+          "clip_end": 2397.483154296875,
+          "geometry_sha256": "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+          "material_sha256": "250cfdf11ab9de50843362024d8705a4fa87a470ddaa8af237700e5b684924ae",
+          "matrix_world": [
+            [
+              -4.371138828673793e-08,
+              -4.371138828673793e-08,
+              -1.0,
+              -606.4854125976562
+            ],
+            [
+              -1.0,
+              1.910685676922942e-15,
+              4.371138828673793e-08,
+              -1.4532470703125
+            ],
+            [
+              0.0,
+              1.0,
+              -4.371138828673793e-08,
+              -14.315132141113281
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "view_id": "back",
+          "name": "Camera_back",
+          "type": "ORTHO",
+          "position": [
+            -7.114604949951172,
+            597.9175415039062,
+            -14.315141677856445
+          ],
+          "forward": [
+            1.4210854715202004e-14,
+            -0.9999999403953552,
+            2.8499662296056294e-15
+          ],
+          "up": [
+            1.5099580252808664e-07,
+            0.0,
+            0.9999999403953552
+          ],
+          "ortho_scale": 190.24021911621094,
+          "clip_start": 0.10000000149011612,
+          "clip_end": 2397.483154296875,
+          "geometry_sha256": "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+          "material_sha256": "250cfdf11ab9de50843362024d8705a4fa87a470ddaa8af237700e5b684924ae",
+          "matrix_world": [
+            [
+              -1.0,
+              1.5099580252808664e-07,
+              -1.1399865765455465e-14,
+              -7.114604949951172
+            ],
+            [
+              0.0,
+              7.549790126404332e-08,
+              1.0,
+              597.9175415039062
+            ],
+            [
+              1.5099580252808664e-07,
+              1.0,
+              -7.549790126404332e-08,
+              -14.315141677856445
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "view_id": "top",
+          "name": "Camera_top",
+          "type": "ORTHO",
+          "position": [
+            -7.114601135253906,
+            -1.4532737731933594,
+            585.0556640625
+          ],
+          "forward": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "up": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "ortho_scale": 190.24021911621094,
+          "clip_start": 0.10000000149011612,
+          "clip_end": 2397.483154296875,
+          "geometry_sha256": "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+          "material_sha256": "250cfdf11ab9de50843362024d8705a4fa87a470ddaa8af237700e5b684924ae",
+          "matrix_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              -7.114601135253906
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -1.4532737731933594
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              585.0556640625
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "view_id": "isometric",
+          "name": "Camera_isometric",
+          "type": "ORTHO",
+          "position": [
+            268.7190856933594,
+            -275.88067626953125,
+            441.59423828125
+          ],
+          "forward": [
+            -0.4601655602455139,
+            0.46016550064086914,
+            -0.7592729926109314
+          ],
+          "up": [
+            -0.5368872284889221,
+            0.536886990070343,
+            0.6507723331451416
+          ],
+          "ortho_scale": 249.2891387939453,
+          "clip_start": 0.10000000149011612,
+          "clip_end": 2397.483154296875,
+          "geometry_sha256": "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+          "material_sha256": "250cfdf11ab9de50843362024d8705a4fa87a470ddaa8af237700e5b684924ae",
+          "matrix_world": [
+            [
+              0.7071067094802856,
+              -0.5368871092796326,
+              0.46016553044319153,
+              268.7190856933594
+            ],
+            [
+              0.7071068286895752,
+              0.536886990070343,
+              -0.46016553044319153,
+              -275.88067626953125
+            ],
+            [
+              7.186193329289381e-08,
+              0.6507723331451416,
+              0.7592729330062866,
+              441.59423828125
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "same_geometry_across_renders",
+      "pass": true,
+      "render_evidence_required": true,
+      "before_and_after_present": true,
+      "snapshot_count": 9,
+      "distinct_hash_count": 1,
+      "hashes": [
+        "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+        "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+        "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+        "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+        "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+        "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+        "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+        "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+        "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e"
+      ],
+      "live_geometry": {
+        "sha256": "7b911f999eaeafaf3054e47c27f066c23ce2a41a5fa30696c148a8f880f9d78e",
+        "mesh_count": 4147,
+        "vertex_count": 7342040,
+        "triangle_count": 11818598,
+        "hash_method": "evaluated_local_f32_world_matrix_f64_triangle_i32"
+      }
+    }
+  ]
+}

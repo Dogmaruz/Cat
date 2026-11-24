@@ -1,0 +1,104 @@
+[
+  {
+    "view": "front",
+    "attempt": 1,
+    "prompt": "Use case: stylized-concept / 3D environment modeling reference. Output exactly ONE complete floating island in ONE camera view, NOT a collage/contact sheet/multi-panel. A beautiful premium tactile stylized 3D miniature matching the Radio Archipelago reference: warm ivory limestone cliffs and architecture, mint patinated copper, restrained warm brass, coral cloth accents, dark cypress foliage, golden wildflowers, soft moss, rich delicate material detail and soft warm daylight. No characters, UI, text, labels, compass, arrows, glowing game tiles, ocean, horizon, scenery background or clouds obscuring geometry. Neutral very pale warm-grey studio background. All rock bottom tips and tree/mast tips fully visible, 12% margin. One connected main island, avoid a swarm of detached debris. Large clear shapes suitable for modeling; beautiful crafted detail, not simplified low-poly primitives.\nIMPORTANT PLAYABLE TERRAIN: a continuous generously wide pale stone road, visibly distinct from the grassy/rocky surroundings, forms ONE CLOSED SMOOTH LOOP around landmarks. Use the supplied plan to guide its footprint: one physical road, reused across several song passes, NOT multiple nested/parallel lap roads. No square90-degree corners, hairpin/U-turn, zigzags or central crossing. A180-degree heading change is spread across roughly half the island. Low stone edging/grass shoulders, clear sight lines, width for three future game lanes. The road is a modeling/landscape corridor, NOT blue/coral stepping tiles. It closes smoothly behind the landmark, with no dead ends. Ignore colored entry/exit dots and any dashed guide line: do not paint those marks onto the island. Modelers will scale the terrain later; an example60–90 second song revisits this same road. Do not write duration text into the image.\n\nIDENTITY: 10_broadcast_citadel — A grand but friendly ivory radio citadel: central round tower, two smaller unequal towers, large elegant brass signal ring above the central dome, arched mint shutters, one coral pennant and three cypress trees. Broad two-tier limestone terraces with a sweeping pale road around the outer terraces; gradual curved ramps replace square stair turns. Make this the distinctive destination island without religious symbols or lettering. Rock silhouette: broad citadel crown.\nDerive a NEW island variant from image1 as STYLE ONLY; replace its building/terrain according to this specific brief. Image2 is a schematic top route plan, not a finished painting.\nCAMERA: FRONT camera at SOUTH looking NORTH, centered slightly elevated orthographic-style asset elevation. Main southern facade faces the viewer. Only modest elevation so the paved terrace is visible. No yaw to a diagonal hero angle.\nOne standalone high-detail reference image; no technical labels or embedded views.",
+    "references": [
+      "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/Source/radio-harbor-style-anchor.png",
+      "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/RouteGuides_v1/10_broadcast_citadel/route-guide.png"
+    ],
+    "originalGeneratedPath": "C:\\Users\\Derek\\.codex\\generated_images\\01a179ae-ce0f-78a1-a267-4aa748a08100\\exec-913d172e-049b-440b-aa65-f41af221c4dc.png",
+    "outputPath": "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/ReferencePack_v1/10_broadcast_citadel/front.png",
+    "mode": "built-in image_gen",
+    "createdUtc": "2026-10-26T19:42:05.225Z",
+    "sha256": "D84F2FE3F02C72A5C5E95C9E206D4E34961694D132286FECB571565CBABC81C1",
+    "width": 1536,
+    "height": 1024,
+    "qa": "Standalone south/front with three towers, three cypresses, brass ring, one broad smooth outer loop."
+  },
+  {
+    "view": "top",
+    "attempt": 1,
+    "prompt": "Use case: stylized-concept / environment modeling plan. STRICT VERTICAL ORTHOGRAPHIC SITE PLAN. Camera EXACTLY overhead at 90 degrees looking straight down, NORTH at image top. Match image1's flat overhead camera; image2 is identity and material reference only. Render the SAME radio citadel island from above: central large circular mint dome, smaller unequal circular tower roofs west and east, brass signal ring centered over central dome (seen edge-on from nadir), coral pennant, exactly three cypresses at their fixed positions. No vertical building walls, no front speaker/entrance, no hanging cliff underside, no tree trunks; roofs centered directly over footprints and trees show circular crowns. Keep world positions: western taller minor tower and two west cypresses on image LEFT; eastern shorter tower and single east cypress on RIGHT; southern entrance at image bottom hidden under roof edge. One generously wide CLOSED smooth pale limestone road loop around the outer terraces, matching image1 footprint; one road reused across laps, no nested roads, no sharp corners. Same two-tier broad limestone terrain, ivory limestone, mint copper, restrained brass, coral, gold flowers and moss, tactile premium stylized3D materials and soft warm daylight. Full island footprint with 12% margin, pale warm-grey studio background, no text/labels/arrows, no collage. A TRUE PLAN, absolutely zero oblique/isometric tilt.",
+    "references": [
+      "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/RouteGuides_v1/10_broadcast_citadel/route-guide.png",
+      "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/ReferencePack_v1/10_broadcast_citadel/front.png"
+    ],
+    "originalGeneratedPath": "C:\\Users\\Derek\\.codex\\generated_images\\01a179ae-ce0f-78a1-a267-4aa748a08100\\exec-32d52510-bebb-4c7a-b5be-a225f944cb80.png",
+    "outputPath": "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/ReferencePack_v1/10_broadcast_citadel/top_attempt1.png",
+    "mode": "built-in image_gen",
+    "createdUtc": "2026-10-26T19:42:56.711Z",
+    "sha256": "0FAEEB07244D431E064AE18D2054DF4B4587A935B9CA69A820D6EC9CF26599FB",
+    "qa": "Rejected: high overhead with small facade/slight tilt",
+    "width": 1214,
+    "height": 1295
+  },
+  {
+    "view": "top",
+    "attempt": 2,
+    "prompt": "Create ONE true architectural roof PLAN of image2, projected vertically DOWN, 90° nadir, orthographic, with no perspective or tilt. Match image1's flat camera and closed smooth road loop footprint. North up. Image2 supplies the citadel identity only: one central round mint dome with brass ring seen EDGE-ON above it; smaller round roofs west and east; two west cypress crowns and one east crown; coral pennant. EVERY roof apex sits at the EXACT center of its circular roof footprint. All facades, entrances, speakers, tree trunks, stairs side faces and cliff underside are INVISIBLE. Render only roofs and horizontal terrain surfaces from straight above. Maintain the SAME tower sizes, positions, materials, flora and island outline. One wide pale stone closed smooth loop, no nested roads. Premium tactile stylized 3D with ivory limestone, mint copper, brass and gold flowers. Pale warm-grey background, 12% margin, no text, no collage. Camera 90° overhead like Google satellite, absolutely NOT a bird's-eye perspective render.",
+    "references": [
+      "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/RouteGuides_v1/10_broadcast_citadel/route-guide.png",
+      "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/ReferencePack_v1/10_broadcast_citadel/front.png"
+    ],
+    "originalGeneratedPath": "C:\\Users\\Derek\\.codex\\generated_images\\01a179ae-ce0f-78a1-a267-4aa748a08100\\exec-61234bfa-8e7d-4a6b-951e-3f90eebc5ae0.png",
+    "outputPath": "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/ReferencePack_v1/10_broadcast_citadel/top.png",
+    "mode": "built-in image_gen",
+    "createdUtc": "2026-10-26T19:44:14.924Z",
+    "sha256": "ACA1128B71D13254B426DE8D489FB08D2565BBFF1862CAE87AD2FB51A09B4AB8",
+    "width": 1254,
+    "height": 1254,
+    "qa": "Selected after camera retry: near-nadir roof plan, dome apex nearly centered and ring edge-on; tiny south facade sliver persists."
+  },
+  {
+    "view": "right",
+    "attempt": 1,
+    "prompt": "Use case: stylized-concept. Render ONE RIGHT/EAST SIDE elevation of the SAME radio citadel island. Image1 is north-up layout plan; image2 SOUTH/front gives identity/material only. Camera has moved EXACTLY 90 degrees to EAST, looking WEST. World SOUTH/front appears image RIGHT, NORTH image LEFT. Eastern shorter minor tower and single east cypress now FOREGROUND LEFT, taller western minor tower and two west cypresses behind in BACKGROUND. Central SOUTH circular brass speaker/entrance faces image RIGHT edge and is hidden/strongly foreshortened, NOT facing viewer. Show actual EAST arched mint shutters and east sidewall. The large brass ring above central dome is now EDGE-ON as a thin vertical golden profile, not a full circle facing camera. Keep SAME three towers, exactly three cypresses, coral pennant, two-tier limestone terrain, all fixed geometry and world positions. ONE broad smoothly closed pale stone road loop around outer terrace, no parallel extra laps or sharp corners. Premium tactile stylized3D, ivory limestone, mint copper domes, restrained brass, gold flowers, moss and warm soft studio daylight. Modestly elevated orthographic-style side elevation, no diagonal front hero angle. Complete island with all rock/mast/tree tips and margin, pale warm-grey background; no text, UI, collage or ocean.",
+    "references": [
+      "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/ReferencePack_v1/10_broadcast_citadel/top.png",
+      "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/ReferencePack_v1/10_broadcast_citadel/front.png"
+    ],
+    "originalGeneratedPath": "C:\\Users\\Derek\\.codex\\generated_images\\01a179ae-ce0f-78a1-a267-4aa748a08100\\exec-1bc88386-cb5a-4446-b503-71e46050ec75.png",
+    "outputPath": "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/ReferencePack_v1/10_broadcast_citadel/right.png",
+    "mode": "built-in image_gen",
+    "createdUtc": "2026-10-26T19:45:15.088Z",
+    "sha256": "AF53CE6381F467E4F57E2F4F77027CE1FB73B0C1263AF21420756A6A77A7B0C2",
+    "width": 1536,
+    "height": 1024,
+    "qa": "East side: front speaker right edge, ring edge-on, eastern smaller tower foreground."
+  },
+  {
+    "view": "left",
+    "attempt": 1,
+    "prompt": "Use case: stylized-concept. ONE standalone LEFT/WEST SIDE elevation of the SAME radio citadel. Image1 is north-up layout; image2 SOUTH/front identity only. Move camera exactly 90° to WEST looking EAST, no diagonal yaw. World SOUTH/front now image LEFT, NORTH image RIGHT. Western taller minor tower now FOREGROUND RIGHT; shorter eastern tower behind it BACKGROUND RIGHT partly obscured. Both western cypresses in FOREGROUND (northwestern tall one image RIGHT, southwestern shorter one image LEFT); eastern third cypress in BACKGROUND. The central SOUTH speaker and entrance are on image LEFT edge, hidden or strongly foreshortened; show actual WEST wall with mint arched shutters, no speaker facing viewer. The large brass signal ring is EDGE-ON as a thin vertical golden profile, not full circular face. Keep same three towers, three trees, coral pennant, architecture geometry, world positions, proportions, flora and rock. One broad smooth CLOSED pale stone road loop around outer terrace, no nested parallel roads or sharp corners. Same two-tier ivory limestone, mint copper domes, restrained brass, gold flowers, moss, tactile premium stylized3D and soft warm daylight. Modest elevated orthographic-style side view; entire isolated island/tips visible with margin; neutral pale warm-grey studio background, no text, labels, collage or ocean.",
+    "references": [
+      "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/ReferencePack_v1/10_broadcast_citadel/top.png",
+      "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/ReferencePack_v1/10_broadcast_citadel/front.png"
+    ],
+    "originalGeneratedPath": "C:\\Users\\Derek\\.codex\\generated_images\\01a179ae-ce0f-78a1-a267-4aa748a08100\\exec-5391c678-cef5-4c07-8eb6-6840e921cbaa.png",
+    "outputPath": "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/ReferencePack_v1/10_broadcast_citadel/left.png",
+    "mode": "built-in image_gen",
+    "createdUtc": "2026-10-26T19:46:10.819Z",
+    "sha256": "B5477284005BB6240FB9F73D90617FB0C3D460F35FF117DC3986BC9A3846882C",
+    "width": 1536,
+    "height": 1024,
+    "qa": "West side: front speaker left edge, ring edge-on; minor-tower relative depth/height consistency drifts from front/top."
+  },
+  {
+    "view": "back",
+    "attempt": 1,
+    "prompt": "Use case: stylized-concept. Render ONE BACK/NORTH elevation of the SAME radio citadel island. Image1 north-up geometry plan; image2 SOUTH/front identity only. Move camera exactly180° to NORTH looking SOUTH, no diagonal yaw, same modest elevation and zoom. World WEST now image RIGHT, EAST image LEFT. Western TALLER minor tower and TWO west cypresses image RIGHT; eastern SHORTER minor tower and ONE east cypress image LEFT. Show the actual rear of the central round tower: plain ivory masonry, small mint shutters and service details, NO circular speaker, NO main front entrance or grand entrance stairs on rear. Front speaker and entrance are hidden on far SOUTH side. The brass signal ring above central dome again shows its full circular face from reverse side. Coral pennant extends world EAST, thus image LEFT in this back view. Keep same geometry and counts, two-tier broad limestone terraces, fixed landmark world positions. One generously wide continuous pale stone CLOSED smooth loop road round outer terrace, no extra parallel lap roads or sharp corners. Same premium tactile stylized3D ivory limestone, mint copper domes, restrained warm brass, gold flowers, moss, soft warm daylight. Entire island, ring/tree tips and rock bottom visible with margin; neutral pale warm-grey studio background, no text/labels, collage or ocean.",
+    "references": [
+      "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/ReferencePack_v1/10_broadcast_citadel/top.png",
+      "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/ReferencePack_v1/10_broadcast_citadel/front.png"
+    ],
+    "originalGeneratedPath": "C:\\Users\\Derek\\.codex\\generated_images\\01a179ae-ce0f-78a1-a267-4aa748a08100\\exec-ddc01229-4245-4a28-b0d5-751a7b17545b.png",
+    "outputPath": "C:/Users/Derek/Games_develop/Cat/ArtSource/RadioArchipelago/Islands/ReferencePack_v1/10_broadcast_citadel/back.png",
+    "mode": "built-in image_gen",
+    "createdUtc": "2026-10-26T19:47:04.016Z",
+    "sha256": "8B97A830D04F520B7BC68F55266128FEF12C772EC57C34BD70D3322AA15E56E8",
+    "width": 1536,
+    "height": 1024,
+    "qa": "North/rear: speaker absent, flag points image left, two west cypresses right, eastern single cypress left; service rear door."
+  }
+]

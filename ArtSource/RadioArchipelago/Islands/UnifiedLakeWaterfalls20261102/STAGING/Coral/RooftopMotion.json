@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "island": "Coral",
+  "mechanisms": [
+    {
+      "nodeName": "RA_Rooftop_Coral_01_Fork",
+      "pivot": {
+        "x": -7.336274147033691,
+        "y": 8.383580207824707,
+        "z": 38.62346267700195
+      },
+      "axis": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": -0.0
+      },
+      "degreesPerSecond": 95,
+      "materialSources": [
+        {
+          "nodeName": "RA_Coral_Metal_+00_+01_01",
+          "slot": 0
+        },
+        {
+          "nodeName": "RA_Coral_Architecture_+00_+01_01",
+          "slot": 0
+        }
+      ],
+      "kind": "fork"
+    },
+    {
+      "nodeName": "RA_Rooftop_Coral_02_Fork",
+      "pivot": {
+        "x": 117.6156005859375,
+        "y": 13.338017463684082,
+        "z": 16.469921112060547
+      },
+      "axis": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": -0.0
+      },
+      "degreesPerSecond": -115,
+      "materialSources": [
+        {
+          "nodeName": "RA_Coral_Metal_+00_+01_01",
+          "slot": 0
+        },
+        {
+          "nodeName": "RA_Coral_Architecture_+00_+01_01",
+          "slot": 0
+        }
+      ],
+      "kind": "fork"
+    },
+    {
+      "nodeName": "RA_Rooftop_Coral_03_Receiver",
+      "pivot": {
+        "x": 1.0,
+        "y": 23.696979522705078,
+        "z": -73.0
+      },
+      "axis": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": -0.0
+      },
+      "degreesPerSecond": 55,
+      "materialSources": [
+        {
+          "nodeName": "RA_Coral_Metal_+00_+01_01",
+          "slot": 0
+        }
+      ],
+      "kind": "receiver"
+    },
+    {
+      "nodeName": "RA_Rooftop_Coral_04_Wheel",
+      "pivot": {
+        "x": 1.0,
+        "y": 26.759477615356445,
+        "z": -73.0
+      },
+      "axis": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -1.0
+      },
+      "degreesPerSecond": -80,
+      "materialSources": [
+        {
+          "nodeName": "RA_Coral_Metal_+00_+01_01",
+          "slot": 0
+        }
+      ],
+      "kind": "wheel"
+    }
+  ],
+  "dishes": [
+    {
+      "pivot": {
+        "x": -8.196256637573242,
+        "y": 7.381479740142822,
+        "z": 38.085941314697266
+      },
+      "scale": 0.55
+    },
+    {
+      "pivot": {
+        "x": 117.65918731689453,
+        "y": 12.19926643371582,
+        "z": 15.318302154541016
+      },
+      "scale": 0.55
+    }
+  ]
+}

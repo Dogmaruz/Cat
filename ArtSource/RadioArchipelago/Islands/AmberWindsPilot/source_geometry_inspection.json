@@ -1,0 +1,376 @@
+{
+  "triangles": 3140774,
+  "material_triangles": {
+    "RA_Amber_Architecture": 386470,
+    "RA_Amber_Metal": 121611,
+    "RA_Amber_ArchitectureFabric": 654,
+    "RA_Amber_Stream": 5400,
+    "RA_Amber_Waterfall": 19440,
+    "RA_Amber_Water": 18624,
+    "RA_Amber_Foliage": 1073896,
+    "RA_Amber_Wood": 542248,
+    "RA_Amber_Rocks": 653480,
+    "RA_Amber_Cliffs": 87301,
+    "RA_Amber_Terrain": 110210,
+    "RA_Amber_Grass": 112512,
+    "RA_Amber_Vines": 8928
+  },
+  "rigid_meshes": [
+    {
+      "node": "RA_Rooftop_Amber_01_WindmillSails",
+      "pivotError": 0.0,
+      "triangles": 988
+    },
+    {
+      "node": "RA_Rooftop_Amber_02_WindmillSails",
+      "pivotError": 0.0,
+      "triangles": 988
+    },
+    {
+      "node": "RA_Rooftop_Amber_03_WindmillSails",
+      "pivotError": 0.0,
+      "triangles": 988
+    }
+  ],
+  "canyon_intruding_shell_faces": 0,
+  "upper_creek_fall_seam": {
+    "id": "R3_canyon",
+    "stream_node": "Amber_DownstreamCreek_1",
+    "fall_node": "Amber_VoluminousFallingWater_1_0",
+    "stream_downstream_uv_metres": 53.113525390625,
+    "curtain_top_uv_metres": 53.113525390625,
+    "uv_v_delta_metres": 0.0,
+    "u0_position_error": 0.0,
+    "u1_position_error": 0.0,
+    "width_error": 0.0,
+    "longitudinal_error": 4.0531158447265625e-06,
+    "height_error": 0.0,
+    "v_increases_downward": true,
+    "layer_v_origin_deltas": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "layer_u_orientation_aligned": [
+      true,
+      true,
+      true
+    ]
+  },
+  "water_seams": [
+    {
+      "id": "lower",
+      "stream_node": "Amber_DownstreamCreek_0",
+      "fall_node": "Amber_VoluminousFallingWater_0_0",
+      "stream_downstream_uv_metres": 36.018428802490234,
+      "curtain_top_uv_metres": 36.018428802490234,
+      "uv_v_delta_metres": 0.0,
+      "u0_position_error": 0.0,
+      "u1_position_error": 0.0,
+      "width_error": 0.0,
+      "longitudinal_error": 7.271766662597656e-06,
+      "height_error": 0.0,
+      "v_increases_downward": true,
+      "layer_v_origin_deltas": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "layer_u_orientation_aligned": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "R3_canyon",
+      "stream_node": "Amber_DownstreamCreek_1",
+      "fall_node": "Amber_VoluminousFallingWater_1_0",
+      "stream_downstream_uv_metres": 53.113525390625,
+      "curtain_top_uv_metres": 53.113525390625,
+      "uv_v_delta_metres": 0.0,
+      "u0_position_error": 0.0,
+      "u1_position_error": 0.0,
+      "width_error": 0.0,
+      "longitudinal_error": 4.0531158447265625e-06,
+      "height_error": 0.0,
+      "v_increases_downward": true,
+      "layer_v_origin_deltas": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "layer_u_orientation_aligned": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "raised_side",
+      "stream_node": "RA_Amber_SideCascade_RaisedStreamAndRoll",
+      "fall_node": "RA_Amber_SideCascade_RaisedFall_Layer0",
+      "stream_downstream_uv_metres": 10.356194496154785,
+      "curtain_top_uv_metres": 10.356194496154785,
+      "uv_v_delta_metres": 0.0,
+      "u0_position_error": 0.0,
+      "u1_position_error": 0.0,
+      "width_error": 0.0,
+      "longitudinal_error": 0.0,
+      "height_error": 0.0,
+      "v_increases_downward": true,
+      "layer_v_origin_deltas": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "layer_u_orientation_aligned": [
+        true,
+        true,
+        true
+      ]
+    }
+  ],
+  "water_seam_shading": [
+    {
+      "id": "lower",
+      "comparisons": [
+        {
+          "u": 0,
+          "normal_dot": 1.0000000372491897,
+          "normal_unity_y_stream": -5.670549398928415e-07,
+          "normal_unity_y_fall": 6.548391411342891e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.844384073399806e-06
+        },
+        {
+          "u": 0.25,
+          "normal_dot": 1.000000037252944,
+          "normal_unity_y_stream": 1.0476975376150222e-07,
+          "normal_unity_y_fall": 3.9301812648773193e-07,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.814697265625e-06
+        },
+        {
+          "u": 0.5,
+          "normal_dot": 1.0000000596051384,
+          "normal_unity_y_stream": -1.8003026980295544e-07,
+          "normal_unity_y_fall": -2.741813887041644e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.816559456248789e-06
+        },
+        {
+          "u": 0.75,
+          "normal_dot": 1.0000000447028004,
+          "normal_unity_y_stream": -4.371138828673793e-08,
+          "normal_unity_y_fall": 1.563225123391021e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.962700400017419e-06
+        },
+        {
+          "u": 1,
+          "normal_dot": 1.0000000298022347,
+          "normal_unity_y_stream": -4.371138828673793e-08,
+          "normal_unity_y_fall": 2.007465809583664e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 3.816559456248789e-06
+        }
+      ],
+      "layers": [
+        {
+          "node": "Amber_VoluminousFallingWater_0_0",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.0000000596051384,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "Amber_VoluminousFallingWater_0_1",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.0000000372481808,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "Amber_VoluminousFallingWater_0_2",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.000000089408574,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        }
+      ],
+      "max_displaced_gap": 3.962700400017419e-06
+    },
+    {
+      "id": "R3_canyon",
+      "comparisons": [
+        {
+          "u": 0,
+          "normal_dot": 0.9999999106533323,
+          "normal_unity_y_stream": 3.4198160392406862e-06,
+          "normal_unity_y_fall": 1.7632350136409514e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 9.5367431640625e-07
+        },
+        {
+          "u": 0.25,
+          "normal_dot": 1.0000000900968762,
+          "normal_unity_y_stream": 2.5063753128051758e-05,
+          "normal_unity_y_fall": 2.7526170015335083e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 9.5367431640625e-07
+        },
+        {
+          "u": 0.5,
+          "normal_dot": 0.9999999701272684,
+          "normal_unity_y_stream": 3.53194736817386e-05,
+          "normal_unity_y_fall": -1.9934959709644318e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 0.75,
+          "normal_dot": 0.9999999997843624,
+          "normal_unity_y_stream": 2.638622754602693e-05,
+          "normal_unity_y_fall": -8.172356501745526e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 2.86102294921875e-06
+        },
+        {
+          "u": 1,
+          "normal_dot": 1.0000000597693615,
+          "normal_unity_y_stream": 1.2513744877651334e-05,
+          "normal_unity_y_fall": 1.3162849427317269e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 9.5367431640625e-07
+        }
+      ],
+      "layers": [
+        {
+          "node": "Amber_VoluminousFallingWater_1_0",
+          "has_custom_normals": true,
+          "centre_normal_dot": 0.9999999701272684,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "Amber_VoluminousFallingWater_1_1",
+          "has_custom_normals": true,
+          "centre_normal_dot": 0.9999999402498001,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "Amber_VoluminousFallingWater_1_2",
+          "has_custom_normals": true,
+          "centre_normal_dot": 0.9999999703657322,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        }
+      ],
+      "max_displaced_gap": 2.86102294921875e-06
+    },
+    {
+      "id": "raised_side",
+      "comparisons": [
+        {
+          "u": 0,
+          "normal_dot": 1.0000000008173937,
+          "normal_unity_y_stream": 3.519282108754851e-05,
+          "normal_unity_y_fall": 2.3539632820757106e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 0.25,
+          "normal_dot": 1.000000000438239,
+          "normal_unity_y_stream": 3.480166560621001e-05,
+          "normal_unity_y_fall": 1.2524425983428955e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 0.5,
+          "normal_dot": 0.9999999997568578,
+          "normal_unity_y_stream": 3.477186328382231e-05,
+          "normal_unity_y_fall": -6.916002348589245e-06,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 0.75,
+          "normal_dot": 1.0000000004450234,
+          "normal_unity_y_stream": 3.5721808671951294e-05,
+          "normal_unity_y_fall": 1.2524425983428955e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 1.9073486328125e-06
+        },
+        {
+          "u": 1,
+          "normal_dot": 1.0000000007327556,
+          "normal_unity_y_stream": 3.436952829360962e-05,
+          "normal_unity_y_fall": 2.3546162992715836e-05,
+          "position_delta": 0.0,
+          "uv_delta": 0.0,
+          "rgba_delta": 0.0,
+          "sampled_displacement_gap": 0.0
+        }
+      ],
+      "layers": [
+        {
+          "node": "RA_Amber_SideCascade_RaisedFall_Layer0",
+          "has_custom_normals": true,
+          "centre_normal_dot": 0.9999999997568578,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "RA_Amber_SideCascade_RaisedFall_Layer1",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.0000000000034595,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        },
+        {
+          "node": "RA_Amber_SideCascade_RaisedFall_Layer2",
+          "has_custom_normals": true,
+          "centre_normal_dot": 1.0000000005765548,
+          "centre_rgba_delta": 0.0,
+          "v_delta": 0.0
+        }
+      ],
+      "max_displaced_gap": 1.9073486328125e-06
+    }
+  ],
+  "static_structure_vertex_minimum_route_distance_in_flight_height_band": 10.524773597717285,
+  "candidate_vertices_inside_8_5m_structure_envelope": [],
+  "limitation": "Vertex prepass only; native triangle/camera sweep remains mandatory."
+}

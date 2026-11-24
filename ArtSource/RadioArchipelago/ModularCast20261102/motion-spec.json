@@ -1,0 +1,203 @@
+{
+  "scope": "Reference designs for future 3D equipment; no new runtime animation has been installed.",
+  "nodes": {
+    "BackpackRoot": "Fixed housing and harness",
+    "TopPivot": "Center of visible top swivel",
+    "TopRotor": "Entire independent moving top assembly"
+  },
+  "defaultUnitySpinAxis": "local Y (up)",
+  "plannedMotion": {
+    "shortJumps": "noticeable spin plus damped spring response",
+    "longJumps": "visible rotations through flight",
+    "lateralInput": "inertial lean opposite movement",
+    "holds": "rotation independent of and counter to actor turn"
+  },
+  "constraints": [
+    "single connected top bearing/root",
+    "no stays or cables across rotating joint",
+    "visible space above housing",
+    "validate full revolution clearance after 3D reconstruction"
+  ],
+  "backpacks": [
+    {
+      "id": "Tiko",
+      "heroId": "Tiko",
+      "variant": 1,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Nori",
+      "heroId": "Nori",
+      "variant": 1,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Lumen",
+      "heroId": "Lumen",
+      "variant": 1,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Fira",
+      "heroId": "Fira",
+      "variant": 1,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Miro",
+      "heroId": "Miro",
+      "variant": 1,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Rumi",
+      "heroId": "Rumi",
+      "variant": 1,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Boro",
+      "heroId": "Boro",
+      "variant": 1,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Soli",
+      "heroId": "Soli",
+      "variant": 1,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Vela",
+      "heroId": "Vela",
+      "variant": 1,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Piko",
+      "heroId": "Piko",
+      "variant": 1,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Tiko_Resonator",
+      "heroId": "Tiko",
+      "variant": 2,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Nori_Nocturne",
+      "heroId": "Nori",
+      "variant": 2,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Lumen_Glider",
+      "heroId": "Lumen",
+      "variant": 2,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Fira_Beacon",
+      "heroId": "Fira",
+      "variant": 2,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Z (fore-aft horizontal hub)",
+      "pivotLocation": "center of raised rotor hub, not case attachment",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Miro_Garden",
+      "heroId": "Miro",
+      "variant": 2,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Rumi_Orbit",
+      "heroId": "Rumi",
+      "variant": 2,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Boro_Pulse",
+      "heroId": "Boro",
+      "variant": 2,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Soli_Helio",
+      "heroId": "Soli",
+      "variant": 2,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "whole fan plus U-yoke; do not spin fan independently through yoke tips"
+    },
+    {
+      "id": "Vela_Cloud",
+      "heroId": "Vela",
+      "variant": 2,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    },
+    {
+      "id": "Piko_Voyager",
+      "heroId": "Piko",
+      "variant": 2,
+      "requiresIndependentTopMesh": true,
+      "unitySpinAxis": "local Y (up)",
+      "pivotLocation": "center of visible top root swivel",
+      "movingAssembly": "complete independent top rotor"
+    }
+  ]
+}

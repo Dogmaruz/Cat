@@ -1,0 +1,90 @@
+{
+  "id": "Boro",
+  "kind": "Backpack",
+  "frame": "Blender Z-up / face -Y; FBX -Z-forward Y-up",
+  "fixedMeshName": "Case",
+  "movableMeshName": "TopRotor",
+  "topPivotName": "TopPivot",
+  "caseBoundsMin": [
+    -0.5,
+    -0.3456375002861023,
+    0.0
+  ],
+  "caseBoundsMax": [
+    0.5,
+    0.3456375002861023,
+    0.7690609693527222
+  ],
+  "fixedBoundsMin": [
+    -0.5,
+    0.018747130408883095,
+    0.0
+  ],
+  "fixedBoundsMax": [
+    0.5,
+    0.3456375002861023,
+    0.9052243232727051
+  ],
+  "contactPlaneY": 0.018747130956386897,
+  "rawToPreparedScale": 0.5916498916550897,
+  "referenceBodyWidth": 1.0,
+  "referenceBodyDepth": 0.5,
+  "topPivot": [
+    -0.012383581139147282,
+    0.17879408597946167,
+    0.9052243232727051
+  ],
+  "topPivotUnity": [
+    -0.012383581139147282,
+    0.9052243232727051,
+    -0.17879408597946167
+  ],
+  "spinAxisUnity": [
+    0,
+    1,
+    0
+  ],
+  "source": {
+    "vertices": 12788,
+    "polygons": 12454,
+    "triangles": 24743
+  },
+  "outputTriangles": {
+    "Case": 8797,
+    "TopRotor": 3639
+  },
+  "repairs": {
+    "localizedSpindleCutEdges": 24,
+    "rotorCaps": {
+      "sealedBoundaryEdges": 432,
+      "newCapFaces": 25
+    },
+    "caseCaps": {
+      "sealedBoundaryEdges": 283,
+      "newCapFaces": 6
+    },
+    "leftHarnessCaps": {
+      "sealedBoundaryEdges": 152,
+      "newCapFaces": 3
+    },
+    "rightHarnessCaps": {
+      "sealedBoundaryEdges": 139,
+      "newCapFaces": 3
+    },
+    "horizontalBearing": null,
+    "straplessCase20261105": {
+      "caseFacesBefore": 6902,
+      "caseFacesAfter": 4847,
+      "bodyContactPlaneY": 0.018747130956386897,
+      "trimPlaneY": 0.1,
+      "newCleanCapTriangles": 1,
+      "plainPadUv": [
+        0.1708548218011856,
+        0.6206914186477661
+      ]
+    }
+  },
+  "sourceArchiveSha256": "fbdefb7c609f9c5b5b062aaf4c5e1bc1f02f3b61238cfd6163693fe03dcc8b38",
+  "clearanceToCaseBody": 0.1361633539199829,
+  "validatedRevolutionSamples": 72
+}

@@ -1,0 +1,32 @@
+{
+  "pass": true,
+  "cases": [
+    {
+      "name": "disk_broadphase_keeps_actual_on_route_obstacle",
+      "pass": true,
+      "collision_count": 1
+    },
+    {
+      "name": "crossing_polygon_detected_with_all_vertices_outside_corridor",
+      "pass": true,
+      "minimum_vertex_centerline_distance": 41.568542494923804,
+      "collision_count": 1
+    },
+    {
+      "name": "disk_broadphase_safely_rejects_corner_aabb_overlap",
+      "pass": true,
+      "aabb_candidate_segments": 6,
+      "objects_after_disk_filter": 0
+    },
+    {
+      "name": "optimized_snapshot_hash_tracks_world_matrix_and_restores",
+      "pass": true,
+      "baseline": "54f2874d36059bf5b23110e4b80487f69d361271337ad3dcb3fb3e5669e286a3",
+      "translated_parent": "296fdf5bda63bfdb995df5cc42fbc3f3295f43ea1cdee0dbc190628a59966961",
+      "restored": "54f2874d36059bf5b23110e4b80487f69d361271337ad3dcb3fb3e5669e286a3",
+      "camera_only_change": "54f2874d36059bf5b23110e4b80487f69d361271337ad3dcb3fb3e5669e286a3",
+      "method": "evaluated_local_f32_world_matrix_f64_triangle_i32"
+    }
+  ],
+  "source_sha256": "fc3f312bcab1e3145e993ad66162536e3d5ea6e8084382b9fea8aa7478ced842"
+}

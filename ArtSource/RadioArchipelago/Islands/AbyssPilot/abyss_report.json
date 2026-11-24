@@ -1,0 +1,307 @@
+{
+  "schema": "radio_archipelago_abyss_pilot/1",
+  "frozen_inputs": {
+    "C:\\Users\\Derek\\Games_develop\\Cat\\ArtSource\\RadioArchipelago\\Islands\\V4\\Output\\01_emerald_ravine\\island.blend": "2e176284a43d91c3dfb6bceee6ff8ef0cab81686962bf79e3fa9d535e41bbf6d",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\Emerald\\emerald_island.fbx": "c58945b4dfc3dc6f846c670ab65a7831442ebb98c35203b676403daa95376727",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\EmeraldRelief\\emerald_relief_island.fbx": "af8e3a9d935e1fdcbf9d2ad2d7b5792607fba7b1ade3a67553e59cb4dde52b68",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\EmeraldRelief\\ground_elevation.json": "a89573079de362bd7e87dfc8d8bfde654fb11f389449b4f18e06577a181cda50",
+    "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Assets\\RadioArchipelago\\Imported\\Islands\\EmeraldRelief\\play_elevation.json": "f2e112c5a7b7a53d2114aad410edfa9d19e7e98219d86219b23a8176652a4136"
+  },
+  "frozen_inputs_unchanged": true,
+  "road_geometry_absent": true,
+  "cobblestones_absent": true,
+  "wooden_walkway_absent": true,
+  "source_connected_terrain_topology": {
+    "vertices": 10474,
+    "faces": 17557,
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0
+  },
+  "clear_flight_corridor_width": 7,
+  "ravines": [
+    {
+      "start": 125,
+      "end": 185,
+      "mouth_width": [
+        12,
+        18
+      ],
+      "through_entire_island": true
+    },
+    {
+      "start": 402,
+      "end": 501,
+      "mouth_width": [
+        12,
+        18
+      ],
+      "through_entire_island": true
+    }
+  ],
+  "islets": [
+    {
+      "name": "Abyss_Low grass shard",
+      "distance": 146,
+      "cap_height": -0.9,
+      "center": [
+        -30.88613510131836,
+        21.565750122070312,
+        0.0
+      ],
+      "radius_along": 5.2,
+      "radius_across": 3.8,
+      "depth": 23,
+      "kind": "rough",
+      "topology": {
+        "vertices": 122,
+        "faces": 144,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0
+      }
+    },
+    {
+      "name": "Abyss_Ravine needle",
+      "distance": 171,
+      "cap_height": -0.9,
+      "center": [
+        -30.619760513305664,
+        44.673091888427734,
+        0.0
+      ],
+      "radius_along": 4.7,
+      "radius_across": 3.6,
+      "depth": 29,
+      "kind": "spire",
+      "topology": {
+        "vertices": 146,
+        "faces": 168,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0
+      }
+    },
+    {
+      "name": "Abyss_High terraced garden",
+      "distance": 420,
+      "cap_height": 7.7424164121322985,
+      "center": [
+        20.402910232543945,
+        -56.49058532714844,
+        0.0
+      ],
+      "radius_along": 8.5,
+      "radius_across": 4.5,
+      "depth": 27,
+      "kind": "terrace",
+      "topology": {
+        "vertices": 170,
+        "faces": 192,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0
+      }
+    },
+    {
+      "name": "Abyss_Leaning radio spire",
+      "distance": 445,
+      "cap_height": 11.1,
+      "center": [
+        -5.184683799743652,
+        -54.97868347167969,
+        0.0
+      ],
+      "radius_along": 5.0,
+      "radius_across": 3.6,
+      "depth": 35,
+      "kind": "spire",
+      "topology": {
+        "vertices": 146,
+        "faces": 168,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0
+      }
+    },
+    {
+      "name": "Abyss_Copper cottage isle",
+      "distance": 478,
+      "cap_height": 5.1,
+      "center": [
+        -37.766204833984375,
+        -63.737823486328125,
+        0.0
+      ],
+      "radius_along": 6.8,
+      "radius_across": 4.5,
+      "depth": 25,
+      "kind": "rough",
+      "topology": {
+        "vertices": 122,
+        "faces": 144,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0
+      }
+    }
+  ],
+  "plant_relocation": {
+    "relocated_plant_groups": 362,
+    "removed_unstable_groups": 0,
+    "unsupported_outer_coast_rock_groups_removed": 61
+  },
+  "root_geometry": "closed opaque seven-sided volumetric tubes, below tile flight",
+  "route_xz_unchanged": true,
+  "ground_and_play_json_byte_identical": true,
+  "bridge_distance": 90.5,
+  "house_hill_height": 8,
+  "structural_materials": [
+    "RA_Emerald_Terrain",
+    "RA_Emerald_Cliffs",
+    "RA_Emerald_BridgeDeck"
+  ],
+  "vines_material": "RA_Emerald_Vines",
+  "export": {
+    "meshes": 324,
+    "triangle_estimate": 4496943,
+    "material_buckets": {
+      "Terrain": 17676,
+      "Cliffs": 6754,
+      "Vines": 5642,
+      "Rocks": 476836,
+      "Architecture": 502272,
+      "Wood": 827100,
+      "Metal": 121200,
+      "BridgeDeck": 8096,
+      "Water": 8892,
+      "Foliage": 2526784
+    },
+    "optimization": {
+      "leaves_seen": 189516,
+      "leaves_retained": 64566,
+      "bough_hulls": 2832
+    },
+    "road_source_objects_omitted": 1
+  },
+  "elapsed_seconds": 105.0407625999942,
+  "structural_replacement": {
+    "removed_old_terrain_cliff_batches": 96,
+    "new_exact_closed_shells": 6,
+    "open_ground_scree_decorations_removed": true,
+    "closed_polygon_indices_preserved": true,
+    "structural_triangulation_deferred_to_unity": true,
+    "decoration_normal_fallbacks": [
+      {
+        "mesh": "RA_Architecture_+02_+00_02",
+        "corners": 2
+      }
+    ]
+  },
+  "final_verification": {
+    "pass_geometry": true,
+    "pass_flight_corridor": true,
+    "mesh_batches": 234,
+    "triangles": 4386185,
+    "material_buckets": {
+      "Architecture": 499188,
+      "BridgeDeck": 8096,
+      "Foliage": 2526784,
+      "Metal": 118633,
+      "Rocks": 476645,
+      "Vines": 5642,
+      "Water": 8892,
+      "Wood": 719965,
+      "Terrain": 15586,
+      "Cliffs": 6754
+    },
+    "colored_meshes": 234,
+    "invalid_corner_normals": 0,
+    "max_unit_normal_error": 5.960464477539062e-07,
+    "anchors": [
+      {
+        "name": "RA_Origin",
+        "error": 0.0
+      },
+      {
+        "name": "RA_X10",
+        "error": 0.0
+      },
+      {
+        "name": "RA_North10",
+        "error": 3.139164618914947e-06
+      }
+    ],
+    "structural_shell": {
+      "vertices": 11180,
+      "faces": 18373,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "per_object": [
+        {
+          "name": "RA_Closed_Copper cottage isle",
+          "vertices": 122,
+          "faces": 144,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0
+        },
+        {
+          "name": "RA_Closed_High terraced garden",
+          "vertices": 170,
+          "faces": 192,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0
+        },
+        {
+          "name": "RA_Closed_Leaning radio spire",
+          "vertices": 146,
+          "faces": 168,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0
+        },
+        {
+          "name": "RA_Closed_Low grass shard",
+          "vertices": 122,
+          "faces": 144,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0
+        },
+        {
+          "name": "RA_Closed_Mainland",
+          "vertices": 10474,
+          "faces": 17557,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0
+        },
+        {
+          "name": "RA_Closed_Ravine needle",
+          "vertices": 146,
+          "faces": 168,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "method": "Exact serialized polygon indices; no collapse or proximity weld"
+    },
+    "removed_decorative_sliver_faces": {},
+    "corridor": {
+      "lane_offsets": [
+        -3.5,
+        -2,
+        0,
+        2,
+        3.5
+      ],
+      "sample_spacing": 0.5,
+      "tile_elevation": 1,
+      "minimum_downward_surface_clearance": 1.9324532747268677,
+      "open_sky_below_samples": 680,
+      "surface_below_samples": 920,
+      "overhead_hits": [],
+      "intersection_hits": [],
+      "min_cap_below_profile": 0.9324532747268677
+    },
+    "frozen_inputs_unchanged": true,
+    "fbx_sha256": "d906f49729502753bed156940941e4228350be0b830f057f70ddc30f5fe856eb",
+    "fbx_bytes": 166414044,
+    "route_and_profiles_byte_identical": true
+  },
+  "final_native_file": "emerald_abyss_final.blend",
+  "proofs_show_final_serialized_geometry": true,
+  "legacy_proofs": "Proof_PreCoastalOpening: previous coast geometry, not final",
+  "coastal_open_to_outside": true
+}

@@ -1,0 +1,90 @@
+{
+  "id": "Lumen",
+  "kind": "Backpack",
+  "frame": "Blender Z-up / face -Y; FBX -Z-forward Y-up",
+  "fixedMeshName": "Case",
+  "movableMeshName": "TopRotor",
+  "topPivotName": "TopPivot",
+  "caseBoundsMin": [
+    -0.5,
+    -0.30653172731399536,
+    0.0
+  ],
+  "caseBoundsMax": [
+    0.5,
+    0.30653172731399536,
+    0.7860333919525146
+  ],
+  "fixedBoundsMin": [
+    -0.4699999988079071,
+    -0.14738869667053223,
+    0.003917765337973833
+  ],
+  "fixedBoundsMax": [
+    0.4699999988079071,
+    0.30653172731399536,
+    0.8398436903953552
+  ],
+  "contactPlaneY": -0.14738869140031752,
+  "rawToPreparedScale": 0.6721161173509167,
+  "referenceBodyWidth": 1.0,
+  "referenceBodyDepth": 0.5,
+  "topPivot": [
+    -0.15297557413578033,
+    0.08591444045305252,
+    0.8398436903953552
+  ],
+  "topPivotUnity": [
+    -0.15297557413578033,
+    0.8398436903953552,
+    -0.08591444045305252
+  ],
+  "spinAxisUnity": [
+    0,
+    1,
+    0
+  ],
+  "source": {
+    "vertices": 11582,
+    "polygons": 11562,
+    "triangles": 23077
+  },
+  "outputTriangles": {
+    "Case": 6162,
+    "TopRotor": 4320
+  },
+  "repairs": {
+    "localizedSpindleCutEdges": 16,
+    "rotorCaps": {
+      "sealedBoundaryEdges": 33,
+      "newCapFaces": 3
+    },
+    "caseCaps": {
+      "sealedBoundaryEdges": 189,
+      "newCapFaces": 4
+    },
+    "leftHarnessCaps": {
+      "sealedBoundaryEdges": 92,
+      "newCapFaces": 2
+    },
+    "rightHarnessCaps": {
+      "sealedBoundaryEdges": 70,
+      "newCapFaces": 2
+    },
+    "horizontalBearing": null,
+    "straplessCase20261105": {
+      "caseFacesBefore": 6097,
+      "caseFacesAfter": 3511,
+      "bodyContactPlaneY": -0.14738869140031752,
+      "trimPlaneY": 0.1,
+      "newCleanCapTriangles": 1,
+      "plainPadUv": [
+        0.23522216081619263,
+        0.7913123965263367
+      ]
+    }
+  },
+  "sourceArchiveSha256": "df50720a50eb8fe9a77df6f42c301f5f8506ff4f8717034ab7655d8739536ef9",
+  "clearanceToCaseBody": 0.029974043369293213,
+  "validatedRevolutionSamples": 72
+}

@@ -1,0 +1,144 @@
+{
+  "schema": "radio_archipelago_unity_materials/1",
+  "vertex_color_space": "linear",
+  "vertex_color_name": "Color",
+  "bank_weight_channel": "UV1.x (Unity uv2/TEXCOORD1.x)",
+  "uv0": "Road/Bridge original RoadMeters; Terrain planar X/Y; other buckets use world triplanar coordinates",
+  "rock_texture": "rock_albedo.png",
+  "rock_texture_space": "sRGB",
+  "road_paving": {
+    "brick_width": 0.79,
+    "row_height": 0.56,
+    "mortar": 0.065,
+    "offset": 0.5
+  },
+  "materials": [
+    {
+      "name": "RA_Emerald_Terrain",
+      "bucket": "Terrain",
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "two_sided": false,
+      "roughness": 0.88,
+      "metallic": 0,
+      "rock_detail": false
+    },
+    {
+      "name": "RA_Emerald_Rocks",
+      "bucket": "Rocks",
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "two_sided": false,
+      "roughness": 0.86,
+      "metallic": 0,
+      "rock_detail": true
+    },
+    {
+      "name": "RA_Emerald_Foliage",
+      "bucket": "Foliage",
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "two_sided": true,
+      "roughness": 0.76,
+      "metallic": 0,
+      "rock_detail": false
+    },
+    {
+      "name": "RA_Emerald_Wood",
+      "bucket": "Wood",
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "two_sided": false,
+      "roughness": 0.88,
+      "metallic": 0,
+      "rock_detail": false
+    },
+    {
+      "name": "RA_Emerald_Architecture",
+      "bucket": "Architecture",
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "two_sided": false,
+      "roughness": 0.75,
+      "metallic": 0,
+      "rock_detail": false
+    },
+    {
+      "name": "RA_Emerald_Metal",
+      "bucket": "Metal",
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "two_sided": false,
+      "roughness": 0.36,
+      "metallic": 0.65,
+      "rock_detail": false
+    },
+    {
+      "name": "RA_Emerald_Road",
+      "bucket": "Road",
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "two_sided": false,
+      "roughness": 0.84,
+      "metallic": 0,
+      "rock_detail": false
+    },
+    {
+      "name": "RA_Emerald_Bridge",
+      "bucket": "Bridge",
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "two_sided": false,
+      "roughness": 0.88,
+      "metallic": 0,
+      "rock_detail": false
+    },
+    {
+      "name": "RA_Emerald_Water",
+      "bucket": "Water",
+      "base_color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "two_sided": false,
+      "roughness": 0.22,
+      "metallic": 0.08,
+      "rock_detail": false
+    }
+  ],
+  "approximation": "Procedural color microvariation and bump are represented approximately by vertex material colors and a shared rock/detail texture; lighting remains realtime."
+}

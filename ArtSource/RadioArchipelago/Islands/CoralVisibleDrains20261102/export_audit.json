@@ -1,0 +1,1000 @@
+{
+  "passed": true,
+  "finite_exterior_visibility_passed": true,
+  "finite_witness_method": "Each of30body samples has at least one segment from a point200m away OUTSIDE the complete rock AABB with zero intervening Terrain/Cliffs intersections. No renderer hidden/culling/shader override.",
+  "signed_winding_diagnostic_certified": false,
+  "winding_anomalies": [
+    {
+      "node": "RA_Coral_Waterfall_+01_-01_01",
+      "fraction": 0.75,
+      "u": 0.5,
+      "position": [
+        66.89156341552734,
+        6.199998378753662,
+        -23.84585952758789
+      ],
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "clear": [
+        0,
+        45,
+        270
+      ],
+      "nearest_distance": 6.688680648803711,
+      "nearest_signed_dot": 5.9397975988686085,
+      "rays": [
+        {
+          "angle": 281,
+          "winding": 1,
+          "hits": [
+            {
+              "distance": 6.803948879241943,
+              "node": "RA_Coral_Cliffs_+01_-01_01",
+              "face": 15467,
+              "position": [
+                68.18656158447266,
+                -0.46218252182006836,
+                -23.36399269104004
+              ],
+              "normal_dot": 0.3926345929503441
+            },
+            {
+              "distance": 17.863264070281982,
+              "node": "RA_Coral_Cliffs_+01_-01_01",
+              "face": 15422,
+              "position": [
+                70.2914810180664,
+                -11.291048049926758,
+                -22.580753326416016
+              ],
+              "normal_dot": 0.9651396870613098
+            },
+            {
+              "distance": 18.0517987784338,
+              "node": "RA_Coral_Cliffs_+01_-01_01",
+              "face": 15627,
+              "position": [
+                70.32736206054688,
+                -11.475653648376465,
+                -22.567401885986328
+              ],
+              "normal_dot": -0.9520448856055737
+            },
+            {
+              "distance": 27.757526818900107,
+              "node": "RA_Coral_Cliffs_+01_-01_01",
+              "face": 12593,
+              "position": [
+                72.17465209960938,
+                -20.979137420654297,
+                -21.88002586364746
+              ],
+              "normal_dot": -0.6522623524069786
+            },
+            {
+              "distance": 53.14832012883663,
+              "node": "RA_Coral_Cliffs_+02_-02_01",
+              "face": 34557,
+              "position": [
+                77.00727844238281,
+                -45.84084701538086,
+                -20.081806182861328
+              ],
+              "normal_dot": 0.5956880636513233
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "winding_note": "All signed counters are retained. A lone281degree ray crosses farther overlapping/orientation-inconsistent rock6.8m+ away. It is non-certifying for this non-Boolean scenery mesh; it does not negate direct unobstructed exterior segments. No threshold relaxed or unrelated rock sculpted.",
+  "rock_world_bounds": [
+    [
+      -163.43313598632812,
+      -97.82147216796875,
+      -54.705726623535156
+    ],
+    [
+      169.61537170410156,
+      118.82001495361328,
+      14.868895530700684
+    ]
+  ],
+  "sha256": "37e99875187a9e0e67a6405a042dba3919e8b96377111fc54ec627eaa1ccb4d0",
+  "untouched_imported_objects": 253,
+  "untouched_render_signatures_exact": true,
+  "sculpted_nodes": [
+    {
+      "node": "RA_Coral_Terrain_+01_-01_01",
+      "changed_vertices": 169,
+      "maximum_sculpt_displacement": 0.7212901218963289,
+      "far_position_error": 0.0,
+      "uv_rgba_topology_exact": true,
+      "far_normal_component_delta": 0.0005425214767456055
+    },
+    {
+      "node": "RA_Coral_Terrain_+01_-03_01",
+      "changed_vertices": 16,
+      "maximum_sculpt_displacement": 1.4939635726644624,
+      "far_position_error": 0.0,
+      "uv_rgba_topology_exact": true,
+      "far_normal_component_delta": 0.00039367188583128154
+    },
+    {
+      "node": "RA_Coral_Cliffs_+01_-01_01",
+      "changed_vertices": 2166,
+      "maximum_sculpt_displacement": 0.7059574086563847,
+      "far_position_error": 0.0,
+      "uv_rgba_topology_exact": true,
+      "far_normal_component_delta": 0.004611939191818237
+    },
+    {
+      "node": "RA_Coral_Cliffs_+01_-03_01",
+      "changed_vertices": 10,
+      "maximum_sculpt_displacement": 1.490958541564924,
+      "far_position_error": 0.0,
+      "uv_rgba_topology_exact": true,
+      "far_normal_component_delta": 0.0016077905893325806
+    },
+    {
+      "node": "RA_Coral_Terrain_+01_+00_01",
+      "changed_vertices": 112,
+      "maximum_sculpt_displacement": 0.7212901218963289,
+      "far_position_error": 0.0,
+      "uv_rgba_topology_exact": true,
+      "far_normal_component_delta": 0.00024616532027721405
+    },
+    {
+      "node": "RA_Coral_Cliffs_+01_+00_01",
+      "changed_vertices": 50,
+      "maximum_sculpt_displacement": 0.6225605085754866,
+      "far_position_error": 0.0,
+      "uv_rgba_topology_exact": true,
+      "far_normal_component_delta": 0.0005949549376964569
+    }
+  ],
+  "water": [
+    {
+      "node": "RA_Coral_Waterfall_+01_-01_01",
+      "triangles": 13206,
+      "vertices": 6831,
+      "components": 1,
+      "zero_triangles": 0,
+      "invalid_normals": 0,
+      "samples": [
+        {
+          "fraction": 0.05,
+          "u": 0.15625,
+          "position": [
+            66.2093734741211,
+            5.789406776428223,
+            4.741637229919434
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            45
+          ],
+          "nearest_rock_distance": 2.405529737472534,
+          "nearest_node": "RA_Coral_Cliffs_+01_+00_01",
+          "nearest_signed_dot": 0.08320009708404541
+        },
+        {
+          "fraction": 0.05,
+          "u": 0.5,
+          "position": [
+            67.0,
+            5.789406776428223,
+            4.741637229919434
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            45
+          ],
+          "nearest_rock_distance": 2.3117122650146484,
+          "nearest_node": "RA_Coral_Cliffs_+01_+00_01",
+          "nearest_signed_dot": 2.2330919252708554
+        },
+        {
+          "fraction": 0.05,
+          "u": 0.84375,
+          "position": [
+            67.7906265258789,
+            5.789406776428223,
+            4.741637229919434
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            45
+          ],
+          "nearest_rock_distance": 2.400690793991089,
+          "nearest_node": "RA_Coral_Cliffs_+01_+00_01",
+          "nearest_signed_dot": 2.3609364796429873
+        },
+        {
+          "fraction": 0.25,
+          "u": 0.15625,
+          "position": [
+            66.32870483398438,
+            6.171649932861328,
+            -3.5375819206237793
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            45
+          ],
+          "nearest_rock_distance": 2.741112470626831,
+          "nearest_node": "RA_Coral_Cliffs_+01_+00_01",
+          "nearest_signed_dot": 2.109430968761444
+        },
+        {
+          "fraction": 0.25,
+          "u": 0.5,
+          "position": [
+            67.11933135986328,
+            6.171649932861328,
+            -3.5375819206237793
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            45
+          ],
+          "nearest_rock_distance": 2.895400047302246,
+          "nearest_node": "RA_Coral_Cliffs_+01_+00_01",
+          "nearest_signed_dot": 2.791869968175888
+        },
+        {
+          "fraction": 0.25,
+          "u": 0.84375,
+          "position": [
+            67.90995788574219,
+            6.171649932861328,
+            -3.5375819206237793
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            45
+          ],
+          "nearest_rock_distance": 2.82507061958313,
+          "nearest_node": "RA_Coral_Cliffs_+01_+00_01",
+          "nearest_signed_dot": 2.713934587314725
+        },
+        {
+          "fraction": 0.5,
+          "u": 0.15625,
+          "position": [
+            66.18924713134766,
+            6.1999993324279785,
+            -13.691720962524414
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            45
+          ],
+          "nearest_rock_distance": 5.530097007751465,
+          "nearest_node": "RA_Coral_Cliffs_+01_+00_01",
+          "nearest_signed_dot": 3.083668887615204
+        },
+        {
+          "fraction": 0.5,
+          "u": 0.5,
+          "position": [
+            66.97987365722656,
+            6.1999993324279785,
+            -13.691720962524414
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            45
+          ],
+          "nearest_rock_distance": 5.5240936279296875,
+          "nearest_node": "RA_Coral_Cliffs_+01_+00_01",
+          "nearest_signed_dot": 5.371362950652838
+        },
+        {
+          "fraction": 0.5,
+          "u": 0.84375,
+          "position": [
+            67.77050018310547,
+            6.1999993324279785,
+            -13.691720962524414
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            45
+          ],
+          "nearest_rock_distance": 5.532049655914307,
+          "nearest_node": "RA_Coral_Cliffs_+01_+00_01",
+          "nearest_signed_dot": 5.5309149622917175
+        },
+        {
+          "fraction": 0.75,
+          "u": 0.15625,
+          "position": [
+            66.10093688964844,
+            6.199998378753662,
+            -23.84585952758789
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            45,
+            270
+          ],
+          "nearest_rock_distance": 6.66286563873291,
+          "nearest_node": "RA_Coral_Cliffs_+01_-01_01",
+          "nearest_signed_dot": 6.5268475394696
+        },
+        {
+          "fraction": 0.75,
+          "u": 0.5,
+          "position": [
+            66.89156341552734,
+            6.199998378753662,
+            -23.84585952758789
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            45,
+            270
+          ],
+          "nearest_rock_distance": 6.688680648803711,
+          "nearest_node": "RA_Coral_Cliffs_+01_-01_01",
+          "nearest_signed_dot": 5.9397975988686085
+        },
+        {
+          "fraction": 0.75,
+          "u": 0.84375,
+          "position": [
+            67.68218994140625,
+            6.199998378753662,
+            -23.84585952758789
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            45,
+            270
+          ],
+          "nearest_rock_distance": 6.60914421081543,
+          "nearest_node": "RA_Coral_Cliffs_+01_-01_01",
+          "nearest_signed_dot": 2.877904921770096
+        },
+        {
+          "fraction": 0.95,
+          "u": 0.15625,
+          "position": [
+            66.2490463256836,
+            6.199997901916504,
+            -31.909440994262695
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            45,
+            270
+          ],
+          "nearest_rock_distance": 10.946895599365234,
+          "nearest_node": "RA_Coral_Cliffs_+01_-01_01",
+          "nearest_signed_dot": -0.8337415456771851
+        },
+        {
+          "fraction": 0.95,
+          "u": 0.5,
+          "position": [
+            67.0396728515625,
+            6.199997901916504,
+            -31.909440994262695
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            45,
+            270
+          ],
+          "nearest_rock_distance": 10.821087837219238,
+          "nearest_node": "RA_Coral_Cliffs_+01_-01_01",
+          "nearest_signed_dot": -0.20481133460998535
+        },
+        {
+          "fraction": 0.95,
+          "u": 0.84375,
+          "position": [
+            67.8302993774414,
+            6.199997901916504,
+            -31.909440994262695
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            45,
+            270
+          ],
+          "nearest_rock_distance": 10.752092361450195,
+          "nearest_node": "RA_Coral_Cliffs_+01_-01_01",
+          "nearest_signed_dot": 0.42411887645721436
+        }
+      ]
+    },
+    {
+      "node": "RA_Coral_Waterfall_+01_-03_01",
+      "triangles": 13838,
+      "vertices": 7189,
+      "components": 1,
+      "zero_triangles": 0,
+      "invalid_normals": 0,
+      "samples": [
+        {
+          "fraction": 0.05,
+          "u": 0.15625,
+          "position": [
+            42.83124923706055,
+            -84.1655502319336,
+            -1.069146990776062
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 1.2665196657180786,
+          "nearest_node": "RA_Coral_Cliffs_+01_-03_01",
+          "nearest_signed_dot": 1.266519797500223
+        },
+        {
+          "fraction": 0.05,
+          "u": 0.5,
+          "position": [
+            44.0,
+            -84.1655502319336,
+            -1.069146990776062
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 1.7528300285339355,
+          "nearest_node": "RA_Coral_Cliffs_+01_-03_01",
+          "nearest_signed_dot": 1.7528299978002906
+        },
+        {
+          "fraction": 0.05,
+          "u": 0.84375,
+          "position": [
+            45.16875076293945,
+            -84.1655502319336,
+            -1.069146990776062
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 2.0257153511047363,
+          "nearest_node": "RA_Coral_Cliffs_+01_-03_01",
+          "nearest_signed_dot": 0.0274796299636364
+        },
+        {
+          "fraction": 0.25,
+          "u": 0.15625,
+          "position": [
+            42.94852066040039,
+            -84.6485824584961,
+            -7.496687889099121
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 4.375864505767822,
+          "nearest_node": "RA_Coral_Cliffs_+01_-03_01",
+          "nearest_signed_dot": 1.862818590394454
+        },
+        {
+          "fraction": 0.25,
+          "u": 0.5,
+          "position": [
+            44.117271423339844,
+            -84.6485824584961,
+            -7.496687889099121
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 4.466240406036377,
+          "nearest_node": "RA_Coral_Cliffs_+01_-03_01",
+          "nearest_signed_dot": 1.8607592701446265
+        },
+        {
+          "fraction": 0.25,
+          "u": 0.84375,
+          "position": [
+            45.2860221862793,
+            -84.6485824584961,
+            -7.496687889099121
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 4.61709451675415,
+          "nearest_node": "RA_Coral_Cliffs_+01_-03_01",
+          "nearest_signed_dot": 1.858699701842852
+        },
+        {
+          "fraction": 0.5,
+          "u": 0.15625,
+          "position": [
+            42.822532653808594,
+            -84.70000457763672,
+            -15.231952667236328
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 7.33211612701416,
+          "nearest_node": "RA_Coral_Cliffs_+01_-03_01",
+          "nearest_signed_dot": 7.204144597053528
+        },
+        {
+          "fraction": 0.5,
+          "u": 0.5,
+          "position": [
+            43.99128341674805,
+            -84.70000457763672,
+            -15.231952667236328
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 7.741093635559082,
+          "nearest_node": "RA_Coral_Cliffs_+01_-03_01",
+          "nearest_signed_dot": 7.73372483253479
+        },
+        {
+          "fraction": 0.5,
+          "u": 0.84375,
+          "position": [
+            45.1600341796875,
+            -84.70000457763672,
+            -15.231952667236328
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 8.183494567871094,
+          "nearest_node": "RA_Coral_Cliffs_+01_-03_01",
+          "nearest_signed_dot": 8.183494605123997
+        },
+        {
+          "fraction": 0.75,
+          "u": 0.15625,
+          "position": [
+            42.722198486328125,
+            -84.70000457763672,
+            -23.264728546142578
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 11.196328163146973,
+          "nearest_node": "RA_Coral_Cliffs_+01_-03_01",
+          "nearest_signed_dot": 11.107830315828323
+        },
+        {
+          "fraction": 0.75,
+          "u": 0.5,
+          "position": [
+            43.89094924926758,
+            -84.70000457763672,
+            -23.264728546142578
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 11.402506828308105,
+          "nearest_node": "RA_Coral_Cliffs_+01_-03_01",
+          "nearest_signed_dot": 11.317759186029434
+        },
+        {
+          "fraction": 0.75,
+          "u": 0.84375,
+          "position": [
+            45.05970001220703,
+            -84.70000457763672,
+            -23.264728546142578
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 11.674302101135254,
+          "nearest_node": "RA_Coral_Cliffs_+01_-03_01",
+          "nearest_signed_dot": 11.527689695358276
+        },
+        {
+          "fraction": 0.95,
+          "u": 0.15625,
+          "position": [
+            42.87348556518555,
+            -84.70000457763672,
+            -29.51244354248047
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 15.153881072998047,
+          "nearest_node": "RA_Coral_Cliffs_+01_-02_01",
+          "nearest_signed_dot": 6.432510852813721
+        },
+        {
+          "fraction": 0.95,
+          "u": 0.5,
+          "position": [
+            44.042236328125,
+            -84.70000457763672,
+            -29.51244354248047
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 15.339704513549805,
+          "nearest_node": "RA_Coral_Cliffs_+01_-02_01",
+          "nearest_signed_dot": 7.018071532249451
+        },
+        {
+          "fraction": 0.95,
+          "u": 0.84375,
+          "position": [
+            45.21098709106445,
+            -84.70000457763672,
+            -29.51244354248047
+          ],
+          "winding": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "clear_horizontal_azimuths": [
+            0,
+            225,
+            270,
+            315
+          ],
+          "nearest_rock_distance": 15.611050605773926,
+          "nearest_node": "RA_Coral_Cliffs_+01_-02_01",
+          "nearest_signed_dot": 7.603632211685181
+        }
+      ]
+    }
+  ],
+  "scope": "Actual imported FBX. Eight signed winding rays and eight horizontal exterior rays per sample;5heights\u00d73widthpositions per fall. No route, camera, shader or scene changes."
+}

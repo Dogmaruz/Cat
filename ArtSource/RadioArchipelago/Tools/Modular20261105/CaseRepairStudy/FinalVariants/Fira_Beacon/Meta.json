@@ -1,0 +1,91 @@
+{
+  "id": "Fira_Beacon",
+  "kind": "Backpack",
+  "frame": "Blender Z-up / face -Y; FBX -Z-forward Y-up",
+  "fixedMeshName": "Case",
+  "movableMeshName": "TopRotor",
+  "topPivotName": "TopPivot",
+  "caseBoundsMin": [
+    -0.4999999701976776,
+    -0.26975998282432556,
+    0.0
+  ],
+  "caseBoundsMax": [
+    0.4999999701976776,
+    0.2667243778705597,
+    1.0440458059310913
+  ],
+  "fixedBoundsMin": [
+    -0.3208496868610382,
+    -0.26975998282432556,
+    7.278737757587805e-05
+  ],
+  "fixedBoundsMax": [
+    0.3221738338470459,
+    0.2667243778705597,
+    1.647086262702942
+  ],
+  "contactPlaneY": -0.26180975776864274,
+  "rawToPreparedScale": 0.7565853237053975,
+  "referenceBodyWidth": 1.0,
+  "referenceBodyDepth": 0.5,
+  "topPivot": [
+    0.00022012599220033735,
+    -0.022744977846741676,
+    1.6115267276763916
+  ],
+  "topPivotUnity": [
+    0.00022012599220033735,
+    1.6115267276763916,
+    0.022744977846741676
+  ],
+  "spinAxisUnity": [
+    0,
+    0,
+    1
+  ],
+  "source": {
+    "vertices": 12370,
+    "polygons": 12145,
+    "triangles": 24205
+  },
+  "outputTriangles": {
+    "Case": 13203,
+    "TopRotor": 1444
+  },
+  "repairs": {
+    "localizedSpindleCutEdges": 16,
+    "rotorCaps": {
+      "sealedBoundaryEdges": 16,
+      "newCapFaces": 1
+    },
+    "caseCaps": {
+      "sealedBoundaryEdges": 258,
+      "newCapFaces": 4
+    },
+    "leftHarnessCaps": {
+      "sealedBoundaryEdges": 56,
+      "newCapFaces": 2
+    },
+    "rightHarnessCaps": {
+      "sealedBoundaryEdges": 58,
+      "newCapFaces": 2
+    },
+    "horizontalBearing": {
+      "fixedPostExtendedToHub": 2.13,
+      "removedRotatingPoleFaces": 153,
+      "horizontalBearingRadius": 0.047
+    },
+    "straplessCase20261105": {
+      "method": "actual case cross-section loft, no Boolean operations",
+      "cutPlaneY": 0.025,
+      "removedSourceFaces": 4056,
+      "radioProtectedY": 0.025,
+      "hullVertices": 51,
+      "bearingCapUvRepairs": 0
+    }
+  },
+  "sourceArchiveSha256": "f8cca75287bae1ffe6d6d9bee0bd7edec5072549964df9a68b6a4b859503af45",
+  "clearanceToCaseBody": 0.30754029750823975,
+  "validatedRevolutionSamples": 72
+}

@@ -1,0 +1,90 @@
+{
+  "id": "Nori",
+  "kind": "Backpack",
+  "frame": "Blender Z-up / face -Y; FBX -Z-forward Y-up",
+  "fixedMeshName": "Case",
+  "movableMeshName": "TopRotor",
+  "topPivotName": "TopPivot",
+  "caseBoundsMin": [
+    -0.5002329349517822,
+    -0.22093184292316437,
+    -0.00010318343265680596
+  ],
+  "caseBoundsMax": [
+    0.49991825222969055,
+    0.22085973620414734,
+    0.7996630072593689
+  ],
+  "fixedBoundsMin": [
+    -0.4699999988079071,
+    -0.2183232307434082,
+    0.000387467909604311
+  ],
+  "fixedBoundsMax": [
+    0.4699999988079071,
+    0.22085973620414734,
+    0.8581979870796204
+  ],
+  "contactPlaneY": -0.21832323522945107,
+  "rawToPreparedScale": 0.5837547091300503,
+  "referenceBodyWidth": 1.0,
+  "referenceBodyDepth": 0.5,
+  "topPivot": [
+    -0.22159487009048462,
+    0.055515360087156296,
+    0.8581194281578064
+  ],
+  "topPivotUnity": [
+    -0.22159487009048462,
+    0.8581194281578064,
+    -0.055515360087156296
+  ],
+  "spinAxisUnity": [
+    0,
+    1,
+    0
+  ],
+  "source": {
+    "vertices": 50060,
+    "polygons": 100140,
+    "triangles": 100140
+  },
+  "outputTriangles": {
+    "Case": 8175,
+    "TopRotor": 6000
+  },
+  "repairs": {
+    "localizedSpindleCutEdges": 116,
+    "rotorCaps": {
+      "sealedBoundaryEdges": 116,
+      "newCapFaces": 1
+    },
+    "caseCaps": {
+      "sealedBoundaryEdges": 372,
+      "newCapFaces": 4
+    },
+    "leftHarnessCaps": {
+      "sealedBoundaryEdges": 186,
+      "newCapFaces": 2
+    },
+    "rightHarnessCaps": {
+      "sealedBoundaryEdges": 186,
+      "newCapFaces": 2
+    },
+    "horizontalBearing": null,
+    "straplessCase20261105": {
+      "caseFacesBefore": 18000,
+      "caseFacesAfter": 8030,
+      "bodyContactPlaneY": -0.21832323522945107,
+      "trimPlaneY": 0.1,
+      "newCleanCapTriangles": 2,
+      "plainPadUv": [
+        0.5691075325012207,
+        0.4449714124202728
+      ]
+    }
+  },
+  "sourceArchiveSha256": "25c54e03766feee048d940c6a7f194d629b7ec7d9192a512256fa588da98de0e",
+  "clearanceToCaseBody": 0.05841541290283203,
+  "validatedRevolutionSamples": 72
+}

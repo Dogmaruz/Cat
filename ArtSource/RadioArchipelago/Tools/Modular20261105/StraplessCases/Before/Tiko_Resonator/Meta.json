@@ -1,0 +1,122 @@
+{
+  "id": "Tiko_Resonator",
+  "kind": "Backpack",
+  "frame": "Blender Z-up / face -Y; FBX -Z-forward Y-up",
+  "fixedMeshName": "Case",
+  "movableMeshName": "TopRotor",
+  "topPivotName": "TopPivot",
+  "harnessNames": [
+    "Harness.L",
+    "Harness.R"
+  ],
+  "caseBoundsMin": [
+    -0.5,
+    -0.31224527955055237,
+    9.780381515156478e-05
+  ],
+  "caseBoundsMax": [
+    0.5,
+    0.3122922480106354,
+    0.7601160407066345
+  ],
+  "fixedBoundsMin": [
+    -0.5,
+    -0.31224527955055237,
+    9.780381515156478e-05
+  ],
+  "fixedBoundsMax": [
+    0.5,
+    0.3122922480106354,
+    0.8254602551460266
+  ],
+  "contactPlaneY": 0.003171007749261691,
+  "rawToPreparedScale": 0.466360463282307,
+  "harnessBoundsMin": [
+    -0.5360856056213379,
+    -0.33207279443740845,
+    0.023038478568196297
+  ],
+  "harnessBoundsMax": [
+    0.5483785271644592,
+    -0.008470536209642887,
+    0.7418053150177002
+  ],
+  "harnessShouldersL": [
+    -0.3464518189430237,
+    -0.0987832248210907,
+    0.7418053150177002
+  ],
+  "harnessShouldersR": [
+    0.3504195213317871,
+    -0.09489235281944275,
+    0.7410801649093628
+  ],
+  "harnessBottomL": [
+    -0.3468012809753418,
+    -0.13202090561389923,
+    0.023607561364769936
+  ],
+  "harnessBottomR": [
+    0.3681303858757019,
+    -0.12670525908470154,
+    0.023038478568196297
+  ],
+  "referenceBodyWidth": 1.0,
+  "referenceBodyDepth": 0.5,
+  "topPivot": [
+    0.005886510945856571,
+    0.2105163037776947,
+    0.8254579901695251
+  ],
+  "topPivotUnity": [
+    0.005886510945856571,
+    0.8254579901695251,
+    -0.2105163037776947
+  ],
+  "spinAxisUnity": [
+    0,
+    1,
+    0
+  ],
+  "source": {
+    "vertices": 47566,
+    "polygons": 47396,
+    "triangles": 94736
+  },
+  "outputTriangles": {
+    "Case": 17992,
+    "Harness.L": 3000,
+    "Harness.R": 2995,
+    "TopRotor": 6000
+  },
+  "repairs": {
+    "localizedSpindleCutEdges": 24,
+    "rotorCaps": {
+      "sealedBoundaryEdges": 24,
+      "newCapFaces": 1
+    },
+    "caseCaps": {
+      "sealedBoundaryEdges": 274,
+      "newCapFaces": 4
+    },
+    "leftHarnessCaps": {
+      "sealedBoundaryEdges": 76,
+      "newCapFaces": 2
+    },
+    "rightHarnessCaps": {
+      "sealedBoundaryEdges": 83,
+      "newCapFaces": 2
+    },
+    "horizontalBearing": null
+  },
+  "sourceArchiveSha256": "14c5757ff0856e37ff0aee32db1e8b03f0a4365495f5708c37fdf38f33b35fd6",
+  "clearanceToCaseBody": 0.06534111499786377,
+  "validatedRevolutionSamples": 72,
+  "harnessColorRGB": [
+    0.17254901960784313,
+    0.3058823529411765,
+    0.20784313725490197
+  ],
+  "harnessColorSpace": "sRGB",
+  "harnessColorMethod": "median of actual source harness UV texels, decoded from BaseColor.png"
+}

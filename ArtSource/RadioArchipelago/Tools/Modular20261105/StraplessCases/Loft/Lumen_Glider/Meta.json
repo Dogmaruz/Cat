@@ -1,0 +1,88 @@
+{
+  "id": "Lumen_Glider",
+  "kind": "Backpack",
+  "frame": "Blender Z-up / face -Y; FBX -Z-forward Y-up",
+  "fixedMeshName": "Case",
+  "movableMeshName": "TopRotor",
+  "topPivotName": "TopPivot",
+  "caseBoundsMin": [
+    -0.5000000596046448,
+    -0.19868898391723633,
+    0.0
+  ],
+  "caseBoundsMax": [
+    0.5000000596046448,
+    0.19624614715576172,
+    1.1047301292419434
+  ],
+  "fixedBoundsMin": [
+    -0.41012251377105713,
+    -0.19868898391723633,
+    0.01421783585101366
+  ],
+  "fixedBoundsMax": [
+    0.4096900224685669,
+    0.19624614715576172,
+    1.1990435123443604
+  ],
+  "contactPlaneY": -0.1907159270859084,
+  "rawToPreparedScale": 0.7812084375757677,
+  "referenceBodyWidth": 1.0,
+  "referenceBodyDepth": 0.5,
+  "topPivot": [
+    -0.025439612567424774,
+    0.036421459168195724,
+    1.1990435123443604
+  ],
+  "topPivotUnity": [
+    -0.025439612567424774,
+    1.1990435123443604,
+    -0.036421459168195724
+  ],
+  "spinAxisUnity": [
+    0,
+    1,
+    0
+  ],
+  "source": {
+    "vertices": 11543,
+    "polygons": 11622,
+    "triangles": 23225
+  },
+  "outputTriangles": {
+    "Case": 11083,
+    "TopRotor": 4905
+  },
+  "repairs": {
+    "localizedSpindleCutEdges": 15,
+    "rotorCaps": {
+      "sealedBoundaryEdges": 42,
+      "newCapFaces": 3
+    },
+    "caseCaps": {
+      "sealedBoundaryEdges": 124,
+      "newCapFaces": 4
+    },
+    "leftHarnessCaps": {
+      "sealedBoundaryEdges": 60,
+      "newCapFaces": 2
+    },
+    "rightHarnessCaps": {
+      "sealedBoundaryEdges": 61,
+      "newCapFaces": 2
+    },
+    "horizontalBearing": null,
+    "straplessCase20261105": {
+      "method": "actual case cross-section loft, no Boolean operations",
+      "cutPlaneY": 0.025,
+      "removedSourceFaces": 2590,
+      "radioProtectedY": 0.025,
+      "hullVertices": 50,
+      "bearingCapUvRepairs": 24
+    }
+  },
+  "sourceArchiveSha256": "68fc4b9c0459951bada5db40c31d501128234a005f5c7266ea5055f5646dbf89",
+  "clearanceToCaseBody": 0.08176600933074951,
+  "validatedRevolutionSamples": 72,
+  "harnessNames": []
+}
