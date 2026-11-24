@@ -1,0 +1,103 @@
+{
+  "scope": "Read-only NumPy reproduction of PcmSpectralAnalysis attack detection; native candidate timings checked below.",
+  "highBandFraction": 0.006128741803442804,
+  "spectralAttackCount": 258,
+  "oversizedOrdinaryGaps": [
+    {
+      "fromSourceIndex": 171,
+      "toSourceIndex": 172,
+      "start": 68.041905,
+      "end": 71.234649,
+      "gap": 3.1927440000000047,
+      "measuredMixedAttacks": [
+        69.418776,
+        69.648254,
+        69.867755,
+        70.107211,
+        70.326712,
+        70.55619,
+        71.00517
+      ],
+      "singleAttackRepairs": [
+        69.418776,
+        69.648254,
+        69.867755
+      ]
+    }
+  ],
+  "rawCandidateEvents": 221,
+  "rawCandidateSupports": 208,
+  "voiceStartsInGap": [],
+  "vocalAttacksInGap": [
+    {
+      "time": 68.09179138,
+      "confidence": 0.6710986
+    },
+    {
+      "time": 68.27138322,
+      "confidence": 0.7570016
+    },
+    {
+      "time": 68.37115646,
+      "confidence": 0.5384938
+    },
+    {
+      "time": 68.88997732,
+      "confidence": 0.6396778
+    },
+    {
+      "time": 69.2092517,
+      "confidence": 0.6937289
+    },
+    {
+      "time": 69.74802721,
+      "confidence": 0.3869885
+    },
+    {
+      "time": 69.8677551,
+      "confidence": 0.3385706
+    },
+    {
+      "time": 70.07727891,
+      "confidence": 0.2918407
+    },
+    {
+      "time": 70.17705215,
+      "confidence": 0.3115743
+    },
+    {
+      "time": 70.26684807,
+      "confidence": 0.3760206
+    },
+    {
+      "time": 70.65596372,
+      "confidence": 0.2949055
+    },
+    {
+      "time": 70.82557823,
+      "confidence": 0.2393527
+    },
+    {
+      "time": 71.06503401,
+      "confidence": 0.2282286
+    },
+    {
+      "time": 71.17478458,
+      "confidence": 0.2277211
+    }
+  ],
+  "sourceConfirmedNoteTimes": [
+    68.05641723,
+    69.44108844,
+    69.65006803,
+    69.90548753,
+    70.11446712,
+    70.34666667,
+    70.57034014,
+    71.00517007
+  ],
+  "knownNativeOnsetCrossCheck": {
+    "time": 68.041905,
+    "closestReproducedTime": 68.04190476190476
+  }
+}

@@ -1,0 +1,303 @@
+{
+  "pass": null,
+  "scope": "Final actual-time fixed-camera native frames. Full side-curtain upper/middle/lower and R3 lip angles confirm downstream motion; four small/edge ROIs remain mask-limited, never counted as passes.",
+  "runId": "20261101-234211-5093157",
+  "algorithm": "Normalized local packet matching; rival means separate local peak, not shoulder; original confidence thresholds retained",
+  "fullCurtainUpperMiddleLowerConfirmed": true,
+  "r3Lip35_48_65Confirmed": true,
+  "allRequestedROIsConfirmed": false,
+  "confirmedUpstreamSamples": 0,
+  "syntheticFixtures": "positive/negative/static/blank/periodic/single-broad-packet PASS",
+  "entries": [
+    {
+      "feature": "stream",
+      "pass": null,
+      "frameCount": 14,
+      "exactTimes": 14,
+      "defaultRuntimeClock": true,
+      "cameraStation": 121.09295654296875,
+      "samples": [
+        {
+          "label": "stream-centre",
+          "status": "ambiguous",
+          "roiTopLeftPixels": [
+            188.0069580078125,
+            833.8468627929688
+          ],
+          "recognizablePairs": 0,
+          "downstreamPairs": 0,
+          "upstreamPairs": 0,
+          "distinctStartingFrames": 0,
+          "medianPixelsPerSecond": null,
+          "expectedPixelsPerSecond": 89.83242797851562,
+          "minimumRecognizedNCC": null,
+          "report": "stream-direction.json"
+        }
+      ],
+      "clockSHA256": "4ad9586cc484519343374f940c514139e94848177a185f0a2601607c832e9bf3",
+      "reportSHA256": "906439ec2243590da5dedd9cf51689095d887ea5e8ec13cd7e19974b99bf40d2"
+    },
+    {
+      "feature": "roll210",
+      "pass": true,
+      "frameCount": 14,
+      "exactTimes": 14,
+      "defaultRuntimeClock": true,
+      "cameraStation": 210.0,
+      "samples": [
+        {
+          "label": "roll-35deg",
+          "status": "confirmed downstream",
+          "roiTopLeftPixels": [
+            256.16650390625,
+            610.5280151367188
+          ],
+          "recognizablePairs": 16,
+          "downstreamPairs": 16,
+          "upstreamPairs": 0,
+          "distinctStartingFrames": 13,
+          "medianPixelsPerSecond": 65.2236934747877,
+          "expectedPixelsPerSecond": 70.66903686523438,
+          "minimumRecognizedNCC": 0.6577291266985968,
+          "report": "roll210-direction.json"
+        },
+        {
+          "label": "roll-48deg",
+          "status": "confirmed downstream",
+          "roiTopLeftPixels": [
+            244.977294921875,
+            629.5875244140625
+          ],
+          "recognizablePairs": 14,
+          "downstreamPairs": 14,
+          "upstreamPairs": 0,
+          "distinctStartingFrames": 13,
+          "medianPixelsPerSecond": 70.0389189723673,
+          "expectedPixelsPerSecond": 74.02323913574219,
+          "minimumRecognizedNCC": 0.6702613765963252,
+          "report": "roll210-direction.json"
+        },
+        {
+          "label": "roll-65deg",
+          "status": "confirmed downstream",
+          "roiTopLeftPixels": [
+            236.87411499023438,
+            650.4185791015625
+          ],
+          "recognizablePairs": 29,
+          "downstreamPairs": 26,
+          "upstreamPairs": 3,
+          "distinctStartingFrames": 13,
+          "medianPixelsPerSecond": 55.35679713577474,
+          "expectedPixelsPerSecond": 71.89327239990234,
+          "minimumRecognizedNCC": 0.6594545651332663,
+          "report": "roll210-direction.json"
+        }
+      ],
+      "clockSHA256": "63fcdff76c5d550325bcdae7e130ac97ece23b312e01485a33d8a8ceef5d1500",
+      "reportSHA256": "80f42c903ee6f991b35747fbc8fc8cbd04bc9e6152418393bdf809c81bb94b7f"
+    },
+    {
+      "feature": "side-roll",
+      "pass": null,
+      "frameCount": 14,
+      "exactTimes": 14,
+      "defaultRuntimeClock": true,
+      "cameraStation": 176.0,
+      "samples": [
+        {
+          "label": "roll-35deg",
+          "status": "ambiguous",
+          "roiTopLeftPixels": [
+            364.9206848144531,
+            180.96669006347656
+          ],
+          "recognizablePairs": 0,
+          "downstreamPairs": 0,
+          "upstreamPairs": 0,
+          "distinctStartingFrames": 0,
+          "medianPixelsPerSecond": null,
+          "expectedPixelsPerSecond": 25.367448806762695,
+          "minimumRecognizedNCC": null,
+          "report": "side-roll-direction.json"
+        },
+        {
+          "label": "roll-48deg",
+          "status": "ambiguous",
+          "roiTopLeftPixels": [
+            365.1887512207031,
+            183.63638305664062
+          ],
+          "recognizablePairs": 0,
+          "downstreamPairs": 0,
+          "upstreamPairs": 0,
+          "distinctStartingFrames": 0,
+          "medianPixelsPerSecond": null,
+          "expectedPixelsPerSecond": 30.202491760253906,
+          "minimumRecognizedNCC": null,
+          "report": "side-roll-direction.json"
+        },
+        {
+          "label": "roll-65deg",
+          "status": "ambiguous",
+          "roiTopLeftPixels": [
+            363.33648681640625,
+            188.7716064453125
+          ],
+          "recognizablePairs": 0,
+          "downstreamPairs": 0,
+          "upstreamPairs": 0,
+          "distinctStartingFrames": 0,
+          "medianPixelsPerSecond": null,
+          "expectedPixelsPerSecond": 36.4708137512207,
+          "minimumRecognizedNCC": null,
+          "report": "side-roll-direction.json"
+        }
+      ],
+      "clockSHA256": "af2e02d228678a7a2263bbf25aaf36267976ce5fe89746b10066a9f4b6b923a3",
+      "reportSHA256": "401979c54d36cda5db4a4e5d02472003ff57139a15fbe07f07fa439283ced194"
+    },
+    {
+      "feature": "waterfall",
+      "pass": true,
+      "frameCount": 14,
+      "exactTimes": 14,
+      "defaultRuntimeClock": true,
+      "cameraStation": 178.0,
+      "samples": [
+        {
+          "label": "curtain-upper",
+          "status": "confirmed downstream",
+          "roiTopLeftPixels": [
+            370.4906311035156,
+            235.97824096679688
+          ],
+          "recognizablePairs": 43,
+          "downstreamPairs": 43,
+          "upstreamPairs": 0,
+          "distinctStartingFrames": 13,
+          "medianPixelsPerSecond": 38.933606473420056,
+          "expectedPixelsPerSecond": 40.78374481201172,
+          "minimumRecognizedNCC": 0.7692358238348674,
+          "report": "waterfall-direction.json"
+        },
+        {
+          "label": "curtain-middle",
+          "status": "confirmed downstream",
+          "roiTopLeftPixels": [
+            366.89349365234375,
+            295.23822021484375
+          ],
+          "recognizablePairs": 41,
+          "downstreamPairs": 41,
+          "upstreamPairs": 0,
+          "distinctStartingFrames": 13,
+          "medianPixelsPerSecond": 38.96627296227178,
+          "expectedPixelsPerSecond": 39.643619537353516,
+          "minimumRecognizedNCC": 0.9547502447108245,
+          "report": "waterfall-direction.json"
+        },
+        {
+          "label": "curtain-lower",
+          "status": "confirmed downstream",
+          "roiTopLeftPixels": [
+            363.1701354980469,
+            366.02056884765625
+          ],
+          "recognizablePairs": 42,
+          "downstreamPairs": 42,
+          "upstreamPairs": 0,
+          "distinctStartingFrames": 13,
+          "medianPixelsPerSecond": 32.55887630605323,
+          "expectedPixelsPerSecond": 36.67146301269531,
+          "minimumRecognizedNCC": 0.7905477515546829,
+          "report": "waterfall-direction.json"
+        }
+      ],
+      "clockSHA256": "caed2c9d5cff772427ad879b53f368631e4664441b33b7a7b621710aa2f72553",
+      "reportSHA256": "ffb7a3640e10cda396b2d7987b9e278cbdcdd319f31549f623f51eab8d908287"
+    }
+  ],
+  "supplementaryRoiEvidence": [
+    {
+      "feature": "stream",
+      "label": "stream-centre",
+      "rawSignStatus": "confirmed downstream",
+      "acceptedAsCarrierProof": false,
+      "reason": "Positive sign votes, but too few rate-inconsistent near-bank matches to accept carrier identity",
+      "roiOffsetPixels": [
+        0,
+        0
+      ],
+      "footprint": {
+        "halfWidth": 3,
+        "halfLength": 12,
+        "pixelCount": 175,
+        "selection": "Same supplied position/tangent; 7x25 footprint selected from static visibility-mask geometry only, coverage .942857. No centre offset or motion-result selection."
+      },
+      "medianPixelsPerSecond": 155.46935194909494,
+      "expectedPixelsPerSecond": 89.83242797851562,
+      "report": "stream-direction-roi.json"
+    },
+    {
+      "feature": "side-roll",
+      "label": "roll-35deg",
+      "rawSignStatus": "ambiguous",
+      "acceptedAsCarrierProof": false,
+      "reason": "Even5x5 footprint fails90% visibility threshold",
+      "roiOffsetPixels": [
+        0,
+        0
+      ],
+      "footprint": {
+        "halfWidth": 2,
+        "halfLength": 2,
+        "pixelCount": 25,
+        "selection": "Same supplied35deg position/tangent. Even this5x5 footprint has only .88 static maskcoverage; remains untrackable under unchanged .90 coverage gate."
+      },
+      "medianPixelsPerSecond": null,
+      "expectedPixelsPerSecond": 25.367448806762695,
+      "report": "side-roll-direction-roi.json"
+    },
+    {
+      "feature": "side-roll",
+      "label": "roll-48deg",
+      "rawSignStatus": "confirmed downstream",
+      "acceptedAsCarrierProof": false,
+      "reason": "Positive sign votes follow motion far slower than the independently projected carrier; not accepted as carrier proof",
+      "roiOffsetPixels": [
+        0,
+        0
+      ],
+      "footprint": {
+        "halfWidth": 6,
+        "halfLength": 4,
+        "pixelCount": 117,
+        "selection": "Same supplied position/tangent;13x9 footprint selected from static visibility-mask geometry only, coverage .948718. No centre offset or motion-result selection."
+      },
+      "medianPixelsPerSecond": 3.75128192426581,
+      "expectedPixelsPerSecond": 30.202491760253906,
+      "report": "side-roll-direction-roi.json"
+    },
+    {
+      "feature": "side-roll",
+      "label": "roll-65deg",
+      "rawSignStatus": "ambiguous",
+      "acceptedAsCarrierProof": false,
+      "reason": "No recognizable packet translations in smaller same-position footprint",
+      "roiOffsetPixels": [
+        0,
+        0
+      ],
+      "footprint": {
+        "halfWidth": 8,
+        "halfLength": 6,
+        "pixelCount": 221,
+        "selection": "Same supplied position/tangent;17x13 footprint selected from static visibility-mask geometry only, coverage .986425. No centre offset or motion-result selection."
+      },
+      "medianPixelsPerSecond": null,
+      "expectedPixelsPerSecond": 36.4708137512207,
+      "report": "side-roll-direction-roi.json"
+    }
+  ]
+}

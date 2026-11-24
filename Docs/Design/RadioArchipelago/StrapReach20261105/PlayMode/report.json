@@ -1,0 +1,41 @@
+{
+    "passed": true,
+    "details": "Actual Play Mode initialization, five native UI views, three equipped slots and per-hero outfit restoration passed.",
+    "capture": "Actual Play Mode UI Canvas, native camera render texture; no HTML or reconstructed UI.",
+    "backpack": "backpack_Boro",
+    "hat": "hat_AmberBeret",
+    "scarf": "scarf_NoriBlue",
+    "errors": 0,
+    "screenshots": [
+        "01-home.png",
+        "02-workshop-heroes.png",
+        "03-workshop-backpacks.png",
+        "04-workshop-hats.png",
+        "05-workshop-scarves.png",
+        "06-workshop-dressed.png",
+        "07-workshop-nori.png",
+        "08-workshop-restored-tiko.png"
+    ],
+    "checks": [
+        "VContainer scene startup installed the modular courier under the island route anchor.",
+        "The real workshop navigation button opens the workshop.",
+        "The backpack category is selectable.",
+        "Gameplay has equipped backpack_Boro.",
+        "The live workshop preview has equipped backpack_Boro.",
+        "Gameplay has equipped hat_AmberBeret.",
+        "The live workshop preview has equipped hat_AmberBeret.",
+        "Gameplay has equipped scarf_NoriBlue.",
+        "The live workshop preview has equipped scarf_NoriBlue.",
+        "The actual hero button switches the gameplay courier to Nori.",
+        "A different hero keeps its own independent hat choice.",
+        "Gameplay has equipped backpack_Boro.",
+        "The live workshop preview has equipped backpack_Boro.",
+        "Gameplay has equipped hat_AmberBeret.",
+        "The live workshop preview has equipped hat_AmberBeret.",
+        "Gameplay has equipped scarf_NoriBlue.",
+        "The live workshop preview has equipped scarf_NoriBlue.",
+        "All cosmetic categories use a masked native ScrollRect."
+    ],
+    "errorMessages": [],
+    "preferencesRestored": true
+}

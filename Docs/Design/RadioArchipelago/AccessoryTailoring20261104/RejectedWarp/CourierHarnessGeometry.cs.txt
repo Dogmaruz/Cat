@@ -1,0 +1,189 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering;
+
+namespace RadioArchipelago
+{
+    /// <summary>Fits rounded straps to the measured torso, without changing the supplied case or its UVs.</summary>
+    internal static class CourierHarnessGeometry
+    {
+        private const int PathSegments = 72, SectionSegments = 12;
+
+        public static Mesh[] Create(Transform owner, Transform visual, CourierMountProfile profile, Material leather, Material brass,
+            Transform caseTransform, Vector3 caseMin, Vector3 caseMax, float contactZ)
+        {
+            var meshes = new List<Mesh>(4);
+            for (int side = -1; side <= 1; side += 2)
+            {
+                float bottom = Mathf.Clamp(profile.strapBottomHeight, profile.bodyHeight * .16f, profile.bodyHeight * .65f);
+                float top = Mathf.Clamp(profile.shoulderHeight + .10f, bottom + .22f, profile.bodyHeight * .85f);
+                float width = Mathf.Clamp(profile.bodyHeight * .044f, .065f, .105f);
+                var path = new Vector3[PathSegments];
+                var normals = new Vector3[PathSegments];
+                for (int i = 0; i < path.Length; i++)
+                {
+                    float angle = i * Mathf.PI * 2 / path.Length;
+                    float height = Mathf.Lerp(bottom, top, .5f + .5f * Mathf.Cos(angle));
+                    Section(profile.bodySections, height, out float halfWidth, out float front, out float back);
+                    float middle = (front + back) * .5f;
+                    // At the shoulder and underarm the strap goes around the outer side.
+                    // Its front and rear branches move inward onto the measured chest/back.
+                    float xRatio = .76f + .24f * Mathf.Pow(Mathf.Abs(Mathf.Cos(angle)), 1.4f);
+                    bool isFront = Mathf.Sin(angle) >= 0;
+                    float zRadius = (isFront ? front : back) - middle;
+                    float zWeight = Mathf.Sqrt(Mathf.Max(0, 1 - xRatio * xRatio));
+                    float x = side * halfWidth * xRatio;
+                    float z = middle + zRadius * zWeight;
+                    Vector3 normal = new Vector3(side * xRatio / Mathf.Max(.05f, halfWidth), 0,
+                        Mathf.Sign(zRadius) * zWeight / Mathf.Max(.05f, Mathf.Abs(zRadius))).normalized;
+                    path[i] = new Vector3(x, height, z) + normal * .035f;
+                    normals[i] = normal;
+                }
+                // The asset builder projects these paths onto each real torso in the Editor.
+                // Runtime only constructs the small ribbon mesh and never cooks colliders or samples the skin.
+                var fittedPath = side < 0 ? profile.leftHarnessPath : profile.rightHarnessPath;
+                var fittedNormals = side < 0 ? profile.leftHarnessNormals : profile.rightHarnessNormals;
+                if (fittedPath != null && fittedNormals != null && fittedPath.Length == PathSegments && fittedNormals.Length == PathSegments)
+                {
+                    for (int i = 0; i < PathSegments; i++)
+                    {
+                        path[i] = fittedPath[i];
+                        normals[i] = fittedNormals[i].sqrMagnitude > .001f ? fittedNormals[i].normalized : normals[i];
+                    }
+                }
+                if (caseTransform != null && caseMax.x > caseMin.x && caseMax.y > caseMin.y)
+                {
+                    float caseWidth = caseMax.x - caseMin.x, caseHeight = caseMax.y - caseMin.y;
+                    float caseCenterX = (caseMin.x + caseMax.x) * .5f;
+                    var caseRearNormal = visual.InverseTransformDirection(-caseTransform.forward).normalized;
+                    for (int i = 0; i < PathSegments; i++)
+                    {
+                        float rear = Mathf.Max(0, -Mathf.Sin(i * Mathf.PI * 2 / PathSegments));
+                        if (rear <= .00001f) continue;
+                        Vector3 inCase = caseTransform.InverseTransformPoint(visual.TransformPoint(path[i]));
+                        var anchor = new Vector3(caseCenterX + side * caseWidth * .35f,
+                            Mathf.Clamp(inCase.y, caseMin.y + caseHeight * .05f, caseMax.y - caseHeight * .05f), contactZ - .015f);
+                        var inVisual = visual.InverseTransformPoint(caseTransform.TransformPoint(anchor));
+                        float blend = Mathf.Pow(rear, .65f);
+                        path[i] = Vector3.Lerp(path[i], inVisual, blend);
+                        normals[i] = Vector3.Slerp(normals[i], caseRearNormal, blend).normalized;
+                    }
+                }
+                var mesh = RoundedRibbon(owner, visual, path, normals, width, .027f);
+                mesh.name = side < 0 ? "FittedStrapLeft" : "FittedStrapRight";
+                Render(owner, mesh, leather); meshes.Add(mesh);
+                if (brass != null)
+                {
+                    int buckleIndex = PathSegments / 4 + 4;
+                    Vector3 tangent = (path[(buckleIndex + 1) % path.Length] - path[(buckleIndex - 1 + path.Length) % path.Length]).normalized;
+                    Vector3 normal = normals[buckleIndex];
+                    Vector3 across = Vector3.Cross(tangent, normal).normalized;
+                    var buckle = Buckle(owner, visual, path[buckleIndex] + normal * .032f, across, tangent, normal, width * .70f, width * .92f);
+                    buckle.name = side < 0 ? "FittedBuckleLeft" : "FittedBuckleRight";
+                    Render(owner, buckle, brass); meshes.Add(buckle);
+                }
+            }
+            return meshes.ToArray();
+        }
+
+        private static void Section(CourierBodySection[] sections, float height, out float halfWidth, out float front, out float back)
+        {
+            var a = sections[0]; var b = a;
+            for (int i = 1; i < sections.Length; i++)
+            {
+                b = sections[i];
+                if (height <= b.height) break;
+                a = b;
+            }
+            float blend = Mathf.InverseLerp(a.height, b.height, height);
+            halfWidth = Mathf.Max(.08f, Mathf.Lerp(a.halfWidth, b.halfWidth, blend));
+            front = Mathf.Lerp(a.frontZ, b.frontZ, blend);
+            back = Mathf.Lerp(a.backZ, b.backZ, blend);
+        }
+
+        private static Mesh RoundedRibbon(Transform owner, Transform visual, Vector3[] path, Vector3[] normals, float width, float thickness)
+        {
+            var vertices = new Vector3[path.Length * SectionSegments];
+            var uv = new Vector2[vertices.Length];
+            var triangles = new int[vertices.Length * 6];
+            float radius = thickness * .45f;
+            for (int i = 0; i < path.Length; i++)
+            {
+                var tangent = (path[(i + 1) % path.Length] - path[(i - 1 + path.Length) % path.Length]).normalized;
+                var across = Vector3.Cross(tangent, normals[i]).normalized;
+                for (int j = 0; j < SectionSegments; j++)
+                {
+                    // Three samples per rounded rectangle corner preserve broad flat faces and soft edges.
+                    int corner = j / 3; float angle = corner * Mathf.PI * .5f + (j % 3) * Mathf.PI * .25f;
+                    float sx = corner == 0 || corner == 3 ? 1 : -1;
+                    float sy = corner < 2 ? 1 : -1;
+                    float x = sx * (width * .5f - radius) + Mathf.Cos(angle) * radius;
+                    float y = sy * (thickness * .5f - radius) + Mathf.Sin(angle) * radius;
+                    int index = i * SectionSegments + j;
+                    vertices[index] = owner.InverseTransformPoint(visual.TransformPoint(path[i] + across * x + normals[i] * y));
+                    uv[index] = new Vector2(j / (float)SectionSegments, i / (float)path.Length);
+                    Quad(triangles, index * 6, index, i * SectionSegments + (j + 1) % SectionSegments,
+                        ((i + 1) % path.Length) * SectionSegments + (j + 1) % SectionSegments,
+                        ((i + 1) % path.Length) * SectionSegments + j);
+                }
+            }
+            var mesh = new Mesh { vertices = vertices, uv = uv, triangles = triangles };
+            mesh.RecalculateNormals(); mesh.RecalculateBounds(); return mesh;
+        }
+
+        private static Mesh Buckle(Transform owner, Transform visual, Vector3 center, Vector3 across, Vector3 along, Vector3 normal, float halfWidth, float halfHeight)
+        {
+            const int outlineCount = 32, tubeCount = 8;
+            var vertices = new List<Vector3>(outlineCount * tubeCount + 16);
+            var triangles = new List<int>(outlineCount * tubeCount * 6 + 48);
+            float radius = Mathf.Min(halfWidth, halfHeight) * .32f, tube = .012f;
+            for (int i = 0; i < outlineCount; i++)
+            {
+                int corner = i / 8;
+                float angle = corner * Mathf.PI * .5f + (i % 8) / 7f * Mathf.PI * .5f;
+                float sx = corner == 0 || corner == 3 ? 1 : -1, sy = corner < 2 ? 1 : -1;
+                float x = sx * (halfWidth - radius) + Mathf.Cos(angle) * radius;
+                float y = sy * (halfHeight - radius) + Mathf.Sin(angle) * radius;
+                var radial = (across * Mathf.Cos(angle) + along * Mathf.Sin(angle)).normalized;
+                for (int j = 0; j < tubeCount; j++)
+                {
+                    float cross = j * Mathf.PI * 2 / tubeCount;
+                    var point = center + across * x + along * y + (radial * Mathf.Cos(cross) + normal * Mathf.Sin(cross)) * tube;
+                    vertices.Add(owner.InverseTransformPoint(visual.TransformPoint(point)));
+                    int a = i * tubeCount + j, b = i * tubeCount + (j + 1) % tubeCount;
+                    int c = ((i + 1) % outlineCount) * tubeCount + (j + 1) % tubeCount, d = ((i + 1) % outlineCount) * tubeCount + j;
+                    triangles.Add(a); triangles.Add(c); triangles.Add(b); triangles.Add(a); triangles.Add(d); triangles.Add(c);
+                }
+            }
+            // The central pin crosses the actual strap and anchors the buckle visually.
+            int start = vertices.Count;
+            for (int i = 0; i < 2; i++)
+                for (int j = 0; j < tubeCount; j++)
+                {
+                    float angle = j * Mathf.PI * 2 / tubeCount;
+                    var point = center + across * (i == 0 ? -halfWidth : halfWidth) + along * (Mathf.Cos(angle) * tube) + normal * (Mathf.Sin(angle) * tube);
+                    vertices.Add(owner.InverseTransformPoint(visual.TransformPoint(point)));
+                }
+            for (int j = 0; j < tubeCount; j++)
+            {
+                int a = start + j, b = start + (j + 1) % tubeCount, c = b + tubeCount, d = a + tubeCount;
+                triangles.Add(a); triangles.Add(b); triangles.Add(c); triangles.Add(a); triangles.Add(c); triangles.Add(d);
+            }
+            var mesh = new Mesh(); mesh.SetVertices(vertices); mesh.SetTriangles(triangles, 0);
+            mesh.RecalculateNormals(); mesh.RecalculateBounds(); return mesh;
+        }
+
+        private static void Quad(int[] triangles, int at, int a, int b, int c, int d)
+        { triangles[at] = a; triangles[at + 1] = c; triangles[at + 2] = b; triangles[at + 3] = a; triangles[at + 4] = d; triangles[at + 5] = c; }
+
+        private static void Render(Transform owner, Mesh mesh, Material material)
+        {
+            var node = new GameObject(mesh.name, typeof(MeshFilter), typeof(MeshRenderer));
+            node.transform.SetParent(owner, false); node.layer = owner.gameObject.layer;
+            node.GetComponent<MeshFilter>().sharedMesh = mesh;
+            var renderer = node.GetComponent<MeshRenderer>(); renderer.sharedMaterial = material;
+            renderer.shadowCastingMode = ShadowCastingMode.On; renderer.receiveShadows = true;
+        }
+    }
+}

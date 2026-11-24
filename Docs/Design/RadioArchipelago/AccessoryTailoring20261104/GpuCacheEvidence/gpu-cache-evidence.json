@@ -1,0 +1,24 @@
+{
+  "sameSessionLog": "../probe-04.log",
+  "freshProcessLog": "../probe-04-reloaded.log",
+  "freshProcessDidNotRebake": true,
+  "observedByRoot": "Probe04 same-session Rumi/Rumi side image exactly matched Iteration01 SHA408F despite rewritten source meshes. Fresh Editor review-only reload produced different visible geometry. CopySerialized mesh upload needs explicit GPU invalidation.",
+  "images": [
+    {
+      "image": "Rumi__backpack_Rumi__side.png",
+      "staleSha256": "408f24646ab04b880d4d3d5d870719f3a4464c1aa6f90d9c65468de46ace19f4",
+      "freshSha256": "167ab00937d8f95e0f7a16530c7d1a4926aed5d7d1a03abcc185350ccace13e2"
+    },
+    {
+      "image": "Rumi__backpack_Tiko__front.png",
+      "staleSha256": "c28fdf7eac4aa785d34b3b6061ce133df04287a44207ef466011d9b1734ede8c",
+      "freshSha256": "d884f42415958e88f80140a7f741dea565c1939580334bc6abe78a20772d0538"
+    },
+    {
+      "image": "Rumi__backpack_Miro__side.png",
+      "staleSha256": "61ce162dd644059ac90ac081ed6a6be64d97f3714cdaf13266457f2e2af5dd79",
+      "freshSha256": "6ebd718f702935728ac9f605ec960df89c46e75f6b99fc5d39a79b9f319eddd7"
+    }
+  ],
+  "scope": "These intermediate captures discriminate stale GPU geometry; they are not final artistic acceptance."
+}

@@ -1,0 +1,185 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
+
+namespace RadioArchipelago.Editor
+{
+    /// <summary>
+    /// The supplied Miro mesh contains its leather loops inside Case. Extend those
+    /// same vertices along one axis, without separating the loops or touching the box.
+    /// The two small Harness parts receive exactly the same map at their shared seams.
+    /// </summary>
+    public static class MiroStrapReachBaker
+    {
+        public const float AnchorZ = -.004f;
+        public const float BoxFrontZ = -.015f;
+        const string Output = "Assets/RadioArchipelago/Content/Modular/StrapReach/Miro";
+        static readonly string Evidence = Path.GetFullPath("../Docs/Design/RadioArchipelago/StrapReach20261105/Miro");
+
+        [Serializable] sealed class PartEvidence
+        {
+            public string part, sourceAsset, authoredAsset;
+            public int vertices, changedStrapVertices, protectedVertices;
+            public bool topologyPreserved, uvPreserved, protectedVerticesUnchanged, protectedNormalsUnchanged, heightPreserved;
+            public float maximumHeightChange;
+        }
+
+        [Serializable] sealed class BakeEvidence
+        {
+            public string hero;
+            public float anchorZ, depth, shear;
+            public bool passed;
+            public PartEvidence[] parts;
+        }
+
+        /// <returns>Case, harness[0], harness[1], in that order. Original assets remain untouched.</returns>
+        public static Mesh[] Bake(string heroId, GameObject equipmentPrefab, float depth, float shear)
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+                throw new InvalidOperationException("Author Miro strap reach in Edit Mode.");
+            if (string.IsNullOrEmpty(heroId) || heroId.Any(c => !char.IsLetterOrDigit(c) && c != '_' && c != '-'))
+                throw new ArgumentException("A stable hero identifier is required.", nameof(heroId));
+            if (equipmentPrefab == null || Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(equipmentPrefab)) != "Miro")
+                throw new ArgumentException("This authoring rule applies only to the supplied classic Miro backpack.", nameof(equipmentPrefab));
+            if (!Finite(depth) || depth < 1 || depth > 3 || !Finite(shear) || Mathf.Abs(shear) > 3)
+                throw new ArgumentOutOfRangeException(nameof(depth), "Strap reach must be finite, depth 1..3 and absolute shear <=3.");
+
+            var rig = equipmentPrefab.GetComponent<CourierEquipmentRig>();
+            if (rig == null || rig.harness == null || rig.harness.Length != 2)
+                throw new InvalidDataException("Miro needs its original two Harness parts.");
+            var cases = equipmentPrefab.GetComponentsInChildren<MeshFilter>(true).Where(m => m.name == "Case").ToArray();
+            if (cases.Length != 1) throw new InvalidDataException("Miro needs its one original Case mesh.");
+            var filters = new MeshFilter[3]; filters[0] = cases[0];
+            for (int i = 0; i < rig.harness.Length; i++)
+            {
+                if (rig.harness[i] == null) throw new InvalidDataException("Miro has a missing Harness part.");
+                var candidates = rig.harness[i].GetComponentsInChildren<MeshFilter>(true);
+                if (candidates.Length != 1) throw new InvalidDataException("Each Miro Harness part must contain one source mesh.");
+                filters[i + 1] = candidates[0];
+            }
+
+            EnsureFolder(Output);
+            var result = new Mesh[filters.Length];
+            var observations = new List<PartEvidence>(filters.Length);
+            for (int i = 0; i < filters.Length; i++)
+            {
+                var filter = filters[i]; var original = filter.sharedMesh;
+                if (original == null || !original.isReadable) throw new InvalidDataException(filter.name + ": source mesh must be readable.");
+                var source = original.vertices;
+                var vertices = source.ToArray();
+                var sourceNormals = original.normals;
+                var normals = sourceNormals.ToArray();
+                var sourceTangents = original.tangents;
+                var tangents = sourceTangents.ToArray();
+                Matrix4x4 toEquipment = equipmentPrefab.transform.worldToLocalMatrix * filter.transform.localToWorldMatrix;
+                Matrix4x4 toMesh = toEquipment.inverse;
+                Matrix4x4 normalToEquipment = toEquipment.inverse.transpose;
+                Matrix4x4 normalToMesh = toEquipment.transpose;
+                var record = new PartEvidence { part = filter.name, sourceAsset = AssetDatabase.GetAssetPath(original), protectedVerticesUnchanged = true,
+                    protectedNormalsUnchanged = true, heightPreserved = true, vertices = source.Length };
+
+                for (int vertex = 0; vertex < source.Length; vertex++)
+                {
+                    Vector3 point = toEquipment.MultiplyPoint3x4(source[vertex]);
+                    float forward = point.z - AnchorZ;
+                    if (forward <= 0)
+                    {
+                        // Keep the original local float values exactly, avoiding even
+                        // round-trip matrix error on the whole genuine padded box.
+                        record.protectedVertices++;
+                        continue;
+                    }
+                    float side = point.x < 0 ? -1 : point.x > 0 ? 1 : 0;
+                    Vector3 moved = new Vector3(point.x + side * shear * forward, point.y, AnchorZ + depth * forward);
+                    vertices[vertex] = toMesh.MultiplyPoint3x4(moved);
+                    record.changedStrapVertices++;
+                    float heightChange = Mathf.Abs(toEquipment.MultiplyPoint3x4(vertices[vertex]).y - point.y);
+                    record.maximumHeightChange = Mathf.Max(record.maximumHeightChange, heightChange);
+                    record.heightPreserved &= heightChange < .00002f;
+
+                    // The map is an affine shear/depth extension on each side. Use its
+                    // inverse-transpose for normals; untouched box normals stay exact.
+                    if (sourceNormals.Length == source.Length)
+                    {
+                        Vector3 n = normalToEquipment.MultiplyVector(sourceNormals[vertex]).normalized;
+                        n = new Vector3(n.x, n.y, (n.z - side * shear * n.x) / depth).normalized;
+                        normals[vertex] = normalToMesh.MultiplyVector(n).normalized;
+                    }
+                    if (sourceTangents.Length == source.Length)
+                    {
+                        Vector4 t = sourceTangents[vertex];
+                        Vector3 direction = toEquipment.MultiplyVector(new Vector3(t.x, t.y, t.z));
+                        direction = new Vector3(direction.x + side * shear * direction.z, direction.y, depth * direction.z);
+                        direction = toMesh.MultiplyVector(direction);
+                        if (normals.Length == source.Length) direction = Vector3.ProjectOnPlane(direction, normals[vertex]);
+                        direction.Normalize();
+                        tangents[vertex] = new Vector4(direction.x, direction.y, direction.z, t.w);
+                    }
+                }
+
+                // Every original vertex on or behind the true box front is protected,
+                // including any stationary mechanism geometry in that half-space.
+                for (int vertex = 0; vertex < source.Length; vertex++)
+                {
+                    Vector3 point = toEquipment.MultiplyPoint3x4(source[vertex]);
+                    if (point.z > BoxFrontZ + .000001f) continue;
+                    record.protectedVerticesUnchanged &= vertices[vertex] == source[vertex];
+                    if (normals.Length == source.Length) record.protectedNormalsUnchanged &= normals[vertex] == sourceNormals[vertex];
+                }
+
+                var mesh = UnityEngine.Object.Instantiate(original);
+                mesh.name = heroId + "_Miro_" + filter.name + "_Reach";
+                mesh.vertices = vertices;
+                if (normals.Length == source.Length) mesh.normals = normals;
+                if (tangents.Length == source.Length) mesh.tangents = tangents;
+                mesh.RecalculateBounds();
+                record.topologyPreserved = mesh.subMeshCount == original.subMeshCount && mesh.triangles.SequenceEqual(original.triangles);
+                record.uvPreserved = mesh.uv.SequenceEqual(original.uv);
+                if (!record.protectedVerticesUnchanged || !record.protectedNormalsUnchanged || !record.heightPreserved || !record.topologyPreserved || !record.uvPreserved)
+                {
+                    UnityEngine.Object.DestroyImmediate(mesh);
+                    throw new InvalidDataException(filter.name + ": source box or mesh layout changed while extending straps.");
+                }
+                string path = Output + "/" + heroId + "_" + i + ".asset";
+                var asset = AssetDatabase.LoadAssetAtPath<Mesh>(path);
+                if (asset == null) { AssetDatabase.CreateAsset(mesh, path); asset = mesh; }
+                else
+                {
+                    EditorUtility.CopySerialized(mesh, asset);
+                    // CopySerialized alone can leave an already rendered GPU buffer
+                    // stale in the same Editor run. Explicit setters invalidate it.
+                    asset.vertices = vertices;
+                    if (normals.Length == source.Length) asset.normals = normals;
+                    if (tangents.Length == source.Length) asset.tangents = tangents;
+                    asset.bounds = mesh.bounds;
+                    UnityEngine.Object.DestroyImmediate(mesh);
+                }
+                asset.UploadMeshData(false);
+                EditorUtility.SetDirty(asset);
+                AssetDatabase.SaveAssetIfDirty(asset);
+                result[i] = asset; record.authoredAsset = path; observations.Add(record);
+            }
+            var evidence = new BakeEvidence { hero = heroId, anchorZ = AnchorZ, depth = depth, shear = shear,
+                passed = observations.All(o => o.protectedVerticesUnchanged && o.protectedNormalsUnchanged && o.heightPreserved && o.topologyPreserved && o.uvPreserved), parts = observations.ToArray() };
+            Directory.CreateDirectory(Evidence);
+            File.WriteAllText(Path.Combine(Evidence, heroId + ".json"), JsonUtility.ToJson(evidence, true));
+            return result;
+        }
+
+        static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
+
+        static void EnsureFolder(string path)
+        {
+            string[] parts = path.Split('/'); string parent = parts[0];
+            for (int i = 1; i < parts.Length; i++)
+            {
+                string next = parent + "/" + parts[i];
+                if (!AssetDatabase.IsValidFolder(next)) AssetDatabase.CreateFolder(parent, parts[i]);
+                parent = next;
+            }
+        }
+    }
+}

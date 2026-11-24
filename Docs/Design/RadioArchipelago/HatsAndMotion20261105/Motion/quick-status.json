@@ -1,0 +1,143 @@
+{
+    "status": "complete",
+    "message": "Captured actual motions for all ten heroes.",
+    "phase": "capturing",
+    "startedUtc": "2026-11-05T16:05:46.1580710Z",
+    "completedUtc": "2026-11-05T16:05:48.3466341Z",
+    "unityVersion": "6000.5.5f1",
+    "folder": "C:\\Users\\Derek\\Games_develop\\Cat\\Docs\\Design\\RadioArchipelago\\HatsAndMotion20261105\\Motion\\Quick",
+    "fps": 20,
+    "width": 1920,
+    "height": 1200,
+    "completedFrames": 12,
+    "totalFrames": 12,
+    "clipIndex": 0,
+    "frameIndex": 12,
+    "activeScenePreserved": true,
+    "heroes": [
+        {
+            "id": "signal",
+            "assetId": "Tiko",
+            "label": "Тико",
+            "column": 0,
+            "row": 0,
+            "cropX": 0,
+            "cropY": 0,
+            "cropWidth": 384,
+            "cropHeight": 600
+        },
+        {
+            "id": "sail",
+            "assetId": "Lumen",
+            "label": "Люмен",
+            "column": 1,
+            "row": 0,
+            "cropX": 384,
+            "cropY": 0,
+            "cropWidth": 384,
+            "cropHeight": 600
+        },
+        {
+            "id": "orbit",
+            "assetId": "Nori",
+            "label": "Нори",
+            "column": 2,
+            "row": 0,
+            "cropX": 768,
+            "cropY": 0,
+            "cropWidth": 384,
+            "cropHeight": 600
+        },
+        {
+            "id": "fira",
+            "assetId": "Fira",
+            "label": "Фира",
+            "column": 3,
+            "row": 0,
+            "cropX": 1152,
+            "cropY": 0,
+            "cropWidth": 384,
+            "cropHeight": 600
+        },
+        {
+            "id": "miro",
+            "assetId": "Miro",
+            "label": "Миро",
+            "column": 4,
+            "row": 0,
+            "cropX": 1536,
+            "cropY": 0,
+            "cropWidth": 384,
+            "cropHeight": 600
+        },
+        {
+            "id": "rumi",
+            "assetId": "Rumi",
+            "label": "Руми",
+            "column": 0,
+            "row": 1,
+            "cropX": 0,
+            "cropY": 600,
+            "cropWidth": 384,
+            "cropHeight": 600
+        },
+        {
+            "id": "boro",
+            "assetId": "Boro",
+            "label": "Боро",
+            "column": 1,
+            "row": 1,
+            "cropX": 384,
+            "cropY": 600,
+            "cropWidth": 384,
+            "cropHeight": 600
+        },
+        {
+            "id": "soli",
+            "assetId": "Soli",
+            "label": "Соли",
+            "column": 2,
+            "row": 1,
+            "cropX": 768,
+            "cropY": 600,
+            "cropWidth": 384,
+            "cropHeight": 600
+        },
+        {
+            "id": "vela",
+            "assetId": "Vela",
+            "label": "Вела",
+            "column": 3,
+            "row": 1,
+            "cropX": 1152,
+            "cropY": 600,
+            "cropWidth": 384,
+            "cropHeight": 600
+        },
+        {
+            "id": "piko",
+            "assetId": "Piko",
+            "label": "Пико",
+            "column": 4,
+            "row": 1,
+            "cropX": 1536,
+            "cropY": 600,
+            "cropWidth": 384,
+            "cropHeight": 600
+        }
+    ],
+    "clips": [
+        {
+            "id": "short-hops",
+            "label": "Короткие прыжки — левая и правая ножка",
+            "description": "Чередование опорной ноги, махи от плеч, изменение формы в полёте и пружина при касании.",
+            "frameFolder": "short-hops",
+            "projection": "close-orthographic-limbs",
+            "index": 1,
+            "frames": 12,
+            "duration": 0.6000000238418579,
+            "orthographicSize": 2.667862892150879
+        }
+    ],
+    "method": "Native Unity Camera.Render and CPU-baked real skins at fixed 120 Hz simulation; existing CourierMotion only. Each hero is rendered in its own 384x600 viewport, then read unchanged into one 5x2 PNG. Tall antennas are intentionally cropped in close limb views and cannot overlap another hero. Hats are omitted. Default backpacks are equipped; default scarves appear only in the steering/secondary-motion clip so short arms remain visible elsewhere. A deterministic body-envelope preflight chooses one fixed camera size for each clip and all ten heroes, with a ten-percent margin. Jump root arcs use the production scalar curve with demonstration heights; final departure uses the complete production IslandFinishDeparture including its 1.55s movement/scale/disappearance. No game scenes, assets, profile or accepted motion code are changed."
+}

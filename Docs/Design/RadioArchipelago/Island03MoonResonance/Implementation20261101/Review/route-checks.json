@@ -1,0 +1,186 @@
+{
+    "passed": true,
+    "isolatedAssets": true,
+    "closed": true,
+    "nonIntersecting": true,
+    "windingBothWays": true,
+    "gentleOpening": true,
+    "finalClearSegment": true,
+    "regressionFixturesPassed": true,
+    "finite3D": true,
+    "fullSizeLandings": true,
+    "actualFinishInsideReserve": true,
+    "checkedUtc": "2026-11-01T16:49:33.6545656Z",
+    "definitionDependencyHash": "c86e87359819e143e13186783eb9ceb2",
+    "routeDependencyHash": "4f4ca7a86ee1eef29d704c6b23084434",
+    "definition": "Assets/RadioArchipelago/Content/Islands/MoonResonance/MoonResonance.asset",
+    "sourceRoute": "Assets/RadioArchipelago/Imported/Islands/MoonResonance/moon_resonance_route.json",
+    "sourceProfile": "Assets/RadioArchipelago/Imported/Islands/MoonResonance/play_elevation.json",
+    "finalProfile": "Assets/RadioArchipelago/Content/Islands/MoonResonance/NoriNoMoonHoldGrades.json",
+    "chart": "Assets/RadioArchipelago/Content/Islands/MoonResonance/NoriNoMoon.timeline.json",
+    "scope": "Current Moon Resonance definition and exported closed XZ route. Dense final-height and heading samples, non-neighbour segment intersections and clearance, native finale frame, camera envelope. Imported solid-triangle clearance is reported separately by MoonResonanceTerrainChecks.",
+    "routePoints": 1365,
+    "headingSamples": 3000,
+    "crossIntersections": 0,
+    "nonlocalNearPairs": 0,
+    "length": 749.9959716796875,
+    "spanX": 265.522216796875,
+    "spanZ": 187.73692321777345,
+    "sourceMinimumHeight": 4.0,
+    "sourceMaximumHeight": 20.0,
+    "finalMinimumHeight": 4.0,
+    "finalMaximumHeight": 20.289684295654298,
+    "sourceMaximumGrade": 0.25000786781311037,
+    "finalMaximumGrade": 0.35164499282836916,
+    "maximumHeadingDegreesPerMetre": 2.1609301567077638,
+    "estimatedMinimumBendRadius": 26.514404296875,
+    "accumulatedLeftDegrees": 140.9941864013672,
+    "accumulatedRightDegrees": 500.7665100097656,
+    "minimumNonlocalSeparation": 32.62653732299805,
+    "seamPositionError": 0.0019865273497998716,
+    "seamHeadingError": 0.0,
+    "seamGradeError": 0.0,
+    "finishTakeoffDistance": 695.3875122070313,
+    "finishLandingDistance": 701.3875122070313,
+    "finishEndDistance": 736.1875,
+    "finishExitYaw": 0.0,
+    "finishMaximumGrade": 0.006942244712263346,
+    "finishHeadingVariation": 0.0,
+    "finalSurfaceHeight": 5.0,
+    "actualFinishMaximumGrade": 0.006298511754721403,
+    "actualFinishHeadingVariation": 0.0,
+    "actualFinishMaximumReserveDeviation": 0.00018167495727539063,
+    "camera": {
+        "pass": true,
+        "defaultEnvelopeFits": true,
+        "fixedRadius": true,
+        "stationaryPoseStable": true,
+        "finishPath": false,
+        "scope": "2048 poses over the full elevated route at five aspects; both lane extremes, actor heights .9..8.2m/body half-width .9m, four landing rim corners at reachable gaps 1..10m.",
+        "back": 9.5,
+        "height": 8.0,
+        "lookAhead": 3.799999952316284,
+        "focusHeight": 3.5999999046325685,
+        "headingLead": 3.200000047683716,
+        "smoothing": 7.0,
+        "fixedFieldOfView": 82.0,
+        "lateralScale": 2.4000000953674318,
+        "cameraLateralFollow": 0.5,
+        "nativeLateralLimit": 1.5,
+        "worldLateralLimit": 3.6000001430511476,
+        "fullTravelWidth": 7.200000286102295,
+        "radiusMinimum": 12.4197359085083,
+        "radiusMaximum": 12.41974925994873,
+        "radiusVariation": 0.0000133514404296875,
+        "stationaryPositionDrift": 0.0,
+        "stationaryRotationDrift": 0.0,
+        "requiredFixedFieldOfView": 81.83995056152344,
+        "suggestedFixedFieldOfView": 83.0,
+        "parentWorldPositionDrift": 0.0,
+        "poses": 20480,
+        "safeViewport": {
+            "serializedVersion": "2",
+            "x": 0.07999999821186066,
+            "y": 0.11999999731779099,
+            "width": 0.8399999737739563,
+            "height": 0.7200000286102295
+        },
+        "aspects": [
+            {
+                "aspect": 0.44999998807907107,
+                "actor": {
+                    "minX": 0.0811832919716835,
+                    "maxX": 0.918815016746521,
+                    "minY": 0.2736271917819977,
+                    "maxY": 0.7053742408752441,
+                    "points": 32768,
+                    "clipped": 0
+                },
+                "landings": {
+                    "minX": 0.1335885226726532,
+                    "maxX": 0.8669025301933289,
+                    "minY": 0.3016301095485687,
+                    "maxY": 0.5405107140541077,
+                    "points": 327680,
+                    "clipped": 0
+                }
+            },
+            {
+                "aspect": 0.4609375,
+                "actor": {
+                    "minX": 0.09112132340669632,
+                    "maxX": 0.9088770151138306,
+                    "minY": 0.2736271917819977,
+                    "maxY": 0.7053742408752441,
+                    "points": 32768,
+                    "clipped": 0
+                },
+                "landings": {
+                    "minX": 0.14228303730487824,
+                    "maxX": 0.8581963777542114,
+                    "minY": 0.3016301095485687,
+                    "maxY": 0.5405107140541077,
+                    "points": 327680,
+                    "clipped": 0
+                }
+            },
+            {
+                "aspect": 0.5625,
+                "actor": {
+                    "minX": 0.16494664549827577,
+                    "maxX": 0.8350520133972168,
+                    "minY": 0.2736271917819977,
+                    "maxY": 0.7053742408752441,
+                    "points": 32768,
+                    "clipped": 0
+                },
+                "landings": {
+                    "minX": 0.20687082409858704,
+                    "maxX": 0.7935220003128052,
+                    "minY": 0.3016301095485687,
+                    "maxY": 0.5405107140541077,
+                    "points": 327680,
+                    "clipped": 0
+                }
+            },
+            {
+                "aspect": 0.75,
+                "actor": {
+                    "minX": 0.24870997667312623,
+                    "maxX": 0.7512890100479126,
+                    "minY": 0.2736271917819977,
+                    "maxY": 0.7053742408752441,
+                    "points": 32768,
+                    "clipped": 0
+                },
+                "landings": {
+                    "minX": 0.2801531255245209,
+                    "maxX": 0.7201415300369263,
+                    "minY": 0.3016301095485687,
+                    "maxY": 0.5405107140541077,
+                    "points": 327680,
+                    "clipped": 0
+                }
+            },
+            {
+                "aspect": 1.7777777910232545,
+                "actor": {
+                    "minX": 0.3939870297908783,
+                    "maxX": 0.6060125231742859,
+                    "minY": 0.2736271917819977,
+                    "maxY": 0.7053742408752441,
+                    "points": 32768,
+                    "clipped": 0
+                },
+                "landings": {
+                    "minX": 0.40725210309028628,
+                    "maxX": 0.5928722023963928,
+                    "minY": 0.3016301095485687,
+                    "maxY": 0.5405107140541077,
+                    "points": 327680,
+                    "clipped": 0
+                }
+            }
+        ]
+    }
+}

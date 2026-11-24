@@ -1,0 +1,172 @@
+{
+  "level": "coral",
+  "input_fbx": "C:\\Users\\Derek\\Games_develop\\Cat\\ArtSource\\RadioArchipelago\\Islands\\RooftopMechanisms20261101\\Before\\CoralOasis\\coral_oasis_island.fbx",
+  "input_sha256": "4cc6a188004f508ae440e79a69bf80e3e1488ed45768f82b30871be2b2a713fc",
+  "output_sha256": "6fb98555cb33402282d55f41eeb7e064c4d812d72083a999d85d7c478c9da7b2",
+  "source_blend": "C:\\Users\\Derek\\Games_develop\\Cat\\ArtSource\\RadioArchipelago\\Islands\\CoralOasisPilot\\coral_oasis_preview.blend",
+  "rotors": 4,
+  "rotor_triangles": 8098,
+  "changed_batches": [
+    {
+      "mesh": "RA_Coral_Metal_-01_-02_01",
+      "matched_vertices": 1890,
+      "extracted_faces": 704,
+      "unmatched_geometry_attributes_exact": true
+    },
+    {
+      "mesh": "RA_Coral_Rocks_+03_-01_01",
+      "matched_vertices": 128,
+      "extracted_faces": 0,
+      "unmatched_geometry_attributes_exact": true
+    },
+    {
+      "mesh": "RA_Coral_Metal_-01_+02_01",
+      "matched_vertices": 891,
+      "extracted_faces": 1686,
+      "unmatched_geometry_attributes_exact": true
+    },
+    {
+      "mesh": "RA_Coral_Metal_+03_-01_01",
+      "matched_vertices": 1890,
+      "extracted_faces": 698,
+      "unmatched_geometry_attributes_exact": true
+    },
+    {
+      "mesh": "RA_Coral_Metal_+00_+02_01",
+      "matched_vertices": 1937,
+      "extracted_faces": 3746,
+      "unmatched_geometry_attributes_exact": true
+    },
+    {
+      "mesh": "RA_Coral_Architecture_+03_-01_01",
+      "matched_vertices": 448,
+      "extracted_faces": 632,
+      "unmatched_geometry_attributes_exact": true
+    },
+    {
+      "mesh": "RA_Coral_Rocks_-01_-02_01",
+      "matched_vertices": 128,
+      "extracted_faces": 0,
+      "unmatched_geometry_attributes_exact": true
+    },
+    {
+      "mesh": "RA_Coral_Architecture_-01_-02_01",
+      "matched_vertices": 448,
+      "extracted_faces": 632,
+      "unmatched_geometry_attributes_exact": true
+    }
+  ],
+  "untouched_meshes": 251,
+  "untouched_payloads_exact": true,
+  "remounted_dishes": 2,
+  "remount_delta_world": [
+    [
+      0.0,
+      0.0,
+      0.8305000066757202
+    ],
+    [
+      0.0,
+      0.0,
+      0.9437500238418579
+    ]
+  ],
+  "empty_remainders_to_transforms": [
+    "RA_Coral_Metal_-01_+02_01"
+  ],
+  "mechanisms": [
+    {
+      "nodeName": "RA_Rooftop_Coral_01_Fork",
+      "pivot": {
+        "x": -7.336274147033691,
+        "y": 8.383580207824707,
+        "z": 38.62346267700195
+      },
+      "axis": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": -0.0
+      },
+      "degreesPerSecond": 95,
+      "materialSources": [
+        {
+          "nodeName": "RA_Coral_Metal_+00_+01_01",
+          "slot": 0
+        },
+        {
+          "nodeName": "RA_Coral_Architecture_+00_+01_01",
+          "slot": 0
+        }
+      ],
+      "kind": "fork"
+    },
+    {
+      "nodeName": "RA_Rooftop_Coral_02_Fork",
+      "pivot": {
+        "x": 117.6156005859375,
+        "y": 13.338017463684082,
+        "z": 16.469921112060547
+      },
+      "axis": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": -0.0
+      },
+      "degreesPerSecond": -115,
+      "materialSources": [
+        {
+          "nodeName": "RA_Coral_Metal_+00_+01_01",
+          "slot": 0
+        },
+        {
+          "nodeName": "RA_Coral_Architecture_+00_+01_01",
+          "slot": 0
+        }
+      ],
+      "kind": "fork"
+    },
+    {
+      "nodeName": "RA_Rooftop_Coral_03_Receiver",
+      "pivot": {
+        "x": 1.0,
+        "y": 23.696979522705078,
+        "z": -73.0
+      },
+      "axis": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": -0.0
+      },
+      "degreesPerSecond": 55,
+      "materialSources": [
+        {
+          "nodeName": "RA_Coral_Metal_+00_+01_01",
+          "slot": 0
+        }
+      ],
+      "kind": "receiver"
+    },
+    {
+      "nodeName": "RA_Rooftop_Coral_04_Wheel",
+      "pivot": {
+        "x": 1.0,
+        "y": 26.759477615356445,
+        "z": -73.0
+      },
+      "axis": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -1.0
+      },
+      "degreesPerSecond": -80,
+      "materialSources": [
+        {
+          "nodeName": "RA_Coral_Metal_+00_+01_01",
+          "slot": 0
+        }
+      ],
+      "kind": "wheel"
+    }
+  ],
+  "installed_sha256": "6fb98555cb33402282d55f41eeb7e064c4d812d72083a999d85d7c478c9da7b2"
+}

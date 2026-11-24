@@ -1,0 +1,224 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace RadioArchipelago.Editor
+{
+    /// <summary>Read-only checks of the original strap skins in their actual equipped poses.</summary>
+    public static class CourierStrapSkinChecks
+    {
+        const string CatalogPath = "Assets/RadioArchipelago/Content/CourierCatalog.asset";
+        const float PositionTolerance = .00005f;
+        [Serializable] public sealed class SkinEvidence
+        {
+            public string part;
+            public int vertices, triangles, fixedRearVertices, rigidFrontVertices, protectedBoxVertices, nonfiniteVertices;
+            public bool originalPositionsPreserved, originalUVPreserved, originalTopologyPreserved, originalMaterialsPreserved;
+            public float cpuToBakeMaximumError, expectedPoseMaximumError, fixedRearMaximumError, rigidFrontMaximumError, protectedBoxMaximumError;
+        }
+        [Serializable] public sealed class PairEvidence
+        {
+            public string hero, backpack;
+            public bool passed;
+            public float caseHeight, shoulderZ, posedFrontZ;
+            public int sourceColliders, equippedColliders;
+            public SkinEvidence[] skins;
+            public string[] failures;
+        }
+        [Serializable] public sealed class Report
+        {
+            public bool passed;
+            public string unityVersion, capturedUtc;
+            public int pairs, skins, vertices, fixedRearVertices, rigidFrontVertices, protectedBoxVertices;
+            public float cpuToBakeMaximumError, expectedPoseMaximumError, fixedRearMaximumError, rigidFrontMaximumError, protectedBoxMaximumError;
+            public PairEvidence[] observations;
+        }
+
+        public static void Run()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+                throw new InvalidOperationException("Run the read-only original strap checks in Edit Mode.");
+            var catalog = AssetDatabase.LoadAssetAtPath<CourierCatalog>(CatalogPath);
+            if (catalog == null) throw new InvalidDataException("Missing courier catalog.");
+            var observations = new List<PairEvidence>();
+            var scene = EditorSceneManager.NewPreviewScene();
+            try
+            {
+                foreach (var hero in catalog.entries)
+                {
+                    var actor = UnityEngine.Object.Instantiate(hero.prefab);
+                    SceneManager.MoveGameObjectToScene(actor, scene);
+                    try
+                    {
+                        var wardrobe = actor.GetComponent<CourierWardrobeRig>();
+                        var motion = actor.GetComponent<CourierMotion>();
+                        motion.ManualSimulation = true;
+                        foreach (var item in catalog.equipment.Where(e => e.kind == CourierEquipmentKind.Backpack))
+                        {
+                            var pair = new PairEvidence { hero = hero.assetId, backpack = item.id };
+                            var failures = new List<string>();
+                            var parts = new List<SkinEvidence>();
+                            try
+                            {
+                                motion.ResetMotion();
+                                wardrobe.Apply(item, null, null);
+                                var gear = wardrobe.Equipped(CourierEquipmentKind.Backpack);
+                                var rig = gear.GetComponent<CourierEquipmentRig>();
+                                var fit = wardrobe.profile.FindFit(item.id);
+                                Require(rig != null && fit != null, "Missing equipment rig or fit.", failures);
+                                Require(rig.harnessFrontControls.Length == 2 && rig.harnessFrontControls.All(t => t != null),
+                                    "The supplied loops need two actual front controls.", failures);
+                                Require(rig.harnessFrontControls.All(t => t.parent == rig.transform),
+                                    "Front controls must use the equipment coordinate frame.", failures);
+                                var visual = wardrobe.bodyRig.visualPivot;
+                                var equipmentToVisual = visual.worldToLocalMatrix * gear.transform.localToWorldMatrix;
+                                pair.caseHeight = equipmentToVisual.MultiplyVector(Vector3.up * (rig.caseBoundsMax.y - rig.caseBoundsMin.y)).magnitude;
+                                Require(Mathf.Abs(pair.caseHeight - 1.18f) < .0001f, "The Nori-reference case height changed.", failures);
+                                pair.sourceColliders = item.prefab.GetComponentsInChildren<Collider>(true).Length;
+                                pair.equippedColliders = gear.GetComponentsInChildren<Collider>(true).Length;
+                                Require(pair.sourceColliders == pair.equippedColliders, "Fitting added a collider.", failures);
+                                pair.shoulderZ = (visual.InverseTransformPoint(wardrobe.bodyRig.leftArm.position).z +
+                                    visual.InverseTransformPoint(wardrobe.bodyRig.rightArm.position).z) * .5f;
+                                pair.posedFrontZ = float.NegativeInfinity;
+                                var skins = gear.GetComponentsInChildren<SkinnedMeshRenderer>(true);
+                                Require(skins.Length >= 2, "No skinned original shoulder loops were installed.", failures);
+                                foreach (var skin in skins)
+                                    parts.Add(CheckSkin(skin, rig, visual, item, item.id == "backpack_Miro" && skin.name == "Case", pair, failures));
+                                Require(parts.Sum(p => p.fixedRearVertices) > 0, "No rear mounting vertices remained pinned.", failures);
+                                Require(parts.Sum(p => p.rigidFrontVertices) > 0, "No rigid front region exists for the buckles.", failures);
+                                Require(pair.posedFrontZ >= pair.shoulderZ + .04f,
+                                    "The actual baked strap front still falls behind the upper arm.", failures);
+                            }
+                            catch (Exception error)
+                            {
+                                failures.Add(error.GetType().Name + ": " + error.Message);
+                            }
+                            pair.skins = parts.ToArray(); pair.failures = failures.ToArray(); pair.passed = failures.Count == 0;
+                            observations.Add(pair);
+                        }
+                    }
+                    finally { UnityEngine.Object.DestroyImmediate(actor); }
+                }
+            }
+            finally { EditorSceneManager.ClosePreviewScene(scene); }
+            var all = observations.SelectMany(p => p.skins).ToArray();
+            var report = new Report
+            {
+                unityVersion = Application.unityVersion, capturedUtc = DateTime.UtcNow.ToString("O"),
+                pairs = observations.Count, skins = all.Length, vertices = all.Sum(p => p.vertices),
+                fixedRearVertices = all.Sum(p => p.fixedRearVertices), rigidFrontVertices = all.Sum(p => p.rigidFrontVertices),
+                protectedBoxVertices = all.Sum(p => p.protectedBoxVertices),
+                cpuToBakeMaximumError = Maximum(all, p => p.cpuToBakeMaximumError),
+                expectedPoseMaximumError = Maximum(all, p => p.expectedPoseMaximumError),
+                fixedRearMaximumError = Maximum(all, p => p.fixedRearMaximumError),
+                rigidFrontMaximumError = Maximum(all, p => p.rigidFrontMaximumError),
+                protectedBoxMaximumError = Maximum(all, p => p.protectedBoxMaximumError),
+                observations = observations.ToArray(), passed = observations.Count == 200 && observations.All(p => p.passed)
+            };
+            string folder = Path.GetFullPath("../Docs/Design/RadioArchipelago/StrapReach20261105");
+            Directory.CreateDirectory(folder);
+            File.WriteAllText(Path.Combine(folder, "skin-checks.json"), JsonUtility.ToJson(report, true));
+            if (!report.passed)
+                throw new InvalidDataException("Original strap skin checks failed for " + observations.Count(p => !p.passed) + " pairs. Inspect skin-checks.json.");
+            Debug.Log("COURIER_STRAP_SKIN_CHECKS PASS: 200 equipped pairs; source meshes, fixed rear mounts, rigid front buckles, independent CPU/BakeMesh agreement, case sizes and colliders.");
+        }
+
+        static SkinEvidence CheckSkin(SkinnedMeshRenderer skin, CourierEquipmentRig rig, Transform visual,
+            CourierEquipmentDefinition item, bool protectedMiroBox, PairEvidence pair, List<string> failures)
+        {
+            var filter = skin.GetComponent<MeshFilter>();
+            var source = filter != null ? filter.sharedMesh : null;
+            var mesh = skin.sharedMesh;
+            var result = new SkinEvidence { part = skin.name };
+            Require(source != null && mesh != null, skin.name + ": missing untouched source mesh.", failures);
+            if (source == null || mesh == null) return result;
+            var points = mesh.vertices; var originalPoints = source.vertices;
+            result.vertices = points.Length; result.triangles = mesh.triangles.Length / 3;
+            result.originalPositionsPreserved = points.SequenceEqual(originalPoints);
+            result.originalUVPreserved = mesh.uv.SequenceEqual(source.uv);
+            result.originalTopologyPreserved = mesh.subMeshCount == source.subMeshCount && mesh.triangles.SequenceEqual(source.triangles);
+            var originalRenderer = skin.GetComponent<MeshRenderer>();
+            var expectedMaterial = AssetDatabase.LoadAssetAtPath<Material>("Assets/RadioArchipelago/Content/Modular/Materials/Backpacks_" + item.id.Substring("backpack_".Length) + ".mat");
+            result.originalMaterialsPreserved = expectedMaterial != null && skin.sharedMaterials.Length > 0 && skin.sharedMaterials.All(m => m == expectedMaterial);
+            Require(result.originalPositionsPreserved && result.originalUVPreserved && result.originalTopologyPreserved && result.originalMaterialsPreserved,
+                skin.name + ": source positions, topology, UV or materials changed.", failures);
+            Require(skin.enabled && (originalRenderer == null || !originalRenderer.enabled), skin.name + ": duplicate or disabled visible renderer.", failures);
+            var bones = skin.bones; var bindposes = mesh.bindposes; var weights = mesh.boneWeights;
+            Require(bones.Length == 3 && bindposes.Length == 3 && weights.Length == points.Length,
+                skin.name + ": invalid original strap skeleton.", failures);
+            if (bones.Length != 3 || bindposes.Length != 3 || weights.Length != points.Length) return result;
+            Require(bones[0] == rig.transform && bones[1] == rig.harnessFrontControls[0] && bones[2] == rig.harnessFrontControls[1],
+                skin.name + ": skin uses a different root/front control order.", failures);
+            var matrices = bones.Select((b, i) => b.localToWorldMatrix * bindposes[i]).ToArray();
+            var boneOffsets = new[] { Vector3.zero, bones[1].localPosition, bones[2].localPosition };
+            var toEquipment = rig.transform.worldToLocalMatrix * skin.transform.localToWorldMatrix;
+            var worldToEquipment = rig.transform.worldToLocalMatrix;
+            var toVisual = visual.worldToLocalMatrix * skin.transform.localToWorldMatrix;
+            var baked = new Mesh { indexFormat = mesh.indexFormat };
+            try
+            {
+                skin.BakeMesh(baked, true); var actual = baked.vertices;
+                Require(actual.Length == points.Length, skin.name + ": BakeMesh changed the vertex count.", failures);
+                if (actual.Length != points.Length) return result;
+                for (int i = 0; i < points.Length; i++)
+                {
+                    var w = weights[i];
+                    float sum = w.weight0 + w.weight1 + w.weight2 + w.weight3;
+                    if (Mathf.Abs(sum - 1) > .00001f || w.weight2 > .000001f || w.weight3 > .000001f)
+                    {
+                        failures.Add(skin.name + ": weights are not normalized root/front pairs."); break;
+                    }
+                    var basePoint = toEquipment.MultiplyPoint3x4(points[i]);
+                    var posed = toEquipment.MultiplyPoint3x4(actual[i]);
+                    if (!Finite(posed)) { result.nonfiniteVertices++; continue; }
+                    var cpuWorld = matrices[w.boneIndex0].MultiplyPoint3x4(points[i]) * w.weight0 +
+                        matrices[w.boneIndex1].MultiplyPoint3x4(points[i]) * w.weight1;
+                    var cpu = worldToEquipment.MultiplyPoint3x4(cpuWorld);
+                    result.cpuToBakeMaximumError = Mathf.Max(result.cpuToBakeMaximumError, Vector3.Distance(cpu, posed));
+                    var expectedOffset = boneOffsets[w.boneIndex0] * w.weight0 + boneOffsets[w.boneIndex1] * w.weight1;
+                    result.expectedPoseMaximumError = Mathf.Max(result.expectedPoseMaximumError, Vector3.Distance(basePoint + expectedOffset, posed));
+                    float rootWeight = (w.boneIndex0 == 0 ? w.weight0 : 0) + (w.boneIndex1 == 0 ? w.weight1 : 0);
+                    if (rootWeight >= .999999f)
+                    {
+                        result.fixedRearVertices++;
+                        result.fixedRearMaximumError = Mathf.Max(result.fixedRearMaximumError, Vector3.Distance(basePoint, posed));
+                    }
+                    int rigidBone = w.weight0 >= .999999f ? w.boneIndex0 : w.weight1 >= .999999f ? w.boneIndex1 : 0;
+                    if (rigidBone > 0)
+                    {
+                        result.rigidFrontVertices++;
+                        // Equality of displacement preserves every pairwise distance
+                        // in this region, rather than elongating the original buckle.
+                        result.rigidFrontMaximumError = Mathf.Max(result.rigidFrontMaximumError,
+                            Vector3.Distance(posed - basePoint, boneOffsets[rigidBone]));
+                    }
+                    if (protectedMiroBox && basePoint.z <= -.015f + .000001f)
+                    {
+                        result.protectedBoxVertices++;
+                        result.protectedBoxMaximumError = Mathf.Max(result.protectedBoxMaximumError, Vector3.Distance(basePoint, posed));
+                        if (rootWeight < .999999f) failures.Add("Miro box vertex was assigned a moving strap bone.");
+                    }
+                    pair.posedFrontZ = Mathf.Max(pair.posedFrontZ, toVisual.MultiplyPoint3x4(actual[i]).z);
+                }
+            }
+            finally { UnityEngine.Object.DestroyImmediate(baked); }
+            Require(result.nonfiniteVertices == 0, skin.name + ": nonfinite skinned positions.", failures);
+            Require(result.cpuToBakeMaximumError <= PositionTolerance && result.expectedPoseMaximumError <= PositionTolerance,
+                skin.name + ": pose/bindpose differs from independent CPU skinning (including imported scale).", failures);
+            Require(result.fixedRearMaximumError <= PositionTolerance && result.protectedBoxMaximumError <= PositionTolerance,
+                skin.name + ": a rear mount or fixed case vertex moved.", failures);
+            Require(result.rigidFrontMaximumError <= PositionTolerance, skin.name + ": front buckle region changed shape.", failures);
+            return result;
+        }
+
+        static bool Finite(Vector3 p) => !float.IsNaN(p.x) && !float.IsNaN(p.y) && !float.IsNaN(p.z) &&
+            !float.IsInfinity(p.x) && !float.IsInfinity(p.y) && !float.IsInfinity(p.z);
+        static void Require(bool condition, string message, List<string> failures) { if (!condition) failures.Add(message); }
+        static float Maximum(SkinEvidence[] parts, Func<SkinEvidence, float> select) => parts.Length > 0 ? parts.Max(select) : 0;
+    }
+}

@@ -1,0 +1,68 @@
+{
+  "integrationPassed": true,
+  "sourceFbxSha256": "c5656b305295a74bffc93d0428b111a95e6768e0ef42b9cd956ec612ac88fc3a",
+  "approvedSong": "RadioTrio",
+  "durationSeconds": 85.76,
+  "scene": "Assets/RadioArchipelago/Scenes/AmberWindsPilot.unity",
+  "fullNativeRun": {
+    "runId": "20261101-234737-711",
+    "boundedReview": false,
+    "pass": true,
+    "won": true,
+    "scoredScoreContacts": 346,
+    "requiredScoreContacts": 346,
+    "requiredHolds": 18,
+    "requiredMovingTiles": 97,
+    "requiredBigJumps": 2,
+    "coinsCollectedOnGround": 20,
+    "departureComplete": true,
+    "inputRestored": true,
+    "profileRestored": true,
+    "actualGeometryClips": 0,
+    "actorOffscreenFrames": 0,
+    "nextLandingOffscreenFrames": 0,
+    "errors": []
+  },
+  "terrain": {
+    "corridorSamples": 55488,
+    "tileSamples": 64697,
+    "structureSamples": 33915,
+    "corridorViolations": 0,
+    "tileViolations": 0,
+    "structureViolations": 0,
+    "actualFinishFloorSamples": 2788
+  },
+  "menu": {
+    "visible": [
+      "LumiLai",
+      "TikoTa",
+      "NoriNo",
+      "RadioTrio"
+    ],
+    "underlyingCount": 84,
+    "hiddenCount": 80,
+    "nativeLivePass": true
+  },
+  "earlierIslandGuards": {
+    "coral": true,
+    "moon": true
+  },
+  "waterDirectionEvidence": {
+    "runId": "20261101-234211-5093157",
+    "r3Lip35_48_65Confirmed": true,
+    "newSideCurtainUpperMiddleLowerConfirmed": true,
+    "confirmedUpstreamSamples": 0,
+    "allRequestedROIsConfirmed": false,
+    "unproved": [
+      "near-bank flat stream: mask-limited and smaller-patch speed inconsistent",
+      "side lip35: even 5x5 patch below90% water-mask coverage",
+      "side lip48: positive smaller-patch drift speed inconsistent with intended carrier",
+      "side lip65: no recognizable packets in smaller patch"
+    ],
+    "limits": "These small/edge ROIs remain inconclusive and are never counted as passes. All6 principal lip/full-height curtain points are independently reproduced downstream. No further capture or runtime tuning was performed to force ambiguous samples green."
+  },
+  "editorCleanEditMode": true,
+  "buildsCreated": false,
+  "phonePerformanceMeasured": false,
+  "verification": "Native full-song run and artifact/hash checks;6 offline packet tracker fixtures and independent reanalysis of final R3/side-curtain frames."
+}

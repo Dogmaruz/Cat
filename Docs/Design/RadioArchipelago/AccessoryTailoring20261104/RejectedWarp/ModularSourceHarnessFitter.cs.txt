@@ -1,0 +1,307 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
+
+namespace RadioArchipelago.Editor
+{
+    /// <summary>
+    /// Tailors the user's actual leather/trim meshes. Only source positions change:
+    /// triangles, submeshes, UV seams and the original atlas/material are retained.
+    /// Results are authored assets; equipping does no curve sampling or mesh allocation.
+    /// </summary>
+    public static class ModularSourceHarnessFitter
+    {
+        const string Output="Assets/RadioArchipelago/Content/Modular/TailoredHarness";
+        const int Samples=72;
+        [Serializable] sealed class PairEvidence
+        {
+            public string hero,item;
+            public int sourceMeshes,sourceVertices,sourceTriangles;
+            public bool topologyPreserved,uvPreserved;
+        }
+        [Serializable] sealed class Evidence
+        {
+            public int pairs,meshes;
+            public bool passed;
+            public PairEvidence[] items;
+        }
+
+        [MenuItem("Radio Archipelago/Modular couriers/Tailor source backpack straps")]
+        public static void Run()
+        {
+            BakeAll(AssetDatabase.LoadAssetAtPath<CourierCatalog>("Assets/RadioArchipelago/Content/CourierCatalog.asset"));
+        }
+
+        public static void BakeAll(CourierCatalog catalog) { Bake(catalog,null,null); }
+
+        /// <summary>Fast targeted native inspection after a source-fitting change.</summary>
+        public static void Probe()
+        {
+            Bake(AssetDatabase.LoadAssetAtPath<CourierCatalog>("Assets/RadioArchipelago/Content/CourierCatalog.asset"),"Rumi",
+                new[]{"backpack_Tiko","backpack_Nori","backpack_Rumi","backpack_Miro"});
+        }
+
+        static void Bake(CourierCatalog catalog,string heroFilter,string[] itemFilter)
+        {
+            if(catalog==null)throw new InvalidDataException("Missing courier catalog.");
+            if(EditorApplication.isPlayingOrWillChangePlaymode)throw new InvalidOperationException("Tailor source straps in Edit Mode.");
+            Directory.CreateDirectory(Output);AssetDatabase.Refresh();
+            var report=new List<PairEvidence>();int meshes=0;
+            foreach(var hero in catalog.entries.Where(h=>heroFilter==null||h.assetId==heroFilter))
+            {
+                string heroPath=AssetDatabase.GetAssetPath(hero.prefab);
+                var instance=PrefabUtility.LoadPrefabContents(heroPath);
+                try
+                {
+                    var wardrobe=instance.GetComponent<CourierWardrobeRig>();
+                    if(wardrobe==null)throw new InvalidDataException(hero.id+": no wardrobe.");
+                    var surface=CreateSurface(instance,wardrobe.bodyRig.visualPivot);
+                    try
+                    {
+                    foreach(var equipment in catalog.equipment.Where(x=>x.kind==CourierEquipmentKind.Backpack&&(itemFilter==null||itemFilter.Contains(x.id))))
+                    {
+                        var fit=wardrobe.profile.FindFit(equipment.id);
+                        if(fit==null)throw new InvalidDataException(hero.id+"/"+equipment.id+": no fit.");
+                        var source=UnityEngine.Object.Instantiate(equipment.prefab,wardrobe.bodyRig.visualPivot,false);
+                        try
+                        {
+                            source.transform.localPosition=fit.position;source.transform.localRotation=Quaternion.Euler(fit.euler);source.transform.localScale*=fit.scale;
+                            var rig=source.GetComponent<CourierEquipmentRig>();
+                            var filters=rig.harness.Where(t=>t!=null).SelectMany(t=>t.GetComponentsInChildren<MeshFilter>(true)).Where(m=>m.sharedMesh!=null).Distinct().ToArray();
+                            if(filters.Length<2)throw new InvalidDataException(equipment.id+": supplied straps missing.");
+                            var fitted=new Mesh[filters.Length];var evidence=new PairEvidence{hero=hero.id,item=equipment.id,sourceMeshes=filters.Length,topologyPreserved=true,uvPreserved=true};
+                            for(int i=0;i<filters.Length;i++)
+                            {
+                                var original=filters[i].sharedMesh;
+                                var mesh=Fit(filters[i],rig,wardrobe.bodyRig.visualPivot,wardrobe.profile,surface);
+                                mesh.name=hero.assetId+"_"+equipment.id+"_SourceStrap"+i;
+                                evidence.topologyPreserved&=original.triangles.SequenceEqual(mesh.triangles)&&original.subMeshCount==mesh.subMeshCount;
+                                evidence.uvPreserved&=original.uv.SequenceEqual(mesh.uv);
+                                evidence.sourceVertices+=original.vertexCount;evidence.sourceTriangles+=original.triangles.Length/3;
+                                if(!evidence.topologyPreserved||!evidence.uvPreserved)throw new InvalidDataException(mesh.name+": supplied source topology changed.");
+                                string folder=Output+"/"+hero.assetId;Directory.CreateDirectory(folder);
+                                string path=folder+"/"+equipment.id+"_"+i+".asset";
+                                var asset=AssetDatabase.LoadAssetAtPath<Mesh>(path);
+                                if(asset==null){AssetDatabase.CreateAsset(mesh,path);asset=mesh;}
+                                else
+                                {
+                                    EditorUtility.CopySerialized(mesh,asset);
+                                    // CopySerialized updates serialized mesh data but can leave an
+                                    // already rendered native GPU buffer stale in this Editor process.
+                                    asset.vertices=mesh.vertices;asset.normals=mesh.normals;asset.tangents=mesh.tangents;
+                                    asset.bounds=mesh.bounds;asset.UploadMeshData(false);
+                                    UnityEngine.Object.DestroyImmediate(mesh);EditorUtility.SetDirty(asset);
+                                }
+                                fitted[i]=asset;meshes++;
+                            }
+                            fit.sourceHarnessMeshes=fitted;report.Add(evidence);
+                        }
+                        finally{UnityEngine.Object.DestroyImmediate(source);}
+                    }
+                    }
+                    finally{var mesh=surface.sharedMesh;UnityEngine.Object.DestroyImmediate(surface.gameObject);UnityEngine.Object.DestroyImmediate(mesh);}
+                    PrefabUtility.SaveAsPrefabAsset(instance,heroPath);
+                }
+                finally{PrefabUtility.UnloadPrefabContents(instance);}
+            }
+            AssetDatabase.SaveAssets();
+            int expected=heroFilter==null?200:itemFilter.Length;
+            string evidencePath=Path.GetFullPath("../Docs/Design/RadioArchipelago/ModularCast20261104/HarnessRepair/"+(heroFilter==null?"source-tailoring.json":"source-tailoring-probe.json"));Directory.CreateDirectory(Path.GetDirectoryName(evidencePath));
+            File.WriteAllText(evidencePath,JsonUtility.ToJson(new Evidence{passed=report.Count==expected,pairs=report.Count,meshes=meshes,items=report.ToArray()},true));
+            if(report.Count!=expected)throw new InvalidDataException("Expected "+expected+" source harness fits, got "+report.Count);
+            Debug.Log("MODULAR_SOURCE_HARNESS PASS:"+report.Count+" authored fits, "+meshes+" supplied strap meshes; original triangles/UV/material retained.");
+        }
+
+        static Mesh Fit(MeshFilter source,CourierEquipmentRig equipment,Transform visual,CourierMountProfile profile,MeshCollider surface)
+        {
+            var original=source.sharedMesh;var points=original.vertices.Select(p=>equipment.transform.InverseTransformPoint(source.transform.TransformPoint(p))).ToArray();
+            float side=points.Average(p=>p.x)<0?-1:1;
+            var path=(side<0?profile.leftHarnessPath:profile.rightHarnessPath).ToArray();
+            var normals=(side<0?profile.leftHarnessNormals:profile.rightHarnessNormals).ToArray();
+            if(path.Length!=Samples||normals.Length!=Samples)throw new InvalidDataException("Measured shoulder route must have 72 samples.");
+            AttachRear(path,normals,equipment,visual,side);
+            // Source straps are generally oblique oval loops. Their own horizontal
+            // principal axis supplies a stable plane even on asymmetric generated art.
+            Vector3 mean=Vector3.zero;foreach(var p in points)mean+=p;mean/=points.Length;
+            double xx=0,zz=0,xz=0;
+            foreach(var p in points){double x=p.x-mean.x,z=p.z-mean.z;xx+=x*x;zz+=z*z;xz+=x*z;}
+            float orientation=.5f*Mathf.Atan2((float)(2*xz),(float)(xx-zz));
+            var horizontal=new Vector3(Mathf.Cos(orientation),0,Mathf.Sin(orientation));
+            if(horizontal.z<0)horizontal=-horizontal;
+            var planeNormal=Vector3.Cross(Vector3.up,horizontal).normalized;
+            var u=points.Select(p=>Vector3.Dot(p,horizontal)).ToArray();
+            float uMin=u.Min(),uMax=u.Max(),vMin=points.Min(p=>p.y),vMax=points.Max(p=>p.y);
+            float uc=(uMin+uMax)*.5f,vc=(vMin+vMax)*.5f,ru=Mathf.Max(.015f,(uMax-uMin)*.5f),rv=Mathf.Max(.015f,(vMax-vMin)*.5f);
+            float nCenter=points.Select(p=>Vector3.Dot(p,planeNormal)).OrderBy(x=>x).ElementAt(points.Length/2);
+            var angles=new float[points.Length];var radii=new List<float>[Samples];for(int i=0;i<Samples;i++)radii[i]=new List<float>();
+            for(int i=0;i<points.Length;i++)
+            {
+                float a=Mathf.Atan2((u[i]-uc)/ru,(points[i].y-vc)/rv);if(a<0)a+=Mathf.PI*2;angles[i]=a;
+                float r=Mathf.Sqrt(Mathf.Pow((u[i]-uc)/ru,2)+Mathf.Pow((points[i].y-vc)/rv,2));
+                radii[Mathf.RoundToInt(a/(Mathf.PI*2)*Samples)%Samples].Add(r);
+            }
+            var centerR=new float[Samples];
+            for(int i=0;i<Samples;i++)
+            {
+                if(radii[i].Count>0){radii[i].Sort();centerR[i]=radii[i][radii[i].Count/2];}
+                else
+                {
+                    int previous=1,next=1;while(previous<Samples&&radii[(i-previous+Samples)%Samples].Count==0)previous++;while(next<Samples&&radii[(i+next)%Samples].Count==0)next++;
+                    var a=radii[(i-previous+Samples)%Samples];var b=radii[(i+next)%Samples];a.Sort();b.Sort();centerR[i]=Mathf.Lerp(a[a.Count/2],b[b.Count/2],previous/(float)(previous+next));
+                }
+            }
+            // A local source centreline removes the loop's natural out-of-plane bend.
+            // PCA of its transverse section identifies the actual broad leather face;
+            // generated packs do not all orient that face in the same global plane.
+            var centers=new Vector3[Samples];var broad=new Vector3[Samples];var thin=new Vector3[Samples];
+            for(int i=0;i<Samples;i++)
+            {
+                var nearby=new List<Vector3>();float angle=i*Mathf.PI*2/Samples;
+                for(int k=0;k<points.Length;k++)if(Mathf.Abs(Mathf.DeltaAngle(angles[k]*Mathf.Rad2Deg,angle*Mathf.Rad2Deg))<7.5f)nearby.Add(points[k]);
+                if(nearby.Count<4)
+                {
+                    int[] nearest=Enumerable.Range(0,points.Length).OrderBy(k=>Mathf.Abs(Mathf.DeltaAngle(angles[k]*Mathf.Rad2Deg,angle*Mathf.Rad2Deg))).Take(12).ToArray();
+                    nearby=nearest.Select(k=>points[k]).ToList();
+                }
+                centers[i]=new Vector3(Median(nearby.Select(p=>p.x)),Median(nearby.Select(p=>p.y)),Median(nearby.Select(p=>p.z)));
+            }
+            for(int pass=0;pass<4;pass++){var copy=centers.ToArray();for(int i=0;i<Samples;i++)centers[i]=(copy[(i-1+Samples)%Samples]+copy[i]*2+copy[(i+1)%Samples])*.25f;}
+            var radialAxes=new Vector3[Samples];var normalAxes=new Vector3[Samples];
+            var radialVariances=new List<float>();var normalVariances=new List<float>();
+            for(int i=0;i<Samples;i++)
+            {
+                float angle=i*Mathf.PI*2/Samples;var tangent=(centers[(i+1)%Samples]-centers[(i-1+Samples)%Samples]).normalized;
+                var radial=(horizontal*Mathf.Sin(angle)+Vector3.up*Mathf.Cos(angle));radial=Vector3.ProjectOnPlane(radial,tangent).normalized;
+                if(radial.sqrMagnitude<.01f)radial=Vector3.ProjectOnPlane(planeNormal,tangent).normalized;
+                var normal=Vector3.Cross(tangent,radial).normalized;
+                if(Vector3.Dot(normal,planeNormal)<0)normal=-normal;
+                radialAxes[i]=radial;normalAxes[i]=normal;
+                double aa=0,bb=0;int count=0;
+                for(int k=0;k<points.Length;k++)
+                {
+                    if(Mathf.Abs(Mathf.DeltaAngle(angles[k]*Mathf.Rad2Deg,angle*Mathf.Rad2Deg))>10)continue;
+                    var delta=points[k]-centers[i];double x=Vector3.Dot(delta,radial),y=Vector3.Dot(delta,normal);aa+=x*x;bb+=y*y;count++;
+                }
+                if(count>12){radialVariances.Add((float)(aa/count));normalVariances.Add((float)(bb/count));}
+            }
+            // Source strips can have their broad face radial OR normal to the oval.
+            // Choose that physical orientation once per supplied strip. Per-bin PCA
+            // eigenvectors are unoriented lines and can introduce a half-turn at 0/360.
+            // This continuous frame has the same orientation on both sides of the seam.
+            bool radialIsWidth=Median(radialVariances)>Median(normalVariances);
+            for(int i=0;i<Samples;i++)
+            {
+                broad[i]=radialIsWidth?radialAxes[i]:normalAxes[i];
+                var sourceTangent=(centers[(i+1)%Samples]-centers[(i-1+Samples)%Samples]).normalized;
+                thin[i]=Vector3.Cross(sourceTangent,broad[i]).normalized;
+            }
+            var anchors=CaseVertexGrid(equipment);
+            float scale=visual.InverseTransformVector(equipment.transform.TransformVector(Vector3.up)).magnitude;
+            var result=new Vector3[points.Length];
+            for(int i=0;i<points.Length;i++)
+            {
+                float a=angles[i],sample=a/(Mathf.PI*2)*Samples;int lo=Mathf.FloorToInt(sample)%Samples,hi=(lo+1)%Samples;float blend=sample-Mathf.Floor(sample);
+                Vector3 center=Vector3.Lerp(centers[lo],centers[hi],blend);
+                Vector3 sourceWide=Vector3.Lerp(broad[lo],broad[hi],blend).normalized;
+                Vector3 sourceThin=Vector3.Lerp(thin[lo],thin[hi],blend).normalized;
+                float widthOffset=Vector3.Dot(points[i]-center,sourceWide)*scale;
+                float thicknessOffset=Vector3.Dot(points[i]-center,sourceThin)*scale;
+                Vector3 target=Vector3.Lerp(path[lo],path[hi],blend);
+                Vector3 outward=Vector3.Slerp(normals[lo],normals[hi],blend).normalized;
+                Vector3 tangent=(path[(lo+1)%Samples]-path[(lo-1+Samples)%Samples]).normalized;
+                Vector3 across=Vector3.Cross(outward,tangent).normalized;
+                if(across.sqrMagnitude<.1f)across=Vector3.right;
+                target+=across*Mathf.Clamp(widthOffset,-.12f,.12f);
+                float outerOffset=.025f+Mathf.Clamp(thicknessOffset,-.012f,.06f);
+                // Conform the complete supplied leather face, not just its centre.
+                // Otherwise the inner half of a broad strip disappears inside a curved torso.
+                var ray=new Ray(visual.TransformPoint(target+outward*2),visual.TransformDirection(-outward));
+                float front=Mathf.Clamp01(Mathf.Sin(a)*4+.25f);
+                if(front>0&&surface.Raycast(ray,out RaycastHit hit,4))
+                {
+                    Vector3 onBody=visual.InverseTransformPoint(hit.point);Vector3 normal=visual.InverseTransformDirection(hit.normal).normalized;
+                    target=Vector3.Lerp(target,onBody,front);outward=Vector3.Slerp(outward,normal,front).normalized;
+                }
+                target+=outward*outerOffset;
+                // Only actual rear cuts retain the exact attachment seam. Holding a
+                // forward buckle merely because its depth matches the cut folds faces.
+                float rootDistance=DistanceToCase(points[i],anchors);
+                float hold=1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(.012f,.075f,rootDistance));
+                Vector3 originalInVisual=visual.InverseTransformPoint(equipment.transform.TransformPoint(points[i]));
+                target=Vector3.Lerp(target,originalInVisual,hold);
+                result[i]=source.transform.InverseTransformPoint(visual.TransformPoint(target));
+            }
+            var mesh=UnityEngine.Object.Instantiate(original);mesh.vertices=result;mesh.RecalculateNormals();mesh.RecalculateTangents();mesh.RecalculateBounds();return mesh;
+        }
+
+        const float AnchorCell=.04f;
+        static Vector3Int Cell(Vector3 point)=>new Vector3Int(Mathf.FloorToInt(point.x/AnchorCell),Mathf.FloorToInt(point.y/AnchorCell),Mathf.FloorToInt(point.z/AnchorCell));
+        static Dictionary<Vector3Int,List<Vector3>> CaseVertexGrid(CourierEquipmentRig equipment)
+        {
+            var grid=new Dictionary<Vector3Int,List<Vector3>>();
+            foreach(var filter in equipment.GetComponentsInChildren<MeshFilter>(true))
+            {
+                if(filter.sharedMesh==null||filter.name!="Case")continue;
+                foreach(var vertex in filter.sharedMesh.vertices)
+                {
+                    var point=equipment.transform.InverseTransformPoint(filter.transform.TransformPoint(vertex));var key=Cell(point);
+                    if(!grid.TryGetValue(key,out var bucket)){bucket=new List<Vector3>();grid.Add(key,bucket);}bucket.Add(point);
+                }
+            }
+            return grid;
+        }
+        static float DistanceToCase(Vector3 point,Dictionary<Vector3Int,List<Vector3>> grid)
+        {
+            Vector3Int cell=Cell(point);float nearest=.15f*.15f;
+            for(int x=-2;x<=2;x++)for(int y=-2;y<=2;y++)for(int z=-2;z<=2;z++)
+                if(grid.TryGetValue(cell+new Vector3Int(x,y,z),out var bucket))
+                    foreach(var sample in bucket)nearest=Mathf.Min(nearest,(point-sample).sqrMagnitude);
+            return Mathf.Sqrt(nearest);
+        }
+
+        static float Median(IEnumerable<float> values){var sorted=values.OrderBy(x=>x).ToArray();return sorted[sorted.Length/2];}
+
+        static MeshCollider CreateSurface(GameObject hero,Transform visual)
+        {
+            var vertices=new List<Vector3>();var triangles=new List<int>();
+            foreach(var skin in hero.GetComponentsInChildren<SkinnedMeshRenderer>(true))
+            {
+                if(skin.sharedMesh==null||skin.bones.Length==0)continue;
+                var scratch=new Mesh();
+                try
+                {
+                    skin.BakeMesh(scratch,true);var points=scratch.vertices;var counts=skin.sharedMesh.GetBonesPerVertex();var weights=skin.sharedMesh.GetAllBoneWeights();int cursor=0;
+                    var eligible=new bool[points.Length];int offset=vertices.Count;
+                    for(int i=0;i<points.Length;i++)
+                    {
+                        float weight=0;for(int j=0;j<counts[i];j++){var w=weights[cursor++];string name=skin.bones[w.boneIndex].name;if(name=="body"||name=="head"||name=="root")weight+=w.weight;}
+                        eligible[i]=weight>.7f;vertices.Add(visual.InverseTransformPoint(skin.transform.TransformPoint(points[i])));
+                    }
+                    var indices=scratch.triangles;for(int i=0;i<indices.Length;i+=3)if(eligible[indices[i]]&&eligible[indices[i+1]]&&eligible[indices[i+2]])
+                    {triangles.Add(offset+indices[i]);triangles.Add(offset+indices[i+1]);triangles.Add(offset+indices[i+2]);}
+                }
+                finally{UnityEngine.Object.DestroyImmediate(scratch);}
+            }
+            var mesh=new Mesh{indexFormat=UnityEngine.Rendering.IndexFormat.UInt32};mesh.SetVertices(vertices);mesh.SetTriangles(triangles,0);mesh.RecalculateBounds();
+            var node=new GameObject("Disposable source strap tailoring surface");node.transform.SetParent(visual,false);var collider=node.AddComponent<MeshCollider>();collider.sharedMesh=mesh;Physics.SyncTransforms();return collider;
+        }
+
+        static void AttachRear(Vector3[] path,Vector3[] normals,CourierEquipmentRig equipment,Transform visual,float side)
+        {
+            float height=equipment.caseBoundsMax.y-equipment.caseBoundsMin.y,width=equipment.caseBoundsMax.x-equipment.caseBoundsMin.x;
+            var rearNormal=visual.InverseTransformDirection(equipment.transform.forward).normalized;
+            for(int i=0;i<path.Length;i++)
+            {
+                float rear=Mathf.Max(0,-Mathf.Sin(i*Mathf.PI*2/path.Length));if(rear<.0001f)continue;
+                Vector3 p=equipment.transform.InverseTransformPoint(visual.TransformPoint(path[i]));
+                var anchor=new Vector3((equipment.caseBoundsMax.x+equipment.caseBoundsMin.x)*.5f+side*width*.34f,
+                    Mathf.Clamp(p.y,equipment.caseBoundsMin.y+height*.1f,equipment.caseBoundsMax.y-height*.1f),equipment.caseContactZ+.012f);
+                Vector3 contact=visual.InverseTransformPoint(equipment.transform.TransformPoint(anchor));float blend=Mathf.Pow(rear,.7f);
+                path[i]=Vector3.Lerp(path[i],contact,blend);normals[i]=Vector3.Slerp(normals[i],rearNormal,blend).normalized;
+            }
+        }
+    }
+}

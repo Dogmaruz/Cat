@@ -1,0 +1,1695 @@
+{
+  "reviewer": "independent waterfall_visual_audit agent",
+  "status": "practical_visual_pass_for_reported_seam_and_static_curtain",
+  "user_artistic_approval": false,
+  "runId": "20261102-074355-3655427",
+  "folder": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\RadioArchipelago\\AmberWinds\\WaterfallVisual\\after-20261102-074355-3655427",
+  "native_report_sha256": "33afe0f4bc761ac36b662a7cad09b90a1b608840e917d9677d751be2e31ed856",
+  "shader_sha256_at_review": "783894e63f03b852dd2f1a159a2824a77150e9d007c8d7aa2e7e9e53b36abf39",
+  "width": 540,
+  "height": 960,
+  "method": {
+    "capture": "Real native Play Mode frames, actual timestamps, unchanged fixed gameplay camera, complete scenery. No time override or synthesized temporal frames.",
+    "presence": "Fixed rectangular ROIs; count pixels satisfying B-R>.047 and G-R>.047 in normalized RGB. Presence is not artistic acceptance.",
+    "tracking": "Read-only grayscale local normalized cross-correlation of 15x31 pixel patches in each adjacent pair. Search image displacement s=-16..16px at0.25px steps along manually estimated local projected flow tangent (tx*s,s), bilinear resampling. Positive screen Y is downward.",
+    "classification": "Best shift>.75px: downward; <-.75px: upward; otherwise subpixel/static.",
+    "limitations": [
+      "Manual image-space ROIs/tangents; no new independent physical projection or carrier identity certification.",
+      "This supporting diagnostic does not apply the more elaborate older distinct-peak/visibility gates and is not a substitute for visual review.",
+      "A local subpixel/static result does not mean the entire waterfall stopped.",
+      "No phone frame-time, thermal, GPU cost, or target-device performance certification."
+    ]
+  },
+  "presence": [
+    {
+      "station": 185,
+      "roi_xyxy": [
+        12,
+        390,
+        142,
+        930
+      ],
+      "frames": 24,
+      "min_count": 39299,
+      "max_count": 39339,
+      "first_count": 39309,
+      "counts": [
+        39309,
+        39319,
+        39331,
+        39325,
+        39315,
+        39302,
+        39324,
+        39327,
+        39339,
+        39324,
+        39315,
+        39317,
+        39301,
+        39320,
+        39332,
+        39324,
+        39299,
+        39303,
+        39313,
+        39318,
+        39334,
+        39336,
+        39319,
+        39321
+      ],
+      "all_frames_contain_visible_target_water": true
+    },
+    {
+      "station": 210,
+      "roi_xyxy": [
+        190,
+        655,
+        300,
+        950
+      ],
+      "frames": 24,
+      "min_count": 28447,
+      "max_count": 28500,
+      "first_count": 28486,
+      "counts": [
+        28486,
+        28486,
+        28458,
+        28447,
+        28454,
+        28460,
+        28482,
+        28484,
+        28467,
+        28463,
+        28463,
+        28472,
+        28481,
+        28499,
+        28488,
+        28474,
+        28474,
+        28477,
+        28500,
+        28493,
+        28494,
+        28481,
+        28482,
+        28486
+      ],
+      "all_frames_contain_visible_target_water": true
+    }
+  ],
+  "motion_regions": [
+    {
+      "label": "left-upper",
+      "center_xy": [
+        59,
+        450
+      ],
+      "patch_wh": [
+        15,
+        31
+      ],
+      "tangent_unnormalized_xy": [
+        0.08,
+        1
+      ],
+      "pair_count": 23,
+      "downward": 23,
+      "upward": 0,
+      "subpixel_or_static": 0,
+      "median_shift_y": 7.0,
+      "median_ncc": 0.9744909884197119,
+      "median_pixels_per_second_y": 69.64935403826902,
+      "pairs": [
+        {
+          "from": "station-185-000.png",
+          "to": "station-185-001.png",
+          "delta_time": 0.1008569598197937,
+          "best_shift_y": 7.0,
+          "best_shift_x": 0.56,
+          "ncc": 0.9867224912546915,
+          "pixels_per_second_y": 69.40522510798718,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-001.png",
+          "to": "station-185-002.png",
+          "delta_time": 0.10030388832092285,
+          "best_shift_y": 7.25,
+          "best_shift_x": 0.58,
+          "ncc": 0.9826803563898286,
+          "pixels_per_second_y": 72.28034846269952,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-002.png",
+          "to": "station-185-003.png",
+          "delta_time": 0.10029709339141846,
+          "best_shift_y": 6.5,
+          "best_shift_x": 0.52,
+          "ncc": 0.9847096509507868,
+          "pixels_per_second_y": 64.80746131528622,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-003.png",
+          "to": "station-185-004.png",
+          "delta_time": 0.10041534900665283,
+          "best_shift_y": 6.75,
+          "best_shift_x": 0.54,
+          "ncc": 0.9919330072979209,
+          "pixels_per_second_y": 67.22079907876227,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-004.png",
+          "to": "station-185-005.png",
+          "delta_time": 0.10043132305145264,
+          "best_shift_y": 7.25,
+          "best_shift_x": 0.58,
+          "ncc": 0.9920841241844356,
+          "pixels_per_second_y": 72.18863378196964,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-005.png",
+          "to": "station-185-006.png",
+          "delta_time": 0.10035574436187744,
+          "best_shift_y": 7.25,
+          "best_shift_x": 0.58,
+          "ncc": 0.9831038766068699,
+          "pixels_per_second_y": 72.24299960206451,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-006.png",
+          "to": "station-185-007.png",
+          "delta_time": 0.10061752796173096,
+          "best_shift_y": 7.0,
+          "best_shift_x": 0.56,
+          "ncc": 0.960158033076271,
+          "pixels_per_second_y": 69.57038342924099,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-007.png",
+          "to": "station-185-008.png",
+          "delta_time": 0.10112166404724121,
+          "best_shift_y": 7.25,
+          "best_shift_x": 0.58,
+          "ncc": 0.9347175207260032,
+          "pixels_per_second_y": 71.69581383285983,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-008.png",
+          "to": "station-185-009.png",
+          "delta_time": 0.10022640228271484,
+          "best_shift_y": 7.25,
+          "best_shift_x": 0.58,
+          "ncc": 0.9267426862252683,
+          "pixels_per_second_y": 72.33622912602883,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-009.png",
+          "to": "station-185-010.png",
+          "delta_time": 0.10042965412139893,
+          "best_shift_y": 7.0,
+          "best_shift_x": 0.56,
+          "ncc": 0.9364846809055414,
+          "pixels_per_second_y": 69.70052880535097,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-010.png",
+          "to": "station-185-011.png",
+          "delta_time": 0.1008310317993164,
+          "best_shift_y": 7.25,
+          "best_shift_x": 0.58,
+          "ncc": 0.9436369737288048,
+          "pixels_per_second_y": 71.90246762950562,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-011.png",
+          "to": "station-185-012.png",
+          "delta_time": 0.10034704208374023,
+          "best_shift_y": 6.75,
+          "best_shift_x": 0.54,
+          "ncc": 0.978282872469085,
+          "pixels_per_second_y": 67.26655673982978,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-012.png",
+          "to": "station-185-013.png",
+          "delta_time": 0.10007238388061523,
+          "best_shift_y": 6.75,
+          "best_shift_x": 0.54,
+          "ncc": 0.9812075761430361,
+          "pixels_per_second_y": 67.45117622113052,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-013.png",
+          "to": "station-185-014.png",
+          "delta_time": 0.10054969787597656,
+          "best_shift_y": 6.75,
+          "best_shift_x": 0.54,
+          "ncc": 0.9761323219914945,
+          "pixels_per_second_y": 67.13098241553958,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-014.png",
+          "to": "station-185-015.png",
+          "delta_time": 0.10050344467163086,
+          "best_shift_y": 7.0,
+          "best_shift_x": 0.56,
+          "ncc": 0.9759831926914078,
+          "pixels_per_second_y": 69.64935403826902,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-015.png",
+          "to": "station-185-016.png",
+          "delta_time": 0.1002655029296875,
+          "best_shift_y": 6.75,
+          "best_shift_x": 0.54,
+          "ncc": 0.9762861858107282,
+          "pixels_per_second_y": 67.32126008217928,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-016.png",
+          "to": "station-185-017.png",
+          "delta_time": 0.10023927688598633,
+          "best_shift_y": 6.75,
+          "best_shift_x": 0.54,
+          "ncc": 0.9690359536240131,
+          "pixels_per_second_y": 67.33887364009571,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-017.png",
+          "to": "station-185-018.png",
+          "delta_time": 0.10049891471862793,
+          "best_shift_y": 6.25,
+          "best_shift_x": 0.5,
+          "ncc": 0.9744909884197119,
+          "pixels_per_second_y": 62.18972630200487,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-018.png",
+          "to": "station-185-019.png",
+          "delta_time": 0.10025501251220703,
+          "best_shift_y": 7.75,
+          "best_shift_x": 0.62,
+          "ncc": 0.9726974485982457,
+          "pixels_per_second_y": 77.30286801426873,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-019.png",
+          "to": "station-185-020.png",
+          "delta_time": 0.10202884674072266,
+          "best_shift_y": 7.5,
+          "best_shift_x": 0.6,
+          "ncc": 0.9588689083013024,
+          "pixels_per_second_y": 73.5086227041174,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-020.png",
+          "to": "station-185-021.png",
+          "delta_time": 0.10077762603759766,
+          "best_shift_y": 7.25,
+          "best_shift_x": 0.58,
+          "ncc": 0.937990204308293,
+          "pixels_per_second_y": 71.94057138531129,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-021.png",
+          "to": "station-185-022.png",
+          "delta_time": 0.10036134719848633,
+          "best_shift_y": 6.5,
+          "best_shift_x": 0.52,
+          "ncc": 0.9426206311237586,
+          "pixels_per_second_y": 64.76596998189791,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-022.png",
+          "to": "station-185-023.png",
+          "delta_time": 0.10052633285522461,
+          "best_shift_y": 7.75,
+          "best_shift_x": 0.62,
+          "ncc": 0.9481298995521799,
+          "pixels_per_second_y": 77.09422774987074,
+          "classification": "downward"
+        }
+      ]
+    },
+    {
+      "label": "left-middle",
+      "center_xy": [
+        80,
+        650
+      ],
+      "patch_wh": [
+        15,
+        31
+      ],
+      "tangent_unnormalized_xy": [
+        0.08,
+        1
+      ],
+      "pair_count": 23,
+      "downward": 23,
+      "upward": 0,
+      "subpixel_or_static": 0,
+      "median_shift_y": 5.75,
+      "median_ncc": 0.9722062748712346,
+      "median_pixels_per_second_y": 57.29297344552508,
+      "pairs": [
+        {
+          "from": "station-185-000.png",
+          "to": "station-185-001.png",
+          "delta_time": 0.1008569598197937,
+          "best_shift_y": 6.25,
+          "best_shift_x": 0.5,
+          "ncc": 0.9737650424944484,
+          "pixels_per_second_y": 61.96895098927427,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-001.png",
+          "to": "station-185-002.png",
+          "delta_time": 0.10030388832092285,
+          "best_shift_y": 6.0,
+          "best_shift_x": 0.48,
+          "ncc": 0.9741686002511841,
+          "pixels_per_second_y": 59.818219417406496,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-002.png",
+          "to": "station-185-003.png",
+          "delta_time": 0.10029709339141846,
+          "best_shift_y": 6.0,
+          "best_shift_x": 0.48,
+          "ncc": 0.9724112679506951,
+          "pixels_per_second_y": 59.82227198334112,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-003.png",
+          "to": "station-185-004.png",
+          "delta_time": 0.10041534900665283,
+          "best_shift_y": 6.0,
+          "best_shift_x": 0.48,
+          "ncc": 0.969237186572444,
+          "pixels_per_second_y": 59.75182140334424,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-004.png",
+          "to": "station-185-005.png",
+          "delta_time": 0.10043132305145264,
+          "best_shift_y": 6.0,
+          "best_shift_x": 0.48,
+          "ncc": 0.9671251290670231,
+          "pixels_per_second_y": 59.74231761266453,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-005.png",
+          "to": "station-185-006.png",
+          "delta_time": 0.10035574436187744,
+          "best_shift_y": 5.5,
+          "best_shift_x": 0.44,
+          "ncc": 0.9571234482289002,
+          "pixels_per_second_y": 54.805034180876525,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-006.png",
+          "to": "station-185-007.png",
+          "delta_time": 0.10061752796173096,
+          "best_shift_y": 5.75,
+          "best_shift_x": 0.46,
+          "ncc": 0.9330723963919673,
+          "pixels_per_second_y": 57.14710067401939,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-007.png",
+          "to": "station-185-008.png",
+          "delta_time": 0.10112166404724121,
+          "best_shift_y": 5.5,
+          "best_shift_x": 0.44,
+          "ncc": 0.9133824326356099,
+          "pixels_per_second_y": 54.38992773527297,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-008.png",
+          "to": "station-185-009.png",
+          "delta_time": 0.10022640228271484,
+          "best_shift_y": 5.75,
+          "best_shift_x": 0.46,
+          "ncc": 0.8966732249692833,
+          "pixels_per_second_y": 57.370112755126314,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-009.png",
+          "to": "station-185-010.png",
+          "delta_time": 0.10042965412139893,
+          "best_shift_y": 6.5,
+          "best_shift_x": 0.52,
+          "ncc": 0.8902597096310152,
+          "pixels_per_second_y": 64.72191960496875,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-010.png",
+          "to": "station-185-011.png",
+          "delta_time": 0.1008310317993164,
+          "best_shift_y": 5.5,
+          "best_shift_x": 0.44,
+          "ncc": 0.8897432524042442,
+          "pixels_per_second_y": 54.54669958100427,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-011.png",
+          "to": "station-185-012.png",
+          "delta_time": 0.10034704208374023,
+          "best_shift_y": 5.25,
+          "best_shift_x": 0.42,
+          "ncc": 0.914279473422493,
+          "pixels_per_second_y": 52.31843301986761,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-012.png",
+          "to": "station-185-013.png",
+          "delta_time": 0.10007238388061523,
+          "best_shift_y": 5.75,
+          "best_shift_x": 0.46,
+          "ncc": 0.9411665303900353,
+          "pixels_per_second_y": 57.45840937355563,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-013.png",
+          "to": "station-185-014.png",
+          "delta_time": 0.10054969787597656,
+          "best_shift_y": 5.5,
+          "best_shift_x": 0.44,
+          "ncc": 0.9624085352129533,
+          "pixels_per_second_y": 54.69931900525447,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-014.png",
+          "to": "station-185-015.png",
+          "delta_time": 0.10050344467163086,
+          "best_shift_y": 5.5,
+          "best_shift_x": 0.44,
+          "ncc": 0.9722062748712346,
+          "pixels_per_second_y": 54.72449245863994,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-015.png",
+          "to": "station-185-016.png",
+          "delta_time": 0.1002655029296875,
+          "best_shift_y": 5.75,
+          "best_shift_x": 0.46,
+          "ncc": 0.9756948186448502,
+          "pixels_per_second_y": 57.34774007000456,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-016.png",
+          "to": "station-185-017.png",
+          "delta_time": 0.10023927688598633,
+          "best_shift_y": 5.75,
+          "best_shift_x": 0.46,
+          "ncc": 0.9742414922673492,
+          "pixels_per_second_y": 57.36274421193338,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-017.png",
+          "to": "station-185-018.png",
+          "delta_time": 0.10049891471862793,
+          "best_shift_y": 5.75,
+          "best_shift_x": 0.46,
+          "ncc": 0.9747931298445105,
+          "pixels_per_second_y": 57.214548197844486,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-018.png",
+          "to": "station-185-019.png",
+          "delta_time": 0.10025501251220703,
+          "best_shift_y": 6.0,
+          "best_shift_x": 0.48,
+          "ncc": 0.9785227103354078,
+          "pixels_per_second_y": 59.847381688466115,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-019.png",
+          "to": "station-185-020.png",
+          "delta_time": 0.10202884674072266,
+          "best_shift_y": 5.75,
+          "best_shift_x": 0.46,
+          "ncc": 0.9802309350877781,
+          "pixels_per_second_y": 56.35661073982334,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-020.png",
+          "to": "station-185-021.png",
+          "delta_time": 0.10077762603759766,
+          "best_shift_y": 5.75,
+          "best_shift_x": 0.46,
+          "ncc": 0.9801159594825093,
+          "pixels_per_second_y": 57.0563152366262,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-021.png",
+          "to": "station-185-022.png",
+          "delta_time": 0.10036134719848633,
+          "best_shift_y": 5.75,
+          "best_shift_x": 0.46,
+          "ncc": 0.9778078079649372,
+          "pixels_per_second_y": 57.29297344552508,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-022.png",
+          "to": "station-185-023.png",
+          "delta_time": 0.10052633285522461,
+          "best_shift_y": 5.75,
+          "best_shift_x": 0.46,
+          "ncc": 0.9778512847702437,
+          "pixels_per_second_y": 57.19894316925894,
+          "classification": "downward"
+        }
+      ]
+    },
+    {
+      "label": "left-lower",
+      "center_xy": [
+        106,
+        850
+      ],
+      "patch_wh": [
+        15,
+        31
+      ],
+      "tangent_unnormalized_xy": [
+        0.08,
+        1
+      ],
+      "pair_count": 23,
+      "downward": 23,
+      "upward": 0,
+      "subpixel_or_static": 0,
+      "median_shift_y": 3.5,
+      "median_ncc": 0.9383970434796057,
+      "median_pixels_per_second_y": 34.89632532361565,
+      "pairs": [
+        {
+          "from": "station-185-000.png",
+          "to": "station-185-001.png",
+          "delta_time": 0.1008569598197937,
+          "best_shift_y": 4.25,
+          "best_shift_x": 0.34,
+          "ncc": 0.9482839389500195,
+          "pixels_per_second_y": 42.138886672706505,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-001.png",
+          "to": "station-185-002.png",
+          "delta_time": 0.10030388832092285,
+          "best_shift_y": 3.75,
+          "best_shift_x": 0.3,
+          "ncc": 0.9380213198424293,
+          "pixels_per_second_y": 37.38638713587906,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-002.png",
+          "to": "station-185-003.png",
+          "delta_time": 0.10029709339141846,
+          "best_shift_y": 3.5,
+          "best_shift_x": 0.28,
+          "ncc": 0.9625722482039877,
+          "pixels_per_second_y": 34.89632532361565,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-003.png",
+          "to": "station-185-004.png",
+          "delta_time": 0.10041534900665283,
+          "best_shift_y": 3.25,
+          "best_shift_x": 0.26,
+          "ncc": 0.9494707181420077,
+          "pixels_per_second_y": 32.36556992681146,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-004.png",
+          "to": "station-185-005.png",
+          "delta_time": 0.10043132305145264,
+          "best_shift_y": 7.5,
+          "best_shift_x": 0.6,
+          "ncc": 0.846879790403426,
+          "pixels_per_second_y": 74.67789701583067,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-005.png",
+          "to": "station-185-006.png",
+          "delta_time": 0.10035574436187744,
+          "best_shift_y": 2.5,
+          "best_shift_x": 0.2,
+          "ncc": 0.9132182552281413,
+          "pixels_per_second_y": 24.911379173125695,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-006.png",
+          "to": "station-185-007.png",
+          "delta_time": 0.10061752796173096,
+          "best_shift_y": 3.5,
+          "best_shift_x": 0.28,
+          "ncc": 0.9383970434796057,
+          "pixels_per_second_y": 34.785191714620495,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-007.png",
+          "to": "station-185-008.png",
+          "delta_time": 0.10112166404724121,
+          "best_shift_y": 4.5,
+          "best_shift_x": 0.36,
+          "ncc": 0.9195181896921955,
+          "pixels_per_second_y": 44.50084996522334,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-008.png",
+          "to": "station-185-009.png",
+          "delta_time": 0.10022640228271484,
+          "best_shift_y": 2.5,
+          "best_shift_x": 0.2,
+          "ncc": 0.9268621088352381,
+          "pixels_per_second_y": 24.94352728483753,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-009.png",
+          "to": "station-185-010.png",
+          "delta_time": 0.10042965412139893,
+          "best_shift_y": 7.75,
+          "best_shift_x": 0.62,
+          "ncc": 0.8351045569362733,
+          "pixels_per_second_y": 77.16844260592428,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-010.png",
+          "to": "station-185-011.png",
+          "delta_time": 0.1008310317993164,
+          "best_shift_y": 3.5,
+          "best_shift_x": 0.28,
+          "ncc": 0.9012073382886172,
+          "pixels_per_second_y": 34.711536097002714,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-011.png",
+          "to": "station-185-012.png",
+          "delta_time": 0.10034704208374023,
+          "best_shift_y": 3.75,
+          "best_shift_x": 0.3,
+          "ncc": 0.947300323044025,
+          "pixels_per_second_y": 37.370309299905436,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-012.png",
+          "to": "station-185-013.png",
+          "delta_time": 0.10007238388061523,
+          "best_shift_y": 3.5,
+          "best_shift_x": 0.28,
+          "ncc": 0.9684120378811858,
+          "pixels_per_second_y": 34.974683966512124,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-013.png",
+          "to": "station-185-014.png",
+          "delta_time": 0.10054969787597656,
+          "best_shift_y": 3.5,
+          "best_shift_x": 0.28,
+          "ncc": 0.9698605046071199,
+          "pixels_per_second_y": 34.8086575487983,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-014.png",
+          "to": "station-185-015.png",
+          "delta_time": 0.10050344467163086,
+          "best_shift_y": 3.5,
+          "best_shift_x": 0.28,
+          "ncc": 0.966353451411779,
+          "pixels_per_second_y": 34.82467701913451,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-015.png",
+          "to": "station-185-016.png",
+          "delta_time": 0.1002655029296875,
+          "best_shift_y": 3.75,
+          "best_shift_x": 0.3,
+          "ncc": 0.9652749321394475,
+          "pixels_per_second_y": 37.40070004565515,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-016.png",
+          "to": "station-185-017.png",
+          "delta_time": 0.10023927688598633,
+          "best_shift_y": 4.25,
+          "best_shift_x": 0.34,
+          "ncc": 0.9316383550899588,
+          "pixels_per_second_y": 42.39855006968989,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-017.png",
+          "to": "station-185-018.png",
+          "delta_time": 0.10049891471862793,
+          "best_shift_y": 3.5,
+          "best_shift_x": 0.28,
+          "ncc": 0.9605614593166889,
+          "pixels_per_second_y": 34.82624672912273,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-018.png",
+          "to": "station-185-019.png",
+          "delta_time": 0.10025501251220703,
+          "best_shift_y": 4.25,
+          "best_shift_x": 0.34,
+          "ncc": 0.9323092252192673,
+          "pixels_per_second_y": 42.3918953626635,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-019.png",
+          "to": "station-185-020.png",
+          "delta_time": 0.10202884674072266,
+          "best_shift_y": 3.5,
+          "best_shift_x": 0.28,
+          "ncc": 0.9616232670047206,
+          "pixels_per_second_y": 34.30402392858812,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-020.png",
+          "to": "station-185-021.png",
+          "delta_time": 0.10077762603759766,
+          "best_shift_y": 3.5,
+          "best_shift_x": 0.28,
+          "ncc": 0.9380047999689857,
+          "pixels_per_second_y": 34.72993101359855,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-021.png",
+          "to": "station-185-022.png",
+          "delta_time": 0.10036134719848633,
+          "best_shift_y": 3.5,
+          "best_shift_x": 0.28,
+          "ncc": 0.964655131467929,
+          "pixels_per_second_y": 34.87398383640657,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-022.png",
+          "to": "station-185-023.png",
+          "delta_time": 0.10052633285522461,
+          "best_shift_y": 3.75,
+          "best_shift_x": 0.3,
+          "ncc": 0.9362758974643565,
+          "pixels_per_second_y": 37.30365858864713,
+          "classification": "downward"
+        }
+      ]
+    },
+    {
+      "label": "side-upper",
+      "center_xy": [
+        491,
+        240
+      ],
+      "patch_wh": [
+        15,
+        31
+      ],
+      "tangent_unnormalized_xy": [
+        -0.2,
+        1
+      ],
+      "pair_count": 23,
+      "downward": 23,
+      "upward": 0,
+      "subpixel_or_static": 0,
+      "median_shift_y": 8.5,
+      "median_ncc": 0.9401820072654767,
+      "median_pixels_per_second_y": 84.783790725327,
+      "pairs": [
+        {
+          "from": "station-185-000.png",
+          "to": "station-185-001.png",
+          "delta_time": 0.1008569598197937,
+          "best_shift_y": 4.5,
+          "best_shift_x": -0.9,
+          "ncc": 0.9296129694146691,
+          "pixels_per_second_y": 44.617644712277475,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-001.png",
+          "to": "station-185-002.png",
+          "delta_time": 0.10030388832092285,
+          "best_shift_y": 8.25,
+          "best_shift_x": -1.6500000000000001,
+          "ncc": 0.9420118026387371,
+          "pixels_per_second_y": 82.25005169893393,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-002.png",
+          "to": "station-185-003.png",
+          "delta_time": 0.10029709339141846,
+          "best_shift_y": 8.75,
+          "best_shift_x": -1.75,
+          "ncc": 0.9654284223567257,
+          "pixels_per_second_y": 87.24081330903913,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-003.png",
+          "to": "station-185-004.png",
+          "delta_time": 0.10041534900665283,
+          "best_shift_y": 8.75,
+          "best_shift_x": -1.75,
+          "ncc": 0.9788516969351941,
+          "pixels_per_second_y": 87.13807287987701,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-004.png",
+          "to": "station-185-005.png",
+          "delta_time": 0.10043132305145264,
+          "best_shift_y": 9.0,
+          "best_shift_x": -1.8,
+          "ncc": 0.9792295576149643,
+          "pixels_per_second_y": 89.6134764189968,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-005.png",
+          "to": "station-185-006.png",
+          "delta_time": 0.10035574436187744,
+          "best_shift_y": 8.75,
+          "best_shift_x": -1.75,
+          "ncc": 0.9750576839776998,
+          "pixels_per_second_y": 87.18982710593993,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-006.png",
+          "to": "station-185-007.png",
+          "delta_time": 0.10061752796173096,
+          "best_shift_y": 8.75,
+          "best_shift_x": -1.75,
+          "ncc": 0.9640940251780804,
+          "pixels_per_second_y": 86.96297928655125,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-007.png",
+          "to": "station-185-008.png",
+          "delta_time": 0.10112166404724121,
+          "best_shift_y": 8.75,
+          "best_shift_x": -1.75,
+          "ncc": 0.9614530983053027,
+          "pixels_per_second_y": 86.52943048793426,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-008.png",
+          "to": "station-185-009.png",
+          "delta_time": 0.10022640228271484,
+          "best_shift_y": 4.5,
+          "best_shift_x": -0.9,
+          "ncc": 0.9601009139691499,
+          "pixels_per_second_y": 44.89834911270755,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-009.png",
+          "to": "station-185-010.png",
+          "delta_time": 0.10042965412139893,
+          "best_shift_y": 8.5,
+          "best_shift_x": -1.7000000000000002,
+          "ncc": 0.9545110311768539,
+          "pixels_per_second_y": 84.6363564064976,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-010.png",
+          "to": "station-185-011.png",
+          "delta_time": 0.1008310317993164,
+          "best_shift_y": 8.75,
+          "best_shift_x": -1.75,
+          "ncc": 0.9467476731565764,
+          "pixels_per_second_y": 86.77884024250679,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-011.png",
+          "to": "station-185-012.png",
+          "delta_time": 0.10034704208374023,
+          "best_shift_y": 8.75,
+          "best_shift_x": -1.75,
+          "ncc": 0.9396169877692366,
+          "pixels_per_second_y": 87.19738836644602,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-012.png",
+          "to": "station-185-013.png",
+          "delta_time": 0.10007238388061523,
+          "best_shift_y": 9.0,
+          "best_shift_x": -1.8,
+          "ncc": 0.9302647905324846,
+          "pixels_per_second_y": 89.93490162817403,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-013.png",
+          "to": "station-185-014.png",
+          "delta_time": 0.10054969787597656,
+          "best_shift_y": 8.75,
+          "best_shift_x": -1.75,
+          "ncc": 0.9231871216300835,
+          "pixels_per_second_y": 87.02164387199575,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-014.png",
+          "to": "station-185-015.png",
+          "delta_time": 0.10050344467163086,
+          "best_shift_y": 8.5,
+          "best_shift_x": -1.7000000000000002,
+          "ncc": 0.9245237625805457,
+          "pixels_per_second_y": 84.5742156178981,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-015.png",
+          "to": "station-185-016.png",
+          "delta_time": 0.1002655029296875,
+          "best_shift_y": 8.5,
+          "best_shift_x": -1.7000000000000002,
+          "ncc": 0.9107779265534098,
+          "pixels_per_second_y": 84.77492010348502,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-016.png",
+          "to": "station-185-017.png",
+          "delta_time": 0.10023927688598633,
+          "best_shift_y": 4.25,
+          "best_shift_x": -0.8500000000000001,
+          "ncc": 0.9182059360381479,
+          "pixels_per_second_y": 42.39855006968989,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-017.png",
+          "to": "station-185-018.png",
+          "delta_time": 0.10049891471862793,
+          "best_shift_y": 4.0,
+          "best_shift_x": -0.8,
+          "ncc": 0.9121526078281704,
+          "pixels_per_second_y": 39.80142483328312,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-018.png",
+          "to": "station-185-019.png",
+          "delta_time": 0.10025501251220703,
+          "best_shift_y": 8.5,
+          "best_shift_x": -1.7000000000000002,
+          "ncc": 0.9238816404347538,
+          "pixels_per_second_y": 84.783790725327,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-019.png",
+          "to": "station-185-020.png",
+          "delta_time": 0.10202884674072266,
+          "best_shift_y": 8.5,
+          "best_shift_x": -1.7000000000000002,
+          "ncc": 0.9361443341150604,
+          "pixels_per_second_y": 83.30977239799972,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-020.png",
+          "to": "station-185-021.png",
+          "delta_time": 0.10077762603759766,
+          "best_shift_y": 8.5,
+          "best_shift_x": -1.7000000000000002,
+          "ncc": 0.9367059713689718,
+          "pixels_per_second_y": 84.3441181758822,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-021.png",
+          "to": "station-185-022.png",
+          "delta_time": 0.10036134719848633,
+          "best_shift_y": 8.5,
+          "best_shift_x": -1.7000000000000002,
+          "ncc": 0.9403968937508326,
+          "pixels_per_second_y": 84.69396074555881,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-022.png",
+          "to": "station-185-023.png",
+          "delta_time": 0.10052633285522461,
+          "best_shift_y": 8.75,
+          "best_shift_x": -1.75,
+          "ncc": 0.9401820072654767,
+          "pixels_per_second_y": 87.04187004017665,
+          "classification": "downward"
+        }
+      ]
+    },
+    {
+      "label": "side-middle",
+      "center_xy": [
+        477,
+        320
+      ],
+      "patch_wh": [
+        15,
+        31
+      ],
+      "tangent_unnormalized_xy": [
+        -0.2,
+        1
+      ],
+      "pair_count": 23,
+      "downward": 19,
+      "upward": 0,
+      "subpixel_or_static": 4,
+      "median_shift_y": 5.75,
+      "median_ncc": 0.8832970354794056,
+      "median_pixels_per_second_y": 57.18565168731149,
+      "pairs": [
+        {
+          "from": "station-185-000.png",
+          "to": "station-185-001.png",
+          "delta_time": 0.1008569598197937,
+          "best_shift_y": 0.75,
+          "best_shift_x": -0.15000000000000002,
+          "ncc": 0.8317382835933804,
+          "pixels_per_second_y": 7.436274118712912,
+          "classification": "subpixel_or_static"
+        },
+        {
+          "from": "station-185-001.png",
+          "to": "station-185-002.png",
+          "delta_time": 0.10030388832092285,
+          "best_shift_y": 0.0,
+          "best_shift_x": -0.0,
+          "ncc": 0.8381697347784566,
+          "pixels_per_second_y": 0.0,
+          "classification": "subpixel_or_static"
+        },
+        {
+          "from": "station-185-002.png",
+          "to": "station-185-003.png",
+          "delta_time": 0.10029709339141846,
+          "best_shift_y": 0.0,
+          "best_shift_x": -0.0,
+          "ncc": 0.8382489906096515,
+          "pixels_per_second_y": 0.0,
+          "classification": "subpixel_or_static"
+        },
+        {
+          "from": "station-185-003.png",
+          "to": "station-185-004.png",
+          "delta_time": 0.10041534900665283,
+          "best_shift_y": 6.25,
+          "best_shift_x": -1.25,
+          "ncc": 0.7905074038158731,
+          "pixels_per_second_y": 62.24148062848358,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-004.png",
+          "to": "station-185-005.png",
+          "delta_time": 0.10043132305145264,
+          "best_shift_y": 6.25,
+          "best_shift_x": -1.25,
+          "ncc": 0.7939755915153863,
+          "pixels_per_second_y": 62.23158084652555,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-005.png",
+          "to": "station-185-006.png",
+          "delta_time": 0.10035574436187744,
+          "best_shift_y": 5.75,
+          "best_shift_x": -1.1500000000000001,
+          "ncc": 0.8309116050947633,
+          "pixels_per_second_y": 57.296172098189096,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-006.png",
+          "to": "station-185-007.png",
+          "delta_time": 0.10061752796173096,
+          "best_shift_y": 5.75,
+          "best_shift_x": -1.1500000000000001,
+          "ncc": 0.8576347975163795,
+          "pixels_per_second_y": 57.14710067401939,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-007.png",
+          "to": "station-185-008.png",
+          "delta_time": 0.10112166404724121,
+          "best_shift_y": 5.75,
+          "best_shift_x": -1.1500000000000001,
+          "ncc": 0.8922356430009161,
+          "pixels_per_second_y": 56.862197177785376,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-008.png",
+          "to": "station-185-009.png",
+          "delta_time": 0.10022640228271484,
+          "best_shift_y": 0.25,
+          "best_shift_x": -0.05,
+          "ncc": 0.9218240195491239,
+          "pixels_per_second_y": 2.494352728483753,
+          "classification": "subpixel_or_static"
+        },
+        {
+          "from": "station-185-009.png",
+          "to": "station-185-010.png",
+          "delta_time": 0.10042965412139893,
+          "best_shift_y": 6.5,
+          "best_shift_x": -1.3,
+          "ncc": 0.8747338718928838,
+          "pixels_per_second_y": 64.72191960496875,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-010.png",
+          "to": "station-185-011.png",
+          "delta_time": 0.1008310317993164,
+          "best_shift_y": 6.5,
+          "best_shift_x": -1.3,
+          "ncc": 0.8092526742976333,
+          "pixels_per_second_y": 64.46428132300504,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-011.png",
+          "to": "station-185-012.png",
+          "delta_time": 0.10034704208374023,
+          "best_shift_y": 5.5,
+          "best_shift_x": -1.1,
+          "ncc": 0.8832970354794056,
+          "pixels_per_second_y": 54.80978697319464,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-012.png",
+          "to": "station-185-013.png",
+          "delta_time": 0.10007238388061523,
+          "best_shift_y": 5.5,
+          "best_shift_x": -1.1,
+          "ncc": 0.9136281131343358,
+          "pixels_per_second_y": 54.96021766166191,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-013.png",
+          "to": "station-185-014.png",
+          "delta_time": 0.10054969787597656,
+          "best_shift_y": 5.75,
+          "best_shift_x": -1.1500000000000001,
+          "ncc": 0.907153358206249,
+          "pixels_per_second_y": 57.18565168731149,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-014.png",
+          "to": "station-185-015.png",
+          "delta_time": 0.10050344467163086,
+          "best_shift_y": 5.75,
+          "best_shift_x": -1.1500000000000001,
+          "ncc": 0.8869422850053852,
+          "pixels_per_second_y": 57.211969388578126,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-015.png",
+          "to": "station-185-016.png",
+          "delta_time": 0.1002655029296875,
+          "best_shift_y": 1.5,
+          "best_shift_x": -0.30000000000000004,
+          "ncc": 0.838360976294859,
+          "pixels_per_second_y": 14.960280018262061,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-016.png",
+          "to": "station-185-017.png",
+          "delta_time": 0.10023927688598633,
+          "best_shift_y": 1.25,
+          "best_shift_x": -0.25,
+          "ncc": 0.8898651162219607,
+          "pixels_per_second_y": 12.47016178520291,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-017.png",
+          "to": "station-185-018.png",
+          "delta_time": 0.10049891471862793,
+          "best_shift_y": 1.25,
+          "best_shift_x": -0.25,
+          "ncc": 0.8936350208633727,
+          "pixels_per_second_y": 12.437945260400975,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-018.png",
+          "to": "station-185-019.png",
+          "delta_time": 0.10025501251220703,
+          "best_shift_y": 5.75,
+          "best_shift_x": -1.1500000000000001,
+          "ncc": 0.8833712998415937,
+          "pixels_per_second_y": 57.35374078478002,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-019.png",
+          "to": "station-185-020.png",
+          "delta_time": 0.10202884674072266,
+          "best_shift_y": 6.25,
+          "best_shift_x": -1.25,
+          "ncc": 0.8881635504002942,
+          "pixels_per_second_y": 61.2571855867645,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-020.png",
+          "to": "station-185-021.png",
+          "delta_time": 0.10077762603759766,
+          "best_shift_y": 6.0,
+          "best_shift_x": -1.2000000000000002,
+          "ncc": 0.9047609015132786,
+          "pixels_per_second_y": 59.53702459474038,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-021.png",
+          "to": "station-185-022.png",
+          "delta_time": 0.10036134719848633,
+          "best_shift_y": 5.75,
+          "best_shift_x": -1.1500000000000001,
+          "ncc": 0.9218170091577077,
+          "pixels_per_second_y": 57.29297344552508,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-022.png",
+          "to": "station-185-023.png",
+          "delta_time": 0.10052633285522461,
+          "best_shift_y": 6.25,
+          "best_shift_x": -1.25,
+          "ncc": 0.8716738123053653,
+          "pixels_per_second_y": 62.172764314411886,
+          "classification": "downward"
+        }
+      ]
+    },
+    {
+      "label": "side-lower",
+      "center_xy": [
+        456,
+        407
+      ],
+      "patch_wh": [
+        15,
+        31
+      ],
+      "tangent_unnormalized_xy": [
+        -0.2,
+        1
+      ],
+      "pair_count": 23,
+      "downward": 23,
+      "upward": 0,
+      "subpixel_or_static": 0,
+      "median_shift_y": 6.0,
+      "median_ncc": 0.8669498529359115,
+      "median_pixels_per_second_y": 59.685853741835416,
+      "pairs": [
+        {
+          "from": "station-185-000.png",
+          "to": "station-185-001.png",
+          "delta_time": 0.1008569598197937,
+          "best_shift_y": 2.25,
+          "best_shift_x": -0.45,
+          "ncc": 0.8419439856348699,
+          "pixels_per_second_y": 22.308822356138737,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-001.png",
+          "to": "station-185-002.png",
+          "delta_time": 0.10030388832092285,
+          "best_shift_y": 5.75,
+          "best_shift_x": -1.1500000000000001,
+          "ncc": 0.8266322781056168,
+          "pixels_per_second_y": 57.325793608347894,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-002.png",
+          "to": "station-185-003.png",
+          "delta_time": 0.10029709339141846,
+          "best_shift_y": 5.75,
+          "best_shift_x": -1.1500000000000001,
+          "ncc": 0.8623476463927906,
+          "pixels_per_second_y": 57.32967731736857,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-003.png",
+          "to": "station-185-004.png",
+          "delta_time": 0.10041534900665283,
+          "best_shift_y": 6.5,
+          "best_shift_x": -1.3,
+          "ncc": 0.8489726194022617,
+          "pixels_per_second_y": 64.73113985362292,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-004.png",
+          "to": "station-185-005.png",
+          "delta_time": 0.10043132305145264,
+          "best_shift_y": 6.5,
+          "best_shift_x": -1.3,
+          "ncc": 0.8873264298754578,
+          "pixels_per_second_y": 64.72084408038657,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-005.png",
+          "to": "station-185-006.png",
+          "delta_time": 0.10035574436187744,
+          "best_shift_y": 6.5,
+          "best_shift_x": -1.3,
+          "ncc": 0.9045650489863714,
+          "pixels_per_second_y": 64.7695858501268,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-006.png",
+          "to": "station-185-007.png",
+          "delta_time": 0.10061752796173096,
+          "best_shift_y": 6.5,
+          "best_shift_x": -1.3,
+          "ncc": 0.9066758994052037,
+          "pixels_per_second_y": 64.60107032715236,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-007.png",
+          "to": "station-185-008.png",
+          "delta_time": 0.10112166404724121,
+          "best_shift_y": 6.25,
+          "best_shift_x": -1.25,
+          "ncc": 0.8965108485385471,
+          "pixels_per_second_y": 61.80673606281019,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-008.png",
+          "to": "station-185-009.png",
+          "delta_time": 0.10022640228271484,
+          "best_shift_y": 6.25,
+          "best_shift_x": -1.25,
+          "ncc": 0.9034722422335546,
+          "pixels_per_second_y": 62.35881821209382,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-009.png",
+          "to": "station-185-010.png",
+          "delta_time": 0.10042965412139893,
+          "best_shift_y": 6.25,
+          "best_shift_x": -1.25,
+          "ncc": 0.8959920077003669,
+          "pixels_per_second_y": 62.23261500477765,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-010.png",
+          "to": "station-185-011.png",
+          "delta_time": 0.1008310317993164,
+          "best_shift_y": 6.5,
+          "best_shift_x": -1.3,
+          "ncc": 0.8040794354353138,
+          "pixels_per_second_y": 64.46428132300504,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-011.png",
+          "to": "station-185-012.png",
+          "delta_time": 0.10034704208374023,
+          "best_shift_y": 1.5,
+          "best_shift_x": -0.30000000000000004,
+          "ncc": 0.8097032379217264,
+          "pixels_per_second_y": 14.948123719962174,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-012.png",
+          "to": "station-185-013.png",
+          "delta_time": 0.10007238388061523,
+          "best_shift_y": 1.5,
+          "best_shift_x": -0.30000000000000004,
+          "ncc": 0.8096718310255502,
+          "pixels_per_second_y": 14.98915027136234,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-013.png",
+          "to": "station-185-014.png",
+          "delta_time": 0.10054969787597656,
+          "best_shift_y": 5.25,
+          "best_shift_x": -1.05,
+          "ncc": 0.8546193519558032,
+          "pixels_per_second_y": 52.21298632319745,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-014.png",
+          "to": "station-185-015.png",
+          "delta_time": 0.10050344467163086,
+          "best_shift_y": 5.75,
+          "best_shift_x": -1.1500000000000001,
+          "ncc": 0.876703650569658,
+          "pixels_per_second_y": 57.211969388578126,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-015.png",
+          "to": "station-185-016.png",
+          "delta_time": 0.1002655029296875,
+          "best_shift_y": 5.75,
+          "best_shift_x": -1.1500000000000001,
+          "ncc": 0.8678142176107674,
+          "pixels_per_second_y": 57.34774007000456,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-016.png",
+          "to": "station-185-017.png",
+          "delta_time": 0.10023927688598633,
+          "best_shift_y": 6.0,
+          "best_shift_x": -1.2000000000000002,
+          "ncc": 0.8465505878734029,
+          "pixels_per_second_y": 59.85677656897396,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-017.png",
+          "to": "station-185-018.png",
+          "delta_time": 0.10049891471862793,
+          "best_shift_y": 6.0,
+          "best_shift_x": -1.2000000000000002,
+          "ncc": 0.8668020760328229,
+          "pixels_per_second_y": 59.702137249924675,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-018.png",
+          "to": "station-185-019.png",
+          "delta_time": 0.10025501251220703,
+          "best_shift_y": 5.75,
+          "best_shift_x": -1.1500000000000001,
+          "ncc": 0.8961683614201137,
+          "pixels_per_second_y": 57.35374078478002,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-019.png",
+          "to": "station-185-020.png",
+          "delta_time": 0.10202884674072266,
+          "best_shift_y": 5.75,
+          "best_shift_x": -1.1500000000000001,
+          "ncc": 0.9195694895361607,
+          "pixels_per_second_y": 56.35661073982334,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-020.png",
+          "to": "station-185-021.png",
+          "delta_time": 0.10077762603759766,
+          "best_shift_y": 5.75,
+          "best_shift_x": -1.1500000000000001,
+          "ncc": 0.9196651428019574,
+          "pixels_per_second_y": 57.0563152366262,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-021.png",
+          "to": "station-185-022.png",
+          "delta_time": 0.10036134719848633,
+          "best_shift_y": 6.0,
+          "best_shift_x": -1.2000000000000002,
+          "ncc": 0.8669498529359115,
+          "pixels_per_second_y": 59.78397229098269,
+          "classification": "downward"
+        },
+        {
+          "from": "station-185-022.png",
+          "to": "station-185-023.png",
+          "delta_time": 0.10052633285522461,
+          "best_shift_y": 6.0,
+          "best_shift_x": -1.2000000000000002,
+          "ncc": 0.8563366287678819,
+          "pixels_per_second_y": 59.685853741835416,
+          "classification": "downward"
+        }
+      ]
+    }
+  ],
+  "input_sha256": {
+    "station-185-000.png": "8ea1a1950654046cdd67f721b63939f1184e00e918fe1963250ea481c013e9bd",
+    "station-185-001.png": "7b80d600e3d57cdd24c93feef1a989ddf3aa4b4a8f6476a3d2acde681c770e76",
+    "station-185-002.png": "1a8bd4b54027ba3553b83a9e2e8f6bff16b1161eb64ec0e9bbe01d7078cff3ef",
+    "station-185-003.png": "6a2b95c1190f18c2c946a313dac08544ea05cf172f75b7557526d3ef184a27d8",
+    "station-185-004.png": "8df677e2eed92c48e32b0dc3de0ca80911f71a92aa51f5486a626d2f4224a6b6",
+    "station-185-005.png": "b292e7b49e42872dd48ad2b79ee352884298d124c8f9a4509da06d24e1b3d87e",
+    "station-185-006.png": "9f585b8e24c1626a9b328cea8a416ee39a89e80d97c5fe6cc38c42ec64ea8d70",
+    "station-185-007.png": "a60e7e25e432048517d77239972bc05bc4141a33d4364225b4672d48b53993f7",
+    "station-185-008.png": "3e95868370accc4bf593f0043365693f5f647975ad40ac0d245efed6c23889ba",
+    "station-185-009.png": "12f90dcc6fe230643f0c2e29b05e546b693ace5a4af83ca4d2b938d246ae6aaa",
+    "station-185-010.png": "2be8018c26204b2fdf6ca79b6d0e147315a26021023a544e5aad52c42109f150",
+    "station-185-011.png": "8338ace7383db39d1e2d5e6dc77a2d0d0081df8fc5f33490fb04811b447fc143",
+    "station-185-012.png": "78d40c1111533a99c72d5dc87620e3933af51e89593e8cc3ec52420b2c8e117f",
+    "station-185-013.png": "71ed7ce2617cbe693623c965cc215ada2ff876806518e42ed0e19e8804daa502",
+    "station-185-014.png": "79a54adfd37fa14f9bb24b59a36abdce2d774c01f469e11298abbdd5b6b4c453",
+    "station-185-015.png": "b1e80943d6690ec84a0a563bcd2d5bd7b2a921cf48f0c69300d6dea6888866b0",
+    "station-185-016.png": "92b8fd2207171fb36fd8689c2667ab0df4376c81887a0b2938e6c6d481460356",
+    "station-185-017.png": "edbdbe99a6547a5bb6d105d19299cfdd581956fcc7a2879ff9cd8d721075d668",
+    "station-185-018.png": "5ddd5154222dacc2ba2019de8aa8140583e6c31ab28605be3936cbc6d8549ee0",
+    "station-185-019.png": "ade329ad48b58c30a88a6f121f3ee597095ccb37692d8c30828461eda016bc13",
+    "station-185-020.png": "e47b068f92ddd5f5e94aa3e423d74eaad83a9782881f1d8783e1ee340436cb52",
+    "station-185-021.png": "8f8f7630e04f5f81bb6d647d2f8313e300d6ceab818813f3c2724511a1d883af",
+    "station-185-022.png": "55bd1ed55164e0d731f58934c6dcbb6624bcfe3f96d7c9b6d1e3f261d5263387",
+    "station-185-023.png": "1782c181f8eb2ed35cc98a593c68a27e72b93a8259889709bec0a83899c211e0",
+    "station-210-000.png": "b38d758a4e462036e7ab83b66117ad90c566b09cc304f8f1a3139f79ba19f6c6",
+    "station-210-001.png": "235a7090d72e2a735d675a5cc2f9a10571b1378a7b997bf78285af7b1ca48a19",
+    "station-210-002.png": "549f4e62630a92f1e3821c096b7cba8513237f2fd2b240ee97e1a4189f1188d6",
+    "station-210-003.png": "0887344eaf020351af6c7871287d11002984a25cad9818ce20e81b7e0cb776a6",
+    "station-210-004.png": "cd496571b90e5cf107de6365962ddd42e746142b6f1caff3713a07c5f50b5d00",
+    "station-210-005.png": "dad8c08f1c192492ad4f0281d3d66c3ab67df583409df8554b693dfdac8c89fa",
+    "station-210-006.png": "5fc1eb83d99e65a866af24d16b387dfab2751fe9c602c0bf134f0f73df0afb3c",
+    "station-210-007.png": "bc961297d78b95743a64d279c0b553159c8c5d546a944acb42a3e980806c1747",
+    "station-210-008.png": "a9e5841d242e48669b488d85a3cbdd1b9e966d9818e18c87503846c72a2b5e43",
+    "station-210-009.png": "edc5d73bca43e8323555bacb010ecbacd31eac69b7b9d7b227cd6c24faf89ff4",
+    "station-210-010.png": "eecf58a8be11c88ce30948e01e3600ca097fd6c75c8615238acbcb21f5877fae",
+    "station-210-011.png": "ea8967f7fa19bcf94554628f37bff0859e115a57e9de760594768fd1ea1fbe7c",
+    "station-210-012.png": "3a00184f8217af4474bd50df7f39d43f99a26de2f350b9f74a7f671f156f79c0",
+    "station-210-013.png": "a1c0cfa81bccb317d3add6203c9d85328503c399f4a5e513d2586cd570a6d81d",
+    "station-210-014.png": "a16bfa3e78bdfad6c860d7ae5a9a1e06625b399962e214ae53a1741beeed0a92",
+    "station-210-015.png": "2d763c7737405f757f2df3a9091b32244b5eb3d37f6e37f5a9c69dc2e0e8d60d",
+    "station-210-016.png": "089627be0538ea51c9ec532ad08aa9258939878cb1650dc02dbf44e556d0c563",
+    "station-210-017.png": "3b03187804f887d30b9091972cd550d1ae6dac5c3abddc397f48f50908e06009",
+    "station-210-018.png": "0d4e5f5e92a4b09da475d63b13c09ace0715b477a2227c099c7b91db46498763",
+    "station-210-019.png": "1b269ded8700f29ac47e460494c9199a6b08ac43cfad854520737d80748a6582",
+    "station-210-020.png": "03d59cd6c08d5731bf53d266a291773d382aa4f58eb6e8c6e17f398db74e1b7c",
+    "station-210-021.png": "3a9c19f57c974b7624bd81ee285d723acd52ef6831e981eda132809f65faaf04",
+    "station-210-022.png": "91ce357d7400a47ee3d9ec5193415cd939e71af52c46eeb566bc3e1ecad08074",
+    "station-210-023.png": "c036e5985a0312a049d070e4394b753f280e4dd83972c7e399ac5277ed7ba5b3"
+  },
+  "warmup": {
+    "final_actual_draws_before_each_view": 2,
+    "bad_first_attempt_preserved_folder": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\RadioArchipelago\\AmberWinds\\WaterfallVisual\\after-20261102-073926-0612166",
+    "bad_first_attempt_frame": "station-185-000.png",
+    "bad_first_attempt_observation": "Both falls absent only in first render submission; subsequent23frames contain both. Fixed2-draw warmup prevented this artifact in reviewed final48frames; asynchronous variant readiness was not independently logged."
+  },
+  "original_baseline_folder": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\RadioArchipelago\\AmberWinds\\WaterfallVisual\\before-20261102-073625-7573009",
+  "summary": {
+    "inspected_native_frames": 48,
+    "adjacent_local_pairs": 138,
+    "downward": 134,
+    "upward": 0,
+    "subpixel_or_static": 4
+  }
+}

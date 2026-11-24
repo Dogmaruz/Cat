@@ -1,0 +1,151 @@
+{
+  "level": "moon",
+  "input_fbx": "C:\\Users\\Derek\\Games_develop\\Cat\\ArtSource\\RadioArchipelago\\Islands\\RooftopMechanisms20261101\\Before\\MoonResonance\\moon_resonance_island.fbx",
+  "input_sha256": "61c7fcf48bae8e023d527dccaf33845c8f5249f6bcd2248c3598e6b8c155299f",
+  "output_sha256": "c2407e489e3ec0e85322e66897e8379f3828b143d09111781df8944fc38912be",
+  "source_blend": "C:\\Users\\Derek\\Games_develop\\Cat\\ArtSource\\RadioArchipelago\\Islands\\MoonResonancePilot\\CrystalClusters20261101\\moon_resonance_hexagonal_druses.blend",
+  "rotors": 4,
+  "rotor_triangles": 11464,
+  "changed_batches": [
+    {
+      "mesh": "RA_Moon_Metal_-01_+00_01",
+      "matched_vertices": 384,
+      "extracted_faces": 760,
+      "unmatched_geometry_attributes_exact": true
+    },
+    {
+      "mesh": "RA_Moon_Architecture_+01_+00_01",
+      "matched_vertices": 320,
+      "extracted_faces": 632,
+      "unmatched_geometry_attributes_exact": true
+    },
+    {
+      "mesh": "RA_Moon_Architecture_-01_+03_01",
+      "matched_vertices": 320,
+      "extracted_faces": 632,
+      "unmatched_geometry_attributes_exact": true
+    },
+    {
+      "mesh": "RA_Moon_Metal_+01_+00_01",
+      "matched_vertices": 384,
+      "extracted_faces": 760,
+      "unmatched_geometry_attributes_exact": true
+    },
+    {
+      "mesh": "RA_Moon_Metal_-01_+03_01",
+      "matched_vertices": 4056,
+      "extracted_faces": 8048,
+      "unmatched_geometry_attributes_exact": true
+    },
+    {
+      "mesh": "RA_Moon_Architecture_-01_+00_01",
+      "matched_vertices": 320,
+      "extracted_faces": 632,
+      "unmatched_geometry_attributes_exact": true
+    }
+  ],
+  "untouched_meshes": 263,
+  "untouched_payloads_exact": true,
+  "remounted_dishes": 0,
+  "remount_delta_world": [],
+  "empty_remainders_to_transforms": [],
+  "mechanisms": [
+    {
+      "nodeName": "RA_Rooftop_Moon_01_Fork",
+      "pivot": {
+        "x": -18.026966094970703,
+        "y": 11.863212585449219,
+        "z": -29.07255744934082
+      },
+      "axis": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": -0.0
+      },
+      "degreesPerSecond": 95,
+      "materialSources": [
+        {
+          "nodeName": "RA_Moon_Metal_+01_+00_01",
+          "slot": 0
+        },
+        {
+          "nodeName": "RA_Moon_Architecture_+01_+00_01",
+          "slot": 0
+        }
+      ],
+      "kind": "fork"
+    },
+    {
+      "nodeName": "RA_Rooftop_Moon_02_Fork",
+      "pivot": {
+        "x": 79.02154541015625,
+        "y": 13.064262390136719,
+        "z": -37.72886657714844
+      },
+      "axis": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": -0.0
+      },
+      "degreesPerSecond": -115,
+      "materialSources": [
+        {
+          "nodeName": "RA_Moon_Architecture_+01_+00_01",
+          "slot": 0
+        },
+        {
+          "nodeName": "RA_Moon_Metal_+01_+00_01",
+          "slot": 0
+        }
+      ],
+      "kind": "fork"
+    },
+    {
+      "nodeName": "RA_Rooftop_Moon_03_Fork",
+      "pivot": {
+        "x": -26.739999771118164,
+        "y": 29.443683624267578,
+        "z": -167.1999969482422
+      },
+      "axis": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": -0.0
+      },
+      "degreesPerSecond": 75,
+      "materialSources": [
+        {
+          "nodeName": "RA_Moon_Architecture_+01_+00_01",
+          "slot": 0
+        },
+        {
+          "nodeName": "RA_Moon_Metal_+01_+00_01",
+          "slot": 0
+        }
+      ],
+      "kind": "fork"
+    },
+    {
+      "nodeName": "RA_Rooftop_Moon_04_Wheel",
+      "pivot": {
+        "x": -24.0,
+        "y": 37.344482421875,
+        "z": -165.0
+      },
+      "axis": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -1.0
+      },
+      "degreesPerSecond": 65,
+      "materialSources": [
+        {
+          "nodeName": "RA_Moon_Metal_+01_+00_01",
+          "slot": 0
+        }
+      ],
+      "kind": "wheel"
+    }
+  ],
+  "installed_sha256": "c2407e489e3ec0e85322e66897e8379f3828b143d09111781df8944fc38912be"
+}

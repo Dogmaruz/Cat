@@ -1,0 +1,1613 @@
+{
+  "pass": null,
+  "scope": "Fixed-camera native-frame local packet correlation along independently projected downstream tangents; ambiguous texture is not a pass",
+  "feature": "side-roll",
+  "metadata": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\RadioArchipelago\\AmberWinds\\WaterNative\\side-roll-clock.json",
+  "frameHashes": [
+    {
+      "name": "side-roll-flow-00.png",
+      "sha256": "99273b392fad494abaaff0de093f8c1fc1f51b7a853c12c38424dae6788a0731"
+    },
+    {
+      "name": "side-roll-flow-01.png",
+      "sha256": "5874f2d56a35a324128b20288a475989bb41a086f5ff90d18e2663c00df1650f"
+    },
+    {
+      "name": "side-roll-flow-02.png",
+      "sha256": "cb90bb606168915b06fe719c0659fe0f4908aa0e5a664855737de89e4b92ee2e"
+    },
+    {
+      "name": "side-roll-flow-03.png",
+      "sha256": "b9b57d5db3ec6101cf32657fd6af3ea88c77a03b615cc0c93dbbc2bdbb406f6d"
+    },
+    {
+      "name": "side-roll-flow-04.png",
+      "sha256": "3e1c19ab7da72ee10a39478b0d621d62a4e68e130d271d75263e0e68c06ce7b9"
+    },
+    {
+      "name": "side-roll-flow-05.png",
+      "sha256": "666db94644a29ec83359fe71d9f165f009a08e00104c750fa70d60cca13f557c"
+    },
+    {
+      "name": "side-roll-flow-06.png",
+      "sha256": "8dbee1364f5f56c28627e707b50aad2a069340276ecfd86cd5cfea18c8c3a020"
+    },
+    {
+      "name": "side-roll-flow-07.png",
+      "sha256": "fc0e3f16bb6ed928b6bc3d49975c62e1c2564a67e968c745a0e8e2b53358573a"
+    },
+    {
+      "name": "side-roll-flow-08.png",
+      "sha256": "721101cce3f4e6be43fa48e1199b2b423cccd2152cc2a3b92c96f836c3455792"
+    },
+    {
+      "name": "side-roll-flow-09.png",
+      "sha256": "1e047d54ed4b19933b3a59e313092dd2ce9c56abaec52be7bf715fcfb2408ef7"
+    },
+    {
+      "name": "side-roll-flow-10.png",
+      "sha256": "244598cbd71779203c851e5dc195dd2a6e66aab3c35bb621b25a756c0605905e"
+    },
+    {
+      "name": "side-roll-flow-11.png",
+      "sha256": "586ebfd288eae7d03beb277dc19be600387c86561d0bc9f7b6ba594ae6b04731"
+    },
+    {
+      "name": "side-roll-flow-12.png",
+      "sha256": "6eb19b7fa65b46066efb87694b3bbb87aae8f2e10da2a6ee7286a63e8f523068"
+    },
+    {
+      "name": "side-roll-flow-13.png",
+      "sha256": "66f46d76cd0cbd2249a70abd2ab1d964d9c58acef40bb70f5b83cb64090fabcd"
+    }
+  ],
+  "thresholds": {
+    "minimumNCC": 0.65,
+    "minimumGainOverStationary": 0.03,
+    "minimumSeparatedPeakMargin": 0.035,
+    "minimumPixelTravel": 0.75,
+    "minimumVisibleCoverage": 0.9,
+    "minimumRecognizablePairs": 3,
+    "requiredDirectionalVoteFraction": 0.75
+  },
+  "samples": [
+    {
+      "label": "roll-35deg",
+      "status": "ambiguous",
+      "position": [
+        364.9206848144531,
+        180.96669006347656
+      ],
+      "footprint": {
+        "halfWidth": 2,
+        "halfLength": 2,
+        "pixelCount": 25,
+        "selection": "Same supplied35deg position/tangent. Even this5x5 footprint has only .88 static maskcoverage; remains untrackable under unchanged .90 coverage gate."
+      },
+      "expectedPixelsPerSecond": 25.367448806762695,
+      "recognizablePairs": 0,
+      "downstreamPairs": 0,
+      "distinctStartingFrames": 0,
+      "upstreamPairs": 0,
+      "medianPixelsPerSecond": null,
+      "pairs": [
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 0,
+          "lastFrame": 1,
+          "elapsed": 0.33333349227905273
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 1,
+          "lastFrame": 2,
+          "elapsed": 0.046753883361816406
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 2,
+          "lastFrame": 3,
+          "elapsed": 0.036997079849243164
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 3,
+          "lastFrame": 4,
+          "elapsed": 0.03724241256713867
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 4,
+          "lastFrame": 5,
+          "elapsed": 0.04612398147583008
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 5,
+          "lastFrame": 6,
+          "elapsed": 0.10816144943237305
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 6,
+          "lastFrame": 7,
+          "elapsed": 0.09231710433959961
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 7,
+          "lastFrame": 8,
+          "elapsed": 0.10019993782043457
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 8,
+          "lastFrame": 9,
+          "elapsed": 0.0992286205291748
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 9,
+          "lastFrame": 10,
+          "elapsed": 0.0998997688293457
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 10,
+          "lastFrame": 11,
+          "elapsed": 0.09982919692993164
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 11,
+          "lastFrame": 12,
+          "elapsed": 0.1003117561340332
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 12,
+          "lastFrame": 13,
+          "elapsed": 0.099822998046875
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 0,
+          "lastFrame": 2,
+          "elapsed": 0.38008737564086914
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 1,
+          "lastFrame": 3,
+          "elapsed": 0.08375096321105957
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 2,
+          "lastFrame": 4,
+          "elapsed": 0.07423949241638184
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 3,
+          "lastFrame": 5,
+          "elapsed": 0.08336639404296875
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 4,
+          "lastFrame": 6,
+          "elapsed": 0.15428543090820312
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 5,
+          "lastFrame": 7,
+          "elapsed": 0.20047855377197266
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 6,
+          "lastFrame": 8,
+          "elapsed": 0.19251704216003418
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 7,
+          "lastFrame": 9,
+          "elapsed": 0.19942855834960938
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 8,
+          "lastFrame": 10,
+          "elapsed": 0.1991283893585205
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 9,
+          "lastFrame": 11,
+          "elapsed": 0.19972896575927734
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 10,
+          "lastFrame": 12,
+          "elapsed": 0.20014095306396484
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 11,
+          "lastFrame": 13,
+          "elapsed": 0.2001347541809082
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 0,
+          "lastFrame": 3,
+          "elapsed": 0.4170844554901123
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 1,
+          "lastFrame": 4,
+          "elapsed": 0.12099337577819824
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 2,
+          "lastFrame": 5,
+          "elapsed": 0.12036347389221191
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 3,
+          "lastFrame": 6,
+          "elapsed": 0.1915278434753418
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 4,
+          "lastFrame": 7,
+          "elapsed": 0.24660253524780273
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 5,
+          "lastFrame": 8,
+          "elapsed": 0.3006784915924072
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 6,
+          "lastFrame": 9,
+          "elapsed": 0.291745662689209
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 7,
+          "lastFrame": 10,
+          "elapsed": 0.2993283271789551
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 8,
+          "lastFrame": 11,
+          "elapsed": 0.29895758628845215
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 9,
+          "lastFrame": 12,
+          "elapsed": 0.30004072189331055
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 10,
+          "lastFrame": 13,
+          "elapsed": 0.29996395111083984
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 0,
+          "lastFrame": 4,
+          "elapsed": 0.454326868057251
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 1,
+          "lastFrame": 5,
+          "elapsed": 0.16711735725402832
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 2,
+          "lastFrame": 6,
+          "elapsed": 0.22852492332458496
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 3,
+          "lastFrame": 7,
+          "elapsed": 0.2838449478149414
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 4,
+          "lastFrame": 8,
+          "elapsed": 0.3468024730682373
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 5,
+          "lastFrame": 9,
+          "elapsed": 0.39990711212158203
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 6,
+          "lastFrame": 10,
+          "elapsed": 0.3916454315185547
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 7,
+          "lastFrame": 11,
+          "elapsed": 0.3991575241088867
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 8,
+          "lastFrame": 12,
+          "elapsed": 0.39926934242248535
+        },
+        {
+          "status": "ambiguous",
+          "reason": "patch mostly outside visible target water",
+          "coverage": 0.88,
+          "firstFrame": 9,
+          "lastFrame": 13,
+          "elapsed": 0.39986371994018555
+        }
+      ]
+    },
+    {
+      "label": "roll-48deg",
+      "status": "confirmed downstream",
+      "position": [
+        365.1887512207031,
+        183.63638305664062
+      ],
+      "footprint": {
+        "halfWidth": 6,
+        "halfLength": 4,
+        "pixelCount": 117,
+        "selection": "Same supplied position/tangent;13x9 footprint selected from static visibility-mask geometry only, coverage .948718. No centre offset or motion-result selection."
+      },
+      "expectedPixelsPerSecond": 30.202491760253906,
+      "recognizablePairs": 8,
+      "downstreamPairs": 8,
+      "distinctStartingFrames": 5,
+      "upstreamPairs": 0,
+      "medianPixelsPerSecond": 3.75128192426581,
+      "pairs": [
+        {
+          "status": "ambiguous",
+          "pixels": -0.25,
+          "correlation": 0.8089241567860485,
+          "zeroCorrelation": 0.7936060648483452,
+          "separatedPeakMargin": 0.5495092025491244,
+          "competingPeakCount": 1,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 0,
+          "lastFrame": 1,
+          "elapsed": 0.33333349227905273
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.9545073978446469,
+          "zeroCorrelation": 0.9541787000487065,
+          "separatedPeakMargin": 1.954507397844647,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 1,
+          "lastFrame": 2,
+          "elapsed": 0.046753883361816406
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.9613629618834476,
+          "zeroCorrelation": 0.9613629618834476,
+          "separatedPeakMargin": 1.9613629618834476,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 2,
+          "lastFrame": 3,
+          "elapsed": 0.036997079849243164
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.9535679221887639,
+          "zeroCorrelation": 0.9523087468957332,
+          "separatedPeakMargin": 1.9535679221887639,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 3,
+          "lastFrame": 4,
+          "elapsed": 0.03724241256713867
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.9267181084886033,
+          "zeroCorrelation": 0.9161320393345885,
+          "separatedPeakMargin": 1.9267181084886031,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 4,
+          "lastFrame": 5,
+          "elapsed": 0.04612398147583008
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.2530363902459578,
+          "zeroCorrelation": 0.24963662306808657,
+          "separatedPeakMargin": 1.2530363902459578,
+          "competingPeakCount": 0,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 5,
+          "lastFrame": 6,
+          "elapsed": 0.10816144943237305
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.75,
+          "correlation": 0.5275781269276517,
+          "zeroCorrelation": 0.4899948448687991,
+          "separatedPeakMargin": 1.5275781269276516,
+          "competingPeakCount": 0,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 6,
+          "lastFrame": 7,
+          "elapsed": 0.09231710433959961
+        },
+        {
+          "status": "downstream",
+          "pixels": 0.75,
+          "correlation": 0.863801996893856,
+          "zeroCorrelation": 0.8175925573268844,
+          "separatedPeakMargin": 1.863801996893856,
+          "competingPeakCount": 0,
+          "firstFrame": 7,
+          "lastFrame": 8,
+          "elapsed": 0.10019993782043457,
+          "pixelsPerSecond": 7.485034584991993
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.5,
+          "correlation": 0.8800745386022674,
+          "zeroCorrelation": 0.8572499686196263,
+          "separatedPeakMargin": 1.8800745386022673,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 8,
+          "lastFrame": 9,
+          "elapsed": 0.0992286205291748
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.8142739145415593,
+          "zeroCorrelation": 0.8049932968381868,
+          "separatedPeakMargin": 1.8142739145415594,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 9,
+          "lastFrame": 10,
+          "elapsed": 0.0998997688293457
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.5,
+          "correlation": 0.8963750498871573,
+          "zeroCorrelation": 0.8549161936767548,
+          "separatedPeakMargin": 1.8963750498871574,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 10,
+          "lastFrame": 11,
+          "elapsed": 0.09982919692993164
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.8546828216585648,
+          "zeroCorrelation": 0.842565090361296,
+          "separatedPeakMargin": 1.8546828216585647,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 11,
+          "lastFrame": 12,
+          "elapsed": 0.1003117561340332
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.5,
+          "correlation": 0.9211945607696048,
+          "zeroCorrelation": 0.8713143310650375,
+          "separatedPeakMargin": 1.9211945607696048,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 12,
+          "lastFrame": 13,
+          "elapsed": 0.099822998046875
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -0.25,
+          "correlation": 0.7177512436680417,
+          "zeroCorrelation": 0.7108507886023827,
+          "separatedPeakMargin": 0.48592430173044265,
+          "competingPeakCount": 1,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 0,
+          "lastFrame": 2,
+          "elapsed": 0.38008737564086914
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.874665398041441,
+          "zeroCorrelation": 0.8728208348411655,
+          "separatedPeakMargin": 1.874665398041441,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 1,
+          "lastFrame": 3,
+          "elapsed": 0.08375096321105957
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.8636280673633314,
+          "zeroCorrelation": 0.8636280673633314,
+          "separatedPeakMargin": 1.8636280673633314,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 2,
+          "lastFrame": 4,
+          "elapsed": 0.07423949241638184
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.8212481527369495,
+          "zeroCorrelation": 0.8158694361300076,
+          "separatedPeakMargin": 1.8212481527369495,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 3,
+          "lastFrame": 5,
+          "elapsed": 0.08336639404296875
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -0.25,
+          "correlation": 0.25885612312390016,
+          "zeroCorrelation": 0.25013152300884756,
+          "separatedPeakMargin": 0.08714861383672332,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 4,
+          "lastFrame": 6,
+          "elapsed": 0.15428543090820312
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -1.0,
+          "correlation": 0.4032166620172805,
+          "zeroCorrelation": 0.3126525816222636,
+          "separatedPeakMargin": 0.4221455342720137,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 5,
+          "lastFrame": 7,
+          "elapsed": 0.20047855377197266
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.5,
+          "correlation": 0.5665033120123824,
+          "zeroCorrelation": 0.548871966053231,
+          "separatedPeakMargin": 0.7501180470438025,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 6,
+          "lastFrame": 8,
+          "elapsed": 0.19251704216003418
+        },
+        {
+          "status": "downstream",
+          "pixels": 1.0,
+          "correlation": 0.7280015129157801,
+          "zeroCorrelation": 0.6543909518033493,
+          "separatedPeakMargin": 0.7565771035291056,
+          "competingPeakCount": 2,
+          "firstFrame": 7,
+          "lastFrame": 9,
+          "elapsed": 0.19942855834960938,
+          "pixelsPerSecond": 5.0143269764150045
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.5,
+          "correlation": 0.7036847808065705,
+          "zeroCorrelation": 0.6699874007722951,
+          "separatedPeakMargin": 0.5818564046696121,
+          "competingPeakCount": 1,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 8,
+          "lastFrame": 10,
+          "elapsed": 0.1991283893585205
+        },
+        {
+          "status": "downstream",
+          "pixels": 0.75,
+          "correlation": 0.67515709586194,
+          "zeroCorrelation": 0.5709897966005396,
+          "separatedPeakMargin": 0.5205786529303765,
+          "competingPeakCount": 1,
+          "firstFrame": 9,
+          "lastFrame": 11,
+          "elapsed": 0.19972896575927734,
+          "pixelsPerSecond": 3.75508878819277
+        },
+        {
+          "status": "downstream",
+          "pixels": 0.75,
+          "correlation": 0.8027102044401381,
+          "zeroCorrelation": 0.737788717321767,
+          "separatedPeakMargin": 0.7281290049845451,
+          "competingPeakCount": 1,
+          "firstFrame": 10,
+          "lastFrame": 12,
+          "elapsed": 0.20014095306396484,
+          "pixelsPerSecond": 3.747358991341971
+        },
+        {
+          "status": "downstream",
+          "pixels": 0.75,
+          "correlation": 0.7487986717776839,
+          "zeroCorrelation": 0.6914508087120008,
+          "separatedPeakMargin": 0.7392506977278575,
+          "competingPeakCount": 1,
+          "firstFrame": 11,
+          "lastFrame": 13,
+          "elapsed": 0.2001347541809082,
+          "pixelsPerSecond": 3.7474750603388505
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -0.25,
+          "correlation": 0.6245953114486055,
+          "zeroCorrelation": 0.6209489517637987,
+          "separatedPeakMargin": 0.39545518213881625,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 0,
+          "lastFrame": 3,
+          "elapsed": 0.4170844554901123
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.7798739474995457,
+          "zeroCorrelation": 0.7798739474995457,
+          "separatedPeakMargin": 1.7798739474995457,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 1,
+          "lastFrame": 4,
+          "elapsed": 0.12099337577819824
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.7444979693306281,
+          "zeroCorrelation": 0.7444979693306281,
+          "separatedPeakMargin": 1.7444979693306282,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 2,
+          "lastFrame": 5,
+          "elapsed": 0.12036347389221191
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -0.25,
+          "correlation": 0.28783227735451355,
+          "zeroCorrelation": 0.2740553215417875,
+          "separatedPeakMargin": 0.07360498901430604,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 3,
+          "lastFrame": 6,
+          "elapsed": 0.1915278434753418
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -1.0,
+          "correlation": 0.3988363525054937,
+          "zeroCorrelation": 0.3009587693857382,
+          "separatedPeakMargin": 0.27197799012823065,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 4,
+          "lastFrame": 7,
+          "elapsed": 0.24660253524780273
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -1.0,
+          "correlation": 0.5304666783269344,
+          "zeroCorrelation": 0.4468421266010184,
+          "separatedPeakMargin": 0.5836135288919867,
+          "competingPeakCount": 2,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 5,
+          "lastFrame": 8,
+          "elapsed": 0.3006784915924072
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.75,
+          "correlation": 0.5943162068677708,
+          "zeroCorrelation": 0.5632111743263953,
+          "separatedPeakMargin": 0.714142150217876,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 6,
+          "lastFrame": 9,
+          "elapsed": 0.291745662689209
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 1.0,
+          "correlation": 0.6037097909892776,
+          "zeroCorrelation": 0.5172787125065116,
+          "separatedPeakMargin": 0.576071591840171,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 7,
+          "lastFrame": 10,
+          "elapsed": 0.2993283271789551
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 1.0,
+          "correlation": 0.5553991223864506,
+          "zeroCorrelation": 0.43857878413343354,
+          "separatedPeakMargin": 0.4330918947814879,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 8,
+          "lastFrame": 11,
+          "elapsed": 0.29895758628845215
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 1.0,
+          "correlation": 0.6030860603171738,
+          "zeroCorrelation": 0.49984211714445265,
+          "separatedPeakMargin": 0.4863824592949123,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 9,
+          "lastFrame": 12,
+          "elapsed": 0.30004072189331055
+        },
+        {
+          "status": "downstream",
+          "pixels": 1.25,
+          "correlation": 0.7911652442964009,
+          "zeroCorrelation": 0.6114801314200043,
+          "separatedPeakMargin": 0.8135772103688177,
+          "competingPeakCount": 1,
+          "firstFrame": 10,
+          "lastFrame": 13,
+          "elapsed": 0.29996395111083984,
+          "pixelsPerSecond": 4.1671674058530845
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.5482602500271263,
+          "zeroCorrelation": 0.5482602500271263,
+          "separatedPeakMargin": 0.3097657438332575,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 0,
+          "lastFrame": 4,
+          "elapsed": 0.454326868057251
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.688421732002105,
+          "zeroCorrelation": 0.688421732002105,
+          "separatedPeakMargin": 0.5533680765325912,
+          "competingPeakCount": 1,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 1,
+          "lastFrame": 5,
+          "elapsed": 0.16711735725402832
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -0.75,
+          "correlation": 0.3668450918948584,
+          "zeroCorrelation": 0.3314691805472795,
+          "separatedPeakMargin": 0.15957987148439562,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 2,
+          "lastFrame": 6,
+          "elapsed": 0.22852492332458496
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -1.0,
+          "correlation": 0.38228589568221594,
+          "zeroCorrelation": 0.2834232350902655,
+          "separatedPeakMargin": 0.2070745743293746,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 3,
+          "lastFrame": 7,
+          "elapsed": 0.2838449478149414
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -1.0,
+          "correlation": 0.5456345588033918,
+          "zeroCorrelation": 0.45860124374945654,
+          "separatedPeakMargin": 0.43603299345082625,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 4,
+          "lastFrame": 8,
+          "elapsed": 0.3468024730682373
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -1.0,
+          "correlation": 0.527814275367732,
+          "zeroCorrelation": 0.4734214784732869,
+          "separatedPeakMargin": 0.5668087322446018,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 5,
+          "lastFrame": 9,
+          "elapsed": 0.39990711212158203
+        },
+        {
+          "status": "downstream",
+          "pixels": 0.75,
+          "correlation": 0.8305754958825347,
+          "zeroCorrelation": 0.7558374852786269,
+          "separatedPeakMargin": 0.9384271333018817,
+          "competingPeakCount": 1,
+          "firstFrame": 6,
+          "lastFrame": 10,
+          "elapsed": 0.3916454315185547,
+          "pixelsPerSecond": 1.9149974432025714
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 1.25,
+          "correlation": 0.4798330591178949,
+          "zeroCorrelation": 0.35991135402385005,
+          "separatedPeakMargin": 0.5403991925159409,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 7,
+          "lastFrame": 11,
+          "elapsed": 0.3991575241088867
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 1.0,
+          "correlation": 0.5794303170306425,
+          "zeroCorrelation": 0.4741802042283158,
+          "separatedPeakMargin": 0.4858822192312024,
+          "competingPeakCount": 1,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 8,
+          "lastFrame": 12,
+          "elapsed": 0.39926934242248535
+        },
+        {
+          "status": "downstream",
+          "pixels": 1.25,
+          "correlation": 0.6565023531630747,
+          "zeroCorrelation": 0.4707458051337719,
+          "separatedPeakMargin": 0.598389941694775,
+          "competingPeakCount": 1,
+          "firstFrame": 9,
+          "lastFrame": 13,
+          "elapsed": 0.39986371994018555,
+          "pixelsPerSecond": 3.1260650508302774
+        }
+      ]
+    },
+    {
+      "label": "roll-65deg",
+      "status": "ambiguous",
+      "position": [
+        363.33648681640625,
+        188.7716064453125
+      ],
+      "footprint": {
+        "halfWidth": 8,
+        "halfLength": 6,
+        "pixelCount": 221,
+        "selection": "Same supplied position/tangent;17x13 footprint selected from static visibility-mask geometry only, coverage .986425. No centre offset or motion-result selection."
+      },
+      "expectedPixelsPerSecond": 36.4708137512207,
+      "recognizablePairs": 0,
+      "downstreamPairs": 0,
+      "distinctStartingFrames": 0,
+      "upstreamPairs": 0,
+      "medianPixelsPerSecond": null,
+      "pairs": [
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.8686771574966807,
+          "zeroCorrelation": 0.8686771574966807,
+          "separatedPeakMargin": 1.8686771574966807,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 0,
+          "lastFrame": 1,
+          "elapsed": 0.33333349227905273
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.973951098150753,
+          "zeroCorrelation": 0.973951098150753,
+          "separatedPeakMargin": 1.9739510981507529,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 1,
+          "lastFrame": 2,
+          "elapsed": 0.046753883361816406
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.9859838487471838,
+          "zeroCorrelation": 0.9859838487471838,
+          "separatedPeakMargin": 1.9859838487471837,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 2,
+          "lastFrame": 3,
+          "elapsed": 0.036997079849243164
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.9837579068051713,
+          "zeroCorrelation": 0.9837579068051713,
+          "separatedPeakMargin": 1.9837579068051712,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 3,
+          "lastFrame": 4,
+          "elapsed": 0.03724241256713867
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.9735665836355105,
+          "zeroCorrelation": 0.9697910388460745,
+          "separatedPeakMargin": 1.9735665836355105,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 4,
+          "lastFrame": 5,
+          "elapsed": 0.04612398147583008
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.7895431785746524,
+          "zeroCorrelation": 0.7895431785746524,
+          "separatedPeakMargin": 1.7895431785746525,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 5,
+          "lastFrame": 6,
+          "elapsed": 0.10816144943237305
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.9219609592854474,
+          "zeroCorrelation": 0.9177236255087308,
+          "separatedPeakMargin": 1.9219609592854474,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 6,
+          "lastFrame": 7,
+          "elapsed": 0.09231710433959961
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.9300098268793536,
+          "zeroCorrelation": 0.9244395707981578,
+          "separatedPeakMargin": 1.9300098268793535,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 7,
+          "lastFrame": 8,
+          "elapsed": 0.10019993782043457
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.9201606790275731,
+          "zeroCorrelation": 0.9145840006288404,
+          "separatedPeakMargin": 1.9201606790275731,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 8,
+          "lastFrame": 9,
+          "elapsed": 0.0992286205291748
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.8785873312949863,
+          "zeroCorrelation": 0.8756325898761537,
+          "separatedPeakMargin": 1.8785873312949863,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 9,
+          "lastFrame": 10,
+          "elapsed": 0.0998997688293457
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.9230270729314024,
+          "zeroCorrelation": 0.9170248170159039,
+          "separatedPeakMargin": 1.9230270729314025,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 10,
+          "lastFrame": 11,
+          "elapsed": 0.09982919692993164
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.8989237346085526,
+          "zeroCorrelation": 0.8955723905125967,
+          "separatedPeakMargin": 1.8989237346085526,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 11,
+          "lastFrame": 12,
+          "elapsed": 0.1003117561340332
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.5,
+          "correlation": 0.9477873068111194,
+          "zeroCorrelation": 0.9248279400244109,
+          "separatedPeakMargin": 1.9477873068111196,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 12,
+          "lastFrame": 13,
+          "elapsed": 0.099822998046875
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.8392770539310008,
+          "zeroCorrelation": 0.8392770539310008,
+          "separatedPeakMargin": 1.8392770539310008,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 0,
+          "lastFrame": 2,
+          "elapsed": 0.38008737564086914
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.938607935470848,
+          "zeroCorrelation": 0.938607935470848,
+          "separatedPeakMargin": 1.938607935470848,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 1,
+          "lastFrame": 3,
+          "elapsed": 0.08375096321105957
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.9549891663104112,
+          "zeroCorrelation": 0.9549891663104112,
+          "separatedPeakMargin": 1.954989166310411,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 2,
+          "lastFrame": 4,
+          "elapsed": 0.07423949241638184
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.9342496443962236,
+          "zeroCorrelation": 0.9289107272765992,
+          "separatedPeakMargin": 1.9342496443962236,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 3,
+          "lastFrame": 5,
+          "elapsed": 0.08336639404296875
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.780990883625258,
+          "zeroCorrelation": 0.780990883625258,
+          "separatedPeakMargin": 1.780990883625258,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 4,
+          "lastFrame": 6,
+          "elapsed": 0.15428543090820312
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.7842655303803376,
+          "zeroCorrelation": 0.7842655303803376,
+          "separatedPeakMargin": 1.7842655303803376,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 5,
+          "lastFrame": 7,
+          "elapsed": 0.20047855377197266
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.8844645964235948,
+          "zeroCorrelation": 0.8789306557514801,
+          "separatedPeakMargin": 1.8844645964235949,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 6,
+          "lastFrame": 8,
+          "elapsed": 0.19251704216003418
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.883153400004572,
+          "zeroCorrelation": 0.8751910796900473,
+          "separatedPeakMargin": 1.883153400004572,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 7,
+          "lastFrame": 9,
+          "elapsed": 0.19942855834960938
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.8562955203107023,
+          "zeroCorrelation": 0.8494760407732548,
+          "separatedPeakMargin": 1.8562955203107023,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 8,
+          "lastFrame": 10,
+          "elapsed": 0.1991283893585205
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.7989220762278617,
+          "zeroCorrelation": 0.7892783247823875,
+          "separatedPeakMargin": 1.7989220762278617,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 9,
+          "lastFrame": 11,
+          "elapsed": 0.19972896575927734
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.8660484628008179,
+          "zeroCorrelation": 0.8593191227750947,
+          "separatedPeakMargin": 1.8660484628008178,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 10,
+          "lastFrame": 12,
+          "elapsed": 0.20014095306396484
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.5,
+          "correlation": 0.8097511417586226,
+          "zeroCorrelation": 0.7891943051377835,
+          "separatedPeakMargin": 1.8097511417586225,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 11,
+          "lastFrame": 13,
+          "elapsed": 0.2001347541809082
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.79928023157588,
+          "zeroCorrelation": 0.79928023157588,
+          "separatedPeakMargin": 1.79928023157588,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 0,
+          "lastFrame": 3,
+          "elapsed": 0.4170844554901123
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.9071200210039088,
+          "zeroCorrelation": 0.9071200210039088,
+          "separatedPeakMargin": 1.9071200210039088,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 1,
+          "lastFrame": 4,
+          "elapsed": 0.12099337577819824
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.9045298521446213,
+          "zeroCorrelation": 0.9025241786560079,
+          "separatedPeakMargin": 1.9045298521446212,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 2,
+          "lastFrame": 5,
+          "elapsed": 0.12036347389221191
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.7874138260999131,
+          "zeroCorrelation": 0.7874138260999131,
+          "separatedPeakMargin": 1.787413826099913,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 3,
+          "lastFrame": 6,
+          "elapsed": 0.1915278434753418
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.7655314819634342,
+          "zeroCorrelation": 0.7655314819634342,
+          "separatedPeakMargin": 1.7655314819634342,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 4,
+          "lastFrame": 7,
+          "elapsed": 0.24660253524780273
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.7843481009025055,
+          "zeroCorrelation": 0.7843481009025055,
+          "separatedPeakMargin": 1.7843481009025055,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 5,
+          "lastFrame": 8,
+          "elapsed": 0.3006784915924072
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.8300390545387816,
+          "zeroCorrelation": 0.8215477653743843,
+          "separatedPeakMargin": 1.8300390545387817,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 6,
+          "lastFrame": 9,
+          "elapsed": 0.291745662689209
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.5,
+          "correlation": 0.8696415815506243,
+          "zeroCorrelation": 0.8539007982504382,
+          "separatedPeakMargin": 1.8696415815506242,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 7,
+          "lastFrame": 10,
+          "elapsed": 0.2993283271789551
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.5,
+          "correlation": 0.7887344468874288,
+          "zeroCorrelation": 0.7694577437153118,
+          "separatedPeakMargin": 1.7887344468874287,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 8,
+          "lastFrame": 11,
+          "elapsed": 0.29895758628845215
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.7599513742234152,
+          "zeroCorrelation": 0.751574030835493,
+          "separatedPeakMargin": 1.7599513742234152,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 9,
+          "lastFrame": 12,
+          "elapsed": 0.30004072189331055
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.5,
+          "correlation": 0.8266328002172713,
+          "zeroCorrelation": 0.7892286888907085,
+          "separatedPeakMargin": 1.2538274114993233,
+          "competingPeakCount": 1,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 10,
+          "lastFrame": 13,
+          "elapsed": 0.29996395111083984
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.7747769038584199,
+          "zeroCorrelation": 0.7747769038584199,
+          "separatedPeakMargin": 1.7747769038584198,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 0,
+          "lastFrame": 4,
+          "elapsed": 0.454326868057251
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.8662567260370805,
+          "zeroCorrelation": 0.8628653492764611,
+          "separatedPeakMargin": 1.8662567260370806,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 1,
+          "lastFrame": 5,
+          "elapsed": 0.16711735725402832
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.8038706485230228,
+          "zeroCorrelation": 0.8038706485230228,
+          "separatedPeakMargin": 1.8038706485230227,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 2,
+          "lastFrame": 6,
+          "elapsed": 0.22852492332458496
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.7599910193955579,
+          "zeroCorrelation": 0.7599910193955579,
+          "separatedPeakMargin": 1.759991019395558,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 3,
+          "lastFrame": 7,
+          "elapsed": 0.2838449478149414
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.7855871973450963,
+          "zeroCorrelation": 0.7855871973450963,
+          "separatedPeakMargin": 1.7855871973450963,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 4,
+          "lastFrame": 8,
+          "elapsed": 0.3468024730682373
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.0,
+          "correlation": 0.7505988745156569,
+          "zeroCorrelation": 0.7505988745156569,
+          "separatedPeakMargin": 1.7505988745156569,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 5,
+          "lastFrame": 9,
+          "elapsed": 0.39990711212158203
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.5,
+          "correlation": 0.8751450643033075,
+          "zeroCorrelation": 0.8601368390834928,
+          "separatedPeakMargin": 1.8751450643033074,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 6,
+          "lastFrame": 10,
+          "elapsed": 0.3916454315185547
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.5,
+          "correlation": 0.8374875648463197,
+          "zeroCorrelation": 0.8148322280810709,
+          "separatedPeakMargin": 1.8374875648463198,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 7,
+          "lastFrame": 11,
+          "elapsed": 0.3991575241088867
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.25,
+          "correlation": 0.7707357602001235,
+          "zeroCorrelation": 0.7598250879014138,
+          "separatedPeakMargin": 1.7707357602001235,
+          "competingPeakCount": 0,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 8,
+          "lastFrame": 12,
+          "elapsed": 0.39926934242248535
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.5,
+          "correlation": 0.7589792426497758,
+          "zeroCorrelation": 0.7254696727903246,
+          "separatedPeakMargin": 0.9789211732300366,
+          "competingPeakCount": 1,
+          "reason": "stationary or subpixel maximum",
+          "firstFrame": 9,
+          "lastFrame": 13,
+          "elapsed": 0.39986371994018555
+        }
+      ]
+    }
+  ]
+}

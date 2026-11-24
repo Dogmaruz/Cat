@@ -1,0 +1,649 @@
+{
+  "pass": true,
+  "scope": "Fixed-camera native-frame local packet correlation along independently projected downstream tangents; ambiguous texture is not a pass",
+  "feature": "stream",
+  "metadata": "C:\\Users\\Derek\\Games_develop\\Cat\\DancingCatsClone\\Library\\RadioArchipelago\\AmberWinds\\WaterNative\\stream-clock.json",
+  "frameHashes": [
+    {
+      "name": "stream-flow-00.png",
+      "sha256": "7440056e6891f8882bd5bc2ef4d318de80fed92fe0b97c6de79775d238cf77de"
+    },
+    {
+      "name": "stream-flow-01.png",
+      "sha256": "6c47bec9d0f69ba73e1fda103dbc62c6cd0b4be3c0b3e82e7b06775f4ce7e4b3"
+    },
+    {
+      "name": "stream-flow-02.png",
+      "sha256": "77a72bdcb4d0d162ee5278e14cc1faef7f047b13ca2b40dba0d16cc0f28e15ae"
+    },
+    {
+      "name": "stream-flow-03.png",
+      "sha256": "dd1864c42f989ba9fa021053d33e5f2ba122faa0864be39a8552b3e958d8f605"
+    },
+    {
+      "name": "stream-flow-04.png",
+      "sha256": "21b6ebfc6b3a2134364adb0e5b258f807ad4ae8bc6e0bec54f65a05379b98f61"
+    },
+    {
+      "name": "stream-flow-05.png",
+      "sha256": "93930378ab3cb3851faec7d8f9b6dae251f3b7821cb3c63c5a16741bc86e2072"
+    },
+    {
+      "name": "stream-flow-06.png",
+      "sha256": "2ffd1dd027ccd30aa73bce175dca17aeb2b5c7d2b8e50468b2ca28f31c5ec188"
+    },
+    {
+      "name": "stream-flow-07.png",
+      "sha256": "4ddfd22c8c4c17d77b0570a23283510d6b6f7f3037a762c0ed97b0a2c45b5f15"
+    },
+    {
+      "name": "stream-flow-08.png",
+      "sha256": "d1a2f7f8f0aeb0b63b3c5cce4b8378e313c7ad013a0c78dfc95dc9408dff20de"
+    },
+    {
+      "name": "stream-flow-09.png",
+      "sha256": "df9316ae1c7654fc900d2ae865bdec4eff840ebd9e97a9db594574257b59ca42"
+    },
+    {
+      "name": "stream-flow-10.png",
+      "sha256": "e49a455532389364c7ca6112ea80a6f79f830264297fdd39025aeff18157c2a4"
+    },
+    {
+      "name": "stream-flow-11.png",
+      "sha256": "c7ff0599b4f36dbea54adb0fde98b14d308d356d216f728111855858c457f9b8"
+    },
+    {
+      "name": "stream-flow-12.png",
+      "sha256": "a40fe1b83d3f6da8a625b59caa838b8d7985d1f0592d4b4a3d99b6d9b97e336a"
+    },
+    {
+      "name": "stream-flow-13.png",
+      "sha256": "b9682c623b3fe6c094326fe3eb7d9bf3716a6be1997194fe97481d2a25d7bbc7"
+    }
+  ],
+  "thresholds": {
+    "minimumNCC": 0.65,
+    "minimumGainOverStationary": 0.03,
+    "minimumSeparatedPeakMargin": 0.035,
+    "minimumPixelTravel": 0.75,
+    "minimumVisibleCoverage": 0.9,
+    "minimumRecognizablePairs": 3,
+    "requiredDirectionalVoteFraction": 0.75
+  },
+  "samples": [
+    {
+      "label": "stream-centre",
+      "status": "confirmed downstream",
+      "position": [
+        188.0069580078125,
+        833.8468627929688
+      ],
+      "footprint": {
+        "halfWidth": 3,
+        "halfLength": 12,
+        "pixelCount": 175,
+        "selection": "Same supplied position/tangent; 7x25 footprint selected from static visibility-mask geometry only, coverage .942857. No centre offset or motion-result selection."
+      },
+      "expectedPixelsPerSecond": 89.83242797851562,
+      "recognizablePairs": 5,
+      "downstreamPairs": 4,
+      "distinctStartingFrames": 5,
+      "upstreamPairs": 1,
+      "medianPixelsPerSecond": 155.46935194909494,
+      "pairs": [
+        {
+          "status": "ambiguous",
+          "pixels": -5.75,
+          "correlation": 0.2703495339621022,
+          "zeroCorrelation": -0.1972303417405438,
+          "separatedPeakMargin": 0.20980141698574056,
+          "competingPeakCount": 4,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 0,
+          "lastFrame": 1,
+          "elapsed": 0.3333333730697632
+        },
+        {
+          "status": "downstream",
+          "pixels": 6.75,
+          "correlation": 0.8990871652666861,
+          "zeroCorrelation": 0.08609562950805592,
+          "separatedPeakMargin": 0.7952640303691425,
+          "competingPeakCount": 5,
+          "firstFrame": 1,
+          "lastFrame": 2,
+          "elapsed": 0.050855278968811035,
+          "pixelsPerSecond": 132.72958357262573
+        },
+        {
+          "status": "downstream",
+          "pixels": 6.75,
+          "correlation": 0.9791784014049885,
+          "zeroCorrelation": 0.05617853094434068,
+          "separatedPeakMargin": 0.7785909360962795,
+          "competingPeakCount": 3,
+          "firstFrame": 2,
+          "lastFrame": 3,
+          "elapsed": 0.03953289985656738,
+          "pixelsPerSecond": 170.7438620614789
+        },
+        {
+          "status": "downstream",
+          "pixels": 5.75,
+          "correlation": 0.9480261014254011,
+          "zeroCorrelation": 0.2010700269795904,
+          "separatedPeakMargin": 0.4812676336766324,
+          "competingPeakCount": 2,
+          "firstFrame": 3,
+          "lastFrame": 4,
+          "elapsed": 0.03295618295669556,
+          "pixelsPerSecond": 174.47408905198466
+        },
+        {
+          "status": "downstream",
+          "pixels": 6.75,
+          "correlation": 0.9703628883978315,
+          "zeroCorrelation": 0.30854320521450374,
+          "separatedPeakMargin": 0.5060104719636672,
+          "competingPeakCount": 2,
+          "firstFrame": 4,
+          "lastFrame": 5,
+          "elapsed": 0.04341691732406616,
+          "pixelsPerSecond": 155.46935194909494
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -5.75,
+          "correlation": 0.31060839189927514,
+          "zeroCorrelation": 0.19174337453257584,
+          "separatedPeakMargin": 0.11882717187411299,
+          "competingPeakCount": 4,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 5,
+          "lastFrame": 6,
+          "elapsed": 0.11095267534255981
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 1.5,
+          "correlation": 0.4686950439216195,
+          "zeroCorrelation": 0.46494478040995363,
+          "separatedPeakMargin": 0.002213279698424664,
+          "competingPeakCount": 4,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 6,
+          "lastFrame": 7,
+          "elapsed": 0.08966761827468872
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -1.25,
+          "correlation": 0.35805494339512584,
+          "zeroCorrelation": 0.2791218946198149,
+          "separatedPeakMargin": 0.19447021951636578,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 7,
+          "lastFrame": 8,
+          "elapsed": 0.10018181800842285
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -1.0,
+          "correlation": 0.6380380874801984,
+          "zeroCorrelation": 0.5497365422712062,
+          "separatedPeakMargin": 0.4015782296299051,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 8,
+          "lastFrame": 9,
+          "elapsed": 0.09939324855804443
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -0.5,
+          "correlation": 0.3750565524728708,
+          "zeroCorrelation": 0.35898494723897545,
+          "separatedPeakMargin": 0.08496970833338419,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 9,
+          "lastFrame": 10,
+          "elapsed": 0.10058879852294922
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 0.5,
+          "correlation": 0.2814688436567102,
+          "zeroCorrelation": 0.2555106581630836,
+          "separatedPeakMargin": 0.07110917892727137,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 10,
+          "lastFrame": 11,
+          "elapsed": 0.09953439235687256
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -5.25,
+          "correlation": 0.15669036226330899,
+          "zeroCorrelation": 0.036230700005947594,
+          "separatedPeakMargin": 0.0217771673881893,
+          "competingPeakCount": 4,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 11,
+          "lastFrame": 12,
+          "elapsed": 0.0998154878616333
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -5.75,
+          "correlation": 0.6068454462215241,
+          "zeroCorrelation": 0.46691084517926756,
+          "separatedPeakMargin": 0.13961723974690093,
+          "competingPeakCount": 5,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 12,
+          "lastFrame": 13,
+          "elapsed": 0.09978508949279785
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -1.0,
+          "correlation": 0.39906870029414004,
+          "zeroCorrelation": 0.3728573114175031,
+          "separatedPeakMargin": 0.21470154415032827,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 0,
+          "lastFrame": 2,
+          "elapsed": 0.3841886520385742
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -5.75,
+          "correlation": 0.47724058248146084,
+          "zeroCorrelation": 0.05595884165204038,
+          "separatedPeakMargin": 0.40387996242680424,
+          "competingPeakCount": 5,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 1,
+          "lastFrame": 3,
+          "elapsed": 0.09038817882537842
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 6.75,
+          "correlation": 0.17069924142338128,
+          "zeroCorrelation": 0.10513070646820434,
+          "separatedPeakMargin": 0.047151423806627527,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 2,
+          "lastFrame": 4,
+          "elapsed": 0.07248908281326294
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 6.75,
+          "correlation": 0.21984617768714612,
+          "zeroCorrelation": -0.010799532630066866,
+          "separatedPeakMargin": 0.21747471948850888,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 3,
+          "lastFrame": 5,
+          "elapsed": 0.07637310028076172
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -1.25,
+          "correlation": 0.31519895065809034,
+          "zeroCorrelation": 0.18396127829460573,
+          "separatedPeakMargin": 0.1867231907567484,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 4,
+          "lastFrame": 6,
+          "elapsed": 0.15436959266662598
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -0.75,
+          "correlation": 0.5599619183159807,
+          "zeroCorrelation": 0.5051832490863299,
+          "separatedPeakMargin": 0.2473320427170868,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 5,
+          "lastFrame": 7,
+          "elapsed": 0.20062029361724854
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 6.75,
+          "correlation": 0.013939085118951922,
+          "zeroCorrelation": -0.12211265134868841,
+          "separatedPeakMargin": 0.028468164850681963,
+          "competingPeakCount": 5,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 6,
+          "lastFrame": 8,
+          "elapsed": 0.18984943628311157
+        },
+        {
+          "status": "upstream",
+          "pixels": -5.75,
+          "correlation": 0.6579030372977807,
+          "zeroCorrelation": 0.19008962578549465,
+          "separatedPeakMargin": 0.2948949144260941,
+          "competingPeakCount": 3,
+          "firstFrame": 7,
+          "lastFrame": 9,
+          "elapsed": 0.19957506656646729,
+          "pixelsPerSecond": -28.811214240958286
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -1.25,
+          "correlation": -0.04668960140016025,
+          "zeroCorrelation": -0.08326736138291048,
+          "separatedPeakMargin": 0.03496718824353613,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 8,
+          "lastFrame": 10,
+          "elapsed": 0.19998204708099365
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 1.25,
+          "correlation": 0.5367304768899154,
+          "zeroCorrelation": 0.433183640016174,
+          "separatedPeakMargin": 0.1407043855498899,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 9,
+          "lastFrame": 11,
+          "elapsed": 0.20012319087982178
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 6.75,
+          "correlation": 0.28596218356067216,
+          "zeroCorrelation": 0.1119817134284926,
+          "separatedPeakMargin": 0.15156625451523897,
+          "competingPeakCount": 4,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 10,
+          "lastFrame": 12,
+          "elapsed": 0.19934988021850586
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 6.75,
+          "correlation": 0.2656266321193627,
+          "zeroCorrelation": 0.2317889904944651,
+          "separatedPeakMargin": 0.012484554640452672,
+          "competingPeakCount": 4,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 11,
+          "lastFrame": 13,
+          "elapsed": 0.19960057735443115
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 6.75,
+          "correlation": 0.3768179955672561,
+          "zeroCorrelation": 0.0862794668762033,
+          "separatedPeakMargin": 0.19660925021555326,
+          "competingPeakCount": 2,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 0,
+          "lastFrame": 3,
+          "elapsed": 0.4237215518951416
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -5.25,
+          "correlation": 0.4969444415801553,
+          "zeroCorrelation": 0.34634831565238006,
+          "separatedPeakMargin": 0.0958808539028167,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 1,
+          "lastFrame": 4,
+          "elapsed": 0.12334436178207397
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -5.25,
+          "correlation": 0.5594471496802574,
+          "zeroCorrelation": 0.13007256795301675,
+          "separatedPeakMargin": 0.31413267798916034,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 2,
+          "lastFrame": 5,
+          "elapsed": 0.1159060001373291
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 1.5,
+          "correlation": 0.4389597237971721,
+          "zeroCorrelation": 0.30370266203733254,
+          "separatedPeakMargin": 0.11711147125857346,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 3,
+          "lastFrame": 6,
+          "elapsed": 0.18732577562332153
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -1.25,
+          "correlation": 0.3718995489659825,
+          "zeroCorrelation": 0.2672722052813865,
+          "separatedPeakMargin": 0.0418502383059855,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 4,
+          "lastFrame": 7,
+          "elapsed": 0.2440372109413147
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -1.25,
+          "correlation": 0.6424525808154224,
+          "zeroCorrelation": 0.5175337360109646,
+          "separatedPeakMargin": 0.2933455654389175,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 5,
+          "lastFrame": 8,
+          "elapsed": 0.3008021116256714
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -1.25,
+          "correlation": 0.4095343338787078,
+          "zeroCorrelation": 0.35834353797758944,
+          "separatedPeakMargin": 0.03755536528822767,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 6,
+          "lastFrame": 9,
+          "elapsed": 0.289242684841156
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -5.75,
+          "correlation": 0.6208524928775506,
+          "zeroCorrelation": 0.2490959431553801,
+          "separatedPeakMargin": 0.17919522111435515,
+          "competingPeakCount": 5,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 7,
+          "lastFrame": 10,
+          "elapsed": 0.3001638650894165
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -5.75,
+          "correlation": 0.5330095190214083,
+          "zeroCorrelation": 0.09884278262388924,
+          "separatedPeakMargin": 0.34627127448071904,
+          "competingPeakCount": 5,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 8,
+          "lastFrame": 11,
+          "elapsed": 0.2995164394378662
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -5.75,
+          "correlation": 0.40315895459554163,
+          "zeroCorrelation": -0.021368275578739562,
+          "separatedPeakMargin": 0.07872244133280887,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 9,
+          "lastFrame": 12,
+          "elapsed": 0.2999386787414551
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 5.75,
+          "correlation": 0.28500556228893037,
+          "zeroCorrelation": 0.12526555912715776,
+          "separatedPeakMargin": 0.13182167492499078,
+          "competingPeakCount": 4,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 10,
+          "lastFrame": 13,
+          "elapsed": 0.2991349697113037
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 6.75,
+          "correlation": 0.19896870750413947,
+          "zeroCorrelation": -0.1814153529872833,
+          "separatedPeakMargin": 0.16298417659875608,
+          "competingPeakCount": 5,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 0,
+          "lastFrame": 4,
+          "elapsed": 0.45667773485183716
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -0.25,
+          "correlation": 0.6266426546427807,
+          "zeroCorrelation": 0.625911362435161,
+          "separatedPeakMargin": 0.21864483851461952,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 1,
+          "lastFrame": 5,
+          "elapsed": 0.16676127910614014
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -5.25,
+          "correlation": 0.5538052010589513,
+          "zeroCorrelation": 0.3564371486561826,
+          "separatedPeakMargin": 0.04662179897564234,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 2,
+          "lastFrame": 6,
+          "elapsed": 0.22685867547988892
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -5.75,
+          "correlation": 0.3969105489208421,
+          "zeroCorrelation": 0.1504048068860492,
+          "separatedPeakMargin": 0.03578651588025228,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 3,
+          "lastFrame": 7,
+          "elapsed": 0.27699339389801025
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 1.5,
+          "correlation": 0.6226547247903708,
+          "zeroCorrelation": 0.5275849790269188,
+          "separatedPeakMargin": 0.2589302511112589,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 4,
+          "lastFrame": 8,
+          "elapsed": 0.34421902894973755
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -5.75,
+          "correlation": 0.5195696437831272,
+          "zeroCorrelation": 0.2555285321320891,
+          "separatedPeakMargin": 0.10238610866549641,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 5,
+          "lastFrame": 9,
+          "elapsed": 0.4001953601837158
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -5.75,
+          "correlation": 0.5215322765308913,
+          "zeroCorrelation": 0.4492892011918204,
+          "separatedPeakMargin": 0.054039105802470566,
+          "competingPeakCount": 5,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 6,
+          "lastFrame": 10,
+          "elapsed": 0.3898314833641052
+        },
+        {
+          "status": "ambiguous",
+          "pixels": -5.75,
+          "correlation": 0.5182248087968182,
+          "zeroCorrelation": 0.4735205860589458,
+          "separatedPeakMargin": 0.017661419527536082,
+          "competingPeakCount": 6,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 7,
+          "lastFrame": 11,
+          "elapsed": 0.39969825744628906
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 6.75,
+          "correlation": 0.5034737254830929,
+          "zeroCorrelation": 0.03501982646348552,
+          "separatedPeakMargin": 0.2969094555689689,
+          "competingPeakCount": 2,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 8,
+          "lastFrame": 12,
+          "elapsed": 0.3993319272994995
+        },
+        {
+          "status": "ambiguous",
+          "pixels": 5.75,
+          "correlation": 0.5925592014459095,
+          "zeroCorrelation": 0.46495861786145165,
+          "separatedPeakMargin": 0.06427009059248956,
+          "competingPeakCount": 3,
+          "reason": "appearance did not retain an identifiable packet",
+          "firstFrame": 9,
+          "lastFrame": 13,
+          "elapsed": 0.39972376823425293
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+    "pass": true,
+    "scope": "Closed island route math; no gameplay or rendering test.",
+    "checks": [
+        {
+            "name": "arc_length_and_exact_polyline",
+            "evidence": "24m nonuniform loop; exact authored vertices and segment positions.",
+            "pass": true
+        },
+        {
+            "name": "periodic_seam_position_and_frame",
+            "evidence": "Position, tangent, right and yaw continuous on both sides of lap seam.",
+            "pass": true
+        },
+        {
+            "name": "lateral_height_and_start_offset",
+            "evidence": "Both ±1.5m lateral offsets, 2.25m vertical offset, +11m start distance, world scale 1.",
+            "pass": true
+        },
+        {
+            "name": "changing_yaw_and_orthonormal_frame",
+            "evidence": "90-degree changing heading; 160 unit/perpendicular orientation frames.",
+            "pass": true
+        },
+        {
+            "name": "negative_distances_and_many_laps",
+            "evidence": "Double-distance wrapping preserves offsets across ±1,000,000 laps.",
+            "pass": true
+        },
+        {
+            "name": "duplicates_and_defensive_copy",
+            "evidence": "Consecutive/closing duplicates removed; caller list changes have no effect.",
+            "pass": true
+        },
+        {
+            "name": "invalid_data_and_nonfinite_queries",
+            "evidence": "Null/degenerate/nonplanar/nonfinite data and exact reversals rejected explicitly.",
+            "pass": true
+        },
+        {
+            "name": "evaluate_and_map_allocate_no_managed_memory",
+            "evidence": "40,000 hot-path calls allocated 0 managed bytes after warmup.",
+            "pass": true
+        }
+    ]
+}

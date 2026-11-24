@@ -1,0 +1,598 @@
+{
+  "candidate": "C9 final",
+  "captureUtc": "2026-11-05T17:35:59.8836914Z",
+  "reviewer": "Independent native visual QA",
+  "accepted": true,
+  "scope": {
+    "heroes": 10,
+    "hats": 8,
+    "pairs": 80,
+    "reviewedFrontSideViews": 160,
+    "nativePNGsAvailable": 184,
+    "freshHeroSheetsReviewed": 10,
+    "previousProblemPairsInspectedAtNativeSize": true
+  },
+  "method": "Reviewed every current front/side native head view in ten per-hero sheets; inspected the final repaired Fira Navigator and Piko Sailor also at original480x640 size. Compared all184 source PNG hashes to preserved C8 manifest.",
+  "findings": {
+    "unresolvedConcreteVisualDefects": [],
+    "eyesOpenAndUnoccluded": true,
+    "observedGrossFloatingOrTipPerching": false,
+    "observedIsolatedHeadColorPatchesThroughClosedHatFabric": false,
+    "finalRepairs": "Piko Sailor continuous cuff, no green point or severe sag; Fira Navigator continuous lower cuff. Piko/Miro Amber and Vela Navigator repairs remain visible. Miro Aviator surrounds head at a suitable size.",
+    "acceptedDesignDetails": "Soft-cloth wrinkles and natural ear/forelock exposure below open edges or open diadems are intentional; they are distinguished from closed-fabric penetration."
+  },
+  "limits": [
+    "Static neutral front/side visual review; not every frame of gameplay or every animation pose.",
+    "Geometric sample diagnostics have separate limitations; this report does not claim every numeric metric is green.",
+    "This audit does not establish mobile performance or all simultaneous accessory interactions."
+  ],
+  "evidence": {
+    "nativeFolder": "C:\\Users\\Derek\\Games_develop\\Cat\\Docs\\Design\\RadioArchipelago\\HatsAndMotion20261105\\Hats\\After",
+    "sourceHashManifest": "C:\\Users\\Derek\\Games_develop\\Cat\\Docs\\Design\\RadioArchipelago\\HatsAndMotion20261105\\Hats\\AuditFinal\\native-manifest.json",
+    "freshSheetsFolder": "C:\\Users\\Derek\\Games_develop\\Cat\\Docs\\Design\\RadioArchipelago\\HatsAndMotion20261105\\Hats\\AuditFinal",
+    "comparisonImage": "C:\\Users\\Derek\\Games_develop\\Cat\\Docs\\Design\\RadioArchipelago\\HatsAndMotion20261105\\Hats\\Comparison\\lumen-before-after.png",
+    "comparisonProvenance": "C:\\Users\\Derek\\Games_develop\\Cat\\Docs\\Design\\RadioArchipelago\\HatsAndMotion20261105\\Hats\\Comparison\\lumen-before-after-provenance.json"
+  },
+  "pairReview": [
+    {
+      "hero": "Tiko",
+      "hat": "hat_AmberBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "842f33f69edccd506d006a3b15bbb554ab0d8edef94690db90109e4ec0e0e452",
+      "sideSHA256": "9d9671e803667999ff409037c93eaf9e299f3099b4a4b132f001df893001f779"
+    },
+    {
+      "hero": "Tiko",
+      "hat": "hat_AviatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "a71e7e8c4ad48758ebabc57365ad1ca211b0b6591350cef0457aa42689d16cfa",
+      "sideSHA256": "5314cec26c4f2b3eb3bd325499050090f15170747cae5734ef472f84b5361872"
+    },
+    {
+      "hero": "Tiko",
+      "hat": "hat_ExplorerHat",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "17fbaafc309923d398fabbe15ba9cccd8f1224b321f28b8c5fafc9d42feea7da",
+      "sideSHA256": "f2aa30b46079f17a583f2dac3d9b34273f47a960b12a0fadb327d4bdf7da42e4"
+    },
+    {
+      "hero": "Tiko",
+      "hat": "hat_NavigatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "5f479bb01bc52068b972be7b9231af1573a336aa3c9a66e783de8f0cf11eefcf",
+      "sideSHA256": "07d1bcebdb0cf3293bc726e06c7d3938e5343d0577932ef4e0da8d554a86af8c"
+    },
+    {
+      "hero": "Tiko",
+      "hat": "hat_ObservatoryCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "0561c5dd8268352570b8f8a27bed1957783089fd9a307959bb0c78d63afe9330",
+      "sideSHA256": "3e7a37f507b1127602d1fa518f10fd72e6c7ed36eda0063e056c27928766eff8"
+    },
+    {
+      "hero": "Tiko",
+      "hat": "hat_SailorBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "03bbee6e0a3dd4737dfa77a39bc480eeedfc58db790d933f33abb42986b4ebd6",
+      "sideSHA256": "7d090a4fc11954cc57f11183b8d87f782f1bcd5ac3e89e74de3d8b2d98664b3a"
+    },
+    {
+      "hero": "Tiko",
+      "hat": "hat_SignalBeanie",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "8a760adc41bdd9552bf814c2ccdbd89188de158ac94beb51ee15456435988745",
+      "sideSHA256": "5c69aac534b7f02479b50a58815adb23071fd5340dd64ba3ddb2cd2667ac68a8"
+    },
+    {
+      "hero": "Tiko",
+      "hat": "hat_SignalDiadem",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "b43d225e3e54b4b5b16c4d80907f9259d323ce71718b2a5e7851506afef6398c",
+      "sideSHA256": "63fcb41111e921738c8e85778a5042c48cb45262b9318da3b33d6f68df452306"
+    },
+    {
+      "hero": "Lumen",
+      "hat": "hat_AmberBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "7348b9e4504a954432a6cbdf3f702901fbc290d0c41672c65dc0b3dd77739e36",
+      "sideSHA256": "7a9d5c82e3208c35ba03e4c751a7f486597d8e901e949e31305e2f8455ae7f29"
+    },
+    {
+      "hero": "Lumen",
+      "hat": "hat_AviatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "68b09081b1dd571b03e6760967494922437e5860b674cfe972e1b04e97a98bbe",
+      "sideSHA256": "1f6d606d000aa64f06e58c7c2a2b5beaec5429bb275ad03b58c8f5e7e4e0f1bd"
+    },
+    {
+      "hero": "Lumen",
+      "hat": "hat_ExplorerHat",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "27580917564d32f7c44909dda51f05db5452c26b97cca81c372e2ff68dab8245",
+      "sideSHA256": "7abbd2a39c7d88fefebdd67781dbe104c393134d15f669e8241aaae05ad813b8"
+    },
+    {
+      "hero": "Lumen",
+      "hat": "hat_NavigatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "3c8f5c1ee6d03217423b15d6004842f2ca195cf0fe4e1498d4816c4cf3791143",
+      "sideSHA256": "f4c11af81e608b98d333110a1a1bf73e377e5e9c875b8323fcc48a819cf3ea89"
+    },
+    {
+      "hero": "Lumen",
+      "hat": "hat_ObservatoryCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "cf25a0d41401222562f5707419e827645f0e7a6c618ecec96aabc9804f523a59",
+      "sideSHA256": "809d05fd9b8efacce01181c2cbb68aaa99a182fca63addc401bd9b031ee508dc"
+    },
+    {
+      "hero": "Lumen",
+      "hat": "hat_SailorBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "1f0131d63e2ba24e47af46da44523a42a665d71aee1ccb34f98424cf5efb0c05",
+      "sideSHA256": "6b4bfa6bef17b8bc0a4528422e5cc9affe4f0ea61368fa33618b9bacdc9aa7e1"
+    },
+    {
+      "hero": "Lumen",
+      "hat": "hat_SignalBeanie",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "2ba747bfdec51a437d842bc1537b129ac3b8f456aaa0f08296d933ff59f29691",
+      "sideSHA256": "de2b31d4e15a66019f1159d31779e368e57901459405b1a4889a2186bfb65bb0"
+    },
+    {
+      "hero": "Lumen",
+      "hat": "hat_SignalDiadem",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "6479da0f864d6128e64108d9c721dc7030bec700d875a2571773b5d132f3ea4f",
+      "sideSHA256": "72d2d13f0264226eca88548f53e312c13b897c55fe23b8f577bbe20be27aee86"
+    },
+    {
+      "hero": "Nori",
+      "hat": "hat_AmberBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "d6c750bde31acaadfecbf1dc13418ac82e9cd732e5be101a1eecd2f51a066537",
+      "sideSHA256": "6e3190b2bb2e15788eaed8d9aa4783856237fc18b99abf406dde1c9edd1e0838"
+    },
+    {
+      "hero": "Nori",
+      "hat": "hat_AviatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "de2b4130ad11b3303e7792ac0f87a014d840a6403a9eaf9aa0906ef5cae685b4",
+      "sideSHA256": "523eed49c3c74591ea08b14032531890c11b7aa2468a19b7ad9a290a29a16644"
+    },
+    {
+      "hero": "Nori",
+      "hat": "hat_ExplorerHat",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "532046337d432ef8ce0f0a5db55c2dc5fa65e37ef0e78a937451561c61d37d4a",
+      "sideSHA256": "1f85626222347907472acdbfd42af1b6616aff6bf4a91d9aee220872ab1cbe0a"
+    },
+    {
+      "hero": "Nori",
+      "hat": "hat_NavigatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "87ff3d0e838e054a0f53937eb1c0743e53098dcb682146b3a82cf6ff90611f1e",
+      "sideSHA256": "283d93482985fc3b4122662f328fad69a6cd9875ec24418014219483d0b414ba"
+    },
+    {
+      "hero": "Nori",
+      "hat": "hat_ObservatoryCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "e311f639516d1d1693bd6f0d6bf04a2348db9cb90c67b530c9e6344c84bf6328",
+      "sideSHA256": "335692cb746cb64a6fba5e06a85d3db790707cd510b10e108d9a8593493864b9"
+    },
+    {
+      "hero": "Nori",
+      "hat": "hat_SailorBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "23e2eb7c90950c578df906cf15e2e1da9eb135ea7d0c30f350f9225fbbcb0254",
+      "sideSHA256": "cf60d55e3587260bb15a34235ce4a9415df853eeec16b2ec2892ae4833a73b89"
+    },
+    {
+      "hero": "Nori",
+      "hat": "hat_SignalBeanie",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "a9fbbc84b8c16adaf9f87e3d3f27b96c46f476c4f902b0f4984a10cc22b7a605",
+      "sideSHA256": "278f67c35c1aa91ef038144b7dc06b8ddef709547491d846a11d4569912580c7"
+    },
+    {
+      "hero": "Nori",
+      "hat": "hat_SignalDiadem",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "f7d5a944d1948431ad9393859057f2e95e68c97f0e615b670d28d9a084882eb5",
+      "sideSHA256": "c2c788c90f1f6849d4972c734de7a879fca6558e1a2c32e6bdd1ba42c7fcd341"
+    },
+    {
+      "hero": "Fira",
+      "hat": "hat_AmberBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "ad92af5cac1a1a092f334d18f045bd9af7e74762d4f496f6e8aef25e06ca2f72",
+      "sideSHA256": "975af04b7a6274440961faf7bcb3a6076b9a3759cc3ffec695763f1ecc4e6457"
+    },
+    {
+      "hero": "Fira",
+      "hat": "hat_AviatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "dfb8e78fe60e458fa296af88f7d4793a39e9addd8e32c6b3129f508a03415d5d",
+      "sideSHA256": "d4c841e5a4d5f8e69682ba573b70f999f6debffb4bdb663c9a11b03fbe20a3e6"
+    },
+    {
+      "hero": "Fira",
+      "hat": "hat_ExplorerHat",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "43c6b45d009e9b18b5b5e0bf425cd797bd90703beb42287de2bb1b9e137df374",
+      "sideSHA256": "a48bcf448b6f49cd602f6cc8242be2a2b1b7e477a5702318a14e25ffbf0c07d5"
+    },
+    {
+      "hero": "Fira",
+      "hat": "hat_NavigatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "f8ffc775a71a315c7630eb20981628afb2765fad99743463c93fcd64a3665e87",
+      "sideSHA256": "cd2949d2b3c84a33584f27cca7a18149f0797f74cd5b82d2e454d98e8628e07a"
+    },
+    {
+      "hero": "Fira",
+      "hat": "hat_ObservatoryCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "4ba734ef7a4a2458e38057aeccf57d70f9591d2687d56b7f8ee6e5e4d2b06ae5",
+      "sideSHA256": "78af0184bd490d4d2041084a2243f04e199aaf0659688258d91cdd2594d8be61"
+    },
+    {
+      "hero": "Fira",
+      "hat": "hat_SailorBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "631f4296320ead1ab61e141072c4463e61654269dcde359ce1fb609c8eb0ab9a",
+      "sideSHA256": "976be217707a0be6d0676593d984e2f6a9491d145b91b6663f6545e0167f9c9f"
+    },
+    {
+      "hero": "Fira",
+      "hat": "hat_SignalBeanie",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "658622a160c3a9a78e21a8054ffeebb5973dff1ce9cc7b3b5bdfa63e95a17968",
+      "sideSHA256": "e3b1066a3a1fbc0d9564f7b9490b20a2875294c32605f9b488a16dddb064ecd1"
+    },
+    {
+      "hero": "Fira",
+      "hat": "hat_SignalDiadem",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "c3445136328b4fe0e4f6b119822bae9c8675f8b415d5e4dd9cae8a82aa8be17a",
+      "sideSHA256": "a97ceef80e55877f06e034acb5a220df9dbf3409208370cb62067a0891b7b986"
+    },
+    {
+      "hero": "Miro",
+      "hat": "hat_AmberBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "cb61da80b3d34ef94dd2ac435c0f816f6046b5bc5ba5686c853616fd33062d61",
+      "sideSHA256": "53555c64462a2f1561bb40596a1b735765e5fc7e1a17e0c9260a0ff3be0e1f6c"
+    },
+    {
+      "hero": "Miro",
+      "hat": "hat_AviatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "8265c9546b9eff9e0f98253cd3203af440ed607997efd0a8e694d7cf496a62f0",
+      "sideSHA256": "e4d8df58d8452eba96dc6589ceaf4cdee1a7bcaed7970e2cdca8ecca3f173c4a"
+    },
+    {
+      "hero": "Miro",
+      "hat": "hat_ExplorerHat",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "4bbf57187170c5ca0113b6d95857f5b3c3d9cb5d66b7282b7fd6222fb9e4d24e",
+      "sideSHA256": "5a9371cdb250ce082f650be52631f4e736d4fac5f11349ba0ffeadde5319424a"
+    },
+    {
+      "hero": "Miro",
+      "hat": "hat_NavigatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "e88be52bbe9df705539f52e72048d8b9c2d6aa3055f3b85ddfa8f134c9dba22d",
+      "sideSHA256": "15a008604f0b847471fb39c6dcbfb0c59ff24a8b86ae65dac54f9c3b47d3c372"
+    },
+    {
+      "hero": "Miro",
+      "hat": "hat_ObservatoryCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "9dcc24eccef97c1a0ea2d5c872df9a503b99ca77567934f35504a457d819bff1",
+      "sideSHA256": "ffa8111bf0ecc80ed839accc47a0a9ff495848f9461759e1df3177ea4c43329e"
+    },
+    {
+      "hero": "Miro",
+      "hat": "hat_SailorBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "71f092e66ebbdff6504b1ef99e53a7c24ba17abba9e10ab42e38383e984c36f2",
+      "sideSHA256": "036624009555d54313c290c6a86b336d81a743eafc81c415ed054c20d487289e"
+    },
+    {
+      "hero": "Miro",
+      "hat": "hat_SignalBeanie",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "280480b0306ef90e30235c9d34ae35e2655794040d7cf4299dd6b48bc213a479",
+      "sideSHA256": "d8b839cf945c8bc6f2a34f227d1f9ab245b19e3ff0f4489be3333dbdbb0a4cc0"
+    },
+    {
+      "hero": "Miro",
+      "hat": "hat_SignalDiadem",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "9c4617451a450265f51092d41058278284eb52b85fe35747c03aa8e67e90ed54",
+      "sideSHA256": "007e7fb0af8f1276ae685090b3161b4dc2f3151544b63bbb55db87e56bdda44d"
+    },
+    {
+      "hero": "Rumi",
+      "hat": "hat_AmberBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "3fb12ce443c1ea78b34dd45b45080854e2bf9de15e42a680ab2e7559620a910e",
+      "sideSHA256": "e13e86cf4b39074538160b89244cad4c1e309bc15326ad3d2ca62bad4f3d3a8d"
+    },
+    {
+      "hero": "Rumi",
+      "hat": "hat_AviatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "243316b48845fd42b7bfd44412847b737cb84b526268d43c5b113fe924dfa213",
+      "sideSHA256": "6338d6bb24bdae7b85f5dee916f98bcbe420be7f965f0acfd3711cd6a88da88b"
+    },
+    {
+      "hero": "Rumi",
+      "hat": "hat_ExplorerHat",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "1ac9b1334d4a9b8a1d321229b44c2a79ab63c11dee5707ce84a7d1e230f202ba",
+      "sideSHA256": "a78914ecde7c47df2dee21cec6d1b8b82ec4054a19ec4866b793a714798bf586"
+    },
+    {
+      "hero": "Rumi",
+      "hat": "hat_NavigatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "17caa453ecbc66e0260d812f40af7d3023d4b73e2f0b649744e335789f501fbe",
+      "sideSHA256": "ad4423eab1fb833e1c6d47d0ea6a248244406d01242ef5f53a1d9c620f905a32"
+    },
+    {
+      "hero": "Rumi",
+      "hat": "hat_ObservatoryCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "3653667ad495fe0a5ac4ae3542472cf5342ade5ebf194518dd0875ebbb854a50",
+      "sideSHA256": "a2b0bc2bc9254f123d453d1d5e2cccdddbc8f5275364f441ba9c5e2b97464a78"
+    },
+    {
+      "hero": "Rumi",
+      "hat": "hat_SailorBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "4a99a01e6587535c2428d27b404a228c7a9313b5a12b3b8b7f07c65236c4a3f6",
+      "sideSHA256": "022e0e9ed2178057920aba55098cee27aa0194297bd1d91b9481898372974d4b"
+    },
+    {
+      "hero": "Rumi",
+      "hat": "hat_SignalBeanie",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "82c926c41490af87424563726c60ec755b4dc793a2bb4b5d35be93714cb1e1d5",
+      "sideSHA256": "2c3355da5a8a8785baff78128a6dea70614a16ca09831f70981d0cc5f9eae3d3"
+    },
+    {
+      "hero": "Rumi",
+      "hat": "hat_SignalDiadem",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "2dedad390de9fa4a6b325ebc51b7b525d344164976f71761e09d07b796263cf4",
+      "sideSHA256": "4c201f1f910ece90fee1d32bba344a38049658ca376d8769abdb6b64fdc9c9fd"
+    },
+    {
+      "hero": "Boro",
+      "hat": "hat_AmberBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "e4a18d912cf67a9dae3a5adebd84d653c8beabfa78b64a42ea36a300a55ebca7",
+      "sideSHA256": "892e5140877d71e6e53ea90166641e8f9fce83210f6b791b19a3a9d13dcd96fb"
+    },
+    {
+      "hero": "Boro",
+      "hat": "hat_AviatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "72cc36ad584c16f59387edf0cbda915fed102cf7a01a4c8e399bf735f293189c",
+      "sideSHA256": "7fa2eec894a04982cf1f8ecef9bff82c10f5aa8dc6484c68f8b92248e253b13a"
+    },
+    {
+      "hero": "Boro",
+      "hat": "hat_ExplorerHat",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "bc11199de9b57748c56c1c4da4f68596c2048ffaa4446b19fa2adebcaa43cbf7",
+      "sideSHA256": "c1612ebd3b51c3338394a8f3c306e506ec641e9335ef97762033150ca352a8ed"
+    },
+    {
+      "hero": "Boro",
+      "hat": "hat_NavigatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "bbd59113e3d653f3735ae92b0382490d52059c6cfca28e406220609e3d61d7fc",
+      "sideSHA256": "c2f1c3a67a1ea601e741c7a3d591b91bd1908946075d386032fe0255e302b6c0"
+    },
+    {
+      "hero": "Boro",
+      "hat": "hat_ObservatoryCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "1493ef8dc2757c9f18b4ed14ed40e3d28abea343d26d389c5a9f4a3f93161b5a",
+      "sideSHA256": "b74e2612a431628d66edc0642cfe99dbbf584edd097d1dfa9a8f8fafdf732bb8"
+    },
+    {
+      "hero": "Boro",
+      "hat": "hat_SailorBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "6780c20dfdf259a6d9ce1f331c75c0ecc1164c7dc2881920facafdd3610a8f30",
+      "sideSHA256": "ddf5a2a200c2485a2c0f228431ab6940a65ee713e90dbf390f3814dcc94949f3"
+    },
+    {
+      "hero": "Boro",
+      "hat": "hat_SignalBeanie",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "90585e3e67015e827f677b2f845702ef4b1536dfc4b26d7ab0fe4352ac8a6628",
+      "sideSHA256": "cfd57bfcfc59e8a50603fedc67201a923b31598d0d2144e35943588aa7dbbcdc"
+    },
+    {
+      "hero": "Boro",
+      "hat": "hat_SignalDiadem",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "2bba26830c08ced1109d42ccab07e09704f0c313ac8c338a1741cc35a79a231b",
+      "sideSHA256": "e788906af1cc2d4409fa379975cdf61edf9f7c3c504fd5a38b5e4ec21b5672da"
+    },
+    {
+      "hero": "Soli",
+      "hat": "hat_AmberBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "3197ba02e9d88b82a41d873cdcf997718672654275401ae85bd5a0c9233ee2c8",
+      "sideSHA256": "6116fc4446848ea77ac4586867b46d26138540b16818d1caf276e76f247cec17"
+    },
+    {
+      "hero": "Soli",
+      "hat": "hat_AviatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "b0d840e04eb0097bfb5d00678c64b68093df529de23f9e1b54b53b0dc0d8c7f5",
+      "sideSHA256": "c5a3cc76f3a5234f9fdee440503323441f99596deb8acfac1d638c2c292e04f4"
+    },
+    {
+      "hero": "Soli",
+      "hat": "hat_ExplorerHat",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "7cb9b7c2bf377e5c8e3829b1943f609609890542f2ef2c85a16218ea7f3634d9",
+      "sideSHA256": "2b76d964f66ffcffdb62b06bf43328c1bb5b33fe7f405d57bc18a57ba722012e"
+    },
+    {
+      "hero": "Soli",
+      "hat": "hat_NavigatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "87735f6087ffbe3862c9c4ad06fb975b1f1d0134378bfbf5b0a8a0fbb394d1e6",
+      "sideSHA256": "ac1e21764f94499b2ac6de9177467e097e5533b4fee1f9979ee64eb036ed2f42"
+    },
+    {
+      "hero": "Soli",
+      "hat": "hat_ObservatoryCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "2409f4285e86b65569612608315b6a77ceb39dd581a768d39be22a58e04c91b5",
+      "sideSHA256": "8a629494909f12c7122d6511f5ab2b3d2c46cc0ac26af0ecf7d9442c73e65909"
+    },
+    {
+      "hero": "Soli",
+      "hat": "hat_SailorBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "267f34bbca0491157d5f8f4bf192ed8f88f1ede8cba3d88475b2ba66f7c0d33b",
+      "sideSHA256": "f279d014476d24ef8109ff795aa6460cad40d4ecf552eba6b2c0db6e13508b5b"
+    },
+    {
+      "hero": "Soli",
+      "hat": "hat_SignalBeanie",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "aa63f15d96df65a1d797a97bea23e71abf9d219abcfc5344d43d39ddc3a5a83e",
+      "sideSHA256": "c3c1c98d6b14d345c21d8bd23c242eb55fcf344bfebf50551d932019caf69589"
+    },
+    {
+      "hero": "Soli",
+      "hat": "hat_SignalDiadem",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "8d996ac6671f767766e54b9a0f19a652e2e79350eea3c6c059ee5b75f721430a",
+      "sideSHA256": "7c0b4b1d48b3b6df1de4099890b9f9df18203ea09382cb974ed0e7a299c69dfd"
+    },
+    {
+      "hero": "Vela",
+      "hat": "hat_AmberBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "fc805e8b3cc9b7b4d97f453e9440d7804439eb8df95c913b7e8ab90c3740cd45",
+      "sideSHA256": "1dc4daf54570adbb8cc999021236c033d199857f7d0822d2f4fa401c57ead88c"
+    },
+    {
+      "hero": "Vela",
+      "hat": "hat_AviatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "5709074a60702cc01b857b82dd13d76466f95c90cd955e24e4b949a6f8352eec",
+      "sideSHA256": "363d907cc4d68c1327cb3e37faca741c0269c1fb3db9ddb2d48b91225ca0168d"
+    },
+    {
+      "hero": "Vela",
+      "hat": "hat_ExplorerHat",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "e7ebbd7ef889e6e07fc36f1c9fcba886605e27b4acbe6f0efac0f00a5a97c2a6",
+      "sideSHA256": "417531f176aa248c98250ac04eec4fd7db968d259967ad68d0e6f9e559736f13"
+    },
+    {
+      "hero": "Vela",
+      "hat": "hat_NavigatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "bd99e67d9f5ba629e6ba775747502c99efe0022b85c97ca7fb8a5dff50032fce",
+      "sideSHA256": "bde7344542ffb372fd24418ad44026a1d2146abcb0837b7f408a18e5555f2fa4"
+    },
+    {
+      "hero": "Vela",
+      "hat": "hat_ObservatoryCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "22981ffc9331831f3812359383b35ba9f07ed6da9730cd444a7eedd77570a176",
+      "sideSHA256": "fb59b1e43b85e7d29604dc25ff6d4a19e66df4c3ffbee160ff64503f2f69027c"
+    },
+    {
+      "hero": "Vela",
+      "hat": "hat_SailorBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "5e1bb9a1e60e36ab4f8053fe8a54de45ad1e1d623431f0608f5ac0cdd1fbd887",
+      "sideSHA256": "143e7f92f01fd6b659e6958e178c19dcfb058e38eabac50c756d3626cfc35f17"
+    },
+    {
+      "hero": "Vela",
+      "hat": "hat_SignalBeanie",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "15b15c5c2e4a6855d3159dcbdcc668bfb11ee214a44344d82686c170403db99f",
+      "sideSHA256": "b4aef7f96c017e4fe54a846b9bf5f9474d181aa4b3fb4d42c549aece59523391"
+    },
+    {
+      "hero": "Vela",
+      "hat": "hat_SignalDiadem",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "0279633a8a4c00b123274a4358202883f30e6db941dcb6f470043a1da648091f",
+      "sideSHA256": "94db76d2770d22f42834e5dcae7725419c7939985e873ffddf799ba7e90c8d5f"
+    },
+    {
+      "hero": "Piko",
+      "hat": "hat_AmberBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "f1dd853da95543aa2a009d2ebbf276425f48fc321f55cfdcf43985df03dab130",
+      "sideSHA256": "1d19bc7df9f0dc06f57b1c853be2835cccdaf7519dc1d6314e381bf50801225e"
+    },
+    {
+      "hero": "Piko",
+      "hat": "hat_AviatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "6ec0d7d6068f93273841430b9a3488e8a514e0bc5f80075e46c1a7c61a76929b",
+      "sideSHA256": "f9e4340bbf45d88bcf34cfe71cc36003e7b5dbded082608699f0cb80507aad81"
+    },
+    {
+      "hero": "Piko",
+      "hat": "hat_ExplorerHat",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "c236a4a0066aaa7be04f4c46d85fe4def90eab63ff5f8fd35e12fdfa24746185",
+      "sideSHA256": "79b73a622ea85a92f2761c6ef5e057440d052d6df27f77266e1790d48e06051f"
+    },
+    {
+      "hero": "Piko",
+      "hat": "hat_NavigatorCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "ef2d7359ae2e2d726420168c98b5443c27aa8440fa45a3a1ddefe30dfefb0d88",
+      "sideSHA256": "7363c1091a0d09f8fd879c1444a5cff2f0b4300f3ead3b2c43afb9435fd0c7e7"
+    },
+    {
+      "hero": "Piko",
+      "hat": "hat_ObservatoryCap",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "96db5eaac29a041ae774bd8fd15e13369aef751f487b59f8e7cc15479b78244e",
+      "sideSHA256": "9e6365670cae5971b668b37bf708a4c37d2d1e28983d5bc0be425f0c3b8fb4f4"
+    },
+    {
+      "hero": "Piko",
+      "hat": "hat_SailorBeret",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "0f5054355a35175b7ce950f30c62a970c7312f2651f81d9a92620ca5a4925e55",
+      "sideSHA256": "2a06a5fb64b3c164b9fdd65c8fc5c684a488f0bde9e12e332cf92a34e4c6d78a"
+    },
+    {
+      "hero": "Piko",
+      "hat": "hat_SignalBeanie",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "eb45681a1d459541b54e698913861bd9f8fde427a45dea2a5f91fccf4beacd3a",
+      "sideSHA256": "2d536476962a7a5b1829958c46fd6c10f90d13c26b7be8479afbc54015a219cc"
+    },
+    {
+      "hero": "Piko",
+      "hat": "hat_SignalDiadem",
+      "status": "accepted in current front/side native views",
+      "frontSHA256": "b7edbaa4daa8c2a6c661d1bfe29a7a240f7a0e8a30ab183453c459bfe422b13a",
+      "sideSHA256": "160716cd1af1d535e7b0f4b0e2fcc6bf2a2d2e5679237478ca7b00e0c90c2c74"
+    }
+  ]
+}
